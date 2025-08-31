@@ -1,7 +1,6 @@
 package logs
 
 import (
-	"context"
 	"sync"
 
 	"github.com/sirupsen/logrus"
@@ -132,7 +131,7 @@ func FatalX(field string, format string, args ...interface{}) {
 	}
 }
 
-func InitLog(ctx context.Context, output string) (err error) {
+func InitLog(output string) (err error) {
 	once.Do(func() {
 		logrus.SetFormatter(&logrus.TextFormatter{})
 		logrus.SetLevel(logrus.DebugLevel)
@@ -142,4 +141,8 @@ func InitLog(ctx context.Context, output string) (err error) {
 		instance, err = NewLogger(output)
 	})
 	return
+}
+
+func FlushLog() {
+
 }

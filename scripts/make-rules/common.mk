@@ -10,6 +10,14 @@ ifeq ($(origin OUTPUT_DIR),undefined)
 OUTPUT_DIR := $(ROOT_DIR)/output
 $(shell mkdir -p $(OUTPUT_DIR))
 endif
+ifeq ($(origin BACKEND_OUTPUT_DIR),undefined)
+BACKEND_OUTPUT_DIR := $(ROOT_DIR)/backend/output
+$(shell mkdir -p $(BACKEND_OUTPUT_DIR))
+endif
+ifeq ($(origin BACKEND_DIR),undefined)
+BACKEND_DIR := $(ROOT_DIR)/backend
+$(shell mkdir -p $(BACKEND_DIR))
+endif
 ifeq ($(origin TOOLS_DIR),undefined)
 TOOLS_DIR := $(OUTPUT_DIR)/tools
 $(shell mkdir -p $(TOOLS_DIR))

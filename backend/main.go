@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"math/rand"
 	"os"
@@ -102,12 +101,11 @@ func startHTTPServer() error {
 	//Middleware order matters
 	s.Use(middleware.ContextCacheMW())     // must be first
 	s.Use(middleware.RequestInspectorMW()) // must be second
-	//s.Use(middleware.SetHostMW())
-	//s.Use(middleware.SetLogIDMW())
-	//s.Use(middleware.AccessLogMW())
-	//s.Use(middleware.OpenapiAuthMW())
-	//s.Use(middleware.SessionAuthMW())
-	//s.Use(middleware.I18nMW()) // must after SessionAuthMW
+	s.Use(middleware.SetHostMW())
+	s.Use(middleware.SetLogIDMW())
+	s.Use(middleware.AccessLogMW())
+	s.Use(middleware.OpenapiAuthMW())
+	s.Use(middleware.SessionAuthMW())
 
 	router.GeneratedRegister(s)
 
@@ -116,12 +114,10 @@ func startHTTPServer() error {
 }
 
 func initLog() {
-	logPath := recommendedLogDir
-
-	schedLogPath := fmt.Sprintf("%s%s", logPath, "log/common.log")
-
+	logBasePath := recommendedLogDir
+	logPath := fmt.Sprintf("%s%s", logBasePath, "log/common.log")
 	// 初始化日志打印
-	if err := logs.InitLog(context.Background(), schedLogPath); err != nil {
+	if err := logs.InitLog(logPath); err != nil {
 		panic(err)
 	}
 }

@@ -118,27 +118,46 @@ func (hook *RotateHook) Levels() []logrus.Level {
 	return logrus.AllLevels
 }
 
-type Logger struct {
-	*logrus.Logger
-}
-
-type OutputHook struct {
+type FileHook struct {
 	Writer    io.Writer
 	Formatter logrus.Formatter
-	LogLevels []logrus.Level
 }
 
-func (hook *OutputHook) Fire(entry *logrus.Entry) error {
+func (hook *FileHook) Fire(entry *logrus.Entry) error {
 	line, err := hook.Formatter.Format(entry)
 	if err != nil {
 		return err
 	}
+
 	_, err = hook.Writer.Write(line)
 	return err
 }
 
-func (hook *OutputHook) Levels() []logrus.Level {
-	return hook.LogLevels
+func (hook *FileHook) Levels() []logrus.Level {
+	return logrus.AllLevels
+}
+
+type ConsoleHook struct {
+	Writer    io.Writer
+	Formatter logrus.Formatter
+}
+
+func (hook *ConsoleHook) Fire(entry *logrus.Entry) error {
+	line, err := hook.Formatter.Format(entry)
+	if err != nil {
+		return err
+	}
+
+	_, err = hook.Writer.Write(line)
+	return err
+}
+
+func (hook *ConsoleHook) Levels() []logrus.Level {
+	return logrus.AllLevels
+}
+
+type Logger struct {
+	*logrus.Logger
 }
 
 func NewLogger(filename string) (*Logger, error) {
@@ -149,56 +168,63 @@ func NewLogger(filename string) (*Logger, error) {
 		return nil, err
 	}
 
-	fileFormatter := &logrus.TextFormatter{
-		DisableColors: true,
-		FullTimestamp: true,
-		CallerPrettyfier: func(frame *runtime.Frame) (function string, file string) {
-			_, filename, line, ok := runtime.Caller(9)
+	callerPrettyfier := func(frame *runtime.Frame) (function string, file string) {
+		_, filename, line, ok := runtime.Caller(11)
+		if !ok {
+			return "", ""
+		}
+		if strings.Contains(filename, "pkg/logger/log.go") {
+			_, filename, line, ok = runtime.Caller(10)
 			if !ok {
 				return "", ""
 			}
-			if strings.Contains(filename, "backend/pkg/logger/log.go") {
-				_, filename, line, ok = runtime.Caller(10)
-				if !ok {
-					return "", ""
-				}
-			}
+		}
 
-			relPath, err := filepath.Rel(getRootDir(), filename)
-			if err != nil {
-				return "", ""
-			}
+		relPath, err := filepath.Rel(getRootDir(), filename)
+		if err != nil {
+			return "", ""
+		}
 
-			filename = " "
-			function = fmt.Sprintf("%s:%d", relPath, line)
-			return function, filename
-		},
+		filename = " "
+		function = fmt.Sprintf("%s:%d", relPath, line)
+		return function, filename
 	}
 
+	// 创建控制台格式化器（带颜色）
 	consoleFormatter := &logrus.TextFormatter{
-		ForceColors:      true,
+		ForceColors:      true, // 强制颜色输出
 		FullTimestamp:    true,
-		CallerPrettyfier: fileFormatter.CallerPrettyfier, // 复用CallerPrettyfier
+		CallerPrettyfier: callerPrettyfier,
 	}
 
-	consoleHook := &OutputHook{
+	// 创建文件格式化器（不带颜色）
+	fileFormatter := &logrus.TextFormatter{
+		DisableColors:    true, // 禁用颜色输出
+		FullTimestamp:    true,
+		CallerPrettyfier: callerPrettyfier,
+	}
+
+	// 创建控制台Hook
+	consoleHook := &ConsoleHook{
 		Writer:    os.Stdout,
 		Formatter: consoleFormatter,
-		LogLevels: logrus.AllLevels,
 	}
 
-	fileHook := &OutputHook{
+	// 创建文件Hook
+	fileHook := &FileHook{
 		Writer:    file,
 		Formatter: fileFormatter,
-		LogLevels: logrus.AllLevels,
 	}
 
-	logger.SetOutput(io.Discard) // 禁用默认输出
-	logger.SetReportCaller(true)
-
-	// 添加两个hook
+	// 添加Hooks
 	logger.AddHook(consoleHook)
 	logger.AddHook(fileHook)
+
+	// 禁用默认输出
+	logger.SetOutput(io.Discard)
+
+	// 添加字段来包含代码行号
+	logger.SetReportCaller(true)
 
 	rotateHook := NewRotateHook(filename)
 	logger.AddHook(rotateHook)
@@ -231,8 +257,4 @@ func createFile(filename string) (*os.File, error) {
 	}
 
 	return file, nil
-}
-
-func formatFrame(frame runtime.Frame) string {
-	return fmt.Sprintf("%s:%d - %s", frame.File, frame.Line, frame.Function)
 }

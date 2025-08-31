@@ -1,6 +1,7 @@
 *.o
 *.a
 *.so
+*.db
 _obj
 _test
 *.[568vq]
@@ -32,11 +33,10 @@ _testmain.go
 /.idea
 /.vscode
 /output
+/backend/output
 *.local.yml
-dumped_hertz_remote_config.json
 /oldimpl
 /vendor
 *gen_test.go
-/domain/workflow/internal/nodes/code/script/RestrictedPython/__pycache__/**
 .env.dev
 .env.local

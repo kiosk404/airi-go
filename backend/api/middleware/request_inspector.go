@@ -19,15 +19,14 @@ const (
 func RequestInspectorMW() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authType := RequestAuthTypeWebAPI // default is web api, session auth
-
-		if isNeedOpenapiAuth(ctx) {
+		if isNeedOpenapiAuth(c) {
 			authType = RequestAuthTypeOpenAPI
-		} else if isStaticFile(ctx) {
+		} else if isStaticFile(c) {
 			authType = RequestAuthTypeStaticFile
 		}
 
-		ctx.Set(RequestAuthTypeStr, authType)
-		ctx.Next(c)
+		c.Set(RequestAuthTypeStr, authType)
+		c.Next()
 	}
 }
 
@@ -38,8 +37,8 @@ var staticFilePath = map[string]bool{
 	"/favicon.png": true,
 }
 
-func isStaticFile(ctx *app.RequestContext) bool {
-	path := string(ctx.GetRequest().URI().Path())
+func isStaticFile(c *gin.Context) bool {
+	path := c.Request.URL.Path
 	if staticFilePath[path] {
 		return true
 	}

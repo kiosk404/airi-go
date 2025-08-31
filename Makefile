@@ -12,6 +12,12 @@ ROOT_PACKAGE=airi-go
 FRONTEND_VERSION_PACKAGE=airi-go
 BACKEND_VERSION_PACKAGE=airi-go/backend/pkg/version
 
+# 定义thriftgo的通用参数
+THRIFT_OUT_GO := ./backend/api/model
+THRIFT_PACKAGE_PREFIX_GO := github.com/kiosk404/airi-go/backend/api/model
+THRIFT_OUT_JS := ./frontend/src/api
+THRIFT_PACKAGE_PREFIX_JS :=
+
 # ==============================================================================
 # Includes
 
@@ -44,3 +50,19 @@ clean:
 	@echo "===========> Cleaning all build output"
 	@-rm -vrf $(OUTPUT_DIR)
 	@-rm -vrf $(OUTPUT_BIN_DIR)
+	@-rm -vrf $(BACKEND_OUTPUT_DIR)
+	@-rm -vrf $(BACKEND_DIR)/crash.log
+
+## format: Gofmt (reformat) package sources (exclude vendor dir if existed).
+.PHONY: format
+format: tools.verify.golines tools.verify.goimports
+	@echo "===========> Formating codes"
+	@$(FIND) -type f -name '*.go' | $(XARGS) gofmt -s -w
+	@$(FIND) -type f -name '*.go' | $(XARGS) goimports -w -local $(BACKEND_DIR)
+	@$(FIND) -type f -name '*.go' | $(XARGS) golines -w --max-len=240 --reformat-tags --shorten-comments --ignore-generated .
+	@cd $(BACKEND_DIR) && $(GO) mod edit -fmt && cd -
+
+## idl-go: Generate Go code from Thrift IDL files in ./idl directory.PHONY: idl-go
+idl-go:
+	@thriftgo -r -gen go:package_prefix=$(THRIFT_PACKAGE_PREFIX_GO)/,template=slim,with_context=true \
+		-out $(THRIFT_OUT_GO) ./idl/api.thrift
