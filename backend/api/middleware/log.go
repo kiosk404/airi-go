@@ -10,7 +10,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/kiosk404/airi-go/backend/infra/http/ginutil"
+	"github.com/kiosk404/airi-go/backend/pkg/http/ginutil"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
 

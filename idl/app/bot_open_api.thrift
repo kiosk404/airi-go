@@ -101,7 +101,7 @@ service BotOpenApiService {
     
     OpenGetBotInfoResponse OpenGetBotInfo(1: OpenGetBotInfoRequest request)(api.get='/v1/bots/:bot_id', api.category="bot", api.tag="openapi", agw.preserve_base="true")
     
-    ImpersonateAiriUserResponse ImpersonateAiriUser (1: ImpersonateAiriUserRequest request) (api.post="/api/permission_api/coze_web_app/impersonate_coze_user")
+    ImpersonateAiriUserResponse ImpersonateAiriUser (1: ImpersonateAiriUserRequest request) (api.post="/api/permission_api/airi_web_app/impersonate_airi_user")
     
     // File related OpenAPI
     UploadFileOpenResponse UploadFileOpen(1: UploadFileOpenRequest request)(api.post = "/v1/files/upload", api.category="file", api.tag="openapi", agw.preserve_base="true")

@@ -1498,12 +1498,12 @@ func _openapicreateconversationMw() []gin.HandlerFunc {
 	return nil
 }
 
-func _coze_web_appMw() []gin.HandlerFunc {
+func _airi_web_appMw() []gin.HandlerFunc {
 	// your code...
 	return nil
 }
 
-func _impersonatecozeuserMw() []gin.HandlerFunc {
+func _impersonateairiuserMw() []gin.HandlerFunc {
 	// your code...
 	return nil
 }
