@@ -67,7 +67,7 @@ func isNeedOpenapiAuth(c *gin.Context) bool {
 	uriPath := c.Request.URL.Path
 
 	for rule, res := range needAuthFunc {
-		if regexp.MustCompile(rule).MatchString(string(uriPath)) {
+		if regexp.MustCompile(rule).MatchString(uriPath) {
 			isNeedAuth = res
 			break
 		}

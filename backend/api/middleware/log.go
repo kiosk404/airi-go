@@ -20,7 +20,7 @@ func AccessLogMW() gin.HandlerFunc {
 		c.Next()
 
 		status := c.Writer.Status()
-		path := c.Request.URL.RawPath
+		path := c.Request.URL.Path
 		latency := time.Since(start)
 		method := c.Request.Method
 		clientIP := c.ClientIP()
@@ -32,9 +32,9 @@ func AccessLogMW() gin.HandlerFunc {
 		}
 
 		requestType := ginutil.GetInt32(c, RequestAuthTypeStr)
-		baseLog := fmt.Sprintf("| %s | %s | %d | %v | %s | %s | %v | %s | %d ",
-			c.Request.URL.Scheme, c.Request.Host, status,
-			latency, clientIP, method, path, handleName, requestType)
+		baseLog := fmt.Sprintf("| %s | %s | %s | %d | %v | %s | %v | %s | %d ",
+			c.Request.Proto, c.Request.Host, method, status,
+			latency, clientIP, path, handleName, requestType)
 
 		switch {
 		case status >= http.StatusInternalServerError:

@@ -1,4 +1,4 @@
-package memlocal
+package local
 
 import (
 	"bytes"
@@ -19,6 +19,10 @@ var Nil error = fmt.Errorf("ristretto: nil")
 
 func SetDefaultNilError(err error) {
 	Nil = err
+}
+
+func New() (cache.Cmdable, error) {
+	return NewRistrettoClient()
 }
 
 type CacheType string

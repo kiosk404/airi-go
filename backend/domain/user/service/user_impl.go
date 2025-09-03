@@ -14,10 +14,12 @@ import (
 	"time"
 	"unicode/utf8"
 
+	uploadEntity "github.com/kiosk404/airi-go/backend/domain/upload/entity"
 	userEntity "github.com/kiosk404/airi-go/backend/domain/user/entity"
 	"github.com/kiosk404/airi-go/backend/domain/user/internal/dal/model"
 	"github.com/kiosk404/airi-go/backend/domain/user/repository"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
+	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
@@ -25,7 +27,6 @@ import (
 	"github.com/kiosk404/airi-go/backend/types/consts"
 	"github.com/kiosk404/airi-go/backend/types/errno"
 	"golang.org/x/crypto/argon2"
-	"golang.org/x/mod/sumdb/storage"
 )
 
 type Components struct {
@@ -54,7 +55,7 @@ func (u *userImpl) Login(ctx context.Context, account, password string) (user *u
 		return nil, errorx.New(errno.ErrUserInfoInvalidateCode)
 	}
 
-	// Verify the password using the Argon2id algorithm
+	// Verify the password using the Argon id algorithm
 	valid, err := verifyPassword(password, userModel.Password)
 	if err != nil {
 		return nil, err
@@ -236,7 +237,7 @@ func (u *userImpl) Create(ctx context.Context, req *CreateUserRequest) (user *us
 	}
 
 	if exist {
-		return nil, errorx.New(errno.ErrUserEmailAlreadyExistCode, errorx.KV("email", req.Email))
+		return nil, errorx.New(errno.ErrUserEmailAlreadyExistCode, errorx.KV("account", req.Account))
 	}
 
 	if req.UniqueName != "" {

@@ -6,18 +6,18 @@ package model
 
 const TableNameAPIKey = "api_key"
 
-// APIKey api key table
+// APIKey mapped from table <api_key>
 type APIKey struct {
-	ID         int64  `gorm:"column:id;primaryKey;autoIncrement:true;comment:Primary Key ID" json:"id"`                              // Primary Key ID
-	APIKey     string `gorm:"column:api_key;not null;comment:API Key hash" json:"api_key"`                                           // API Key hash
-	Name       string `gorm:"column:name;not null;comment:API Key Name" json:"name"`                                                 // API Key Name
-	Status     int32  `gorm:"column:status;not null;comment:0 normal, 1 deleted" json:"status"`                                      // 0 normal, 1 deleted
-	UserID     int64  `gorm:"column:user_id;not null;comment:API Key Owner" json:"user_id"`                                          // API Key Owner
-	AkType     int32  `gorm:"column:ak_type;not null;comment:api key type" json:"ak_type"`                                           // api key type
-	ExpiredAt  int64  `gorm:"column:expired_at;not null;comment:API Key Expired Time" json:"expired_at"`                             // API Key Expired Time
-	CreatedAt  int64  `gorm:"column:created_at;not null;autoCreateTime:milli;comment:Create Time in Milliseconds" json:"created_at"` // Create Time in Milliseconds
-	UpdatedAt  int64  `gorm:"column:updated_at;not null;autoUpdateTime:milli;comment:Update Time in Milliseconds" json:"updated_at"` // Update Time in Milliseconds
-	LastUsedAt int64  `gorm:"column:last_used_at;not null;comment:Used Time in Milliseconds" json:"last_used_at"`                    // Used Time in Milliseconds
+	ID          int64  `gorm:"column:id;primaryKey" json:"id"`
+	Name        string `gorm:"column:name" json:"name"`
+	APIKey      string `gorm:"column:api_key" json:"api_key"`
+	ConnectorID int64  `gorm:"column:connector_id" json:"connector_id"`
+	UserID      int64  `gorm:"column:user_id" json:"user_id"`
+	AkType      int32  `gorm:"column:ak_type" json:"ak_type"`
+	LastUsedAt  int64  `gorm:"column:last_used_at" json:"last_used_at"`
+	ExpiredAt   int64  `gorm:"column:expired_at" json:"expired_at"`
+	CreatedAt   int64  `gorm:"column:created_at;autoCreateTime:milli" json:"created_at"`
+	UpdatedAt   int64  `gorm:"column:updated_at;autoUpdateTime:milli" json:"updated_at"`
 }
 
 // TableName APIKey's table name

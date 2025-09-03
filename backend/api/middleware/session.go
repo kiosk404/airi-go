@@ -14,6 +14,7 @@ import (
 )
 
 var noNeedSessionCheckPath = map[string]bool{
+	"/health":                     true,
 	"/api/passport/web/login/":    true,
 	"/api/passport/web/register/": true,
 }

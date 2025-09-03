@@ -4,7 +4,7 @@ type ApiKey struct {
 	ID          int64  `json:"id"`
 	Name        string `json:"name"`
 	ApiKey      string `json:"api_key"`
-	ConnectorID int64  `json:"connector"`
+	ConnectorID int64  `json:"connector_id"`
 	UserID      int64  `json:"user_id"`
 	AkType      AkType `json:"ak_type"`
 	LastUsedAt  int64  `json:"last_used_at"`

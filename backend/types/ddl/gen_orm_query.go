@@ -22,15 +22,32 @@ var path2Table2Columns2Model = map[string]map[string]map[string]any{
 	},
 }
 
+var path2Table2Model = map[string]map[string]any{
+	"domain/openauth/openapiauth/internal/dal/query": {
+		"api_key": &entity.ApiKey{},
+	},
+}
+
 var fieldNullablePath = map[string]bool{}
 
 const (
 	// 存在内存中
 	dbPathInMemory = ":memory:"
+
+	// 存在 sqlite 中
+	dbPathInSqlite = "airi-go.db"
 )
 
+var sqliteDBPath = func() string {
+	if rootP, err := findProjectRoot(); err != nil {
+		return ""
+	} else {
+		return fmt.Sprintf("%s/%s", rootP, dbPathInSqlite)
+	}
+}()
+
 func main() {
-	os.Setenv("LANG", "en_US.UTF-8")
+	_ = os.Setenv("LANG", "en_US.UTF-8")
 	gormDB, err := gorm.Open(sqlite.Open(dbPathInMemory), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,
@@ -41,16 +58,10 @@ func main() {
 	}
 
 	// 自动创建表结构
-	for _, mapping := range path2Table2Columns2Model {
-		for table := range mapping {
-			model := getModelByTableName(table)
-			if model != nil {
-				// 创建表结构
-				gormModel := convertToGormModel(model)
-				err = gormDB.AutoMigrate(gormModel)
-				if err != nil {
-					log.Fatalf("failed to migrate table %s: %v", table, err)
-				}
+	for _, mapping := range path2Table2Model {
+		for table, model := range mapping {
+			if err := gormDB.AutoMigrate(model); err != nil {
+				log.Fatalf("AutoMigrate table %s failed, err=%v", table, err)
 			}
 		}
 	}
@@ -59,7 +70,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to find project root: %v", err)
 	}
-	fmt.Printf("rootPath: %s", rootPath)
+	fmt.Printf("rootPath: %s\n", rootPath)
 
 	for path, mapping := range path2Table2Columns2Model {
 		g := gen.NewGenerator(gen.Config{
@@ -120,18 +131,35 @@ func main() {
 			return f
 		}
 
+		// ----------- 生成逻辑 ----------
 		var models []any
 		for table, col2Model := range mapping {
-			opts := make([]gen.ModelOpt, 0, len(col2Model))
+			opts := make([]gen.ModelOpt, 0, len(col2Model)+2) // +2 for timeModify and entityTypeModify
+
+			// 保留原有的列特定修饰器逻辑
 			for column, m := range col2Model {
 				cp := m
 				opts = append(opts, gen.FieldModify(genModify(column, cp)))
 			}
+
+			// 保留原有的时间修饰器
 			opts = append(opts, gen.FieldModify(timeModify))
+
+			// 新增：基于entity的类型修饰器（放在最后，确保覆盖前面的类型设置）
+			if tableModels, exists := path2Table2Model[path]; exists {
+				if entityModel, exists := tableModels[table]; exists && entityModel != nil {
+					entityFieldTypes := extractEntityFieldTypes(entityModel)
+					entityTypeModifier := createEntityTypeModifier(entityFieldTypes)
+					opts = append(opts, gen.FieldModify(entityTypeModifier))
+				}
+			}
+
 			models = append(models, g.GenerateModel(table, opts...))
 		}
 
-		g.ApplyBasic(models...)
+		if len(models) > 0 {
+			g.ApplyBasic(models...)
+		}
 
 		g.Execute()
 	}
@@ -143,7 +171,7 @@ func findProjectRoot() (string, error) {
 		return "", fmt.Errorf("failed to get current file path")
 	}
 
-	backendDir := filepath.Dir(filepath.Dir(filepath.Dir(filename))) // notice: the relative path of the script file is assumed here
+	backendDir := filepath.Dir(filepath.Dir(filepath.Dir(filename)))
 
 	if _, err := os.Stat(filepath.Join(backendDir, "domain")); os.IsNotExist(err) {
 		return "", fmt.Errorf("could not find 'domain' directory in backend path: %s", backendDir)
@@ -152,19 +180,108 @@ func findProjectRoot() (string, error) {
 	return backendDir, nil
 }
 
-// getModelByTableName 根据表名获取对应的模型结构体
-func getModelByTableName(tableName string) interface{} {
-	switch tableName {
-	case "api_key":
-		return &entity.ApiKey{}
-	default:
-		return nil
+// 从entity提取字段类型信息
+func extractEntityFieldTypes(entityModel interface{}) map[string]string {
+	fieldTypes := make(map[string]string)
+
+	entityType := reflect.TypeOf(entityModel)
+	if entityType.Kind() == reflect.Ptr {
+		entityType = entityType.Elem()
+	}
+
+	for i := 0; i < entityType.NumField(); i++ {
+		field := entityType.Field(i)
+
+		// 获取json tag作为列名，如果没有则使用字段名
+		jsonTag := field.Tag.Get("json")
+		if jsonTag == "" || jsonTag == "-" {
+			jsonTag = strings.ToLower(field.Name)
+		} else {
+			// 处理json tag中的选项 (如 `json:"id,omitempty"`)
+			if idx := strings.Index(jsonTag, ","); idx != -1 {
+				jsonTag = jsonTag[:idx]
+			}
+		}
+
+		// 直接使用json tag作为列名
+		columnName := jsonTag
+
+		// 获取Go类型
+		fieldType := resolveUnderlyingType(field.Type)
+
+		fieldTypes[columnName] = fieldType
+
+		fmt.Printf("Entity field mapping: %s -> %s (type: %s)\n",
+			field.Name, columnName, fieldType)
+	}
+
+	return fieldTypes
+}
+
+// 新增：基于entity的类型修饰器
+func createEntityTypeModifier(entityFieldTypes map[string]string) func(gen.Field) gen.Field {
+	return func(f gen.Field) gen.Field {
+		// 如果entity中定义了这个字段的类型，就使用entity的类型
+		if entityType, exists := entityFieldTypes[f.ColumnName]; exists {
+			fmt.Printf("Applying entity type for %s: %s -> %s\n",
+				f.ColumnName, f.Type, entityType)
+			f.Type = entityType
+		}
+		return f
 	}
 }
 
-// convertToGormModel 将实体模型转换为GORM模型(添加GORM标签)
-func convertToGormModel(model interface{}) interface{} {
-	// 这里可以根据需要添加GORM标签
-	// 当前示例直接返回原模型，实际应用中可能需要添加标签
-	return model
+// 解析底层类型，将自定义类型转换为其底层的基础类型
+func resolveUnderlyingType(t reflect.Type) string {
+	// 如果是指针类型，先获取元素类型
+	if t.Kind() == reflect.Ptr {
+		return "*" + resolveUnderlyingType(t.Elem())
+	}
+
+	// 如果是slice类型
+	if t.Kind() == reflect.Slice {
+		return "[]" + resolveUnderlyingType(t.Elem())
+	}
+
+	// 对于自定义类型，获取其底层类型
+	if t.PkgPath() != "" && t.Kind() != reflect.Struct && t.Kind() != reflect.Interface {
+		// 这是一个自定义类型（如 type AkType int32）
+		underlyingType := t.Kind()
+		switch underlyingType {
+		case reflect.Int:
+			return "int"
+		case reflect.Int8:
+			return "int8"
+		case reflect.Int16:
+			return "int16"
+		case reflect.Int32:
+			return "int32"
+		case reflect.Int64:
+			return "int64"
+		case reflect.Uint:
+			return "uint"
+		case reflect.Uint8:
+			return "uint8"
+		case reflect.Uint16:
+			return "uint16"
+		case reflect.Uint32:
+			return "uint32"
+		case reflect.Uint64:
+			return "uint64"
+		case reflect.Float32:
+			return "float32"
+		case reflect.Float64:
+			return "float64"
+		case reflect.String:
+			return "string"
+		case reflect.Bool:
+			return "bool"
+		default:
+			// 如果无法识别，返回原始类型名
+			return t.String()
+		}
+	}
+
+	// 对于基础类型或结构体，直接返回类型名
+	return t.String()
 }

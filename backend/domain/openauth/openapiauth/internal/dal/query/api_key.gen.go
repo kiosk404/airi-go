@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -28,36 +29,35 @@ func newAPIKey(db *gorm.DB, opts ...gen.DOOption) aPIKey {
 	tableName := _aPIKey.aPIKeyDo.TableName()
 	_aPIKey.ALL = field.NewAsterisk(tableName)
 	_aPIKey.ID = field.NewInt64(tableName, "id")
-	_aPIKey.APIKey = field.NewString(tableName, "api_key")
 	_aPIKey.Name = field.NewString(tableName, "name")
-	_aPIKey.Status = field.NewInt32(tableName, "status")
+	_aPIKey.APIKey = field.NewString(tableName, "api_key")
+	_aPIKey.ConnectorID = field.NewInt64(tableName, "connector_id")
 	_aPIKey.UserID = field.NewInt64(tableName, "user_id")
+	_aPIKey.AkType = field.NewInt32(tableName, "ak_type")
+	_aPIKey.LastUsedAt = field.NewInt64(tableName, "last_used_at")
 	_aPIKey.ExpiredAt = field.NewInt64(tableName, "expired_at")
 	_aPIKey.CreatedAt = field.NewInt64(tableName, "created_at")
 	_aPIKey.UpdatedAt = field.NewInt64(tableName, "updated_at")
-	_aPIKey.LastUsedAt = field.NewInt64(tableName, "last_used_at")
-	_aPIKey.AkType = field.NewInt32(tableName, "ak_type")
 
 	_aPIKey.fillFieldMap()
 
 	return _aPIKey
 }
 
-// aPIKey api key table
 type aPIKey struct {
 	aPIKeyDo
 
-	ALL        field.Asterisk
-	ID         field.Int64  // Primary Key ID
-	APIKey     field.String // API Key hash
-	Name       field.String // API Key Name
-	Status     field.Int32  // 0 normal, 1 deleted
-	UserID     field.Int64  // API Key Owner
-	ExpiredAt  field.Int64  // API Key Expired Time
-	CreatedAt  field.Int64  // Create Time in Milliseconds
-	UpdatedAt  field.Int64  // Update Time in Milliseconds
-	LastUsedAt field.Int64  // Used Time in Milliseconds
-	AkType     field.Int32  // api key type
+	ALL         field.Asterisk
+	ID          field.Int64
+	Name        field.String
+	APIKey      field.String
+	ConnectorID field.Int64
+	UserID      field.Int64
+	AkType      field.Int32
+	LastUsedAt  field.Int64
+	ExpiredAt   field.Int64
+	CreatedAt   field.Int64
+	UpdatedAt   field.Int64
 
 	fieldMap map[string]field.Expr
 }
@@ -75,15 +75,15 @@ func (a aPIKey) As(alias string) *aPIKey {
 func (a *aPIKey) updateTableName(table string) *aPIKey {
 	a.ALL = field.NewAsterisk(table)
 	a.ID = field.NewInt64(table, "id")
-	a.APIKey = field.NewString(table, "api_key")
 	a.Name = field.NewString(table, "name")
-	a.Status = field.NewInt32(table, "status")
+	a.APIKey = field.NewString(table, "api_key")
+	a.ConnectorID = field.NewInt64(table, "connector_id")
 	a.UserID = field.NewInt64(table, "user_id")
+	a.AkType = field.NewInt32(table, "ak_type")
+	a.LastUsedAt = field.NewInt64(table, "last_used_at")
 	a.ExpiredAt = field.NewInt64(table, "expired_at")
 	a.CreatedAt = field.NewInt64(table, "created_at")
 	a.UpdatedAt = field.NewInt64(table, "updated_at")
-	a.LastUsedAt = field.NewInt64(table, "last_used_at")
-	a.AkType = field.NewInt32(table, "ak_type")
 
 	a.fillFieldMap()
 
@@ -102,15 +102,15 @@ func (a *aPIKey) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 func (a *aPIKey) fillFieldMap() {
 	a.fieldMap = make(map[string]field.Expr, 10)
 	a.fieldMap["id"] = a.ID
-	a.fieldMap["api_key"] = a.APIKey
 	a.fieldMap["name"] = a.Name
-	a.fieldMap["status"] = a.Status
+	a.fieldMap["api_key"] = a.APIKey
+	a.fieldMap["connector_id"] = a.ConnectorID
 	a.fieldMap["user_id"] = a.UserID
+	a.fieldMap["ak_type"] = a.AkType
+	a.fieldMap["last_used_at"] = a.LastUsedAt
 	a.fieldMap["expired_at"] = a.ExpiredAt
 	a.fieldMap["created_at"] = a.CreatedAt
 	a.fieldMap["updated_at"] = a.UpdatedAt
-	a.fieldMap["last_used_at"] = a.LastUsedAt
-	a.fieldMap["ak_type"] = a.AkType
 }
 
 func (a aPIKey) clone(db *gorm.DB) aPIKey {
@@ -180,6 +180,8 @@ type IAPIKeyDo interface {
 	FirstOrCreate() (*model.APIKey, error)
 	FindByPage(offset int, limit int) (result []*model.APIKey, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) IAPIKeyDo
 	UnderlyingDB() *gorm.DB

@@ -22,7 +22,7 @@ func InternalError(c *gin.Context, err error) {
 	var customErr errorx.StatusError
 
 	if errors.As(err, &customErr) && customErr.Code() != 0 {
-		logs.Warn("[ErrorX] error:  %v %v \n", customErr.Code(), err)
+		logs.Warn("[ErrorX] error:  %v %s \n", customErr.Code(), customErr.Msg())
 		c.AbortWithStatusJSON(http.StatusOK, data{Code: customErr.Code(), Msg: customErr.Msg()})
 		return
 	}

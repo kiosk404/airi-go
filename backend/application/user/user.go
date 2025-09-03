@@ -11,11 +11,11 @@ import (
 	"github.com/kiosk404/airi-go/backend/application/base/ctxutil"
 	"github.com/kiosk404/airi-go/backend/domain/user/entity"
 	user "github.com/kiosk404/airi-go/backend/domain/user/service"
+	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/types/consts"
 	"github.com/kiosk404/airi-go/backend/types/errno"
-	"golang.org/x/mod/sumdb/storage"
 )
 
 var UserApplicationSVC = &UserApplicationService{}

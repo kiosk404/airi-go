@@ -142,7 +142,3 @@ func InitLog(output string) (err error) {
 	})
 	return
 }
-
-func FlushLog() {
-
-}

@@ -100,7 +100,7 @@ func startHTTPServer() error {
 
 func loadEnv() {
 	appEnv := os.Getenv("APP_ENV")
-	fileName := ternary.IFElse(appEnv == "", ".env", ".env"+appEnv)
+	fileName := ternary.IFElse(appEnv == "", ".env", ".env."+appEnv)
 
 	logs.Info("load env from %s", fileName)
 

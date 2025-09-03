@@ -6,7 +6,7 @@ import (
 	"github.com/kiosk404/airi-go/backend/domain/user/repository"
 	"github.com/kiosk404/airi-go/backend/domain/user/service"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
-	"golang.org/x/mod/sumdb/storage"
+	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
 	"gorm.io/gorm"
 )
 

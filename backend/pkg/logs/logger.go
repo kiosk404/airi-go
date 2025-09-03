@@ -173,8 +173,8 @@ func NewLogger(filename string) (*Logger, error) {
 		if !ok {
 			return "", ""
 		}
-		if strings.Contains(filename, "pkg/logger/log.go") {
-			_, filename, line, ok = runtime.Caller(10)
+		if strings.Contains(filename, "pkg/logs/log.go") {
+			_, filename, line, ok = runtime.Caller(12)
 			if !ok {
 				return "", ""
 			}
@@ -185,7 +185,6 @@ func NewLogger(filename string) (*Logger, error) {
 			return "", ""
 		}
 
-		filename = " "
 		function = fmt.Sprintf("%s:%d", relPath, line)
 		return function, filename
 	}
