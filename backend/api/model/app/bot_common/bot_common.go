@@ -1887,6 +1887,30 @@ func (p *AuthToken) GetUploadHost() (v string) {
 func (p *AuthToken) GetHostScheme() (v string) {
 	return p.HostScheme
 }
+func (p *AuthToken) SetServiceID(val string) {
+	p.ServiceID = val
+}
+func (p *AuthToken) SetAccessKeyID(val string) {
+	p.AccessKeyID = val
+}
+func (p *AuthToken) SetSecretAccessKey(val string) {
+	p.SecretAccessKey = val
+}
+func (p *AuthToken) SetSessionToken(val string) {
+	p.SessionToken = val
+}
+func (p *AuthToken) SetExpiredTime(val string) {
+	p.ExpiredTime = val
+}
+func (p *AuthToken) SetCurrentTime(val string) {
+	p.CurrentTime = val
+}
+func (p *AuthToken) SetUploadHost(val string) {
+	p.UploadHost = val
+}
+func (p *AuthToken) SetHostScheme(val string) {
+	p.HostScheme = val
+}
 
 func (p *AuthToken) String() string {
 	if p == nil {
@@ -1913,6 +1937,9 @@ func (p *PromptInfo) GetPrompt() (v string) {
 		return PromptInfo_Prompt_DEFAULT
 	}
 	return *p.Prompt
+}
+func (p *PromptInfo) SetPrompt(val *string) {
+	p.Prompt = val
 }
 
 func (p *PromptInfo) IsSetPrompt() bool {
@@ -2035,6 +2062,36 @@ func (p *ModelInfo) GetModelStyle() (v ModelStyle) {
 	}
 	return *p.ModelStyle
 }
+func (p *ModelInfo) SetModelId(val *int64) {
+	p.ModelId = val
+}
+func (p *ModelInfo) SetTemperature(val *float64) {
+	p.Temperature = val
+}
+func (p *ModelInfo) SetMaxTokens(val *int32) {
+	p.MaxTokens = val
+}
+func (p *ModelInfo) SetTopP(val *float64) {
+	p.TopP = val
+}
+func (p *ModelInfo) SetFrequencyPenalty(val *float64) {
+	p.FrequencyPenalty = val
+}
+func (p *ModelInfo) SetPresencePenalty(val *float64) {
+	p.PresencePenalty = val
+}
+func (p *ModelInfo) SetShortMemoryPolicy(val *ShortMemoryPolicy) {
+	p.ShortMemoryPolicy = val
+}
+func (p *ModelInfo) SetTopK(val *int32) {
+	p.TopK = val
+}
+func (p *ModelInfo) SetResponseFormat(val *ModelResponseFormat) {
+	p.ResponseFormat = val
+}
+func (p *ModelInfo) SetModelStyle(val *ModelStyle) {
+	p.ModelStyle = val
+}
 
 func (p *ModelInfo) IsSetModelId() bool {
 	return p.ModelId != nil
@@ -2112,6 +2169,12 @@ func (p *ShortMemoryPolicy) GetHistoryRound() (v int32) {
 	}
 	return *p.HistoryRound
 }
+func (p *ShortMemoryPolicy) SetContextMode(val *ContextMode) {
+	p.ContextMode = val
+}
+func (p *ShortMemoryPolicy) SetHistoryRound(val *int32) {
+	p.HistoryRound = val
+}
 
 func (p *ShortMemoryPolicy) IsSetContextMode() bool {
 	return p.ContextMode != nil
@@ -2176,6 +2239,18 @@ func (p *PluginInfo) GetApiVersionMs() (v int64) {
 		return PluginInfo_ApiVersionMs_DEFAULT
 	}
 	return *p.ApiVersionMs
+}
+func (p *PluginInfo) SetPluginId(val *int64) {
+	p.PluginId = val
+}
+func (p *PluginInfo) SetApiId(val *int64) {
+	p.ApiId = val
+}
+func (p *PluginInfo) SetApiName(val *string) {
+	p.ApiName = val
+}
+func (p *PluginInfo) SetApiVersionMs(val *int64) {
+	p.ApiVersionMs = val
 }
 
 func (p *PluginInfo) IsSetPluginId() bool {
@@ -2290,6 +2365,30 @@ func (p *WorkflowInfo) GetPluginIcon() (v string) {
 	}
 	return *p.PluginIcon
 }
+func (p *WorkflowInfo) SetWorkflowId(val *int64) {
+	p.WorkflowId = val
+}
+func (p *WorkflowInfo) SetPluginId(val *int64) {
+	p.PluginId = val
+}
+func (p *WorkflowInfo) SetApiId(val *int64) {
+	p.ApiId = val
+}
+func (p *WorkflowInfo) SetFlowMode(val *WorkflowMode) {
+	p.FlowMode = val
+}
+func (p *WorkflowInfo) SetWorkflowName(val *string) {
+	p.WorkflowName = val
+}
+func (p *WorkflowInfo) SetDesc(val *string) {
+	p.Desc = val
+}
+func (p *WorkflowInfo) SetParameters(val []*PluginParameter) {
+	p.Parameters = val
+}
+func (p *WorkflowInfo) SetPluginIcon(val *string) {
+	p.PluginIcon = val
+}
 
 func (p *WorkflowInfo) IsSetWorkflowId() bool {
 	return p.WorkflowId != nil
@@ -2399,6 +2498,24 @@ func (p *PluginParameter) GetSubType() (v string) {
 	}
 	return *p.SubType
 }
+func (p *PluginParameter) SetName(val *string) {
+	p.Name = val
+}
+func (p *PluginParameter) SetDesc(val *string) {
+	p.Desc = val
+}
+func (p *PluginParameter) SetRequired(val *bool) {
+	p.Required = val
+}
+func (p *PluginParameter) SetType(val *string) {
+	p.Type = val
+}
+func (p *PluginParameter) SetSubParameters(val []*PluginParameter) {
+	p.SubParameters = val
+}
+func (p *PluginParameter) SetSubType(val *string) {
+	p.SubType = val
+}
 
 func (p *PluginParameter) IsSetName() bool {
 	return p.Name != nil
@@ -2490,6 +2607,21 @@ func (p *OnboardingInfo) GetSuggestedQuestionsShowMode() (v SuggestedQuestionsSh
 	}
 	return *p.SuggestedQuestionsShowMode
 }
+func (p *OnboardingInfo) SetPrologue(val *string) {
+	p.Prologue = val
+}
+func (p *OnboardingInfo) SetSuggestedQuestions(val []string) {
+	p.SuggestedQuestions = val
+}
+func (p *OnboardingInfo) SetOnboardingMode(val *OnboardingMode) {
+	p.OnboardingMode = val
+}
+func (p *OnboardingInfo) SetCustomizedOnboardingPrompt(val *string) {
+	p.CustomizedOnboardingPrompt = val
+}
+func (p *OnboardingInfo) SetSuggestedQuestionsShowMode(val *SuggestedQuestionsShowMode) {
+	p.SuggestedQuestionsShowMode = val
+}
 
 func (p *OnboardingInfo) IsSetPrologue() bool {
 	return p.Prologue != nil
@@ -2556,6 +2688,15 @@ func (p *SuggestReplyInfo) GetChainTaskName() (v string) {
 		return SuggestReplyInfo_ChainTaskName_DEFAULT
 	}
 	return *p.ChainTaskName
+}
+func (p *SuggestReplyInfo) SetSuggestReplyMode(val *SuggestReplyMode) {
+	p.SuggestReplyMode = val
+}
+func (p *SuggestReplyInfo) SetCustomizedSuggestPrompt(val *string) {
+	p.CustomizedSuggestPrompt = val
+}
+func (p *SuggestReplyInfo) SetChainTaskName(val *string) {
+	p.ChainTaskName = val
 }
 
 func (p *SuggestReplyInfo) IsSetSuggestReplyMode() bool {
@@ -2656,6 +2797,27 @@ func (p *VoicesInfo) GetDefaultUserInputType() (v DefaultUserInputType) {
 	}
 	return *p.DefaultUserInputType
 }
+func (p *VoicesInfo) SetMuted(val *bool) {
+	p.Muted = val
+}
+func (p *VoicesInfo) SetI18nLangVoice(val map[string]int64) {
+	p.I18nLangVoice = val
+}
+func (p *VoicesInfo) SetI18nLangVoiceStr(val map[string]string) {
+	p.I18nLangVoiceStr = val
+}
+func (p *VoicesInfo) SetAutoplay(val *bool) {
+	p.Autoplay = val
+}
+func (p *VoicesInfo) SetAutoplayVoice(val map[string]int64) {
+	p.AutoplayVoice = val
+}
+func (p *VoicesInfo) SetCloseVoiceCall(val *bool) {
+	p.CloseVoiceCall = val
+}
+func (p *VoicesInfo) SetDefaultUserInputType(val *DefaultUserInputType) {
+	p.DefaultUserInputType = val
+}
 
 func (p *VoicesInfo) IsSetMuted() bool {
 	return p.Muted != nil
@@ -2716,6 +2878,15 @@ func (p *AnswerActionTriggerRule) GetNeedPreloading() (v bool) {
 func (p *AnswerActionTriggerRule) GetTriggerData() (v map[string]string) {
 	return p.TriggerData
 }
+func (p *AnswerActionTriggerRule) SetType(val AnswerActionTriggerType) {
+	p.Type = val
+}
+func (p *AnswerActionTriggerRule) SetNeedPreloading(val bool) {
+	p.NeedPreloading = val
+}
+func (p *AnswerActionTriggerRule) SetTriggerData(val map[string]string) {
+	p.TriggerData = val
+}
 
 func (p *AnswerActionTriggerRule) String() string {
 	if p == nil {
@@ -2757,6 +2928,21 @@ func (p *ActionIcon) GetDefaultUri() (v string) {
 
 func (p *ActionIcon) GetActiveUri() (v string) {
 	return p.ActiveUri
+}
+func (p *ActionIcon) SetType(val string) {
+	p.Type = val
+}
+func (p *ActionIcon) SetDefaultUrl(val string) {
+	p.DefaultUrl = val
+}
+func (p *ActionIcon) SetActiveUrl(val string) {
+	p.ActiveUrl = val
+}
+func (p *ActionIcon) SetDefaultUri(val string) {
+	p.DefaultUri = val
+}
+func (p *ActionIcon) SetActiveUri(val string) {
+	p.ActiveUri = val
 }
 
 func (p *ActionIcon) String() string {
@@ -2815,6 +3001,24 @@ func (p *AnswerActionConfig) GetTriggerRule() (v *AnswerActionTriggerRule) {
 func (p *AnswerActionConfig) GetPosition() (v int32) {
 	return p.Position
 }
+func (p *AnswerActionConfig) SetKey(val string) {
+	p.Key = val
+}
+func (p *AnswerActionConfig) SetName(val string) {
+	p.Name = val
+}
+func (p *AnswerActionConfig) SetIcon(val *ActionIcon) {
+	p.Icon = val
+}
+func (p *AnswerActionConfig) SetNameI18n(val map[string]string) {
+	p.NameI18n = val
+}
+func (p *AnswerActionConfig) SetTriggerRule(val *AnswerActionTriggerRule) {
+	p.TriggerRule = val
+}
+func (p *AnswerActionConfig) SetPosition(val int32) {
+	p.Position = val
+}
 
 func (p *AnswerActionConfig) IsSetIcon() bool {
 	return p.Icon != nil
@@ -2849,6 +3053,12 @@ func (p *AnswerActions) GetAnswerActionsMode() (v AnswerActionsMode) {
 
 func (p *AnswerActions) GetAnswerActionConfigs() (v []*AnswerActionConfig) {
 	return p.AnswerActionConfigs
+}
+func (p *AnswerActions) SetAnswerActionsMode(val AnswerActionsMode) {
+	p.AnswerActionsMode = val
+}
+func (p *AnswerActions) SetAnswerActionConfigs(val []*AnswerActionConfig) {
+	p.AnswerActionConfigs = val
 }
 
 func (p *AnswerActions) String() string {
@@ -2937,6 +3147,27 @@ func (p *BotExtInfo) GetBindingMp() (v bool) {
 	}
 	return *p.BindingMp
 }
+func (p *BotExtInfo) SetAnswerActions(val *AnswerActions) {
+	p.AnswerActions = val
+}
+func (p *BotExtInfo) SetCardIds(val []int32) {
+	p.CardIds = val
+}
+func (p *BotExtInfo) SetPromptId(val *int32) {
+	p.PromptId = val
+}
+func (p *BotExtInfo) SetBotTemplateName(val *string) {
+	p.BotTemplateName = val
+}
+func (p *BotExtInfo) SetUseUGCVoice(val *bool) {
+	p.UseUGCVoice = val
+}
+func (p *BotExtInfo) SetAppId(val *int32) {
+	p.AppId = val
+}
+func (p *BotExtInfo) SetBindingMp(val *bool) {
+	p.BindingMp = val
+}
 
 func (p *BotExtInfo) IsSetAnswerActions() bool {
 	return p.AnswerActions != nil
@@ -3001,6 +3232,12 @@ func (p *KnowledgeInfo) GetName() (v string) {
 		return KnowledgeInfo_Name_DEFAULT
 	}
 	return *p.Name
+}
+func (p *KnowledgeInfo) SetId(val *string) {
+	p.Id = val
+}
+func (p *KnowledgeInfo) SetName(val *string) {
+	p.Name = val
 }
 
 func (p *KnowledgeInfo) IsSetId() bool {
@@ -3127,6 +3364,36 @@ func (p *Knowledge) GetRecallStrategy() (v *RecallStrategy) {
 	}
 	return p.RecallStrategy
 }
+func (p *Knowledge) SetKnowledgeInfo(val []*KnowledgeInfo) {
+	p.KnowledgeInfo = val
+}
+func (p *Knowledge) SetTopK(val *int64) {
+	p.TopK = val
+}
+func (p *Knowledge) SetMinScore(val *float64) {
+	p.MinScore = val
+}
+func (p *Knowledge) SetAuto(val *bool) {
+	p.Auto = val
+}
+func (p *Knowledge) SetSearchStrategy(val *SearchStrategy) {
+	p.SearchStrategy = val
+}
+func (p *Knowledge) SetShowSource(val *bool) {
+	p.ShowSource = val
+}
+func (p *Knowledge) SetNoRecallReplyMode(val *KnowledgeNoRecallReplyMode) {
+	p.NoRecallReplyMode = val
+}
+func (p *Knowledge) SetNoRecallReplyCustomizePrompt(val *string) {
+	p.NoRecallReplyCustomizePrompt = val
+}
+func (p *Knowledge) SetShowSourceMode(val *KnowledgeShowSourceMode) {
+	p.ShowSourceMode = val
+}
+func (p *Knowledge) SetRecallStrategy(val *RecallStrategy) {
+	p.RecallStrategy = val
+}
 
 func (p *Knowledge) IsSetKnowledgeInfo() bool {
 	return p.KnowledgeInfo != nil
@@ -3214,6 +3481,15 @@ func (p *RecallStrategy) GetUseNl2sql() (v bool) {
 	}
 	return *p.UseNl2sql
 }
+func (p *RecallStrategy) SetUseRerank(val *bool) {
+	p.UseRerank = val
+}
+func (p *RecallStrategy) SetUseRewrite(val *bool) {
+	p.UseRewrite = val
+}
+func (p *RecallStrategy) SetUseNl2sql(val *bool) {
+	p.UseNl2sql = val
+}
 
 func (p *RecallStrategy) IsSetUseRerank() bool {
 	return p.UseRerank != nil
@@ -3252,6 +3528,12 @@ func (p *SocietyVisibiltyConfig) GetVisibilityType() (v SocietyVisibility) {
 
 func (p *SocietyVisibiltyConfig) GetVisibilityRoles() (v []string) {
 	return p.VisibilityRoles
+}
+func (p *SocietyVisibiltyConfig) SetVisibilityType(val SocietyVisibility) {
+	p.VisibilityType = val
+}
+func (p *SocietyVisibiltyConfig) SetVisibilityRoles(val []string) {
+	p.VisibilityRoles = val
 }
 
 func (p *SocietyVisibiltyConfig) String() string {
@@ -3340,6 +3622,27 @@ func (p *Variable) GetIsDisabled() (v bool) {
 	}
 	return *p.IsDisabled
 }
+func (p *Variable) SetKey(val *string) {
+	p.Key = val
+}
+func (p *Variable) SetDescription(val *string) {
+	p.Description = val
+}
+func (p *Variable) SetDefaultValue(val *string) {
+	p.DefaultValue = val
+}
+func (p *Variable) SetIsSystem(val *bool) {
+	p.IsSystem = val
+}
+func (p *Variable) SetPromptDisabled(val *bool) {
+	p.PromptDisabled = val
+}
+func (p *Variable) SetSocietyVisibilityConfig(val *SocietyVisibiltyConfig) {
+	p.SocietyVisibilityConfig = val
+}
+func (p *Variable) SetIsDisabled(val *bool) {
+	p.IsDisabled = val
+}
 
 func (p *Variable) IsSetKey() bool {
 	return p.Key != nil
@@ -3404,6 +3707,12 @@ func (p *TaskInfo) GetEnablePresetTask() (v int64) {
 		return TaskInfo_EnablePresetTask_DEFAULT
 	}
 	return *p.EnablePresetTask
+}
+func (p *TaskInfo) SetUserTaskAllowed(val *bool) {
+	p.UserTaskAllowed = val
+}
+func (p *TaskInfo) SetEnablePresetTask(val *int64) {
+	p.EnablePresetTask = val
 }
 
 func (p *TaskInfo) IsSetUserTaskAllowed() bool {
@@ -3499,6 +3808,27 @@ func (p *FieldItem) GetAlterId() (v int64) {
 		return FieldItem_AlterId_DEFAULT
 	}
 	return *p.AlterId
+}
+func (p *FieldItem) SetName(val *string) {
+	p.Name = val
+}
+func (p *FieldItem) SetDesc(val *string) {
+	p.Desc = val
+}
+func (p *FieldItem) SetType(val *FieldItemType) {
+	p.Type = val
+}
+func (p *FieldItem) SetMustRequired(val *bool) {
+	p.MustRequired = val
+}
+func (p *FieldItem) SetId(val *int64) {
+	p.Id = val
+}
+func (p *FieldItem) SetTypeStr(val *string) {
+	p.TypeStr = val
+}
+func (p *FieldItem) SetAlterId(val *int64) {
+	p.AlterId = val
 }
 
 func (p *FieldItem) IsSetName() bool {
@@ -3604,6 +3934,24 @@ func (p *Database) GetRWMode() (v BotTableRWMode) {
 		return Database_RWMode_DEFAULT
 	}
 	return *p.RWMode
+}
+func (p *Database) SetTableId(val *string) {
+	p.TableId = val
+}
+func (p *Database) SetTableName(val *string) {
+	p.TableName = val
+}
+func (p *Database) SetTableDesc(val *string) {
+	p.TableDesc = val
+}
+func (p *Database) SetFieldList(val []*FieldItem) {
+	p.FieldList = val
+}
+func (p *Database) SetPromptDisabled(val *bool) {
+	p.PromptDisabled = val
+}
+func (p *Database) SetRWMode(val *BotTableRWMode) {
+	p.RWMode = val
 }
 
 func (p *Database) IsSetTableId() bool {
@@ -3811,6 +4159,75 @@ func (p *Agent) GetUpdateType() (v ReferenceUpdateType) {
 	}
 	return *p.UpdateType
 }
+func (p *Agent) SetAgentId(val int64) {
+	p.AgentId = val
+}
+func (p *Agent) SetAgentName(val string) {
+	p.AgentName = val
+}
+func (p *Agent) SetPromptInfo(val *PromptInfo) {
+	p.PromptInfo = val
+}
+func (p *Agent) SetPluginInfoList(val []*PluginInfo) {
+	p.PluginInfoList = val
+}
+func (p *Agent) SetKnowledge(val *Knowledge) {
+	p.Knowledge = val
+}
+func (p *Agent) SetWorkflowInfoList(val []*WorkflowInfo) {
+	p.WorkflowInfoList = val
+}
+func (p *Agent) SetModelInfo(val *ModelInfo) {
+	p.ModelInfo = val
+}
+func (p *Agent) SetIntents(val []*Intent) {
+	p.Intents = val
+}
+func (p *Agent) SetAgentType(val AgentType) {
+	p.AgentType = val
+}
+func (p *Agent) SetRootAgent(val bool) {
+	p.RootAgent = val
+}
+func (p *Agent) SetReferenceId(val int64) {
+	p.ReferenceId = val
+}
+func (p *Agent) SetFirstVersion(val string) {
+	p.FirstVersion = val
+}
+func (p *Agent) SetLastVersion(val string) {
+	p.LastVersion = val
+}
+func (p *Agent) SetAgentPosition(val *AgentPosition) {
+	p.AgentPosition = val
+}
+func (p *Agent) SetIconUri(val string) {
+	p.IconUri = val
+}
+func (p *Agent) SetJumpConfig(val *JumpConfig) {
+	p.JumpConfig = val
+}
+func (p *Agent) SetSuggestReplyInfo(val *SuggestReplyInfo) {
+	p.SuggestReplyInfo = val
+}
+func (p *Agent) SetDescription(val string) {
+	p.Description = val
+}
+func (p *Agent) SetVersionCompat(val AgentVersionCompat) {
+	p.VersionCompat = val
+}
+func (p *Agent) SetHookInfo(val *HookInfo) {
+	p.HookInfo = val
+}
+func (p *Agent) SetCurrentVersion(val *string) {
+	p.CurrentVersion = val
+}
+func (p *Agent) SetReferenceInfoStatus(val *ReferenceInfoStatus) {
+	p.ReferenceInfoStatus = val
+}
+func (p *Agent) SetUpdateType(val *ReferenceUpdateType) {
+	p.UpdateType = val
+}
 
 func (p *Agent) IsSetPromptInfo() bool {
 	return p.PromptInfo != nil
@@ -3878,6 +4295,12 @@ func (p *AgentPosition) GetX() (v float64) {
 func (p *AgentPosition) GetY() (v float64) {
 	return p.Y
 }
+func (p *AgentPosition) SetX(val float64) {
+	p.X = val
+}
+func (p *AgentPosition) SetY(val float64) {
+	p.Y = val
+}
 
 func (p *AgentPosition) String() string {
 	if p == nil {
@@ -3914,6 +4337,18 @@ func (p *Intent) GetNextAgentId() (v int64) {
 
 func (p *Intent) GetSessionType() (v MultiAgentSessionType) {
 	return p.SessionType
+}
+func (p *Intent) SetIntentId(val string) {
+	p.IntentId = val
+}
+func (p *Intent) SetPrompt(val string) {
+	p.Prompt = val
+}
+func (p *Intent) SetNextAgentId(val int64) {
+	p.NextAgentId = val
+}
+func (p *Intent) SetSessionType(val MultiAgentSessionType) {
+	p.SessionType = val
 }
 
 func (p *Intent) String() string {
@@ -3952,6 +4387,12 @@ func (p *TimeCapsuleInfo) GetDisablePromptCalling() (v DisablePromptCalling) {
 	}
 	return *p.DisablePromptCalling
 }
+func (p *TimeCapsuleInfo) SetTimeCapsuleMode(val *TimeCapsuleMode) {
+	p.TimeCapsuleMode = val
+}
+func (p *TimeCapsuleInfo) SetDisablePromptCalling(val *DisablePromptCalling) {
+	p.DisablePromptCalling = val
+}
 
 func (p *TimeCapsuleInfo) IsSetTimeCapsuleMode() bool {
 	return p.TimeCapsuleMode != nil
@@ -3987,6 +4428,9 @@ func (p *BotTagInfo) GetTimeCapsuleInfo() (v *TimeCapsuleInfo) {
 	}
 	return p.TimeCapsuleInfo
 }
+func (p *BotTagInfo) SetTimeCapsuleInfo(val *TimeCapsuleInfo) {
+	p.TimeCapsuleInfo = val
+}
 
 func (p *BotTagInfo) IsSetTimeCapsuleInfo() bool {
 	return p.TimeCapsuleInfo != nil
@@ -4017,6 +4461,9 @@ func (p *FileboxInfo) GetMode() (v FileboxInfoMode) {
 		return FileboxInfo_Mode_DEFAULT
 	}
 	return *p.Mode
+}
+func (p *FileboxInfo) SetMode(val *FileboxInfoMode) {
+	p.Mode = val
 }
 
 func (p *FileboxInfo) IsSetMode() bool {
@@ -4284,6 +4731,111 @@ func (p *BotInfo) GetLayoutInfo() (v *LayoutInfo) {
 func (p *BotInfo) GetBusinessType() (v BusinessType) {
 	return p.BusinessType
 }
+func (p *BotInfo) SetBotId(val int64) {
+	p.BotId = val
+}
+func (p *BotInfo) SetName(val string) {
+	p.Name = val
+}
+func (p *BotInfo) SetDescription(val string) {
+	p.Description = val
+}
+func (p *BotInfo) SetIconUri(val string) {
+	p.IconUri = val
+}
+func (p *BotInfo) SetIconUrl(val string) {
+	p.IconUrl = val
+}
+func (p *BotInfo) SetCreatorId(val int64) {
+	p.CreatorId = val
+}
+func (p *BotInfo) SetCreateTime(val int64) {
+	p.CreateTime = val
+}
+func (p *BotInfo) SetUpdateTime(val int64) {
+	p.UpdateTime = val
+}
+func (p *BotInfo) SetConnectorId(val int64) {
+	p.ConnectorId = val
+}
+func (p *BotInfo) SetVersion(val string) {
+	p.Version = val
+}
+func (p *BotInfo) SetModelInfo(val *ModelInfo) {
+	p.ModelInfo = val
+}
+func (p *BotInfo) SetPromptInfo(val *PromptInfo) {
+	p.PromptInfo = val
+}
+func (p *BotInfo) SetPluginInfoList(val []*PluginInfo) {
+	p.PluginInfoList = val
+}
+func (p *BotInfo) SetWorkflowInfoList(val []*WorkflowInfo) {
+	p.WorkflowInfoList = val
+}
+func (p *BotInfo) SetOnboardingInfo(val *OnboardingInfo) {
+	p.OnboardingInfo = val
+}
+func (p *BotInfo) SetKnowledge(val *Knowledge) {
+	p.Knowledge = val
+}
+func (p *BotInfo) SetVariableList(val []*Variable) {
+	p.VariableList = val
+}
+func (p *BotInfo) SetTaskInfo(val *TaskInfo) {
+	p.TaskInfo = val
+}
+func (p *BotInfo) SetDatabaseList(val []*Database) {
+	p.DatabaseList = val
+}
+func (p *BotInfo) SetSuggestReplyInfo(val *SuggestReplyInfo) {
+	p.SuggestReplyInfo = val
+}
+func (p *BotInfo) SetVoicesInfo(val *VoicesInfo) {
+	p.VoicesInfo = val
+}
+func (p *BotInfo) SetBotExtInfo(val *BotExtInfo) {
+	p.BotExtInfo = val
+}
+func (p *BotInfo) SetBotMode(val BotMode) {
+	p.BotMode = val
+}
+func (p *BotInfo) SetAgents(val []*Agent) {
+	p.Agents = val
+}
+func (p *BotInfo) SetBotSpecies(val BotSpecies) {
+	p.BotSpecies = val
+}
+func (p *BotInfo) SetBotTagInfo(val *BotTagInfo) {
+	p.BotTagInfo = val
+}
+func (p *BotInfo) SetFileboxInfo(val *FileboxInfo) {
+	p.FileboxInfo = val
+}
+func (p *BotInfo) SetMultiAgentInfo(val *MultiAgentInfo) {
+	p.MultiAgentInfo = val
+}
+func (p *BotInfo) SetBackgroundImageInfoList(val []*BackgroundImageInfo) {
+	p.BackgroundImageInfoList = val
+}
+func (p *BotInfo) SetShortcutSort(val []string) {
+	p.ShortcutSort = val
+}
+func (p *BotInfo) SetStatus(val BotStatus) {
+	p.Status = val
+}
+func (p *BotInfo) SetHookInfo(val *HookInfo) {
+	p.HookInfo = val
+}
+func (p *BotInfo) SetUserQueryCollectConf(val *UserQueryCollectConf) {
+	p.UserQueryCollectConf = val
+}
+func (p *BotInfo) SetLayoutInfo(val *LayoutInfo) {
+	p.LayoutInfo = val
+}
+func (p *BotInfo) SetBusinessType(val BusinessType) {
+	p.BusinessType = val
+}
 
 func (p *BotInfo) IsSetModelInfo() bool {
 	return p.ModelInfo != nil
@@ -4362,6 +4914,9 @@ func (p *CommonKnowledge) InitDefault() {
 func (p *CommonKnowledge) GetKnowledgeInfos() (v []*KnowledgeInfo) {
 	return p.KnowledgeInfos
 }
+func (p *CommonKnowledge) SetKnowledgeInfos(val []*KnowledgeInfo) {
+	p.KnowledgeInfos = val
+}
 
 func (p *CommonKnowledge) String() string {
 	if p == nil {
@@ -4429,6 +4984,27 @@ func (p *ShortcutCommandComponent) GetDefaultValue() (v string) {
 func (p *ShortcutCommandComponent) GetIsHide() (v bool) {
 	return p.IsHide
 }
+func (p *ShortcutCommandComponent) SetName(val string) {
+	p.Name = val
+}
+func (p *ShortcutCommandComponent) SetDescription(val string) {
+	p.Description = val
+}
+func (p *ShortcutCommandComponent) SetType(val string) {
+	p.Type = val
+}
+func (p *ShortcutCommandComponent) SetToolParameter(val *string) {
+	p.ToolParameter = val
+}
+func (p *ShortcutCommandComponent) SetOptions(val []string) {
+	p.Options = val
+}
+func (p *ShortcutCommandComponent) SetDefaultValue(val *string) {
+	p.DefaultValue = val
+}
+func (p *ShortcutCommandComponent) SetIsHide(val bool) {
+	p.IsHide = val
+}
 
 func (p *ShortcutCommandComponent) IsSetToolParameter() bool {
 	return p.ToolParameter != nil
@@ -4467,6 +5043,12 @@ func (p *ShortcutCommandToolInfo) GetName() (v string) {
 
 func (p *ShortcutCommandToolInfo) GetType() (v string) {
 	return p.Type
+}
+func (p *ShortcutCommandToolInfo) SetName(val string) {
+	p.Name = val
+}
+func (p *ShortcutCommandToolInfo) SetType(val string) {
+	p.Type = val
 }
 
 func (p *ShortcutCommandToolInfo) String() string {
@@ -4544,6 +5126,33 @@ func (p *ShortcutCommandInfo) GetAgentID() (v int64) {
 		return ShortcutCommandInfo_AgentID_DEFAULT
 	}
 	return *p.AgentID
+}
+func (p *ShortcutCommandInfo) SetID(val int64) {
+	p.ID = val
+}
+func (p *ShortcutCommandInfo) SetName(val string) {
+	p.Name = val
+}
+func (p *ShortcutCommandInfo) SetCommand(val string) {
+	p.Command = val
+}
+func (p *ShortcutCommandInfo) SetDescription(val string) {
+	p.Description = val
+}
+func (p *ShortcutCommandInfo) SetQueryTemplate(val string) {
+	p.QueryTemplate = val
+}
+func (p *ShortcutCommandInfo) SetIconURL(val string) {
+	p.IconURL = val
+}
+func (p *ShortcutCommandInfo) SetComponents(val []*ShortcutCommandComponent) {
+	p.Components = val
+}
+func (p *ShortcutCommandInfo) SetTool(val *ShortcutCommandToolInfo) {
+	p.Tool = val
+}
+func (p *ShortcutCommandInfo) SetAgentID(val *int64) {
+	p.AgentID = val
 }
 
 func (p *ShortcutCommandInfo) IsSetComponents() bool {
@@ -4699,6 +5308,63 @@ func (p *OpenAPIBotInfo) GetBackgroundImageInfo() (v *BackgroundImageInfo) {
 func (p *OpenAPIBotInfo) GetVariables() (v []*Variable) {
 	return p.Variables
 }
+func (p *OpenAPIBotInfo) SetBotID(val int64) {
+	p.BotID = val
+}
+func (p *OpenAPIBotInfo) SetName(val string) {
+	p.Name = val
+}
+func (p *OpenAPIBotInfo) SetDescription(val string) {
+	p.Description = val
+}
+func (p *OpenAPIBotInfo) SetIconURL(val string) {
+	p.IconURL = val
+}
+func (p *OpenAPIBotInfo) SetCreateTime(val int64) {
+	p.CreateTime = val
+}
+func (p *OpenAPIBotInfo) SetUpdateTime(val int64) {
+	p.UpdateTime = val
+}
+func (p *OpenAPIBotInfo) SetVersion(val string) {
+	p.Version = val
+}
+func (p *OpenAPIBotInfo) SetPromptInfo(val *PromptInfo) {
+	p.PromptInfo = val
+}
+func (p *OpenAPIBotInfo) SetOnboardingInfo(val *OnboardingInfo) {
+	p.OnboardingInfo = val
+}
+func (p *OpenAPIBotInfo) SetBotMode(val BotMode) {
+	p.BotMode = val
+}
+func (p *OpenAPIBotInfo) SetModelInfo(val *ModelInfo) {
+	p.ModelInfo = val
+}
+func (p *OpenAPIBotInfo) SetPluginInfoList(val []*PluginInfo) {
+	p.PluginInfoList = val
+}
+func (p *OpenAPIBotInfo) SetKnowledge(val *CommonKnowledge) {
+	p.Knowledge = val
+}
+func (p *OpenAPIBotInfo) SetWorkflowInfoList(val []*WorkflowInfo) {
+	p.WorkflowInfoList = val
+}
+func (p *OpenAPIBotInfo) SetShortcutCommands(val []*ShortcutCommandInfo) {
+	p.ShortcutCommands = val
+}
+func (p *OpenAPIBotInfo) SetDefaultUserInputType(val string) {
+	p.DefaultUserInputType = val
+}
+func (p *OpenAPIBotInfo) SetSuggestReplyInfo(val *SuggestReplyInfo) {
+	p.SuggestReplyInfo = val
+}
+func (p *OpenAPIBotInfo) SetBackgroundImageInfo(val *BackgroundImageInfo) {
+	p.BackgroundImageInfo = val
+}
+func (p *OpenAPIBotInfo) SetVariables(val []*Variable) {
+	p.Variables = val
+}
 
 func (p *OpenAPIBotInfo) IsSetPromptInfo() bool {
 	return p.PromptInfo != nil
@@ -4750,6 +5416,12 @@ func (p *LayoutInfo) GetWorkflowId() (v string) {
 func (p *LayoutInfo) GetPluginId() (v string) {
 	return p.PluginId
 }
+func (p *LayoutInfo) SetWorkflowId(val string) {
+	p.WorkflowId = val
+}
+func (p *LayoutInfo) SetPluginId(val string) {
+	p.PluginId = val
+}
 
 func (p *LayoutInfo) String() string {
 	if p == nil {
@@ -4776,6 +5448,12 @@ func (p *UserQueryCollectConf) GetIsCollected() (v bool) {
 
 func (p *UserQueryCollectConf) GetPrivatePolicy() (v string) {
 	return p.PrivatePolicy
+}
+func (p *UserQueryCollectConf) SetIsCollected(val bool) {
+	p.IsCollected = val
+}
+func (p *UserQueryCollectConf) SetPrivatePolicy(val string) {
+	p.PrivatePolicy = val
 }
 
 func (p *UserQueryCollectConf) String() string {
@@ -4814,6 +5492,15 @@ func (p *MultiAgentInfo) GetVersionCompatInfo() (v *AgentVersionCompatInfo) {
 func (p *MultiAgentInfo) GetConnectorType() (v MultiAgentConnectorType) {
 	return p.ConnectorType
 }
+func (p *MultiAgentInfo) SetSessionType(val MultiAgentSessionType) {
+	p.SessionType = val
+}
+func (p *MultiAgentInfo) SetVersionCompatInfo(val *AgentVersionCompatInfo) {
+	p.VersionCompatInfo = val
+}
+func (p *MultiAgentInfo) SetConnectorType(val MultiAgentConnectorType) {
+	p.ConnectorType = val
+}
 
 func (p *MultiAgentInfo) IsSetVersionCompatInfo() bool {
 	return p.VersionCompatInfo != nil
@@ -4844,6 +5531,12 @@ func (p *AgentVersionCompatInfo) GetVersionCompat() (v AgentVersionCompat) {
 
 func (p *AgentVersionCompatInfo) GetVersion() (v string) {
 	return p.Version
+}
+func (p *AgentVersionCompatInfo) SetVersionCompat(val AgentVersionCompat) {
+	p.VersionCompat = val
+}
+func (p *AgentVersionCompatInfo) SetVersion(val string) {
+	p.Version = val
 }
 
 func (p *AgentVersionCompatInfo) String() string {
@@ -4881,6 +5574,12 @@ func (p *BackgroundImageInfo) GetMobileBackgroundImage() (v *BackgroundImageDeta
 		return BackgroundImageInfo_MobileBackgroundImage_DEFAULT
 	}
 	return p.MobileBackgroundImage
+}
+func (p *BackgroundImageInfo) SetWebBackgroundImage(val *BackgroundImageDetail) {
+	p.WebBackgroundImage = val
+}
+func (p *BackgroundImageInfo) SetMobileBackgroundImage(val *BackgroundImageDetail) {
+	p.MobileBackgroundImage = val
 }
 
 func (p *BackgroundImageInfo) IsSetWebBackgroundImage() bool {
@@ -4977,6 +5676,27 @@ func (p *BackgroundImageDetail) GetCanvasPosition() (v *CanvasPosition) {
 	}
 	return p.CanvasPosition
 }
+func (p *BackgroundImageDetail) SetOriginImageUri(val *string) {
+	p.OriginImageUri = val
+}
+func (p *BackgroundImageDetail) SetOriginImageUrl(val *string) {
+	p.OriginImageUrl = val
+}
+func (p *BackgroundImageDetail) SetImageUri(val *string) {
+	p.ImageUri = val
+}
+func (p *BackgroundImageDetail) SetImageUrl(val *string) {
+	p.ImageUrl = val
+}
+func (p *BackgroundImageDetail) SetThemeColor(val *string) {
+	p.ThemeColor = val
+}
+func (p *BackgroundImageDetail) SetGradientPosition(val *GradientPosition) {
+	p.GradientPosition = val
+}
+func (p *BackgroundImageDetail) SetCanvasPosition(val *CanvasPosition) {
+	p.CanvasPosition = val
+}
 
 func (p *BackgroundImageDetail) IsSetOriginImageUri() bool {
 	return p.OriginImageUri != nil
@@ -5042,6 +5762,12 @@ func (p *GradientPosition) GetRight() (v float64) {
 	}
 	return *p.Right
 }
+func (p *GradientPosition) SetLeft(val *float64) {
+	p.Left = val
+}
+func (p *GradientPosition) SetRight(val *float64) {
+	p.Right = val
+}
 
 func (p *GradientPosition) IsSetLeft() bool {
 	return p.Left != nil
@@ -5106,6 +5832,18 @@ func (p *CanvasPosition) GetTop() (v float64) {
 		return CanvasPosition_Top_DEFAULT
 	}
 	return *p.Top
+}
+func (p *CanvasPosition) SetWidth(val *float64) {
+	p.Width = val
+}
+func (p *CanvasPosition) SetHeight(val *float64) {
+	p.Height = val
+}
+func (p *CanvasPosition) SetLeft(val *float64) {
+	p.Left = val
+}
+func (p *CanvasPosition) SetTop(val *float64) {
+	p.Top = val
 }
 
 func (p *CanvasPosition) IsSetWidth() bool {
@@ -5465,6 +6203,105 @@ func (p *BotInfoForUpdate) GetLayoutInfo() (v *LayoutInfo) {
 	}
 	return p.LayoutInfo
 }
+func (p *BotInfoForUpdate) SetBotId(val *int64) {
+	p.BotId = val
+}
+func (p *BotInfoForUpdate) SetName(val *string) {
+	p.Name = val
+}
+func (p *BotInfoForUpdate) SetDescription(val *string) {
+	p.Description = val
+}
+func (p *BotInfoForUpdate) SetIconUri(val *string) {
+	p.IconUri = val
+}
+func (p *BotInfoForUpdate) SetIconUrl(val *string) {
+	p.IconUrl = val
+}
+func (p *BotInfoForUpdate) SetCreatorId(val *int64) {
+	p.CreatorId = val
+}
+func (p *BotInfoForUpdate) SetCreateTime(val *int64) {
+	p.CreateTime = val
+}
+func (p *BotInfoForUpdate) SetUpdateTime(val *int64) {
+	p.UpdateTime = val
+}
+func (p *BotInfoForUpdate) SetConnectorId(val *int64) {
+	p.ConnectorId = val
+}
+func (p *BotInfoForUpdate) SetVersion(val *string) {
+	p.Version = val
+}
+func (p *BotInfoForUpdate) SetModelInfo(val *ModelInfo) {
+	p.ModelInfo = val
+}
+func (p *BotInfoForUpdate) SetPromptInfo(val *PromptInfo) {
+	p.PromptInfo = val
+}
+func (p *BotInfoForUpdate) SetPluginInfoList(val []*PluginInfo) {
+	p.PluginInfoList = val
+}
+func (p *BotInfoForUpdate) SetWorkflowInfoList(val []*WorkflowInfo) {
+	p.WorkflowInfoList = val
+}
+func (p *BotInfoForUpdate) SetOnboardingInfo(val *OnboardingInfo) {
+	p.OnboardingInfo = val
+}
+func (p *BotInfoForUpdate) SetKnowledge(val *Knowledge) {
+	p.Knowledge = val
+}
+func (p *BotInfoForUpdate) SetVariableList(val []*Variable) {
+	p.VariableList = val
+}
+func (p *BotInfoForUpdate) SetTaskInfo(val *TaskInfo) {
+	p.TaskInfo = val
+}
+func (p *BotInfoForUpdate) SetDatabaseList(val []*Database) {
+	p.DatabaseList = val
+}
+func (p *BotInfoForUpdate) SetSuggestReplyInfo(val *SuggestReplyInfo) {
+	p.SuggestReplyInfo = val
+}
+func (p *BotInfoForUpdate) SetVoicesInfo(val *VoicesInfo) {
+	p.VoicesInfo = val
+}
+func (p *BotInfoForUpdate) SetBotExtInfo(val *BotExtInfo) {
+	p.BotExtInfo = val
+}
+func (p *BotInfoForUpdate) SetBotMode(val *BotMode) {
+	p.BotMode = val
+}
+func (p *BotInfoForUpdate) SetAgents(val []*AgentForUpdate) {
+	p.Agents = val
+}
+func (p *BotInfoForUpdate) SetBotSpecies(val BotSpecies) {
+	p.BotSpecies = val
+}
+func (p *BotInfoForUpdate) SetBotTagInfo(val *BotTagInfo) {
+	p.BotTagInfo = val
+}
+func (p *BotInfoForUpdate) SetFileboxInfo(val *FileboxInfo) {
+	p.FileboxInfo = val
+}
+func (p *BotInfoForUpdate) SetMultiAgentInfo(val *MultiAgentInfo) {
+	p.MultiAgentInfo = val
+}
+func (p *BotInfoForUpdate) SetBackgroundImageInfoList(val []*BackgroundImageInfo) {
+	p.BackgroundImageInfoList = val
+}
+func (p *BotInfoForUpdate) SetShortcutSort(val []string) {
+	p.ShortcutSort = val
+}
+func (p *BotInfoForUpdate) SetHookInfo(val *HookInfo) {
+	p.HookInfo = val
+}
+func (p *BotInfoForUpdate) SetUserQueryCollectConf(val *UserQueryCollectConf) {
+	p.UserQueryCollectConf = val
+}
+func (p *BotInfoForUpdate) SetLayoutInfo(val *LayoutInfo) {
+	p.LayoutInfo = val
+}
 
 func (p *BotInfoForUpdate) IsSetBotId() bool {
 	return p.BotId != nil
@@ -5810,6 +6647,66 @@ func (p *AgentForUpdate) GetHookInfo() (v *HookInfo) {
 	}
 	return p.HookInfo
 }
+func (p *AgentForUpdate) SetAgentId(val *int64) {
+	p.AgentId = val
+}
+func (p *AgentForUpdate) SetAgentName(val *string) {
+	p.AgentName = val
+}
+func (p *AgentForUpdate) SetPromptInfo(val *PromptInfo) {
+	p.PromptInfo = val
+}
+func (p *AgentForUpdate) SetPluginInfoList(val []*PluginInfo) {
+	p.PluginInfoList = val
+}
+func (p *AgentForUpdate) SetKnowledge(val *Knowledge) {
+	p.Knowledge = val
+}
+func (p *AgentForUpdate) SetWorkflowInfoList(val []*WorkflowInfo) {
+	p.WorkflowInfoList = val
+}
+func (p *AgentForUpdate) SetModelInfo(val *ModelInfo) {
+	p.ModelInfo = val
+}
+func (p *AgentForUpdate) SetIntents(val []*Intent) {
+	p.Intents = val
+}
+func (p *AgentForUpdate) SetAgentType(val *AgentType) {
+	p.AgentType = val
+}
+func (p *AgentForUpdate) SetRootAgent(val *bool) {
+	p.RootAgent = val
+}
+func (p *AgentForUpdate) SetReferenceId(val *int64) {
+	p.ReferenceId = val
+}
+func (p *AgentForUpdate) SetFirstVersion(val *string) {
+	p.FirstVersion = val
+}
+func (p *AgentForUpdate) SetLastVersion(val *string) {
+	p.LastVersion = val
+}
+func (p *AgentForUpdate) SetPosition(val *AgentPosition) {
+	p.Position = val
+}
+func (p *AgentForUpdate) SetIconUri(val *string) {
+	p.IconUri = val
+}
+func (p *AgentForUpdate) SetJumpConfig(val *JumpConfig) {
+	p.JumpConfig = val
+}
+func (p *AgentForUpdate) SetSuggestReplyInfo(val *SuggestReplyInfo) {
+	p.SuggestReplyInfo = val
+}
+func (p *AgentForUpdate) SetDescription(val *string) {
+	p.Description = val
+}
+func (p *AgentForUpdate) SetVersionCompat(val *AgentVersionCompat) {
+	p.VersionCompat = val
+}
+func (p *AgentForUpdate) SetHookInfo(val *HookInfo) {
+	p.HookInfo = val
+}
 
 func (p *AgentForUpdate) IsSetAgentId() bool {
 	return p.AgentId != nil
@@ -5957,6 +6854,21 @@ func (p *TableDetail) GetPromptDisabled() (v bool) {
 	}
 	return *p.PromptDisabled
 }
+func (p *TableDetail) SetTableId(val *string) {
+	p.TableId = val
+}
+func (p *TableDetail) SetTableName(val *string) {
+	p.TableName = val
+}
+func (p *TableDetail) SetTableDesc(val *string) {
+	p.TableDesc = val
+}
+func (p *TableDetail) SetFieldList(val []*FieldItem) {
+	p.FieldList = val
+}
+func (p *TableDetail) SetPromptDisabled(val *bool) {
+	p.PromptDisabled = val
+}
 
 func (p *TableDetail) IsSetTableId() bool {
 	return p.TableId != nil
@@ -6024,6 +6936,15 @@ func (p *TaskPluginInputField) GetValue() (v string) {
 	}
 	return *p.Value
 }
+func (p *TaskPluginInputField) SetName(val *string) {
+	p.Name = val
+}
+func (p *TaskPluginInputField) SetType(val *string) {
+	p.Type = val
+}
+func (p *TaskPluginInputField) SetValue(val *string) {
+	p.Value = val
+}
 
 func (p *TaskPluginInputField) IsSetName() bool {
 	return p.Name != nil
@@ -6062,6 +6983,9 @@ func (p *TaskPluginInput) GetParams() (v []*TaskPluginInputField) {
 		return TaskPluginInput_Params_DEFAULT
 	}
 	return p.Params
+}
+func (p *TaskPluginInput) SetParams(val []*TaskPluginInputField) {
+	p.Params = val
 }
 
 func (p *TaskPluginInput) IsSetParams() bool {
@@ -6124,6 +7048,18 @@ func (p *TaskWebhookField) GetChildren() (v []*TaskWebhookField) {
 	}
 	return p.Children
 }
+func (p *TaskWebhookField) SetName(val *string) {
+	p.Name = val
+}
+func (p *TaskWebhookField) SetType(val *string) {
+	p.Type = val
+}
+func (p *TaskWebhookField) SetDescription(val *string) {
+	p.Description = val
+}
+func (p *TaskWebhookField) SetChildren(val []*TaskWebhookField) {
+	p.Children = val
+}
 
 func (p *TaskWebhookField) IsSetName() bool {
 	return p.Name != nil
@@ -6166,6 +7102,9 @@ func (p *TaskWebhookOutput) GetParams() (v []*TaskWebhookField) {
 		return TaskWebhookOutput_Params_DEFAULT
 	}
 	return p.Params
+}
+func (p *TaskWebhookOutput) SetParams(val []*TaskWebhookField) {
+	p.Params = val
 }
 
 func (p *TaskWebhookOutput) IsSetParams() bool {
@@ -6378,6 +7317,63 @@ func (p *TaskInfoDetail) GetOriginId() (v string) {
 	}
 	return *p.OriginId
 }
+func (p *TaskInfoDetail) SetTaskId(val *string) {
+	p.TaskId = val
+}
+func (p *TaskInfoDetail) SetUserQuestion(val *string) {
+	p.UserQuestion = val
+}
+func (p *TaskInfoDetail) SetCreateTime(val *string) {
+	p.CreateTime = val
+}
+func (p *TaskInfoDetail) SetNextTime(val *string) {
+	p.NextTime = val
+}
+func (p *TaskInfoDetail) SetStatus(val *int64) {
+	p.Status = val
+}
+func (p *TaskInfoDetail) SetPresetType(val *int32) {
+	p.PresetType = val
+}
+func (p *TaskInfoDetail) SetCronExpr(val *string) {
+	p.CronExpr = val
+}
+func (p *TaskInfoDetail) SetTaskContent(val *string) {
+	p.TaskContent = val
+}
+func (p *TaskInfoDetail) SetTimeZone(val *string) {
+	p.TimeZone = val
+}
+func (p *TaskInfoDetail) SetTaskName(val *string) {
+	p.TaskName = val
+}
+func (p *TaskInfoDetail) SetTriggerType(val *string) {
+	p.TriggerType = val
+}
+func (p *TaskInfoDetail) SetAction(val *string) {
+	p.Action = val
+}
+func (p *TaskInfoDetail) SetBotQuery(val *string) {
+	p.BotQuery = val
+}
+func (p *TaskInfoDetail) SetPluginName(val *string) {
+	p.PluginName = val
+}
+func (p *TaskInfoDetail) SetPluginInput(val *TaskPluginInput) {
+	p.PluginInput = val
+}
+func (p *TaskInfoDetail) SetWebhookUrl(val *string) {
+	p.WebhookUrl = val
+}
+func (p *TaskInfoDetail) SetWebhookBearerToken(val *string) {
+	p.WebhookBearerToken = val
+}
+func (p *TaskInfoDetail) SetWebhookOutput(val *TaskWebhookOutput) {
+	p.WebhookOutput = val
+}
+func (p *TaskInfoDetail) SetOriginId(val *string) {
+	p.OriginId = val
+}
 
 func (p *TaskInfoDetail) IsSetTaskId() bool {
 	return p.TaskId != nil
@@ -6531,6 +7527,24 @@ func (p *DraftBotInfoV2) GetTaskInfo() (v map[string]*TaskInfoDetail) {
 	}
 	return p.TaskInfo
 }
+func (p *DraftBotInfoV2) SetBotInfo(val *BotInfo) {
+	p.BotInfo = val
+}
+func (p *DraftBotInfoV2) SetCanvasData(val *string) {
+	p.CanvasData = val
+}
+func (p *DraftBotInfoV2) SetBaseCommitVersion(val *int64) {
+	p.BaseCommitVersion = val
+}
+func (p *DraftBotInfoV2) SetCommitVersion(val *int64) {
+	p.CommitVersion = val
+}
+func (p *DraftBotInfoV2) SetTableInfo(val map[string]*TableDetail) {
+	p.TableInfo = val
+}
+func (p *DraftBotInfoV2) SetTaskInfo(val map[string]*TaskInfoDetail) {
+	p.TaskInfo = val
+}
 
 func (p *DraftBotInfoV2) IsSetBotInfo() bool {
 	return p.BotInfo != nil
@@ -6592,6 +7606,15 @@ func (p *JumpConfig) GetIndependentConf() (v *IndependentModeConfig) {
 	}
 	return p.IndependentConf
 }
+func (p *JumpConfig) SetBacktrack(val BacktrackMode) {
+	p.Backtrack = val
+}
+func (p *JumpConfig) SetRecognition(val RecognitionMode) {
+	p.Recognition = val
+}
+func (p *JumpConfig) SetIndependentConf(val *IndependentModeConfig) {
+	p.IndependentConf = val
+}
 
 func (p *JumpConfig) IsSetIndependentConf() bool {
 	return p.IndependentConf != nil
@@ -6648,6 +7671,21 @@ func (p *IndependentModeConfig) GetPrompt() (v string) {
 	}
 	return *p.Prompt
 }
+func (p *IndependentModeConfig) SetJudgeTiming(val IndependentTiming) {
+	p.JudgeTiming = val
+}
+func (p *IndependentModeConfig) SetHistoryRound(val int32) {
+	p.HistoryRound = val
+}
+func (p *IndependentModeConfig) SetModelType(val IndependentRecognitionModelType) {
+	p.ModelType = val
+}
+func (p *IndependentModeConfig) SetModelID(val *string) {
+	p.ModelID = val
+}
+func (p *IndependentModeConfig) SetPrompt(val *string) {
+	p.Prompt = val
+}
 
 func (p *IndependentModeConfig) IsSetModelID() bool {
 	return p.ModelID != nil
@@ -6687,6 +7725,15 @@ func (p *MessageFeedback) GetDetailTypes() (v []MessageFeedbackDetailType) {
 
 func (p *MessageFeedback) GetDetailContent() (v string) {
 	return p.DetailContent
+}
+func (p *MessageFeedback) SetFeedbackType(val MessageFeedbackType) {
+	p.FeedbackType = val
+}
+func (p *MessageFeedback) SetDetailTypes(val []MessageFeedbackDetailType) {
+	p.DetailTypes = val
+}
+func (p *MessageFeedback) SetDetailContent(val string) {
+	p.DetailContent = val
 }
 
 func (p *MessageFeedback) String() string {
@@ -6729,6 +7776,21 @@ func (p *UserLabel) GetIconURL() (v string) {
 
 func (p *UserLabel) GetJumpLink() (v string) {
 	return p.JumpLink
+}
+func (p *UserLabel) SetLabelID(val string) {
+	p.LabelID = val
+}
+func (p *UserLabel) SetLabelName(val string) {
+	p.LabelName = val
+}
+func (p *UserLabel) SetIconURI(val string) {
+	p.IconURI = val
+}
+func (p *UserLabel) SetIconURL(val string) {
+	p.IconURL = val
+}
+func (p *UserLabel) SetJumpLink(val string) {
+	p.JumpLink = val
 }
 
 func (p *UserLabel) String() string {
@@ -6847,6 +7909,42 @@ func (p *ChatV3ChatDetail) GetSectionID() (v string) {
 	}
 	return *p.SectionID
 }
+func (p *ChatV3ChatDetail) SetID(val string) {
+	p.ID = val
+}
+func (p *ChatV3ChatDetail) SetConversationID(val string) {
+	p.ConversationID = val
+}
+func (p *ChatV3ChatDetail) SetBotID(val string) {
+	p.BotID = val
+}
+func (p *ChatV3ChatDetail) SetCreatedAt(val *int32) {
+	p.CreatedAt = val
+}
+func (p *ChatV3ChatDetail) SetCompletedAt(val *int32) {
+	p.CompletedAt = val
+}
+func (p *ChatV3ChatDetail) SetFailedAt(val *int32) {
+	p.FailedAt = val
+}
+func (p *ChatV3ChatDetail) SetMetaData(val map[string]string) {
+	p.MetaData = val
+}
+func (p *ChatV3ChatDetail) SetLastError(val *LastError) {
+	p.LastError = val
+}
+func (p *ChatV3ChatDetail) SetStatus(val string) {
+	p.Status = val
+}
+func (p *ChatV3ChatDetail) SetUsage(val *Usage) {
+	p.Usage = val
+}
+func (p *ChatV3ChatDetail) SetRequiredAction(val *RequiredAction) {
+	p.RequiredAction = val
+}
+func (p *ChatV3ChatDetail) SetSectionID(val *string) {
+	p.SectionID = val
+}
 
 func (p *ChatV3ChatDetail) IsSetCreatedAt() bool {
 	return p.CreatedAt != nil
@@ -6906,6 +8004,12 @@ func (p *LastError) GetCode() (v int32) {
 func (p *LastError) GetMsg() (v string) {
 	return p.Msg
 }
+func (p *LastError) SetCode(val int32) {
+	p.Code = val
+}
+func (p *LastError) SetMsg(val string) {
+	p.Msg = val
+}
 
 func (p *LastError) String() string {
 	if p == nil {
@@ -6953,6 +8057,15 @@ func (p *Usage) GetInputTokens() (v int32) {
 	}
 	return *p.InputTokens
 }
+func (p *Usage) SetTokenCount(val *int32) {
+	p.TokenCount = val
+}
+func (p *Usage) SetOutputTokens(val *int32) {
+	p.OutputTokens = val
+}
+func (p *Usage) SetInputTokens(val *int32) {
+	p.InputTokens = val
+}
 
 func (p *Usage) IsSetTokenCount() bool {
 	return p.TokenCount != nil
@@ -6997,6 +8110,12 @@ func (p *RequiredAction) GetSubmitToolOutputs() (v *SubmitToolOutputs) {
 	}
 	return p.SubmitToolOutputs
 }
+func (p *RequiredAction) SetType(val string) {
+	p.Type = val
+}
+func (p *RequiredAction) SetSubmitToolOutputs(val *SubmitToolOutputs) {
+	p.SubmitToolOutputs = val
+}
 
 func (p *RequiredAction) IsSetSubmitToolOutputs() bool {
 	return p.SubmitToolOutputs != nil
@@ -7022,6 +8141,9 @@ func (p *SubmitToolOutputs) InitDefault() {
 
 func (p *SubmitToolOutputs) GetToolCalls() (v []*InterruptPlugin) {
 	return p.ToolCalls
+}
+func (p *SubmitToolOutputs) SetToolCalls(val []*InterruptPlugin) {
+	p.ToolCalls = val
 }
 
 func (p *SubmitToolOutputs) String() string {
@@ -7070,6 +8192,18 @@ func (p *InterruptPlugin) GetRequireInfo() (v *InterruptRequireInfo) {
 	}
 	return p.RequireInfo
 }
+func (p *InterruptPlugin) SetID(val string) {
+	p.ID = val
+}
+func (p *InterruptPlugin) SetType(val string) {
+	p.Type = val
+}
+func (p *InterruptPlugin) SetFunction(val *InterruptFunction) {
+	p.Function = val
+}
+func (p *InterruptPlugin) SetRequireInfo(val *InterruptRequireInfo) {
+	p.RequireInfo = val
+}
 
 func (p *InterruptPlugin) IsSetFunction() bool {
 	return p.Function != nil
@@ -7105,6 +8239,12 @@ func (p *InterruptFunction) GetName() (v string) {
 func (p *InterruptFunction) GetArguments() (v string) {
 	return p.Arguments
 }
+func (p *InterruptFunction) SetName(val string) {
+	p.Name = val
+}
+func (p *InterruptFunction) SetArguments(val string) {
+	p.Arguments = val
+}
 
 func (p *InterruptFunction) String() string {
 	if p == nil {
@@ -7126,6 +8266,9 @@ func (p *InterruptRequireInfo) InitDefault() {
 
 func (p *InterruptRequireInfo) GetInfos() (v []string) {
 	return p.Infos
+}
+func (p *InterruptRequireInfo) SetInfos(val []string) {
+	p.Infos = val
 }
 
 func (p *InterruptRequireInfo) String() string {
@@ -7234,6 +8377,45 @@ func (p *ChatV3MessageDetail) GetReasoningContent() (v string) {
 	}
 	return *p.ReasoningContent
 }
+func (p *ChatV3MessageDetail) SetID(val string) {
+	p.ID = val
+}
+func (p *ChatV3MessageDetail) SetConversationID(val string) {
+	p.ConversationID = val
+}
+func (p *ChatV3MessageDetail) SetBotID(val string) {
+	p.BotID = val
+}
+func (p *ChatV3MessageDetail) SetRole(val string) {
+	p.Role = val
+}
+func (p *ChatV3MessageDetail) SetType(val string) {
+	p.Type = val
+}
+func (p *ChatV3MessageDetail) SetContent(val string) {
+	p.Content = val
+}
+func (p *ChatV3MessageDetail) SetContentType(val string) {
+	p.ContentType = val
+}
+func (p *ChatV3MessageDetail) SetMetaData(val map[string]string) {
+	p.MetaData = val
+}
+func (p *ChatV3MessageDetail) SetChatID(val string) {
+	p.ChatID = val
+}
+func (p *ChatV3MessageDetail) SetSectionID(val *string) {
+	p.SectionID = val
+}
+func (p *ChatV3MessageDetail) SetCreatedAt(val *int64) {
+	p.CreatedAt = val
+}
+func (p *ChatV3MessageDetail) SetUpdatedAt(val *int64) {
+	p.UpdatedAt = val
+}
+func (p *ChatV3MessageDetail) SetReasoningContent(val *string) {
+	p.ReasoningContent = val
+}
 
 func (p *ChatV3MessageDetail) IsSetMetaData() bool {
 	return p.MetaData != nil
@@ -7341,6 +8523,27 @@ func (p *HookInfo) GetSuggestionHook() (v []*HookItem) {
 	}
 	return p.SuggestionHook
 }
+func (p *HookInfo) SetPreAgentJumpHook(val []*HookItem) {
+	p.PreAgentJumpHook = val
+}
+func (p *HookInfo) SetPostAgentJumpHook(val []*HookItem) {
+	p.PostAgentJumpHook = val
+}
+func (p *HookInfo) SetFlowHook(val []*HookItem) {
+	p.FlowHook = val
+}
+func (p *HookInfo) SetAtomicHook(val []*HookItem) {
+	p.AtomicHook = val
+}
+func (p *HookInfo) SetLlmCallHook(val []*HookItem) {
+	p.LlmCallHook = val
+}
+func (p *HookInfo) SetResParsingHook(val []*HookItem) {
+	p.ResParsingHook = val
+}
+func (p *HookInfo) SetSuggestionHook(val []*HookItem) {
+	p.SuggestionHook = val
+}
 
 func (p *HookInfo) IsSetPreAgentJumpHook() bool {
 	return p.PreAgentJumpHook != nil
@@ -7425,6 +8628,18 @@ func (p *HookItem) GetTimeoutMs() (v int64) {
 		return HookItem_TimeoutMs_DEFAULT
 	}
 	return *p.TimeoutMs
+}
+func (p *HookItem) SetURI(val *string) {
+	p.URI = val
+}
+func (p *HookItem) SetFilterRules(val []string) {
+	p.FilterRules = val
+}
+func (p *HookItem) SetStrongDep(val *bool) {
+	p.StrongDep = val
+}
+func (p *HookItem) SetTimeoutMs(val *int64) {
+	p.TimeoutMs = val
 }
 
 func (p *HookItem) IsSetURI() bool {

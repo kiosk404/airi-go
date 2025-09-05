@@ -1,6 +1,7 @@
 package logs
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"os"
@@ -11,6 +12,10 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
+)
+
+const (
+	CtxKeyLogID = "A_LOGID"
 )
 
 type RotateHook struct {
@@ -229,6 +234,11 @@ func NewLogger(filename string) (*Logger, error) {
 	logger.AddHook(rotateHook)
 
 	return &Logger{logger}, nil
+}
+
+func (l *Logger) GetLogID(ctx context.Context) string {
+	logID, _ := ctx.Value(CtxKeyLogID).(string)
+	return logID
 }
 
 func getRootDir() string {

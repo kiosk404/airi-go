@@ -31,6 +31,12 @@ func (p *TrafficEnv) GetOpen() (v bool) {
 func (p *TrafficEnv) GetEnv() (v string) {
 	return p.Env
 }
+func (p *TrafficEnv) SetOpen(val bool) {
+	p.Open = val
+}
+func (p *TrafficEnv) SetEnv(val string) {
+	p.Env = val
+}
 
 func (p *TrafficEnv) String() string {
 	if p == nil {
@@ -98,6 +104,24 @@ func (p *Base) GetExtra() (v map[string]string) {
 	}
 	return p.Extra
 }
+func (p *Base) SetLogID(val string) {
+	p.LogID = val
+}
+func (p *Base) SetCaller(val string) {
+	p.Caller = val
+}
+func (p *Base) SetAddr(val string) {
+	p.Addr = val
+}
+func (p *Base) SetClient(val string) {
+	p.Client = val
+}
+func (p *Base) SetTrafficEnv(val *TrafficEnv) {
+	p.TrafficEnv = val
+}
+func (p *Base) SetExtra(val map[string]string) {
+	p.Extra = val
+}
 
 func (p *Base) IsSetTrafficEnv() bool {
 	return p.TrafficEnv != nil
@@ -148,6 +172,15 @@ func (p *BaseResp) GetExtra() (v map[string]string) {
 		return BaseResp_Extra_DEFAULT
 	}
 	return p.Extra
+}
+func (p *BaseResp) SetStatusMessage(val string) {
+	p.StatusMessage = val
+}
+func (p *BaseResp) SetStatusCode(val int32) {
+	p.StatusCode = val
+}
+func (p *BaseResp) SetExtra(val map[string]string) {
+	p.Extra = val
 }
 
 func (p *BaseResp) IsSetExtra() bool {
@@ -224,6 +257,15 @@ func (p *EmptyResp) GetData() (v *EmptyData) {
 	}
 	return p.Data
 }
+func (p *EmptyResp) SetCode(val int64) {
+	p.Code = val
+}
+func (p *EmptyResp) SetMsg(val string) {
+	p.Msg = val
+}
+func (p *EmptyResp) SetData(val *EmptyData) {
+	p.Data = val
+}
 
 func (p *EmptyResp) IsSetData() bool {
 	return p.Data != nil
@@ -255,6 +297,9 @@ func (p *EmptyRpcReq) GetBase() (v *Base) {
 	}
 	return p.Base
 }
+func (p *EmptyRpcReq) SetBase(val *Base) {
+	p.Base = val
+}
 
 func (p *EmptyRpcReq) IsSetBase() bool {
 	return p.Base != nil
@@ -285,6 +330,9 @@ func (p *EmptyRpcResp) GetBaseResp() (v *BaseResp) {
 		return EmptyRpcResp_BaseResp_DEFAULT
 	}
 	return p.BaseResp
+}
+func (p *EmptyRpcResp) SetBaseResp(val *BaseResp) {
+	p.BaseResp = val
 }
 
 func (p *EmptyRpcResp) IsSetBaseResp() bool {

@@ -21,6 +21,9 @@ func (p *AppUserInfo) InitDefault() {
 func (p *AppUserInfo) GetUserUniqueName() (v string) {
 	return p.UserUniqueName
 }
+func (p *AppUserInfo) SetUserUniqueName(val string) {
+	p.UserUniqueName = val
+}
 
 func (p *AppUserInfo) String() string {
 	if p == nil {
@@ -103,6 +106,36 @@ func (p *User) GetLocale() (v string) {
 func (p *User) GetUserCreateTime() (v int64) {
 	return p.UserCreateTime
 }
+func (p *User) SetUserIDStr(val int64) {
+	p.UserIDStr = val
+}
+func (p *User) SetName(val string) {
+	p.Name = val
+}
+func (p *User) SetUserUniqueName(val string) {
+	p.UserUniqueName = val
+}
+func (p *User) SetAccount(val string) {
+	p.Account = val
+}
+func (p *User) SetDescription(val string) {
+	p.Description = val
+}
+func (p *User) SetAvatarURL(val string) {
+	p.AvatarURL = val
+}
+func (p *User) SetScreenName(val *string) {
+	p.ScreenName = val
+}
+func (p *User) SetAppUserInfo(val *AppUserInfo) {
+	p.AppUserInfo = val
+}
+func (p *User) SetLocale(val *string) {
+	p.Locale = val
+}
+func (p *User) SetUserCreateTime(val int64) {
+	p.UserCreateTime = val
+}
 
 func (p *User) IsSetScreenName() bool {
 	return p.ScreenName != nil
@@ -142,6 +175,12 @@ func (p *PassportWebAccountRegisterPostRequest) GetPassword() (v string) {
 func (p *PassportWebAccountRegisterPostRequest) GetAccount() (v string) {
 	return p.Account
 }
+func (p *PassportWebAccountRegisterPostRequest) SetPassword(val string) {
+	p.Password = val
+}
+func (p *PassportWebAccountRegisterPostRequest) SetAccount(val string) {
+	p.Account = val
+}
 
 func (p *PassportWebAccountRegisterPostRequest) String() string {
 	if p == nil {
@@ -178,6 +217,15 @@ func (p *PassportWebAccountRegisterPostResponse) GetCode() (v int32) {
 
 func (p *PassportWebAccountRegisterPostResponse) GetMsg() (v string) {
 	return p.Msg
+}
+func (p *PassportWebAccountRegisterPostResponse) SetData(val *User) {
+	p.Data = val
+}
+func (p *PassportWebAccountRegisterPostResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *PassportWebAccountRegisterPostResponse) SetMsg(val string) {
+	p.Msg = val
 }
 
 func (p *PassportWebAccountRegisterPostResponse) IsSetData() bool {
@@ -232,6 +280,15 @@ func (p *PassportWebLogoutGetResponse) GetCode() (v int32) {
 func (p *PassportWebLogoutGetResponse) GetMsg() (v string) {
 	return p.Msg
 }
+func (p *PassportWebLogoutGetResponse) SetRedirectURL(val string) {
+	p.RedirectURL = val
+}
+func (p *PassportWebLogoutGetResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *PassportWebLogoutGetResponse) SetMsg(val string) {
+	p.Msg = val
+}
 
 func (p *PassportWebLogoutGetResponse) String() string {
 	if p == nil {
@@ -258,6 +315,12 @@ func (p *PassportWebAccountLoginPostRequest) GetAccount() (v string) {
 
 func (p *PassportWebAccountLoginPostRequest) GetPassword() (v string) {
 	return p.Password
+}
+func (p *PassportWebAccountLoginPostRequest) SetAccount(val string) {
+	p.Account = val
+}
+func (p *PassportWebAccountLoginPostRequest) SetPassword(val string) {
+	p.Password = val
 }
 
 func (p *PassportWebAccountLoginPostRequest) String() string {
@@ -296,6 +359,15 @@ func (p *PassportWebAccountLoginPostResponse) GetCode() (v int32) {
 func (p *PassportWebAccountLoginPostResponse) GetMsg() (v string) {
 	return p.Msg
 }
+func (p *PassportWebAccountLoginPostResponse) SetData(val *User) {
+	p.Data = val
+}
+func (p *PassportWebAccountLoginPostResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *PassportWebAccountLoginPostResponse) SetMsg(val string) {
+	p.Msg = val
+}
 
 func (p *PassportWebAccountLoginPostResponse) IsSetData() bool {
 	return p.Data != nil
@@ -332,6 +404,15 @@ func (p *PassportWebAccountPasswordResetGetRequest) GetCode() (v string) {
 func (p *PassportWebAccountPasswordResetGetRequest) GetAccount() (v string) {
 	return p.Account
 }
+func (p *PassportWebAccountPasswordResetGetRequest) SetPassword(val string) {
+	p.Password = val
+}
+func (p *PassportWebAccountPasswordResetGetRequest) SetCode(val string) {
+	p.Code = val
+}
+func (p *PassportWebAccountPasswordResetGetRequest) SetAccount(val string) {
+	p.Account = val
+}
 
 func (p *PassportWebAccountPasswordResetGetRequest) String() string {
 	if p == nil {
@@ -358,6 +439,12 @@ func (p *PassportWebAccountPasswordResetGetResponse) GetCode() (v int32) {
 
 func (p *PassportWebAccountPasswordResetGetResponse) GetMsg() (v string) {
 	return p.Msg
+}
+func (p *PassportWebAccountPasswordResetGetResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *PassportWebAccountPasswordResetGetResponse) SetMsg(val string) {
+	p.Msg = val
 }
 
 func (p *PassportWebAccountPasswordResetGetResponse) String() string {
@@ -413,6 +500,15 @@ func (p *PassportAccountInfoResponse) GetCode() (v int32) {
 func (p *PassportAccountInfoResponse) GetMsg() (v string) {
 	return p.Msg
 }
+func (p *PassportAccountInfoResponse) SetData(val *User) {
+	p.Data = val
+}
+func (p *PassportAccountInfoResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *PassportAccountInfoResponse) SetMsg(val string) {
+	p.Msg = val
+}
 
 func (p *PassportAccountInfoResponse) IsSetData() bool {
 	return p.Data != nil
@@ -439,6 +535,9 @@ func (p *UserUpdateAvatarRequest) InitDefault() {
 func (p *UserUpdateAvatarRequest) GetAvatar() (v []byte) {
 	return p.Avatar
 }
+func (p *UserUpdateAvatarRequest) SetAvatar(val []byte) {
+	p.Avatar = val
+}
 
 func (p *UserUpdateAvatarRequest) String() string {
 	if p == nil {
@@ -460,6 +559,9 @@ func (p *UserUpdateAvatarResponseData) InitDefault() {
 
 func (p *UserUpdateAvatarResponseData) GetWebURI() (v string) {
 	return p.WebURI
+}
+func (p *UserUpdateAvatarResponseData) SetWebURI(val string) {
+	p.WebURI = val
 }
 
 func (p *UserUpdateAvatarResponseData) String() string {
@@ -497,6 +599,15 @@ func (p *UserUpdateAvatarResponse) GetCode() (v int32) {
 
 func (p *UserUpdateAvatarResponse) GetMsg() (v string) {
 	return p.Msg
+}
+func (p *UserUpdateAvatarResponse) SetData(val *UserUpdateAvatarResponseData) {
+	p.Data = val
+}
+func (p *UserUpdateAvatarResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *UserUpdateAvatarResponse) SetMsg(val string) {
+	p.Msg = val
 }
 
 func (p *UserUpdateAvatarResponse) IsSetData() bool {
@@ -559,6 +670,18 @@ func (p *UserUpdateProfileRequest) GetLocale() (v string) {
 	}
 	return *p.Locale
 }
+func (p *UserUpdateProfileRequest) SetName(val *string) {
+	p.Name = val
+}
+func (p *UserUpdateProfileRequest) SetUserUniqueName(val *string) {
+	p.UserUniqueName = val
+}
+func (p *UserUpdateProfileRequest) SetDescription(val *string) {
+	p.Description = val
+}
+func (p *UserUpdateProfileRequest) SetLocale(val *string) {
+	p.Locale = val
+}
 
 func (p *UserUpdateProfileRequest) IsSetName() bool {
 	return p.Name != nil
@@ -601,6 +724,12 @@ func (p *UserUpdateProfileResponse) GetCode() (v int32) {
 
 func (p *UserUpdateProfileResponse) GetMsg() (v string) {
 	return p.Msg
+}
+func (p *UserUpdateProfileResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *UserUpdateProfileResponse) SetMsg(val string) {
+	p.Msg = val
 }
 
 func (p *UserUpdateProfileResponse) String() string {

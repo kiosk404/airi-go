@@ -4,6 +4,8 @@ package airi
 
 import (
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_open_api"
+	"github.com/kiosk404/airi-go/backend/api/model/llm/manage"
+	"github.com/kiosk404/airi-go/backend/api/model/llm/runtime"
 	"github.com/kiosk404/airi-go/backend/api/model/passport"
 	"github.com/kiosk404/airi-go/backend/api/model/permission/openapiauth"
 )
@@ -18,4 +20,12 @@ type OpenAPIAuthService interface {
 
 type PassportService interface {
 	passport.PassportService
+}
+
+type LLMManageService interface {
+	manage.LLMManageService
+}
+
+type LLMRuntimeService interface {
+	runtime.LLMRuntimeService
 }

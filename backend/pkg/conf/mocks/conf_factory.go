@@ -1,0 +1,47 @@
+package mocks
+
+import (
+	reflect "reflect"
+
+	conf "github.com/kiosk404/airi-go/backend/pkg/conf"
+	gomock "go.uber.org/mock/gomock"
+)
+
+// MockIConfigLoaderFactory is a mock of IConfigLoaderFactory interface.
+type MockIConfigLoaderFactory struct {
+	ctrl     *gomock.Controller
+	recorder *MockIConfigLoaderFactoryMockRecorder
+	isgomock struct{}
+}
+
+// MockIConfigLoaderFactoryMockRecorder is the mock recorder for MockIConfigLoaderFactory.
+type MockIConfigLoaderFactoryMockRecorder struct {
+	mock *MockIConfigLoaderFactory
+}
+
+// NewMockIConfigLoaderFactory creates a new mock instance.
+func NewMockIConfigLoaderFactory(ctrl *gomock.Controller) *MockIConfigLoaderFactory {
+	mock := &MockIConfigLoaderFactory{ctrl: ctrl}
+	mock.recorder = &MockIConfigLoaderFactoryMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockIConfigLoaderFactory) EXPECT() *MockIConfigLoaderFactoryMockRecorder {
+	return m.recorder
+}
+
+// NewConfigLoader mocks base method.
+func (m *MockIConfigLoaderFactory) NewConfigLoader(dsn string) (conf.IConfigLoader, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewConfigLoader", dsn)
+	ret0, _ := ret[0].(conf.IConfigLoader)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// NewConfigLoader indicates an expected call of NewConfigLoader.
+func (mr *MockIConfigLoaderFactoryMockRecorder) NewConfigLoader(dsn any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewConfigLoader", reflect.TypeOf((*MockIConfigLoaderFactory)(nil).NewConfigLoader), dsn)
+}

@@ -1,6 +1,7 @@
 package logs
 
 import (
+	"context"
 	"sync"
 
 	"github.com/sirupsen/logrus"
@@ -129,6 +130,10 @@ func FatalX(field string, format string, args ...interface{}) {
 	} else {
 		instance.WithField("module", field).Fatalf(format, args...)
 	}
+}
+
+func GetLogID(ctx context.Context) string {
+	return instance.GetLogID(ctx)
 }
 
 func InitLog(output string) (err error) {

@@ -28,6 +28,12 @@ func (p *OauthAuthorizationCodeReq) GetCode() (v string) {
 func (p *OauthAuthorizationCodeReq) GetState() (v string) {
 	return p.State
 }
+func (p *OauthAuthorizationCodeReq) SetCode(val string) {
+	p.Code = val
+}
+func (p *OauthAuthorizationCodeReq) SetState(val string) {
+	p.State = val
+}
 
 func (p *OauthAuthorizationCodeReq) String() string {
 	if p == nil {
@@ -54,6 +60,9 @@ func (p *OauthAuthorizationCodeResp) GetBaseResp() (v *base.BaseResp) {
 		return OauthAuthorizationCodeResp_BaseResp_DEFAULT
 	}
 	return p.BaseResp
+}
+func (p *OauthAuthorizationCodeResp) SetBaseResp(val *base.BaseResp) {
+	p.BaseResp = val
 }
 
 func (p *OauthAuthorizationCodeResp) IsSetBaseResp() bool {
@@ -101,6 +110,15 @@ func (p *GetBotOnlineInfoReq) GetVersion() (v string) {
 	}
 	return *p.Version
 }
+func (p *GetBotOnlineInfoReq) SetBotID(val int64) {
+	p.BotID = val
+}
+func (p *GetBotOnlineInfoReq) SetConnectorID(val *string) {
+	p.ConnectorID = val
+}
+func (p *GetBotOnlineInfoReq) SetVersion(val *string) {
+	p.Version = val
+}
 
 func (p *GetBotOnlineInfoReq) IsSetConnectorID() bool {
 	return p.ConnectorID != nil
@@ -145,6 +163,15 @@ func (p *UploadFileOpenRequest) GetBase() (v *base.Base) {
 		return UploadFileOpenRequest_Base_DEFAULT
 	}
 	return p.Base
+}
+func (p *UploadFileOpenRequest) SetContentType(val string) {
+	p.ContentType = val
+}
+func (p *UploadFileOpenRequest) SetData(val []byte) {
+	p.Data = val
+}
+func (p *UploadFileOpenRequest) SetBase(val *base.Base) {
+	p.Base = val
 }
 
 func (p *UploadFileOpenRequest) IsSetBase() bool {
@@ -196,6 +223,18 @@ func (p *UploadFileOpenResponse) GetBaseResp() (v *base.BaseResp) {
 		return UploadFileOpenResponse_BaseResp_DEFAULT
 	}
 	return p.BaseResp
+}
+func (p *UploadFileOpenResponse) SetFile(val *File) {
+	p.File = val
+}
+func (p *UploadFileOpenResponse) SetCode(val int64) {
+	p.Code = val
+}
+func (p *UploadFileOpenResponse) SetMsg(val string) {
+	p.Msg = val
+}
+func (p *UploadFileOpenResponse) SetBaseResp(val *base.BaseResp) {
+	p.BaseResp = val
 }
 
 func (p *UploadFileOpenResponse) IsSetFile() bool {
@@ -252,6 +291,24 @@ func (p *File) GetURL() (v string) {
 func (p *File) GetID() (v string) {
 	return p.ID
 }
+func (p *File) SetURI(val string) {
+	p.URI = val
+}
+func (p *File) SetBytes(val int64) {
+	p.Bytes = val
+}
+func (p *File) SetCreatedAt(val int64) {
+	p.CreatedAt = val
+}
+func (p *File) SetFileName(val string) {
+	p.FileName = val
+}
+func (p *File) SetURL(val string) {
+	p.URL = val
+}
+func (p *File) SetID(val string) {
+	p.ID = val
+}
 
 func (p *File) String() string {
 	if p == nil {
@@ -289,6 +346,15 @@ func (p *GetBotOnlineInfoResp) GetData() (v *bot_common.OpenAPIBotInfo) {
 	}
 	return p.Data
 }
+func (p *GetBotOnlineInfoResp) SetCode(val int32) {
+	p.Code = val
+}
+func (p *GetBotOnlineInfoResp) SetMsg(val string) {
+	p.Msg = val
+}
+func (p *GetBotOnlineInfoResp) SetData(val *bot_common.OpenAPIBotInfo) {
+	p.Data = val
+}
 
 func (p *GetBotOnlineInfoResp) IsSetData() bool {
 	return p.Data != nil
@@ -320,6 +386,12 @@ func (p *WorkspacePermission) GetWorkspaceIDList() (v []string) {
 func (p *WorkspacePermission) GetPermissionList() (v []string) {
 	return p.PermissionList
 }
+func (p *WorkspacePermission) SetWorkspaceIDList(val []string) {
+	p.WorkspaceIDList = val
+}
+func (p *WorkspacePermission) SetPermissionList(val []string) {
+	p.PermissionList = val
+}
 
 func (p *WorkspacePermission) String() string {
 	if p == nil {
@@ -341,6 +413,9 @@ func (p *AccountPermission) InitDefault() {
 
 func (p *AccountPermission) GetPermissionList() (v []string) {
 	return p.PermissionList
+}
+func (p *AccountPermission) SetPermissionList(val []string) {
+	p.PermissionList = val
 }
 
 func (p *AccountPermission) String() string {
@@ -378,6 +453,12 @@ func (p *Scope) GetAccountPermission() (v *AccountPermission) {
 		return Scope_AccountPermission_DEFAULT
 	}
 	return p.AccountPermission
+}
+func (p *Scope) SetWorkspacePermission(val *WorkspacePermission) {
+	p.WorkspacePermission = val
+}
+func (p *Scope) SetAccountPermission(val *AccountPermission) {
+	p.AccountPermission = val
 }
 
 func (p *Scope) IsSetWorkspacePermission() bool {
@@ -418,6 +499,12 @@ func (p *ImpersonateAiriUserRequest) GetScope() (v *Scope) {
 		return ImpersonateAiriUserRequest_Scope_DEFAULT
 	}
 	return p.Scope
+}
+func (p *ImpersonateAiriUserRequest) SetDurationSeconds(val int64) {
+	p.DurationSeconds = val
+}
+func (p *ImpersonateAiriUserRequest) SetScope(val *Scope) {
+	p.Scope = val
 }
 
 func (p *ImpersonateAiriUserRequest) IsSetScope() bool {
@@ -460,6 +547,15 @@ func (p *ImpersonateAiriUserResponse) GetData() (v *ImpersonateAiriUserResponseD
 	}
 	return p.Data
 }
+func (p *ImpersonateAiriUserResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *ImpersonateAiriUserResponse) SetMsg(val string) {
+	p.Msg = val
+}
+func (p *ImpersonateAiriUserResponse) SetData(val *ImpersonateAiriUserResponseData) {
+	p.Data = val
+}
 
 func (p *ImpersonateAiriUserResponse) IsSetData() bool {
 	return p.Data != nil
@@ -495,6 +591,15 @@ func (p *ImpersonateAiriUserResponseData) GetExpiresIn() (v int64) {
 
 func (p *ImpersonateAiriUserResponseData) GetTokenType() (v string) {
 	return p.TokenType
+}
+func (p *ImpersonateAiriUserResponseData) SetAccessToken(val string) {
+	p.AccessToken = val
+}
+func (p *ImpersonateAiriUserResponseData) SetExpiresIn(val int64) {
+	p.ExpiresIn = val
+}
+func (p *ImpersonateAiriUserResponseData) SetTokenType(val string) {
+	p.TokenType = val
 }
 
 func (p *ImpersonateAiriUserResponseData) String() string {
@@ -547,6 +652,18 @@ func (p *OpenGetBotInfoRequest) GetBase() (v *base.Base) {
 		return OpenGetBotInfoRequest_Base_DEFAULT
 	}
 	return p.Base
+}
+func (p *OpenGetBotInfoRequest) SetBotID(val int64) {
+	p.BotID = val
+}
+func (p *OpenGetBotInfoRequest) SetIsPublished(val *bool) {
+	p.IsPublished = val
+}
+func (p *OpenGetBotInfoRequest) SetConnectorID(val *int64) {
+	p.ConnectorID = val
+}
+func (p *OpenGetBotInfoRequest) SetBase(val *base.Base) {
+	p.Base = val
 }
 
 func (p *OpenGetBotInfoRequest) IsSetIsPublished() bool {
@@ -606,6 +723,18 @@ func (p *OpenGetBotInfoResponse) GetBaseResp() (v *base.BaseResp) {
 		return OpenGetBotInfoResponse_BaseResp_DEFAULT
 	}
 	return p.BaseResp
+}
+func (p *OpenGetBotInfoResponse) SetData(val *bot_common.OpenAPIBotInfo) {
+	p.Data = val
+}
+func (p *OpenGetBotInfoResponse) SetCode(val int64) {
+	p.Code = val
+}
+func (p *OpenGetBotInfoResponse) SetMsg(val string) {
+	p.Msg = val
+}
+func (p *OpenGetBotInfoResponse) SetBaseResp(val *base.BaseResp) {
+	p.BaseResp = val
 }
 
 func (p *OpenGetBotInfoResponse) IsSetData() bool {

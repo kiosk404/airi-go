@@ -1,5 +1,9 @@
 package ptr
 
+import (
+	"reflect"
+)
+
 func Of[T any](t T) *T {
 	return &t
 }
@@ -17,4 +21,26 @@ func FromOrDefault[T any](p *T, def T) T {
 		return *p
 	}
 	return def
+}
+
+func PtrConvert[F any, T any](f *F, c func(f F) T) *T {
+	if f == nil {
+		return nil
+	}
+	return Of(c(*f))
+}
+
+type Integer interface {
+	~int64 | ~int32 | ~int16 | ~int8 | ~int
+}
+
+func ConvIntPtr[T, K Integer](val *T) *K {
+	if val == nil {
+		return nil
+	}
+	return Of((K)(*val))
+}
+
+func IsNull[T any](v T) bool {
+	return reflect.ValueOf(v).IsZero()
 }

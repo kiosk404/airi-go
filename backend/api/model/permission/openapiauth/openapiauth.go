@@ -53,6 +53,18 @@ func (p *CreatePersonalAccessTokenAndPermissionRequest) GetDurationDay() (v stri
 func (p *CreatePersonalAccessTokenAndPermissionRequest) GetOrganizationID() (v string) {
 	return p.OrganizationID
 }
+func (p *CreatePersonalAccessTokenAndPermissionRequest) SetName(val string) {
+	p.Name = val
+}
+func (p *CreatePersonalAccessTokenAndPermissionRequest) SetExpireAt(val int64) {
+	p.ExpireAt = val
+}
+func (p *CreatePersonalAccessTokenAndPermissionRequest) SetDurationDay(val string) {
+	p.DurationDay = val
+}
+func (p *CreatePersonalAccessTokenAndPermissionRequest) SetOrganizationID(val string) {
+	p.OrganizationID = val
+}
 
 func (p *CreatePersonalAccessTokenAndPermissionRequest) String() string {
 	if p == nil {
@@ -100,6 +112,24 @@ func (p *PersonalAccessToken) GetLastUsedAt() (v int64) {
 func (p *PersonalAccessToken) GetExpireAt() (v int64) {
 	return p.ExpireAt
 }
+func (p *PersonalAccessToken) SetID(val int64) {
+	p.ID = val
+}
+func (p *PersonalAccessToken) SetName(val string) {
+	p.Name = val
+}
+func (p *PersonalAccessToken) SetCreatedAt(val int64) {
+	p.CreatedAt = val
+}
+func (p *PersonalAccessToken) SetUpdatedAt(val int64) {
+	p.UpdatedAt = val
+}
+func (p *PersonalAccessToken) SetLastUsedAt(val int64) {
+	p.LastUsedAt = val
+}
+func (p *PersonalAccessToken) SetExpireAt(val int64) {
+	p.ExpireAt = val
+}
 
 func (p *PersonalAccessToken) String() string {
 	if p == nil {
@@ -131,6 +161,12 @@ func (p *CreatePersonalAccessTokenAndPermissionResponseData) GetPersonalAccessTo
 
 func (p *CreatePersonalAccessTokenAndPermissionResponseData) GetToken() (v string) {
 	return p.Token
+}
+func (p *CreatePersonalAccessTokenAndPermissionResponseData) SetPersonalAccessToken(val *PersonalAccessToken) {
+	p.PersonalAccessToken = val
+}
+func (p *CreatePersonalAccessTokenAndPermissionResponseData) SetToken(val string) {
+	p.Token = val
 }
 
 func (p *CreatePersonalAccessTokenAndPermissionResponseData) IsSetPersonalAccessToken() bool {
@@ -172,6 +208,15 @@ func (p *CreatePersonalAccessTokenAndPermissionResponse) GetCode() (v int32) {
 
 func (p *CreatePersonalAccessTokenAndPermissionResponse) GetMsg() (v string) {
 	return p.Msg
+}
+func (p *CreatePersonalAccessTokenAndPermissionResponse) SetData(val *CreatePersonalAccessTokenAndPermissionResponseData) {
+	p.Data = val
+}
+func (p *CreatePersonalAccessTokenAndPermissionResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *CreatePersonalAccessTokenAndPermissionResponse) SetMsg(val string) {
+	p.Msg = val
 }
 
 func (p *CreatePersonalAccessTokenAndPermissionResponse) IsSetData() bool {
@@ -233,6 +278,18 @@ func (p *ListPersonalAccessTokensRequest) GetSearchOption() (v PatSearchOption) 
 		return ListPersonalAccessTokensRequest_SearchOption_DEFAULT
 	}
 	return *p.SearchOption
+}
+func (p *ListPersonalAccessTokensRequest) SetOrganizationID(val *string) {
+	p.OrganizationID = val
+}
+func (p *ListPersonalAccessTokensRequest) SetPage(val *int64) {
+	p.Page = val
+}
+func (p *ListPersonalAccessTokensRequest) SetSize(val *int64) {
+	p.Size = val
+}
+func (p *ListPersonalAccessTokensRequest) SetSearchOption(val *PatSearchOption) {
+	p.SearchOption = val
 }
 
 func (p *ListPersonalAccessTokensRequest) IsSetOrganizationID() bool {
@@ -327,6 +384,42 @@ func (p *PersonalAccessTokenWithCreatorInfo) GetLocked() (v bool) {
 func (p *PersonalAccessTokenWithCreatorInfo) GetCreatorStatus() (v UserStatus) {
 	return p.CreatorStatus
 }
+func (p *PersonalAccessTokenWithCreatorInfo) SetID(val int64) {
+	p.ID = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetName(val string) {
+	p.Name = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetCreatedAt(val int64) {
+	p.CreatedAt = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetUpdatedAt(val int64) {
+	p.UpdatedAt = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetLastUsedAt(val int64) {
+	p.LastUsedAt = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetExpireAt(val int64) {
+	p.ExpireAt = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetCreatorName(val string) {
+	p.CreatorName = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetCreatorUniqueName(val string) {
+	p.CreatorUniqueName = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetCreatorAvatarURL(val string) {
+	p.CreatorAvatarURL = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetCreatorIconURL(val string) {
+	p.CreatorIconURL = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetLocked(val bool) {
+	p.Locked = val
+}
+func (p *PersonalAccessTokenWithCreatorInfo) SetCreatorStatus(val UserStatus) {
+	p.CreatorStatus = val
+}
 
 func (p *PersonalAccessTokenWithCreatorInfo) String() string {
 	if p == nil {
@@ -364,6 +457,15 @@ func (p *ListPersonalAccessTokensResponse) GetCode() (v int32) {
 func (p *ListPersonalAccessTokensResponse) GetMsg() (v string) {
 	return p.Msg
 }
+func (p *ListPersonalAccessTokensResponse) SetData(val *ListPersonalAccessTokensResponseData) {
+	p.Data = val
+}
+func (p *ListPersonalAccessTokensResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *ListPersonalAccessTokensResponse) SetMsg(val string) {
+	p.Msg = val
+}
 
 func (p *ListPersonalAccessTokensResponse) IsSetData() bool {
 	return p.Data != nil
@@ -395,6 +497,12 @@ func (p *ListPersonalAccessTokensResponseData) GetPersonalAccessTokens() (v []*P
 func (p *ListPersonalAccessTokensResponseData) GetHasMore() (v bool) {
 	return p.HasMore
 }
+func (p *ListPersonalAccessTokensResponseData) SetPersonalAccessTokens(val []*PersonalAccessTokenWithCreatorInfo) {
+	p.PersonalAccessTokens = val
+}
+func (p *ListPersonalAccessTokensResponseData) SetHasMore(val bool) {
+	p.HasMore = val
+}
 
 func (p *ListPersonalAccessTokensResponseData) String() string {
 	if p == nil {
@@ -416,6 +524,9 @@ func (p *DeletePersonalAccessTokenAndPermissionRequest) InitDefault() {
 
 func (p *DeletePersonalAccessTokenAndPermissionRequest) GetID() (v int64) {
 	return p.ID
+}
+func (p *DeletePersonalAccessTokenAndPermissionRequest) SetID(val int64) {
+	p.ID = val
 }
 
 func (p *DeletePersonalAccessTokenAndPermissionRequest) String() string {
@@ -444,6 +555,12 @@ func (p *DeletePersonalAccessTokenAndPermissionResponse) GetCode() (v int32) {
 func (p *DeletePersonalAccessTokenAndPermissionResponse) GetMsg() (v string) {
 	return p.Msg
 }
+func (p *DeletePersonalAccessTokenAndPermissionResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *DeletePersonalAccessTokenAndPermissionResponse) SetMsg(val string) {
+	p.Msg = val
+}
 
 func (p *DeletePersonalAccessTokenAndPermissionResponse) String() string {
 	if p == nil {
@@ -465,6 +582,9 @@ func (p *GetPersonalAccessTokenAndPermissionRequest) InitDefault() {
 
 func (p *GetPersonalAccessTokenAndPermissionRequest) GetID() (v int64) {
 	return p.ID
+}
+func (p *GetPersonalAccessTokenAndPermissionRequest) SetID(val int64) {
+	p.ID = val
 }
 
 func (p *GetPersonalAccessTokenAndPermissionRequest) String() string {
@@ -492,6 +612,9 @@ func (p *GetPersonalAccessTokenAndPermissionResponseData) GetPersonalAccessToken
 		return GetPersonalAccessTokenAndPermissionResponseData_PersonalAccessToken_DEFAULT
 	}
 	return p.PersonalAccessToken
+}
+func (p *GetPersonalAccessTokenAndPermissionResponseData) SetPersonalAccessToken(val *PersonalAccessToken) {
+	p.PersonalAccessToken = val
 }
 
 func (p *GetPersonalAccessTokenAndPermissionResponseData) IsSetPersonalAccessToken() bool {
@@ -534,6 +657,15 @@ func (p *GetPersonalAccessTokenAndPermissionResponse) GetCode() (v int32) {
 func (p *GetPersonalAccessTokenAndPermissionResponse) GetMsg() (v string) {
 	return p.Msg
 }
+func (p *GetPersonalAccessTokenAndPermissionResponse) SetData(val *GetPersonalAccessTokenAndPermissionResponseData) {
+	p.Data = val
+}
+func (p *GetPersonalAccessTokenAndPermissionResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *GetPersonalAccessTokenAndPermissionResponse) SetMsg(val string) {
+	p.Msg = val
+}
 
 func (p *GetPersonalAccessTokenAndPermissionResponse) IsSetData() bool {
 	return p.Data != nil
@@ -565,6 +697,12 @@ func (p *UpdatePersonalAccessTokenAndPermissionRequest) GetID() (v int64) {
 func (p *UpdatePersonalAccessTokenAndPermissionRequest) GetName() (v string) {
 	return p.Name
 }
+func (p *UpdatePersonalAccessTokenAndPermissionRequest) SetID(val int64) {
+	p.ID = val
+}
+func (p *UpdatePersonalAccessTokenAndPermissionRequest) SetName(val string) {
+	p.Name = val
+}
 
 func (p *UpdatePersonalAccessTokenAndPermissionRequest) String() string {
 	if p == nil {
@@ -591,6 +729,12 @@ func (p *UpdatePersonalAccessTokenAndPermissionResponse) GetCode() (v int32) {
 
 func (p *UpdatePersonalAccessTokenAndPermissionResponse) GetMsg() (v string) {
 	return p.Msg
+}
+func (p *UpdatePersonalAccessTokenAndPermissionResponse) SetCode(val int32) {
+	p.Code = val
+}
+func (p *UpdatePersonalAccessTokenAndPermissionResponse) SetMsg(val string) {
+	p.Msg = val
 }
 
 func (p *UpdatePersonalAccessTokenAndPermissionResponse) String() string {

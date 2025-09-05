@@ -1,5 +1,13 @@
 package slices
 
+import (
+	"github.com/bytedance/gg/gslice"
+)
+
+func Map[A, B any](src []A, fn func(A) B) []B {
+	return gslice.Map(src, fn)
+}
+
 func Transform[A, B any](src []A, fn func(A) B) []B {
 	if src == nil {
 		return nil

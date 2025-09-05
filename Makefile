@@ -64,5 +64,5 @@ format: tools.verify.golines tools.verify.goimports
 
 ## idl-go: Generate Go code from Thrift IDL files in ./idl directory.PHONY: idl-go
 idl-go:
-	@thriftgo -r -gen go:package_prefix=$(THRIFT_PACKAGE_PREFIX_GO)/,template=slim,with_context=true,gen_setter=true \
+	@gothrift -r -gen go:package_prefix=$(THRIFT_PACKAGE_PREFIX_GO)/,template=slim,with_context=true,gen_setter=true \
 		-out $(THRIFT_OUT_GO) ./idl/api.thrift

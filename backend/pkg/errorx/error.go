@@ -41,6 +41,17 @@ func New(code int32, options ...Option) error {
 	return internal.NewByCode(code, options...)
 }
 
+// WithExtra set extra for StatusError.
+func WithExtraMsg(msg string) Option {
+	return internal.Extra("extra", msg)
+}
+
+// NewByCode get an error predefined in the configuration file by statusCode
+// with a stack trace at the point NewByCode is called.
+func NewByCode(code int32, options ...Option) error {
+	return internal.NewByCode(code, options...)
+}
+
 // WrapByCode returns an error annotating err with a stack trace
 // at the point WrapByCode is called, and the status code.
 func WrapByCode(err error, statusCode int32, options ...Option) error {
@@ -71,4 +82,9 @@ func ErrorWithoutStack(err error) string {
 		errMsg = errMsg[:index]
 	}
 	return errMsg
+}
+
+// FromStatusError converts err to StatusError.
+func FromStatusError(err error) (statusErr StatusError, ok bool) {
+	return internal.FromStatusError(err)
 }
