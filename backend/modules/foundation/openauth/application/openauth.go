@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_open_api"
-	openapimodel "github.com/kiosk404/airi-go/backend/api/model/permission/openapiauth"
+	openapimodel "github.com/kiosk404/airi-go/backend/api/model/foundation/domain/openapiauth"
 	"github.com/kiosk404/airi-go/backend/application/base/ctxutil"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
 	"github.com/kiosk404/airi-go/backend/infra/contract/rdb"

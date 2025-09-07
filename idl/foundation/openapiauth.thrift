@@ -1,7 +1,7 @@
 include "../base.thrift"
 include "./domain/openapiauth.thrift"
 
-namespace go foundation.permission
+namespace go foundation.openapiauth
 
 service OpenAPIAuthService {
     openapiauth.GetPersonalAccessTokenAndPermissionResponse GetPersonalAccessTokenAndPermission (1: openapiauth.GetPersonalAccessTokenAndPermissionRequest req) (api.get="/api/permission_api/pat/get_personal_access_token_and_permission")

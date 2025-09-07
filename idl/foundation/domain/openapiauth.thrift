@@ -1,6 +1,6 @@
 include "../../base.thrift"
 
-namespace go foundation.permission.openapiauth
+namespace go foundation.domain.openapiauth
 
 typedef string PatSearchOption
 const PatSearchOption all = "all"

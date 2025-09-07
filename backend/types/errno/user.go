@@ -8,6 +8,7 @@ import (
 const (
 	ErrUserAuthenticationFailed = 700012006 // Don't change this code. It is used in the frontend.
 
+	ErrUserSessionIntervalErrCode     = 700000000
 	ErrUserAccountAlreadyExistCode    = 700000001
 	ErrUserUniqueNameAlreadyExistCode = 700000002
 	ErrUserInfoInvalidateCode         = 700000003
@@ -56,8 +57,8 @@ func init() {
 	)
 
 	code.Register(
-		ErrUserEmailAlreadyExistCode,
-		"email already exist : {email}",
+		ErrUserAccountAlreadyExistCode,
+		"account already exist : {account}",
 		code.WithAffectStability(false),
 	)
 

@@ -8,7 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	httpwarp "github.com/kiosk404/airi-go/backend/api/http"
-	"github.com/kiosk404/airi-go/backend/application/openauth"
+	openauth "github.com/kiosk404/airi-go/backend/modules/foundation/openauth/application"
 	"github.com/kiosk404/airi-go/backend/pkg/ctxcache"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"

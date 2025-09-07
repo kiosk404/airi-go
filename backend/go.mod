@@ -195,4 +195,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/datatypes v1.2.6 // indirect
 	gorm.io/hints v1.1.2 // indirect
+	gorm.io/plugin/soft_delete v1.2.1 // indirect
 )

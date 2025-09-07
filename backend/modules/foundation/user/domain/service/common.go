@@ -1,11 +1,13 @@
 package service
 
 import (
+	"context"
 	"crypto/hmac"
 	"crypto/rand"
 	"crypto/sha256"
 	"crypto/subtle"
 	"encoding/base64"
+	"errors"
 	"fmt"
 	"strings"
 	"time"
@@ -13,7 +15,7 @@ import (
 	userEntity "github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/infra/repo/gorm_gen/model"
 	"github.com/kiosk404/airi-go/backend/pkg/json"
-	"github.com/kiosk404/airi-go/backend/types/consts"
+	"github.com/kiosk404/airi-go/backend/pkg/logs"
 	"golang.org/x/crypto/argon2"
 )
 
@@ -108,77 +110,72 @@ func verifyPassword(password, encodedHash string) (bool, error) {
 }
 
 // Session structure, which contains session information
-type Session struct {
-	ID        int64     `json:"id"`         // Session unique device identifier
-	CreatedAt time.Time `json:"created_at"` // creation time
-	ExpiresAt time.Time `json:"expires_at"` // expiration time
+
+type sessionServiceImpl struct{}
+
+func NewSessionService() ISessionService {
+	return &sessionServiceImpl{}
 }
 
-// The key used for signing (in practice you should read from the configuration or use environment variables)
-var hmacSecret = []byte("openairi-session-hmac-key")
+func (s sessionServiceImpl) GenerateSessionKey(ctx context.Context, session *userEntity.Session) (string, error) {
+	// 设置会话的创建时间和过期时间
+	session.CreatedAt = time.Now()
+	session.ExpiresAt = time.Now().Add(userEntity.SessionExpires)
 
-// Generate a secure session key
-func generateSessionKey(sessionID int64) (string, error) {
-	// Create the default session structure (without the user ID, which will be set in the Login method)
-	session := Session{
-		ID:        sessionID,
-		CreatedAt: time.Now(),
-		ExpiresAt: time.Now().Add(consts.DefaultSessionDuration),
-	}
-
-	// Serialize session data
+	// 序列化会话数据
 	sessionData, err := json.Marshal(session)
 	if err != nil {
 		return "", err
 	}
 
-	// Calculate HMAC signatures to ensure integrity
-	h := hmac.New(sha256.New, hmacSecret)
+	// 计算HMAC签名以确保完整性
+	h := hmac.New(sha256.New, userEntity.HMACSecret)
 	h.Write(sessionData)
 	signature := h.Sum(nil)
 
-	// Combining session data and signatures
+	// 组合会话数据和签名
 	finalData := append(sessionData, signature...)
 
-	// Base64 encoding final result
+	// Base64编码最终结果
 	return base64.RawURLEncoding.EncodeToString(finalData), nil
 }
 
-// Verify the validity of the session key
-func verifySessionKey(sessionKey string) (*Session, error) {
-	// Decode session data
-	data, err := base64.RawURLEncoding.DecodeString(sessionKey)
+func (s sessionServiceImpl) ValidateSession(ctx context.Context, sessionID string) (*userEntity.Session, error) {
+	logs.Debug("sessionID: %s", sessionID)
+
+	// 解码会话数据
+	data, err := base64.RawURLEncoding.DecodeString(sessionID)
 	if err != nil {
-		return nil, fmt.Errorf("invalid session format: %w", err)
+		return nil, fmt.Errorf("invalid session format: %w, data:%s", err, sessionID)
 	}
 
-	// Make sure the data is long enough to include at least session data and signatures
-	if len(data) < 32 { // Simple inspection should actually be more rigorous
-		return nil, fmt.Errorf("session data too short")
+	// 确保数据长够长，至少包含会话数据和签名
+	if len(data) < 32 { // 简单检查，实际应该更严格
+		return nil, errors.New("session data too short")
 	}
 
-	// Separating session data and signatures
-	sessionData := data[:len(data)-32] // Assume the signature is 32 bytes
+	// 分离会话数据和签名
+	sessionData := data[:len(data)-32] // 假设签名是32字节
 	signature := data[len(data)-32:]
 
-	// verify signature
-	h := hmac.New(sha256.New, hmacSecret)
+	// 验证签名
+	h := hmac.New(sha256.New, userEntity.HMACSecret)
 	h.Write(sessionData)
 	expectedSignature := h.Sum(nil)
 
 	if !hmac.Equal(signature, expectedSignature) {
-		return nil, fmt.Errorf("invalid session signature")
+		return nil, errors.New("invalid session signature")
 	}
 
-	// Parsing session data
-	var session Session
+	// 解析会话数据
+	var session userEntity.Session
 	if err := json.Unmarshal(sessionData, &session); err != nil {
 		return nil, fmt.Errorf("invalid session data: %w", err)
 	}
 
-	// Check if the session has expired
+	// 检查会话是否过期
 	if time.Now().After(session.ExpiresAt) {
-		return nil, fmt.Errorf("session expired")
+		return nil, errors.New("session expired")
 	}
 
 	return &session, nil

@@ -2,10 +2,12 @@ package ptr
 
 import (
 	"reflect"
+
+	"github.com/samber/lo"
 )
 
 func Of[T any](t T) *T {
-	return &t
+	return lo.ToPtr(t)
 }
 
 func From[T any](p *T) T {

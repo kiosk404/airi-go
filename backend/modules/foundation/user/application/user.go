@@ -4,11 +4,13 @@ import (
 	"context"
 	"os"
 	"regexp"
-	"slices"
+	"strconv"
 	"strings"
 	"unicode"
 
-	"github.com/kiosk404/airi-go/backend/api/model/passport"
+	"github.com/bytedance/gg/gslice"
+	domain "github.com/kiosk404/airi-go/backend/api/model/foundation/domain/user"
+	"github.com/kiosk404/airi-go/backend/api/model/foundation/user"
 	"github.com/kiosk404/airi-go/backend/application/base/ctxutil"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
 	"github.com/kiosk404/airi-go/backend/infra/contract/rdb"
@@ -16,58 +18,63 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/application/convertor"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/repo"
-	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/service"
+	usersvc "github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/service"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
 	"github.com/kiosk404/airi-go/backend/types/consts"
 	"github.com/kiosk404/airi-go/backend/types/errno"
 )
 
+var UserApplicationSVC = &UserApplicationService{}
+
 func InitUserService(ctx context.Context, provider rdb.Provider, oss storage.Storage, idGen idgen.IDGenerator) *UserApplicationService {
 	db := provider.NewSession(ctx)
-	UserApplicationSVC.DomainSVC = user.NewUserDomain(ctx,
+	UserApplicationSVC.DomainSVC = usersvc.NewUserDomain(ctx,
 		oss, idGen, repo.NewUserRepo(db))
 	UserApplicationSVC.oss = oss
 
 	return UserApplicationSVC
 }
 
-var UserApplicationSVC = &UserApplicationService{}
-
 type UserApplicationService struct {
 	oss       storage.Storage
-	DomainSVC user.User
+	DomainSVC usersvc.User
 }
 
-func (u *UserApplicationService) PassportWebAccountRegister(ctx context.Context, locale string, req *passport.PassportWebAccountRegisterPostRequest) (
-	resp *passport.PassportWebAccountRegisterPostResponse, sessionKey string, err error) {
+var _ user.UserService = &UserApplicationService{}
+
+func (u *UserApplicationService) WebAccountRegister(ctx context.Context,
+	req *user.UserRegisterRequest) (resp *user.UserRegisterResponse, err error) {
 	// Verify that the account format is legitimate
 	if !isValidAccount(req.GetAccount()) {
-		return nil, "", errorx.New(errno.ErrUserInvalidParamCode, errorx.KV("msg", "Invalid account"))
+		return nil, errorx.New(errno.ErrUserInvalidParamCode, errorx.KV("msg", "Invalid account"))
 	}
 
 	// Allow Register Checker
 	if !u.allowRegisterChecker(req.GetAccount()) {
-		return nil, "", errorx.New(errno.ErrNotAllowedRegisterCode)
+		return nil, errorx.New(errno.ErrNotAllowedRegisterCode)
 	}
 
-	userInfo, err := u.DomainSVC.Create(ctx, &user.CreateUserRequest{
+	userDO, err := u.DomainSVC.Create(ctx, &usersvc.CreateUserRequest{
 		Account:  req.GetAccount(),
 		Password: req.GetPassword(),
-		Locale:   locale,
+		Locale:   req.GetLocale(),
 	})
 	if err != nil {
-		return nil, "", err
+		return nil, err
 	}
 
-	userInfo, err = u.DomainSVC.Login(ctx, req.GetAccount(), req.GetPassword())
+	userInfo, err := u.DomainSVC.Login(ctx, req.GetAccount(), req.GetPassword())
 	if err != nil {
-		return nil, "", err
+		return nil, err
 	}
 
-	return &passport.PassportWebAccountRegisterPostResponse{
-		Data: convertor.UserDo2PassportTo(userInfo),
-		Code: 0,
-	}, userInfo.SessionKey, nil
+	return &user.UserRegisterResponse{
+		UserInfo:   convertor.UserDO2DTO(userDO),
+		Token:      ptr.Of(userInfo.SessionKey),
+		ExpireTime: ptr.Of(int64(entity.SessionExpires)),
+	}, nil
 }
 
 func (u *UserApplicationService) allowRegisterChecker(account string) bool {
@@ -84,57 +91,48 @@ func (u *UserApplicationService) allowRegisterChecker(account string) bool {
 	return slices.Contains(strings.Split(allowedAccounts, ","), strings.ToLower(account))
 }
 
-// PassportWebLogoutGet handle user logout requests
-func (u *UserApplicationService) PassportWebLogoutGet(ctx context.Context, req *passport.PassportWebLogoutGetRequest) (
-	resp *passport.PassportWebLogoutGetResponse, err error,
-) {
+// WebLogout handle user logout requests
+func (u *UserApplicationService) WebLogout(ctx context.Context,
+	req *user.LogoutRequest) (resp *user.LogoutResponse, err error) {
 	uid := ctxutil.MustGetUIDFromCtx(ctx)
 
 	err = u.DomainSVC.Logout(ctx, uid)
 	if err != nil {
 		return nil, err
 	}
+	return &user.LogoutResponse{}, nil
+}
 
-	return &passport.PassportWebLogoutGetResponse{
-		Code: 0,
+// WebAccountLoginByPassword handle user account login requests
+func (u *UserApplicationService) WebAccountLoginByPassword(ctx context.Context,
+	req *user.LoginByPasswordRequest) (resp *user.LoginByPasswordResponse, err error) {
+	userDO, err := u.DomainSVC.Login(ctx, req.GetAccount(), req.GetPassword())
+	if err != nil {
+		return nil, err
+	}
+	return &user.LoginByPasswordResponse{
+		UserInfo:   convertor.UserDO2DTO(userDO),
+		Token:      ptr.Of(userDO.SessionKey),
+		ExpireTime: ptr.Of(int64(entity.SessionExpires)),
 	}, nil
 }
 
-// PassportWebAccountLoginPost handle user account login requests
-func (u *UserApplicationService) PassportWebAccountLoginPost(ctx context.Context, req *passport.PassportWebAccountLoginPostRequest) (
-	resp *passport.PassportWebAccountLoginPostResponse, sessionKey string, err error,
-) {
-	userInfo, err := u.DomainSVC.Login(ctx, req.GetAccount(), req.GetPassword())
-	if err != nil {
-		return nil, "", err
-	}
-
-	return &passport.PassportWebAccountLoginPostResponse{
-		Data: convertor.UserDo2PassportTo(userInfo),
-		Code: 0,
-	}, userInfo.SessionKey, nil
-}
-
-func (u *UserApplicationService) PassportWebAccountPasswordResetGet(ctx context.Context, req *passport.PassportWebAccountPasswordResetGetRequest) (
-	resp *passport.PassportWebAccountPasswordResetGetResponse, err error,
-) {
+func (u *UserApplicationService) WebAccountPasswordReset(ctx context.Context,
+	req *user.ResetPasswordRequest) (resp *user.ResetPasswordResponse, err error) {
 	err = u.DomainSVC.ResetPassword(ctx, req.GetAccount(), req.GetPassword())
 	if err != nil {
 		return nil, err
 	}
 
-	return &passport.PassportWebAccountPasswordResetGetResponse{
-		Code: 0,
-	}, nil
+	return &user.ResetPasswordResponse{}, nil
 }
 
 // UserUpdateAvatar Update user avatar
-func (u *UserApplicationService) UserUpdateAvatar(ctx context.Context, mimeType string, req *passport.UserUpdateAvatarRequest) (
-	resp *passport.UserUpdateAvatarResponse, err error,
-) {
+func (u *UserApplicationService) UserUpdateAvatar(ctx context.Context,
+	req *user.UserUpdateAvatarRequest) (resp *user.UserUpdateAvatarResponse, err error) {
 	// Get file suffix by MIME type
 	var ext string
-	switch mimeType {
+	switch req.GetMimeType() {
 	case "image/jpeg", "image/jpg":
 		ext = "jpg"
 	case "image/png":
@@ -149,39 +147,32 @@ func (u *UserApplicationService) UserUpdateAvatar(ctx context.Context, mimeType 
 	}
 
 	uid := ctxutil.MustGetUIDFromCtx(ctx)
-
 	url, err := u.DomainSVC.UpdateAvatar(ctx, uid, ext, req.GetAvatar())
 	if err != nil {
 		return nil, err
 	}
-
-	return &passport.UserUpdateAvatarResponse{
-		Data: &passport.UserUpdateAvatarResponseData{
-			WebURI: url,
-		},
-		Code: 0,
+	return &user.UserUpdateAvatarResponse{
+		WebURI: url,
 	}, nil
 }
 
-// UserUpdateProfile Update user profile
-func (u *UserApplicationService) UserUpdateProfile(ctx context.Context, req *passport.UserUpdateProfileRequest) (
-	resp *passport.UserUpdateProfileResponse, err error,
-) {
+// ModifyUserProfile Update user profile
+func (u *UserApplicationService) ModifyUserProfile(ctx context.Context,
+	req *user.ModifyUserProfileRequest) (resp *user.ModifyUserProfileResponse, err error) {
 	userID := ctxutil.MustGetUIDFromCtx(ctx)
 
-	err = u.DomainSVC.UpdateProfile(ctx, &user.UpdateProfileRequest{
+	userDO, err := u.DomainSVC.UpdateProfile(ctx, &usersvc.UpdateProfileRequest{
 		UserID:      userID,
-		Name:        req.Name,
-		UniqueName:  req.UserUniqueName,
+		Name:        req.NickName,
+		UniqueName:  req.Name,
 		Description: req.Description,
 		Locale:      req.Locale,
 	})
 	if err != nil {
 		return nil, err
 	}
-
-	return &passport.UserUpdateProfileResponse{
-		Code: 0,
+	return &user.ModifyUserProfileResponse{
+		UserInfo: convertor.UserDO2DTO(userDO),
 	}, nil
 }
 
@@ -198,20 +189,53 @@ func (u *UserApplicationService) ValidateSession(ctx context.Context, sessionKey
 	return session, nil
 }
 
-func (u *UserApplicationService) PassportAccountInfo(ctx context.Context, req *passport.PassportAccountInfoRequest) (
-	resp *passport.PassportAccountInfoResponse, err error,
-) {
+func (u *UserApplicationService) GetUserInfo(ctx context.Context,
+	req *user.GetUserInfoRequest) (resp *user.GetUserInfoResponse, err error) {
 	userID := ctxutil.MustGetUIDFromCtx(ctx)
 
-	userInfo, err := u.DomainSVC.GetUserInfo(ctx, userID)
+	userDO, err := u.DomainSVC.GetUserInfo(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+	return &user.GetUserInfoResponse{
+		UserInfo: convertor.UserDO2DTO(userDO),
+	}, err
+}
+
+func (u *UserApplicationService) GetUserInfoByToken(ctx context.Context, request *user.GetUserInfoByTokenRequest) (r *user.GetUserInfoByTokenResponse, err error) {
+	userID := ctxutil.MustGetUIDFromCtx(ctx)
+
+	userDO, err := u.DomainSVC.GetUserProfiles(ctx, userID)
 	if err != nil {
 		return nil, err
 	}
 
-	return &passport.PassportAccountInfoResponse{
-		Data: convertor.UserDo2PassportTo(userInfo),
-		Code: 0,
+	return &user.GetUserInfoByTokenResponse{
+		UserInfo: convertor.UserDO2DTO(userDO),
 	}, nil
+}
+
+func (u *UserApplicationService) MGetUserInfo(ctx context.Context, req *user.MGetUserInfoRequest) (resp *user.MGetUserInfoResponse, err error) {
+	resp = user.NewMGetUserInfoResponse()
+	if len(req.GetUserIds()) == 0 {
+		return nil, errorx.NewByCode(errno.ErrUserInvalidParamCode, errorx.WithExtraMsg("user id is empty"))
+	}
+	userIDs, err := gslice.TryMap(req.GetUserIds(), func(s string) (int64, error) {
+		return strconv.ParseInt(s, 10, 64)
+	}).Get()
+	if err != nil {
+		return nil, errorx.NewByCode(errno.ErrUserInvalidParamCode, errorx.WithExtraMsg("user id is invalid"))
+	}
+
+	userDOs, err := u.DomainSVC.MGetUserProfiles(ctx, userIDs)
+	if err != nil {
+		return nil, err
+	}
+
+	resp.UserInfos = slices.Map(userDOs, func(userDO *entity.User, _ int) *domain.UserInfoDetail {
+		return convertor.UserDO2DTO(userDO)
+	})
+	return resp, nil
 }
 
 // Add a simple account verification function

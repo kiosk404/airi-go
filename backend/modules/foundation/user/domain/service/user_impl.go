@@ -7,9 +7,9 @@ import (
 	"time"
 	"unicode/utf8"
 
-	uploadEntity "github.com/kiosk404/airi-go/backend/domain/upload/entity"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
 	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
+	uploadEntity "github.com/kiosk404/airi-go/backend/modules/action/upload/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/repo"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/infra/repo/gorm_gen/model"
@@ -135,7 +135,12 @@ func (u *userImpl) Login(ctx context.Context, account, password string) (user *e
 		return nil, fmt.Errorf("failed to generate session id: %w", err)
 	}
 
-	sessionKey, err := generateSessionKey(uniqueSessionID)
+	sessionDO := &entity.Session{
+		UserID:    userModel.ID,
+		SessionID: uniqueSessionID,
+	}
+
+	sessionKey, err := NewSessionService().GenerateSessionKey(ctx, sessionDO)
 	if err != nil {
 		return nil, err
 	}
@@ -180,6 +185,28 @@ func (u *userImpl) ResetPassword(ctx context.Context, account, password string) 
 	return nil
 }
 
+func (u *userImpl) CreateSession(ctx context.Context, userID int64) (sessionKey string, err error) {
+	uniqueSessionID, err := u.IDGen.GenID(ctx)
+	if err != nil {
+		return "", errorx.New(errno.ErrUserInfoInvalidateCode)
+	}
+	sessionDO := &entity.Session{
+		UserID:    userID,
+		SessionID: uniqueSessionID,
+	}
+
+	sessionKey, err = NewSessionService().GenerateSessionKey(ctx, sessionDO)
+	if err != nil {
+		return "", errorx.WrapByCode(err, errno.ErrUserSessionIntervalErrCode, errorx.WithExtraMsg("failed to generate session key"))
+	}
+	err = u.UserRepo.UpdateSessionKey(ctx, userID, sessionKey)
+	if err != nil {
+		return "", err
+	}
+
+	return sessionKey, nil
+}
+
 func (u *userImpl) GetUserInfo(ctx context.Context, userID int64) (user *entity.User, err error) {
 	if userID <= 0 {
 		return nil, errorx.New(errno.ErrUserInvalidParamCode,
@@ -219,7 +246,7 @@ func (u *userImpl) UpdateAvatar(ctx context.Context, userID int64, ext string, i
 	return url, nil
 }
 
-func (u *userImpl) UpdateProfile(ctx context.Context, req *UpdateProfileRequest) (err error) {
+func (u *userImpl) UpdateProfile(ctx context.Context, req *UpdateProfileRequest) (user *entity.User, err error) {
 	updates := map[string]interface{}{
 		"updated_at": time.Now().UnixMilli(),
 	}
@@ -229,11 +256,11 @@ func (u *userImpl) UpdateProfile(ctx context.Context, req *UpdateProfileRequest)
 			UniqueName: req.UniqueName,
 		})
 		if err != nil {
-			return err
+			return nil, err
 		}
 
 		if resp.Code != ValidateSuccess {
-			return errorx.New(errno.ErrUserInvalidParamCode, errorx.KV("msg", resp.Msg))
+			return nil, errorx.New(errno.ErrUserInvalidParamCode, errorx.KV("msg", resp.Msg))
 		}
 
 		updates["unique_name"] = ptr.From(req.UniqueName)
@@ -252,8 +279,17 @@ func (u *userImpl) UpdateProfile(ctx context.Context, req *UpdateProfileRequest)
 	}
 
 	err = u.UserRepo.UpdateProfile(ctx, req.UserID, updates)
+	userModel, err := u.UserRepo.GetUserByID(ctx, req.UserID)
+	if err != nil {
+		return nil, err
+	}
 
-	return err
+	resURL, err := u.IconOSS.GetObjectUrl(ctx, userModel.IconURI)
+	if err != nil {
+		return nil, err
+	}
+
+	return userPo2Do(userModel, resURL), err
 }
 
 func (u *userImpl) ValidateProfileUpdate(ctx context.Context, req *ValidateProfileUpdateRequest) (resp *ValidateProfileUpdateResponse, err error) {
@@ -327,7 +363,7 @@ func (u *userImpl) MGetUserProfiles(ctx context.Context, userIDs []int64) (users
 
 func (u *userImpl) ValidateSession(ctx context.Context, sessionKey string) (session *entity.Session, exist bool, err error) {
 	// authentication session key
-	sessionModel, err := verifySessionKey(sessionKey)
+	sessionModel, err := NewSessionService().ValidateSession(ctx, sessionKey)
 	if err != nil {
 		return nil, false, errorx.New(errno.ErrUserAuthenticationFailed, errorx.KV("reason", "access denied"))
 	}

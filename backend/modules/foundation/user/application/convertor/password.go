@@ -1,30 +1,22 @@
 package convertor
 
 import (
-	"github.com/kiosk404/airi-go/backend/api/model/passport"
+	domain "github.com/kiosk404/airi-go/backend/api/model/foundation/domain/user"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 )
 
-func UserDo2PassportTo(userDo *entity.User) *passport.User {
-	var locale *string
-	if userDo.Locale != "" {
-		locale = ptr.Of(userDo.Locale)
+func UserDO2DTO(do *entity.User) *domain.UserInfoDetail {
+	if do == nil {
+		return nil
 	}
-
-	return &passport.User{
-		UserIDStr:      userDo.UserID,
-		Name:           userDo.Name,
-		ScreenName:     ptr.Of(userDo.Name),
-		UserUniqueName: userDo.UniqueName,
-		Account:        userDo.Account,
-		Description:    userDo.Description,
-		AvatarURL:      userDo.IconURL,
-		AppUserInfo: &passport.AppUserInfo{
-			UserUniqueName: userDo.UniqueName,
-		},
-		Locale: locale,
-
-		UserCreateTime: userDo.CreatedAt / 1000,
+	return &domain.UserInfoDetail{
+		Name:      do.UniqueName,
+		NickName:  do.Name,
+		AvatarURL: do.IconURL,
+		Account:   do.Account,
+		Mobile:    nil,
+		UserID:    ptr.Of(conv.ToString(do.UserID)),
 	}
 }

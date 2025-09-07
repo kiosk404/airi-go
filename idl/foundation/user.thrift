@@ -6,6 +6,7 @@ include "./domain/user.thrift"
 struct UserRegisterRequest {
     1: optional string account
     2: optional string password
+    3: optional string locale
 
     255: optional base.Base Base
 }
@@ -63,11 +64,12 @@ struct GetUserInfoByTokenResponse {
 }
 
 struct ModifyUserProfileRequest {
-    1: optional string user_id (api.path="user_id")
+    1: required string user_id (api.path="user_id")
     2: optional string name             // 用户唯一名称
     3: optional string nick_name        // 用户昵称
     4: optional string description      // 用户描述
     5: optional string avatar_uri       // 用户头像URI
+    6: optional string locale           // 用户定位
 
     255: optional base.Base Base
 }
@@ -101,17 +103,28 @@ struct MGetUserInfoResponse {
     255: base.BaseResp  BaseResp
 }
 
+struct UserUpdateAvatarRequest {
+    1: required string mimeType
+    2: required binary avatar (api.form="avatar")
+}
+
+struct UserUpdateAvatarResponse {
+    1: required string web_uri
+    255: optional base.Base Base
+}
+
 service UserService {
     // 用户注册相关接口
-    UserRegisterResponse Register(1: UserRegisterRequest request) (api.post = "/api/foundation/v1/users/register")
-    ResetPasswordResponse ResetPassword(1: ResetPasswordRequest request) (api.post = "/api/foundation/v1/users/reset_password")
+    UserRegisterResponse WebAccountRegister(1: UserRegisterRequest request) (api.post = "/api/foundation/v1/users/register")
+    ResetPasswordResponse WebAccountPasswordReset(1: ResetPasswordRequest request) (api.post = "/api/foundation/v1/users/reset_password")
 
     // 用户登陆相关接口
-    LoginByPasswordResponse LoginByPassword(1: LoginByPasswordRequest request) (api.post = "/api/foundation/v1/users/login_by_password")
-    LogoutResponse Logout(1: LogoutRequest request) (api.post = "/api/foundation/v1/users/logout")
+    LoginByPasswordResponse WebAccountLoginByPassword(1: LoginByPasswordRequest request) (api.post = "/api/foundation/v1/users/login_by_password")
+    LogoutResponse WebLogout(1: LogoutRequest request) (api.post = "/api/foundation/v1/users/logout")
 
     // 修改用户资料相关接口
     ModifyUserProfileResponse ModifyUserProfile(1: ModifyUserProfileRequest request) (api.put = "/api/foundation/v1/users/:user_id/update_profile")
+    UserUpdateAvatarResponse UserUpdateAvatar(1: UserUpdateAvatarRequest req) (api.post="/api/foundation/v1/users/:user_id:/upload_avatar/", api.serializer="form")
 
     // 基于登陆态获取用户信息相关接口
     GetUserInfoByTokenResponse GetUserInfoByToken(1: GetUserInfoByTokenRequest request) (api.get = "/api/foundation/v1/users/session")

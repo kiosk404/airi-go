@@ -4,7 +4,7 @@ package airi
 
 import (
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_open_api"
-	"github.com/kiosk404/airi-go/backend/api/model/foundation/permission"
+	"github.com/kiosk404/airi-go/backend/api/model/foundation/openapiauth"
 	"github.com/kiosk404/airi-go/backend/api/model/foundation/user"
 	"github.com/kiosk404/airi-go/backend/api/model/llm/manage"
 	"github.com/kiosk404/airi-go/backend/api/model/llm/runtime"
@@ -15,7 +15,7 @@ type BotOpenApiService interface {
 }
 
 type OpenAPIAuthService interface {
-	permission.OpenAPIAuthService
+	openapiauth.OpenAPIAuthService
 }
 
 type UserService interface {

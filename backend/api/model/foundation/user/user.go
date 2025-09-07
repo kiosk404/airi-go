@@ -12,6 +12,7 @@ import (
 type UserRegisterRequest struct {
 	Account  *string    `thrift:"account,1,optional" json:"account,omitempty"`
 	Password *string    `thrift:"password,2,optional" json:"password,omitempty"`
+	Locale   *string    `thrift:"locale,3,optional" json:"locale,omitempty"`
 	Base     *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`
 }
 
@@ -40,6 +41,15 @@ func (p *UserRegisterRequest) GetPassword() (v string) {
 	return *p.Password
 }
 
+var UserRegisterRequest_Locale_DEFAULT string
+
+func (p *UserRegisterRequest) GetLocale() (v string) {
+	if !p.IsSetLocale() {
+		return UserRegisterRequest_Locale_DEFAULT
+	}
+	return *p.Locale
+}
+
 var UserRegisterRequest_Base_DEFAULT *base.Base
 
 func (p *UserRegisterRequest) GetBase() (v *base.Base) {
@@ -54,6 +64,9 @@ func (p *UserRegisterRequest) SetAccount(val *string) {
 func (p *UserRegisterRequest) SetPassword(val *string) {
 	p.Password = val
 }
+func (p *UserRegisterRequest) SetLocale(val *string) {
+	p.Locale = val
+}
 func (p *UserRegisterRequest) SetBase(val *base.Base) {
 	p.Base = val
 }
@@ -64,6 +77,10 @@ func (p *UserRegisterRequest) IsSetAccount() bool {
 
 func (p *UserRegisterRequest) IsSetPassword() bool {
 	return p.Password != nil
+}
+
+func (p *UserRegisterRequest) IsSetLocale() bool {
+	return p.Locale != nil
 }
 
 func (p *UserRegisterRequest) IsSetBase() bool {
@@ -622,11 +639,12 @@ func (p *GetUserInfoByTokenResponse) String() string {
 }
 
 type ModifyUserProfileRequest struct {
-	UserID      *string    `thrift:"user_id,1,optional" json:"user_id,omitempty"`
+	UserID      string     `thrift:"user_id,1,required" json:"user_id"`
 	Name        *string    `thrift:"name,2,optional" json:"name,omitempty"`
 	NickName    *string    `thrift:"nick_name,3,optional" json:"nick_name,omitempty"`
 	Description *string    `thrift:"description,4,optional" json:"description,omitempty"`
 	AvatarURI   *string    `thrift:"avatar_uri,5,optional" json:"avatar_uri,omitempty"`
+	Locale      *string    `thrift:"locale,6,optional" json:"locale,omitempty"`
 	Base        *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`
 }
 
@@ -637,13 +655,8 @@ func NewModifyUserProfileRequest() *ModifyUserProfileRequest {
 func (p *ModifyUserProfileRequest) InitDefault() {
 }
 
-var ModifyUserProfileRequest_UserID_DEFAULT string
-
 func (p *ModifyUserProfileRequest) GetUserID() (v string) {
-	if !p.IsSetUserID() {
-		return ModifyUserProfileRequest_UserID_DEFAULT
-	}
-	return *p.UserID
+	return p.UserID
 }
 
 var ModifyUserProfileRequest_Name_DEFAULT string
@@ -682,6 +695,15 @@ func (p *ModifyUserProfileRequest) GetAvatarURI() (v string) {
 	return *p.AvatarURI
 }
 
+var ModifyUserProfileRequest_Locale_DEFAULT string
+
+func (p *ModifyUserProfileRequest) GetLocale() (v string) {
+	if !p.IsSetLocale() {
+		return ModifyUserProfileRequest_Locale_DEFAULT
+	}
+	return *p.Locale
+}
+
 var ModifyUserProfileRequest_Base_DEFAULT *base.Base
 
 func (p *ModifyUserProfileRequest) GetBase() (v *base.Base) {
@@ -690,7 +712,7 @@ func (p *ModifyUserProfileRequest) GetBase() (v *base.Base) {
 	}
 	return p.Base
 }
-func (p *ModifyUserProfileRequest) SetUserID(val *string) {
+func (p *ModifyUserProfileRequest) SetUserID(val string) {
 	p.UserID = val
 }
 func (p *ModifyUserProfileRequest) SetName(val *string) {
@@ -705,12 +727,11 @@ func (p *ModifyUserProfileRequest) SetDescription(val *string) {
 func (p *ModifyUserProfileRequest) SetAvatarURI(val *string) {
 	p.AvatarURI = val
 }
+func (p *ModifyUserProfileRequest) SetLocale(val *string) {
+	p.Locale = val
+}
 func (p *ModifyUserProfileRequest) SetBase(val *base.Base) {
 	p.Base = val
-}
-
-func (p *ModifyUserProfileRequest) IsSetUserID() bool {
-	return p.UserID != nil
 }
 
 func (p *ModifyUserProfileRequest) IsSetName() bool {
@@ -727,6 +748,10 @@ func (p *ModifyUserProfileRequest) IsSetDescription() bool {
 
 func (p *ModifyUserProfileRequest) IsSetAvatarURI() bool {
 	return p.AvatarURI != nil
+}
+
+func (p *ModifyUserProfileRequest) IsSetLocale() bool {
+	return p.Locale != nil
 }
 
 func (p *ModifyUserProfileRequest) IsSetBase() bool {
@@ -995,16 +1020,93 @@ func (p *MGetUserInfoResponse) String() string {
 	return fmt.Sprintf("MGetUserInfoResponse(%+v)", *p)
 }
 
+type UserUpdateAvatarRequest struct {
+	MimeType string `thrift:"mimeType,1,required" json:"mimeType"`
+	Avatar   []byte `thrift:"avatar,2,required" json:"avatar"`
+}
+
+func NewUserUpdateAvatarRequest() *UserUpdateAvatarRequest {
+	return &UserUpdateAvatarRequest{}
+}
+
+func (p *UserUpdateAvatarRequest) InitDefault() {
+}
+
+func (p *UserUpdateAvatarRequest) GetMimeType() (v string) {
+	return p.MimeType
+}
+
+func (p *UserUpdateAvatarRequest) GetAvatar() (v []byte) {
+	return p.Avatar
+}
+func (p *UserUpdateAvatarRequest) SetMimeType(val string) {
+	p.MimeType = val
+}
+func (p *UserUpdateAvatarRequest) SetAvatar(val []byte) {
+	p.Avatar = val
+}
+
+func (p *UserUpdateAvatarRequest) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("UserUpdateAvatarRequest(%+v)", *p)
+}
+
+type UserUpdateAvatarResponse struct {
+	WebURI string     `thrift:"web_uri,1,required" json:"web_uri"`
+	Base   *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`
+}
+
+func NewUserUpdateAvatarResponse() *UserUpdateAvatarResponse {
+	return &UserUpdateAvatarResponse{}
+}
+
+func (p *UserUpdateAvatarResponse) InitDefault() {
+}
+
+func (p *UserUpdateAvatarResponse) GetWebURI() (v string) {
+	return p.WebURI
+}
+
+var UserUpdateAvatarResponse_Base_DEFAULT *base.Base
+
+func (p *UserUpdateAvatarResponse) GetBase() (v *base.Base) {
+	if !p.IsSetBase() {
+		return UserUpdateAvatarResponse_Base_DEFAULT
+	}
+	return p.Base
+}
+func (p *UserUpdateAvatarResponse) SetWebURI(val string) {
+	p.WebURI = val
+}
+func (p *UserUpdateAvatarResponse) SetBase(val *base.Base) {
+	p.Base = val
+}
+
+func (p *UserUpdateAvatarResponse) IsSetBase() bool {
+	return p.Base != nil
+}
+
+func (p *UserUpdateAvatarResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("UserUpdateAvatarResponse(%+v)", *p)
+}
+
 type UserService interface {
-	Register(ctx context.Context, request *UserRegisterRequest) (r *UserRegisterResponse, err error)
+	WebAccountRegister(ctx context.Context, request *UserRegisterRequest) (r *UserRegisterResponse, err error)
 
-	ResetPassword(ctx context.Context, request *ResetPasswordRequest) (r *ResetPasswordResponse, err error)
+	WebAccountPasswordReset(ctx context.Context, request *ResetPasswordRequest) (r *ResetPasswordResponse, err error)
 
-	LoginByPassword(ctx context.Context, request *LoginByPasswordRequest) (r *LoginByPasswordResponse, err error)
+	WebAccountLoginByPassword(ctx context.Context, request *LoginByPasswordRequest) (r *LoginByPasswordResponse, err error)
 
-	Logout(ctx context.Context, request *LogoutRequest) (r *LogoutResponse, err error)
+	WebLogout(ctx context.Context, request *LogoutRequest) (r *LogoutResponse, err error)
 
 	ModifyUserProfile(ctx context.Context, request *ModifyUserProfileRequest) (r *ModifyUserProfileResponse, err error)
+
+	UserUpdateAvatar(ctx context.Context, req *UserUpdateAvatarRequest) (r *UserUpdateAvatarResponse, err error)
 
 	GetUserInfoByToken(ctx context.Context, request *GetUserInfoByTokenRequest) (r *GetUserInfoByTokenResponse, err error)
 
