@@ -8,7 +8,7 @@ import (
 const (
 	ErrUserAuthenticationFailed = 700012006 // Don't change this code. It is used in the frontend.
 
-	ErrUserEmailAlreadyExistCode      = 700000001
+	ErrUserAccountAlreadyExistCode    = 700000001
 	ErrUserUniqueNameAlreadyExistCode = 700000002
 	ErrUserInfoInvalidateCode         = 700000003
 	ErrUserSessionInvalidateCode      = 700000004

@@ -36,6 +36,20 @@ func NewService(db *gorm.DB, generator idgen.IDGenerator) rdb.RDB {
 	return &mysqlService{db: db, generator: generator}
 }
 
+// DB return gorm instance
+func (m *mysqlService) DB() *gorm.DB {
+	return m.db
+}
+
+func (m *mysqlService) Transaction(ctx context.Context, fc func(tx rdb.RDB) error) error {
+	return m.db.Transaction(func(tx *gorm.DB) error {
+		transactionalService := &mysqlService{
+			db: tx,
+		}
+		return fc(transactionalService)
+	})
+}
+
 // CreateTable create table
 func (m *mysqlService) CreateTable(ctx context.Context, req *rdb.CreateTableRequest) (*rdb.CreateTableResponse, error) {
 	if req == nil || req.Table == nil {

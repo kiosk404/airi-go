@@ -1,0 +1,63 @@
+package service
+
+import (
+	"context"
+
+	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
+)
+
+type UpdateProfileRequest struct {
+	UserID      int64
+	Name        *string
+	UniqueName  *string
+	Description *string
+	Locale      *string
+}
+
+type ValidateProfileUpdateRequest struct {
+	UniqueName *string
+	Account    *string
+}
+
+type ValidateProfileUpdateResult int
+
+const (
+	ValidateSuccess             ValidateProfileUpdateResult = 0
+	UniqueNameExist             ValidateProfileUpdateResult = 2
+	UniqueNameTooShortOrTooLong ValidateProfileUpdateResult = 3
+	AccountExist                ValidateProfileUpdateResult = 5
+)
+
+type ValidateProfileUpdateResponse struct {
+	Code ValidateProfileUpdateResult
+	Msg  string
+}
+
+type CreateUserRequest struct {
+	Account     string
+	Password    string
+	Name        string
+	UniqueName  string
+	Description string
+	SpaceID     int64
+	Locale      string
+}
+
+type CreateUserResponse struct {
+	UserID int64
+}
+
+type User interface {
+	// Create creates or registers a new user.
+	Create(ctx context.Context, req *CreateUserRequest) (user *entity.User, err error)
+	Login(ctx context.Context, account, password string) (user *entity.User, err error)
+	Logout(ctx context.Context, userID int64) (err error)
+	ResetPassword(ctx context.Context, account, password string) (err error)
+	GetUserInfo(ctx context.Context, userID int64) (user *entity.User, err error)
+	UpdateAvatar(ctx context.Context, userID int64, ext string, imagePayload []byte) (url string, err error)
+	UpdateProfile(ctx context.Context, req *UpdateProfileRequest) (err error)
+	ValidateProfileUpdate(ctx context.Context, req *ValidateProfileUpdateRequest) (resp *ValidateProfileUpdateResponse, err error)
+	GetUserProfiles(ctx context.Context, userID int64) (user *entity.User, err error)
+	MGetUserProfiles(ctx context.Context, userIDs []int64) (users []*entity.User, err error)
+	ValidateSession(ctx context.Context, sessionKey string) (session *entity.Session, exist bool, err error)
+}

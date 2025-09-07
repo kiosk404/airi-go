@@ -8,9 +8,12 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/component/conf"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/repo"
+	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service/llmfactory"
+	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service/llminterface"
 	llm_errorx "github.com/kiosk404/airi-go/backend/modules/llm/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/modules/llm/pkg/httputil"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
+	"github.com/kiosk404/airi-go/backend/pkg/utils/localos"
 )
 
 //go:generate mockgen -destination=mocks/runtime.go -package=mocks . IRuntime
@@ -31,7 +34,7 @@ type IRuntime interface {
 type RuntimeImpl struct {
 	llmFact     llmfactory.IFactory
 	idGen       idgen.IDGenerator
-	runtimeRepo repo.IRuntimeRepo
+	runtimeRepo repo.IRuntimeRepository
 	runtimeCfg  conf.IConfigRuntime
 }
 

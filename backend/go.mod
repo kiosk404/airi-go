@@ -23,12 +23,13 @@ require (
 	github.com/gin-gonic/gin v1.10.1
 	github.com/go-viper/mapstructure/v2 v2.2.1
 	github.com/google/uuid v1.6.0
+	github.com/google/wire v0.7.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/joho/godotenv v1.5.1
 	github.com/minio/minio-go/v7 v7.0.95
 	github.com/ohler55/ojg v1.26.10
 	github.com/ollama/ollama v0.11.4
-	github.com/pingcap/tidb/pkg/parser v0.0.0-20250829103204-a1183bc1cc67
+	github.com/pingcap/tidb/pkg/parser v0.0.0-20250905175712-58108373686b
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.12.1
 	github.com/sajari/storage v1.0.0
@@ -44,8 +45,9 @@ require (
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/driver/sqlite v1.6.0
 	gorm.io/gen v0.3.27
-	gorm.io/gorm v1.30.2
+	gorm.io/gorm v1.30.3
 	gorm.io/plugin/dbresolver v1.6.2
+	gorm.io/rawsql v1.0.2
 )
 
 require (
@@ -85,6 +87,7 @@ require (
 	github.com/cloudwego/base64x v0.1.6 // indirect
 	github.com/cncf/xds/go v0.0.0-20250501225837-2ac532fd4443 // indirect
 	github.com/cohesion-org/deepseek-go v1.3.2 // indirect
+	github.com/cznic/mathutil v0.0.0-20181122101859-297441e03548 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/eino-contrib/jsonschema v1.0.0 // indirect
@@ -139,7 +142,9 @@ require (
 	github.com/pingcap/errors v0.11.5-0.20250523034308-74f78ae071ee // indirect
 	github.com/pingcap/failpoint v0.0.0-20240528011301-b51a646c7c86 // indirect
 	github.com/pingcap/log v1.1.1-0.20221015072633-39906604fb81 // indirect
+	github.com/pingcap/tidb/parser v0.0.0-20231013125129-93a834a6bf8d // indirect
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 // indirect
+	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/sagikazarmark/locafero v0.7.0 // indirect

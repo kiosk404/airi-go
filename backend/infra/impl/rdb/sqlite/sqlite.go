@@ -32,6 +32,19 @@ type sqliteService struct {
 	generator idgen.IDGenerator
 }
 
+func (m *sqliteService) Transaction(ctx context.Context, fc func(tx rdb.RDB) error) error {
+	return m.db.Transaction(func(tx *gorm.DB) error {
+		transactionalService := &sqliteService{
+			db: tx,
+		}
+		return fc(transactionalService)
+	})
+}
+
+func (m *sqliteService) DB() *gorm.DB {
+	return m.db
+}
+
 func NewService(db *gorm.DB, generator idgen.IDGenerator) rdb.RDB {
 	return &sqliteService{db: db, generator: generator}
 }

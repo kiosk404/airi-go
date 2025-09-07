@@ -9,7 +9,7 @@ import (
 )
 
 func ModelsDO2DTO(models []*entity.Model, mask bool) []*manage.Model {
-	return slices.Map(models, func(model *entity.Model) *manage.Model {
+	return slices.Map(models, func(model *entity.Model, _ int) *manage.Model {
 		return ModelDO2DTO(model, mask)
 	})
 }
@@ -127,7 +127,7 @@ func ProtocolConfigGeminiDO2DTO(p *entity.ProtocolConfigGemini) *manage.Protocol
 	return &manage.ProtocolConfigGemini{
 		ResponseSchema:      p.ResponseSchema,
 		EnableCodeExecution: ptr.Of(p.EnableCodeExecution),
-		SafetySettings: slices.Transform(p.SafetySettings, func(s entity.ProtocolConfigGeminiSafetySetting, _ int) *manage.ProtocolConfigGeminiSafetySetting {
+		SafetySettings: slices.Map(p.SafetySettings, func(s entity.ProtocolConfigGeminiSafetySetting, _ int) *manage.ProtocolConfigGeminiSafetySetting {
 			return GeminiSafetySettingDO2DTO(s)
 		}),
 	}
@@ -197,7 +197,7 @@ func ParamConfigDO2DTO(p *entity.ParamConfig) *manage.ParamConfig {
 		return nil
 	}
 	return &manage.ParamConfig{
-		ParamSchemas: slices.Transform(p.ParamSchemas, func(s *entity.ParamSchema, _ int) *manage.ParamSchema {
+		ParamSchemas: slices.Map(p.ParamSchemas, func(s *entity.ParamSchema, _ int) *manage.ParamSchema {
 			return ParamSchemaDO2DTO(s)
 		}),
 	}
@@ -220,7 +220,7 @@ func ParamSchemaDO2DTO(ps *entity.ParamSchema) *manage.ParamSchema {
 }
 
 func ParamOptionsDO2DTO(os []*entity.ParamOption) []*manage.ParamOption {
-	return slices.Transform(os, func(o *entity.ParamOption, _ int) *manage.ParamOption {
+	return slices.Map(os, func(o *entity.ParamOption, _ int) *manage.ParamOption {
 		return ParamOptionDO2DTO(o)
 	})
 }

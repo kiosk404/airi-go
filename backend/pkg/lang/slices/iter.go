@@ -1,11 +1,11 @@
 package slices
 
 import (
-	"github.com/bytedance/gg/gslice"
+	"github.com/samber/lo"
 )
 
-func Map[A, B any](src []A, fn func(A) B) []B {
-	return gslice.Map(src, fn)
+func Map[A, B any](src []A, fn func(a A, index int) B) []B {
+	return lo.Map(src, fn)
 }
 
 func Transform[A, B any](src []A, fn func(A) B) []B {

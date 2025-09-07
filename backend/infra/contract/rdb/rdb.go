@@ -4,7 +4,26 @@ import (
 	"context"
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/rdb/entity"
+	"gorm.io/gorm"
 )
+
+type Option func(option OptionService)
+
+type OptionService interface {
+	WithMaster() Option            // WithMaster 强制读主库
+	WithTransaction(tx RDB) Option // WithTransaction 使用一个已有的事务
+	Debug() Option                 // Debug 启用调试模式
+	WithDeleted() Option           // WithDeleted 返回软删的数据
+	WithSelectForUpdate() Option   // WithSelectForUpdate 开启当前读
+}
+
+//go:generate mockgen -destination=mocks/db.go -package=mocks . Provider
+type Provider interface {
+	// NewSession 创建一个新的数据库会话
+	NewSession(ctx context.Context, opts ...Option) RDB
+	// Transaction 执行一个事务
+	Transaction(ctx context.Context, fc func(tx RDB) error, opts ...Option) error
+}
 
 //go:generate mockgen -destination  ../../../internal/mock/infra/contract/rdb/rdb_mock.go  --package rdb  -source rdb.go
 type RDB interface {
@@ -20,6 +39,8 @@ type RDB interface {
 	UpsertData(ctx context.Context, req *UpsertDataRequest) (*UpsertDataResponse, error)
 
 	ExecuteSQL(ctx context.Context, req *ExecuteSQLRequest) (*ExecuteSQLResponse, error)
+	Transaction(ctx context.Context, fc func(tx RDB) error) error
+	DB() *gorm.DB
 }
 
 // CreateTableRequest Create table request

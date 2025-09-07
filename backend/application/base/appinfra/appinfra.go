@@ -3,18 +3,19 @@ package appinfra
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/cache"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
+	"github.com/kiosk404/airi-go/backend/infra/contract/rdb"
 	"github.com/kiosk404/airi-go/backend/infra/impl/cache/local"
 	idgenimpl "github.com/kiosk404/airi-go/backend/infra/impl/idgen"
 	"github.com/kiosk404/airi-go/backend/infra/impl/rdb/sqlite"
 	"github.com/kiosk404/airi-go/backend/infra/impl/storage"
-	"gorm.io/gorm"
 )
 
 type AppDependencies struct {
-	DB        *gorm.DB
+	DB        rdb.Provider
 	CacheCli  cache.Cmdable
 	IDGenSVC  idgen.IDGenerator
 	TOSClient storage.Storage
@@ -23,7 +24,7 @@ type AppDependencies struct {
 func Init(ctx context.Context) (*AppDependencies, error) {
 	deps := &AppDependencies{}
 	var err error
-	if deps.DB, err = sqlite.New(); err != nil {
+	if deps.DB, err = sqlite.NewDB(sqliteDBConfig()); err != nil {
 		return nil, fmt.Errorf("init db failed, err=%w", err)
 	}
 	if deps.CacheCli, err = local.New(); err != nil {
@@ -37,4 +38,11 @@ func Init(ctx context.Context) (*AppDependencies, error) {
 	}
 
 	return deps, err
+}
+
+func sqliteDBConfig() *sqlite.Config {
+	return &sqlite.Config{
+		DBName:  "./airi-go.db",
+		Timeout: 3 * time.Second,
+	}
 }

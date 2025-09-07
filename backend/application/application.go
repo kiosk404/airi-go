@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/kiosk404/airi-go/backend/application/base/appinfra"
-	"github.com/kiosk404/airi-go/backend/application/openauth"
-	"github.com/kiosk404/airi-go/backend/application/user"
+	openauth "github.com/kiosk404/airi-go/backend/modules/foundation/openauth/application"
+	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/application"
 )
 
 type basicServices struct {
@@ -43,7 +43,7 @@ func Init(ctx context.Context) (err error) {
 // initBasicServices init basic services that only depends on infra.
 func initBasicServices(ctx context.Context, infra *appinfra.AppDependencies) (*basicServices, error) {
 	openAuthSVC := openauth.InitService(infra.DB, infra.IDGenSVC)
-	userSVC := user.InitService(ctx, infra.DB, infra.TOSClient, infra.IDGenSVC)
+	userSVC := user.InitUserService(ctx, infra.DB, infra.TOSClient, infra.IDGenSVC)
 
 	return &basicServices{
 		infra:       infra,

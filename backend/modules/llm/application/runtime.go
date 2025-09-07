@@ -9,10 +9,12 @@ import (
 
 	druntime "github.com/kiosk404/airi-go/backend/api/model/llm/domain/runtime"
 	"github.com/kiosk404/airi-go/backend/api/model/llm/runtime"
+	"github.com/kiosk404/airi-go/backend/infra/contract/cache"
 	"github.com/kiosk404/airi-go/backend/infra/contract/limiter"
 	"github.com/kiosk404/airi-go/backend/modules/llm/application/convertor"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service"
+	"github.com/kiosk404/airi-go/backend/modules/llm/pkg"
 	llm_errorx "github.com/kiosk404/airi-go/backend/modules/llm/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/modules/llm/pkg/traceutil"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
@@ -20,20 +22,19 @@ import (
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 	"github.com/kiosk404/airi-go/backend/pkg/utils/goroutineutil"
 	"github.com/pkg/errors"
-	"github.com/redis/go-redis/v9"
 )
 
 type runtimeApp struct {
 	manageSrv   service.IManage
 	runtimeSrv  service.IRuntime
-	redis       redis.Cmdable
+	redis       cache.Cmdable
 	rateLimiter limiter.IRateLimiter
 }
 
 func NewRuntimeApplication(
 	manageSrv service.IManage,
 	runtimeSrv service.IRuntime,
-	redis redis.Cmdable,
+	redis cache.Cmdable,
 	factory limiter.IRateLimiterFactory,
 ) runtime.LLMRuntimeService {
 	return &runtimeApp{
@@ -245,7 +246,7 @@ func (r *runtimeApp) recordModelRequest(ctx context.Context, param *recordModelR
 			record.ErrorMsg = ptr.Of(param.err.Error())
 		}
 		if err := r.runtimeSrv.CreateModelRequestRecord(ctx, record); err != nil {
-			logs.WarnX(ModelName, "[recordModelRequest] failed, err:%v", err)
+			logs.WarnX(pkg.ModelName, "[recordModelRequest] failed, err:%v", err)
 		}
 	})
 }

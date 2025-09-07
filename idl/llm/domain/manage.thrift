@@ -1,4 +1,4 @@
-namespace go coze.loop.llm.domain.manage
+namespace go llm.domain.manage
 
 include "common.thrift"
 

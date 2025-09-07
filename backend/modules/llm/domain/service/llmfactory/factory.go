@@ -6,6 +6,7 @@ import (
 
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service/llmimpl/eino"
+	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service/llminterface"
 	llm_errorx "github.com/kiosk404/airi-go/backend/modules/llm/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 )

@@ -3,7 +3,7 @@ package ctxutil
 import (
 	"context"
 
-	"github.com/kiosk404/airi-go/backend/domain/user/entity"
+	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/pkg/ctxcache"
 	"github.com/kiosk404/airi-go/backend/types/consts"
 )

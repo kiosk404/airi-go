@@ -10,7 +10,7 @@ import (
 func NewRuntime(
 	llmFact llmfactory.IFactory,
 	idGen idgen.IDGenerator,
-	runtimeRepo repo.IRuntimeRepo,
+	runtimeRepo repo.IRuntimeRepository,
 	cfg conf.IConfigRuntime,
 ) IRuntime {
 	return &RuntimeImpl{
