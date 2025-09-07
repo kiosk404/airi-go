@@ -1,15 +1,25 @@
 <picture>
-  <source
-    width="100%"
-    srcset="./docs/content/public/banner-dark-rect-1280x640.avif"
-    media="(prefers-color-scheme: dark)"
-  />
-  <source
-    width="100%"
-    srcset="./docs/content/public/banner-light-1280x640.avif"
-    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-  />
-  <img width="250" src="./docs/content/public/banner-dark-rect-1280x640.avif" />
+
+[//]: # (  <source)
+
+[//]: # (    width="100%")
+
+[//]: # (    srcset="./docs/content/public/banner-dark-1280x640.avif")
+
+[//]: # (    media="&#40;prefers-color-scheme: dark&#41;")
+
+[//]: # (  />)
+
+[//]: # (  <source)
+
+[//]: # (    width="100%")
+
+[//]: # (    srcset="./docs/content/public/banner-light-1280x640.avif")
+
+[//]: # (    media="&#40;prefers-color-scheme: light&#41;, &#40;prefers-color-scheme: no-preference&#41;")
+
+[//]: # (  />)
+  <img width="250" src="./docs/content/public/banner-dark-1280x640.avif" />
 </picture>
 
 <h1 align="center">Project AIRI-GO</h1>
@@ -20,7 +30,8 @@
 <p align="center">
   <a href="https://deepwiki.com/moeru-ai/airi"><img src="https://deepwiki.com/badge.svg"></a>
   <a href="https://github.com/kiosk404/airi-go/blob/master/LICENSE"><img src="https://img.shields.io/github/license/kiosk404/airi-go.svg?style=flat&colorA=080f12&colorB=1fa669"></a>
-  <a href="https://discord.gg/TgQ3Cu2F7A"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FTgQ3Cu2F7A%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&logo=discord&logoColor=white&label=%20&color=7389D8&labelColor=6A7EC2"></a>
-  <a href="https://x.com/proj_airi"><img src="https://img.shields.io/badge/%40proj__airi-black?style=flat&logo=x&labelColor=%23101419&color=%232d2e30"></a>
-  <a href="https://t.me/+7M_ZKO3zUHFlOThh"><img src="https://img.shields.io/badge/Telegram-%235AA9E6?logo=telegram&labelColor=FFFFFF"></a>
 </p>
+
+## What's So Special About This Project?
+Unlike the other AI driven VTuber open source projects, This project uses GoLang to build the soul of Airi 
+and React to build her appearance. In order to make Airi smarter, it drew on the [Coze project](https://github.com/coze-dev/coze-studio) to enable Airi to learn more skills and abilities
