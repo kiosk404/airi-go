@@ -33,6 +33,7 @@ _testmain.go
 /.idea
 /.vscode
 /output
+node_modules/
 /backend/output
 *.local.yml
 /oldimpl
