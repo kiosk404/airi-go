@@ -1,0 +1,27 @@
+{
+  "name": "@rush-temp/app",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@airi-arch/eslint-config": "workspace:*",
+    "@airi-arch/postcss-config": "workspace:*",
+    "@airi-arch/rsbuild-config": "workspace:*",
+    "@airi-arch/tailwind-config": "workspace:*",
+    "@airi-arch/ts-config": "workspace:*",
+    "@airi-arch/vitest-config": "workspace:*",
+    "@types/lodash-es": "^4.17.10",
+    "@types/node": "18.18.9",
+    "@types/react": "18.2.37",
+    "@types/react-dom": "18.2.15",
+    "ahooks": "^3.7.8",
+    "classnames": "^2.3.2",
+    "dayjs": "^1.11.7",
+    "lodash-es": "^4.17.21",
+    "react": "~18.2.0",
+    "react-dom": "~18.2.0",
+    "react-router-dom": "^6.22.0",
+    "typescript": "~5.8.2",
+    "vitest": "~3.0.5",
+    "zustand": "^4.4.7"
+  }
+}

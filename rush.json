@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+  "rushVersion": "5.147.1",
+  "pnpmVersion": "8.15.8",
+  "nodeSupportedVersionRange": ">=18",
+  "projectFolderMinDepth": 3,
+  "projectFolderMaxDepth": 6,
+  "gitPolicy": {
+    "versionBumpCommitMessage": "chore: bump versions [skip ci]",
+    "changeLogUpdateCommitMessage": "chore: update changelogs [skip ci]",
+    "tagSeparator": "@"
+  },
+  "repository": {},
+  "eventHooks": {
+    "preRushInstall": [],
+    "postRushInstall": [],
+    "preRushBuild": [],
+    "postRushBuild": []
+  },
+  "telemetryEnabled": false,
+  "allowedProjectTags": [
+    "rush-x",
+    "team-arch",
+    "team-studio",
+    "level-1",
+    "level-2",
+    "level-3",
+    "level-4",
+    "core"
+  ],
+  "projects": [
+    {
+      "packageName": "@airi-arch/eslint-config",
+      "projectFolder": "frontend/config/eslint-config",
+      "tags": ["team-arch", "level-1"]
+    },
+    {
+      "packageName": "@airi-arch/ts-config",
+      "projectFolder": "frontend/config/ts-config",
+      "tags": ["team-arch", "level-1", "core"]
+    },
+    {
+      "packageName": "@airi-arch/stylelint-config",
+      "projectFolder": "frontend/config/stylelint-config",
+      "tags": ["team-arch", "level-1"]
+    },
+    {
+      "packageName": "@airi-arch/rsbuild-config",
+      "projectFolder": "frontend/config/rsbuild-config",
+      "tags": ["team-arch", "level-1"]
+    },
+    {
+      "packageName": "@airi-arch/tailwind-config",
+      "projectFolder": "frontend/config/tailwind-config",
+      "tags": ["team-arch", "level-1"]
+    },
+    {
+      "packageName": "@airi-arch/postcss-config",
+      "projectFolder": "frontend/config/postcss-config",
+      "tags": ["team-arch", "level-1"]
+    },
+    {
+      "packageName": "@airi-arch/vitest-config",
+      "projectFolder": "frontend/config/vitest-config",
+      "tags": ["team-arch", "level-1"]
+    },
+    {
+      "packageName": "@airi-studio/app",
+      "projectFolder": "frontend/apps/airi-studio",
+      "tags": ["level-4"]
+    }
+  ]
+}
+
+
+
+
+
+

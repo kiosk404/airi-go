@@ -1,0 +1,23 @@
+{
+  "name": "@airi-arch/tailwind-config",
+  "version": "0.0.1",
+  "description": "Tailwind CSS configuration for Airi projects",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "build": "exit 0",
+    "lint": "eslint ./ --cache --quiet"
+  },
+  "dependencies": {
+    "tailwindcss": "~3.3.3"
+  }
+}
+
+
+
+
+
+

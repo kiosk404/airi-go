@@ -1,0 +1,25 @@
+{
+  "name": "@airi-arch/ts-config",
+  "version": "0.0.1",
+  "description": "TypeScript configuration for Airi projects",
+  "license": "MIT",
+  "main": "base.json",
+  "files": [
+    "base.json",
+    "react.json",
+    "node.json"
+  ],
+  "scripts": {
+    "build": "exit 0",
+    "lint": "eslint ./ --cache --quiet"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.2"
+  }
+}
+
+
+
+
+
+
