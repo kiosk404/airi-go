@@ -4444,6 +4444,7 @@ type BotInfo struct {
 	CreatorId               int64                  `thrift:"CreatorId,6" json:"CreatorId"`
 	CreateTime              int64                  `thrift:"CreateTime,7" json:"CreateTime"`
 	UpdateTime              int64                  `thrift:"UpdateTime,8" json:"UpdateTime"`
+	ConnectorId             int64                  `thrift:"ConnectorId,9" json:"ConnectorId"`
 	Version                 string                 `thrift:"Version,10" json:"Version"`
 	ModelInfo               *ModelInfo             `thrift:"ModelInfo,11" json:"ModelInfo"`
 	PromptInfo              *PromptInfo            `thrift:"PromptInfo,12" json:"PromptInfo"`
@@ -4509,6 +4510,10 @@ func (p *BotInfo) GetCreateTime() (v int64) {
 
 func (p *BotInfo) GetUpdateTime() (v int64) {
 	return p.UpdateTime
+}
+
+func (p *BotInfo) GetConnectorId() (v int64) {
+	return p.ConnectorId
 }
 
 func (p *BotInfo) GetVersion() (v string) {
@@ -4707,6 +4712,9 @@ func (p *BotInfo) SetCreateTime(val int64) {
 }
 func (p *BotInfo) SetUpdateTime(val int64) {
 	p.UpdateTime = val
+}
+func (p *BotInfo) SetConnectorId(val int64) {
+	p.ConnectorId = val
 }
 func (p *BotInfo) SetVersion(val string) {
 	p.Version = val
@@ -5820,6 +5828,7 @@ type BotInfoForUpdate struct {
 	CreatorId               *int64                 `thrift:"CreatorId,6,optional" json:"CreatorId,omitempty"`
 	CreateTime              *int64                 `thrift:"CreateTime,7,optional" json:"CreateTime,omitempty"`
 	UpdateTime              *int64                 `thrift:"UpdateTime,8,optional" json:"UpdateTime,omitempty"`
+	ConnectorId             *int64                 `thrift:"ConnectorId,9,optional" json:"ConnectorId,omitempty"`
 	Version                 *string                `thrift:"Version,10,optional" json:"Version,omitempty"`
 	ModelInfo               *ModelInfo             `thrift:"ModelInfo,11,optional" json:"ModelInfo,omitempty"`
 	PromptInfo              *PromptInfo            `thrift:"PromptInfo,12,optional" json:"PromptInfo,omitempty"`
@@ -5923,6 +5932,15 @@ func (p *BotInfoForUpdate) GetUpdateTime() (v int64) {
 		return BotInfoForUpdate_UpdateTime_DEFAULT
 	}
 	return *p.UpdateTime
+}
+
+var BotInfoForUpdate_ConnectorId_DEFAULT int64
+
+func (p *BotInfoForUpdate) GetConnectorId() (v int64) {
+	if !p.IsSetConnectorId() {
+		return BotInfoForUpdate_ConnectorId_DEFAULT
+	}
+	return *p.ConnectorId
 }
 
 var BotInfoForUpdate_Version_DEFAULT string
@@ -6159,6 +6177,9 @@ func (p *BotInfoForUpdate) SetCreateTime(val *int64) {
 func (p *BotInfoForUpdate) SetUpdateTime(val *int64) {
 	p.UpdateTime = val
 }
+func (p *BotInfoForUpdate) SetConnectorId(val *int64) {
+	p.ConnectorId = val
+}
 func (p *BotInfoForUpdate) SetVersion(val *string) {
 	p.Version = val
 }
@@ -6262,6 +6283,10 @@ func (p *BotInfoForUpdate) IsSetCreateTime() bool {
 
 func (p *BotInfoForUpdate) IsSetUpdateTime() bool {
 	return p.UpdateTime != nil
+}
+
+func (p *BotInfoForUpdate) IsSetConnectorId() bool {
+	return p.ConnectorId != nil
 }
 
 func (p *BotInfoForUpdate) IsSetVersion() bool {

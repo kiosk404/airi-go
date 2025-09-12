@@ -438,7 +438,7 @@ struct BotInfo {
     6 : i64                CreatorId        (agw.js_conv="str", api.js_conv="true", api.body="creator_id")  , // creator id
     7 : i64                CreateTime       (agw.js_conv="str", api.js_conv="true", api.body="create_time") , // create_time
     8 : i64                UpdateTime       (agw.js_conv="str", api.js_conv="true", api.body="update_time") , // update time
-//    9 : i64                ConnectorId      (agw.js_conv="str", api.js_conv="true", api.body="connector_id"), // line of business
+    9 : i64                ConnectorId      (agw.js_conv="str", api.js_conv="true", api.body="connector_id"), // line of business
     10: string             Version          (api.body="version")                                            , // Version, ms
     11: ModelInfo          ModelInfo        (api.body="model_info")                                         , // model configuration
     12: PromptInfo         PromptInfo       (api.body="prompt_info")                                        , // Prompt message
@@ -586,7 +586,7 @@ struct BotInfoForUpdate {
     6:  optional i64 CreatorId  (agw.js_conv="str", api.js_conv="true", api.body="creator_id")                             // creator id
     7:  optional i64 CreateTime (agw.js_conv="str", api.js_conv="true", api.body="create_time")                             // create_time
     8:  optional i64 UpdateTime (agw.js_conv="str", api.js_conv="true", api.body="update_time")                             // update time
-//    9:  optional i64 ConnectorId (agw.js_conv="str", api.js_conv="true", api.body="connector_id")                         // line of business
+    9:  optional i64 ConnectorId (agw.js_conv="str", api.js_conv="true", api.body="connector_id")                         // line of business
     10: optional string Version (api.body="version")                                                  // Version, ms
     11: optional ModelInfo ModelInfo    (api.body="model_info")                                             // model configuration
     12: optional PromptInfo PromptInfo  (api.body="prompt_info")                                           // Prompt message
