@@ -11,7 +11,6 @@ const (
 	HostKeyInCtx          = "HOST_KEY_IN_CTX"
 	RequestSchemeKeyInCtx = "REQUEST_SCHEME_IN_CTX"
 
-	APIConnectorID     = int64(9527)
 	LocalStoragePath   = "LOCAL_STORAGE_PATH"
 	StorageType        = "STORAGE_TYPE"
 	MinIOAK            = "MINIO_AK"

@@ -372,11 +372,6 @@ enum MultiAgentSessionType{
     Host = 2
 }
 
-enum MultiAgentConnectorType {
-    Curve = 0
-    Straight   = 1
-}
-
 struct Intent{
     1: string IntentId    (api.body="intent_id")                                           ,
     2: string Prompt      (api.body="prompt")                                              ,
@@ -443,7 +438,7 @@ struct BotInfo {
     6 : i64                CreatorId        (agw.js_conv="str", api.js_conv="true", api.body="creator_id")  , // creator id
     7 : i64                CreateTime       (agw.js_conv="str", api.js_conv="true", api.body="create_time") , // create_time
     8 : i64                UpdateTime       (agw.js_conv="str", api.js_conv="true", api.body="update_time") , // update time
-    9 : i64                ConnectorId      (agw.js_conv="str", api.js_conv="true", api.body="connector_id"), // line of business
+//    9 : i64                ConnectorId      (agw.js_conv="str", api.js_conv="true", api.body="connector_id"), // line of business
     10: string             Version          (api.body="version")                                            , // Version, ms
     11: ModelInfo          ModelInfo        (api.body="model_info")                                         , // model configuration
     12: PromptInfo         PromptInfo       (api.body="prompt_info")                                        , // Prompt message
@@ -544,7 +539,7 @@ struct UserQueryCollectConf {
 struct MultiAgentInfo {
     1: MultiAgentSessionType SessionType   (api.body="session_type")                                       , // multi_agent session takeover
     2: AgentVersionCompatInfo VersionCompatInfo    (api.body="version_compat_info")                        , // multi_agent version compatibility field, front-end use
-    3: MultiAgentConnectorType ConnectorType    (api.body="connector_type")                                  , // multi_agent connection type, front end
+//    3: MultiAgentConnectorType ConnectorType    (api.body="connector_type")                                  , // multi_agent connection type, front end
 }
 
 struct AgentVersionCompatInfo {
@@ -591,7 +586,7 @@ struct BotInfoForUpdate {
     6:  optional i64 CreatorId  (agw.js_conv="str", api.js_conv="true", api.body="creator_id")                             // creator id
     7:  optional i64 CreateTime (agw.js_conv="str", api.js_conv="true", api.body="create_time")                             // create_time
     8:  optional i64 UpdateTime (agw.js_conv="str", api.js_conv="true", api.body="update_time")                             // update time
-    9:  optional i64 ConnectorId (agw.js_conv="str", api.js_conv="true", api.body="connector_id")                         // line of business
+//    9:  optional i64 ConnectorId (agw.js_conv="str", api.js_conv="true", api.body="connector_id")                         // line of business
     10: optional string Version (api.body="version")                                                  // Version, ms
     11: optional ModelInfo ModelInfo    (api.body="model_info")                                             // model configuration
     12: optional PromptInfo PromptInfo  (api.body="prompt_info")                                           // Prompt message

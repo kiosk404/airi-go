@@ -1,7 +1,6 @@
 import { RouterProvider } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Spin } from 'antd';
-
 import { router } from './routes';
 
 function App() {

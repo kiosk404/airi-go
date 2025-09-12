@@ -1119,48 +1119,6 @@ func (p *MultiAgentSessionType) Value() (driver.Value, error) {
 	return int64(*p), nil
 }
 
-type MultiAgentConnectorType int64
-
-const (
-	MultiAgentConnectorType_Curve    MultiAgentConnectorType = 0
-	MultiAgentConnectorType_Straight MultiAgentConnectorType = 1
-)
-
-func (p MultiAgentConnectorType) String() string {
-	switch p {
-	case MultiAgentConnectorType_Curve:
-		return "Curve"
-	case MultiAgentConnectorType_Straight:
-		return "Straight"
-	}
-	return "<UNSET>"
-}
-
-func MultiAgentConnectorTypeFromString(s string) (MultiAgentConnectorType, error) {
-	switch s {
-	case "Curve":
-		return MultiAgentConnectorType_Curve, nil
-	case "Straight":
-		return MultiAgentConnectorType_Straight, nil
-	}
-	return MultiAgentConnectorType(0), fmt.Errorf("not a valid MultiAgentConnectorType string")
-}
-
-func MultiAgentConnectorTypePtr(v MultiAgentConnectorType) *MultiAgentConnectorType { return &v }
-func (p *MultiAgentConnectorType) Scan(value interface{}) (err error) {
-	var result sql.NullInt64
-	err = result.Scan(value)
-	*p = MultiAgentConnectorType(result.Int64)
-	return
-}
-
-func (p *MultiAgentConnectorType) Value() (driver.Value, error) {
-	if p == nil {
-		return nil, nil
-	}
-	return int64(*p), nil
-}
-
 type BotMode int64
 
 const (
@@ -4486,7 +4444,6 @@ type BotInfo struct {
 	CreatorId               int64                  `thrift:"CreatorId,6" json:"CreatorId"`
 	CreateTime              int64                  `thrift:"CreateTime,7" json:"CreateTime"`
 	UpdateTime              int64                  `thrift:"UpdateTime,8" json:"UpdateTime"`
-	ConnectorId             int64                  `thrift:"ConnectorId,9" json:"ConnectorId"`
 	Version                 string                 `thrift:"Version,10" json:"Version"`
 	ModelInfo               *ModelInfo             `thrift:"ModelInfo,11" json:"ModelInfo"`
 	PromptInfo              *PromptInfo            `thrift:"PromptInfo,12" json:"PromptInfo"`
@@ -4552,10 +4509,6 @@ func (p *BotInfo) GetCreateTime() (v int64) {
 
 func (p *BotInfo) GetUpdateTime() (v int64) {
 	return p.UpdateTime
-}
-
-func (p *BotInfo) GetConnectorId() (v int64) {
-	return p.ConnectorId
 }
 
 func (p *BotInfo) GetVersion() (v string) {
@@ -4754,9 +4707,6 @@ func (p *BotInfo) SetCreateTime(val int64) {
 }
 func (p *BotInfo) SetUpdateTime(val int64) {
 	p.UpdateTime = val
-}
-func (p *BotInfo) SetConnectorId(val int64) {
-	p.ConnectorId = val
 }
 func (p *BotInfo) SetVersion(val string) {
 	p.Version = val
@@ -5466,7 +5416,6 @@ func (p *UserQueryCollectConf) String() string {
 type MultiAgentInfo struct {
 	SessionType       MultiAgentSessionType   `thrift:"SessionType,1" json:"SessionType"`
 	VersionCompatInfo *AgentVersionCompatInfo `thrift:"VersionCompatInfo,2" json:"VersionCompatInfo"`
-	ConnectorType     MultiAgentConnectorType `thrift:"ConnectorType,3" json:"ConnectorType"`
 }
 
 func NewMultiAgentInfo() *MultiAgentInfo {
@@ -5488,18 +5437,11 @@ func (p *MultiAgentInfo) GetVersionCompatInfo() (v *AgentVersionCompatInfo) {
 	}
 	return p.VersionCompatInfo
 }
-
-func (p *MultiAgentInfo) GetConnectorType() (v MultiAgentConnectorType) {
-	return p.ConnectorType
-}
 func (p *MultiAgentInfo) SetSessionType(val MultiAgentSessionType) {
 	p.SessionType = val
 }
 func (p *MultiAgentInfo) SetVersionCompatInfo(val *AgentVersionCompatInfo) {
 	p.VersionCompatInfo = val
-}
-func (p *MultiAgentInfo) SetConnectorType(val MultiAgentConnectorType) {
-	p.ConnectorType = val
 }
 
 func (p *MultiAgentInfo) IsSetVersionCompatInfo() bool {
@@ -5878,7 +5820,6 @@ type BotInfoForUpdate struct {
 	CreatorId               *int64                 `thrift:"CreatorId,6,optional" json:"CreatorId,omitempty"`
 	CreateTime              *int64                 `thrift:"CreateTime,7,optional" json:"CreateTime,omitempty"`
 	UpdateTime              *int64                 `thrift:"UpdateTime,8,optional" json:"UpdateTime,omitempty"`
-	ConnectorId             *int64                 `thrift:"ConnectorId,9,optional" json:"ConnectorId,omitempty"`
 	Version                 *string                `thrift:"Version,10,optional" json:"Version,omitempty"`
 	ModelInfo               *ModelInfo             `thrift:"ModelInfo,11,optional" json:"ModelInfo,omitempty"`
 	PromptInfo              *PromptInfo            `thrift:"PromptInfo,12,optional" json:"PromptInfo,omitempty"`
@@ -5982,15 +5923,6 @@ func (p *BotInfoForUpdate) GetUpdateTime() (v int64) {
 		return BotInfoForUpdate_UpdateTime_DEFAULT
 	}
 	return *p.UpdateTime
-}
-
-var BotInfoForUpdate_ConnectorId_DEFAULT int64
-
-func (p *BotInfoForUpdate) GetConnectorId() (v int64) {
-	if !p.IsSetConnectorId() {
-		return BotInfoForUpdate_ConnectorId_DEFAULT
-	}
-	return *p.ConnectorId
 }
 
 var BotInfoForUpdate_Version_DEFAULT string
@@ -6227,9 +6159,6 @@ func (p *BotInfoForUpdate) SetCreateTime(val *int64) {
 func (p *BotInfoForUpdate) SetUpdateTime(val *int64) {
 	p.UpdateTime = val
 }
-func (p *BotInfoForUpdate) SetConnectorId(val *int64) {
-	p.ConnectorId = val
-}
 func (p *BotInfoForUpdate) SetVersion(val *string) {
 	p.Version = val
 }
@@ -6333,10 +6262,6 @@ func (p *BotInfoForUpdate) IsSetCreateTime() bool {
 
 func (p *BotInfoForUpdate) IsSetUpdateTime() bool {
 	return p.UpdateTime != nil
-}
-
-func (p *BotInfoForUpdate) IsSetConnectorId() bool {
-	return p.ConnectorId != nil
 }
 
 func (p *BotInfoForUpdate) IsSetVersion() bool {

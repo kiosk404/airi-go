@@ -121,7 +121,6 @@ func OpenapiAuthMW() gin.HandlerFunc {
 			return
 		}
 
-		apiKeyInfo.ConnectorID = consts.APIConnectorID
 		logs.Info("OpenapiAuthMW: apiKeyInfo=%v", conv.DebugJsonToStr(apiKeyInfo))
 		ctxcache.Store(ctx, consts.OpenapiAuthKeyInCtx, apiKeyInfo)
 		err = openauth.OpenAuthApplication.UpdateLastUsedAt(ctx, apiKeyInfo.ID, apiKeyInfo.UserID)

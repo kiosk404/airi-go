@@ -4,6 +4,8 @@ package airi
 
 import (
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_open_api"
+	"github.com/kiosk404/airi-go/backend/api/model/app/developer_api"
+	"github.com/kiosk404/airi-go/backend/api/model/component/plugin_develop"
 	"github.com/kiosk404/airi-go/backend/api/model/foundation/openapiauth"
 	"github.com/kiosk404/airi-go/backend/api/model/foundation/user"
 	"github.com/kiosk404/airi-go/backend/api/model/llm/manage"
@@ -12,6 +14,10 @@ import (
 
 type BotOpenApiService interface {
 	bot_open_api.BotOpenApiService
+}
+
+type DeveloperApiService interface {
+	developer_api.DeveloperApiService
 }
 
 type OpenAPIAuthService interface {
@@ -28,4 +34,8 @@ type LLMManageService interface {
 
 type LLMRuntimeService interface {
 	runtime.LLMRuntimeService
+}
+
+type PluginDevelopService interface {
+	plugin_develop.PluginDevelopService
 }
