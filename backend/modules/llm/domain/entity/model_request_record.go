@@ -9,7 +9,6 @@ type ModelRequestRecord struct {
 	UserID              string    `json:"user_id"`
 	UsageScene          Scenario  `json:"usage_scene"`
 	UsageSceneEntityID  string    `json:"usage_scene_entity_id"`
-	Frame               Frame     `json:"frame"`
 	Protocol            Protocol  `json:"protocol"`
 	ModelIdentification string    `json:"model_identification"`
 	ModelAk             string    `json:"model_ak"`

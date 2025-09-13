@@ -18,7 +18,7 @@ type Options struct {
 	// ResponseFormat is the response format for the model. default is text
 	ResponseFormat *ResponseFormat
 	// TopK is the top k for the model, which controls the diversity of the model.
-	TopK *int32
+	TopK *int
 	// PresencePenalty is the presence penalty for the model, which controls the diversity of the model.
 	PresencePenalty *float32
 	// FrequencyPenalty is the frequency penalty for the model, which controls the diversity of the model.
@@ -42,6 +42,18 @@ func ApplyOptions(base *Options, opts ...Option) *Options {
 		opt.apply(base)
 	}
 	return base
+}
+
+func NewDefaultParams(param CommonParam) *Options {
+	return &Options{
+		Temperature:      param.Temperature,
+		MaxTokens:        param.MaxTokens,
+		TopP:             param.TopP,
+		Stop:             param.Stop,
+		TopK:             param.TopK,
+		PresencePenalty:  param.PresencePenalty,
+		FrequencyPenalty: param.FrequencyPenalty,
+	}
 }
 
 // WrapImplSpecificOptFn is the option to wrap the implementation specific option function.
@@ -141,7 +153,7 @@ func WithResponseFormat(r *ResponseFormat) Option {
 	}
 }
 
-func WithTopK(t *int32) Option {
+func WithTopK(t *int) Option {
 	return Option{
 		apply: func(opts *Options) {
 			opts.TopK = t

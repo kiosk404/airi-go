@@ -37,8 +37,6 @@ type AgentEvent struct {
 
 type SingleAgent struct {
 	AgentID   int64
-	CreatorID int64
-	SpaceID   int64
 	Name      string
 	Desc      string
 	IconURI   string
@@ -47,7 +45,7 @@ type SingleAgent struct {
 	Version   string
 	DeletedAt gorm.DeletedAt
 
-	VariablesMetaID         *int64
+	Variables               []*bot_common.Variable            // 上下文变量
 	OnboardingInfo          *bot_common.OnboardingInfo        // 开场白
 	ModelInfo               *bot_common.ModelInfo             // 模型信息
 	Prompt                  *bot_common.PromptInfo            // 提示词
@@ -60,6 +58,7 @@ type SingleAgent struct {
 	Database                []*bot_common.Database            // 数据库
 	BotMode                 bot_common.BotMode                // 机器人模式
 	LayoutInfo              *bot_common.LayoutInfo
+	ShortcutCommand         []string
 }
 
 type InterruptEventType int64

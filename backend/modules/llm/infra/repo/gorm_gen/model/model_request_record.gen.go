@@ -16,7 +16,6 @@ type ModelRequestRecord struct {
 	UserID              string    `gorm:"column:user_id;type:varchar(256);not null;comment:user id" json:"user_id"`                                                                    // user id
 	UsageScene          string    `gorm:"column:usage_scene;type:varchar(128);not null;comment:场景" json:"usage_scene"`                                                                 // 场景
 	UsageSceneEntityID  string    `gorm:"column:usage_scene_entity_id;type:varchar(256);not null;comment:场景实体id" json:"usage_scene_entity_id"`                                         // 场景实体id
-	Frame               string    `gorm:"column:frame;type:varchar(128);not null;comment:使用的框架，如eino" json:"frame"`                                                                    // 使用的框架，如eino
 	Protocol            string    `gorm:"column:protocol;type:varchar(128);not null;comment:使用的协议，如ark/deepseek等" json:"protocol"`                                                     // 使用的协议，如ark/deepseek等
 	ModelIdentification string    `gorm:"column:model_identification;type:varchar(1024);not null;comment:模型唯一标识" json:"model_identification"`                                          // 模型唯一标识
 	ModelAk             string    `gorm:"column:model_ak;type:varchar(1024);not null;comment:模型的AK" json:"model_ak"`                                                                   // 模型的AK

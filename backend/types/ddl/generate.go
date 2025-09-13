@@ -163,7 +163,7 @@ func findProjectRoot() (string, error) {
 		return "", fmt.Errorf("failed to get current file path")
 	}
 
-	backendDir := filepath.Dir(filepath.Dir(filepath.Dir(filepath.Dir(filename))))
+	backendDir := filepath.Dir(filepath.Dir(filepath.Dir(filename)))
 
 	if _, err := os.Stat(filepath.Join(backendDir, "deployment")); os.IsNotExist(err) {
 		return "", fmt.Errorf("could not find 'domain' directory in backend path: %s", backendDir)

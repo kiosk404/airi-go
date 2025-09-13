@@ -16,7 +16,6 @@ models:
           binary_enabled: true # Optional. Default value is false. If this model wants to use multi modal image binary capability, please set it to true.
           max_image_size: 20 # Optional. Unit is MB. Default value is 0, which means size is not limited.
           max_image_count: 20 # Optional. Default value is 0, which means count is not limited.
-    frame: "eino" # Required. Options Include [eino]
     protocol: "ollama" # Required. Options Include [ark, openai, deepseek, qwen, qianfan, ollama, gemini, claude, arkbot]
     protocol_config: # Required.
       base_url: "http://10.0.0.10:11434" # Required. See Details in https://github.com/cloudwego/eino-ext/blob/main/components/model/ollama/chatmodel.go

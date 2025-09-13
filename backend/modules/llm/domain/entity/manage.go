@@ -6,21 +6,19 @@ import (
 	"github.com/bytedance/sonic"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/pkg/errors"
+	"google.golang.org/genai"
 )
 
 type Model struct {
-	ID          int64  `json:"id" yaml:"id" mapstructure:"id"`                               // id
-	WorkspaceID int64  `json:"workspace_id" yaml:"workspace_id" mapstructure:"workspace_id"` // 空间id，to be used in future
-	Name        string `json:"name" yaml:"name" mapstructure:"name"`                         // 模型展示名称
-	Desc        string `json:"desc" yaml:"desc" mapstructure:"desc"`                         // 模型描述
+	ID   int64  `json:"id" yaml:"id" mapstructure:"id"`       // id
+	Name string `json:"name" yaml:"name" mapstructure:"name"` // 模型展示名称
+	Desc string `json:"desc" yaml:"desc" mapstructure:"desc"` // 模型描述
 
-	Ability *Ability `json:"ability" yaml:"ability" mapstructure:"ability"` // 模型能力
-
-	Frame           Frame                        `json:"frame" yaml:"frame" mapstructure:"frame"`                                  // 该模型使用的外部框架，目前只支持eino
-	Protocol        Protocol                     `json:"protocol" yaml:"protocol" mapstructure:"protocol"`                         // 该模型的协议类型，如ark/deepseek/openai等
-	ProtocolConfig  *ProtocolConfig              `json:"protocol_config" yaml:"protocol_config" mapstructure:"protocol_config"`    // 该模型的协议配置
+	Ability         *Ability                     `json:"ability" yaml:"ability" mapstructure:"ability"`                            // 模型能力
+	Protocol        Protocol                     `json:"protocol" yaml:"protocol" mapstructure:"protocol"`                         // 该模型的协议类型，如qwen/deepseek/openai等
+	ProtocolConfig  ProtocolConfig               `json:"protocol_config" yaml:"protocol_config" mapstructure:"protocol_config"`    // 该模型的协议配置
 	ScenarioConfigs map[Scenario]*ScenarioConfig `json:"scenario_configs" yaml:"scenario_configs" mapstructure:"scenario_configs"` // 该模型的场景配置
-	ParamConfig     *ParamConfig                 `json:"param_config" yaml:"param_config" mapstructure:"param_config"`             // 该模型的参数配置
+	ParamConfig     ParamConfig                  `json:"param_config" yaml:"param_config" mapstructure:"param_config"`             // 该模型的参数配置
 }
 
 func (m *Model) Valid() error {
@@ -70,7 +68,7 @@ func (p *ProtocolConfig) ValidProtocolConfig(protocol Protocol) error {
 }
 
 func (m *Model) GetModel() string {
-	if m == nil || m.ProtocolConfig == nil {
+	if m == nil {
 		return ""
 	}
 	return m.ProtocolConfig.Model
@@ -158,23 +156,12 @@ type ProtocolConfig struct {
 	APIKey                 string                  `json:"api_key" yaml:"api_key" mapstructure:"api_key"`
 	Model                  string                  `json:"model" yaml:"model" mapstructure:"model"`
 	TimeoutMs              *int64                  `json:"timeout_ms" yaml:"timeout_ms" mapstructure:"timeout_ms"`
-	ProtocolConfigArk      *ProtocolConfigArk      `json:"protocol_config_ark" yaml:"protocol_config_ark" mapstructure:"protocol_config_ark"`
 	ProtocolConfigOpenAI   *ProtocolConfigOpenAI   `json:"protocol_config_open_ai" yaml:"protocol_config_open_ai" mapstructure:"protocol_config_open_ai"`
 	ProtocolConfigClaude   *ProtocolConfigClaude   `json:"protocol_config_claude" yaml:"protocol_config_claude" mapstructure:"protocol_config_claude"`
 	ProtocolConfigDeepSeek *ProtocolConfigDeepSeek `json:"protocol_config_deep_seek" yaml:"protocol_config_deep_seek" mapstructure:"protocol_config_deep_seek"`
 	ProtocolConfigGemini   *ProtocolConfigGemini   `json:"protocol_config_gemini" yaml:"protocol_config_gemini" mapstructure:"protocol_config_gemini"`
 	ProtocolConfigOllama   *ProtocolConfigOllama   `json:"protocol_config_ollama" yaml:"protocol_config_ollama" mapstructure:"protocol_config_ollama"`
 	ProtocolConfigQwen     *ProtocolConfigQwen     `json:"protocol_config_qwen" yaml:"protocol_config_qwen" mapstructure:"protocol_config_qwen"`
-	ProtocolConfigQianfan  *ProtocolConfigQianfan  `json:"protocol_config_qianfan" yaml:"protocol_config_qianfan" mapstructure:"protocol_config_qianfan"`
-	ProtocolConfigArkBot   *ProtocolConfigArkBot   `json:"protocol_config_ark_bot" yaml:"protocol_config_ark_bot" mapstructure:"protocol_config_ark_bot"`
-}
-
-type ProtocolConfigArk struct {
-	Region        string            `json:"region" yaml:"region" mapstructure:"region"`
-	AccessKey     string            `json:"access_key" yaml:"access_key" mapstructure:"access_key"`
-	SecretKey     string            `json:"secret_key" yaml:"secret_key" mapstructure:"secret_key"`
-	RetryTimes    *int64            `json:"retry_times" yaml:"retry_times" mapstructure:"retry_times"`
-	CustomHeaders map[string]string `json:"custom_headers" yaml:"custom_headers" mapstructure:"custom_headers"`
 }
 
 type ProtocolConfigOpenAI struct {
@@ -190,6 +177,7 @@ type ProtocolConfigClaude struct {
 	SecretAccessKey string `json:"secret_access_key" yaml:"secret_access_key" mapstructure:"secret_access_key"`
 	SessionToken    string `json:"session_token" yaml:"session_token" mapstructure:"session_token"`
 	Region          string `json:"region" yaml:"region" mapstructure:"region"`
+	BudgetTokens    *int   `json:"budget_tokens,omitempty" yaml:"budget_tokens" mapstructure:"budget_tokens"`
 }
 
 type ProtocolConfigDeepSeek struct {
@@ -197,6 +185,15 @@ type ProtocolConfigDeepSeek struct {
 }
 
 type ProtocolConfigGemini struct {
+	Backend    genai.Backend       `json:"backend,omitempty" yaml:"backend"`
+	Project    string              `json:"project,omitempty" yaml:"project"`
+	Location   string              `json:"location,omitempty" yaml:"location"`
+	APIVersion string              `json:"api_version,omitempty" yaml:"api_version"`
+	Headers    map[string][]string `json:"headers,omitempty" yaml:"headers"`
+
+	IncludeThoughts *bool  `json:"include_thoughts,omitempty" yaml:"include_thoughts"` // default true
+	ThinkingBudget  *int32 `json:"thinking_budget,omitempty" yaml:"thinking_budget"`   // default nil
+
 	ResponseSchema      *string                             `json:"response_schema" yaml:"response_schema" mapstructure:"response_schema"`
 	EnableCodeExecution bool                                `json:"enable_code_execution" yaml:"enable_code_execution" mapstructure:"enable_code_execution"`
 	SafetySettings      []ProtocolConfigGeminiSafetySetting `json:"safety_settings" yaml:"safety_settings" mapstructure:"safety_settings"`
@@ -217,23 +214,6 @@ type ProtocolConfigOllama struct {
 type ProtocolConfigQwen struct {
 	ResponseFormatType       *string `json:"response_format_type" yaml:"response_format_type" mapstructure:"response_format_type"`
 	ResponseFormatJsonSchema *string `json:"response_format_json_schema" yaml:"response_format_json_schema" mapstructure:"response_format_json_schema"`
-}
-
-type ProtocolConfigQianfan struct {
-	LLMRetryCount            *int     `json:"llm_retry_count" yaml:"llm_retry_count" mapstructure:"llm_retry_count"`                            // 重试次数
-	LLMRetryTimeout          *float32 `json:"llm_retry_timeout" yaml:"llm_retry_timeout" mapstructure:"llm_retry_timeout"`                      // 重试超时时间
-	LLMRetryBackoffFactor    *float32 `json:"llm_retry_backoff_factor" yaml:"llm_retry_backoff_factor" mapstructure:"llm_retry_backoff_factor"` // 重试退避因子
-	ParallelToolCalls        *bool    `json:"parallel_tool_calls" yaml:"parallel_tool_calls" mapstructure:"parallel_tool_calls"`
-	ResponseFormatType       *string  `json:"response_format_type" yaml:"response_format_type" mapstructure:"response_format_type"`
-	ResponseFormatJsonSchema *string  `json:"response_format_json_schema" yaml:"response_format_json_schema" mapstructure:"response_format_json_schema"`
-}
-
-type ProtocolConfigArkBot struct {
-	Region        string            `json:"region" yaml:"region" mapstructure:"region"`
-	AccessKey     string            `json:"access_key" yaml:"access_key" mapstructure:"access_key"`
-	SecretKey     string            `json:"secret_key" yaml:"secret_key" mapstructure:"secret_key"`
-	RetryTimes    *int64            `json:"retry_times" yaml:"retry_times" mapstructure:"retry_times"`
-	CustomHeaders map[string]string `json:"custom_headers" yaml:"custom_headers" mapstructure:"custom_headers"`
 }
 
 type ScenarioConfig struct {
@@ -259,10 +239,11 @@ type CommonParam struct {
 	Stop             []string `json:"stop,omitempty" yaml:"stop" mapstructure:"stop"`
 	FrequencyPenalty *float32 `json:"frequency_penalty,omitempty" yaml:"frequency_penalty" mapstructure:"frequency_penalty"`
 	PresencePenalty  *float32 `json:"presence_penalty,omitempty" yaml:"presence_penalty" mapstructure:"presence_penalty"`
+	EnableThinking   *bool    `json:"enable_thinking,omitempty" yaml:"enable_thinking,omitempty"`
 }
 
 func (p *ParamConfig) GetCommonParamDefaultVal() CommonParam {
-	rawDf := p.GetDefaultVal([]string{"max_tokens", "temperature", "top_p", "top_k", "frequency_penalty", "presence_penalty", "stop"})
+	rawDf := p.GetDefaultVal([]string{"max_tokens", "temperature", "top_p", "top_k", "frequency_penalty", "presence_penalty", "enable_thinking", "stop"})
 	cp := CommonParam{}
 	if rawDf == nil {
 		return cp
@@ -295,6 +276,10 @@ func (p *ParamConfig) GetCommonParamDefaultVal() CommonParam {
 	if rawDf["presence_penalty"] != "" {
 		presencePenalty, _ := strconv.ParseFloat(rawDf["presence_penalty"], 32)
 		cp.PresencePenalty = ptr.Of(float32(presencePenalty))
+	}
+	if rawDf["enable_thinking"] != "" {
+		enableThinking, _ := strconv.ParseBool(rawDf["enable_thinking"])
+		cp.EnableThinking = ptr.Of(enableThinking)
 	}
 	return cp
 }
@@ -339,13 +324,6 @@ const (
 	ParamTypeString  ParamType = "string"
 )
 
-type Frame string
-
-const (
-	FrameDefault Frame = "default"
-	FrameEino    Frame = "eino"
-)
-
 type Protocol string
 
 const (
@@ -358,13 +336,11 @@ const (
 )
 
 type ListModelReq struct {
-	WorkspaceID *int64
-	Scenario    *Scenario
-	PageToken   int64
-	PageSize    int64
+	Scenario  *Scenario
+	PageToken int64
+	PageSize  int64
 }
 
 type GetModelReq struct {
-	WorkspaceID *int64
-	ModelID     int64
+	ModelID int64
 }

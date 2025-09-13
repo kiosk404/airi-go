@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS `airi-go`.`model_request_record`
     `user_id`               varchar(256)    NOT NULL DEFAULT '' COMMENT 'user id',
     `usage_scene`           varchar(128)    NOT NULL DEFAULT '' COMMENT '场景',
     `usage_scene_entity_id` varchar(256)    NOT NULL DEFAULT '' COMMENT '场景实体id',
-    `frame`                 varchar(128)    NOT NULL DEFAULT '' COMMENT '使用的框架，如eino',
     `protocol`              varchar(128)    NOT NULL DEFAULT '' COMMENT '使用的协议，如ark/deepseek等',
     `model_identification`  varchar(1024)   NOT NULL DEFAULT '' COMMENT '模型唯一标识',
     `model_ak`              varchar(1024)   NOT NULL DEFAULT '' COMMENT '模型的AK',

@@ -29,7 +29,6 @@ func newSingleAgentDraft(db *gorm.DB, opts ...gen.DOOption) singleAgentDraft {
 	_singleAgentDraft.ALL = field.NewAsterisk(tableName)
 	_singleAgentDraft.ID = field.NewInt64(tableName, "id")
 	_singleAgentDraft.AgentID = field.NewInt64(tableName, "agent_id")
-	_singleAgentDraft.CreatorID = field.NewInt64(tableName, "creator_id")
 	_singleAgentDraft.Name = field.NewString(tableName, "name")
 	_singleAgentDraft.Description = field.NewString(tableName, "description")
 	_singleAgentDraft.IconURI = field.NewString(tableName, "icon_uri")
@@ -63,7 +62,6 @@ type singleAgentDraft struct {
 	ALL                     field.Asterisk
 	ID                      field.Int64  // Primary Key ID
 	AgentID                 field.Int64  // Agent ID
-	CreatorID               field.Int64  // Creator ID
 	Name                    field.String // Agent Name
 	Description             field.String // Agent Description
 	IconURI                 field.String // Icon URI
@@ -102,7 +100,6 @@ func (s *singleAgentDraft) updateTableName(table string) *singleAgentDraft {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
 	s.AgentID = field.NewInt64(table, "agent_id")
-	s.CreatorID = field.NewInt64(table, "creator_id")
 	s.Name = field.NewString(table, "name")
 	s.Description = field.NewString(table, "description")
 	s.IconURI = field.NewString(table, "icon_uri")
@@ -151,10 +148,9 @@ func (s *singleAgentDraft) GetFieldByName(fieldName string) (field.OrderExpr, bo
 }
 
 func (s *singleAgentDraft) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 23)
+	s.fieldMap = make(map[string]field.Expr, 22)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["agent_id"] = s.AgentID
-	s.fieldMap["creator_id"] = s.CreatorID
 	s.fieldMap["name"] = s.Name
 	s.fieldMap["description"] = s.Description
 	s.fieldMap["icon_uri"] = s.IconURI

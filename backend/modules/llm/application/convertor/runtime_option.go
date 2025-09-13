@@ -39,7 +39,7 @@ func ModelAndTools2OptionDOs(modelCfg *druntime.ModelConfig, tools []*druntime.T
 		}
 	}
 	if len(tools) > 0 {
-		toolsDTO := slices.Map(tools, func(t *druntime.Tool) *entity.ToolInfo {
+		toolsDTO := slices.Map(tools, func(t *druntime.Tool, _ int) *entity.ToolInfo {
 			return ToolDTO2DO(t)
 		})
 		opts = append(opts, entity.WithTools(toolsDTO))
@@ -57,7 +57,7 @@ func ResponseFormatDTO2DO(r *druntime.ResponseFormat) *entity.ResponseFormat {
 }
 
 func ToolsDTO2DO(ts []*druntime.Tool) []*entity.ToolInfo {
-	return slices.Map(ts, func(t *druntime.Tool) *entity.ToolInfo {
+	return slices.Map(ts, func(t *druntime.Tool, _ int) *entity.ToolInfo {
 		return ToolDTO2DO(t)
 	})
 }

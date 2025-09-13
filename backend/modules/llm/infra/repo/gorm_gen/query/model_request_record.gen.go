@@ -31,7 +31,6 @@ func newModelRequestRecord(db *gorm.DB, opts ...gen.DOOption) modelRequestRecord
 	_modelRequestRecord.UserID = field.NewString(tableName, "user_id")
 	_modelRequestRecord.UsageScene = field.NewString(tableName, "usage_scene")
 	_modelRequestRecord.UsageSceneEntityID = field.NewString(tableName, "usage_scene_entity_id")
-	_modelRequestRecord.Frame = field.NewString(tableName, "frame")
 	_modelRequestRecord.Protocol = field.NewString(tableName, "protocol")
 	_modelRequestRecord.ModelIdentification = field.NewString(tableName, "model_identification")
 	_modelRequestRecord.ModelAk = field.NewString(tableName, "model_ak")
@@ -59,7 +58,6 @@ type modelRequestRecord struct {
 	UserID              field.String // user id
 	UsageScene          field.String // 场景
 	UsageSceneEntityID  field.String // 场景实体id
-	Frame               field.String // 使用的框架，如eino
 	Protocol            field.String // 使用的协议，如ark/deepseek等
 	ModelIdentification field.String // 模型唯一标识
 	ModelAk             field.String // 模型的AK
@@ -92,7 +90,6 @@ func (m *modelRequestRecord) updateTableName(table string) *modelRequestRecord {
 	m.UserID = field.NewString(table, "user_id")
 	m.UsageScene = field.NewString(table, "usage_scene")
 	m.UsageSceneEntityID = field.NewString(table, "usage_scene_entity_id")
-	m.Frame = field.NewString(table, "frame")
 	m.Protocol = field.NewString(table, "protocol")
 	m.ModelIdentification = field.NewString(table, "model_identification")
 	m.ModelAk = field.NewString(table, "model_ak")
@@ -133,12 +130,11 @@ func (m *modelRequestRecord) GetFieldByName(fieldName string) (field.OrderExpr, 
 }
 
 func (m *modelRequestRecord) fillFieldMap() {
-	m.fieldMap = make(map[string]field.Expr, 17)
+	m.fieldMap = make(map[string]field.Expr, 16)
 	m.fieldMap["id"] = m.ID
 	m.fieldMap["user_id"] = m.UserID
 	m.fieldMap["usage_scene"] = m.UsageScene
 	m.fieldMap["usage_scene_entity_id"] = m.UsageSceneEntityID
-	m.fieldMap["frame"] = m.Frame
 	m.fieldMap["protocol"] = m.Protocol
 	m.fieldMap["model_identification"] = m.ModelIdentification
 	m.fieldMap["model_ak"] = m.ModelAk
