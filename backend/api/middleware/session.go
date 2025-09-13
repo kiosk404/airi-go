@@ -5,12 +5,12 @@ import (
 	httpwarp "github.com/kiosk404/airi-go/backend/api/http"
 	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/application"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
+	"github.com/kiosk404/airi-go/backend/modules/foundation/user/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/ctxcache"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/http/ginutil"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 	"github.com/kiosk404/airi-go/backend/types/consts"
-	"github.com/kiosk404/airi-go/backend/types/errno"
 )
 
 var noNeedSessionCheckPath = map[string]bool{

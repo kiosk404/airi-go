@@ -19,11 +19,11 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/repo"
 	usersvc "github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/service"
+	"github.com/kiosk404/airi-go/backend/modules/foundation/user/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
 	"github.com/kiosk404/airi-go/backend/types/consts"
-	"github.com/kiosk404/airi-go/backend/types/errno"
 )
 
 var UserApplicationSVC = &UserApplicationService{}

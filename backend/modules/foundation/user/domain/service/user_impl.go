@@ -14,11 +14,11 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/repo"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/infra/repo/gorm_gen/model"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/pkg"
+	"github.com/kiosk404/airi-go/backend/modules/foundation/user/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
-	"github.com/kiosk404/airi-go/backend/types/errno"
 )
 
 func NewUserDomain(ctx context.Context, oss storage.Storage,

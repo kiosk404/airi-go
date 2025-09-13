@@ -841,14 +841,14 @@ func (p *ProductUnlistType) Value() (driver.Value, error) {
 type CreationMethod int64
 
 const (
-	CreationMethod_COZE CreationMethod = 0
+	CreationMethod_AIRI CreationMethod = 0
 	CreationMethod_IDE  CreationMethod = 1
 )
 
 func (p CreationMethod) String() string {
 	switch p {
-	case CreationMethod_COZE:
-		return "COZE"
+	case CreationMethod_AIRI:
+		return "AIRI"
 	case CreationMethod_IDE:
 		return "IDE"
 	}
@@ -857,8 +857,8 @@ func (p CreationMethod) String() string {
 
 func CreationMethodFromString(s string) (CreationMethod, error) {
 	switch s {
-	case "COZE":
-		return CreationMethod_COZE, nil
+	case "AIRI":
+		return CreationMethod_AIRI, nil
 	case "IDE":
 		return CreationMethod_IDE, nil
 	}

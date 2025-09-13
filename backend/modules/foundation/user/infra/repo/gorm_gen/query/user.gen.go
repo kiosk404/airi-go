@@ -39,7 +39,7 @@ func newUser(db *gorm.DB, opts ...gen.DOOption) user {
 	_user.SessionKey = field.NewString(tableName, "session_key")
 	_user.CreatedAt = field.NewInt64(tableName, "created_at")
 	_user.UpdatedAt = field.NewInt64(tableName, "updated_at")
-	_user.DeletedAt = field.NewField(tableName, "deleted_at")
+	_user.DeletedAt = field.NewInt64(tableName, "deleted_at")
 
 	_user.fillFieldMap()
 
@@ -63,7 +63,7 @@ type user struct {
 	SessionKey   field.String // Session Key
 	CreatedAt    field.Int64  // Creation Time (Milliseconds)
 	UpdatedAt    field.Int64  // Update Time (Milliseconds)
-	DeletedAt    field.Field  // Deletion Time (Milliseconds)
+	DeletedAt    field.Int64  // Deletion Time (Milliseconds)
 
 	fieldMap map[string]field.Expr
 }
@@ -92,7 +92,7 @@ func (u *user) updateTableName(table string) *user {
 	u.SessionKey = field.NewString(table, "session_key")
 	u.CreatedAt = field.NewInt64(table, "created_at")
 	u.UpdatedAt = field.NewInt64(table, "updated_at")
-	u.DeletedAt = field.NewField(table, "deleted_at")
+	u.DeletedAt = field.NewInt64(table, "deleted_at")
 
 	u.fillFieldMap()
 

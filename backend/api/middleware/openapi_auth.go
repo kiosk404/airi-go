@@ -9,12 +9,12 @@ import (
 	"github.com/gin-gonic/gin"
 	httpwarp "github.com/kiosk404/airi-go/backend/api/http"
 	openauth "github.com/kiosk404/airi-go/backend/modules/foundation/openauth/application"
+	"github.com/kiosk404/airi-go/backend/modules/foundation/user/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/ctxcache"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 	"github.com/kiosk404/airi-go/backend/types/consts"
-	"github.com/kiosk404/airi-go/backend/types/errno"
 )
 
 const HeaderAuthorizationKey = "Authorization"
