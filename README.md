@@ -19,7 +19,7 @@
 [//]: # (    media="&#40;prefers-color-scheme: light&#41;, &#40;prefers-color-scheme: no-preference&#41;")
 
 [//]: # (  />)
-  <img width="250" src="./docs/content/public/banner-dark-1280x640.avif" />
+  <img width="100%" src="./docs/content/public/banner-dark-1280x640.avif" />
 </picture>
 
 <h1 align="center">Project AIRI-GO</h1>
