@@ -1,8 +1,8 @@
 package convertor
 
 import (
-	"github.com/kiosk404/airi-go/backend/api/model/coze/loop/llm/domain/manage"
 	"github.com/kiosk404/airi-go/backend/api/model/llm/domain/common"
+	"github.com/kiosk404/airi-go/backend/api/model/llm/domain/manage"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/entity"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"

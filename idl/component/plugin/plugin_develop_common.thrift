@@ -120,7 +120,7 @@ enum ProductUnlistType {
 }
 
 enum CreationMethod {
-    COZE = 0,
+    AIRI = 0,
     IDE  = 1,
 }
 
@@ -152,7 +152,7 @@ enum AuthorizationType {
 enum ServiceAuthSubType {
     ApiKey             = 0,
 
-    // for opencoze
+    // for airi-go
     OAuthAuthorizationCode  = 4,
 }
 

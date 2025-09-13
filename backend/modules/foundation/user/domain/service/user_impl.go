@@ -9,7 +9,7 @@ import (
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
 	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
-	uploadEntity "github.com/kiosk404/airi-go/backend/modules/action/upload/entity"
+	uploadEntity "github.com/kiosk404/airi-go/backend/modules/data/upload/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/repo"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/infra/repo/gorm_gen/model"
