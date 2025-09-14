@@ -1,7 +1,7 @@
-CREATE TABLE IF NOT EXISTS `airi-go`.`api_key` (
+CREATE TABLE IF NOT EXISTS `airi_go`.`api_key` (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT "Primary Key ID",
     `api_key` varchar(255) NOT NULL DEFAULT "" COMMENT "API Key hash",
-    `ak_type` tinyint NOT NULL DEFAULT "" COMMENT "AK Type",
+    `ak_type` tinyint NOT NULL DEFAULT 0 COMMENT "AK Type",
     `name` varchar(255) NOT NULL DEFAULT "" COMMENT "API Key Name",
     `status` tinyint NOT NULL DEFAULT 0 COMMENT "0 normal, 1 deleted",
     `user_id` bigint NOT NULL DEFAULT 0 COMMENT "API Key Owner",

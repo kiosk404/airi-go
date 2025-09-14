@@ -231,7 +231,6 @@ func (r *runtimeApp) recordModelRequest(ctx context.Context, param *recordModelR
 			UserID:              param.bizParam.GetUserID(),
 			UsageScene:          entity.Scenario(param.bizParam.GetScenario()),
 			UsageSceneEntityID:  param.bizParam.GetScenarioEntityID(),
-			Frame:               param.model.Frame,
 			Protocol:            param.model.Protocol,
 			ModelIdentification: param.model.ProtocolConfig.Model,
 			ModelAk:             param.model.ProtocolConfig.APIKey,

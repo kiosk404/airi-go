@@ -7,7 +7,6 @@ type SingleAgentPublish struct {
 	Version       string
 	PublishResult *string
 	PublishInfo   *string
-	CreatorID     int64
 	PublishTime   int64
 	CreatedAt     int64
 	UpdatedAt     int64

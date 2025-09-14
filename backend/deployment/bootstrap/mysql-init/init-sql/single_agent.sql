@@ -1,5 +1,5 @@
 -- Create 'single_agent_draft' table
-CREATE TABLE IF NOT EXISTS `single_agent_draft` (
+CREATE TABLE IF NOT EXISTS `airi_go`.`single_agent_draft` (
     `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key ID',
     `agent_id` bigint NOT NULL DEFAULT 0 COMMENT 'Agent ID',
     `name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Agent Name',
@@ -23,13 +23,12 @@ CREATE TABLE IF NOT EXISTS `single_agent_draft` (
     `layout_info` text NULL COMMENT 'chatflow layout info',
     `shortcut_command` json NULL COMMENT 'shortcut command',
     PRIMARY KEY (`id`),
-    INDEX `idx_creator_id` (`creator_id`),
     UNIQUE INDEX `uniq_agent_id` (`agent_id`)
 ) ENGINE=InnoDB CHARSET utf8mb4
 COLLATE utf8mb4_unicode_ci COMMENT 'Single Agent Draft Copy Table';
 
 -- Create 'single_agent_publish' table
-CREATE TABLE IF NOT EXISTS `single_agent_publish` (
+CREATE TABLE IF NOT EXISTS `airi_go`.`single_agent_publish` (
     `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
     `agent_id` bigint unsigned NOT NULL DEFAULT 0 COMMENT 'agent_id',
     `publish_id` varchar(50) NOT NULL DEFAULT '' COMMENT 'publish id' COLLATE utf8mb4_general_ci,
@@ -38,16 +37,16 @@ CREATE TABLE IF NOT EXISTS `single_agent_publish` (
     `publish_time` bigint unsigned NOT NULL DEFAULT 0 COMMENT 'publish time',
     `created_at` bigint unsigned NOT NULL DEFAULT 0 COMMENT 'Create Time in Milliseconds',
     `updated_at` bigint unsigned NOT NULL DEFAULT 0 COMMENT 'Update Time in Milliseconds',
-    `creator_id` bigint unsigned NOT NULL DEFAULT 0 COMMENT 'creator id',
     `status` tinyint NOT NULL DEFAULT 0 COMMENT 'Status 0: In use 1: Delete 3: Disabled',
     `extra` json NULL COMMENT 'extra',
     PRIMARY KEY (`id`),
     INDEX `idx_agent_id_version` (`agent_id`, `version`),
     INDEX `idx_publish_id` (`publish_id`)
-    ) ENGINE=InnoDB CHARSET utf8mb4
+) ENGINE=InnoDB CHARSET utf8mb4
 COLLATE utf8mb4_unicode_ci COMMENT 'Bot release version info';
+
 -- Create 'single_agent_version' table
-CREATE TABLE IF NOT EXISTS `single_agent_version` (
+CREATE TABLE IF NOT EXISTS `airi_go`.`single_agent_version` (
     `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key ID',
     `agent_id` bigint NOT NULL DEFAULT 0 COMMENT 'Agent ID',
     `name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Agent Name',

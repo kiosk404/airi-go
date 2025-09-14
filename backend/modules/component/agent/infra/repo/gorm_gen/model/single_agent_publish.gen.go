@@ -16,7 +16,6 @@ type SingleAgentPublish struct {
 	PublishTime int64   `gorm:"column:publish_time;type:bigint(20) unsigned;not null;comment:publish time" json:"publish_time"`                           // publish time
 	CreatedAt   int64   `gorm:"column:created_at;type:bigint(20) unsigned;not null;comment:Create Time in Milliseconds" json:"created_at"`                // Create Time in Milliseconds
 	UpdatedAt   int64   `gorm:"column:updated_at;type:bigint(20) unsigned;not null;comment:Update Time in Milliseconds" json:"updated_at"`                // Update Time in Milliseconds
-	CreatorID   int64   `gorm:"column:creator_id;type:bigint(20) unsigned;not null;comment:creator id" json:"creator_id"`                                 // creator id
 	Status      int32   `gorm:"column:status;type:tinyint(4);not null;comment:Status 0: In use 1: Delete 3: Disabled" json:"status"`                      // Status 0: In use 1: Delete 3: Disabled
 	Extra       *string `gorm:"column:extra;type:json;comment:extra" json:"extra"`                                                                        // extra
 }

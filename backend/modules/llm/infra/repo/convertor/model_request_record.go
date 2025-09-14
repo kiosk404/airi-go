@@ -14,7 +14,6 @@ func ModelReqRecordDO2PO(record *entity.ModelRequestRecord) *model.ModelRequestR
 		UserID:              record.UserID,
 		UsageScene:          string(record.UsageScene),
 		UsageSceneEntityID:  record.UsageSceneEntityID,
-		Frame:               string(record.Frame),
 		Protocol:            string(record.Protocol),
 		ModelIdentification: record.ModelIdentification,
 		ModelAk:             record.ModelAk,

@@ -12,7 +12,7 @@ import (
 )
 
 func FromDOMessages(dos []*Message) []*schema.Message {
-	return slices.Map(dos, func(do *Message) *schema.Message {
+	return slices.Map(dos, func(do *Message, _ int) *schema.Message {
 		return FromDOMessage(do)
 	})
 }
@@ -34,7 +34,7 @@ func FromDOMessage(do *Message) *schema.Message {
 }
 
 func FromDOChatMsgParts(ps []*ChatMessagePart) []schema.ChatMessagePart {
-	return slices.Map(ps, func(p *ChatMessagePart) schema.ChatMessagePart {
+	return slices.Map(ps, func(p *ChatMessagePart, _ int) schema.ChatMessagePart {
 		return FromDOChatMsgPart(p)
 	})
 }
@@ -62,7 +62,7 @@ func FromDOImageURL(p *ChatMessageImageURL) *schema.ChatMessageImageURL {
 }
 
 func FromDOToolCalls(ts []*ToolCall) []schema.ToolCall {
-	return slices.Map(ts, func(t *ToolCall) schema.ToolCall {
+	return slices.Map(ts, func(t *ToolCall, _ int) schema.ToolCall {
 		return FromDOToolCall(t)
 	})
 }
@@ -221,7 +221,7 @@ func GetReasoningContent(msg *schema.Message) string {
 }
 
 func ToDOToolCalls(tcs []schema.ToolCall) []*ToolCall {
-	return slices.Map(tcs, func(tc schema.ToolCall) *ToolCall {
+	return slices.Map(tcs, func(tc schema.ToolCall, _ int) *ToolCall {
 		return ToDOToolCall(tc)
 	})
 }
@@ -246,7 +246,7 @@ func ToDOFunctionCall(f schema.FunctionCall) *FunctionCall {
 }
 
 func ToDOMultiContents(cms []schema.ChatMessagePart) []*ChatMessagePart {
-	return slices.Map(cms, func(cm schema.ChatMessagePart) *ChatMessagePart {
+	return slices.Map(cms, func(cm schema.ChatMessagePart, _ int) *ChatMessagePart {
 		return ToDOMultiContent(cm)
 	})
 }

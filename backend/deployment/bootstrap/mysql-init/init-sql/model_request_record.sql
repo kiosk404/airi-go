@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `airi-go`.`model_request_record`
+CREATE TABLE IF NOT EXISTS `airi_go`.`model_request_record`
 (
     `id`                    bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
     `user_id`               varchar(256)    NOT NULL DEFAULT '' COMMENT 'user id',
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `airi-go`.`model_request_record`
     `created_at`            datetime        NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`            datetime        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
-    KEY `idx_space_id_create_time` (`space_id`, `created_at`) USING BTREE COMMENT 'space_id_create_time'
+    KEY `idx_create_time` (`created_at`) USING BTREE COMMENT 'create_time'
 ) ENGINE = InnoDB
 DEFAULT CHARSET = utf8mb4
 COLLATE = utf8mb4_general_ci COMMENT ='模型流量记录表';

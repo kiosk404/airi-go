@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `airi-go`.`user`
+CREATE TABLE IF NOT EXISTS `airi_go`.`user`
 (
     `id` bigint NOT NULL AUTO_INCREMENT COMMENT "Primary Key ID",
     `name` varchar(128) NOT NULL DEFAULT "" COMMENT "User Nickname",
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `airi-go`.`user`
     `updated_at` bigint unsigned NOT NULL DEFAULT 0 COMMENT "Update Time (Milliseconds)",
     `deleted_at` bigint unsigned NULL COMMENT "Deletion Time (Milliseconds)",
      PRIMARY KEY (`id`),
-     UNIQUE INDEX `idx_email` (`account`),
+     UNIQUE INDEX `idx_account` (`account`),
      INDEX `idx_session_key` (`session_key`),
      UNIQUE INDEX `idx_unique_name` (`unique_name`)
 ) ENGINE = InnoDB

@@ -51,7 +51,7 @@ func TokenUsageDTO2DO(dto *druntime.TokenUsage) (do *entity.TokenUsage) {
 }
 
 func ToolCallsDTO2DO(dtos []*druntime.ToolCall) (dos []*entity.ToolCall) {
-	return slices.Map(dtos, func(dto *druntime.ToolCall) *entity.ToolCall {
+	return slices.Map(dtos, func(dto *druntime.ToolCall, _ int) *entity.ToolCall {
 		return ToolCallDTO2DO(dto)
 	})
 }
@@ -80,7 +80,7 @@ func FunctionCallDTO2DO(dto *druntime.FunctionCall) (do *entity.FunctionCall) {
 }
 
 func ChatMessagePartsDTO2DO(dtos []*druntime.ChatMessagePart) (dos []*entity.ChatMessagePart) {
-	return slices.Map(dtos, func(dto *druntime.ChatMessagePart) *entity.ChatMessagePart {
+	return slices.Map(dtos, func(dto *druntime.ChatMessagePart, _ int) *entity.ChatMessagePart {
 		return ChatMessagePartDTO2DO(dto)
 	})
 }
@@ -144,7 +144,7 @@ func TokenUsageDO2DTO(do *entity.TokenUsage) (dto *druntime.TokenUsage) {
 }
 
 func ToolCallsDO2DTO(dos []*entity.ToolCall) (dtos []*druntime.ToolCall) {
-	return slices.Map(dos, func(do *entity.ToolCall) *druntime.ToolCall {
+	return slices.Map(dos, func(do *entity.ToolCall, _ int) *druntime.ToolCall {
 		return ToolCallDO2DTO(do)
 	})
 }
@@ -172,7 +172,7 @@ func FunctionCallDO2DTO(do *entity.FunctionCall) (dto *druntime.FunctionCall) {
 }
 
 func ChatMessagePartsDO2DTO(dos []*entity.ChatMessagePart) (dtos []*druntime.ChatMessagePart) {
-	return slices.Map(dos, func(do *entity.ChatMessagePart) *druntime.ChatMessagePart {
+	return slices.Map(dos, func(do *entity.ChatMessagePart, _ int) *druntime.ChatMessagePart {
 		return ChatMessagePartDO2DTO(do)
 	})
 }

@@ -7,12 +7,22 @@ import (
 	"github.com/kiosk404/airi-go/backend/application/base/appinfra"
 	openauth "github.com/kiosk404/airi-go/backend/modules/foundation/openauth/application"
 	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/application"
+	model "github.com/kiosk404/airi-go/backend/modules/llm/application"
+	modelservice "github.com/kiosk404/airi-go/backend/modules/llm/domain/service"
+	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service/llmfactory"
+	"github.com/kiosk404/airi-go/backend/modules/llm/infra/config"
+	modelrepo "github.com/kiosk404/airi-go/backend/modules/llm/infra/repo"
+	modeldao "github.com/kiosk404/airi-go/backend/modules/llm/infra/repo/dao"
+	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
+
+const Application = "application"
 
 type basicServices struct {
 	infra       *appinfra.AppDependencies
 	userSVC     *user.UserApplicationService
 	openAuthSVC *openauth.OpenAuthApplicationService
+	modelMgrSVC *model.ModelApplicationService
 }
 
 type primaryServices struct {
@@ -42,13 +52,28 @@ func Init(ctx context.Context) (err error) {
 
 // initBasicServices init basic services that only depends on infra.
 func initBasicServices(ctx context.Context, infra *appinfra.AppDependencies) (*basicServices, error) {
+	var err error
+
 	openAuthSVC := openauth.InitService(infra.DB, infra.IDGenSVC)
 	userSVC := user.InitUserService(ctx, infra.DB, infra.TOSClient, infra.IDGenSVC)
+
+	modelManagerConf, err := config.NewManage(ctx, infra.ConfigFactory)
+	if err != nil {
+		logs.ErrorX(Application, "failed to load model mgr config")
+		return nil, err
+	}
+	modelRuntimeConf, err := config.NewRuntime(ctx, infra.ConfigFactory)
+	runTimeRepo := modelrepo.NewRuntimeRepo(infra.DB, modeldao.NewModelRequestRecordDao(infra.DB))
+
+	modelSVC := model.NewModelApplicationService(
+		modelservice.NewManage(modelManagerConf),
+		modelservice.NewRuntime(llmfactory.ModelF, infra.IDGenSVC, runTimeRepo, modelRuntimeConf))
 
 	return &basicServices{
 		infra:       infra,
 		userSVC:     userSVC,
 		openAuthSVC: openAuthSVC,
+		modelMgrSVC: modelSVC,
 	}, nil
 }
 

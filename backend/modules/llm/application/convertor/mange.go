@@ -20,7 +20,7 @@ func ModelDO2DTO(model *entity.Model, mask bool) *manage.Model {
 	}
 	var pc *manage.ProtocolConfig
 	if !mask {
-		pc = ProtocolConfigDO2DTO(model.ProtocolConfig)
+		pc = ProtocolConfigDO2DTO(&model.ProtocolConfig)
 	}
 	return &manage.Model{
 		ModelID:         ptr.Of(model.ID),
@@ -30,7 +30,7 @@ func ModelDO2DTO(model *entity.Model, mask bool) *manage.Model {
 		Protocol:        ptr.Of(manage.Protocol(model.Protocol)),
 		ProtocolConfig:  pc,
 		ScenarioConfigs: ScenarioConfigMapDO2DTO(model.ScenarioConfigs),
-		ParamConfig:     ParamConfigDO2DTO(model.ParamConfig),
+		ParamConfig:     ParamConfigDO2DTO(&model.ParamConfig),
 	}
 }
 

@@ -29,7 +29,7 @@ func ModelAndTools2OptionDOs(modelCfg *druntime.ModelConfig, tools []*druntime.T
 			opts = append(opts, entity.WithResponseFormat(ResponseFormatDTO2DO(modelCfg.ResponseFormat)))
 		}
 		if modelCfg.TopK != nil {
-			opts = append(opts, entity.WithTopK(modelCfg.TopK))
+			opts = append(opts, entity.WithTopK(ptr.Of(int(ptr.From(modelCfg.TopK)))))
 		}
 		if modelCfg.PresencePenalty != nil {
 			opts = append(opts, entity.WithPresencePenalty(float32(*modelCfg.PresencePenalty)))

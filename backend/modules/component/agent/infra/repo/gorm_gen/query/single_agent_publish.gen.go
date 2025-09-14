@@ -35,7 +35,6 @@ func newSingleAgentPublish(db *gorm.DB, opts ...gen.DOOption) singleAgentPublish
 	_singleAgentPublish.PublishTime = field.NewInt64(tableName, "publish_time")
 	_singleAgentPublish.CreatedAt = field.NewInt64(tableName, "created_at")
 	_singleAgentPublish.UpdatedAt = field.NewInt64(tableName, "updated_at")
-	_singleAgentPublish.CreatorID = field.NewInt64(tableName, "creator_id")
 	_singleAgentPublish.Status = field.NewInt32(tableName, "status")
 	_singleAgentPublish.Extra = field.NewString(tableName, "extra")
 
@@ -57,7 +56,6 @@ type singleAgentPublish struct {
 	PublishTime field.Int64  // publish time
 	CreatedAt   field.Int64  // Create Time in Milliseconds
 	UpdatedAt   field.Int64  // Update Time in Milliseconds
-	CreatorID   field.Int64  // creator id
 	Status      field.Int32  // Status 0: In use 1: Delete 3: Disabled
 	Extra       field.String // extra
 
@@ -84,7 +82,6 @@ func (s *singleAgentPublish) updateTableName(table string) *singleAgentPublish {
 	s.PublishTime = field.NewInt64(table, "publish_time")
 	s.CreatedAt = field.NewInt64(table, "created_at")
 	s.UpdatedAt = field.NewInt64(table, "updated_at")
-	s.CreatorID = field.NewInt64(table, "creator_id")
 	s.Status = field.NewInt32(table, "status")
 	s.Extra = field.NewString(table, "extra")
 
@@ -115,7 +112,7 @@ func (s *singleAgentPublish) GetFieldByName(fieldName string) (field.OrderExpr, 
 }
 
 func (s *singleAgentPublish) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 11)
+	s.fieldMap = make(map[string]field.Expr, 10)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["agent_id"] = s.AgentID
 	s.fieldMap["publish_id"] = s.PublishID
@@ -124,7 +121,6 @@ func (s *singleAgentPublish) fillFieldMap() {
 	s.fieldMap["publish_time"] = s.PublishTime
 	s.fieldMap["created_at"] = s.CreatedAt
 	s.fieldMap["updated_at"] = s.UpdatedAt
-	s.fieldMap["creator_id"] = s.CreatorID
 	s.fieldMap["status"] = s.Status
 	s.fieldMap["extra"] = s.Extra
 }

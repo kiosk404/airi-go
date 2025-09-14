@@ -34,12 +34,12 @@ func InitRuntimeApplication(ctx context.Context, idGen idgen.IDGenerator, config
 	iManage := service.NewManage(iConfigManage)
 	iFactory := llmfactory.NewFactory()
 	iModelRequestRecordDao := dao.NewModelRequestRecordDao(db)
-	iRuntimeRepo := repo.NewRuntimeRepo(db, iModelRequestRecordDao)
+	iRuntimeRepository := repo.NewRuntimeRepo(db, iModelRequestRecordDao)
 	iConfigRuntime, err := config.NewRuntime(ctx, configFactory)
 	if err != nil {
 		return nil, err
 	}
-	iRuntime := service.NewRuntime(iFactory, idGen, iRuntimeRepo, iConfigRuntime)
+	iRuntime := service.NewRuntime(iFactory, idGen, iRuntimeRepository, iConfigRuntime)
 	llmRuntimeService := NewRuntimeApplication(iManage, iRuntime, redis, factory)
 	return llmRuntimeService, nil
 }
