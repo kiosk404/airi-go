@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/url"
 	"os"
+	"path/filepath"
+	"runtime"
 	"time"
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/cache"
@@ -15,6 +17,8 @@ import (
 	"github.com/kiosk404/airi-go/backend/infra/impl/rdb/mysql"
 	"github.com/kiosk404/airi-go/backend/infra/impl/storage"
 	"github.com/kiosk404/airi-go/backend/pkg/conf"
+	"github.com/kiosk404/airi-go/backend/pkg/conf/viper"
+	"github.com/kiosk404/airi-go/backend/types/consts"
 )
 
 type AppDependencies struct {
@@ -41,6 +45,12 @@ func Init(ctx context.Context) (*AppDependencies, error) {
 		return nil, fmt.Errorf("init storage failed, err=%w", err)
 	}
 
+	projectConfigDir := fmt.Sprintf("%s/conf", getApplicationProjectRoot())
+	configOptionList := []viper.FileConfLoaderFactoryOpt{viper.WithFactoryConfigPath(projectConfigDir)}
+	if deps.ConfigFactory, err = viper.NewFileConfigLoaderFactory(configOptionList...); err != nil {
+		return nil, fmt.Errorf("init config loader factory, err=%w", err)
+	}
+
 	return deps, err
 }
 
@@ -60,22 +70,35 @@ func mysqlDBConfig() *mysql.Config {
 	}
 }
 
+func getApplicationProjectRoot() string {
+	_, filename, _, ok := runtime.Caller(0)
+	if !ok {
+		return "."
+	}
+	projectRoot := filepath.Dir(filepath.Dir(filepath.Dir(filepath.Dir(filename))))
+	_, err := os.Stat(filepath.Join(projectRoot, "conf"))
+	if err != nil {
+		return "."
+	}
+	return projectRoot
+}
+
 func getMysqlDomain() string {
-	return os.Getenv("AIRI_GO_MYSQL_DOMAIN")
+	return os.Getenv(consts.MySQLDomain)
 }
 
 func getMysqlPort() string {
-	return os.Getenv("AIRI_GO_MYSQL_PORT")
+	return os.Getenv(consts.MySQLPort)
 }
 
 func getMysqlUser() string {
-	return os.Getenv("AIRI_GO_MYSQL_USER")
+	return os.Getenv(consts.MySQLUser)
 }
 
 func getMysqlPassword() string {
-	return os.Getenv("AIRI_GO_MYSQL_PASSWORD")
+	return os.Getenv(consts.MySQLPassport)
 }
 
 func getMysqlDatabase() string {
-	return os.Getenv("AIRI_GO_MYSQL_DATABASE")
+	return os.Getenv(consts.MySQLDatabase)
 }

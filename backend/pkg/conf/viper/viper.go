@@ -72,12 +72,16 @@ func NewFileConfLoader(file string, opts ...FileConfLoaderOpt) (conf.IConfigLoad
 	}, nil
 }
 
-func NewFileConfigLoaderFactory(opts ...FileConfLoaderFactoryOpt) conf.IConfigLoaderFactory {
+func NewFileConfigLoaderFactory(opts ...FileConfLoaderFactoryOpt) (conf.IConfigLoaderFactory, error) {
 	opt := &fileConfLoaderFactoryOpt{}
 	for _, fn := range opts {
 		fn(opt)
 	}
+	if _, err := os.Stat(opt.path); err != nil {
+		return nil, errors.New("config path not exist")
+	}
+
 	return &fileConfLoaderFactory{
 		configPath: opt.path,
-	}
+	}, nil
 }

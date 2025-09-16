@@ -22,6 +22,14 @@ const (
 )
 
 const (
+	MySQLDomain   = "AIRI_GO_MYSQL_DOMAIN"
+	MySQLPort     = "AIRI_GO_MYSQL_PORT"
+	MySQLUser     = "AIRI_GO_MYSQL_USER"
+	MySQLPassport = "AIRI_GO_MYSQL_PASSWORD"
+	MySQLDatabase = "AIRI_GO_MYSQL_DATABASE"
+)
+
+const (
 	SessionMaxAgeSecond    = 30 * 24 * 60 * 60
 	DefaultSessionDuration = SessionMaxAgeSecond * time.Second
 )
