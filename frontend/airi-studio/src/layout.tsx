@@ -1,6 +1,7 @@
 import { Layout, Menu, Button, Avatar } from 'tdesign-react';
-import { Outlet, useNavigate} from 'react-router-dom';
-import { HelpCircleIcon, HomeIcon, LogoGithubIcon, NotificationIcon } from 'tdesign-icons-react';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { HelpCircleIcon, EarthIcon, Gamepad1Icon,
+     BookIcon, LogoGithubIcon, NotificationIcon, ToolsIcon } from 'tdesign-icons-react';
 
 const {Header, Content} = Layout;
 const {HeadMenu, MenuItem} = Menu;
@@ -8,11 +9,12 @@ const {HeadMenu, MenuItem} = Menu;
 
 export default () => {
     const navigate = useNavigate();
+    const location = useLocation();
     return (
         <Layout>
             <Header>
                 <HeadMenu 
-                    defaultValue={"main"}
+                    defaultValue={location.pathname}
                     logo={<LogoGithubIcon size="36px" />}
                     operations={
                         <div className="t-menu__operations">
@@ -22,10 +24,22 @@ export default () => {
                         </div>
                     }
                 >
-
-                    <MenuItem value="main" icon={<HomeIcon/>} onClick={() => navigate('/')} content="工作空间"/>
-                    <MenuItem value="playground" icon={<HomeIcon/>} onClick={() => navigate('/playground')} content="Playground"/>
-                
+                    <MenuItem 
+                        value="/workspace" icon={<EarthIcon/>} 
+                        onClick={() => navigate('/workspace')} content={
+                           <span className="font-mono">工作室</span>}/>
+                    <MenuItem 
+                        value="/playground" icon={<Gamepad1Icon/>} 
+                        onClick={() => navigate('/playground')} content={
+                            <span className="font-mono">Playground</span>}/>
+                    <MenuItem 
+                        value="/knowledge" icon={<BookIcon/>} 
+                        onClick={() => navigate('/knowledge')} content={
+                            <span className="font-mono">知识库</span>}/> 
+                    <MenuItem 
+                        value="/tool" icon={<ToolsIcon/>} 
+                        onClick={() => navigate('/tool')} content={
+                            <span className="font-mono">工具</span>}/>           
                 </HeadMenu>
             </Header>
             <Content>

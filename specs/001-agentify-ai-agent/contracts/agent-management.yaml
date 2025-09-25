@@ -1,0 +1,126 @@
+# Agent Management API Contracts
+
+## Create Agent
+
+**Endpoint**: POST /api/agents
+**Description**: 创建一个新的 AI Agent
+
+**Request**:
+```json
+{
+  "name": "string",
+  "description": "string",
+  "systemPrompt": "string"
+}
+```
+
+**Response**:
+```json
+{
+  "id": "string",
+  "name": "string",
+  "description": "string",
+  "systemPrompt": "string",
+  "plugins": [],
+  "workflows": [],
+  "createdAt": "2025-09-23T00:00:00.000Z",
+  "updatedAt": "2025-09-23T00:00:00.000Z"
+}
+```
+
+**Error Responses**:
+- 400: Invalid input data
+- 500: Server error
+
+## Get Agent
+
+**Endpoint**: GET /api/agents/{agentId}
+**Description**: 获取指定 AI Agent 的详细信息
+
+**Response**:
+```json
+{
+  "id": "string",
+  "name": "string",
+  "description": "string",
+  "systemPrompt": "string",
+  "plugins": [],
+  "workflows": [],
+  "createdAt": "2025-09-23T00:00:00.000Z",
+  "updatedAt": "2025-09-23T00:00:00.000Z"
+}
+```
+
+**Error Responses**:
+- 404: Agent not found
+- 500: Server error
+
+## Update Agent
+
+**Endpoint**: PUT /api/agents/{agentId}
+**Description**: 更新指定 AI Agent 的信息
+
+**Request**:
+```json
+{
+  "name": "string",
+  "description": "string",
+  "systemPrompt": "string"
+}
+```
+
+**Response**:
+```json
+{
+  "id": "string",
+  "name": "string",
+  "description": "string",
+  "systemPrompt": "string",
+  "plugins": [],
+  "workflows": [],
+  "createdAt": "2025-09-23T00:00:00.000Z",
+  "updatedAt": "2025-09-23T00:00:00.000Z"
+}
+```
+
+**Error Responses**:
+- 400: Invalid input data
+- 404: Agent not found
+- 500: Server error
+
+## Delete Agent
+
+**Endpoint**: DELETE /api/agents/{agentId}
+**Description**: 删除指定的 AI Agent
+
+**Response**:
+```json
+{
+  "success": true
+}
+```
+
+**Error Responses**:
+- 404: Agent not found
+- 500: Server error
+
+## List Agents
+
+**Endpoint**: GET /api/agents
+**Description**: 获取所有 AI Agents 的列表
+
+**Response**:
+```json
+[
+  {
+    "id": "string",
+    "name": "string",
+    "description": "string",
+    "createdAt": "2025-09-23T00:00:00.000Z",
+    "updatedAt": "2025-09-23T00:00:00.000Z"
+  }
+]
+```
+
+**Error Responses**:
+- 500: Server error

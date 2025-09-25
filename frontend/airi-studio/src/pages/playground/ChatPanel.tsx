@@ -1,6 +1,6 @@
 import { Layout, Typography, Input, Button, Avatar, Space } from "tdesign-react";
 import { BrowseIcon, Delete1Icon, RollbackIcon, SendIcon } from "tdesign-icons-react";
-const { Title, Paragraph } = Typography
+const { Title } = Typography
 const { Header, Content, Footer } = Layout;
 
 const kioskAvatarURL = "https://kiosk007.top/images/avatar.jpg"
