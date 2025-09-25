@@ -4,13 +4,13 @@ import (
 	"context"
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
+	"github.com/kiosk404/airi-go/backend/infra/contract/rdb"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/infra/dao"
-	"gorm.io/gorm"
 )
 
-func NewSingleAgentVersionRepo(db *gorm.DB, idGen idgen.IDGenerator) SingleAgentVersionRepo {
-	return dao.NewSingleAgentVersion(db, idGen)
+func NewSingleAgentVersionRepo(rdb rdb.Provider, idGen idgen.IDGenerator) SingleAgentVersionRepo {
+	return dao.NewSingleAgentVersion(rdb.NewSession(context.Background()).DB(), idGen)
 }
 
 //go:generate mockgen -destination=mocks/single_agent_version.go -package=mocks . SingleAgentVersionRepo

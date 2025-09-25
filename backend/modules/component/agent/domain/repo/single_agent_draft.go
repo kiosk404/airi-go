@@ -5,13 +5,13 @@ import (
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/cache"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
+	"github.com/kiosk404/airi-go/backend/infra/contract/rdb"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/infra/dao"
-	"gorm.io/gorm"
 )
 
-func NewSingleAgentRepo(db *gorm.DB, idGen idgen.IDGenerator, cli cache.Cmdable) SingleAgentDraftRepo {
-	return dao.NewSingleAgentDraftDAO(db, idGen, cli)
+func NewSingleAgentRepo(rdb rdb.Provider, idGen idgen.IDGenerator, cli cache.Cmdable) SingleAgentDraftRepo {
+	return dao.NewSingleAgentDraftDAO(rdb.NewSession(context.Background()).DB(), idGen, cli)
 }
 
 //go:generate mockgen -destination=mocks/single_agent_draft.go -package=mocks . SingleAgentDraftRepo

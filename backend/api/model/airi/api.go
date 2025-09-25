@@ -6,6 +6,9 @@ import (
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_open_api"
 	"github.com/kiosk404/airi-go/backend/api/model/app/developer_api"
 	"github.com/kiosk404/airi-go/backend/api/model/component/plugin_develop"
+	"github.com/kiosk404/airi-go/backend/api/model/conversation/agentrun"
+	"github.com/kiosk404/airi-go/backend/api/model/conversation/conversation"
+	"github.com/kiosk404/airi-go/backend/api/model/conversation/message"
 	"github.com/kiosk404/airi-go/backend/api/model/foundation/openapiauth"
 	"github.com/kiosk404/airi-go/backend/api/model/foundation/user"
 	"github.com/kiosk404/airi-go/backend/api/model/llm/manage"
@@ -38,4 +41,16 @@ type LLMRuntimeService interface {
 
 type PluginDevelopService interface {
 	plugin_develop.PluginDevelopService
+}
+
+type AgentRunService interface {
+	agentrun.AgentRunService
+}
+
+type MessageService interface {
+	message.MessageService
+}
+
+type ConversationService interface {
+	conversation.ConversationService
 }

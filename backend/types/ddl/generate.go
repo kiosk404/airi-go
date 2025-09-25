@@ -50,9 +50,9 @@ var table2Columns2Model = map[string]map[string]any{
 func main() {
 	db := initDB()
 	generateForModelRequestRecord(db)
-	generateForFoundationUser(db)
-	generateForFoundationOpenAuth(db)
-	generateForComponentAgent(db)
+	generateForFoundation(db)
+	generateForComponent(db)
+	generateForConversation(db)
 }
 
 func initDB() *gorm.DB {
@@ -91,21 +91,42 @@ func generateForModelRequestRecord(db *gorm.DB) {
 	generateFunc(db, path, tableList)
 }
 
-func generateForFoundationUser(db *gorm.DB) {
-	path := "modules/foundation/user/infra/repo/gorm_gen"
-	tableList := []string{"user"}
+func generateForFoundation(db *gorm.DB) {
+	var path string
+	var tableList []string
+	// User
+	path = "modules/foundation/user/infra/repo/gorm_gen"
+	tableList = []string{"user"}
+	generateFunc(db, path, tableList)
+
+	// OpenAuth
+	path = "modules/foundation/openauth/infra/repo/gorm_gen"
+	tableList = []string{"api_key"}
+	generateFunc(db, path, tableList)
+
+}
+
+func generateForComponent(db *gorm.DB) {
+	var path string
+	var tableList []string
+
+	path = "modules/component/agent/infra/repo/gorm_gen"
+	tableList = []string{"single_agent_draft", "single_agent_publish", "single_agent_version"}
 	generateFunc(db, path, tableList)
 }
 
-func generateForFoundationOpenAuth(db *gorm.DB) {
-	path := "modules/foundation/openauth/infra/repo/gorm_gen"
-	tableList := []string{"api_key"}
-	generateFunc(db, path, tableList)
-}
+func generateForConversation(db *gorm.DB) {
+	var path string
+	var tableList []string
 
-func generateForComponentAgent(db *gorm.DB) {
-	path := "modules/component/agent/infra/repo/gorm_gen"
-	tableList := []string{"single_agent_draft", "single_agent_publish", "single_agent_version"}
+	// Conversation
+	path = "modules/conversation/conversation/infra/repo/gorm_gen"
+	tableList = []string{"conversation"}
+	generateFunc(db, path, tableList)
+
+	// Message
+	path = "modules/conversation/message/infra/repo/gorm_gen"
+	tableList = []string{"message"}
 	generateFunc(db, path, tableList)
 }
 

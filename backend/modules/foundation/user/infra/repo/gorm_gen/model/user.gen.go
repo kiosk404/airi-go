@@ -11,7 +11,7 @@ type User struct {
 	ID           int64  `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true;comment:Primary Key ID" json:"id"`                                         // Primary Key ID
 	Name         string `gorm:"column:name;type:varchar(128);not null;comment:User Nickname" json:"name"`                                                         // User Nickname
 	UniqueName   string `gorm:"column:unique_name;type:varchar(128);not null;uniqueIndex:idx_unique_name,priority:1;comment:User Unique Name" json:"unique_name"` // User Unique Name
-	Account      string `gorm:"column:account;type:varchar(128);not null;uniqueIndex:idx_email,priority:1;comment:Account" json:"account"`                        // Account
+	Account      string `gorm:"column:account;type:varchar(128);not null;uniqueIndex:idx_account,priority:1;comment:Account" json:"account"`                      // Account
 	Password     string `gorm:"column:password;type:varchar(128);not null;comment:Password (Encrypted)" json:"password"`                                          // Password (Encrypted)
 	Description  string `gorm:"column:description;type:varchar(512);not null;comment:User Description" json:"description"`                                        // User Description
 	IconURI      string `gorm:"column:icon_uri;type:varchar(512);not null;comment:Avatar URI" json:"icon_uri"`                                                    // Avatar URI

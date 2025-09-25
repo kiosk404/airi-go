@@ -12,22 +12,22 @@ const TableNameModelRequestRecord = "model_request_record"
 
 // ModelRequestRecord 模型流量记录表
 type ModelRequestRecord struct {
-	ID                  int64     `gorm:"column:id;type:bigint(20) unsigned;primaryKey;autoIncrement:true;comment:自增主键ID" json:"id"`                                                   // 自增主键ID
-	UserID              string    `gorm:"column:user_id;type:varchar(256);not null;comment:user id" json:"user_id"`                                                                    // user id
-	UsageScene          string    `gorm:"column:usage_scene;type:varchar(128);not null;comment:场景" json:"usage_scene"`                                                                 // 场景
-	UsageSceneEntityID  string    `gorm:"column:usage_scene_entity_id;type:varchar(256);not null;comment:场景实体id" json:"usage_scene_entity_id"`                                         // 场景实体id
-	Protocol            string    `gorm:"column:protocol;type:varchar(128);not null;comment:使用的协议，如ark/deepseek等" json:"protocol"`                                                     // 使用的协议，如ark/deepseek等
-	ModelIdentification string    `gorm:"column:model_identification;type:varchar(1024);not null;comment:模型唯一标识" json:"model_identification"`                                          // 模型唯一标识
-	ModelAk             string    `gorm:"column:model_ak;type:varchar(1024);not null;comment:模型的AK" json:"model_ak"`                                                                   // 模型的AK
-	ModelID             string    `gorm:"column:model_id;type:varchar(256);not null;comment:model id" json:"model_id"`                                                                 // model id
-	ModelName           string    `gorm:"column:model_name;type:varchar(1024);not null;comment:模型展示名称" json:"model_name"`                                                              // 模型展示名称
-	InputToken          int64     `gorm:"column:input_token;type:bigint(20) unsigned;not null;comment:输入token数量" json:"input_token"`                                                   // 输入token数量
-	OutputToken         int64     `gorm:"column:output_token;type:bigint(20) unsigned;not null;comment:输出token数量" json:"output_token"`                                                 // 输出token数量
-	Logid               string    `gorm:"column:logid;type:varchar(128);not null;comment:logid" json:"logid"`                                                                          // logid
-	ErrorCode           string    `gorm:"column:error_code;type:varchar(128);not null;comment:error_code" json:"error_code"`                                                           // error_code
-	ErrorMsg            *string   `gorm:"column:error_msg;type:text;comment:error_msg" json:"error_msg"`                                                                               // error_msg
-	CreatedAt           time.Time `gorm:"column:created_at;type:datetime;not null;index:idx_space_id_create_time,priority:2;default:CURRENT_TIMESTAMP;comment:创建时间" json:"created_at"` // 创建时间
-	UpdatedAt           time.Time `gorm:"column:updated_at;type:datetime;not null;default:CURRENT_TIMESTAMP;comment:更新时间" json:"updated_at"`                                           // 更新时间
+	ID                  int64     `gorm:"column:id;type:bigint(20) unsigned;primaryKey;autoIncrement:true;comment:自增主键ID" json:"id"`                                          // 自增主键ID
+	UserID              string    `gorm:"column:user_id;type:varchar(256);not null;comment:user id" json:"user_id"`                                                           // user id
+	UsageScene          string    `gorm:"column:usage_scene;type:varchar(128);not null;comment:场景" json:"usage_scene"`                                                        // 场景
+	UsageSceneEntityID  string    `gorm:"column:usage_scene_entity_id;type:varchar(256);not null;comment:场景实体id" json:"usage_scene_entity_id"`                                // 场景实体id
+	Protocol            string    `gorm:"column:protocol;type:varchar(128);not null;comment:使用的协议，如ark/deepseek等" json:"protocol"`                                            // 使用的协议，如ark/deepseek等
+	ModelIdentification string    `gorm:"column:model_identification;type:varchar(1024);not null;comment:模型唯一标识" json:"model_identification"`                                 // 模型唯一标识
+	ModelAk             string    `gorm:"column:model_ak;type:varchar(1024);not null;comment:模型的AK" json:"model_ak"`                                                          // 模型的AK
+	ModelID             string    `gorm:"column:model_id;type:varchar(256);not null;comment:model id" json:"model_id"`                                                        // model id
+	ModelName           string    `gorm:"column:model_name;type:varchar(1024);not null;comment:模型展示名称" json:"model_name"`                                                     // 模型展示名称
+	InputToken          int64     `gorm:"column:input_token;type:bigint(20) unsigned;not null;comment:输入token数量" json:"input_token"`                                          // 输入token数量
+	OutputToken         int64     `gorm:"column:output_token;type:bigint(20) unsigned;not null;comment:输出token数量" json:"output_token"`                                        // 输出token数量
+	Logid               string    `gorm:"column:logid;type:varchar(128);not null;comment:logid" json:"logid"`                                                                 // logid
+	ErrorCode           string    `gorm:"column:error_code;type:varchar(128);not null;comment:error_code" json:"error_code"`                                                  // error_code
+	ErrorMsg            *string   `gorm:"column:error_msg;type:text;comment:error_msg" json:"error_msg"`                                                                      // error_msg
+	CreatedAt           time.Time `gorm:"column:created_at;type:datetime;not null;index:idx_create_time,priority:1;default:CURRENT_TIMESTAMP;comment:创建时间" json:"created_at"` // 创建时间
+	UpdatedAt           time.Time `gorm:"column:updated_at;type:datetime;not null;default:CURRENT_TIMESTAMP;comment:更新时间" json:"updated_at"`                                  // 更新时间
 }
 
 // TableName ModelRequestRecord's table name
