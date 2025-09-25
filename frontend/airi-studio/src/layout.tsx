@@ -1,7 +1,7 @@
 import { Layout, Menu, Button, Avatar } from 'tdesign-react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { HelpCircleIcon, EarthIcon, Gamepad1Icon,
-     BookIcon, LogoGithubIcon, NotificationIcon, ToolsIcon } from 'tdesign-icons-react';
+     BookIcon, RocketIcon, NotificationIcon, ToolsIcon } from 'tdesign-icons-react';
 
 const {Header, Content} = Layout;
 const {HeadMenu, MenuItem} = Menu;
@@ -13,9 +13,9 @@ export default () => {
     return (
         <Layout>
             <Header>
-                <HeadMenu 
+                <HeadMenu
                     defaultValue={location.pathname}
-                    logo={<LogoGithubIcon size="36px" />}
+                    logo={<RocketIcon size="36px" />}
                     operations={
                         <div className="t-menu__operations">
                             <Button variant='text' shape='square' icon={<NotificationIcon />}></Button>
