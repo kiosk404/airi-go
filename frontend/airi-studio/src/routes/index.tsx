@@ -1,7 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import AppLayout from '../layout';
-import PlaygroundPage from '../pages/playground';
-import WorkspacePage from '../pages/workspace';
+import AppLayout from '@/layout';
+import WorkspacePage from '@/pages/workspace';
+import KnowledgePage from "@/pages/knowledge";
+import AppsPage from "@/pages/apps";
 
 const LoadingFallback = () => <div>loading</div>
 
@@ -12,11 +13,10 @@ export const router = createBrowserRouter([
         HydrateFallback: LoadingFallback,
         children: [
             { index: true, element: <Navigate to="/apps" replace /> },
-            { path: "apps", Component: WorkspacePage },
+            { path: "apps", Component: AppsPage },
             { path: "workspace", Component: WorkspacePage },
-            { path: "playground", Component: PlaygroundPage },
-            { path: "knowledge", Component: WorkspacePage },
-            { path: "tool", Component: WorkspacePage },
+            { path: "knowledge", Component: KnowledgePage },
+            { path: "tool", Component: KnowledgePage },
         ]
     },
     

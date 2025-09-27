@@ -1,6 +1,6 @@
 import { Layout, Menu, Button, Avatar } from 'tdesign-react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { HelpCircleIcon, EarthIcon, Gamepad1Icon,
+import { HelpCircleIcon, EarthIcon,
      BookIcon, RocketIcon, NotificationIcon, ToolsIcon } from 'tdesign-icons-react';
 
 const {Header, Content} = Layout;
@@ -28,10 +28,6 @@ export default () => {
                         value="/workspace" icon={<EarthIcon/>} 
                         onClick={() => navigate('/workspace')} content={
                            <span className="font-mono">工作室</span>}/>
-                    <MenuItem 
-                        value="/playground" icon={<Gamepad1Icon/>} 
-                        onClick={() => navigate('/playground')} content={
-                            <span className="font-mono">Playground</span>}/>
                     <MenuItem 
                         value="/knowledge" icon={<BookIcon/>} 
                         onClick={() => navigate('/knowledge')} content={

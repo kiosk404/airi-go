@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/run"
-	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation"
+	"github.com/kiosk404/airi-go/backend/modules/conversation"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/http/sse"

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Layout, Typography, Space, Button } from 'tdesign-react';
-import ChatPanel from './ChatPanel';
-import EditorPanel from './EditorPanel';
-import SkillPanel from './SkillPanel';
+import ChatPanel from './ChatPanel.tsx';
+import EditorPanel from './EditorPanel.tsx';
+import SkillPanel from './SkillPanel.tsx';
 import { Shuffle } from "@/components/base/bit"
 
 

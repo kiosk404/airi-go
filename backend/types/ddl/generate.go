@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"strings"
 
+	"github.com/kiosk404/airi-go/backend/api/crossdomain/agentrun"
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_common"
 	"gorm.io/gen"
 	"gorm.io/gorm"
@@ -44,6 +45,9 @@ var table2Columns2Model = map[string]map[string]any{
 		"database_config":            []*bot_common.Database{},
 		"shortcut_command":           []string{},
 		"layout_info":                &bot_common.LayoutInfo{},
+	},
+	"run_record": {
+		"usage": &agentrun.Usage{},
 	},
 }
 
@@ -127,6 +131,11 @@ func generateForConversation(db *gorm.DB) {
 	// Message
 	path = "modules/conversation/message/infra/repo/gorm_gen"
 	tableList = []string{"message"}
+	generateFunc(db, path, tableList)
+
+	// Agent Run
+	path = "modules/conversation/agent_run/infra/repo/gorm_gen"
+	tableList = []string{"run_record"}
 	generateFunc(db, path, tableList)
 }
 

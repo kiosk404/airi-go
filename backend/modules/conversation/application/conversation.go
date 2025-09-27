@@ -7,6 +7,7 @@ import (
 )
 
 type ConversationApplicationService struct {
+	appContext *ServiceComponents
 }
 
 func (c *ConversationApplicationService) ClearHistory(ctx context.Context, req *conversation.ClearConversationHistoryRequest) (*conversation.ClearConversationHistoryResponse, error) {

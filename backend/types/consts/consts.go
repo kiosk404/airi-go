@@ -5,6 +5,8 @@ import (
 )
 
 const (
+	RunMode = "RUN_MODE"
+
 	SessionDataKeyInCtx = "session_data_key_in_ctx"
 	OpenapiAuthKeyInCtx = "openapi_auth_key_in_ctx"
 

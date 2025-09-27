@@ -8,15 +8,12 @@ import (
 )
 
 type conversationImpl struct {
-	Components
-}
-type Components struct {
 	ConversationRepo repo.ConversationRepo
 }
 
-func NewService(c *Components) Conversation {
+func NewService(repo repo.ConversationRepo) Conversation {
 	return &conversationImpl{
-		Components: *c,
+		ConversationRepo: repo,
 	}
 }
 
