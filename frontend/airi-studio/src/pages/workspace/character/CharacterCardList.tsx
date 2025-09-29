@@ -1,7 +1,7 @@
-import { Dropdown, Card } from "@douyinfe/semi-ui";
+import { Dropdown,  } from "@douyinfe/semi-ui";
 import { useNavigate } from "react-router-dom";
 import { StarIcon, TagIcon, MoreIcon } from "tdesign-icons-react"
-import { Space, Button, Avatar } from "tdesign-react"
+import { Space, Button, Avatar, Card } from "tdesign-react"
 
 interface CharacterCardProps {
     id: number;                     // 角色id
@@ -54,8 +54,8 @@ const CharacterCardSpace: React.FC<CharacterCardProps> = ({
 
     return (
         <>
-            <div onClick={() => navigate(`/workspace/playground/${id}`)} >
-                <Card shadows="hover" bordered headerLine={true}>
+            <div onClick={() => navigate(`/workspace/playground/${id}`)} style={{ cursor: 'pointer' }}>
+                <Card bordered headerBordered hoverShadow shadow size="medium" theme="normal" >
                     {/* 卡片头部 */}
                     <div style={{ display: 'flex', alignItems: 'center', padding: '12px 14px', borderBottom: '1px solid #f0f0f0' }}>
                         <Avatar 
@@ -86,7 +86,17 @@ const CharacterCardSpace: React.FC<CharacterCardProps> = ({
 
                     {/* 卡片内容 */}
                     <div style={{ padding: '12px 16px', fontSize: '13px', color: '#666666', minHeight: '60px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
-                        <div style={{ display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>
+                        <div style={{ 
+                            display: '-webkit-box', 
+                            WebkitLineClamp: '2', 
+                            WebkitBoxOrient: 'vertical', 
+                            overflow: 'hidden', 
+                            textOverflow: 'ellipsis', 
+                            width: '100%',
+                            height: '2.8em', 
+                            minHeight: '2.8em',
+                            maxHeight: '2.8em',
+                            }}>
                             {description}
                         </div>
                     </div>

@@ -4,7 +4,7 @@ import CharacterCardSpace from "./CharacterCardList";
 
 
 const mockCharacter = [
-    { id: 1, name: "Airis", description: "基于大语言模型的AI管家", isStarred: true },
+    { id: 1, name: "Airis", description: "基于大语言模型的AI管家,基于大语言模型的AI管家,基于大语言模型的AI管家,基于大语言模型的AI管家", isStarred: true },
     { id: 2, name: "Atlas", description: "基于大语言模型的AI小笨蛋", isStarred: true }
 ];
 
