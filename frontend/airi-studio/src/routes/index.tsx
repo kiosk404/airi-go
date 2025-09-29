@@ -3,6 +3,7 @@ import AppLayout from '@/layout';
 import WorkspacePage from '@/pages/workspace';
 import KnowledgePage from "@/pages/knowledge";
 import AppsPage from "@/pages/apps";
+import PlaygroundPage from "@/pages/workspace/playground";
 
 const LoadingFallback = () => <div>loading</div>
 
@@ -19,5 +20,14 @@ export const router = createBrowserRouter([
             { path: "tool", Component: KnowledgePage },
         ]
     },
-    
+    {
+        path: "/workspace/playground",
+        HydrateFallback: LoadingFallback,
+        children: [
+            {
+                path: ":id",
+                Component: PlaygroundPage
+            }
+        ]
+    }
 ]);

@@ -1,1 +1,0 @@
-declare module 'tdesign-react/dist/tdesign.css';

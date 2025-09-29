@@ -38,7 +38,7 @@ export default () => {
                             <span className="font-mono">工具</span>}/>           
                 </HeadMenu>
             </Header>
-            <Content>
+            <Content style={{ backgroundColor: 'white'}}>
                 <Outlet />
             </Content>
         </Layout>
