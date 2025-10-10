@@ -4,11 +4,11 @@ exec 2>&1
 set -e
 
 # Define common paths and configurations
-MYSQL_HOST="coze-loop-mysql"
-MYSQL_USER="${COZE_LOOP_MYSQL_USER}"
-MYSQL_DATABASE="${COZE_LOOP_MYSQL_DATABASE}"
-BASE_INIT_PATH="/coze-loop-mysql-init/bootstrap/init-sql"
-ALTERS_PATH="/coze-loop-mysql-init/bootstrap/patch-sql"
+MYSQL_HOST="${AIRI_GO_MYSQL_DOMAIN}"
+MYSQL_USER="${AIRI_GO_MYSQL_USER}"
+MYSQL_DATABASE="${AIRI_GO_MYSQL_DATABASE}"
+BASE_INIT_PATH="./init-sql"
+ALTERS_PATH="./patch-sql"
 
 print_banner() {
   msg="$1"
@@ -25,7 +25,11 @@ print_banner() {
 
 print_banner "Starting..."
 
-export MYSQL_PWD="${COZE_LOOP_MYSQL_PASSWORD}"
+export MYSQL_PWD="${AIRI_GO_MYSQL_PASSWORD}"
+
+echo "Waiting for MySQL server or database('$MYSQL_DATABASE') to be available..."
+
+
 
 for i in $(seq 1 60); do
   if mysql \
@@ -38,6 +42,7 @@ for i in $(seq 1 60); do
     break
   else
     sleep 1
+    echo "[INFO] MySQL server or database('$MYSQL_DATABASE') not available, retry in 1 second."
   fi
   if [ "$i" -eq 60 ]; then
     echo "[ERROR] MySQL server or database('$MYSQL_DATABASE') not available after 60 time."
@@ -47,6 +52,13 @@ done
 
 # Step 1: Execute CREATE TABLE statements (excluding compatibility and alter files)
 echo "Creating tables..."
+
+# 检查初始化目录是否存在
+if [ ! -d "$BASE_INIT_PATH" ]; then
+  echo "[ERROR] Base init path '$BASE_INIT_PATH' does not exist."
+  exit 1
+fi
+
 # shellcheck disable=SC2010
 i=1
 for file in $(ls "$BASE_INIT_PATH" | grep '\.sql$'); do
