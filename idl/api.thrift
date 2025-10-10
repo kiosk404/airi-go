@@ -7,6 +7,7 @@ include "./foundation/user.thrift"
 include "./llm/manage.thrift"
 include "./llm/runtime.thrift"
 include "./component/plugin/plugin_develop.thrift"
+include "./component/playground/playground.thrift"
 include "./conversation/agent_run_service.thrift"
 include "./conversation/message_service.thrift"
 include "./conversation/conversation_service.thrift"
@@ -21,3 +22,4 @@ service PluginDevelopService extends plugin_develop.PluginDevelopService {}
 service AgentRunService extends agent_run_service.AgentRunService {}
 service MessageService extends message_service.MessageService {}
 service ConversationService extends conversation_service.ConversationService {}
+service PlaygroundService extends playground.PlaygroundService {}

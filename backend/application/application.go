@@ -3,10 +3,9 @@ package application
 import (
 	"context"
 	"fmt"
+	openauth "github.com/kiosk404/airi-go/backend/modules/foundation/application"
 
 	"github.com/kiosk404/airi-go/backend/application/base/appinfra"
-	openauth "github.com/kiosk404/airi-go/backend/modules/foundation/openauth/application"
-	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/application"
 	model "github.com/kiosk404/airi-go/backend/modules/llm/application"
 	modelservice "github.com/kiosk404/airi-go/backend/modules/llm/domain/service"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service/llmfactory"
@@ -20,7 +19,7 @@ const Application = "application"
 
 type basicServices struct {
 	infra       *appinfra.AppDependencies
-	userSVC     *user.UserApplicationService
+	userSVC     *openauth.UserApplicationService
 	openAuthSVC *openauth.OpenAuthApplicationService
 	modelMgrSVC *model.ModelApplicationService
 }
@@ -55,7 +54,7 @@ func initBasicServices(ctx context.Context, infra *appinfra.AppDependencies) (*b
 	var err error
 
 	openAuthSVC := openauth.InitService(infra.DB, infra.IDGenSVC)
-	userSVC := user.InitUserService(ctx, infra.DB, infra.TOSClient, infra.IDGenSVC)
+	userSVC := openauth.InitUserService(ctx, infra.DB, infra.TOSClient, infra.IDGenSVC)
 
 	modelManagerConf, err := config.NewManage(ctx, infra.ConfigFactory)
 	if err != nil {

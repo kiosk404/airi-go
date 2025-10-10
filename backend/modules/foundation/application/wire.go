@@ -5,7 +5,6 @@ package application
 
 import (
 	"context"
-
 	"github.com/google/wire"
 	"github.com/kiosk404/airi-go/backend/api/model/foundation/user"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"

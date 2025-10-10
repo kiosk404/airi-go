@@ -3,7 +3,7 @@ package middleware
 import (
 	"github.com/gin-gonic/gin"
 	httpwarp "github.com/kiosk404/airi-go/backend/api/http"
-	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/application"
+	user "github.com/kiosk404/airi-go/backend/modules/foundation/application"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/ctxcache"

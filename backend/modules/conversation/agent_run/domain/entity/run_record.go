@@ -87,8 +87,6 @@ type MetaInfo struct {
 
 type AgentRunMeta struct {
 	ConversationID   int64                    `json:"conversation_id"`
-	ConnectorID      int64                    `json:"connector_id"`
-	SpaceID          int64                    `json:"space_id"`
 	Scene            common.Scene             `json:"scene"`
 	SectionID        int64                    `json:"section_id"`
 	Name             string                   `json:"name"`

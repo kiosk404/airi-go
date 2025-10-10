@@ -86,10 +86,12 @@ type ExecuteRequest struct {
 	Identity *AgentIdentity
 	UserID   string
 
-	Input        *schema.Message
-	History      []*schema.Message
-	ResumeInfo   *InterruptInfo
-	PreCallTools []*agentrun.ToolsRetriever
+	Input           *schema.Message
+	History         []*schema.Message
+	ResumeInfo      *InterruptInfo
+	PreCallTools    []*agentrun.ToolsRetriever
+	CustomVariables map[string]string
+	ConversationID  int64
 }
 
 type AgentIdentity struct {

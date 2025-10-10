@@ -2,6 +2,7 @@ package application
 
 import (
 	"context"
+	"github.com/kiosk404/airi-go/backend/modules/foundation/application/convertor"
 	"os"
 	"regexp"
 	"strconv"
@@ -15,7 +16,6 @@ import (
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
 	"github.com/kiosk404/airi-go/backend/infra/contract/rdb"
 	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
-	"github.com/kiosk404/airi-go/backend/modules/foundation/user/application/convertor"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/repo"
 	usersvc "github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/service"

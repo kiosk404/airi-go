@@ -4,12 +4,13 @@ import (
 	"context"
 	"encoding/json"
 
+	"github.com/gin-contrib/sse"
 	"github.com/gin-gonic/gin"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/run"
 	"github.com/kiosk404/airi-go/backend/modules/conversation"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
-	"github.com/kiosk404/airi-go/backend/pkg/http/sse"
+	sseimpl "github.com/kiosk404/airi-go/backend/pkg/http/sse"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 )
 
@@ -32,12 +33,7 @@ func AgentRun(c *gin.Context) {
 		return
 	}
 
-	if checkErr := checkParams(ctx, &req); checkErr != nil {
-		invalidParamRequestResponse(c, checkErr.Error())
-		return
-	}
-
-	sseSender := sse.NewSSESender(c)
+	sseSender := sseimpl.NewSSESender(c)
 
 	err = conversation.ConversationSVC.Run(ctx, sseSender, &req)
 	if err != nil {

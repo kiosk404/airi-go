@@ -3,21 +3,13 @@ package sse
 import (
 	"context"
 	"fmt"
-
+	"github.com/gin-contrib/sse"
 	"github.com/gin-gonic/gin"
 )
 
-// Event SSE 事件结构
-type Event struct {
-	Event string      `json:"event,omitempty"`
-	Data  interface{} `json:"data,omitempty"`
-	ID    string      `json:"id,omitempty"`
-	Retry int         `json:"retry,omitempty"`
-}
-
 // SSESender SSE发送器接口
 type SSESender interface {
-	Send(ctx context.Context, event *Event) error
+	Send(ctx context.Context, event *sse.Event) error
 	Close() error
 }
 
@@ -45,7 +37,7 @@ func NewSSESender(c *gin.Context) *SSenderImpl {
 }
 
 // Send 发送SSE事件
-func (s *SSenderImpl) Send(ctx context.Context, event *Event) error {
+func (s *SSenderImpl) Send(ctx context.Context, event *sse.Event) error {
 	if s.closed {
 		return fmt.Errorf("SSE connection is closed")
 	}
@@ -58,8 +50,8 @@ func (s *SSenderImpl) Send(ctx context.Context, event *Event) error {
 	}
 
 	// 构建SSE数据格式
-	if event.ID != "" {
-		s.writer.WriteString(fmt.Sprintf("id: %s\n", event.ID))
+	if event.Id != "" {
+		s.writer.WriteString(fmt.Sprintf("id: %s\n", event.Id))
 	}
 
 	if event.Event != "" {
@@ -90,7 +82,7 @@ func (s *SSenderImpl) Send(ctx context.Context, event *Event) error {
 
 // SendString 发送字符串数据的便捷方法
 func (s *SSenderImpl) SendString(ctx context.Context, eventType, data string) error {
-	return s.Send(ctx, &Event{
+	return s.Send(ctx, &sse.Event{
 		Event: eventType,
 		Data:  data,
 	})
@@ -98,7 +90,7 @@ func (s *SSenderImpl) SendString(ctx context.Context, eventType, data string) er
 
 // SendJSON 发送JSON数据的便捷方法
 func (s *SSenderImpl) SendJSON(ctx context.Context, eventType string, data interface{}) error {
-	return s.Send(ctx, &Event{
+	return s.Send(ctx, &sse.Event{
 		Event: eventType,
 		Data:  data,
 	})
@@ -106,8 +98,8 @@ func (s *SSenderImpl) SendJSON(ctx context.Context, eventType string, data inter
 
 // SendWithID 发送带ID的事件
 func (s *SSenderImpl) SendWithID(ctx context.Context, id, eventType string, data interface{}) error {
-	return s.Send(ctx, &Event{
-		ID:    id,
+	return s.Send(ctx, &sse.Event{
+		Id:    id,
 		Event: eventType,
 		Data:  data,
 	})
@@ -141,7 +133,7 @@ type Stream struct {
 	removeClient chan *Client
 
 	// 广播消息通道
-	broadcast chan *Event
+	broadcast chan *sse.Event
 
 	// 停止信号
 	stopCh chan struct{}
@@ -151,7 +143,7 @@ type Stream struct {
 type Client struct {
 	ID     string
 	Sender *SSenderImpl
-	Events chan *Event
+	Events chan *sse.Event
 }
 
 // NewStream 创建新的SSE流
@@ -160,7 +152,7 @@ func NewStream() *Stream {
 		clients:      make(map[string]*SSenderImpl),
 		addClient:    make(chan *Client),
 		removeClient: make(chan *Client),
-		broadcast:    make(chan *Event, 100),
+		broadcast:    make(chan *sse.Event, 100),
 		stopCh:       make(chan struct{}),
 	}
 }
@@ -186,7 +178,7 @@ func (s *Stream) RemoveClient(client *Client) {
 }
 
 // Publish 广播消息到所有客户端
-func (s *Stream) Publish(event *Event) {
+func (s *Stream) Publish(event *sse.Event) {
 	select {
 	case s.broadcast <- event:
 	default:
@@ -247,7 +239,7 @@ func SSEHandler(stream *Stream) gin.HandlerFunc {
 		client := &Client{
 			ID:     clientID,
 			Sender: sender,
-			Events: make(chan *Event, 10),
+			Events: make(chan *sse.Event, 10),
 		}
 
 		// 添加到流中
@@ -305,7 +297,7 @@ func ExampleUsage() {
 		}
 
 		// 广播事件
-		sseStream.Publish(&Event{
+		sseStream.Publish(&sse.Event{
 			Event: req.Event,
 			Data:  req.Data,
 		})

@@ -4,10 +4,17 @@ import (
 	"context"
 
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/conversation"
+	agentrun "github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/service"
+	conversationService "github.com/kiosk404/airi-go/backend/modules/conversation/conversation/domain/service"
+	message "github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/service"
 )
 
 type ConversationApplicationService struct {
 	appContext *ServiceComponents
+
+	AgentRunDomainSVC     agentrun.Run
+	ConversationDomainSVC conversationService.Conversation
+	MessageDomainSVC      message.Message
 }
 
 func (c *ConversationApplicationService) ClearHistory(ctx context.Context, req *conversation.ClearConversationHistoryRequest) (*conversation.ClearConversationHistoryResponse, error) {

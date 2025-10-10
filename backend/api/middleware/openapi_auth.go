@@ -3,12 +3,12 @@ package middleware
 import (
 	"crypto/md5"
 	"encoding/hex"
+	openauth "github.com/kiosk404/airi-go/backend/modules/foundation/application"
 	"regexp"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 	httpwarp "github.com/kiosk404/airi-go/backend/api/http"
-	openauth "github.com/kiosk404/airi-go/backend/modules/foundation/openauth/application"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/ctxcache"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"

@@ -9,8 +9,8 @@ import (
 
 type SingleAgent interface {
 	// draft agent
-	CreateSingleAgentDraft(ctx context.Context, creatorID int64, draft *entity.SingleAgent) (agentID int64, err error)
-	CreateSingleAgentDraftWithID(ctx context.Context, creatorID, agentID int64, draft *entity.SingleAgent) (int64, error)
+	CreateSingleAgentDraft(ctx context.Context, draft *entity.SingleAgent) (agentID int64, err error)
+	CreateSingleAgentDraftWithID(ctx context.Context, agentID int64, draft *entity.SingleAgent) (int64, error)
 	MGetSingleAgentDraft(ctx context.Context, agentIDs []int64) (agents []*entity.SingleAgent, err error)
 	GetSingleAgentDraft(ctx context.Context, agentID int64) (agentInfo *entity.SingleAgent, err error)
 	UpdateSingleAgentDraft(ctx context.Context, agentInfo *entity.SingleAgent) (err error)
