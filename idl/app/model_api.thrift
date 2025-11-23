@@ -4,6 +4,23 @@ include "../base.thrift"
 include "../app/developer_api.thrift"
 
 
+struct GetModelListReq  {
+   255: optional base.Base Base
+}
+
+struct GetModelListResp {
+    1: list<ProviderModelList> provider_model_list
+
+    253: required i64 code
+    254: required string msg
+    255: required base.BaseResp BaseResp(api.none="true")
+}
+
+struct ProviderModelList {
+    1: ModelProvider provider
+    2: list<Model> model_list
+}
+
 struct I18nText {
     1: string zh_cn
     2: string en_us
@@ -25,10 +42,24 @@ struct DisplayInfo {
 }
 
 
+
 enum ModelType {
     LLM = 0
     TextEmbedding = 1
     Rerank = 2
+}
+
+struct Model {
+    1: i64 id
+    2: ModelProvider provider
+    3: DisplayInfo display_info
+    4: developer_api.ModelAbility capability
+    5: Connection  connection
+    6: ModelType type
+    7: list<developer_api.ModelParameter> parameters
+    8: ModelStatus status
+    9: bool enable_base64_url
+    10: i64 delete_at_ms
 }
 
 enum ThinkingType {
@@ -47,12 +78,13 @@ enum ModelStatus {
 
 struct Connection {
     1: BaseConnectionInfo base_conn_info
-    2: optional OpenAIConnInfo openai
-    3: optional DeepseekConnInfo deepseek
-    4: optional GeminiConnInfo gemini
-    5: optional QwenConnInfo qwen
-    6: optional OllamaConnInfo ollama
-    7: optional ClaudeConnInfo claude
+    2: optional ArkConnInfo ark
+    3: optional OpenAIConnInfo openai
+    4: optional DeepseekConnInfo deepseek
+    5: optional GeminiConnInfo gemini
+    6: optional QwenConnInfo qwen
+    7: optional OllamaConnInfo ollama
+    8: optional ClaudeConnInfo claude
 }
 
 struct BaseConnectionInfo {
@@ -65,6 +97,7 @@ struct BaseConnectionInfo {
 struct EmbeddingInfo {
     1: i32 dims
 }
+
 
 struct ArkConnInfo {
     1: string region
@@ -97,6 +130,7 @@ struct CreateModelReq {
     3: Connection connection
     4: bool enable_base64_url
 
+
     255: optional base.Base Base
 }
 
@@ -117,6 +151,11 @@ struct DeleteModelResp {
     253: required i64 code
     254: required string msg
     255: required base.BaseResp BaseResp(api.none="true")
+}
+
+struct UpdateModelReq {
+    1: Model model
+    255: optional base.Base Base
 }
 
 struct UpdateModelResp {
@@ -177,9 +216,9 @@ struct BasicConfiguration {
 }
 
 struct PluginConfiguration {
-    1: bool saas_plugin_enabled
-    2: string api_token
-    3: string saas_api_base_url
+    1: bool coze_saas_plugin_enabled
+    2: string coze_api_token
+    3: string coze_saas_api_base_url
 }
 
 struct UpdateKnowledgeConfigReq {
@@ -233,10 +272,11 @@ enum EmbeddingType {
 struct EmbeddingConnection {
     1: BaseConnectionInfo base_conn_info
     2: EmbeddingInfo embedding_info
-    3: optional OpenAIConnInfo openai
-    4: optional OllamaConnInfo ollama
-    5: optional GeminiConnInfo gemini
-    6: optional HttpConnection http
+    3: optional ArkConnInfo ark
+    4: optional OpenAIConnInfo openai
+    5: optional OllamaConnInfo ollama
+    6: optional GeminiConnInfo gemini
+    7: optional HttpConnection http
 }
 
 struct HttpConnection {
@@ -284,14 +324,12 @@ struct ParserConfig {
     2: string paddleocr_structure_api_url
 }
 
-service ModelConfigService {
+service ConfigService {
     GetBasicConfigurationResp GetBasicConfiguration(1:GetBasicConfigurationReq req)(api.get='/api/admin/config/basic/get', api.category="admin")
     SaveBasicConfigurationResp SaveBasicConfiguration(1:SaveBasicConfigurationReq req)(api.post='/api/admin/config/basic/save', api.category="admin")
     GetKnowledgeConfigResp GetKnowledgeConfig(1:GetKnowledgeConfigReq req)(api.get='/api/admin/config/knowledge/get', api.category="admin")
     UpdateKnowledgeConfigResp UpdateKnowledgeConfig(1:UpdateKnowledgeConfigReq req)(api.post='/api/admin/config/knowledge/save', api.category="admin")
+    GetModelListResp GetModelList(1:GetModelListReq req)(api.get='/api/admin/config/model/list', api.category="admin")
     CreateModelResp CreateModel(1:CreateModelReq req)(api.post='/api/admin/config/model/create', api.category="admin")
     DeleteModelResp DeleteModel(1:DeleteModelReq req)(api.post='/api/admin/config/model/delete', api.category="admin")
 }
-
-
-
