@@ -1,7 +1,7 @@
 models:
   - id: 1
-    name: "ollama-deepseek-r1" # required
-    desc: "deepseek-r1:1.5b"
+    name: "deepseek-r1:1.5b" # required
+    desc: "ollama-deepseek-r1"
     ability: # optional
       max_context_tokens: 65536 # Optional. This parameter only indicates the model capability and will not have any practical effect for the time being.
       max_input_tokens: 65536 # Optional. This parameter only indicates the model capability and will not have any practical effect for the time being.
@@ -45,40 +45,58 @@ models:
           type: "float" # Required. Must be float, int, bool, string
           min: "0"
           max: "1.0"
-          default_val: "0.7"
+          default_value:
+          - "creative": "0.7"
+            "balance": "0.7"
+            "precise": "0.7"
         - name: "max_tokens"
           label: "max_tokens"  # Displayed as a name on the front end
           desc: "Controls the maximum length of tokens output by the model. Typically, 100 tokens are approximately equal to 150 Chinese characters." # Displayed as a description on the front end
           type: "int" # Required. Must be float, int, bool, string
           min: "1"
           max: "4096"
-          default_val: "2048"
+          default_value:
+          - "creative": "2048"
+            "balance": "2048"
+            "precise": "2048"
         - name: "top_k"
           label: "top_k"  # Displayed as a name on the front end
           desc: "Samples from the top k tokens with the highest probability, limiting the candidate range and improving generation stability." # Displayed as a description on the front end
           type: "int" # Required. Must be float, int, bool, string
           min: "1"
           max: "100"
-          default_val: "50"
+          default_value:
+          - "creative": "50"
+            "balance": "50"
+            "precise": "50"
         - name: "top_p"
           label: "top_p"  # Displayed as a name on the front end
           desc: "During generation, selects the smallest set of tokens whose cumulative probability reaches top_p. Tokens outside the set are excluded, balancing diversity and reasonableness." # Displayed as a description on the front end
           type: "float" # Required. Must be float, int, bool, string
           min: "0.001"
           max: "1.0"
-          default_val: "0.7"
+          default_value:
+          - "creative": "0.7"
+            "balance": "0.7"
+            "precise": "0.7"
         - name: "frequency_penalty"
           label: "frequency_penalty"  # Displayed as a name on the front end
           desc: "Penalizes tokens that have already been generated. The higher the frequency, the greater the penalty, suppressing repeated content." # Displayed as a description on the front end
           type: "float" # Required. Must be float, int, bool, string
           min: "0"
           max: "2.0"
-          default_val: "0"
+          default_value:
+          - "creative": "0"
+            "balance": "0"
+            "precise": "0"
         - name: "presence_penalty"
           label: "presence_penalty"  # Displayed as a name on the front end
           desc: "Penalizes all tokens that have appeared, preventing the same content from appearing repeatedly and increasing content diversity." # Displayed as a description on the front end
           type: "float" # Required. Must be float, int, bool, string
           min: "0"
           max: "2.0"
-          default_val: "0"
+          default_value:
+          - "creative": "0"
+            "balance": "0"
+            "precise": "0"
 

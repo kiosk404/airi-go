@@ -11,6 +11,7 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/infra/repo/gorm_gen/model"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/infra/repo/gorm_gen/query"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/pkg"
+	agentrun "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/agentrun/model"
 	"github.com/kiosk404/airi-go/backend/pkg/json"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
@@ -79,7 +80,7 @@ func (dao *RunRecordDAO) UpdateByID(ctx context.Context, id int64, updateMeta *e
 		po.FailedAt = updateMeta.FailedAt
 	}
 	if updateMeta.Usage != nil {
-		po.Usage = updateMeta.Usage
+		po.Usage = ptr.PtrConvert[agentrun.Usage, entity.Usage](updateMeta.Usage)
 	}
 	po.UpdatedAt = time.Now().UnixMilli()
 
@@ -176,7 +177,7 @@ func (dao *RunRecordDAO) buildPo2Do(po *model.RunRecord) *entity.RunRecordMeta {
 		UpdatedAt:      po.UpdatedAt,
 		CompletedAt:    po.CompletedAt,
 		FailedAt:       po.FailedAt,
-		Usage:          po.Usage,
+		Usage:          ptr.PtrConvert[entity.Usage, agentrun.Usage](po.Usage),
 		CreatorID:      po.CreatorID,
 	}
 

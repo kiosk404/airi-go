@@ -42,5 +42,4 @@ node_modules/
 .env.dev
 .env.local
 /_test
-local_storage/
 frontend/common

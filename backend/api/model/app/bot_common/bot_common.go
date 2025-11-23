@@ -338,6 +338,48 @@ func (p *ModelFuncConfigStatus) Value() (driver.Value, error) {
 	return int64(*p), nil
 }
 
+type PluginFrom int64
+
+const (
+	PluginFrom_Default  PluginFrom = 0
+	PluginFrom_FromSaas PluginFrom = 1
+)
+
+func (p PluginFrom) String() string {
+	switch p {
+	case PluginFrom_Default:
+		return "Default"
+	case PluginFrom_FromSaas:
+		return "FromSaas"
+	}
+	return "<UNSET>"
+}
+
+func PluginFromFromString(s string) (PluginFrom, error) {
+	switch s {
+	case "Default":
+		return PluginFrom_Default, nil
+	case "FromSaas":
+		return PluginFrom_FromSaas, nil
+	}
+	return PluginFrom(0), fmt.Errorf("not a valid PluginFrom string")
+}
+
+func PluginFromPtr(v PluginFrom) *PluginFrom { return &v }
+func (p *PluginFrom) Scan(value interface{}) (err error) {
+	var result sql.NullInt64
+	err = result.Scan(value)
+	*p = PluginFrom(result.Int64)
+	return
+}
+
+func (p *PluginFrom) Value() (driver.Value, error) {
+	if p == nil {
+		return nil, nil
+	}
+	return int64(*p), nil
+}
+
 type WorkflowMode int64
 
 const (
@@ -2150,10 +2192,11 @@ func (p *ShortMemoryPolicy) String() string {
 }
 
 type PluginInfo struct {
-	PluginId     *int64  `thrift:"PluginId,1,optional" json:"PluginId,omitempty"`
-	ApiId        *int64  `thrift:"ApiId,2,optional" json:"ApiId,omitempty"`
-	ApiName      *string `thrift:"ApiName,3,optional" json:"ApiName,omitempty"`
-	ApiVersionMs *int64  `thrift:"ApiVersionMs,100,optional" json:"ApiVersionMs,omitempty"`
+	PluginId     *int64      `thrift:"PluginId,1,optional" json:"PluginId,omitempty"`
+	ApiId        *int64      `thrift:"ApiId,2,optional" json:"ApiId,omitempty"`
+	ApiName      *string     `thrift:"ApiName,3,optional" json:"ApiName,omitempty"`
+	PluginFrom   *PluginFrom `thrift:"PluginFrom,99,optional,PluginFrom" json:"PluginFrom,omitempty"`
+	ApiVersionMs *int64      `thrift:"ApiVersionMs,100,optional" json:"ApiVersionMs,omitempty"`
 }
 
 func NewPluginInfo() *PluginInfo {
@@ -2190,6 +2233,15 @@ func (p *PluginInfo) GetApiName() (v string) {
 	return *p.ApiName
 }
 
+var PluginInfo_PluginFrom_DEFAULT PluginFrom
+
+func (p *PluginInfo) GetPluginFrom() (v PluginFrom) {
+	if !p.IsSetPluginFrom() {
+		return PluginInfo_PluginFrom_DEFAULT
+	}
+	return *p.PluginFrom
+}
+
 var PluginInfo_ApiVersionMs_DEFAULT int64
 
 func (p *PluginInfo) GetApiVersionMs() (v int64) {
@@ -2207,6 +2259,9 @@ func (p *PluginInfo) SetApiId(val *int64) {
 func (p *PluginInfo) SetApiName(val *string) {
 	p.ApiName = val
 }
+func (p *PluginInfo) SetPluginFrom(val *PluginFrom) {
+	p.PluginFrom = val
+}
 func (p *PluginInfo) SetApiVersionMs(val *int64) {
 	p.ApiVersionMs = val
 }
@@ -2221,6 +2276,10 @@ func (p *PluginInfo) IsSetApiId() bool {
 
 func (p *PluginInfo) IsSetApiName() bool {
 	return p.ApiName != nil
+}
+
+func (p *PluginInfo) IsSetPluginFrom() bool {
+	return p.PluginFrom != nil
 }
 
 func (p *PluginInfo) IsSetApiVersionMs() bool {
@@ -5820,39 +5879,39 @@ func (p *CanvasPosition) String() string {
 }
 
 type BotInfoForUpdate struct {
-	BotId                   *int64                 `thrift:"BotId,1,optional" json:"BotId,omitempty"`
-	Name                    *string                `thrift:"Name,2,optional" json:"Name,omitempty"`
-	Description             *string                `thrift:"Description,3,optional" json:"Description,omitempty"`
-	IconUri                 *string                `thrift:"IconUri,4,optional" json:"IconUri,omitempty"`
-	IconUrl                 *string                `thrift:"IconUrl,5,optional" json:"IconUrl,omitempty"`
-	CreatorId               *int64                 `thrift:"CreatorId,6,optional" json:"CreatorId,omitempty"`
-	CreateTime              *int64                 `thrift:"CreateTime,7,optional" json:"CreateTime,omitempty"`
-	UpdateTime              *int64                 `thrift:"UpdateTime,8,optional" json:"UpdateTime,omitempty"`
-	ConnectorId             *int64                 `thrift:"ConnectorId,9,optional" json:"ConnectorId,omitempty"`
-	Version                 *string                `thrift:"Version,10,optional" json:"Version,omitempty"`
-	ModelInfo               *ModelInfo             `thrift:"ModelInfo,11,optional" json:"ModelInfo,omitempty"`
-	PromptInfo              *PromptInfo            `thrift:"PromptInfo,12,optional" json:"PromptInfo,omitempty"`
-	PluginInfoList          []*PluginInfo          `thrift:"PluginInfoList,13,optional,list<PluginInfo>" json:"PluginInfoList,omitempty"`
-	WorkflowInfoList        []*WorkflowInfo        `thrift:"WorkflowInfoList,14,optional,list<WorkflowInfo>" json:"WorkflowInfoList,omitempty"`
-	OnboardingInfo          *OnboardingInfo        `thrift:"OnboardingInfo,15,optional" json:"OnboardingInfo,omitempty"`
-	Knowledge               *Knowledge             `thrift:"Knowledge,16,optional" json:"Knowledge,omitempty"`
-	VariableList            []*Variable            `thrift:"VariableList,17,optional,list<Variable>" json:"VariableList,omitempty"`
-	TaskInfo                *TaskInfo              `thrift:"TaskInfo,18,optional" json:"TaskInfo,omitempty"`
-	DatabaseList            []*Database            `thrift:"DatabaseList,19,optional,list<Database>" json:"DatabaseList,omitempty"`
-	SuggestReplyInfo        *SuggestReplyInfo      `thrift:"SuggestReplyInfo,20,optional" json:"SuggestReplyInfo,omitempty"`
-	VoicesInfo              *VoicesInfo            `thrift:"VoicesInfo,21,optional" json:"VoicesInfo,omitempty"`
-	BotExtInfo              *BotExtInfo            `thrift:"BotExtInfo,22,optional" json:"BotExtInfo,omitempty"`
-	BotMode                 *BotMode               `thrift:"BotMode,23,optional,BotMode" json:"BotMode,omitempty"`
-	Agents                  []*AgentForUpdate      `thrift:"Agents,24,optional,list<AgentForUpdate>" json:"Agents,omitempty"`
-	BotSpecies              BotSpecies             `thrift:"BotSpecies,25,default,BotSpecies" json:"BotSpecies"`
-	BotTagInfo              *BotTagInfo            `thrift:"BotTagInfo,26,optional" json:"BotTagInfo,omitempty"`
-	FileboxInfo             *FileboxInfo           `thrift:"FileboxInfo,27,optional" json:"FileboxInfo,omitempty"`
-	MultiAgentInfo          *MultiAgentInfo        `thrift:"MultiAgentInfo,28,optional" json:"MultiAgentInfo,omitempty"`
-	BackgroundImageInfoList []*BackgroundImageInfo `thrift:"BackgroundImageInfoList,29,optional,list<BackgroundImageInfo>" json:"BackgroundImageInfoList,omitempty"`
-	ShortcutSort            []string               `thrift:"ShortcutSort,30,optional,list<string>" json:"ShortcutSort,omitempty"`
-	HookInfo                *HookInfo              `thrift:"HookInfo,31,optional" json:"HookInfo,omitempty"`
-	UserQueryCollectConf    *UserQueryCollectConf  `thrift:"UserQueryCollectConf,32,optional" json:"UserQueryCollectConf,omitempty"`
-	LayoutInfo              *LayoutInfo            `thrift:"LayoutInfo,33,optional" json:"LayoutInfo,omitempty"`
+	BotId                   *int64                 `thrift:"BotId,1,optional" json:"bot_id,omitempty,string"`
+	Name                    *string                `thrift:"Name,2,optional" json:"name,omitempty"`
+	Description             *string                `thrift:"Description,3,optional" json:"description,omitempty"`
+	IconUri                 *string                `thrift:"IconUri,4,optional" json:"icon_uri,omitempty"`
+	IconUrl                 *string                `thrift:"IconUrl,5,optional" json:"icon_url,omitempty"`
+	CreatorId               *int64                 `thrift:"CreatorId,6,optional" json:"creator_id,omitempty"`
+	CreateTime              *int64                 `thrift:"CreateTime,7,optional" json:"create_time,omitempty"`
+	UpdateTime              *int64                 `thrift:"UpdateTime,8,optional" json:"update_time,omitempty"`
+	ConnectorId             *int64                 `thrift:"ConnectorId,9,optional" json:"connector_id,omitempty"`
+	Version                 *string                `thrift:"Version,10,optional" json:"version,omitempty"`
+	ModelInfo               *ModelInfo             `thrift:"ModelInfo,11,optional" json:"model_info,omitempty"`
+	PromptInfo              *PromptInfo            `thrift:"PromptInfo,12,optional" json:"prompt_info,omitempty"`
+	PluginInfoList          []*PluginInfo          `thrift:"PluginInfoList,13,optional,list<PluginInfo>" json:"plugin_info_list,omitempty"`
+	WorkflowInfoList        []*WorkflowInfo        `thrift:"WorkflowInfoList,14,optional,list<WorkflowInfo>" json:"workflow_info_list,omitempty"`
+	OnboardingInfo          *OnboardingInfo        `thrift:"OnboardingInfo,15,optional" json:"onboarding_info,omitempty"`
+	Knowledge               *Knowledge             `thrift:"Knowledge,16,optional" json:"knowledge,omitempty"`
+	VariableList            []*Variable            `thrift:"VariableList,17,optional,list<Variable>" json:"variable_list,omitempty"`
+	TaskInfo                *TaskInfo              `thrift:"TaskInfo,18,optional" json:"task_info,omitempty"`
+	DatabaseList            []*Database            `thrift:"DatabaseList,19,optional,list<Database>" json:"database_list,omitempty"`
+	SuggestReplyInfo        *SuggestReplyInfo      `thrift:"SuggestReplyInfo,20,optional" json:"suggest_reply_info,omitempty"`
+	VoicesInfo              *VoicesInfo            `thrift:"VoicesInfo,21,optional" json:"voices_info,omitempty"`
+	BotExtInfo              *BotExtInfo            `thrift:"BotExtInfo,22,optional" json:"bot_ext_info,omitempty"`
+	BotMode                 *BotMode               `thrift:"BotMode,23,optional,BotMode" json:"bot_mode,omitempty"`
+	Agents                  []*AgentForUpdate      `thrift:"Agents,24,optional,list<AgentForUpdate>" json:"agents,omitempty"`
+	BotSpecies              BotSpecies             `thrift:"BotSpecies,25,default,BotSpecies" json:"bot_species,omitempty"`
+	BotTagInfo              *BotTagInfo            `thrift:"BotTagInfo,26,optional" json:"bot_tag_info,omitempty"`
+	FileboxInfo             *FileboxInfo           `thrift:"FileboxInfo,27,optional" json:"filebox_info,omitempty"`
+	MultiAgentInfo          *MultiAgentInfo        `thrift:"MultiAgentInfo,28,optional" json:"multi_agent_info,omitempty"`
+	BackgroundImageInfoList []*BackgroundImageInfo `thrift:"BackgroundImageInfoList,29,optional,list<BackgroundImageInfo>" json:"background_image_info_list,omitempty"`
+	ShortcutSort            []string               `thrift:"ShortcutSort,30,optional,list<string>" json:"shortcut_sort,omitempty"`
+	HookInfo                *HookInfo              `thrift:"HookInfo,31,optional" json:"hook_info,omitempty"`
+	UserQueryCollectConf    *UserQueryCollectConf  `thrift:"UserQueryCollectConf,32,optional" json:"user_query_collect_conf,omitempty"`
+	LayoutInfo              *LayoutInfo            `thrift:"LayoutInfo,33,optional" json:"layout_info,omitempty"`
 }
 
 func NewBotInfoForUpdate() *BotInfoForUpdate {

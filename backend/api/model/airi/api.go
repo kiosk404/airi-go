@@ -5,6 +5,7 @@ package airi
 import (
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_open_api"
 	"github.com/kiosk404/airi-go/backend/api/model/app/developer_api"
+	"github.com/kiosk404/airi-go/backend/api/model/app/intelligence"
 	"github.com/kiosk404/airi-go/backend/api/model/component/plugin_develop"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/agentrun"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/conversation"
@@ -13,7 +14,9 @@ import (
 	"github.com/kiosk404/airi-go/backend/api/model/foundation/user"
 	"github.com/kiosk404/airi-go/backend/api/model/llm/manage"
 	"github.com/kiosk404/airi-go/backend/api/model/llm/runtime"
+	"github.com/kiosk404/airi-go/backend/api/model/modelapi"
 	"github.com/kiosk404/airi-go/backend/api/model/playground"
+	"github.com/kiosk404/airi-go/backend/api/model/resource"
 )
 
 type BotOpenApiService interface {
@@ -26,6 +29,10 @@ type DeveloperApiService interface {
 
 type OpenAPIAuthService interface {
 	openapiauth.OpenAPIAuthService
+}
+
+type ModelConfigService interface {
+	modelapi.ModelConfigService
 }
 
 type UserService interface {
@@ -58,4 +65,12 @@ type ConversationService interface {
 
 type PlaygroundService interface {
 	playground.PlaygroundService
+}
+
+type IntelligenceService interface {
+	intelligence.IntelligenceService
+}
+
+type ResourceService interface {
+	resource.ResourceService
 }

@@ -2,6 +2,7 @@ package airi
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/kiosk404/airi-go/backend/api/handle"
 )
 
 /*
@@ -14,6 +15,33 @@ import (
 func Register(r *gin.Engine) {
 	root := r.Group("/", rootMw()...)
 	{
+		_api := root.Group("/api")
+		{
+			_draftbot := _api.Group("/draftbot", _draftbotMw()...)
+			_draftbot.POST("/create", append(_draftbotcreateMw(), handle.DraftBotCreate)...)
+		}
+		{
+			_playground := _api.Group("/playground_api")
+			_playground_draftbot := _playground.Group("/draftbot")
+			{
+				_playground_draftbot.POST("/update_draft_bot_info", append(_updatedraftbotinfoagwMw(), handle.DraftBotUpdateInfo)...)
+			}
+		}
+		{
+			_conversation := _api.Group("/conversation", _conversationMw()...)
+			_conversation.POST("/chat", append(_agentrunMw(), handle.AgentRun)...)
+			_conversation.POST("/get_message_list", append(_getmessagelistMw(), handle.GetMessageList)...)
+		}
+		{
+			_foundation := _api.Group("/foundation", _foundationMw()...)
+			{
+				_foundation_v1 := _foundation.Group("/v1", _foundationV1Mw()...)
+				_foundation_v1_users := _foundation_v1.Group("/users", _userMw()...)
+				{
+					_foundation_v1_users.POST("/register", append(_registerMw(), handle.PassportWebRegisterPost)...)
+				}
+			}
+		}
 		root.GET("/health", Health)
 	}
 }

@@ -28,7 +28,7 @@ func NewManage(ctx context.Context, factory conf.IConfigLoaderFactory) (llm_conf
 }
 
 // ListModel 用于获得模型的配置；后续会使用数据库管理，本期先使用yaml文件管理
-func (m *ManageImpl) ListModels(ctx context.Context, req entity.ListModelReq) (models []*entity.Model, total int64, hasMore bool, nextPageToken int64, err error) {
+func (m *ManageImpl) ListModels(ctx context.Context, req entity.ListModelsRequest) (models []*entity.Model, total int64, hasMore bool, nextPageToken int64, err error) {
 	modelsInCfg, err := m.readConfig(ctx)
 	if err != nil {
 		return models, total, hasMore, nextPageToken, err
@@ -60,6 +60,21 @@ func (m *ManageImpl) GetModel(ctx context.Context, id int64) (model *entity.Mode
 		}
 	}
 	return nil, ErrRecordNotFound
+}
+
+func (m *ManageImpl) GetModelSet(ctx context.Context) (map[int64]*entity.Model, error) {
+	models, err := m.readConfig(ctx)
+	if err != nil {
+		return nil, err
+	}
+	modelMap := make(map[int64]*entity.Model)
+	for _, model := range models {
+		if model.Valid() != nil {
+			continue
+		}
+		modelMap[model.ID] = model
+	}
+	return modelMap, nil
 }
 
 func (m *ManageImpl) readConfig(ctx context.Context) ([]*entity.Model, error) {

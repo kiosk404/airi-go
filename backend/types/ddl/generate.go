@@ -8,8 +8,9 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/agentrun"
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_common"
+	pluginmodel "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/plugin/model"
+	agentrunmodel "github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
 	"gorm.io/gen"
 	"gorm.io/gorm"
 	"gorm.io/rawsql"
@@ -46,8 +47,42 @@ var table2Columns2Model = map[string]map[string]any{
 		"shortcut_command":           []string{},
 		"layout_info":                &bot_common.LayoutInfo{},
 	},
+	"plugin": {
+		"manifest":    &pluginmodel.PluginManifest{},
+		"openapi_doc": &pluginmodel.Openapi3T{},
+		"ext":         map[string]any{},
+	},
+	"plugin_draft": {
+		"manifest":    &pluginmodel.PluginManifest{},
+		"openapi_doc": &pluginmodel.Openapi3T{},
+	},
+	"plugin_version": {
+		"manifest":    &pluginmodel.PluginManifest{},
+		"openapi_doc": &pluginmodel.Openapi3T{},
+		"ext":         map[string]any{},
+	},
+	"agent_tool_draft": {
+		"operation": &pluginmodel.Openapi3Operation{},
+	},
+	"agent_tool_version": {
+		"operation": &pluginmodel.Openapi3Operation{},
+	},
+	"tool": {
+		"operation": &pluginmodel.Openapi3Operation{},
+		"ext":       map[string]any{},
+	},
+	"tool_draft": {
+		"operation": &pluginmodel.Openapi3Operation{},
+	},
+	"tool_version": {
+		"operation": &pluginmodel.Openapi3Operation{},
+		"ext":       map[string]any{},
+	},
+	"plugin_oauth_auth": {
+		"oauth_config": &pluginmodel.OAuthAuthorizationCodeConfig{},
+	},
 	"run_record": {
-		"usage": &agentrun.Usage{},
+		"usage": &agentrunmodel.Usage{},
 	},
 }
 
@@ -57,6 +92,7 @@ func main() {
 	generateForFoundation(db)
 	generateForComponent(db)
 	generateForConversation(db)
+	generateForData(db)
 }
 
 func initDB() *gorm.DB {
@@ -117,6 +153,24 @@ func generateForComponent(db *gorm.DB) {
 	path = "modules/component/agent/infra/repo/gorm_gen"
 	tableList = []string{"single_agent_draft", "single_agent_publish", "single_agent_version"}
 	generateFunc(db, path, tableList)
+
+	path = "modules/component/prompt/infra/repo/gorm_gen"
+	tableList = []string{"prompt_resource"}
+	generateFunc(db, path, tableList)
+
+	path = "modules/component/plugin/infra/repo/gorm_gen"
+	tableList = []string{"agent_tool_draft", "agent_tool_version", "plugin",
+		"plugin_draft", "plugin_oauth_auth", "plugin_version", "tool", "tool_draft", "tool_version"}
+	generateFunc(db, path, tableList)
+}
+
+func generateForData(db *gorm.DB) {
+	var path string
+	var tableList []string
+
+	path = "modules/data/upload/infra/repo/gorm_gen"
+	tableList = []string{"files"}
+	generateFunc(db, path, tableList)
 }
 
 func generateForConversation(db *gorm.DB) {
@@ -145,7 +199,6 @@ func generateFunc(db *gorm.DB, projectPath string, tableList []string) {
 
 	var models []any
 	for _, tableName := range tableList {
-
 		var opts []gen.ModelOpt
 		if col2Model, exist := table2Columns2Model[tableName]; exist {
 			g.WithOpts(gen.FieldType("deleted_at", "gorm.DeletedAt"))

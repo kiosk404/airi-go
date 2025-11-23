@@ -7,8 +7,9 @@ import (
 
 	"github.com/bytedance/sonic"
 	"github.com/getkin/kin-openapi/openapi3"
-	model "github.com/kiosk404/airi-go/backend/api/crossdomain/plugin"
 	"github.com/kiosk404/airi-go/backend/api/model/component/plugin_develop/common"
+	"github.com/kiosk404/airi-go/backend/modules/component/crossdomain/plugin/consts"
+	"github.com/kiosk404/airi-go/backend/modules/component/crossdomain/plugin/model"
 	"github.com/kiosk404/airi-go/backend/modules/component/plugin/pkg"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
@@ -128,20 +129,20 @@ func NewDefaultPluginManifest() *PluginManifest {
 	return &model.PluginManifest{
 		SchemaVersion: "v1",
 		API: model.APIDesc{
-			Type: model.PluginTypeOfCloud,
+			Type: consts.PluginTypeOfCloud,
 		},
 		Auth: &model.AuthV2{
-			Type: model.AuthzTypeOfNone,
+			Type: consts.AuthzTypeOfNone,
 		},
-		CommonParams: map[model.HTTPParamLocation][]*common.CommonParamSchema{
-			model.ParamInBody: {},
-			model.ParamInHeader: {
+		CommonParams: map[consts.HTTPParamLocation][]*common.CommonParamSchema{
+			consts.ParamInBody: {},
+			consts.ParamInHeader: {
 				{
 					Name:  "User-Agent",
 					Value: "Coze/1.0",
 				},
 			},
-			model.ParamInQuery: {},
+			consts.ParamInQuery: {},
 		},
 	}
 }

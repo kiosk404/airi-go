@@ -11,6 +11,100 @@ import (
 	"github.com/kiosk404/airi-go/backend/api/model/base"
 )
 
+type Branch int64
+
+const (
+	Branch_Undefined     Branch = 0
+	Branch_PersonalDraft Branch = 1
+	Branch_Base          Branch = 2
+	Branch_Publish       Branch = 3
+)
+
+func (p Branch) String() string {
+	switch p {
+	case Branch_Undefined:
+		return "Undefined"
+	case Branch_PersonalDraft:
+		return "PersonalDraft"
+	case Branch_Base:
+		return "Base"
+	case Branch_Publish:
+		return "Publish"
+	}
+	return "<UNSET>"
+}
+
+func BranchFromString(s string) (Branch, error) {
+	switch s {
+	case "Undefined":
+		return Branch_Undefined, nil
+	case "PersonalDraft":
+		return Branch_PersonalDraft, nil
+	case "Base":
+		return Branch_Base, nil
+	case "Publish":
+		return Branch_Publish, nil
+	}
+	return Branch(0), fmt.Errorf("not a valid Branch string")
+}
+
+func BranchPtr(v Branch) *Branch { return &v }
+func (p *Branch) Scan(value interface{}) (err error) {
+	var result sql.NullInt64
+	err = result.Scan(value)
+	*p = Branch(result.Int64)
+	return
+}
+
+func (p *Branch) Value() (driver.Value, error) {
+	if p == nil {
+		return nil, nil
+	}
+	return int64(*p), nil
+}
+
+type BotMarketStatus int64
+
+const (
+	BotMarketStatus_Offline BotMarketStatus = 0
+	BotMarketStatus_Online  BotMarketStatus = 1
+)
+
+func (p BotMarketStatus) String() string {
+	switch p {
+	case BotMarketStatus_Offline:
+		return "Offline"
+	case BotMarketStatus_Online:
+		return "Online"
+	}
+	return "<UNSET>"
+}
+
+func BotMarketStatusFromString(s string) (BotMarketStatus, error) {
+	switch s {
+	case "Offline":
+		return BotMarketStatus_Offline, nil
+	case "Online":
+		return BotMarketStatus_Online, nil
+	}
+	return BotMarketStatus(0), fmt.Errorf("not a valid BotMarketStatus string")
+}
+
+func BotMarketStatusPtr(v BotMarketStatus) *BotMarketStatus { return &v }
+func (p *BotMarketStatus) Scan(value interface{}) (err error) {
+	var result sql.NullInt64
+	err = result.Scan(value)
+	*p = BotMarketStatus(result.Int64)
+	return
+}
+
+func (p *BotMarketStatus) Value() (driver.Value, error) {
+	if p == nil {
+		return nil, nil
+	}
+	return int64(*p), nil
+}
+
 type BotPopupType int64
 
 const (
@@ -130,6 +224,706 @@ func (p *BehaviorType) Value() (driver.Value, error) {
 		return nil, nil
 	}
 	return int64(*p), nil
+}
+
+type UpdateDraftBotInfoAgwResponse struct {
+	Data     *UpdateDraftBotInfoAgwData `thrift:"data,1,required" json:"data"`
+	Code     int64                      `thrift:"code,253,required" json:"code"`
+	Msg      string                     `thrift:"msg,254,required" json:"msg"`
+	BaseResp *base.BaseResp             `thrift:"BaseResp,255,required" json:"BaseResp"`
+}
+
+func NewUpdateDraftBotInfoAgwResponse() *UpdateDraftBotInfoAgwResponse {
+	return &UpdateDraftBotInfoAgwResponse{}
+}
+
+func (p *UpdateDraftBotInfoAgwResponse) InitDefault() {
+}
+
+var UpdateDraftBotInfoAgwResponse_Data_DEFAULT *UpdateDraftBotInfoAgwData
+
+func (p *UpdateDraftBotInfoAgwResponse) GetData() (v *UpdateDraftBotInfoAgwData) {
+	if !p.IsSetData() {
+		return UpdateDraftBotInfoAgwResponse_Data_DEFAULT
+	}
+	return p.Data
+}
+
+func (p *UpdateDraftBotInfoAgwResponse) GetCode() (v int64) {
+	return p.Code
+}
+
+func (p *UpdateDraftBotInfoAgwResponse) GetMsg() (v string) {
+	return p.Msg
+}
+
+var UpdateDraftBotInfoAgwResponse_BaseResp_DEFAULT *base.BaseResp
+
+func (p *UpdateDraftBotInfoAgwResponse) GetBaseResp() (v *base.BaseResp) {
+	if !p.IsSetBaseResp() {
+		return UpdateDraftBotInfoAgwResponse_BaseResp_DEFAULT
+	}
+	return p.BaseResp
+}
+func (p *UpdateDraftBotInfoAgwResponse) SetData(val *UpdateDraftBotInfoAgwData) {
+	p.Data = val
+}
+func (p *UpdateDraftBotInfoAgwResponse) SetCode(val int64) {
+	p.Code = val
+}
+func (p *UpdateDraftBotInfoAgwResponse) SetMsg(val string) {
+	p.Msg = val
+}
+func (p *UpdateDraftBotInfoAgwResponse) SetBaseResp(val *base.BaseResp) {
+	p.BaseResp = val
+}
+
+func (p *UpdateDraftBotInfoAgwResponse) IsSetData() bool {
+	return p.Data != nil
+}
+
+func (p *UpdateDraftBotInfoAgwResponse) IsSetBaseResp() bool {
+	return p.BaseResp != nil
+}
+
+func (p *UpdateDraftBotInfoAgwResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("UpdateDraftBotInfoAgwResponse(%+v)", *p)
+}
+
+type UpdateDraftBotInfoAgwData struct {
+	HasChange       *bool   `thrift:"has_change,1,optional" json:"has_change,omitempty"`
+	CheckNotPass    bool    `thrift:"check_not_pass,2" json:"check_not_pass"`
+	Branch          *Branch `thrift:"branch,3,optional,Branch" json:"branch,omitempty"`
+	SameWithOnline  *bool   `thrift:"same_with_online,4,optional" json:"same_with_online,omitempty"`
+	CheckNotPassMsg *string `thrift:"check_not_pass_msg,5,optional" json:"check_not_pass_msg,omitempty"`
+}
+
+func NewUpdateDraftBotInfoAgwData() *UpdateDraftBotInfoAgwData {
+	return &UpdateDraftBotInfoAgwData{}
+}
+
+func (p *UpdateDraftBotInfoAgwData) InitDefault() {
+}
+
+var UpdateDraftBotInfoAgwData_HasChange_DEFAULT bool
+
+func (p *UpdateDraftBotInfoAgwData) GetHasChange() (v bool) {
+	if !p.IsSetHasChange() {
+		return UpdateDraftBotInfoAgwData_HasChange_DEFAULT
+	}
+	return *p.HasChange
+}
+
+func (p *UpdateDraftBotInfoAgwData) GetCheckNotPass() (v bool) {
+	return p.CheckNotPass
+}
+
+var UpdateDraftBotInfoAgwData_Branch_DEFAULT Branch
+
+func (p *UpdateDraftBotInfoAgwData) GetBranch() (v Branch) {
+	if !p.IsSetBranch() {
+		return UpdateDraftBotInfoAgwData_Branch_DEFAULT
+	}
+	return *p.Branch
+}
+
+var UpdateDraftBotInfoAgwData_SameWithOnline_DEFAULT bool
+
+func (p *UpdateDraftBotInfoAgwData) GetSameWithOnline() (v bool) {
+	if !p.IsSetSameWithOnline() {
+		return UpdateDraftBotInfoAgwData_SameWithOnline_DEFAULT
+	}
+	return *p.SameWithOnline
+}
+
+var UpdateDraftBotInfoAgwData_CheckNotPassMsg_DEFAULT string
+
+func (p *UpdateDraftBotInfoAgwData) GetCheckNotPassMsg() (v string) {
+	if !p.IsSetCheckNotPassMsg() {
+		return UpdateDraftBotInfoAgwData_CheckNotPassMsg_DEFAULT
+	}
+	return *p.CheckNotPassMsg
+}
+func (p *UpdateDraftBotInfoAgwData) SetHasChange(val *bool) {
+	p.HasChange = val
+}
+func (p *UpdateDraftBotInfoAgwData) SetCheckNotPass(val bool) {
+	p.CheckNotPass = val
+}
+func (p *UpdateDraftBotInfoAgwData) SetBranch(val *Branch) {
+	p.Branch = val
+}
+func (p *UpdateDraftBotInfoAgwData) SetSameWithOnline(val *bool) {
+	p.SameWithOnline = val
+}
+func (p *UpdateDraftBotInfoAgwData) SetCheckNotPassMsg(val *string) {
+	p.CheckNotPassMsg = val
+}
+
+func (p *UpdateDraftBotInfoAgwData) IsSetHasChange() bool {
+	return p.HasChange != nil
+}
+
+func (p *UpdateDraftBotInfoAgwData) IsSetBranch() bool {
+	return p.Branch != nil
+}
+
+func (p *UpdateDraftBotInfoAgwData) IsSetSameWithOnline() bool {
+	return p.SameWithOnline != nil
+}
+
+func (p *UpdateDraftBotInfoAgwData) IsSetCheckNotPassMsg() bool {
+	return p.CheckNotPassMsg != nil
+}
+
+func (p *UpdateDraftBotInfoAgwData) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("UpdateDraftBotInfoAgwData(%+v)", *p)
+}
+
+type UpdateDraftBotInfoAgwRequest struct {
+	BotInfo           *bot_common.BotInfoForUpdate `thrift:"bot_info,1,optional" json:"bot_info,omitempty"`
+	BaseCommitVersion *int64                       `thrift:"base_commit_version,2,optional" json:"base_commit_version,omitempty"`
+	Base              *base.Base                   `thrift:"Base,255" json:"Base"`
+}
+
+func NewUpdateDraftBotInfoAgwRequest() *UpdateDraftBotInfoAgwRequest {
+	return &UpdateDraftBotInfoAgwRequest{}
+}
+
+func (p *UpdateDraftBotInfoAgwRequest) InitDefault() {
+}
+
+var UpdateDraftBotInfoAgwRequest_BotInfo_DEFAULT *bot_common.BotInfoForUpdate
+
+func (p *UpdateDraftBotInfoAgwRequest) GetBotInfo() (v *bot_common.BotInfoForUpdate) {
+	if !p.IsSetBotInfo() {
+		return UpdateDraftBotInfoAgwRequest_BotInfo_DEFAULT
+	}
+	return p.BotInfo
+}
+
+var UpdateDraftBotInfoAgwRequest_BaseCommitVersion_DEFAULT int64
+
+func (p *UpdateDraftBotInfoAgwRequest) GetBaseCommitVersion() (v int64) {
+	if !p.IsSetBaseCommitVersion() {
+		return UpdateDraftBotInfoAgwRequest_BaseCommitVersion_DEFAULT
+	}
+	return *p.BaseCommitVersion
+}
+
+var UpdateDraftBotInfoAgwRequest_Base_DEFAULT *base.Base
+
+func (p *UpdateDraftBotInfoAgwRequest) GetBase() (v *base.Base) {
+	if !p.IsSetBase() {
+		return UpdateDraftBotInfoAgwRequest_Base_DEFAULT
+	}
+	return p.Base
+}
+func (p *UpdateDraftBotInfoAgwRequest) SetBotInfo(val *bot_common.BotInfoForUpdate) {
+	p.BotInfo = val
+}
+func (p *UpdateDraftBotInfoAgwRequest) SetBaseCommitVersion(val *int64) {
+	p.BaseCommitVersion = val
+}
+func (p *UpdateDraftBotInfoAgwRequest) SetBase(val *base.Base) {
+	p.Base = val
+}
+
+func (p *UpdateDraftBotInfoAgwRequest) IsSetBotInfo() bool {
+	return p.BotInfo != nil
+}
+
+func (p *UpdateDraftBotInfoAgwRequest) IsSetBaseCommitVersion() bool {
+	return p.BaseCommitVersion != nil
+}
+
+func (p *UpdateDraftBotInfoAgwRequest) IsSetBase() bool {
+	return p.Base != nil
+}
+
+func (p *UpdateDraftBotInfoAgwRequest) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("UpdateDraftBotInfoAgwRequest(%+v)", *p)
+}
+
+type GetDraftBotInfoAgwRequest struct {
+	BotID         int64      `thrift:"bot_id,1,required" json:"bot_id"`
+	Version       *string    `thrift:"version,2,optional" json:"version,omitempty"`
+	CommitVersion *string    `thrift:"commit_version,3,optional" json:"commit_version,omitempty"`
+	Base          *base.Base `thrift:"Base,255" json:"Base"`
+}
+
+func NewGetDraftBotInfoAgwRequest() *GetDraftBotInfoAgwRequest {
+	return &GetDraftBotInfoAgwRequest{}
+}
+
+func (p *GetDraftBotInfoAgwRequest) InitDefault() {
+}
+
+func (p *GetDraftBotInfoAgwRequest) GetBotID() (v int64) {
+	return p.BotID
+}
+
+var GetDraftBotInfoAgwRequest_Version_DEFAULT string
+
+func (p *GetDraftBotInfoAgwRequest) GetVersion() (v string) {
+	if !p.IsSetVersion() {
+		return GetDraftBotInfoAgwRequest_Version_DEFAULT
+	}
+	return *p.Version
+}
+
+var GetDraftBotInfoAgwRequest_CommitVersion_DEFAULT string
+
+func (p *GetDraftBotInfoAgwRequest) GetCommitVersion() (v string) {
+	if !p.IsSetCommitVersion() {
+		return GetDraftBotInfoAgwRequest_CommitVersion_DEFAULT
+	}
+	return *p.CommitVersion
+}
+
+var GetDraftBotInfoAgwRequest_Base_DEFAULT *base.Base
+
+func (p *GetDraftBotInfoAgwRequest) GetBase() (v *base.Base) {
+	if !p.IsSetBase() {
+		return GetDraftBotInfoAgwRequest_Base_DEFAULT
+	}
+	return p.Base
+}
+func (p *GetDraftBotInfoAgwRequest) SetBotID(val int64) {
+	p.BotID = val
+}
+func (p *GetDraftBotInfoAgwRequest) SetVersion(val *string) {
+	p.Version = val
+}
+func (p *GetDraftBotInfoAgwRequest) SetCommitVersion(val *string) {
+	p.CommitVersion = val
+}
+func (p *GetDraftBotInfoAgwRequest) SetBase(val *base.Base) {
+	p.Base = val
+}
+
+func (p *GetDraftBotInfoAgwRequest) IsSetVersion() bool {
+	return p.Version != nil
+}
+
+func (p *GetDraftBotInfoAgwRequest) IsSetCommitVersion() bool {
+	return p.CommitVersion != nil
+}
+
+func (p *GetDraftBotInfoAgwRequest) IsSetBase() bool {
+	return p.Base != nil
+}
+
+func (p *GetDraftBotInfoAgwRequest) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("GetDraftBotInfoAgwRequest(%+v)", *p)
+}
+
+type GetDraftBotInfoAgwResponse struct {
+	Data     *GetDraftBotInfoAgwData `thrift:"data,1,required" json:"data"`
+	Code     int64                   `thrift:"code,253,required" json:"code"`
+	Msg      string                  `thrift:"msg,254,required" json:"msg"`
+	BaseResp *base.BaseResp          `thrift:"BaseResp,255,required" json:"BaseResp"`
+}
+
+func NewGetDraftBotInfoAgwResponse() *GetDraftBotInfoAgwResponse {
+	return &GetDraftBotInfoAgwResponse{}
+}
+
+func (p *GetDraftBotInfoAgwResponse) InitDefault() {
+}
+
+var GetDraftBotInfoAgwResponse_Data_DEFAULT *GetDraftBotInfoAgwData
+
+func (p *GetDraftBotInfoAgwResponse) GetData() (v *GetDraftBotInfoAgwData) {
+	if !p.IsSetData() {
+		return GetDraftBotInfoAgwResponse_Data_DEFAULT
+	}
+	return p.Data
+}
+
+func (p *GetDraftBotInfoAgwResponse) GetCode() (v int64) {
+	return p.Code
+}
+
+func (p *GetDraftBotInfoAgwResponse) GetMsg() (v string) {
+	return p.Msg
+}
+
+var GetDraftBotInfoAgwResponse_BaseResp_DEFAULT *base.BaseResp
+
+func (p *GetDraftBotInfoAgwResponse) GetBaseResp() (v *base.BaseResp) {
+	if !p.IsSetBaseResp() {
+		return GetDraftBotInfoAgwResponse_BaseResp_DEFAULT
+	}
+	return p.BaseResp
+}
+func (p *GetDraftBotInfoAgwResponse) SetData(val *GetDraftBotInfoAgwData) {
+	p.Data = val
+}
+func (p *GetDraftBotInfoAgwResponse) SetCode(val int64) {
+	p.Code = val
+}
+func (p *GetDraftBotInfoAgwResponse) SetMsg(val string) {
+	p.Msg = val
+}
+func (p *GetDraftBotInfoAgwResponse) SetBaseResp(val *base.BaseResp) {
+	p.BaseResp = val
+}
+
+func (p *GetDraftBotInfoAgwResponse) IsSetData() bool {
+	return p.Data != nil
+}
+
+func (p *GetDraftBotInfoAgwResponse) IsSetBaseResp() bool {
+	return p.BaseResp != nil
+}
+
+func (p *GetDraftBotInfoAgwResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("GetDraftBotInfoAgwResponse(%+v)", *p)
+}
+
+type GetDraftBotInfoAgwData struct {
+	BotInfo              *bot_common.BotInfo `thrift:"bot_info,1,required" json:"bot_info"`
+	BotOptionData        *BotOptionData      `thrift:"bot_option_data,2,optional" json:"bot_option_data,omitempty"`
+	HasUnpublishedChange *bool               `thrift:"has_unpublished_change,3,optional" json:"has_unpublished_change,omitempty"`
+	BotMarketStatus      *BotMarketStatus    `thrift:"bot_market_status,4,optional,BotMarketStatus" json:"bot_market_status,omitempty"`
+	InCollaboration      *bool               `thrift:"in_collaboration,5,optional" json:"in_collaboration,omitempty"`
+	SameWithOnline       *bool               `thrift:"same_with_online,6,optional" json:"same_with_online,omitempty"`
+	Editable             *bool               `thrift:"editable,7,optional" json:"editable,omitempty"`
+	Deletable            *bool               `thrift:"deletable,8,optional" json:"deletable,omitempty"`
+	Publisher            *UserInfo           `thrift:"publisher,9,optional" json:"publisher,omitempty"`
+	HasPublish           bool                `thrift:"has_publish,10" json:"has_publish"`
+	SpaceID              int64               `thrift:"space_id,11" json:"space_id"`
+	Branch               *Branch             `thrift:"branch,12,optional,Branch" json:"branch,omitempty"`
+	CommitVersion        *string             `thrift:"commit_version,13,optional" json:"commit_version,omitempty"`
+	CommitterName        *string             `thrift:"committer_name,14,optional" json:"committer_name,omitempty"`
+	CommitTime           *string             `thrift:"commit_time,15,optional" json:"commit_time,omitempty"`
+	PublishTime          *string             `thrift:"publish_time,16,optional" json:"publish_time,omitempty"`
+}
+
+func NewGetDraftBotInfoAgwData() *GetDraftBotInfoAgwData {
+	return &GetDraftBotInfoAgwData{}
+}
+
+func (p *GetDraftBotInfoAgwData) InitDefault() {
+}
+
+var GetDraftBotInfoAgwData_BotInfo_DEFAULT *bot_common.BotInfo
+
+func (p *GetDraftBotInfoAgwData) GetBotInfo() (v *bot_common.BotInfo) {
+	if !p.IsSetBotInfo() {
+		return GetDraftBotInfoAgwData_BotInfo_DEFAULT
+	}
+	return p.BotInfo
+}
+
+var GetDraftBotInfoAgwData_BotOptionData_DEFAULT *BotOptionData
+
+func (p *GetDraftBotInfoAgwData) GetBotOptionData() (v *BotOptionData) {
+	if !p.IsSetBotOptionData() {
+		return GetDraftBotInfoAgwData_BotOptionData_DEFAULT
+	}
+	return p.BotOptionData
+}
+
+var GetDraftBotInfoAgwData_HasUnpublishedChange_DEFAULT bool
+
+func (p *GetDraftBotInfoAgwData) GetHasUnpublishedChange() (v bool) {
+	if !p.IsSetHasUnpublishedChange() {
+		return GetDraftBotInfoAgwData_HasUnpublishedChange_DEFAULT
+	}
+	return *p.HasUnpublishedChange
+}
+
+var GetDraftBotInfoAgwData_BotMarketStatus_DEFAULT BotMarketStatus
+
+func (p *GetDraftBotInfoAgwData) GetBotMarketStatus() (v BotMarketStatus) {
+	if !p.IsSetBotMarketStatus() {
+		return GetDraftBotInfoAgwData_BotMarketStatus_DEFAULT
+	}
+	return *p.BotMarketStatus
+}
+
+var GetDraftBotInfoAgwData_InCollaboration_DEFAULT bool
+
+func (p *GetDraftBotInfoAgwData) GetInCollaboration() (v bool) {
+	if !p.IsSetInCollaboration() {
+		return GetDraftBotInfoAgwData_InCollaboration_DEFAULT
+	}
+	return *p.InCollaboration
+}
+
+var GetDraftBotInfoAgwData_SameWithOnline_DEFAULT bool
+
+func (p *GetDraftBotInfoAgwData) GetSameWithOnline() (v bool) {
+	if !p.IsSetSameWithOnline() {
+		return GetDraftBotInfoAgwData_SameWithOnline_DEFAULT
+	}
+	return *p.SameWithOnline
+}
+
+var GetDraftBotInfoAgwData_Editable_DEFAULT bool
+
+func (p *GetDraftBotInfoAgwData) GetEditable() (v bool) {
+	if !p.IsSetEditable() {
+		return GetDraftBotInfoAgwData_Editable_DEFAULT
+	}
+	return *p.Editable
+}
+
+var GetDraftBotInfoAgwData_Deletable_DEFAULT bool
+
+func (p *GetDraftBotInfoAgwData) GetDeletable() (v bool) {
+	if !p.IsSetDeletable() {
+		return GetDraftBotInfoAgwData_Deletable_DEFAULT
+	}
+	return *p.Deletable
+}
+
+var GetDraftBotInfoAgwData_Publisher_DEFAULT *UserInfo
+
+func (p *GetDraftBotInfoAgwData) GetPublisher() (v *UserInfo) {
+	if !p.IsSetPublisher() {
+		return GetDraftBotInfoAgwData_Publisher_DEFAULT
+	}
+	return p.Publisher
+}
+
+func (p *GetDraftBotInfoAgwData) GetHasPublish() (v bool) {
+	return p.HasPublish
+}
+
+func (p *GetDraftBotInfoAgwData) GetSpaceID() (v int64) {
+	return p.SpaceID
+}
+
+var GetDraftBotInfoAgwData_Branch_DEFAULT Branch
+
+func (p *GetDraftBotInfoAgwData) GetBranch() (v Branch) {
+	if !p.IsSetBranch() {
+		return GetDraftBotInfoAgwData_Branch_DEFAULT
+	}
+	return *p.Branch
+}
+
+var GetDraftBotInfoAgwData_CommitVersion_DEFAULT string
+
+func (p *GetDraftBotInfoAgwData) GetCommitVersion() (v string) {
+	if !p.IsSetCommitVersion() {
+		return GetDraftBotInfoAgwData_CommitVersion_DEFAULT
+	}
+	return *p.CommitVersion
+}
+
+var GetDraftBotInfoAgwData_CommitterName_DEFAULT string
+
+func (p *GetDraftBotInfoAgwData) GetCommitterName() (v string) {
+	if !p.IsSetCommitterName() {
+		return GetDraftBotInfoAgwData_CommitterName_DEFAULT
+	}
+	return *p.CommitterName
+}
+
+var GetDraftBotInfoAgwData_CommitTime_DEFAULT string
+
+func (p *GetDraftBotInfoAgwData) GetCommitTime() (v string) {
+	if !p.IsSetCommitTime() {
+		return GetDraftBotInfoAgwData_CommitTime_DEFAULT
+	}
+	return *p.CommitTime
+}
+
+var GetDraftBotInfoAgwData_PublishTime_DEFAULT string
+
+func (p *GetDraftBotInfoAgwData) GetPublishTime() (v string) {
+	if !p.IsSetPublishTime() {
+		return GetDraftBotInfoAgwData_PublishTime_DEFAULT
+	}
+	return *p.PublishTime
+}
+func (p *GetDraftBotInfoAgwData) SetBotInfo(val *bot_common.BotInfo) {
+	p.BotInfo = val
+}
+func (p *GetDraftBotInfoAgwData) SetBotOptionData(val *BotOptionData) {
+	p.BotOptionData = val
+}
+func (p *GetDraftBotInfoAgwData) SetHasUnpublishedChange(val *bool) {
+	p.HasUnpublishedChange = val
+}
+func (p *GetDraftBotInfoAgwData) SetBotMarketStatus(val *BotMarketStatus) {
+	p.BotMarketStatus = val
+}
+func (p *GetDraftBotInfoAgwData) SetInCollaboration(val *bool) {
+	p.InCollaboration = val
+}
+func (p *GetDraftBotInfoAgwData) SetSameWithOnline(val *bool) {
+	p.SameWithOnline = val
+}
+func (p *GetDraftBotInfoAgwData) SetEditable(val *bool) {
+	p.Editable = val
+}
+func (p *GetDraftBotInfoAgwData) SetDeletable(val *bool) {
+	p.Deletable = val
+}
+func (p *GetDraftBotInfoAgwData) SetPublisher(val *UserInfo) {
+	p.Publisher = val
+}
+func (p *GetDraftBotInfoAgwData) SetHasPublish(val bool) {
+	p.HasPublish = val
+}
+func (p *GetDraftBotInfoAgwData) SetSpaceID(val int64) {
+	p.SpaceID = val
+}
+func (p *GetDraftBotInfoAgwData) SetBranch(val *Branch) {
+	p.Branch = val
+}
+func (p *GetDraftBotInfoAgwData) SetCommitVersion(val *string) {
+	p.CommitVersion = val
+}
+func (p *GetDraftBotInfoAgwData) SetCommitterName(val *string) {
+	p.CommitterName = val
+}
+func (p *GetDraftBotInfoAgwData) SetCommitTime(val *string) {
+	p.CommitTime = val
+}
+func (p *GetDraftBotInfoAgwData) SetPublishTime(val *string) {
+	p.PublishTime = val
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetBotInfo() bool {
+	return p.BotInfo != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetBotOptionData() bool {
+	return p.BotOptionData != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetHasUnpublishedChange() bool {
+	return p.HasUnpublishedChange != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetBotMarketStatus() bool {
+	return p.BotMarketStatus != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetInCollaboration() bool {
+	return p.InCollaboration != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetSameWithOnline() bool {
+	return p.SameWithOnline != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetEditable() bool {
+	return p.Editable != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetDeletable() bool {
+	return p.Deletable != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetPublisher() bool {
+	return p.Publisher != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetBranch() bool {
+	return p.Branch != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetCommitVersion() bool {
+	return p.CommitVersion != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetCommitterName() bool {
+	return p.CommitterName != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetCommitTime() bool {
+	return p.CommitTime != nil
+}
+
+func (p *GetDraftBotInfoAgwData) IsSetPublishTime() bool {
+	return p.PublishTime != nil
+}
+
+func (p *GetDraftBotInfoAgwData) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("GetDraftBotInfoAgwData(%+v)", *p)
+}
+
+type BotOptionData struct {
+}
+
+func NewBotOptionData() *BotOptionData {
+	return &BotOptionData{}
+}
+
+func (p *BotOptionData) InitDefault() {
+}
+
+func (p *BotOptionData) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("BotOptionData(%+v)", *p)
+}
+
+type UserInfo struct {
+	UserID  int64  `thrift:"user_id,1" json:"user_id"`
+	Name    string `thrift:"name,2" json:"name"`
+	IconURL string `thrift:"icon_url,3" json:"icon_url"`
+}
+
+func NewUserInfo() *UserInfo {
+	return &UserInfo{}
+}
+
+func (p *UserInfo) InitDefault() {
+}
+
+func (p *UserInfo) GetUserID() (v int64) {
+	return p.UserID
+}
+
+func (p *UserInfo) GetName() (v string) {
+	return p.Name
+}
+
+func (p *UserInfo) GetIconURL() (v string) {
+	return p.IconURL
+}
+func (p *UserInfo) SetUserID(val int64) {
+	p.UserID = val
+}
+func (p *UserInfo) SetName(val string) {
+	p.Name = val
+}
+func (p *UserInfo) SetIconURL(val string) {
+	p.IconURL = val
+}
+
+func (p *UserInfo) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("UserInfo(%+v)", *p)
 }
 
 type OnboardingContent struct {
@@ -568,9 +1362,21 @@ func (p *ReportUserBehaviorResponse) String() string {
 }
 
 type PlaygroundService interface {
+	UpdateDraftBotInfoAgw(ctx context.Context, request *UpdateDraftBotInfoAgwRequest) (r *UpdateDraftBotInfoAgwResponse, err error)
+
+	GetDraftBotInfoAgw(ctx context.Context, request *GetDraftBotInfoAgwRequest) (r *GetDraftBotInfoAgwResponse, err error)
+
 	GetBotPopupInfo(ctx context.Context, request *GetBotPopupInfoRequest) (r *GetBotPopupInfoResponse, err error)
 
 	UpdateBotPopupInfo(ctx context.Context, request *UpdateBotPopupInfoRequest) (r *UpdateBotPopupInfoResponse, err error)
 
 	ReportUserBehavior(ctx context.Context, request *ReportUserBehaviorRequest) (r *ReportUserBehaviorResponse, err error)
+
+	GetOfficialPromptResourceList(ctx context.Context, request *GetOfficialPromptResourceListRequest) (r *GetOfficialPromptResourceListResponse, err error)
+
+	GetPromptResourceInfo(ctx context.Context, request *GetPromptResourceInfoRequest) (r *GetPromptResourceInfoResponse, err error)
+
+	UpsertPromptResource(ctx context.Context, request *UpsertPromptResourceRequest) (r *UpsertPromptResourceResponse, err error)
+
+	DeletePromptResource(ctx context.Context, request *DeletePromptResourceRequest) (r *DeletePromptResourceResponse, err error)
 }

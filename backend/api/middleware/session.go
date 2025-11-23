@@ -3,7 +3,7 @@ package middleware
 import (
 	"github.com/gin-gonic/gin"
 	httpwarp "github.com/kiosk404/airi-go/backend/api/http"
-	user "github.com/kiosk404/airi-go/backend/modules/foundation/application"
+	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/application"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/ctxcache"
@@ -14,9 +14,9 @@ import (
 )
 
 var noNeedSessionCheckPath = map[string]bool{
-	"/health":                     true,
-	"/api/passport/web/login/":    true,
-	"/api/passport/web/register/": true,
+	"/health":                           true,
+	"/api/foundation/v1/users/login":    true,
+	"/api/foundation/v1/users/register": true,
 }
 
 func SessionAuthMW() gin.HandlerFunc {
@@ -49,7 +49,7 @@ func SessionAuthMW() gin.HandlerFunc {
 		}
 
 		if session != nil {
-			ctxcache.Store(c, consts.SessionDataKeyInCtx, session)
+			ctxcache.Store(c.Request.Context(), consts.SessionDataKeyInCtx, session)
 		}
 
 		c.Next()

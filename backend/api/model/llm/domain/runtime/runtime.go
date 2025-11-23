@@ -12,6 +12,8 @@ const (
 
 	ResponseFormatText = "text"
 
+	ResourceFormatMarkdown = "markdown"
+
 	ToolChoiceAuto = "auto"
 
 	ToolChoiceRequired = "required"

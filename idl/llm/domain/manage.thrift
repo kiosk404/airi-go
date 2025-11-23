@@ -27,14 +27,10 @@ struct Ability {
 
 struct AbilityMultiModal {
     1: optional bool image
-    2: optional AbilityImage ability_image
-}
-
-struct AbilityImage {
-    1: optional bool url_enabled
-    2: optional bool binary_enabled
-    3: optional i64 max_image_size (api.js_conv='true', go.tag='json:"max_image_size"')
-    4: optional i64 max_image_count (api.js_conv='true', go.tag='json:"max_image_count"')
+    2: optional bool function_call
+    3: optional bool video
+    4: optional bool audio
+    5: optional bool prefill_resp
 }
 
 struct ProtocolConfig {
@@ -62,6 +58,7 @@ struct ProtocolConfigClaude {
     3: optional string secret_access_key
     4: optional string session_token
     5: optional string region
+    6: optional i32    budget_tokens
 
 }
 struct ProtocolConfigDeepSeek {
@@ -69,14 +66,14 @@ struct ProtocolConfigDeepSeek {
 }
 
 struct ProtocolConfigGemini {
-    1: optional string response_schema
-    2: optional bool enable_code_execution
-    3: optional list<ProtocolConfigGeminiSafetySetting> safety_settings
-}
-
-struct ProtocolConfigGeminiSafetySetting {
-    1: optional i32 category
-    2: optional i32 threshold
+    1: optional i32 backend
+    2: optional string project
+    3: optional string location
+    4: optional string api_version
+    5: optional string timeout_ms
+    6: optional bool include_thoughts
+    7: optional i32 thinking_budget
+    8: optional map<string, list<string>> headers;
 }
 
 struct ProtocolConfigOllama {
@@ -106,7 +103,7 @@ struct ParamSchema {
     4: optional ParamType type
     5: optional string min
     6: optional string max
-    7: optional string default_value
+    7: optional map<DefaultType, string> default_value
     8: optional list<ParamOption> options
 }
 
@@ -134,3 +131,10 @@ const ParamType param_type_float = "float"
 const ParamType param_type_int = "int"
 const ParamType param_type_boolean = "boolean"
 const ParamType param_type_string = "string"
+
+typedef string DefaultType (ts.enum="true")
+
+const DefaultType default_type_value = "default"
+const DefaultType default_type_creative = "creative"
+const DefaultType default_type_balance = "balance"
+const DefaultType default_type_precise = "precise"

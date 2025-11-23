@@ -7,7 +7,7 @@ import (
 	"github.com/gin-contrib/sse"
 	"github.com/gin-gonic/gin"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/run"
-	"github.com/kiosk404/airi-go/backend/modules/conversation"
+	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/application"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	sseimpl "github.com/kiosk404/airi-go/backend/pkg/http/sse"
@@ -32,10 +32,10 @@ func AgentRun(c *gin.Context) {
 		invalidParamRequestResponse(c, checkErr.Error())
 		return
 	}
-
+	// 起一个 SSE Server
 	sseSender := sseimpl.NewSSESender(c)
 
-	err = conversation.ConversationSVC.Run(ctx, sseSender, &req)
+	err = application.ConversationSVC.Run(ctx, sseSender, &req)
 	if err != nil {
 		errData := run.ErrorData{
 			Code: errno.ErrConversationAgentRunError,

@@ -18,6 +18,14 @@ type LocalClient struct {
 }
 
 func New(ctx context.Context, pathDir string) (storage.Storage, error) {
+	m, err := getLocalClient(pathDir)
+	if err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func getLocalClient(pathDir string) (*LocalClient, error) {
 	// 确保目录存在
 	if err := os.MkdirAll(pathDir, 0755); err != nil {
 		return nil, fmt.Errorf("failed to create directory %s: %w", pathDir, err)
@@ -31,10 +39,10 @@ func New(ctx context.Context, pathDir string) (storage.Storage, error) {
 		baseDir: pathDir,
 	}
 
-	return c, nil
+	return &c, nil
 }
 
-func (l LocalClient) PutObject(ctx context.Context, objectKey string, content []byte, opts ...storage.PutOptFn) error {
+func (l *LocalClient) PutObject(ctx context.Context, objectKey string, content []byte, opts ...storage.PutOptFn) error {
 	// 确保目录结构存在
 	if err := l.ensureDir(objectKey); err != nil {
 		return err
@@ -55,7 +63,7 @@ func (l LocalClient) PutObject(ctx context.Context, objectKey string, content []
 	return nil
 }
 
-func (l LocalClient) PutObjectWithReader(ctx context.Context, objectKey string, content io.Reader, opts ...storage.PutOptFn) error {
+func (l *LocalClient) PutObjectWithReader(ctx context.Context, objectKey string, content io.Reader, opts ...storage.PutOptFn) error {
 	// 确保目录结构存在
 	if err := l.ensureDir(objectKey); err != nil {
 		return err
@@ -76,7 +84,7 @@ func (l LocalClient) PutObjectWithReader(ctx context.Context, objectKey string, 
 	return nil
 }
 
-func (l LocalClient) GetObject(ctx context.Context, objectKey string) ([]byte, error) {
+func (l *LocalClient) GetObject(ctx context.Context, objectKey string) ([]byte, error) {
 	r, err := l.store.Open(ctx, objectKey)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open object %s: %w", objectKey, err)
@@ -91,7 +99,7 @@ func (l LocalClient) GetObject(ctx context.Context, objectKey string) ([]byte, e
 	return content, nil
 }
 
-func (l LocalClient) DeleteObject(ctx context.Context, objectKey string) error {
+func (l *LocalClient) DeleteObject(ctx context.Context, objectKey string) error {
 	err := l.store.Delete(ctx, objectKey)
 	if err != nil {
 		return fmt.Errorf("failed to delete object %s: %w", objectKey, err)
@@ -99,7 +107,7 @@ func (l LocalClient) DeleteObject(ctx context.Context, objectKey string) error {
 	return nil
 }
 
-func (l LocalClient) GetObjectUrl(ctx context.Context, objectKey string, opts ...storage.GetOptFn) (string, error) {
+func (l *LocalClient) GetObjectUrl(ctx context.Context, objectKey string, opts ...storage.GetOptFn) (string, error) {
 	// 本地文件系统返回file://协议的URL
 	fullPath := filepath.Join(l.baseDir, objectKey)
 	absPath, err := filepath.Abs(fullPath)
@@ -115,7 +123,7 @@ func (l LocalClient) GetObjectUrl(ctx context.Context, objectKey string, opts ..
 	return "file://" + absPath, nil
 }
 
-func (l LocalClient) ListAllObjects(ctx context.Context, prefix string, withTagging bool) ([]*storage.FileInfo, error) {
+func (l *LocalClient) ListAllObjects(ctx context.Context, prefix string, withTagging bool) ([]*storage.FileInfo, error) {
 	var fileInfos []*storage.FileInfo
 
 	// 构建搜索路径
@@ -167,7 +175,7 @@ func (l LocalClient) ListAllObjects(ctx context.Context, prefix string, withTagg
 	return fileInfos, nil
 }
 
-func (l LocalClient) ListObjectsPaginated(ctx context.Context, input *storage.ListObjectsPaginatedInput) (*storage.ListObjectsPaginatedOutput, error) {
+func (l *LocalClient) ListObjectsPaginated(ctx context.Context, input *storage.ListObjectsPaginatedInput) (*storage.ListObjectsPaginatedOutput, error) {
 	// 获取所有匹配的文件
 	allFiles, err := l.ListAllObjects(ctx, input.Prefix, input.WithTagging)
 	if err != nil {
@@ -210,7 +218,7 @@ func (l LocalClient) ListObjectsPaginated(ctx context.Context, input *storage.Li
 }
 
 // ensureDir 确保对象键对应的目录结构存在
-func (l LocalClient) ensureDir(objectKey string) error {
+func (l *LocalClient) ensureDir(objectKey string) error {
 	dir := filepath.Dir(filepath.Join(l.baseDir, objectKey))
 	return os.MkdirAll(dir, 0755)
 }

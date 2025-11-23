@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"strconv"
 	"time"
 	"unicode/utf8"
@@ -64,25 +65,13 @@ func (u *userImpl) Create(ctx context.Context, req *CreateUserRequest) (user *en
 		return nil, err
 	}
 
-	name := req.Name
-
+	name := u.getNameFormAccount(ctx, req.Name, req.Account)
 	userID, err := u.IDGen.GenID(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("generate id error: %w", err)
 	}
 
 	now := time.Now().UnixMilli()
-
-	spaceID := req.SpaceID
-	if spaceID <= 0 {
-		var sid int64
-		sid, err = u.IDGen.GenID(ctx)
-		if err != nil {
-			return nil, fmt.Errorf("gen space_id failed: %w", err)
-		}
-
-		spaceID = sid
-	}
 
 	newUser := &model.User{
 		ID:           userID,
@@ -399,5 +388,17 @@ func (u *userImpl) getUniqueNameFormAccount(ctx context.Context, account string)
 		return account
 	}
 
+	return username
+}
+
+func (u *userImpl) getNameFormAccount(ctx context.Context, name, account string) string {
+	var username string
+	username = name
+	emailRegex := regexp.MustCompile(`^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$`)
+	matches := emailRegex.FindStringSubmatch(account)
+	if len(matches) == 3 {
+		// 如果匹配成功，第一个子匹配项就是@符号前的用户名
+		username = matches[1]
+	}
 	return username
 }

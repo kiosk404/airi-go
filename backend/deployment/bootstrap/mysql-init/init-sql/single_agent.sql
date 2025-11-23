@@ -2,6 +2,7 @@
 CREATE TABLE IF NOT EXISTS `airi_go`.`single_agent_draft` (
     `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key ID',
     `agent_id` bigint NOT NULL DEFAULT 0 COMMENT 'Agent ID',
+    `creator_id` bigint NOT NULL DEFAULT 0 COMMENT 'Creator ID',
     `name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Agent Name',
     `description` text NULL COMMENT 'Agent Description',
     `icon_uri` varchar(255) NOT NULL DEFAULT '' COMMENT 'Icon URI',

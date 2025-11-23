@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+
 	"github.com/cloudwego/eino/compose"
 	"github.com/cloudwego/eino/schema"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
@@ -10,7 +11,6 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/service/agentflow"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/pkg"
-	llm "github.com/kiosk404/airi-go/backend/modules/llm/domain/service"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service/llmimpl/chatmodel"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/jsoncache"
@@ -18,7 +18,6 @@ import (
 )
 
 type singleAgentImpl struct {
-	ModelMgr     llm.IManage
 	ModelFactory chatmodel.Factory
 
 	AgentDraftRepo   repo.SingleAgentDraftRepo
@@ -28,12 +27,11 @@ type singleAgentImpl struct {
 	CPStore compose.CheckPointStore
 }
 
-func NewService(model llm.IManage, factory chatmodel.Factory,
+func NewService(factory chatmodel.Factory,
 	agentDraft repo.SingleAgentDraftRepo, agentVersion repo.SingleAgentVersionRepo,
 	publishInfoRepo *jsoncache.JsonCache[entity.PublishInfo],
 	cps compose.CheckPointStore) SingleAgent {
 	s := &singleAgentImpl{
-		ModelMgr:         model,
 		ModelFactory:     factory,
 		AgentDraftRepo:   agentDraft,
 		AgentVersionRepo: agentVersion,
@@ -44,12 +42,12 @@ func NewService(model llm.IManage, factory chatmodel.Factory,
 	return s
 }
 
-func (s singleAgentImpl) CreateSingleAgentDraft(ctx context.Context, draft *entity.SingleAgent) (agentID int64, err error) {
-	return s.AgentDraftRepo.CreateWithID(ctx, agentID, draft)
+func (s singleAgentImpl) CreateSingleAgentDraft(ctx context.Context, creatorID int64, draft *entity.SingleAgent) (agentID int64, err error) {
+	return s.AgentDraftRepo.CreateWithID(ctx, creatorID, draft.AgentID, draft)
 }
 
-func (s singleAgentImpl) CreateSingleAgentDraftWithID(ctx context.Context, agentID int64, draft *entity.SingleAgent) (int64, error) {
-	return s.AgentDraftRepo.CreateWithID(ctx, agentID, draft)
+func (s singleAgentImpl) CreateSingleAgentDraftWithID(ctx context.Context, agentID, creatorID int64, draft *entity.SingleAgent) (int64, error) {
+	return s.AgentDraftRepo.CreateWithID(ctx, creatorID, agentID, draft)
 }
 
 func (s singleAgentImpl) MGetSingleAgentDraft(ctx context.Context, agentIDs []int64) (agents []*entity.SingleAgent, err error) {
@@ -169,7 +167,6 @@ func (s singleAgentImpl) StreamExecute(ctx context.Context, req *entity.ExecuteR
 		Agent:        ae,
 		UserID:       req.UserID,
 		Identity:     req.Identity,
-		ModelMgr:     s.ModelMgr,
 		ModelFactory: s.ModelFactory,
 		CPStore:      s.CPStore,
 

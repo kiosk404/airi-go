@@ -499,8 +499,8 @@ func (p *AdditionalContent) String() string {
 }
 
 type AgentRunRequest struct {
-	BotID                    int64                         `thrift:"bot_id,1" json:"bot_id"`
-	ConversationID           int64                         `thrift:"conversation_id,2,required" json:"conversation_id"`
+	BotID                    int64                         `thrift:"bot_id,1" form:"bot_id" json:"bot_id,string" query:"bot_id"`
+	ConversationID           int64                         `thrift:"conversation_id,2,required" form:"conversation_id" json:"conversation_id,string" query:"conversation_id"`
 	Query                    string                        `thrift:"query,5,required" json:"query"`
 	Extra                    map[string]string             `thrift:"extra,7" json:"extra"`
 	CustomVariables          map[string]string             `thrift:"custom_variables,9" json:"custom_variables"`

@@ -4,8 +4,8 @@ import (
 	"context"
 	"strings"
 
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/message"
 	"github.com/kiosk404/airi-go/backend/infra/contract/imagex"
+	message "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/model"
 )
 
 func (art *AgentRuntime) ChatflowRun(ctx context.Context, imagex imagex.ImageX) (err error) {

@@ -6,7 +6,7 @@ import (
 
 const (
 	SessionKey     = "session_key"
-	SessionExpires = 7 * 24 * time.Hour
+	SessionExpires = 30 * 24 * time.Hour
 )
 
 // HMACSecret 用于签名的密钥（在实际应用中应从配置中读取或使用环境变量）

@@ -816,7 +816,12 @@ func _userupdateprofileMw() []gin.HandlerFunc {
 	return nil
 }
 
-func _passportMw() []gin.HandlerFunc {
+func _foundationMw() []gin.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _foundationV1Mw() []gin.HandlerFunc {
 	// your code...
 	return nil
 }

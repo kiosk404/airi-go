@@ -88,6 +88,7 @@ struct ResponseFormat {
 typedef string ResponseFormatType
 const ResponseFormatType response_format_json_object  = "json_object"
 const ResponseFormatType response_format_text  = "text"
+const ResponseFormatType resource_format_markdown = "markdown"
 
 typedef string ToolChoice (ts.enum="true")
 const ToolChoice tool_choice_auto = "auto"

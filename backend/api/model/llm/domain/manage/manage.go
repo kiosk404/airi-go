@@ -27,11 +27,21 @@ const (
 	ParamTypeBoolean = "boolean"
 
 	ParamTypeString = "string"
+
+	DefaultTypeValue = "default"
+
+	DefaultTypeCreative = "creative"
+
+	DefaultTypeBalance = "balance"
+
+	DefaultTypePrecise = "precise"
 )
 
 type Protocol = string
 
 type ParamType = string
+
+type DefaultType = string
 
 type Model struct {
 	ModelID         *int64                              `thrift:"model_id,1,optional" json:"model_id"`
@@ -357,8 +367,11 @@ func (p *Ability) String() string {
 }
 
 type AbilityMultiModal struct {
-	Image        *bool         `thrift:"image,1,optional" json:"image,omitempty"`
-	AbilityImage *AbilityImage `thrift:"ability_image,2,optional" json:"ability_image,omitempty"`
+	Image        *bool `thrift:"image,1,optional" json:"image,omitempty"`
+	FunctionCall *bool `thrift:"function_call,2,optional" json:"function_call,omitempty"`
+	Video        *bool `thrift:"video,3,optional" json:"video,omitempty"`
+	Audio        *bool `thrift:"audio,4,optional" json:"audio,omitempty"`
+	PrefillResp  *bool `thrift:"prefill_resp,5,optional" json:"prefill_resp,omitempty"`
 }
 
 func NewAbilityMultiModal() *AbilityMultiModal {
@@ -377,27 +390,75 @@ func (p *AbilityMultiModal) GetImage() (v bool) {
 	return *p.Image
 }
 
-var AbilityMultiModal_AbilityImage_DEFAULT *AbilityImage
+var AbilityMultiModal_FunctionCall_DEFAULT bool
 
-func (p *AbilityMultiModal) GetAbilityImage() (v *AbilityImage) {
-	if !p.IsSetAbilityImage() {
-		return AbilityMultiModal_AbilityImage_DEFAULT
+func (p *AbilityMultiModal) GetFunctionCall() (v bool) {
+	if !p.IsSetFunctionCall() {
+		return AbilityMultiModal_FunctionCall_DEFAULT
 	}
-	return p.AbilityImage
+	return *p.FunctionCall
+}
+
+var AbilityMultiModal_Video_DEFAULT bool
+
+func (p *AbilityMultiModal) GetVideo() (v bool) {
+	if !p.IsSetVideo() {
+		return AbilityMultiModal_Video_DEFAULT
+	}
+	return *p.Video
+}
+
+var AbilityMultiModal_Audio_DEFAULT bool
+
+func (p *AbilityMultiModal) GetAudio() (v bool) {
+	if !p.IsSetAudio() {
+		return AbilityMultiModal_Audio_DEFAULT
+	}
+	return *p.Audio
+}
+
+var AbilityMultiModal_PrefillResp_DEFAULT bool
+
+func (p *AbilityMultiModal) GetPrefillResp() (v bool) {
+	if !p.IsSetPrefillResp() {
+		return AbilityMultiModal_PrefillResp_DEFAULT
+	}
+	return *p.PrefillResp
 }
 func (p *AbilityMultiModal) SetImage(val *bool) {
 	p.Image = val
 }
-func (p *AbilityMultiModal) SetAbilityImage(val *AbilityImage) {
-	p.AbilityImage = val
+func (p *AbilityMultiModal) SetFunctionCall(val *bool) {
+	p.FunctionCall = val
+}
+func (p *AbilityMultiModal) SetVideo(val *bool) {
+	p.Video = val
+}
+func (p *AbilityMultiModal) SetAudio(val *bool) {
+	p.Audio = val
+}
+func (p *AbilityMultiModal) SetPrefillResp(val *bool) {
+	p.PrefillResp = val
 }
 
 func (p *AbilityMultiModal) IsSetImage() bool {
 	return p.Image != nil
 }
 
-func (p *AbilityMultiModal) IsSetAbilityImage() bool {
-	return p.AbilityImage != nil
+func (p *AbilityMultiModal) IsSetFunctionCall() bool {
+	return p.FunctionCall != nil
+}
+
+func (p *AbilityMultiModal) IsSetVideo() bool {
+	return p.Video != nil
+}
+
+func (p *AbilityMultiModal) IsSetAudio() bool {
+	return p.Audio != nil
+}
+
+func (p *AbilityMultiModal) IsSetPrefillResp() bool {
+	return p.PrefillResp != nil
 }
 
 func (p *AbilityMultiModal) String() string {
@@ -405,91 +466,6 @@ func (p *AbilityMultiModal) String() string {
 		return "<nil>"
 	}
 	return fmt.Sprintf("AbilityMultiModal(%+v)", *p)
-}
-
-type AbilityImage struct {
-	URLEnabled    *bool  `thrift:"url_enabled,1,optional" json:"url_enabled,omitempty"`
-	BinaryEnabled *bool  `thrift:"binary_enabled,2,optional" json:"binary_enabled,omitempty"`
-	MaxImageSize  *int64 `thrift:"max_image_size,3,optional" json:"max_image_size"`
-	MaxImageCount *int64 `thrift:"max_image_count,4,optional" json:"max_image_count"`
-}
-
-func NewAbilityImage() *AbilityImage {
-	return &AbilityImage{}
-}
-
-func (p *AbilityImage) InitDefault() {
-}
-
-var AbilityImage_URLEnabled_DEFAULT bool
-
-func (p *AbilityImage) GetURLEnabled() (v bool) {
-	if !p.IsSetURLEnabled() {
-		return AbilityImage_URLEnabled_DEFAULT
-	}
-	return *p.URLEnabled
-}
-
-var AbilityImage_BinaryEnabled_DEFAULT bool
-
-func (p *AbilityImage) GetBinaryEnabled() (v bool) {
-	if !p.IsSetBinaryEnabled() {
-		return AbilityImage_BinaryEnabled_DEFAULT
-	}
-	return *p.BinaryEnabled
-}
-
-var AbilityImage_MaxImageSize_DEFAULT int64
-
-func (p *AbilityImage) GetMaxImageSize() (v int64) {
-	if !p.IsSetMaxImageSize() {
-		return AbilityImage_MaxImageSize_DEFAULT
-	}
-	return *p.MaxImageSize
-}
-
-var AbilityImage_MaxImageCount_DEFAULT int64
-
-func (p *AbilityImage) GetMaxImageCount() (v int64) {
-	if !p.IsSetMaxImageCount() {
-		return AbilityImage_MaxImageCount_DEFAULT
-	}
-	return *p.MaxImageCount
-}
-func (p *AbilityImage) SetURLEnabled(val *bool) {
-	p.URLEnabled = val
-}
-func (p *AbilityImage) SetBinaryEnabled(val *bool) {
-	p.BinaryEnabled = val
-}
-func (p *AbilityImage) SetMaxImageSize(val *int64) {
-	p.MaxImageSize = val
-}
-func (p *AbilityImage) SetMaxImageCount(val *int64) {
-	p.MaxImageCount = val
-}
-
-func (p *AbilityImage) IsSetURLEnabled() bool {
-	return p.URLEnabled != nil
-}
-
-func (p *AbilityImage) IsSetBinaryEnabled() bool {
-	return p.BinaryEnabled != nil
-}
-
-func (p *AbilityImage) IsSetMaxImageSize() bool {
-	return p.MaxImageSize != nil
-}
-
-func (p *AbilityImage) IsSetMaxImageCount() bool {
-	return p.MaxImageCount != nil
-}
-
-func (p *AbilityImage) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("AbilityImage(%+v)", *p)
 }
 
 type ProtocolConfig struct {
@@ -753,6 +729,7 @@ type ProtocolConfigClaude struct {
 	SecretAccessKey *string `thrift:"secret_access_key,3,optional" json:"secret_access_key,omitempty"`
 	SessionToken    *string `thrift:"session_token,4,optional" json:"session_token,omitempty"`
 	Region          *string `thrift:"region,5,optional" json:"region,omitempty"`
+	BudgetTokens    *int32  `thrift:"budget_tokens,6,optional" json:"budget_tokens,omitempty"`
 }
 
 func NewProtocolConfigClaude() *ProtocolConfigClaude {
@@ -806,6 +783,15 @@ func (p *ProtocolConfigClaude) GetRegion() (v string) {
 	}
 	return *p.Region
 }
+
+var ProtocolConfigClaude_BudgetTokens_DEFAULT int32
+
+func (p *ProtocolConfigClaude) GetBudgetTokens() (v int32) {
+	if !p.IsSetBudgetTokens() {
+		return ProtocolConfigClaude_BudgetTokens_DEFAULT
+	}
+	return *p.BudgetTokens
+}
 func (p *ProtocolConfigClaude) SetByBedrock(val *bool) {
 	p.ByBedrock = val
 }
@@ -820,6 +806,9 @@ func (p *ProtocolConfigClaude) SetSessionToken(val *string) {
 }
 func (p *ProtocolConfigClaude) SetRegion(val *string) {
 	p.Region = val
+}
+func (p *ProtocolConfigClaude) SetBudgetTokens(val *int32) {
+	p.BudgetTokens = val
 }
 
 func (p *ProtocolConfigClaude) IsSetByBedrock() bool {
@@ -840,6 +829,10 @@ func (p *ProtocolConfigClaude) IsSetSessionToken() bool {
 
 func (p *ProtocolConfigClaude) IsSetRegion() bool {
 	return p.Region != nil
+}
+
+func (p *ProtocolConfigClaude) IsSetBudgetTokens() bool {
+	return p.BudgetTokens != nil
 }
 
 func (p *ProtocolConfigClaude) String() string {
@@ -884,9 +877,14 @@ func (p *ProtocolConfigDeepSeek) String() string {
 }
 
 type ProtocolConfigGemini struct {
-	ResponseSchema      *string                              `thrift:"response_schema,1,optional" json:"response_schema,omitempty"`
-	EnableCodeExecution *bool                                `thrift:"enable_code_execution,2,optional" json:"enable_code_execution,omitempty"`
-	SafetySettings      []*ProtocolConfigGeminiSafetySetting `thrift:"safety_settings,3,optional,list<ProtocolConfigGeminiSafetySetting>" json:"safety_settings,omitempty"`
+	Backend         *int32              `thrift:"backend,1,optional" json:"backend,omitempty"`
+	Project         *string             `thrift:"project,2,optional" json:"project,omitempty"`
+	Location        *string             `thrift:"location,3,optional" json:"location,omitempty"`
+	APIVersion      *string             `thrift:"api_version,4,optional" json:"api_version,omitempty"`
+	TimeoutMs       *string             `thrift:"timeout_ms,5,optional" json:"timeout_ms,omitempty"`
+	IncludeThoughts *bool               `thrift:"include_thoughts,6,optional" json:"include_thoughts,omitempty"`
+	ThinkingBudget  *int32              `thrift:"thinking_budget,7,optional" json:"thinking_budget,omitempty"`
+	Headers         map[string][]string `thrift:"headers,8,optional,map<string:list<string>>" json:"headers,omitempty"`
 }
 
 func NewProtocolConfigGemini() *ProtocolConfigGemini {
@@ -896,52 +894,132 @@ func NewProtocolConfigGemini() *ProtocolConfigGemini {
 func (p *ProtocolConfigGemini) InitDefault() {
 }
 
-var ProtocolConfigGemini_ResponseSchema_DEFAULT string
+var ProtocolConfigGemini_Backend_DEFAULT int32
 
-func (p *ProtocolConfigGemini) GetResponseSchema() (v string) {
-	if !p.IsSetResponseSchema() {
-		return ProtocolConfigGemini_ResponseSchema_DEFAULT
+func (p *ProtocolConfigGemini) GetBackend() (v int32) {
+	if !p.IsSetBackend() {
+		return ProtocolConfigGemini_Backend_DEFAULT
 	}
-	return *p.ResponseSchema
+	return *p.Backend
 }
 
-var ProtocolConfigGemini_EnableCodeExecution_DEFAULT bool
+var ProtocolConfigGemini_Project_DEFAULT string
 
-func (p *ProtocolConfigGemini) GetEnableCodeExecution() (v bool) {
-	if !p.IsSetEnableCodeExecution() {
-		return ProtocolConfigGemini_EnableCodeExecution_DEFAULT
+func (p *ProtocolConfigGemini) GetProject() (v string) {
+	if !p.IsSetProject() {
+		return ProtocolConfigGemini_Project_DEFAULT
 	}
-	return *p.EnableCodeExecution
+	return *p.Project
 }
 
-var ProtocolConfigGemini_SafetySettings_DEFAULT []*ProtocolConfigGeminiSafetySetting
+var ProtocolConfigGemini_Location_DEFAULT string
 
-func (p *ProtocolConfigGemini) GetSafetySettings() (v []*ProtocolConfigGeminiSafetySetting) {
-	if !p.IsSetSafetySettings() {
-		return ProtocolConfigGemini_SafetySettings_DEFAULT
+func (p *ProtocolConfigGemini) GetLocation() (v string) {
+	if !p.IsSetLocation() {
+		return ProtocolConfigGemini_Location_DEFAULT
 	}
-	return p.SafetySettings
-}
-func (p *ProtocolConfigGemini) SetResponseSchema(val *string) {
-	p.ResponseSchema = val
-}
-func (p *ProtocolConfigGemini) SetEnableCodeExecution(val *bool) {
-	p.EnableCodeExecution = val
-}
-func (p *ProtocolConfigGemini) SetSafetySettings(val []*ProtocolConfigGeminiSafetySetting) {
-	p.SafetySettings = val
+	return *p.Location
 }
 
-func (p *ProtocolConfigGemini) IsSetResponseSchema() bool {
-	return p.ResponseSchema != nil
+var ProtocolConfigGemini_APIVersion_DEFAULT string
+
+func (p *ProtocolConfigGemini) GetAPIVersion() (v string) {
+	if !p.IsSetAPIVersion() {
+		return ProtocolConfigGemini_APIVersion_DEFAULT
+	}
+	return *p.APIVersion
 }
 
-func (p *ProtocolConfigGemini) IsSetEnableCodeExecution() bool {
-	return p.EnableCodeExecution != nil
+var ProtocolConfigGemini_TimeoutMs_DEFAULT string
+
+func (p *ProtocolConfigGemini) GetTimeoutMs() (v string) {
+	if !p.IsSetTimeoutMs() {
+		return ProtocolConfigGemini_TimeoutMs_DEFAULT
+	}
+	return *p.TimeoutMs
 }
 
-func (p *ProtocolConfigGemini) IsSetSafetySettings() bool {
-	return p.SafetySettings != nil
+var ProtocolConfigGemini_IncludeThoughts_DEFAULT bool
+
+func (p *ProtocolConfigGemini) GetIncludeThoughts() (v bool) {
+	if !p.IsSetIncludeThoughts() {
+		return ProtocolConfigGemini_IncludeThoughts_DEFAULT
+	}
+	return *p.IncludeThoughts
+}
+
+var ProtocolConfigGemini_ThinkingBudget_DEFAULT int32
+
+func (p *ProtocolConfigGemini) GetThinkingBudget() (v int32) {
+	if !p.IsSetThinkingBudget() {
+		return ProtocolConfigGemini_ThinkingBudget_DEFAULT
+	}
+	return *p.ThinkingBudget
+}
+
+var ProtocolConfigGemini_Headers_DEFAULT map[string][]string
+
+func (p *ProtocolConfigGemini) GetHeaders() (v map[string][]string) {
+	if !p.IsSetHeaders() {
+		return ProtocolConfigGemini_Headers_DEFAULT
+	}
+	return p.Headers
+}
+func (p *ProtocolConfigGemini) SetBackend(val *int32) {
+	p.Backend = val
+}
+func (p *ProtocolConfigGemini) SetProject(val *string) {
+	p.Project = val
+}
+func (p *ProtocolConfigGemini) SetLocation(val *string) {
+	p.Location = val
+}
+func (p *ProtocolConfigGemini) SetAPIVersion(val *string) {
+	p.APIVersion = val
+}
+func (p *ProtocolConfigGemini) SetTimeoutMs(val *string) {
+	p.TimeoutMs = val
+}
+func (p *ProtocolConfigGemini) SetIncludeThoughts(val *bool) {
+	p.IncludeThoughts = val
+}
+func (p *ProtocolConfigGemini) SetThinkingBudget(val *int32) {
+	p.ThinkingBudget = val
+}
+func (p *ProtocolConfigGemini) SetHeaders(val map[string][]string) {
+	p.Headers = val
+}
+
+func (p *ProtocolConfigGemini) IsSetBackend() bool {
+	return p.Backend != nil
+}
+
+func (p *ProtocolConfigGemini) IsSetProject() bool {
+	return p.Project != nil
+}
+
+func (p *ProtocolConfigGemini) IsSetLocation() bool {
+	return p.Location != nil
+}
+
+func (p *ProtocolConfigGemini) IsSetAPIVersion() bool {
+	return p.APIVersion != nil
+}
+
+func (p *ProtocolConfigGemini) IsSetTimeoutMs() bool {
+	return p.TimeoutMs != nil
+}
+
+func (p *ProtocolConfigGemini) IsSetIncludeThoughts() bool {
+	return p.IncludeThoughts != nil
+}
+
+func (p *ProtocolConfigGemini) IsSetThinkingBudget() bool {
+	return p.ThinkingBudget != nil
+}
+
+func (p *ProtocolConfigGemini) IsSetHeaders() bool {
+	return p.Headers != nil
 }
 
 func (p *ProtocolConfigGemini) String() string {
@@ -949,57 +1027,6 @@ func (p *ProtocolConfigGemini) String() string {
 		return "<nil>"
 	}
 	return fmt.Sprintf("ProtocolConfigGemini(%+v)", *p)
-}
-
-type ProtocolConfigGeminiSafetySetting struct {
-	Category  *int32 `thrift:"category,1,optional" json:"category,omitempty"`
-	Threshold *int32 `thrift:"threshold,2,optional" json:"threshold,omitempty"`
-}
-
-func NewProtocolConfigGeminiSafetySetting() *ProtocolConfigGeminiSafetySetting {
-	return &ProtocolConfigGeminiSafetySetting{}
-}
-
-func (p *ProtocolConfigGeminiSafetySetting) InitDefault() {
-}
-
-var ProtocolConfigGeminiSafetySetting_Category_DEFAULT int32
-
-func (p *ProtocolConfigGeminiSafetySetting) GetCategory() (v int32) {
-	if !p.IsSetCategory() {
-		return ProtocolConfigGeminiSafetySetting_Category_DEFAULT
-	}
-	return *p.Category
-}
-
-var ProtocolConfigGeminiSafetySetting_Threshold_DEFAULT int32
-
-func (p *ProtocolConfigGeminiSafetySetting) GetThreshold() (v int32) {
-	if !p.IsSetThreshold() {
-		return ProtocolConfigGeminiSafetySetting_Threshold_DEFAULT
-	}
-	return *p.Threshold
-}
-func (p *ProtocolConfigGeminiSafetySetting) SetCategory(val *int32) {
-	p.Category = val
-}
-func (p *ProtocolConfigGeminiSafetySetting) SetThreshold(val *int32) {
-	p.Threshold = val
-}
-
-func (p *ProtocolConfigGeminiSafetySetting) IsSetCategory() bool {
-	return p.Category != nil
-}
-
-func (p *ProtocolConfigGeminiSafetySetting) IsSetThreshold() bool {
-	return p.Threshold != nil
-}
-
-func (p *ProtocolConfigGeminiSafetySetting) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("ProtocolConfigGeminiSafetySetting(%+v)", *p)
 }
 
 type ProtocolConfigOllama struct {
@@ -1207,14 +1234,14 @@ func (p *ParamConfig) String() string {
 }
 
 type ParamSchema struct {
-	Name         *string        `thrift:"name,1,optional" json:"name,omitempty"`
-	Label        *string        `thrift:"label,2,optional" json:"label,omitempty"`
-	Desc         *string        `thrift:"desc,3,optional" json:"desc,omitempty"`
-	Type         *ParamType     `thrift:"type,4,optional" json:"type,omitempty"`
-	Min          *string        `thrift:"min,5,optional" json:"min,omitempty"`
-	Max          *string        `thrift:"max,6,optional" json:"max,omitempty"`
-	DefaultValue *string        `thrift:"default_value,7,optional" json:"default_value,omitempty"`
-	Options      []*ParamOption `thrift:"options,8,optional,list<ParamOption>" json:"options,omitempty"`
+	Name         *string                `thrift:"name,1,optional" json:"name,omitempty"`
+	Label        *string                `thrift:"label,2,optional" json:"label,omitempty"`
+	Desc         *string                `thrift:"desc,3,optional" json:"desc,omitempty"`
+	Type         *ParamType             `thrift:"type,4,optional" json:"type,omitempty"`
+	Min          *string                `thrift:"min,5,optional" json:"min,omitempty"`
+	Max          *string                `thrift:"max,6,optional" json:"max,omitempty"`
+	DefaultValue map[DefaultType]string `thrift:"default_value,7,optional" json:"default_value,omitempty"`
+	Options      []*ParamOption         `thrift:"options,8,optional,list<ParamOption>" json:"options,omitempty"`
 }
 
 func NewParamSchema() *ParamSchema {
@@ -1278,13 +1305,13 @@ func (p *ParamSchema) GetMax() (v string) {
 	return *p.Max
 }
 
-var ParamSchema_DefaultValue_DEFAULT string
+var ParamSchema_DefaultValue_DEFAULT map[DefaultType]string
 
-func (p *ParamSchema) GetDefaultValue() (v string) {
+func (p *ParamSchema) GetDefaultValue() (v map[DefaultType]string) {
 	if !p.IsSetDefaultValue() {
 		return ParamSchema_DefaultValue_DEFAULT
 	}
-	return *p.DefaultValue
+	return p.DefaultValue
 }
 
 var ParamSchema_Options_DEFAULT []*ParamOption
@@ -1313,7 +1340,7 @@ func (p *ParamSchema) SetMin(val *string) {
 func (p *ParamSchema) SetMax(val *string) {
 	p.Max = val
 }
-func (p *ParamSchema) SetDefaultValue(val *string) {
+func (p *ParamSchema) SetDefaultValue(val map[DefaultType]string) {
 	p.DefaultValue = val
 }
 func (p *ParamSchema) SetOptions(val []*ParamOption) {

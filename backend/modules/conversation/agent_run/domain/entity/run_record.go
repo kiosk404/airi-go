@@ -2,11 +2,11 @@ package entity
 
 import (
 	"github.com/cloudwego/eino/schema"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/agentrun"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/message"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/singleagent"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/common"
 	modelMessage "github.com/kiosk404/airi-go/backend/api/model/conversation/message"
+	singleagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
+	agentrun "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/agentrun/model"
+	message "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/model"
 )
 
 type RunRecordMeta struct {
@@ -152,3 +152,5 @@ type CancelRunMeta struct {
 	ConversationID int64 `json:"conversation_id"`
 	RunID          int64 `json:"run_id"`
 }
+
+type Usage agentrun.Usage

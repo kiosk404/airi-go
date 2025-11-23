@@ -5,11 +5,11 @@ import (
 	"time"
 
 	"github.com/cloudwego/eino/schema"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/agentrun"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/repo"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/pkg"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/pkg/errno"
+	agentrun "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/agentrun/model"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
 

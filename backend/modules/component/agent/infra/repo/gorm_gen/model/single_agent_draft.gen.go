@@ -15,6 +15,7 @@ const TableNameSingleAgentDraft = "single_agent_draft"
 type SingleAgentDraft struct {
 	ID                      int64                             `gorm:"column:id;type:bigint(20) unsigned;primaryKey;autoIncrement:true;comment:Primary Key ID" json:"id"`                              // Primary Key ID
 	AgentID                 int64                             `gorm:"column:agent_id;type:bigint(20);not null;uniqueIndex:uniq_agent_id,priority:1;comment:Agent ID" json:"agent_id"`                 // Agent ID
+	CreatorID               int64                             `gorm:"column:creator_id;type:bigint(20);not null;comment:Creator ID" json:"creator_id"`                                                // Creator ID
 	Name                    string                            `gorm:"column:name;type:varchar(255);not null;comment:Agent Name" json:"name"`                                                          // Agent Name
 	Description             *string                           `gorm:"column:description;type:text;comment:Agent Description" json:"description"`                                                      // Agent Description
 	IconURI                 string                            `gorm:"column:icon_uri;type:varchar(255);not null;comment:Icon URI" json:"icon_uri"`                                                    // Icon URI

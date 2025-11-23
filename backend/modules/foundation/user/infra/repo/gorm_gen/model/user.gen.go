@@ -17,7 +17,7 @@ type User struct {
 	IconURI      string `gorm:"column:icon_uri;type:varchar(512);not null;comment:Avatar URI" json:"icon_uri"`                                                    // Avatar URI
 	UserVerified bool   `gorm:"column:user_verified;type:tinyint(1);not null;comment:User Verification Status" json:"user_verified"`                              // User Verification Status
 	Locale       string `gorm:"column:locale;type:varchar(128);not null;comment:Locale" json:"locale"`                                                            // Locale
-	SessionKey   string `gorm:"column:session_key;type:varchar(256);not null;index:idx_session_key,priority:1;comment:Session Key" json:"session_key"`            // Session Key
+	SessionKey   string `gorm:"column:session_key;type:varchar(512);not null;index:idx_session_key,priority:1;comment:Session Key" json:"session_key"`            // Session Key
 	CreatedAt    int64  `gorm:"column:created_at;type:bigint(20) unsigned;not null;comment:Creation Time (Milliseconds)" json:"created_at"`                       // Creation Time (Milliseconds)
 	UpdatedAt    int64  `gorm:"column:updated_at;type:bigint(20) unsigned;not null;comment:Update Time (Milliseconds)" json:"updated_at"`                         // Update Time (Milliseconds)
 	DeletedAt    *int64 `gorm:"column:deleted_at;type:bigint(20) unsigned;comment:Deletion Time (Milliseconds)" json:"deleted_at"`                                // Deletion Time (Milliseconds)

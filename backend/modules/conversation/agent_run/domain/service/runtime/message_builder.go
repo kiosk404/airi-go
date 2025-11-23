@@ -7,13 +7,14 @@ import (
 	"time"
 
 	"github.com/cloudwego/eino/schema"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/message"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/singleagent"
 	messageModel "github.com/kiosk404/airi-go/backend/api/model/conversation/message"
 	"github.com/kiosk404/airi-go/backend/infra/contract/imagex"
+	crossagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent"
+	singleagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/pkg/errno"
-	crossmessage "github.com/kiosk404/airi-go/backend/modules/conversation/message/crossdomain"
+	crossmessage "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message"
+	message "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/model"
 	msgEntity "github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/entity"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/json"
@@ -102,27 +103,27 @@ type irMsg struct {
 }
 
 func parseInterruptData(_ context.Context, interruptData *singleagent.InterruptInfo) (string, message.ContentType, error) {
-
+	var data string
 	defaultContentType := message.ContentTypeText
 	switch interruptData.InterruptType {
 	case singleagent.InterruptEventType_OauthPlugin:
-		data := interruptData.AllToolInterruptData[interruptData.ToolCallID].ToolNeedOAuth.Message
+		data = interruptData.AllToolInterruptData[interruptData.ToolCallID].ToolNeedOAuth.Message
 		return data, defaultContentType, nil
 	case singleagent.InterruptEventType_Question:
-		data := interruptData.AllWfInterruptData[interruptData.ToolCallID].InterruptData
+		//data = interruptData.AllWfInterruptData[interruptData.ToolCallID].InterruptData
 		return processQuestionInterruptData(data)
 	case singleagent.InterruptEventType_InputNode:
-		data := interruptData.AllWfInterruptData[interruptData.ToolCallID].InterruptData
+		//data = interruptData.AllWfInterruptData[interruptData.ToolCallID].InterruptData
 		return processInputNodeInterruptData(data)
 	case singleagent.InterruptEventType_WorkflowLLM:
-		toolInterruptEvent := interruptData.AllWfInterruptData[interruptData.ToolCallID].ToolInterruptEvent
-		data := toolInterruptEvent.InterruptData
-		if singleagent.InterruptEventType(toolInterruptEvent.EventType) == singleagent.InterruptEventType_InputNode {
-			return processInputNodeInterruptData(data)
-		}
-		if singleagent.InterruptEventType(toolInterruptEvent.EventType) == singleagent.InterruptEventType_Question {
-			return processQuestionInterruptData(data)
-		}
+		//toolInterruptEvent := interruptData.AllWfInterruptData[interruptData.ToolCallID].ToolInterruptEvent
+		//data := toolInterruptEvent.InterruptData
+		//if singleagent.InterruptEventType(toolInterruptEvent.EventType) == singleagent.InterruptEventType_InputNode {
+		//	return processInputNodeInterruptData(data)
+		//}
+		//if singleagent.InterruptEventType(toolInterruptEvent.EventType) == singleagent.InterruptEventType_Question {
+		//	return processQuestionInterruptData(data)
+		//}
 		return "", defaultContentType, errorx.New(errno.ErrUnknowInterruptType)
 
 	}

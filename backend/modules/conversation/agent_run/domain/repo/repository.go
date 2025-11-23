@@ -4,13 +4,13 @@ import (
 	"context"
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
+	"github.com/kiosk404/airi-go/backend/infra/contract/rdb"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/infra/repo/dao"
-	"gorm.io/gorm"
 )
 
-func NewRunRecordRepo(db *gorm.DB, idGen idgen.IDGenerator) RunRecordRepo {
-	return dao.NewRunRecordDAO(db, idGen)
+func NewRunRecordRepo(rdb rdb.Provider, idGen idgen.IDGenerator) RunRecordRepo {
+	return dao.NewRunRecordDAO(rdb.NewSession(context.Background()).DB(), idGen)
 }
 
 type RunRecordRepo interface {

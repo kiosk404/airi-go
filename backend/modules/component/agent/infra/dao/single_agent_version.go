@@ -4,12 +4,12 @@ import (
 	"context"
 	"errors"
 
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/singleagent"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/infra/repo/gorm_gen/model"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/infra/repo/gorm_gen/query"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg/errno"
+	singleagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"gorm.io/gorm"

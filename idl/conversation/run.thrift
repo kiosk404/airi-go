@@ -83,15 +83,15 @@ struct AdditionalContent {
 }
 
 struct AgentRunRequest  {
-    1 :          i64             bot_id    (api.js_conv='true') , //agent id
-    2 : required i64             conversation_id  (api.js_conv='true')         , // session id
+    1 :          i64                bot_id    (api.js_conv='true', go.tag='form:"bot_id" json:"bot_id,string" query:"bot_id"'), //agent id
+    2 : required i64                conversation_id  (api.js_conv='true', go.tag='form:"conversation_id" json:"conversation_id,string" query:"conversation_id"'), // session id
     5 : required string             query                      ,
     7 :          map<string,string> extra                      , // ext pass-through field
     9 :          map<string,string> custom_variables           ,
     10: optional bool               draft_mode                 , // Draft bot or online bot
-    11: optional common.Scene              scene               , // Explore the scene
+    11: optional common.Scene       scene                      , // Explore the scene
     12: optional string             content_type               , // Files files pictures images etc
-    13: optional i64             regen_message_id   (api.js_conv='true')          , // Retry message id
+    13: optional i64                regen_message_id   (api.js_conv='true')          , // Retry message id
     14: optional string             local_message_id           , // The local message_id on the front end is passed back in the extra_info
     15: optional string             preset_bot                 , // The bot template used, instead of bot_id bot_version draft_mode parameters, coze home uses preset_bot = "coze_home"
     16: optional list<string>       insert_history_message_list,

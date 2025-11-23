@@ -191,7 +191,8 @@ func NewLogger(filename string) (*Logger, error) {
 		}
 
 		function = fmt.Sprintf("%s:%d", relPath, line)
-		return function, filename
+
+		return function, ""
 	}
 
 	// 创建控制台格式化器（带颜色）

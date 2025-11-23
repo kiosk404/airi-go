@@ -3,8 +3,8 @@ package runtime
 import (
 	"context"
 
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/singleagent"
-	crossagent "github.com/kiosk404/airi-go/backend/modules/component/agent/crossdomain"
+	crossagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent"
+	singleagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 )

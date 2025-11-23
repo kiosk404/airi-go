@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `airi_go`.`user`
     `icon_uri` varchar(512) NOT NULL DEFAULT "" COMMENT "Avatar URI",
     `user_verified` bool NOT NULL DEFAULT 0 COMMENT "User Verification Status",
     `locale` varchar(128) NOT NULL DEFAULT "" COMMENT "Locale",
-    `session_key` varchar(256) NOT NULL DEFAULT "" COMMENT "Session Key",
+    `session_key` varchar(512) NOT NULL DEFAULT "" COMMENT "Session Key",
     `created_at` bigint unsigned NOT NULL DEFAULT 0 COMMENT "Creation Time (Milliseconds)",
     `updated_at` bigint unsigned NOT NULL DEFAULT 0 COMMENT "Update Time (Milliseconds)",
     `deleted_at` bigint unsigned NULL COMMENT "Deletion Time (Milliseconds)",

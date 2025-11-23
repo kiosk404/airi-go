@@ -1,0 +1,297 @@
+namespace go modelapi
+
+include "../base.thrift"
+include "../app/developer_api.thrift"
+
+
+struct I18nText {
+    1: string zh_cn
+    2: string en_us
+}
+
+struct ModelProvider {
+    1: I18nText name
+    2: string icon_uri
+    3: string icon_url
+    4: I18nText description
+    5: developer_api.ModelClass model_class
+}
+
+struct DisplayInfo {
+    1: string name
+    3: I18nText description
+    4: i64 output_tokens
+    5: i64 max_tokens
+}
+
+
+enum ModelType {
+    LLM = 0
+    TextEmbedding = 1
+    Rerank = 2
+}
+
+enum ThinkingType {
+    Default = 0
+    Enable = 1
+    Disable = 2
+    Auto = 3
+}
+
+
+enum ModelStatus {
+    StatusDefault = 0  // Default state when not configured, equivalent to StatusInUse
+    StatusInUse   = 1  // In the application, it can be used to create new
+    StatusDeleted = 2 // It is offline, unusable, and cannot be created.
+}
+
+struct Connection {
+    1: BaseConnectionInfo base_conn_info
+    2: optional OpenAIConnInfo openai
+    3: optional DeepseekConnInfo deepseek
+    4: optional GeminiConnInfo gemini
+    5: optional QwenConnInfo qwen
+    6: optional OllamaConnInfo ollama
+    7: optional ClaudeConnInfo claude
+}
+
+struct BaseConnectionInfo {
+    1: string base_url
+    2: string api_key
+    3: string model
+    4: ThinkingType thinking_type
+}
+
+struct EmbeddingInfo {
+    1: i32 dims
+}
+
+struct ArkConnInfo {
+    1: string region
+    3: string api_type
+}
+
+struct OpenAIConnInfo {
+    6: bool by_azure
+    7: string api_version
+}
+
+
+struct GeminiConnInfo {
+    1: i32 backend // "1" for BackendGeminiAPI / "2" for BackendVertexAI
+    2: string project
+    3: string location
+}
+
+struct DeepseekConnInfo {}
+
+struct QwenConnInfo {}
+
+struct OllamaConnInfo {}
+
+struct ClaudeConnInfo {}
+
+struct CreateModelReq {
+    1: developer_api.ModelClass model_class
+    2: string model_name
+    3: Connection connection
+    4: bool enable_base64_url
+
+    255: optional base.Base Base
+}
+
+struct CreateModelResp {
+    1: i64 id (agw.js_conv="str", api.js_conv="true")
+
+    253: required i64 code
+    254: required string msg
+    255: required base.BaseResp BaseResp(api.none="true")
+}
+
+struct DeleteModelReq {
+    1: i64 id (agw.js_conv="str", api.js_conv="true")
+    255: optional base.Base Base
+}
+
+struct DeleteModelResp {
+    253: required i64 code
+    254: required string msg
+    255: required base.BaseResp BaseResp(api.none="true")
+}
+
+struct UpdateModelResp {
+    253: required i64 code
+    254: required string msg
+    255: required base.BaseResp BaseResp(api.none="true")
+}
+
+
+struct SaveBasicConfigurationReq {
+    1: BasicConfiguration configuration
+    255: optional base.Base Base
+}
+
+struct SaveBasicConfigurationResp {
+    253: required i64 code
+    254: required string msg
+    255: required base.BaseResp BaseResp(api.none="true")
+}
+
+struct GetBasicConfigurationReq {
+    255: optional base.Base Base
+}
+
+struct GetBasicConfigurationResp {
+    1: BasicConfiguration configuration
+
+    253: required i64 code
+    254: required string msg
+    255: required base.BaseResp BaseResp(api.none="true")
+}
+
+enum CodeRunnerType {
+    Local = 0
+    Sandbox = 1
+}
+
+struct SandboxConfig {
+    1: string allow_env
+    2: string allow_read
+    3: string allow_write
+    4: string allow_run
+    5: string allow_net
+    6: string allow_ffi
+    7: string node_modules_dir
+    8: double timeout_seconds
+    9: i64 memory_limit_mb
+}
+
+struct BasicConfiguration {
+    1: string admin_emails
+    2: bool disable_user_registration
+    3: string allow_registration_email
+    4: PluginConfiguration plugin_configuration
+    5: CodeRunnerType code_runner_type
+    6: optional SandboxConfig sandbox_config
+    7: string server_host
+}
+
+struct PluginConfiguration {
+    1: bool saas_plugin_enabled
+    2: string api_token
+    3: string saas_api_base_url
+}
+
+struct UpdateKnowledgeConfigReq {
+    1: KnowledgeConfig knowledge_config
+
+    255: optional base.Base Base
+}
+
+struct UpdateKnowledgeConfigResp {
+    253: required i64 code
+    254: required string msg
+    255: required base.BaseResp BaseResp(api.none="true")
+}
+
+
+
+struct GetKnowledgeConfigReq {
+    255: optional base.Base Base
+}
+
+struct GetKnowledgeConfigResp {
+    1: KnowledgeConfig knowledge_config
+
+    253: required i64 code
+    254: required string msg
+    255: required base.BaseResp BaseResp(api.none="true")
+}
+
+struct KnowledgeConfig {
+    1: EmbeddingConfig embedding_config
+    2: RerankConfig rerank_config
+    3: OCRConfig ocr_config
+    4: ParserConfig parser_config
+    5: i64 builtin_model_id
+}
+
+struct EmbeddingConfig {
+    1: EmbeddingType type
+    2: i32 max_batch_size
+    3: EmbeddingConnection connection
+}
+
+enum EmbeddingType {
+    Ark = 0
+    OpenAI = 1
+    Ollama = 2
+    Gemini = 3
+    HTTP = 4
+}
+
+struct EmbeddingConnection {
+    1: BaseConnectionInfo base_conn_info
+    2: EmbeddingInfo embedding_info
+    3: optional OpenAIConnInfo openai
+    4: optional OllamaConnInfo ollama
+    5: optional GeminiConnInfo gemini
+    6: optional HttpConnection http
+}
+
+struct HttpConnection {
+    1: string address
+}
+
+enum RerankType {
+    VikingDB = 0
+    RRF = 1
+}
+
+
+struct RerankConfig {
+    1: RerankType type
+    2: VikingDBConfig vikingdb_config
+}
+
+struct VikingDBConfig {
+    1: string ak
+    2: string sk
+    3: string host
+    4: string region
+    5: string model
+}
+
+enum OCRType {
+    Volcengine = 0
+    Paddleocr = 1
+}
+
+struct OCRConfig {
+    1: OCRType type
+    2: string volcengine_ak
+    3: string volcengine_sk
+    4: string paddleocr_api_url
+}
+
+enum ParserType {
+   builtin = 0
+   Paddleocr = 1
+}
+
+struct ParserConfig {
+    1: ParserType type
+    2: string paddleocr_structure_api_url
+}
+
+service ModelConfigService {
+    GetBasicConfigurationResp GetBasicConfiguration(1:GetBasicConfigurationReq req)(api.get='/api/admin/config/basic/get', api.category="admin")
+    SaveBasicConfigurationResp SaveBasicConfiguration(1:SaveBasicConfigurationReq req)(api.post='/api/admin/config/basic/save', api.category="admin")
+    GetKnowledgeConfigResp GetKnowledgeConfig(1:GetKnowledgeConfigReq req)(api.get='/api/admin/config/knowledge/get', api.category="admin")
+    UpdateKnowledgeConfigResp UpdateKnowledgeConfig(1:UpdateKnowledgeConfigReq req)(api.post='/api/admin/config/knowledge/save', api.category="admin")
+    CreateModelResp CreateModel(1:CreateModelReq req)(api.post='/api/admin/config/model/create', api.category="admin")
+    DeleteModelResp DeleteModel(1:DeleteModelReq req)(api.post='/api/admin/config/model/delete', api.category="admin")
+}
+
+
+

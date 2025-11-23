@@ -16,8 +16,8 @@ func NewSingleAgentRepo(rdb rdb.Provider, idGen idgen.IDGenerator, cli cache.Cmd
 
 //go:generate mockgen -destination=mocks/single_agent_draft.go -package=mocks . SingleAgentDraftRepo
 type SingleAgentDraftRepo interface {
-	Create(ctx context.Context, draft *entity.SingleAgent) (draftID int64, err error)
-	CreateWithID(ctx context.Context, agentID int64, draft *entity.SingleAgent) (draftID int64, err error)
+	Create(ctx context.Context, creatorID int64, draft *entity.SingleAgent) (draftID int64, err error)
+	CreateWithID(ctx context.Context, agentID, creator int64, draft *entity.SingleAgent) (draftID int64, err error)
 	Get(ctx context.Context, agentID int64) (*entity.SingleAgent, error)
 	MGet(ctx context.Context, agentIDs []int64) ([]*entity.SingleAgent, error)
 	Delete(ctx context.Context, agentID int64) (err error)

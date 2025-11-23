@@ -1,15 +1,10 @@
 package entity
 
-type Scenario string
-
-const (
-	ScenarioDefault   Scenario = "default"
-	ScenarioEvaluator Scenario = "evaluator"
+import (
+	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 )
 
-func ScenarioValue(scenario *Scenario) Scenario {
-	if scenario == nil {
-		return ScenarioDefault
-	}
-	return *scenario
-}
+type Scenario = model.Scenario
+
+var ScenarioDefault = model.ScenarioDefault
+var ScenarioEvaluator = model.ScenarioEvaluator

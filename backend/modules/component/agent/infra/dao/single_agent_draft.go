@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/singleagent"
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_common"
 	"github.com/kiosk404/airi-go/backend/infra/contract/cache"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
@@ -12,6 +11,7 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/infra/repo/gorm_gen/model"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/infra/repo/gorm_gen/query"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg/errno"
+	singleagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"gorm.io/gorm"
@@ -31,18 +31,19 @@ func NewSingleAgentDraftDAO(db *gorm.DB, idGen idgen.IDGenerator, cli cache.Cmda
 	}
 }
 
-func (sa *SingleAgentDraftDAO) Create(ctx context.Context, draft *entity.SingleAgent) (draftID int64, err error) {
+func (sa *SingleAgentDraftDAO) Create(ctx context.Context, creatorID int64, draft *entity.SingleAgent) (draftID int64, err error) {
 	id, err := sa.idGen.GenID(ctx)
 	if err != nil {
 		return 0, errorx.WrapByCode(err, errno.ErrAgentIDGenFailCode, errorx.KV("msg", "CreatePromptResource"))
 	}
 
-	return sa.CreateWithID(ctx, id, draft)
+	return sa.CreateWithID(ctx, id, creatorID, draft)
 }
 
-func (sa *SingleAgentDraftDAO) CreateWithID(ctx context.Context, agentID int64, draft *entity.SingleAgent) (draftID int64, err error) {
+func (sa *SingleAgentDraftDAO) CreateWithID(ctx context.Context, agentID, creatorID int64, draft *entity.SingleAgent) (draftID int64, err error) {
 	po := sa.singleAgentDraftDo2Po(draft)
 	po.AgentID = agentID
+	po.CreatorID = creatorID
 
 	err = sa.dbQuery.SingleAgentDraft.WithContext(ctx).Create(po)
 	if err != nil {

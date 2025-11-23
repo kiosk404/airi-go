@@ -8,15 +8,15 @@ import (
 	"sync"
 
 	"github.com/cloudwego/eino/schema"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/agentrun"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/message"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/singleagent"
 	"github.com/kiosk404/airi-go/backend/infra/contract/imagex"
-	crossagent "github.com/kiosk404/airi-go/backend/modules/component/agent/crossdomain"
+	crossagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent"
+	singleagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/pkg"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/pkg/errno"
-	crossmessage "github.com/kiosk404/airi-go/backend/modules/conversation/message/crossdomain"
+	agentrun "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/agentrun/model"
+	crossmessage "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message"
+	message "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/model"
 	msgEntity "github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/entity"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
@@ -30,11 +30,9 @@ func (art *AgentRuntime) AgentStreamExecute(ctx context.Context, imagex imagex.I
 
 	ar := &crossagent.AgentRuntime{
 		AgentVersion:     art.GetRunMeta().Version,
-		SpaceID:          art.GetRunMeta().SpaceID,
 		AgentID:          art.GetRunMeta().AgentID,
 		IsDraft:          art.GetRunMeta().IsDraft,
 		UserID:           art.GetRunMeta().UserID,
-		ConnectorID:      art.GetRunMeta().ConnectorID,
 		PreRetrieveTools: art.GetRunMeta().PreRetrieveTools,
 		Input:            transMessageToSchemaMessage(ctx, []*msgEntity.Message{art.GetInput()}, imagex)[0],
 		HistoryMsg:       transMessageToSchemaMessage(ctx, historyPairs(art.GetHistory()), imagex),

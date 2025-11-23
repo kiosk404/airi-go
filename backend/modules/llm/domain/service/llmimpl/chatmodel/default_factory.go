@@ -67,9 +67,9 @@ func (f *defaultFactory) SupportProtocol(protocol entity.Protocol) bool {
 
 func openAIBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, error) {
 	cfg := &openai.ChatModelConfig{
-		APIKey:           config.APIKey,
-		BaseURL:          config.BaseURL,
-		Model:            config.Model,
+		APIKey:           config.GetAPIKey(),
+		BaseURL:          config.GetBaseURL(),
+		Model:            config.GetModel(),
 		MaxTokens:        config.MaxTokens,
 		Temperature:      config.Temperature,
 		TopP:             config.TopP,
@@ -77,23 +77,23 @@ func openAIBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, e
 		PresencePenalty:  config.PresencePenalty,
 		FrequencyPenalty: config.FrequencyPenalty,
 	}
-	if config.TimeoutMs != nil {
-		cfg.Timeout = time.Duration(*config.TimeoutMs) * time.Millisecond
+	if config.Timeout != 0 {
+		cfg.Timeout = time.Duration(config.Timeout) * time.Millisecond
 	}
 
-	configProtocol := config.ProtocolConfigOpenAI
+	configProtocol := config.ProtocolConfigOpenai
 
 	if configProtocol != nil {
-		cfg.ByAzure = configProtocol.ByAzure
-		cfg.APIVersion = configProtocol.ApiVersion
+		cfg.ByAzure = configProtocol.GetByAzure()
+		cfg.APIVersion = configProtocol.GetAPIVersion()
 		var js acl_openai.ChatCompletionResponseFormatJSONSchema
-		if configProtocol.ResponseFormatJsonSchema != "" {
-			if err := sonic.UnmarshalString(configProtocol.ResponseFormatJsonSchema, js); err != nil {
+		if configProtocol.GetResponseFormatType() != "" {
+			if err := sonic.UnmarshalString(configProtocol.GetResponseFormatJSONSchema(), js); err != nil {
 				return nil, err
 			}
 		}
 		cfg.ResponseFormat = &acl_openai.ChatCompletionResponseFormat{
-			Type:       acl_openai.ChatCompletionResponseFormatType(configProtocol.ResponseFormatType),
+			Type:       acl_openai.ChatCompletionResponseFormatType(configProtocol.GetResponseFormatType()),
 			JSONSchema: &js,
 		}
 
@@ -103,14 +103,14 @@ func openAIBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, e
 
 func claudeBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, error) {
 	cfg := &claude.Config{
-		APIKey:        config.APIKey,
-		Model:         config.Model,
+		APIKey:        config.GetAPIKey(),
+		Model:         config.GetModel(),
 		Temperature:   config.Temperature,
 		TopP:          config.TopP,
 		StopSequences: config.Stop,
 	}
-	if config.BaseURL != "" {
-		cfg.BaseURL = &config.BaseURL
+	if ptr.From(config.BaseURL) != "" {
+		cfg.BaseURL = config.BaseURL
 	}
 	if config.MaxTokens != nil {
 		cfg.MaxTokens = *config.MaxTokens
@@ -120,18 +120,18 @@ func claudeBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, e
 	}
 	configProtocol := config.ProtocolConfigClaude
 	if configProtocol != nil {
-		cfg.ByBedrock = configProtocol.ByBedrock
-		cfg.AccessKey = configProtocol.AccessKey
-		cfg.SecretAccessKey = configProtocol.SecretAccessKey
-		cfg.SessionToken = configProtocol.SessionToken
-		cfg.Region = configProtocol.Region
+		cfg.ByBedrock = configProtocol.GetByBedrock()
+		cfg.AccessKey = configProtocol.GetAccessKey()
+		cfg.SecretAccessKey = configProtocol.GetSecretAccessKey()
+		cfg.SessionToken = configProtocol.GetSessionToken()
+		cfg.Region = configProtocol.GetRegion()
 	}
 	if config.EnableThinking != nil {
 		cfg.Thinking = &claude.Thinking{
 			Enable: ptr.From(config.EnableThinking),
 		}
 		if configProtocol != nil && configProtocol.BudgetTokens != nil {
-			cfg.Thinking.BudgetTokens = ptr.From(configProtocol.BudgetTokens)
+			cfg.Thinking.BudgetTokens = int(configProtocol.GetBudgetTokens())
 		}
 	}
 	return claude.NewChatModel(ctx, cfg)
@@ -139,13 +139,13 @@ func claudeBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, e
 
 func deepseekBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, error) {
 	cfg := &deepseek.ChatModelConfig{
-		APIKey:  config.APIKey,
-		BaseURL: config.BaseURL,
-		Model:   config.Model,
+		APIKey:  config.GetAPIKey(),
+		BaseURL: config.GetBaseURL(),
+		Model:   config.GetModel(),
 		Stop:    config.Stop,
 	}
-	if config.TimeoutMs != nil {
-		cfg.Timeout = time.Duration(*config.TimeoutMs) * time.Millisecond
+	if config.Timeout != 0 {
+		cfg.Timeout = time.Duration(config.Timeout) * time.Millisecond
 	}
 	if config.Temperature != nil {
 		cfg.Temperature = *config.Temperature
@@ -163,19 +163,21 @@ func deepseekBuilder(ctx context.Context, config *Config) (ToolCallingChatModel,
 		cfg.TopP = *config.TopP
 	}
 
-	protocolConfig := config.ProtocolConfigDeepSeek
+	protocolConfig := config.ProtocolConfigDeepseek
 	if protocolConfig != nil {
-		cfg.ResponseFormatType = deepseek.ResponseFormatType(protocolConfig.ResponseFormatType)
+		cfg.ResponseFormatType = deepseek.ResponseFormatType(protocolConfig.GetResponseFormatType())
 	}
 
 	return deepseek.NewChatModel(ctx, cfg)
 }
 
 func ollamaBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, error) {
+	configProtocol := config.ProtocolConfigOllama
+
 	cfg := &ollama.ChatModelConfig{
-		BaseURL:    config.BaseURL,
+		BaseURL:    config.GetBaseURL(),
+		Model:      config.GetModel(),
 		HTTPClient: nil,
-		Model:      config.Model,
 		Format:     nil,
 		KeepAlive:  nil,
 		Options: &api.Options{
@@ -187,20 +189,26 @@ func ollamaBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, e
 			Stop:             config.Stop,
 		},
 	}
-	if config.TimeoutMs != nil {
-		cfg.Timeout = time.Duration(*config.TimeoutMs) * time.Millisecond
+	if config.Timeout != 0 {
+		cfg.Timeout = time.Duration(config.Timeout) * time.Millisecond
 	}
 	if config.EnableThinking != nil {
 		cfg.Thinking = &ollamaapi.ThinkValue{Value: ptr.From(config.EnableThinking)}
+	}
+	if configProtocol.IsSetKeepAliveMs() {
+		cfg.KeepAlive = ptr.Of(time.Duration(configProtocol.GetKeepAliveMs()) * time.Millisecond)
+	}
+	if configProtocol.IsSetFormat() {
+		cfg.Format = []byte(configProtocol.GetFormat())
 	}
 	return ollama.NewChatModel(ctx, cfg)
 }
 
 func qwenBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, error) {
 	cfg := &qwen.ChatModelConfig{
-		APIKey:           config.APIKey,
-		BaseURL:          config.BaseURL,
-		Model:            config.Model,
+		APIKey:           config.GetAPIKey(),
+		BaseURL:          config.GetBaseURL(),
+		Model:            config.GetModel(),
 		MaxTokens:        config.MaxTokens,
 		Temperature:      config.Temperature,
 		TopP:             config.TopP,
@@ -209,15 +217,15 @@ func qwenBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, err
 		FrequencyPenalty: config.FrequencyPenalty,
 		EnableThinking:   config.EnableThinking,
 	}
-	if config.TimeoutMs != nil {
-		cfg.Timeout = time.Duration(*config.TimeoutMs) * time.Millisecond
+	if config.Timeout != 0 {
+		cfg.Timeout = time.Duration(config.Timeout) * time.Millisecond
 	}
 	configProtocol := config.ProtocolConfigQwen
 	if configProtocol != nil {
 		if configProtocol.ResponseFormatType != nil {
 			var js acl_openai.ChatCompletionResponseFormatJSONSchema
-			if configProtocol.ResponseFormatJsonSchema != nil {
-				if err := sonic.UnmarshalString(ptr.From(configProtocol.ResponseFormatJsonSchema), js); err != nil {
+			if configProtocol.ResponseFormatJSONSchema != nil {
+				if err := sonic.UnmarshalString(configProtocol.GetResponseFormatJSONSchema(), js); err != nil {
 					return nil, err
 				}
 			}
@@ -232,20 +240,19 @@ func qwenBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, err
 
 func geminiBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, error) {
 	gc := &genai.ClientConfig{
-		APIKey: config.APIKey,
+		APIKey: config.GetAPIKey(),
 		HTTPOptions: genai.HTTPOptions{
-			BaseURL: config.BaseURL,
+			BaseURL: config.GetBaseURL(),
 		},
 	}
 	configProtocol := config.ProtocolConfigGemini
 
 	if configProtocol != nil {
-		gc.Backend = configProtocol.Backend
-		gc.Project = configProtocol.Project
-		gc.Location = configProtocol.Location
-		gc.HTTPOptions.APIVersion = configProtocol.APIVersion
+		gc.Backend = genai.Backend(configProtocol.GetBackend())
+		gc.Project = configProtocol.GetProject()
+		gc.Location = configProtocol.GetLocation()
+		gc.HTTPOptions.APIVersion = configProtocol.GetAPIVersion()
 		gc.HTTPOptions.Headers = configProtocol.Headers
-
 	}
 
 	client, err := genai.NewClient(ctx, gc)
@@ -255,7 +262,7 @@ func geminiBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, e
 
 	cfg := &gemini.Config{
 		Client:      client,
-		Model:       config.Model,
+		Model:       config.GetModel(),
 		MaxTokens:   config.MaxTokens,
 		Temperature: config.Temperature,
 		TopP:        config.TopP,
@@ -275,19 +282,6 @@ func geminiBuilder(ctx context.Context, config *Config) (ToolCallingChatModel, e
 		}
 		if protocolConfig.ThinkingBudget != nil {
 			cfg.ThinkingConfig.ThinkingBudget = protocolConfig.ThinkingBudget
-		}
-
-		if protocolConfig.ResponseSchema != nil && *protocolConfig.ResponseSchema != "" {
-			if err := sonic.UnmarshalString(*protocolConfig.ResponseSchema, &cfg.ResponseSchema); err != nil {
-				return nil, err
-			}
-		}
-		cfg.EnableCodeExecution = protocolConfig.EnableCodeExecution
-		for _, ss := range protocolConfig.SafetySettings {
-			cfg.SafetySettings = append(cfg.SafetySettings, &genai.SafetySetting{
-				Category:  genai.HarmCategory(ss.Category),
-				Threshold: genai.HarmBlockThreshold(ss.Threshold),
-			})
 		}
 	}
 

@@ -6,6 +6,7 @@ import (
 	einoModel "github.com/cloudwego/eino/components/model"
 	"github.com/cloudwego/eino/schema"
 	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
 	"github.com/pkg/errors"
@@ -33,13 +34,13 @@ func FromDOMessage(do *Message) *schema.Message {
 	}
 }
 
-func FromDOChatMsgParts(ps []*ChatMessagePart) []schema.ChatMessagePart {
-	return slices.Map(ps, func(p *ChatMessagePart, _ int) schema.ChatMessagePart {
+func FromDOChatMsgParts(ps []*model.ChatMessagePart) []schema.ChatMessagePart {
+	return slices.Map(ps, func(p *model.ChatMessagePart, _ int) schema.ChatMessagePart {
 		return FromDOChatMsgPart(p)
 	})
 }
 
-func FromDOChatMsgPart(p *ChatMessagePart) schema.ChatMessagePart {
+func FromDOChatMsgPart(p *model.ChatMessagePart) schema.ChatMessagePart {
 	if p == nil {
 		return schema.ChatMessagePart{}
 	}
@@ -50,7 +51,7 @@ func FromDOChatMsgPart(p *ChatMessagePart) schema.ChatMessagePart {
 	}
 }
 
-func FromDOImageURL(p *ChatMessageImageURL) *schema.ChatMessageImageURL {
+func FromDOImageURL(p *model.ChatMessageImageURL) *schema.ChatMessageImageURL {
 	if p == nil {
 		return nil
 	}
@@ -61,18 +62,18 @@ func FromDOImageURL(p *ChatMessageImageURL) *schema.ChatMessageImageURL {
 	}
 }
 
-func FromDOToolCalls(ts []*ToolCall) []schema.ToolCall {
-	return slices.Map(ts, func(t *ToolCall, _ int) schema.ToolCall {
+func FromDOToolCalls(ts []*model.ToolCall) []schema.ToolCall {
+	return slices.Map(ts, func(t *model.ToolCall, _ int) schema.ToolCall {
 		return FromDOToolCall(t)
 	})
 }
 
-func FromDOToolCall(t *ToolCall) schema.ToolCall {
+func FromDOToolCall(t *model.ToolCall) schema.ToolCall {
 	if t == nil {
 		return schema.ToolCall{}
 	}
 	return schema.ToolCall{
-		Index: ptr.PtrConvert(t.Index, func(f int64) int {
+		Index: ptr.PtrConvertMap(t.Index, func(f int64) int {
 			return int(f)
 		}),
 		ID:       t.ID,
@@ -81,7 +82,7 @@ func FromDOToolCall(t *ToolCall) schema.ToolCall {
 	}
 }
 
-func FromDOFunctionCall(f *FunctionCall) schema.FunctionCall {
+func FromDOFunctionCall(f *model.FunctionCall) schema.FunctionCall {
 	if f == nil {
 		return schema.FunctionCall{}
 	}
@@ -91,7 +92,7 @@ func FromDOFunctionCall(f *FunctionCall) schema.FunctionCall {
 	}
 }
 
-func FromDOResponseMeta(rm *ResponseMeta) *schema.ResponseMeta {
+func FromDOResponseMeta(rm *model.ResponseMeta) *schema.ResponseMeta {
 	if rm == nil {
 		return nil
 	}
@@ -101,7 +102,7 @@ func FromDOResponseMeta(rm *ResponseMeta) *schema.ResponseMeta {
 	}
 }
 
-func FromDOTokenUsage(tu *TokenUsage) *schema.TokenUsage {
+func FromDOTokenUsage(tu *model.TokenUsage) *schema.TokenUsage {
 	if tu == nil {
 		return nil
 	}
@@ -112,7 +113,7 @@ func FromDOTokenUsage(tu *TokenUsage) *schema.TokenUsage {
 	}
 }
 
-func FromDOOptions(options *Options) ([]einoModel.Option, error) {
+func FromDOOptions(options *model.Options) ([]einoModel.Option, error) {
 	var res []einoModel.Option
 	if options.Temperature != nil {
 		res = append(res, einoModel.WithTemperature(*options.Temperature))
@@ -135,20 +136,20 @@ func FromDOOptions(options *Options) ([]einoModel.Option, error) {
 	return res, nil
 }
 
-func FromDOToolChoice(do ToolChoice) (einoToolChoice schema.ToolChoice) {
+func FromDOToolChoice(do model.ToolChoice) (einoToolChoice schema.ToolChoice) {
 	switch do {
-	case ToolChoiceNone:
+	case model.ToolChoiceNone:
 		return schema.ToolChoiceForbidden
-	case ToolChoiceAuto:
+	case model.ToolChoiceAuto:
 		return schema.ToolChoiceAllowed
-	case ToolChoiceRequired:
+	case model.ToolChoiceRequired:
 		return schema.ToolChoiceForced
 	default:
 		return
 	}
 }
 
-func FromDOTools(dos []*ToolInfo) ([]*schema.ToolInfo, error) {
+func FromDOTools(dos []*model.ToolInfo) ([]*schema.ToolInfo, error) {
 	if len(dos) == 0 {
 		return nil, nil
 	}
@@ -163,11 +164,11 @@ func FromDOTools(dos []*ToolInfo) ([]*schema.ToolInfo, error) {
 	return res, nil
 }
 
-func FromDOTool(do *ToolInfo) (*schema.ToolInfo, error) {
+func FromDOTool(do *model.ToolInfo) (*schema.ToolInfo, error) {
 	if do == nil {
 		return nil, nil
 	}
-	if do.ToolDefType != ToolDefTypeOpenAPIV3 {
+	if do.ToolDefType != model.ToolDefTypeOpenAPIV3 {
 		return nil, errors.Errorf("unsupport tool def type:%s", do.ToolDefType)
 	}
 	var openApiV3Schema openapi3.Schema
@@ -220,15 +221,15 @@ func GetReasoningContent(msg *schema.Message) string {
 	return ""
 }
 
-func ToDOToolCalls(tcs []schema.ToolCall) []*ToolCall {
-	return slices.Map(tcs, func(tc schema.ToolCall, _ int) *ToolCall {
+func ToDOToolCalls(tcs []schema.ToolCall) []*model.ToolCall {
+	return slices.Map(tcs, func(tc schema.ToolCall, _ int) *model.ToolCall {
 		return ToDOToolCall(tc)
 	})
 }
 
-func ToDOToolCall(tc schema.ToolCall) *ToolCall {
-	return &ToolCall{
-		Index: ptr.PtrConvert(tc.Index, func(f int) int64 {
+func ToDOToolCall(tc schema.ToolCall) *model.ToolCall {
+	return &model.ToolCall{
+		Index: ptr.PtrConvertMap(tc.Index, func(f int) int64 {
 			return int64(f)
 		}),
 		ID:       tc.ID,
@@ -238,53 +239,53 @@ func ToDOToolCall(tc schema.ToolCall) *ToolCall {
 	}
 }
 
-func ToDOFunctionCall(f schema.FunctionCall) *FunctionCall {
-	return &FunctionCall{
+func ToDOFunctionCall(f schema.FunctionCall) *model.FunctionCall {
+	return &model.FunctionCall{
 		Name:      f.Name,
 		Arguments: f.Arguments,
 	}
 }
 
-func ToDOMultiContents(cms []schema.ChatMessagePart) []*ChatMessagePart {
-	return slices.Map(cms, func(cm schema.ChatMessagePart, _ int) *ChatMessagePart {
+func ToDOMultiContents(cms []schema.ChatMessagePart) []*model.ChatMessagePart {
+	return slices.Map(cms, func(cm schema.ChatMessagePart, _ int) *model.ChatMessagePart {
 		return ToDOMultiContent(cm)
 	})
 }
 
-func ToDOMultiContent(cm schema.ChatMessagePart) *ChatMessagePart {
-	return &ChatMessagePart{
-		Type:     ChatMessagePartType(cm.Type),
+func ToDOMultiContent(cm schema.ChatMessagePart) *model.ChatMessagePart {
+	return &model.ChatMessagePart{
+		Type:     model.ChatMessagePartType(cm.Type),
 		Text:     cm.Text,
 		ImageURL: ToDOImageURL(cm.ImageURL),
 	}
 }
 
-func ToDOImageURL(cm *schema.ChatMessageImageURL) *ChatMessageImageURL {
+func ToDOImageURL(cm *schema.ChatMessageImageURL) *model.ChatMessageImageURL {
 	if cm == nil {
 		return nil
 	}
-	return &ChatMessageImageURL{
+	return &model.ChatMessageImageURL{
 		URL:      cm.URL,
-		Detail:   ImageURLDetail(cm.Detail),
+		Detail:   model.ImageURLDetail(cm.Detail),
 		MIMEType: cm.MIMEType,
 	}
 }
 
-func ToDORespMeta(rm *schema.ResponseMeta) *ResponseMeta {
+func ToDORespMeta(rm *schema.ResponseMeta) *model.ResponseMeta {
 	if rm == nil {
 		return nil
 	}
-	return &ResponseMeta{
+	return &model.ResponseMeta{
 		FinishReason: rm.FinishReason,
 		Usage:        ToDOTokenUsage(rm.Usage),
 	}
 }
 
-func ToDOTokenUsage(tu *schema.TokenUsage) *TokenUsage {
+func ToDOTokenUsage(tu *schema.TokenUsage) *model.TokenUsage {
 	if tu == nil {
 		return nil
 	}
-	return &TokenUsage{
+	return &model.TokenUsage{
 		PromptTokens:     tu.PromptTokens,
 		CompletionTokens: tu.CompletionTokens,
 		TotalTokens:      tu.TotalTokens,

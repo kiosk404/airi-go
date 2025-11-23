@@ -14,6 +14,6 @@ func NewAuthRPCProvider() rpc.IAuthProvider {
 }
 
 func (a *AuthRPCAdapter) CheckPermission(ctx context.Context, action string) error {
-
+	// TODO: implement
 	return nil
 }

@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/message"
+	message "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/model"
 )
 
 type Message = message.Message

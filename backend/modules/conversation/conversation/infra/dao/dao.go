@@ -5,12 +5,12 @@ import (
 	"errors"
 	"time"
 
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/conversation"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/common"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/infra/repo/gorm_gen/model"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/infra/repo/gorm_gen/query"
+	model2 "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/conversation/model"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
 	"gorm.io/gorm"
@@ -82,7 +82,7 @@ func (dao *ConversationDAO) Delete(ctx context.Context, id int64) (int64, error)
 
 	updateColumn := make(map[string]interface{})
 	updateColumn[table.UpdatedAt.ColumnName().String()] = time.Now().UnixMilli()
-	updateColumn[table.Status.ColumnName().String()] = conversation.ConversationStatusDeleted
+	updateColumn[table.Status.ColumnName().String()] = model2.ConversationStatusDeleted
 
 	updateRes, err := dao.query.Conversation.WithContext(ctx).Where(dao.query.Conversation.ID.Eq(id)).UpdateColumns(updateColumn)
 	if err != nil {
@@ -110,7 +110,7 @@ func (dao *ConversationDAO) Get(ctx context.Context, userID int64, agentID int64
 		Where(dao.query.Conversation.CreatorID.Eq(userID)).
 		Where(dao.query.Conversation.AgentID.Eq(agentID)).
 		Where(dao.query.Conversation.Scene.Eq(scene)).
-		Where(dao.query.Conversation.Status.Eq(int32(conversation.ConversationStatusNormal))).
+		Where(dao.query.Conversation.Status.Eq(int32(model2.ConversationStatusNormal))).
 		Order(dao.query.Conversation.CreatedAt.Desc()).
 		First()
 
@@ -130,7 +130,7 @@ func (dao *ConversationDAO) List(ctx context.Context, userID int64, agentID int6
 	do = do.Where(dao.query.Conversation.CreatorID.Eq(userID)).
 		Where(dao.query.Conversation.AgentID.Eq(agentID)).
 		Where(dao.query.Conversation.Scene.Eq(scene)).
-		Where(dao.query.Conversation.Status.Eq(int32(conversation.ConversationStatusNormal)))
+		Where(dao.query.Conversation.Status.Eq(int32(model2.ConversationStatusNormal)))
 
 	do = do.Offset((page - 1) * limit)
 
@@ -181,7 +181,7 @@ func (dao *ConversationDAO) conversationPO2DO(ctx context.Context, c *model.Conv
 		AgentID:   c.AgentID,
 		CreatorID: ptr.From(c.CreatorID),
 		Scene:     common.Scene(c.Scene),
-		Status:    conversation.ConversationStatus(c.Status),
+		Status:    model2.ConversationStatus(c.Status),
 		Ext:       ptr.From(c.Ext),
 		CreatedAt: c.CreatedAt,
 		UpdatedAt: c.UpdatedAt,
@@ -197,7 +197,7 @@ func (dao *ConversationDAO) conversationBatchPO2DO(ctx context.Context, conversa
 			AgentID:   c.AgentID,
 			CreatorID: ptr.From(c.CreatorID),
 			Scene:     common.Scene(c.Scene),
-			Status:    conversation.ConversationStatus(c.Status),
+			Status:    model2.ConversationStatus(c.Status),
 			Ext:       ptr.From(c.Ext),
 			CreatedAt: c.CreatedAt,
 			UpdatedAt: c.UpdatedAt,

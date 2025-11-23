@@ -5,15 +5,15 @@ import (
 	"time"
 
 	"github.com/cloudwego/eino/schema"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/agentrun"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/singleagent"
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_common"
 	"github.com/kiosk404/airi-go/backend/infra/contract/imagex"
+	singleagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
 	agentEntity "github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/repo"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/pkg"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/pkg/errno"
-	crossmessage "github.com/kiosk404/airi-go/backend/modules/conversation/message/crossdomain"
+	agentrun "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/agentrun/model"
+	crossmessage "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message"
 	msgEntity "github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/entity"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
@@ -35,58 +35,58 @@ type AgentRuntime struct {
 	MessageEvent  *Event
 }
 
-func (rd *AgentRuntime) SetRunRecord(runRecord *agentEntity.RunRecordMeta) {
-	rd.RunRecord = runRecord
+func (art *AgentRuntime) SetRunRecord(runRecord *agentEntity.RunRecordMeta) {
+	art.RunRecord = runRecord
 }
 
-func (rd *AgentRuntime) GetRunRecord() *agentEntity.RunRecordMeta {
-	return rd.RunRecord
+func (art *AgentRuntime) GetRunRecord() *agentEntity.RunRecordMeta {
+	return art.RunRecord
 }
 
-func (rd *AgentRuntime) SetUsage(usage *agentrun.Usage) {
-	rd.Usage = usage
+func (art *AgentRuntime) SetUsage(usage *agentrun.Usage) {
+	art.Usage = usage
 }
-func (rd *AgentRuntime) GetUsage() *agentrun.Usage {
-	return rd.Usage
-}
-
-func (rd *AgentRuntime) SetRunMeta(arm *agentEntity.AgentRunMeta) {
-	rd.RunMeta = arm
-}
-func (rd *AgentRuntime) GetRunMeta() *agentEntity.AgentRunMeta {
-	return rd.RunMeta
-}
-func (rd *AgentRuntime) SetAgentInfo(agentInfo *singleagent.SingleAgent) {
-	rd.AgentInfo = agentInfo
-}
-func (rd *AgentRuntime) GetAgentInfo() *singleagent.SingleAgent {
-	return rd.AgentInfo
-}
-func (rd *AgentRuntime) SetQuestionMsgID(msgID int64) {
-	rd.QuestionMsgID = msgID
-}
-func (rd *AgentRuntime) GetQuestionMsgID() int64 {
-	return rd.QuestionMsgID
-}
-func (rd *AgentRuntime) SetStartTime(t time.Time) {
-	rd.StartTime = t
-}
-func (rd *AgentRuntime) GetStartTime() time.Time {
-	return rd.StartTime
-}
-func (rd *AgentRuntime) SetInput(input *msgEntity.Message) {
-	rd.Input = input
-}
-func (rd *AgentRuntime) GetInput() *msgEntity.Message {
-	return rd.Input
+func (art *AgentRuntime) GetUsage() *agentrun.Usage {
+	return art.Usage
 }
 
-func (rd *AgentRuntime) SetHistoryMsg(histroyMsg []*msgEntity.Message) {
-	rd.HistoryMsg = histroyMsg
+func (art *AgentRuntime) SetRunMeta(arm *agentEntity.AgentRunMeta) {
+	art.RunMeta = arm
+}
+func (art *AgentRuntime) GetRunMeta() *agentEntity.AgentRunMeta {
+	return art.RunMeta
+}
+func (art *AgentRuntime) SetAgentInfo(agentInfo *singleagent.SingleAgent) {
+	art.AgentInfo = agentInfo
+}
+func (art *AgentRuntime) GetAgentInfo() *singleagent.SingleAgent {
+	return art.AgentInfo
+}
+func (art *AgentRuntime) SetQuestionMsgID(msgID int64) {
+	art.QuestionMsgID = msgID
+}
+func (art *AgentRuntime) GetQuestionMsgID() int64 {
+	return art.QuestionMsgID
+}
+func (art *AgentRuntime) SetStartTime(t time.Time) {
+	art.StartTime = t
+}
+func (art *AgentRuntime) GetStartTime() time.Time {
+	return art.StartTime
+}
+func (art *AgentRuntime) SetInput(input *msgEntity.Message) {
+	art.Input = input
+}
+func (art *AgentRuntime) GetInput() *msgEntity.Message {
+	return art.Input
 }
 
-func (rd *AgentRuntime) GetHistory() []*msgEntity.Message {
-	return rd.HistoryMsg
+func (art *AgentRuntime) SetHistoryMsg(histroyMsg []*msgEntity.Message) {
+	art.HistoryMsg = histroyMsg
+}
+
+func (art *AgentRuntime) GetHistory() []*msgEntity.Message {
+	return art.HistoryMsg
 }
 
 func (art *AgentRuntime) Run(ctx context.Context) (err error) {

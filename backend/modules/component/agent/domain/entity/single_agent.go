@@ -1,17 +1,17 @@
 package entity
 
 import (
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/singleagent"
+	model "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
 )
 
 // SingleAgent Use composition instead of aliasing for domain entities to enhance extensibility
 type SingleAgent struct {
-	*singleagent.SingleAgent
+	*model.SingleAgent
 }
 
-type AgentIdentity = singleagent.AgentIdentity
+type AgentIdentity = model.AgentIdentity
 
-type ExecuteRequest = singleagent.ExecuteRequest
+type ExecuteRequest = model.ExecuteRequest
 
 type DuplicateInfo struct {
 	UserID     int64

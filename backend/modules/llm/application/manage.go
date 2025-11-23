@@ -6,6 +6,7 @@ import (
 
 	"github.com/kiosk404/airi-go/backend/api/model/llm/manage"
 	"github.com/kiosk404/airi-go/backend/modules/llm/application/convertor"
+	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/component/rpc"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service"
@@ -32,14 +33,14 @@ func (m *manageApp) ListModels(ctx context.Context, req *manage.ListModelsReques
 	if err := m.auth.CheckPermission(ctx, "listModels"); err != nil {
 		return r, err
 	}
-	var scenario *entity.Scenario
+	var scenario *model.Scenario
 	if req.Scenario != nil {
-		scenario = ptr.Of(entity.Scenario(req.GetScenario()))
+		scenario = ptr.Of(model.Scenario(req.GetScenario()))
 	} else {
-		scenario = ptr.Of(entity.ScenarioDefault)
+		scenario = ptr.Of(model.ScenarioDefault)
 	}
 	pageToken, _ := strconv.ParseInt(req.GetPageToken(), 10, 64)
-	models, total, hasMore, nextPageToken, err := m.manageSrv.ListModels(ctx, entity.ListModelReq{
+	models, total, hasMore, nextPageToken, err := m.manageSrv.ListModels(ctx, entity.ListModelsRequest{
 		Scenario:  scenario,
 		PageSize:  int64(req.GetPageSize()),
 		PageToken: pageToken,

@@ -1,0 +1,110 @@
+package service
+
+import (
+	"context"
+	"time"
+
+	"github.com/bytedance/sonic"
+	"github.com/kiosk404/airi-go/backend/infra/contract/eventbus"
+	"github.com/kiosk404/airi-go/backend/modules/data/search/domain/entity"
+	"github.com/kiosk404/airi-go/backend/modules/data/search/pkg"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
+	"github.com/kiosk404/airi-go/backend/pkg/logs"
+)
+
+type eventbusImpl struct {
+	producer eventbus.Producer
+}
+
+func NewProjectEventBus(p eventbus.Producer) ProjectEventBus {
+	return &eventbusImpl{
+		producer: p,
+	}
+}
+
+func NewResourceEventBus(p eventbus.Producer) ResourceEventBus {
+	return &eventbusImpl{
+		producer: p,
+	}
+}
+
+func (d *eventbusImpl) PublishResources(ctx context.Context, event *entity.ResourceDomainEvent) error {
+	if event.Meta == nil {
+		event.Meta = &entity.EventMeta{}
+	}
+
+	now := time.Now().UnixMilli()
+	event.Meta.SendTimeMs = time.Now().UnixMilli()
+
+	if event.OpType == entity.Created &&
+		event.Resource != nil &&
+		(event.Resource.CreateTimeMS == nil || *event.Resource.CreateTimeMS == 0) {
+		event.Resource.CreateTimeMS = ptr.Of(now)
+	}
+
+	if (event.OpType == entity.Created || event.OpType == entity.Updated) &&
+		event.Resource != nil &&
+		(event.Resource.UpdateTimeMS == nil || *event.Resource.UpdateTimeMS == 0) {
+		event.Resource.UpdateTimeMS = ptr.Of(now)
+	}
+
+	if defaultResourceHandler != nil {
+		err := defaultResourceHandler.indexResources(ctx, event)
+		if err == nil {
+			json, _ := sonic.Marshal(event)
+			logs.InfoX(pkg.ModelName, "Sync PublishResources success: %s", string(json))
+
+			return nil
+		}
+
+		logs.WarnX(pkg.ModelName, "Sync PublishResources indexResources error: %s", err.Error())
+	}
+
+	bytes, err := sonic.Marshal(event)
+	if err != nil {
+		return err
+	}
+
+	logs.InfoX(pkg.ModelName, "PublishResources success: %s", string(bytes))
+	return d.producer.Send(ctx, bytes)
+}
+
+func (d *eventbusImpl) PublishProject(ctx context.Context, event *entity.ProjectDomainEvent) error {
+	if event.Meta == nil {
+		event.Meta = &entity.EventMeta{}
+	}
+
+	event.Meta.SendTimeMs = time.Now().UnixMilli()
+	now := time.Now().UnixMilli()
+	event.Meta.SendTimeMs = time.Now().UnixMilli()
+
+	if event.OpType == entity.Created &&
+		event.Project != nil &&
+		(event.Project.CreateTimeMS == nil || *event.Project.CreateTimeMS == 0) {
+		event.Project.CreateTimeMS = ptr.Of(now)
+	}
+
+	if (event.OpType == entity.Created || event.OpType == entity.Updated) &&
+		event.Project != nil &&
+		(event.Project.UpdateTimeMS == nil || *event.Project.UpdateTimeMS == 0) {
+		event.Project.UpdateTimeMS = ptr.Of(now)
+	}
+
+	if defaultProjectHandle != nil {
+		err := defaultProjectHandle.indexProject(ctx, event)
+		if err == nil {
+			json, _ := sonic.Marshal(event)
+			logs.InfoX(pkg.ModelName, "Sync PublishProject success: %s", string(json))
+			return nil
+		}
+		logs.InfoX(pkg.ModelName, "Sync PublishProject indexProject error: %s", err.Error())
+	}
+
+	bytes, err := sonic.Marshal(event)
+	if err != nil {
+		return err
+	}
+
+	logs.InfoX(pkg.ModelName, "PublishProject success: %s", string(bytes))
+	return d.producer.Send(ctx, bytes)
+}

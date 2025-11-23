@@ -7,9 +7,9 @@ import (
 
 	"github.com/bytedance/sonic"
 	"github.com/cloudwego/eino/schema"
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/message"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/conversation/pkg/errno"
+	message "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/model"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/message/infra/repo/gorm_gen/model"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/message/infra/repo/gorm_gen/query"
@@ -53,6 +53,25 @@ func (dao *MessageDAO) Create(ctx context.Context, msg *entity.Message) (*entity
 	}
 
 	return dao.messagePO2DO(poData), nil
+}
+
+func (dao *MessageDAO) BatchCreate(ctx context.Context, msg []*entity.Message) ([]*entity.Message, error) {
+	poList := make([]*model.Message, 0, len(msg))
+	for _, m := range msg {
+		po, err := dao.messageDO2PO(ctx, m)
+		if err != nil {
+			return nil, err
+		}
+		poList = append(poList, po)
+	}
+
+	do := dao.query.Message.WithContext(ctx).Debug()
+	cErr := do.CreateInBatches(poList, len(poList))
+	if cErr != nil {
+		return nil, cErr
+	}
+
+	return dao.batchMessagePO2DO(poList), nil
 }
 
 func (dao *MessageDAO) List(ctx context.Context, listMeta *entity.ListMeta) ([]*entity.Message, bool, error) {

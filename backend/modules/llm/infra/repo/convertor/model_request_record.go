@@ -21,7 +21,7 @@ func ModelReqRecordDO2PO(record *entity.ModelRequestRecord) *model.ModelRequestR
 		ModelName:           record.ModelName,
 		InputToken:          record.InputToken,
 		OutputToken:         record.OutputToken,
-		Logid:               record.Logid,
+		Logid:               record.LogId,
 		ErrorCode:           record.ErrorCode,
 		ErrorMsg:            record.ErrorMsg,
 		CreatedAt:           record.CreatedAt,

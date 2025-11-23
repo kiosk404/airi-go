@@ -1,5 +1,9 @@
 package maps
 
+import (
+	mapset "github.com/deckarep/golang-set/v2"
+)
+
 func ToAnyValue[K comparable, V any](m map[K]V) map[K]any {
 	n := make(map[K]any, len(m))
 	for k, v := range m {
@@ -27,4 +31,13 @@ func TransformKeyWithErrorCheck[K1, K2 comparable, V any](m map[K1]V, f func(K1)
 		n[k2] = v
 	}
 	return n, nil
+}
+
+func MapFromSet[T comparable](set mapset.Set[T]) map[T]struct{} {
+	mapstruct := make(map[T]struct{})
+	set.Each(func(t T) bool {
+		mapstruct[t] = struct{}{}
+		return false
+	})
+	return mapstruct
 }

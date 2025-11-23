@@ -213,10 +213,9 @@ type ConversationData struct {
 	CreatedAt     int64             `thrift:"CreatedAt,2" json:"CreatedAt"`
 	MetaData      map[string]string `thrift:"MetaData,3" json:"MetaData"`
 	CreatorID     *int64            `thrift:"CreatorID,4,optional" json:"CreatorID,omitempty"`
-	ConnectorID   *int64            `thrift:"ConnectorID,5,optional" json:"ConnectorID,omitempty"`
-	LastSectionID *int64            `thrift:"LastSectionID,6,optional" json:"LastSectionID,omitempty"`
-	AccountID     *int64            `thrift:"AccountID,7,optional" json:"AccountID,omitempty"`
-	Name          *string           `thrift:"Name,8,optional" json:"Name,omitempty"`
+	LastSectionID *int64            `thrift:"LastSectionID,5,optional" json:"LastSectionID,omitempty"`
+	AccountID     *int64            `thrift:"AccountID,6,optional" json:"AccountID,omitempty"`
+	Name          *string           `thrift:"Name,7,optional" json:"Name,omitempty"`
 }
 
 func NewConversationData() *ConversationData {
@@ -245,15 +244,6 @@ func (p *ConversationData) GetCreatorID() (v int64) {
 		return ConversationData_CreatorID_DEFAULT
 	}
 	return *p.CreatorID
-}
-
-var ConversationData_ConnectorID_DEFAULT int64
-
-func (p *ConversationData) GetConnectorID() (v int64) {
-	if !p.IsSetConnectorID() {
-		return ConversationData_ConnectorID_DEFAULT
-	}
-	return *p.ConnectorID
 }
 
 var ConversationData_LastSectionID_DEFAULT int64
@@ -294,9 +284,6 @@ func (p *ConversationData) SetMetaData(val map[string]string) {
 func (p *ConversationData) SetCreatorID(val *int64) {
 	p.CreatorID = val
 }
-func (p *ConversationData) SetConnectorID(val *int64) {
-	p.ConnectorID = val
-}
 func (p *ConversationData) SetLastSectionID(val *int64) {
 	p.LastSectionID = val
 }
@@ -309,10 +296,6 @@ func (p *ConversationData) SetName(val *string) {
 
 func (p *ConversationData) IsSetCreatorID() bool {
 	return p.CreatorID != nil
-}
-
-func (p *ConversationData) IsSetConnectorID() bool {
-	return p.ConnectorID != nil
 }
 
 func (p *ConversationData) IsSetLastSectionID() bool {
@@ -335,9 +318,8 @@ func (p *ConversationData) String() string {
 }
 
 type CreateConversationRequest struct {
-	MetaData    map[string]string `thrift:"MetaData,1,optional" json:"MetaData,omitempty"`
-	BotId       *int64            `thrift:"BotId,3,optional" json:"BotId,omitempty"`
-	ConnectorId *int64            `thrift:"ConnectorId,4,optional" json:"ConnectorId,omitempty"`
+	MetaData map[string]string `thrift:"MetaData,1,optional" json:"MetaData,omitempty"`
+	BotId    *int64            `thrift:"BotId,3,optional" json:"BotId,omitempty"`
 }
 
 func NewCreateConversationRequest() *CreateConversationRequest {
@@ -364,23 +346,11 @@ func (p *CreateConversationRequest) GetBotId() (v int64) {
 	}
 	return *p.BotId
 }
-
-var CreateConversationRequest_ConnectorId_DEFAULT int64
-
-func (p *CreateConversationRequest) GetConnectorId() (v int64) {
-	if !p.IsSetConnectorId() {
-		return CreateConversationRequest_ConnectorId_DEFAULT
-	}
-	return *p.ConnectorId
-}
 func (p *CreateConversationRequest) SetMetaData(val map[string]string) {
 	p.MetaData = val
 }
 func (p *CreateConversationRequest) SetBotId(val *int64) {
 	p.BotId = val
-}
-func (p *CreateConversationRequest) SetConnectorId(val *int64) {
-	p.ConnectorId = val
 }
 
 func (p *CreateConversationRequest) IsSetMetaData() bool {
@@ -389,10 +359,6 @@ func (p *CreateConversationRequest) IsSetMetaData() bool {
 
 func (p *CreateConversationRequest) IsSetBotId() bool {
 	return p.BotId != nil
-}
-
-func (p *CreateConversationRequest) IsSetConnectorId() bool {
-	return p.ConnectorId != nil
 }
 
 func (p *CreateConversationRequest) String() string {
@@ -595,13 +561,12 @@ func (p *ClearConversationApiResponse) String() string {
 }
 
 type ListConversationsApiRequest struct {
-	PageNum     int64      `thrift:"page_num,1" json:"page_num"`
-	PageSize    int64      `thrift:"page_size,2" json:"page_size"`
-	SortOrder   string     `thrift:"sort_order,3" json:"sort_order"`
-	SortField   string     `thrift:"sort_field,4" json:"sort_field"`
-	BotID       int64      `thrift:"bot_id,5,required" json:"bot_id"`
-	ConnectorID *int64     `thrift:"connector_id,6,optional" json:"connector_id,omitempty"`
-	Base        *base.Base `thrift:"Base,255" json:"Base"`
+	PageNum   int64      `thrift:"page_num,1" json:"page_num"`
+	PageSize  int64      `thrift:"page_size,2" json:"page_size"`
+	SortOrder string     `thrift:"sort_order,3" json:"sort_order"`
+	SortField string     `thrift:"sort_field,4" json:"sort_field"`
+	BotID     int64      `thrift:"bot_id,5,required" json:"bot_id"`
+	Base      *base.Base `thrift:"Base,255" json:"Base"`
 }
 
 func NewListConversationsApiRequest() *ListConversationsApiRequest {
@@ -631,15 +596,6 @@ func (p *ListConversationsApiRequest) GetBotID() (v int64) {
 	return p.BotID
 }
 
-var ListConversationsApiRequest_ConnectorID_DEFAULT int64
-
-func (p *ListConversationsApiRequest) GetConnectorID() (v int64) {
-	if !p.IsSetConnectorID() {
-		return ListConversationsApiRequest_ConnectorID_DEFAULT
-	}
-	return *p.ConnectorID
-}
-
 var ListConversationsApiRequest_Base_DEFAULT *base.Base
 
 func (p *ListConversationsApiRequest) GetBase() (v *base.Base) {
@@ -663,15 +619,8 @@ func (p *ListConversationsApiRequest) SetSortField(val string) {
 func (p *ListConversationsApiRequest) SetBotID(val int64) {
 	p.BotID = val
 }
-func (p *ListConversationsApiRequest) SetConnectorID(val *int64) {
-	p.ConnectorID = val
-}
 func (p *ListConversationsApiRequest) SetBase(val *base.Base) {
 	p.Base = val
-}
-
-func (p *ListConversationsApiRequest) IsSetConnectorID() bool {
-	return p.ConnectorID != nil
 }
 
 func (p *ListConversationsApiRequest) IsSetBase() bool {

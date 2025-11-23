@@ -1,12 +1,16 @@
 package entity
 
+import (
+	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
+)
+
 func MergeStreamMsgs(msgs []*Message) *Message {
 	if len(msgs) == 0 {
 		return nil
 	}
 	allInOne := &Message{
-		Role:         RoleAssistant,
-		ResponseMeta: &ResponseMeta{},
+		Role:         model.RoleAssistant,
+		ResponseMeta: &model.ResponseMeta{},
 	}
 	for _, msg := range msgs {
 		if msg == nil {
@@ -31,7 +35,7 @@ func MergeStreamMsgs(msgs []*Message) *Message {
 				continue
 			}
 			if len(allInOne.ToolCalls) == 0 || isFirstStreamPkgToolCall(allInOne.ToolCalls[len(allInOne.ToolCalls)-1], tc) {
-				allInOne.ToolCalls = append(allInOne.ToolCalls, &ToolCall{
+				allInOne.ToolCalls = append(allInOne.ToolCalls, &model.ToolCall{
 					Index:    tc.Index,
 					ID:       tc.ID,
 					Type:     tc.Type,
@@ -47,7 +51,7 @@ func MergeStreamMsgs(msgs []*Message) *Message {
 	return allInOne
 }
 
-func isFirstStreamPkgToolCall(tc1, tc2 *ToolCall) bool {
+func isFirstStreamPkgToolCall(tc1, tc2 *model.ToolCall) bool {
 	if tc1 == nil || tc2 == nil {
 		return false
 	}

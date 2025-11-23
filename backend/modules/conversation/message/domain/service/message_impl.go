@@ -4,7 +4,7 @@ import (
 	"context"
 	"sort"
 
-	"github.com/kiosk404/airi-go/backend/api/crossdomain/message"
+	message "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/model"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/repo"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
@@ -28,6 +28,10 @@ func (m *messageImpl) PreCreate(ctx context.Context, msg *entity.Message) (*enti
 func (m *messageImpl) Create(ctx context.Context, msg *entity.Message) (*entity.Message, error) {
 	// create message
 	return m.MessageRepo.Create(ctx, msg)
+}
+
+func (m *messageImpl) BatchCreate(ctx context.Context, req []*entity.Message) ([]*entity.Message, error) {
+	return m.MessageRepo.BatchCreate(ctx, req)
 }
 
 func (m *messageImpl) List(ctx context.Context, req *entity.ListMeta) (*entity.ListResult, error) {

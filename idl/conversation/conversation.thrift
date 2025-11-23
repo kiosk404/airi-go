@@ -33,16 +33,14 @@ struct ConversationData {
     2: i64                CreatedAt (api.body = "created_at", agw.key = "created_at")
     3: map<string,string> MetaData (api.body = "meta_data", agw.key = "meta_data")
     4: optional i64 CreatorID (api.body = "creator_d", agw.key = "creator_d", api.js_conv="true")
-    5: optional i64 ConnectorID (api.body = "connector_id", agw.key="connector_id", api.js_conv="true")
-    6: optional i64 LastSectionID (api.body="last_section_id", api.js_conv="true")
-    7: optional i64    AccountID (api.body = "account_id")
-    8: optional string Name (api.body = "name")
+    5: optional i64 LastSectionID (api.body="last_section_id", api.js_conv="true")
+    6: optional i64    AccountID (api.body = "account_id")
+    7: optional string Name (api.body = "name")
 }
 
 struct CreateConversationRequest {
     1:   optional  map<string,string> MetaData (api.body = "meta_data") //custom passthrough field
     3:   optional  i64             BotId (api.body = "bot_id",  api.js_conv="true")
-    4:   optional  i64             ConnectorId (api.body= "connector_id",  api.js_conv="true")
 }
 
 struct CreateConversationResponse {
@@ -76,7 +74,6 @@ struct ListConversationsApiRequest {
     3 : string sort_order (api.query = "sort_order", agw.key = "sort_order") // Optional values: ASC, DESC
     4 : string sort_field (api.query = "sort_field", age.key = "sort_field") // Optional value: such as created_at
     5 : required i64  bot_id (api.query = "bot_id", agw.key = "bot_id",api.js_conv="true")
-    6 : optional i64  connector_id (api.query = "connector_id", agw.key = "connector_id",api.js_conv="true")
 
     255: base.Base Base
 }

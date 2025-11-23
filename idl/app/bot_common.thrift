@@ -83,14 +83,19 @@ struct ShortMemoryPolicy {
     2: optional i32         HistoryRound (api.body="history_round"), // Number of rounds of context band
 }
 
+enum PluginFrom {
+    Default = 0
+    FromSaas = 1
+}
+
 struct PluginInfo {
     1: optional i64 PluginId (agw.js_conv="str", api.js_conv="true", api.body="plugin_id"), // Plugin ID
     2: optional i64 ApiId    (agw.js_conv="str", api.js_conv="true", api.body="api_id")   , // api Id
     3: optional string ApiName (api.body="api_name")   , // API name O project
 
+    99: optional PluginFrom PluginFrom  (api.body="plugin_from"),
     100: optional i64 ApiVersionMs (agw.js_conv="str", api.js_conv="true", api.body="api_version_ms"), // api version
 }
-
 struct WorkflowInfo {
     1: optional i64 WorkflowId (agw.js_conv="str", api.js_conv="true", api.body="workflow_id"), // WorkflowId
     2: optional i64 PluginId   (agw.js_conv="str", api.js_conv="true", api.body="plugin_id")  , // Plugin ID
@@ -578,39 +583,39 @@ struct CanvasPosition {
 
 // Update for bot information
 struct BotInfoForUpdate {
-    1:  optional i64 BotId  (agw.js_conv="str", api.js_conv="true",api.body="bot_id") // bot id
-    2:  optional string Name  (api.body="name")                                      // bot name
-    3:  optional string Description (api.body="description")                         // Bot description
-    4:  optional string IconUri (api.body="icon_uri")                             // Bot icon uri
-    5:  optional string IconUrl (api.body="icon_url")                             // Bot icon url
-    6:  optional i64 CreatorId  (agw.js_conv="str", api.js_conv="true", api.body="creator_id")                             // creator id
-    7:  optional i64 CreateTime (agw.js_conv="str", api.js_conv="true", api.body="create_time")                             // create_time
-    8:  optional i64 UpdateTime (agw.js_conv="str", api.js_conv="true", api.body="update_time")                             // update time
-    9:  optional i64 ConnectorId (agw.js_conv="str", api.js_conv="true", api.body="connector_id")                         // line of business
-    10: optional string Version (api.body="version")                                                  // Version, ms
-    11: optional ModelInfo ModelInfo    (api.body="model_info")                                             // model configuration
-    12: optional PromptInfo PromptInfo  (api.body="prompt_info")                                           // Prompt message
-    13: optional list<PluginInfo> PluginInfoList (api.body="plugin_info_list")                                 // List of plugins
-    14: optional list<WorkflowInfo> WorkflowInfoList  (api.body="workflow_info_list")                             // Workflow List
-    15: optional OnboardingInfo OnboardingInfo  (api.body="onboarding_info")                                   // opening statement
-    16: optional Knowledge Knowledge    (api.body="knowledge")                                             // dataset
-    17: optional list<Variable> VariableList    (api.body="variable_list")                                     // KV storage
-    18: optional TaskInfo TaskInfo  (api.body="task_info")                                               // Task management/preset tasks
-    19: optional list<Database> DatabaseList    (api.body="database_list")                                     // data table
-    20: optional SuggestReplyInfo SuggestReplyInfo  (api.body="suggest_reply_info")                               // referral question
-    21: optional VoicesInfo VoicesInfo  (api.body="voices_info")                                           // Timbre Configuration
-    22: optional BotExtInfo BotExtInfo  (api.body="bot_ext_info")                                          // Additional information, extended fields
-    23: optional BotMode BotMode    (api.body="bot_mode")                                                 // Bot type, single agent or multi agent
-    24: optional list<AgentForUpdate> Agents    (api.body="agents")                                       // Multi agent mode agent information
-    25: BotSpecies BotSpecies   (api.body="bot_species")                                                   // Bot type
-    26: optional BotTagInfo BotTagInfo  (api.body="bot_tag_info")                                           // Bot tag information, user new field
-    27: optional FileboxInfo        FileboxInfo (api.body="filebox_info")                                           // FileBox Information
-    28: optional MultiAgentInfo     MultiAgentInfo  (api.body="multi_agent_info")                               // multi_agent structure
-    29: optional list<BackgroundImageInfo> BackgroundImageInfoList  (api.body="background_image_info_list")               // Background cover list structure
-    30: optional list<string>             ShortcutSort  (api.body="shortcut_sort")
-    31: optional HookInfo             HookInfo (api.body="hook_info")
-    32: optional UserQueryCollectConf     UserQueryCollectConf (api.body="user_query_collect_conf")// User query collection configuration
-    33: optional LayoutInfo               LayoutInfo(api.body="layout_info")                           // Orchestration information for workflow patterns
+    1:  optional i64 BotId  (agw.js_conv="str", api.js_conv="true",api.body="bot_id",go.tag='json:"bot_id,omitempty,string"') // bot id
+    2:  optional string Name  (api.body="name",go.tag='json:"name,omitempty"')                                         // bot name
+    3:  optional string Description (api.body="description",go.tag='json:"description,omitempty"')                     // Bot description
+    4:  optional string IconUri (api.body="icon_uri",go.tag='json:"icon_uri,omitempty"')                               // Bot icon uri
+    5:  optional string IconUrl (api.body="icon_url",go.tag='json:"icon_url,omitempty"')                               // Bot icon url
+    6:  optional i64 CreatorId  (agw.js_conv="str", api.js_conv="true", api.body="creator_id",go.tag='json:"creator_id,omitempty"')      // creator id
+    7:  optional i64 CreateTime (agw.js_conv="str", api.js_conv="true", api.body="create_time",go.tag='json:"create_time,omitempty"')    // create_time
+    8:  optional i64 UpdateTime (agw.js_conv="str", api.js_conv="true", api.body="update_time",go.tag='json:"update_time,omitempty"')    // update time
+    9:  optional i64 ConnectorId (agw.js_conv="str", api.js_conv="true", api.body="connector_id",go.tag='json:"connector_id,omitempty"') // line of business
+    10: optional string Version (api.body="version",go.tag='json:"version,omitempty"')                                                   // Version, ms
+    11: optional ModelInfo ModelInfo    (api.body="model_info",go.tag='json:"model_info,omitempty"')                                     // model configuration
+    12: optional PromptInfo PromptInfo  (api.body="prompt_info",go.tag='json:"prompt_info,omitempty"')                                   // Prompt message
+    13: optional list<PluginInfo> PluginInfoList (api.body="plugin_info_list",go.tag='json:"plugin_info_list,omitempty"')                // List of plugins
+    14: optional list<WorkflowInfo> WorkflowInfoList  (api.body="workflow_info_list",go.tag='json:"workflow_info_list,omitempty"')       // Workflow List
+    15: optional OnboardingInfo OnboardingInfo  (api.body="onboarding_info",go.tag='json:"onboarding_info,omitempty"')                   // opening statement
+    16: optional Knowledge Knowledge    (api.body="knowledge",go.tag='json:"knowledge,omitempty"')                                       // dataset
+    17: optional list<Variable> VariableList    (api.body="variable_list",go.tag='json:"variable_list,omitempty"')                       // KV storage
+    18: optional TaskInfo TaskInfo  (api.body="task_info",go.tag='json:"task_info,omitempty"')                                           // Task management/preset tasks
+    19: optional list<Database> DatabaseList    (api.body="database_list",go.tag='json:"database_list,omitempty"')                       // data table
+    20: optional SuggestReplyInfo SuggestReplyInfo  (api.body="suggest_reply_info",go.tag='json:"suggest_reply_info,omitempty"')         // referral question
+    21: optional VoicesInfo VoicesInfo  (api.body="voices_info",go.tag='json:"voices_info,omitempty"')                                   // Timbre Configuration
+    22: optional BotExtInfo BotExtInfo  (api.body="bot_ext_info",go.tag='json:"bot_ext_info,omitempty"')                                 // Additional information, extended fields
+    23: optional BotMode BotMode    (api.body="bot_mode",go.tag='json:"bot_mode,omitempty"')                                             // Bot type, single agent or multi agent
+    24: optional list<AgentForUpdate> Agents    (api.body="agents",go.tag='json:"agents,omitempty"')                                     // Multi agent mode agent information
+    25: BotSpecies BotSpecies   (api.body="bot_species",go.tag='json:"bot_species,omitempty"')                                           // Bot type
+    26: optional BotTagInfo BotTagInfo  (api.body="bot_tag_info",go.tag='json:"bot_tag_info,omitempty"')                                 // Bot tag information, user new field
+    27: optional FileboxInfo        FileboxInfo (api.body="filebox_info",go.tag='json:"filebox_info,omitempty"')                         // FileBox Information
+    28: optional MultiAgentInfo     MultiAgentInfo  (api.body="multi_agent_info",go.tag='json:"multi_agent_info,omitempty"')             // multi_agent structure
+    29: optional list<BackgroundImageInfo> BackgroundImageInfoList  (api.body="background_image_info_list",go.tag='json:"background_image_info_list,omitempty"')               // Background cover list structure
+    30: optional list<string>             ShortcutSort  (api.body="shortcut_sort",go.tag='json:"shortcut_sort,omitempty"')
+    31: optional HookInfo             HookInfo (api.body="hook_info",go.tag='json:"hook_info,omitempty"')
+    32: optional UserQueryCollectConf     UserQueryCollectConf (api.body="user_query_collect_conf",go.tag='json:"user_query_collect_conf,omitempty"')// User query collection configuration
+    33: optional LayoutInfo               LayoutInfo(api.body="layout_info",go.tag='json:"layout_info,omitempty"')                                   // Orchestration information for workflow patterns
 }
 
 struct AgentForUpdate {
