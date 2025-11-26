@@ -5,7 +5,7 @@
 package model
 
 import (
-	"github.com/kiosk404/airi-go/backend/modules/component/plugin/infra/repo/gorm_gen/model"
+	"github.com/kiosk404/airi-go/backend/modules/component/crossdomain/plugin/model"
 	"gorm.io/gorm"
 )
 

@@ -4,9 +4,7 @@
 
 package model
 
-import (
-	"github.com/kiosk404/airi-go/backend/modules/component/plugin/infra/repo/gorm_gen/model"
-)
+import "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/plugin/model"
 
 const TableNameAgentToolDraft = "agent_tool_draft"
 

@@ -9,8 +9,9 @@ import (
 	"strings"
 
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_common"
-	pluginmodel "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/plugin/model"
-	agentrunmodel "github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
+	pluginentity "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/plugin/model"
+	agentrunentity "github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
+	mgrentity "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/llmmgr/model"
 	"gorm.io/gen"
 	"gorm.io/gorm"
 	"gorm.io/rawsql"
@@ -48,47 +49,54 @@ var table2Columns2Model = map[string]map[string]any{
 		"layout_info":                &bot_common.LayoutInfo{},
 	},
 	"plugin": {
-		"manifest":    &pluginmodel.PluginManifest{},
-		"openapi_doc": &pluginmodel.Openapi3T{},
+		"manifest":    &pluginentity.PluginManifest{},
+		"openapi_doc": &pluginentity.Openapi3T{},
 		"ext":         map[string]any{},
 	},
 	"plugin_draft": {
-		"manifest":    &pluginmodel.PluginManifest{},
-		"openapi_doc": &pluginmodel.Openapi3T{},
+		"manifest":    &pluginentity.PluginManifest{},
+		"openapi_doc": &pluginentity.Openapi3T{},
 	},
 	"plugin_version": {
-		"manifest":    &pluginmodel.PluginManifest{},
-		"openapi_doc": &pluginmodel.Openapi3T{},
+		"manifest":    &pluginentity.PluginManifest{},
+		"openapi_doc": &pluginentity.Openapi3T{},
 		"ext":         map[string]any{},
 	},
 	"agent_tool_draft": {
-		"operation": &pluginmodel.Openapi3Operation{},
+		"operation": &pluginentity.Openapi3Operation{},
 	},
 	"agent_tool_version": {
-		"operation": &pluginmodel.Openapi3Operation{},
+		"operation": &pluginentity.Openapi3Operation{},
 	},
 	"tool": {
-		"operation": &pluginmodel.Openapi3Operation{},
+		"operation": &pluginentity.Openapi3Operation{},
 		"ext":       map[string]any{},
 	},
 	"tool_draft": {
-		"operation": &pluginmodel.Openapi3Operation{},
+		"operation": &pluginentity.Openapi3Operation{},
 	},
 	"tool_version": {
-		"operation": &pluginmodel.Openapi3Operation{},
+		"operation": &pluginentity.Openapi3Operation{},
 		"ext":       map[string]any{},
 	},
 	"plugin_oauth_auth": {
-		"oauth_config": &pluginmodel.OAuthAuthorizationCodeConfig{},
+		"oauth_config": &pluginentity.OAuthAuthorizationCodeConfig{},
 	},
 	"run_record": {
-		"usage": &agentrunmodel.Usage{},
+		"usage": &agentrunentity.Usage{},
+	},
+	"model_instance": {
+		"provider":     &mgrentity.ModelProvider{},
+		"display_info": &mgrentity.DisplayInfo{},
+		"connection":   &mgrentity.Connection{},
+		"capability":   &mgrentity.ModelAbility{},
+		"parameters":   []mgrentity.ModelParameter{},
 	},
 }
 
 func main() {
 	db := initDB()
-	generateForModelRequestRecord(db)
+	generateForLLM(db)
 	generateForFoundation(db)
 	generateForComponent(db)
 	generateForConversation(db)
@@ -114,21 +122,13 @@ func initDB() *gorm.DB {
 func getGenerateConfig(path string) gen.Config {
 	config := gen.Config{
 		// 最终package不能设置为model，在有数据库表同步的情况下会产生冲突，若一定要使用可以单独指定model package的新名字
-		OutPath: fmt.Sprintf("./%s/query", path),
-		// Mode: gen.WithoutContext,
+		OutPath:           fmt.Sprintf("./%s/query", path),
 		ModelPkgPath:      fmt.Sprintf("./%s/model", path), // 默认情况下会跟随OutPath参数，在同目录下生成model目录
 		FieldNullable:     true,                            // 对于数据库中nullable的数据，在生成代码中自动对应为指针类型
 		FieldWithIndexTag: true,                            // 从数据库同步的表结构代码包含gorm的index tag
 		FieldWithTypeTag:  true,
 	}
-	config.WithImportPkgPath(fmt.Sprintf("github.com/kiosk404/airi-go/backend/%s/model", path))
 	return config
-}
-
-func generateForModelRequestRecord(db *gorm.DB) {
-	path := "modules/llm/infra/repo/gorm_gen"
-	tableList := []string{"model_request_record"}
-	generateFunc(db, path, tableList)
 }
 
 func generateForFoundation(db *gorm.DB) {
@@ -190,6 +190,15 @@ func generateForConversation(db *gorm.DB) {
 	// Agent Run
 	path = "modules/conversation/agent_run/infra/repo/gorm_gen"
 	tableList = []string{"run_record"}
+	generateFunc(db, path, tableList)
+}
+
+func generateForLLM(db *gorm.DB) {
+	var path string
+	var tableList []string
+
+	path = "modules/llm/infra/repo/gorm_gen"
+	tableList = []string{"model_entity", "model_meta", "model_instance", "model_request_record"}
 	generateFunc(db, path, tableList)
 }
 

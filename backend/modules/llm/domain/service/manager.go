@@ -6,7 +6,7 @@ import (
 
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/component/conf"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/entity"
-	llm_errorx "github.com/kiosk404/airi-go/backend/modules/llm/pkg/errno"
+	llmerrorx "github.com/kiosk404/airi-go/backend/modules/llm/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
@@ -33,9 +33,9 @@ func (m *ManageImpl) GetModelByID(ctx context.Context, id int64) (model *entity.
 	model, err = m.conf.GetModel(ctx, id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, errorx.NewByCode(llm_errorx.ResourceNotFoundCode, errorx.WithExtraMsg(fmt.Sprintf("model id:%d not exist in db", id)))
+			return nil, errorx.NewByCode(llmerrorx.ResourceNotFoundCode, errorx.WithExtraMsg(fmt.Sprintf("model id:%d not exist in db", id)))
 		}
-		return nil, errorx.NewByCode(llm_errorx.CommonMySqlErrorCode, errorx.WithExtraMsg(err.Error()))
+		return nil, errorx.NewByCode(llmerrorx.CommonMySqlErrorCode, errorx.WithExtraMsg(err.Error()))
 	}
 	return model, nil
 }
