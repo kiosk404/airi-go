@@ -11,7 +11,7 @@ import (
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_common"
 	pluginentity "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/plugin/model"
 	agentrunentity "github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/domain/entity"
-	mgrentity "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/llmmgr/model"
+	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 	"gorm.io/gen"
 	"gorm.io/gorm"
 	"gorm.io/rawsql"
@@ -86,11 +86,11 @@ var table2Columns2Model = map[string]map[string]any{
 		"usage": &agentrunentity.Usage{},
 	},
 	"model_instance": {
-		"provider":     &mgrentity.ModelProvider{},
-		"display_info": &mgrentity.DisplayInfo{},
-		"connection":   &mgrentity.Connection{},
-		"capability":   &mgrentity.ModelAbility{},
-		"parameters":   []mgrentity.ModelParameter{},
+		"provider":     &model.ModelProvider{},
+		"display_info": &model.DisplayInfo{},
+		"connection":   &model.Connection{},
+		"capability":   &model.ModelAbility{},
+		"parameters":   []model.ModelParameter{},
 	},
 }
 
@@ -197,7 +197,7 @@ func generateForLLM(db *gorm.DB) {
 	var path string
 	var tableList []string
 
-	path = "modules/llm/infra/repo/gorm_gen"
+	path = "modules/modelmgr/infra/repo/gorm_gen"
 	tableList = []string{"model_entity", "model_meta", "model_instance", "model_request_record"}
 	generateFunc(db, path, tableList)
 }

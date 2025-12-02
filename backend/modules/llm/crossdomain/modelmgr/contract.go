@@ -3,32 +3,28 @@ package modelmgr
 import (
 	"context"
 
-	model "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
+	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 )
 
-type Model interface {
-	LLMManageService
-	LLMRuntimeService
+type ModelManager interface {
+	CreateModel(ctx context.Context, request model.CreateModelRequest) (int64, error)
+	UpdateModel(ctx context.Context, request model.UpdateModelRequest) error
+	DeleteModel(ctx context.Context, modelID int64) error
+	GetModelByID(ctx context.Context, modelID int64) (*model.Model, error)
+	MGetModelByID(ctx context.Context, ids []int64) ([]*model.Model, error)
+	GetOnlineModelListWithLimit(ctx context.Context, limit int) ([]*model.Model, error)
+	GetOnlineModelList(ctx context.Context) ([]*model.Model, error)
+	GetAllModelList(ctx context.Context) ([]*model.Model, error)
 }
 
-type LLMManageService interface {
-	ListModels(ctx context.Context, req *model.ListModelsRequest) (r *model.ListModelsResponse, err error)
-	GetModel(ctx context.Context, req *model.GetModelRequest) (r *model.GetModelResponse, err error)
-}
+type ModelManagerApp = model.Model
 
-type LLMRuntimeService interface {
-	Chat(ctx context.Context, req *model.ChatRequest) (r *model.ChatResponse, err error)
-	ChatStream(req *model.ChatRequest, stream model.ChatResponseStream) (err error)
-}
+var defaultSVC ModelManager
 
-type ModelAppMeta = model.Model
-
-var defaultSVC Model
-
-func DefaultSVC() Model {
+func DefaultSVC() ModelManager {
 	return defaultSVC
 }
 
-func SetDefaultSVC(svc Model) {
+func SetDefaultSVC(svc ModelManager) {
 	defaultSVC = svc
 }

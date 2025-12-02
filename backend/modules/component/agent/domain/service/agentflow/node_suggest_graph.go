@@ -7,7 +7,7 @@ import (
 	"github.com/cloudwego/eino/compose"
 	"github.com/cloudwego/eino/schema"
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_common"
-	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/service/modelbuilder"
+	"github.com/kiosk404/airi-go/backend/modules/llm/application"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 )
 
@@ -21,7 +21,7 @@ const (
 	keyOfSuggestTemplate        = "suggest_template"
 )
 
-func newSuggestGraph(_ context.Context, conf *Config, chatModel modelbuilder.ToolCallingChatModel) (*compose.Graph[[]*schema.Message, *schema.Message], bool) {
+func newSuggestGraph(_ context.Context, conf *Config, chatModel application.ToolCallingChatModel) (*compose.Graph[[]*schema.Message, *schema.Message], bool) {
 	isNeedGenerateSuggest := false
 	agentSuggestionSetting := conf.Agent.SuggestReply
 

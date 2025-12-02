@@ -7,7 +7,6 @@ import (
 	"github.com/kiosk404/airi-go/backend/application/appinfra"
 	"github.com/kiosk404/airi-go/backend/infra/contract/eventbus"
 	implEventbus "github.com/kiosk404/airi-go/backend/infra/impl/eventbus"
-	"github.com/kiosk404/airi-go/backend/infra/impl/limiter"
 	singleagentapp "github.com/kiosk404/airi-go/backend/modules/component/agent/application/singleagent"
 	crossagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent"
 	crossagentimpl "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/impl"
@@ -37,7 +36,7 @@ type basicServices struct {
 	eventbus    *eventbusImpl
 	userSVC     *userapp.UserApplicationService
 	openAuthSVC *openauthapp.OpenAuthApplicationService
-	modelMgrSVC *modelmgrapp.ModelApplicationService
+	modelMgrSVC *modelmgrapp.ModelManagerApplicationService
 }
 
 type primaryServices struct {
@@ -78,7 +77,7 @@ func Init(ctx context.Context) (err error) {
 		return fmt.Errorf("init - initVitalServices failed, err: %v", err)
 	}
 
-	crossmodelmgr.SetDefaultSVC(crossmodelmgrimpl.InitDomainService(basicServices.modelMgrSVC.DomainSVC, basicServices.modelMgrSVC.ChatModelSVC))
+	crossmodelmgr.SetDefaultSVC(crossmodelmgrimpl.InitDomainService(basicServices.modelMgrSVC.DomainSVC))
 	crossplugin.SetDefaultSVC(crosspluginimpl.InitDomainService(primaryServices.pluginSVC.DomainSVC, infra.TOSClient))
 	crossagent.SetDefaultSVC(crossagentimpl.InitDomainService(complexServices.singleAgentSVC.DomainSVC, infra.ImageXClient))
 	crossmessage.SetDefaultSVC(crossmessageimpl.InitDomainService(complexServices.conversationSVC.MessageDomainSVC))
@@ -99,8 +98,7 @@ func initBasicServices(ctx context.Context, infra *appinfra.AppDependencies, e *
 
 	openAuthSVC := openauthapp.InitService(infra.DB, infra.IDGenSVC)
 	userSVC := userapp.InitService(ctx, infra.DB, infra.TOSClient, infra.IDGenSVC)
-	modelSVC := modelmgrapp.InitService(ctx, infra.ConfigFactory,
-		infra.IDGenSVC, infra.DB, limiter.NewRateLimiterFactory(infra.CacheCli))
+	modelSVC := modelmgrapp.InitService(ctx, infra.IDGenSVC, infra.DB, infra.TOSClient, infra.ConfigFactory)
 
 	return &basicServices{
 		eventbus:    e,

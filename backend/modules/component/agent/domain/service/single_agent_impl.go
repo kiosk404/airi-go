@@ -11,15 +11,12 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/service/agentflow"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/pkg"
-	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service/llmimpl/chatmodel"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/jsoncache"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
 
 type singleAgentImpl struct {
-	ModelFactory chatmodel.Factory
-
 	AgentDraftRepo   repo.SingleAgentDraftRepo
 	AgentVersionRepo repo.SingleAgentVersionRepo
 	PublishInfoRepo  *jsoncache.JsonCache[entity.PublishInfo]
@@ -27,12 +24,11 @@ type singleAgentImpl struct {
 	CPStore compose.CheckPointStore
 }
 
-func NewService(factory chatmodel.Factory,
+func NewService(
 	agentDraft repo.SingleAgentDraftRepo, agentVersion repo.SingleAgentVersionRepo,
 	publishInfoRepo *jsoncache.JsonCache[entity.PublishInfo],
 	cps compose.CheckPointStore) SingleAgent {
 	s := &singleAgentImpl{
-		ModelFactory:     factory,
 		AgentDraftRepo:   agentDraft,
 		AgentVersionRepo: agentVersion,
 		PublishInfoRepo:  publishInfoRepo,
@@ -164,11 +160,10 @@ func (s singleAgentImpl) StreamExecute(ctx context.Context, req *entity.ExecuteR
 	}
 
 	conf := &agentflow.Config{
-		Agent:        ae,
-		UserID:       req.UserID,
-		Identity:     req.Identity,
-		ModelFactory: s.ModelFactory,
-		CPStore:      s.CPStore,
+		Agent:    ae,
+		UserID:   req.UserID,
+		Identity: req.Identity,
+		CPStore:  s.CPStore,
 
 		CustomVariables: req.CustomVariables,
 		ConversationID:  req.ConversationID,

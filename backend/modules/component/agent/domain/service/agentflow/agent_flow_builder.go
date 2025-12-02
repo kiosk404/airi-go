@@ -12,18 +12,16 @@ import (
 	"github.com/cloudwego/eino/schema"
 	mapset "github.com/deckarep/golang-set/v2"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
-	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/service/modelbuilder"
-	"github.com/kiosk404/airi-go/backend/modules/llm/domain/service/llmimpl/chatmodel"
+	"github.com/kiosk404/airi-go/backend/modules/llm/application"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/maps"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
 )
 
 type Config struct {
-	Agent        *entity.SingleAgent
-	UserID       string
-	Identity     *entity.AgentIdentity
-	ModelFactory chatmodel.Factory
-	CPStore      compose.CheckPointStore
+	Agent    *entity.SingleAgent
+	UserID   string
+	Identity *entity.AgentIdentity
+	CPStore  compose.CheckPointStore
 
 	CustomVariables map[string]string
 	ConversationID  int64
@@ -80,7 +78,7 @@ func BuildAgent(ctx context.Context, conf *Config) (r *AgentRunner, err error) {
 	}
 
 	// 生成LLM模型 (聊天模型)
-	chatModel, modelInfo, err := modelbuilder.BuildModelBySettings(ctx, conf.Agent.ModelInfo)
+	chatModel, modelInfo, err := application.BuildModelBySettings(ctx, conf.Agent.ModelInfo)
 	if err != nil {
 		return nil, err
 	}
@@ -139,8 +137,8 @@ func BuildAgent(ctx context.Context, conf *Config) (r *AgentRunner, err error) {
 	if len(agentTools) > 0 {
 		isReActAgent = true
 		requireCheckpoint = true
-		if modelInfo.Ability != nil && !modelInfo.Ability.AbilityMultiModal.GetFunctionCall() {
-			return nil, fmt.Errorf("model %v does not support function call", modelInfo.GetModelName())
+		if modelInfo.Capability != nil && !modelInfo.Capability.GetFunctionCall() {
+			return nil, fmt.Errorf("model %v does not support function call", modelInfo.DisplayInfo.GetName())
 		}
 	}
 

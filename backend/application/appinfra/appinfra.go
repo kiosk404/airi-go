@@ -18,8 +18,8 @@ import (
 	idgenimpl "github.com/kiosk404/airi-go/backend/infra/impl/idgen"
 	"github.com/kiosk404/airi-go/backend/infra/impl/rdb/mysql"
 	"github.com/kiosk404/airi-go/backend/infra/impl/storage"
+	modelmgr "github.com/kiosk404/airi-go/backend/modules/llm/domain/service"
 	"github.com/kiosk404/airi-go/backend/pkg/conf"
-	"github.com/kiosk404/airi-go/backend/pkg/conf/viper"
 	"github.com/kiosk404/airi-go/backend/types/consts"
 )
 
@@ -51,10 +51,8 @@ func Init(ctx context.Context) (*AppDependencies, error) {
 	if deps.ImageXClient, err = storage.NewImageX(ctx); err != nil {
 		return nil, fmt.Errorf("init imagex client failed, err=%w", err)
 	}
-	projectConfigDir := fmt.Sprintf("%s/conf", getApplicationProjectRoot())
-	configOptionList := []viper.FileConfLoaderFactoryOpt{viper.WithFactoryConfigPath(projectConfigDir)}
-	if deps.ConfigFactory, err = viper.NewFileConfigLoaderFactory(configOptionList...); err != nil {
-		return nil, fmt.Errorf("init config loader factory, err=%w", err)
+	if deps.ConfigFactory, err = modelmgr.ModelMetaConfFactory(getApplicationProjectRoot()); err != nil {
+		return nil, fmt.Errorf("init model meta conf factory failed, err=%w", err)
 	}
 
 	return deps, err

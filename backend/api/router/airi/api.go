@@ -42,6 +42,17 @@ func Register(r *gin.Engine) {
 				}
 			}
 		}
+		{
+			_admin := _api.Group("/admin", _adminMw()...)
+			{
+				{
+					_model := _admin.Group("/model", _modelMw()...)
+					_model.POST("/create", append(_createmodelMw(), handle.CreateModel)...)
+					_model.POST("/delete", append(_deletemodelMw(), handle.DeleteModel)...)
+					_model.POST("/list", append(_listmodelMw(), handle.GetModelList)...)
+				}
+			}
+		}
 		root.GET("/health", Health)
 	}
 }

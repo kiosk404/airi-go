@@ -115,3 +115,9 @@ func Reverse[T any](slice []T) []T {
 	}
 	return slice
 }
+
+func ForEach[T any](slice []T, fn func(T, int)) {
+	for i, t := range slice {
+		fn(t, i)
+	}
+}

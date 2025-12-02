@@ -5,7 +5,7 @@
 package model
 
 import (
-	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/llmmgr/model"
+	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 	"gorm.io/gorm"
 )
 

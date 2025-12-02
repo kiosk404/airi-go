@@ -851,8 +851,25 @@ func _webMw() []gin.HandlerFunc {
 	return nil
 }
 
-func _emailMw() []gin.HandlerFunc {
+func _adminMw() []gin.HandlerFunc {
 	// your code...
+	return nil
+}
+
+func _modelMw() []gin.HandlerFunc {
+	return nil
+}
+
+func _createmodelMw() []gin.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _deletemodelMw() []gin.HandlerFunc {
+	return nil
+}
+
+func _listmodelMw() []gin.HandlerFunc {
 	return nil
 }
 

@@ -25,6 +25,15 @@ func StrToFloat64(v string) (float64, error) {
 	return strconv.ParseFloat(v, 64)
 }
 
+func StrToFloat64D(v string, defaultValue float64) float64 {
+	toV, err := strconv.ParseFloat(v, 64)
+	if err != nil {
+		return defaultValue
+	}
+
+	return toV
+}
+
 // StrToInt64 returns strconv.ParseInt(v, 10, 64)'s value.
 // if error occurs, returns defaultValue as result.
 func StrToInt64D(v string, defaultValue int64) int64 {

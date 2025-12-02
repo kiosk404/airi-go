@@ -13,19 +13,18 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg/errno"
 	singleagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
-	"github.com/kiosk404/airi-go/backend/modules/llm/application/convertor"
-	moduleentity "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
+	modelmgr "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
 
 func (s *SingleAgentApplicationService) CreateSingleAgentDraft(ctx context.Context, req *developer_api.DraftBotCreateRequest) (*developer_api.DraftBotCreateResponse, error) {
-	resp, err := s.appContext.ModelMgr.DomainSVC.ListModels(ctx, defaultModelRequest(common.ScenarioDefault))
+	modelList, err := modelmgr.DefaultSVC().GetOnlineModelListWithLimit(ctx, 1)
 	if err != nil {
 		return nil, err
 	}
-	if len(resp.Models) == 0 {
+	if len(modelList) == 0 {
 		return nil, errorx.New(errno.ErrAgentNoModelInUseCode)
 	}
 	do, err := s.draftBotCreateRequestToSingleAgent(ctx, req)
@@ -95,83 +94,25 @@ func (s *SingleAgentApplicationService) newDefaultSingleAgent(ctx context.Contex
 }
 
 func (s *SingleAgentApplicationService) defaultModelInfo(ctx context.Context) (*bot_common.ModelInfo, error) {
-	modelResp, err := s.appContext.ModelMgr.DomainSVC.ListModels(ctx, defaultModelRequest(common.ScenarioDefault))
+	modelList, err := modelmgr.DefaultSVC().GetOnlineModelListWithLimit(ctx, 1)
 	if err != nil {
 		return nil, err
 	}
 
-	if len(modelResp.Models) == 0 {
+	if len(modelList) == 0 {
 		return nil, errorx.New(errno.ErrAgentResourceNotFound, errorx.KV("type", "model"), errorx.KV("id", "default"))
 	}
 
-	dm := modelResp.Models[0]
-	dme := convertor.ModelDTO2DO(dm)
-
-	var temperature *float64
-	if tp, ok := dme.FindParameter(moduleentity.Temperature); ok {
-		t, err := tp.GetFloat(moduleentity.DefaultTypeBalance)
-		if err != nil {
-			return nil, err
-		}
-
-		temperature = ptr.Of(t)
-	}
-
-	var maxTokens *int32
-	if tp, ok := dme.FindParameter(moduleentity.MaxTokens); ok {
-		t, err := tp.GetInt(moduleentity.DefaultTypeBalance)
-		if err != nil {
-			return nil, err
-		}
-		maxTokens = ptr.Of(int32(t))
-	} else if dme.CommonParam.MaxTokens != nil {
-		maxTokens = ptr.Of(int32(*dme.CommonParam.MaxTokens))
-	}
-
-	var topP *float64
-	if tp, ok := dme.FindParameter(moduleentity.TopP); ok {
-		t, err := tp.GetFloat(moduleentity.DefaultTypeBalance)
-		if err != nil {
-			return nil, err
-		}
-		topP = ptr.Of(t)
-	}
-
-	var topK *int32
-	if tp, ok := dme.FindParameter(moduleentity.TopK); ok {
-		t, err := tp.GetInt(moduleentity.DefaultTypeBalance)
-		if err != nil {
-			return nil, err
-		}
-		topK = ptr.Of(int32(t))
-	}
-
-	var frequencyPenalty *float64
-	if tp, ok := dme.FindParameter(moduleentity.FrequencyPenalty); ok {
-		t, err := tp.GetFloat(moduleentity.DefaultTypeBalance)
-		if err != nil {
-			return nil, err
-		}
-		frequencyPenalty = ptr.Of(t)
-	}
-
-	var presencePenalty *float64
-	if tp, ok := dme.FindParameter(moduleentity.PresencePenalty); ok {
-		t, err := tp.GetFloat(moduleentity.DefaultTypeBalance)
-		if err != nil {
-			return nil, err
-		}
-		presencePenalty = ptr.Of(t)
-	}
+	dm := modelList[0]
 
 	return &bot_common.ModelInfo{
-		ModelId:          dm.ModelID,
-		Temperature:      temperature,
-		MaxTokens:        maxTokens,
-		TopP:             topP,
-		FrequencyPenalty: frequencyPenalty,
-		PresencePenalty:  presencePenalty,
-		TopK:             topK,
+		ModelId:          ptr.Of(dm.ID),
+		Temperature:      dm.GetDefaultTemperature(),
+		MaxTokens:        dm.GetDefaultMaxTokens(),
+		TopP:             dm.GetDefaultTopP(),
+		FrequencyPenalty: dm.GetDefaultFrequencyPenalty(),
+		PresencePenalty:  dm.GetDefaultPresencePenalty(),
+		TopK:             dm.GetDefaultTopK(),
 		ModelStyle:       bot_common.ModelStylePtr(bot_common.ModelStyle_Balance),
 		ShortMemoryPolicy: &bot_common.ShortMemoryPolicy{
 			ContextMode:  bot_common.ContextModePtr(bot_common.ContextMode_FunctionCall_2),

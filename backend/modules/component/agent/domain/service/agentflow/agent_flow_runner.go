@@ -9,10 +9,10 @@ import (
 	mapset "github.com/deckarep/golang-set/v2"
 	"github.com/google/uuid"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
-	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/service/modelbuilder"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg"
 	singleagent "github.com/kiosk404/airi-go/backend/modules/component/crossdomain/agent/model"
 	agentrun "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/agentrun/model"
+	modelmgr "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 	"github.com/kiosk404/airi-go/backend/pkg/urltobase64url"
@@ -43,7 +43,7 @@ type AgentRunner struct {
 
 	returnDirectlyTools mapset.Set[string] // 直接返回的工具集
 	containWfTool       bool               // 是否包含工作流
-	modelInfo           *modelbuilder.Model
+	modelInfo           *modelmgr.Model
 }
 
 func (r *AgentRunner) StreamExecute(ctx context.Context, req *AgentRequest) (sr *schema.StreamReader[*entity.AgentEvent], err error) {
@@ -198,20 +198,12 @@ func (r *AgentRunner) preHandlerHistory(history []*schema.Message) []*schema.Mes
 }
 
 func (r *AgentRunner) isSupportMultiContent() bool {
-	return r.modelInfo.Ability.GetMultiModal()
+	return r.modelInfo.Capability != nil
 }
-func (r *AgentRunner) isSupportImage() bool {
-	return r.modelInfo.Ability.AbilityMultiModal.GetImage()
-}
-func (r *AgentRunner) isSupportFile() bool {
-	return false
-}
-func (r *AgentRunner) isSupportAudio() bool {
-	return r.modelInfo.Ability.AbilityMultiModal.GetAudio()
-}
-func (r *AgentRunner) isSupportVideo() bool {
-	return r.modelInfo.Ability.AbilityMultiModal.GetVideo()
-}
+func (r *AgentRunner) isSupportImage() bool { return r.modelInfo.Capability.GetImageUnderstanding() }
+func (r *AgentRunner) isSupportFile() bool  { return r.modelInfo.Capability.GetAudioUnderstanding() }
+func (r *AgentRunner) isSupportAudio() bool { return r.modelInfo.Capability.GetAudioUnderstanding() }
+func (r *AgentRunner) isSupportVideo() bool { return r.modelInfo.Capability.GetVideoUnderstanding() }
 
 func (r *AgentRunner) enableLocalFileToLLMWithBase64() bool {
 	return r.modelInfo.EnableBase64URL

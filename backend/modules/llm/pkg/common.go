@@ -1,5 +1,5 @@
 package pkg
 
 const (
-	ModelName = "llm"
+	ModelName = "modelmgr"
 )

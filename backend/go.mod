@@ -32,6 +32,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/google/wire v0.7.0
 	github.com/gosuri/uitable v0.0.4
+	github.com/jinzhu/copier v0.4.0
 	github.com/joho/godotenv v1.5.1
 	github.com/matoous/go-nanoid v1.5.1
 	github.com/minio/minio-go/v7 v7.0.95
