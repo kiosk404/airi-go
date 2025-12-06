@@ -1,31 +1,8 @@
-<picture>
-
-[//]: # (  <source)
-
-[//]: # (    width="100%")
-
-[//]: # (    srcset="./docs/content/public/banner-dark-1280x640.avif")
-
-[//]: # (    media="&#40;prefers-color-scheme: dark&#41;")
-
-[//]: # (  />)
-
-[//]: # (  <source)
-
-[//]: # (    width="100%")
-
-[//]: # (    srcset="./docs/content/public/banner-light-1280x640.avif")
-
-[//]: # (    media="&#40;prefers-color-scheme: light&#41;, &#40;prefers-color-scheme: no-preference&#41;")
-
-[//]: # (  />)
-  <img width="100%" src="./docs/content/public/banner-dark-1280x640.avif" />
-</picture>
-
 <h1 align="center">Project AIRI-GO</h1>
 
-<p align="center">Re-creating ARIRI, a soul container of AI waifu / virtual characters to bring them into our world.</p>
+<p align="center">Re-creating ARIR, a soul container of AI virtual characters to bring them into our world.</p>
 
+🚧 Work in progress (WIP) – this project is not finished yet.
 
 <p align="center">
   <a href="https://deepwiki.com/moeru-ai/airi"><img src="https://deepwiki.com/badge.svg"></a>
