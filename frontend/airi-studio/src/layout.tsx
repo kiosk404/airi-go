@@ -1,7 +1,9 @@
 import { Layout, Menu, Button, Avatar } from 'tdesign-react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { HelpCircleIcon, EarthIcon,
-     BookIcon, RocketIcon, NotificationIcon, ToolsIcon } from 'tdesign-icons-react';
+import {
+    HelpCircleIcon, EarthIcon,
+    BookIcon, RocketIcon, NotificationIcon, ToolsIcon, ControlPlatformIcon
+} from 'tdesign-icons-react';
 
 const {Header, Content} = Layout;
 const {HeadMenu, MenuItem} = Menu;
@@ -11,8 +13,8 @@ export default () => {
     const navigate = useNavigate();
     const location = useLocation();
     return (
-        <Layout>
-            <Header>
+        <Layout style={{ height: "100vh", overflow:"hidden", display:"flex", flexDirection:"column" }}>
+            <Header style={{ flexShrink: 0 }}>
                 <HeadMenu
                     defaultValue={location.pathname}
                     logo={<RocketIcon size="36px" />}
@@ -31,14 +33,18 @@ export default () => {
                     <MenuItem 
                         value="/knowledge" icon={<BookIcon/>} 
                         onClick={() => navigate('/knowledge')} content={
-                            <span className="font-mono">知识库</span>}/> 
+                            <span className="font-mono">知识库</span>}/>
+                    <MenuItem
+                        value="/models" icon={<ControlPlatformIcon/>}
+                        onClick={() => navigate('/models')} content={
+                        <span className="font-mono">模型</span>}/>
                     <MenuItem 
                         value="/tool" icon={<ToolsIcon/>} 
                         onClick={() => navigate('/tool')} content={
                             <span className="font-mono">工具</span>}/>           
                 </HeadMenu>
             </Header>
-            <Content style={{ backgroundColor: 'white'}}>
+            <Content style={{ backgroundColor: 'white', flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
                 <Outlet />
             </Content>
         </Layout>

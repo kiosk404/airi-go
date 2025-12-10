@@ -382,6 +382,140 @@ func (p *ParserType) Value() (driver.Value, error) {
 	return int64(*p), nil
 }
 
+type GetModelListReq struct {
+	Base *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`
+}
+
+func NewGetModelListReq() *GetModelListReq {
+	return &GetModelListReq{}
+}
+
+func (p *GetModelListReq) InitDefault() {
+}
+
+var GetModelListReq_Base_DEFAULT *base.Base
+
+func (p *GetModelListReq) GetBase() (v *base.Base) {
+	if !p.IsSetBase() {
+		return GetModelListReq_Base_DEFAULT
+	}
+	return p.Base
+}
+func (p *GetModelListReq) SetBase(val *base.Base) {
+	p.Base = val
+}
+
+func (p *GetModelListReq) IsSetBase() bool {
+	return p.Base != nil
+}
+
+func (p *GetModelListReq) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("GetModelListReq(%+v)", *p)
+}
+
+type GetModelListResp struct {
+	ProviderModelList []*ProviderModelList `thrift:"provider_model_list,1,default,list<ProviderModelList>" json:"provider_model_list"`
+	Code              int64                `thrift:"code,253,required" json:"code"`
+	Msg               string               `thrift:"msg,254,required" json:"msg"`
+	BaseResp          *base.BaseResp       `thrift:"BaseResp,255,required" json:"BaseResp"`
+}
+
+func NewGetModelListResp() *GetModelListResp {
+	return &GetModelListResp{}
+}
+
+func (p *GetModelListResp) InitDefault() {
+}
+
+func (p *GetModelListResp) GetProviderModelList() (v []*ProviderModelList) {
+	return p.ProviderModelList
+}
+
+func (p *GetModelListResp) GetCode() (v int64) {
+	return p.Code
+}
+
+func (p *GetModelListResp) GetMsg() (v string) {
+	return p.Msg
+}
+
+var GetModelListResp_BaseResp_DEFAULT *base.BaseResp
+
+func (p *GetModelListResp) GetBaseResp() (v *base.BaseResp) {
+	if !p.IsSetBaseResp() {
+		return GetModelListResp_BaseResp_DEFAULT
+	}
+	return p.BaseResp
+}
+func (p *GetModelListResp) SetProviderModelList(val []*ProviderModelList) {
+	p.ProviderModelList = val
+}
+func (p *GetModelListResp) SetCode(val int64) {
+	p.Code = val
+}
+func (p *GetModelListResp) SetMsg(val string) {
+	p.Msg = val
+}
+func (p *GetModelListResp) SetBaseResp(val *base.BaseResp) {
+	p.BaseResp = val
+}
+
+func (p *GetModelListResp) IsSetBaseResp() bool {
+	return p.BaseResp != nil
+}
+
+func (p *GetModelListResp) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("GetModelListResp(%+v)", *p)
+}
+
+type ProviderModelList struct {
+	Provider  *ModelProvider `thrift:"provider,1" json:"provider"`
+	ModelList []*Model       `thrift:"model_list,2,default,list<Model>" json:"model_list"`
+}
+
+func NewProviderModelList() *ProviderModelList {
+	return &ProviderModelList{}
+}
+
+func (p *ProviderModelList) InitDefault() {
+}
+
+var ProviderModelList_Provider_DEFAULT *ModelProvider
+
+func (p *ProviderModelList) GetProvider() (v *ModelProvider) {
+	if !p.IsSetProvider() {
+		return ProviderModelList_Provider_DEFAULT
+	}
+	return p.Provider
+}
+
+func (p *ProviderModelList) GetModelList() (v []*Model) {
+	return p.ModelList
+}
+func (p *ProviderModelList) SetProvider(val *ModelProvider) {
+	p.Provider = val
+}
+func (p *ProviderModelList) SetModelList(val []*Model) {
+	p.ModelList = val
+}
+
+func (p *ProviderModelList) IsSetProvider() bool {
+	return p.Provider != nil
+}
+
+func (p *ProviderModelList) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("ProviderModelList(%+v)", *p)
+}
+
 type I18nText struct {
 	ZhCn string `thrift:"zh_cn,1" json:"zh_cn"`
 	EnUs string `thrift:"en_us,2" json:"en_us"`
@@ -548,14 +682,148 @@ func (p *DisplayInfo) String() string {
 	return fmt.Sprintf("DisplayInfo(%+v)", *p)
 }
 
+type Model struct {
+	ID              int64                           `thrift:"id,1" json:"id"`
+	Provider        *ModelProvider                  `thrift:"provider,2" json:"provider"`
+	DisplayInfo     *DisplayInfo                    `thrift:"display_info,3" json:"display_info"`
+	Capability      *developer_api.ModelAbility     `thrift:"capability,4" json:"capability"`
+	Connection      *Connection                     `thrift:"connection,5" json:"connection"`
+	Type            ModelType                       `thrift:"type,6,default,ModelType" json:"type"`
+	Parameters      []*developer_api.ModelParameter `thrift:"parameters,7,default,list<developer_api.ModelParameter>" json:"parameters"`
+	Status          ModelStatus                     `thrift:"status,8,default,ModelStatus" json:"status"`
+	EnableBase64URL bool                            `thrift:"enable_base64_url,9" json:"enable_base64_url"`
+	DeleteAtMs      int64                           `thrift:"delete_at_ms,10" json:"delete_at_ms"`
+}
+
+func NewModel() *Model {
+	return &Model{}
+}
+
+func (p *Model) InitDefault() {
+}
+
+func (p *Model) GetID() (v int64) {
+	return p.ID
+}
+
+var Model_Provider_DEFAULT *ModelProvider
+
+func (p *Model) GetProvider() (v *ModelProvider) {
+	if !p.IsSetProvider() {
+		return Model_Provider_DEFAULT
+	}
+	return p.Provider
+}
+
+var Model_DisplayInfo_DEFAULT *DisplayInfo
+
+func (p *Model) GetDisplayInfo() (v *DisplayInfo) {
+	if !p.IsSetDisplayInfo() {
+		return Model_DisplayInfo_DEFAULT
+	}
+	return p.DisplayInfo
+}
+
+var Model_Capability_DEFAULT *developer_api.ModelAbility
+
+func (p *Model) GetCapability() (v *developer_api.ModelAbility) {
+	if !p.IsSetCapability() {
+		return Model_Capability_DEFAULT
+	}
+	return p.Capability
+}
+
+var Model_Connection_DEFAULT *Connection
+
+func (p *Model) GetConnection() (v *Connection) {
+	if !p.IsSetConnection() {
+		return Model_Connection_DEFAULT
+	}
+	return p.Connection
+}
+
+func (p *Model) GetType() (v ModelType) {
+	return p.Type
+}
+
+func (p *Model) GetParameters() (v []*developer_api.ModelParameter) {
+	return p.Parameters
+}
+
+func (p *Model) GetStatus() (v ModelStatus) {
+	return p.Status
+}
+
+func (p *Model) GetEnableBase64URL() (v bool) {
+	return p.EnableBase64URL
+}
+
+func (p *Model) GetDeleteAtMs() (v int64) {
+	return p.DeleteAtMs
+}
+func (p *Model) SetID(val int64) {
+	p.ID = val
+}
+func (p *Model) SetProvider(val *ModelProvider) {
+	p.Provider = val
+}
+func (p *Model) SetDisplayInfo(val *DisplayInfo) {
+	p.DisplayInfo = val
+}
+func (p *Model) SetCapability(val *developer_api.ModelAbility) {
+	p.Capability = val
+}
+func (p *Model) SetConnection(val *Connection) {
+	p.Connection = val
+}
+func (p *Model) SetType(val ModelType) {
+	p.Type = val
+}
+func (p *Model) SetParameters(val []*developer_api.ModelParameter) {
+	p.Parameters = val
+}
+func (p *Model) SetStatus(val ModelStatus) {
+	p.Status = val
+}
+func (p *Model) SetEnableBase64URL(val bool) {
+	p.EnableBase64URL = val
+}
+func (p *Model) SetDeleteAtMs(val int64) {
+	p.DeleteAtMs = val
+}
+
+func (p *Model) IsSetProvider() bool {
+	return p.Provider != nil
+}
+
+func (p *Model) IsSetDisplayInfo() bool {
+	return p.DisplayInfo != nil
+}
+
+func (p *Model) IsSetCapability() bool {
+	return p.Capability != nil
+}
+
+func (p *Model) IsSetConnection() bool {
+	return p.Connection != nil
+}
+
+func (p *Model) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("Model(%+v)", *p)
+}
+
 type Connection struct {
 	BaseConnInfo *BaseConnectionInfo `thrift:"base_conn_info,1" json:"base_conn_info"`
-	Openai       *OpenAIConnInfo     `thrift:"openai,2,optional" json:"openai,omitempty"`
-	Deepseek     *DeepseekConnInfo   `thrift:"deepseek,3,optional" json:"deepseek,omitempty"`
-	Gemini       *GeminiConnInfo     `thrift:"gemini,4,optional" json:"gemini,omitempty"`
-	Qwen         *QwenConnInfo       `thrift:"qwen,5,optional" json:"qwen,omitempty"`
-	Ollama       *OllamaConnInfo     `thrift:"ollama,6,optional" json:"ollama,omitempty"`
-	Claude       *ClaudeConnInfo     `thrift:"claude,7,optional" json:"claude,omitempty"`
+	Ark          *ArkConnInfo        `thrift:"ark,2,optional" json:"ark,omitempty"`
+	Openai       *OpenAIConnInfo     `thrift:"openai,3,optional" json:"openai,omitempty"`
+	Deepseek     *DeepseekConnInfo   `thrift:"deepseek,4,optional" json:"deepseek,omitempty"`
+	Gemini       *GeminiConnInfo     `thrift:"gemini,5,optional" json:"gemini,omitempty"`
+	Qwen         *QwenConnInfo       `thrift:"qwen,6,optional" json:"qwen,omitempty"`
+	Ollama       *OllamaConnInfo     `thrift:"ollama,7,optional" json:"ollama,omitempty"`
+	Claude       *ClaudeConnInfo     `thrift:"claude,8,optional" json:"claude,omitempty"`
 }
 
 func NewConnection() *Connection {
@@ -572,6 +840,15 @@ func (p *Connection) GetBaseConnInfo() (v *BaseConnectionInfo) {
 		return Connection_BaseConnInfo_DEFAULT
 	}
 	return p.BaseConnInfo
+}
+
+var Connection_Ark_DEFAULT *ArkConnInfo
+
+func (p *Connection) GetArk() (v *ArkConnInfo) {
+	if !p.IsSetArk() {
+		return Connection_Ark_DEFAULT
+	}
+	return p.Ark
 }
 
 var Connection_Openai_DEFAULT *OpenAIConnInfo
@@ -630,6 +907,9 @@ func (p *Connection) GetClaude() (v *ClaudeConnInfo) {
 func (p *Connection) SetBaseConnInfo(val *BaseConnectionInfo) {
 	p.BaseConnInfo = val
 }
+func (p *Connection) SetArk(val *ArkConnInfo) {
+	p.Ark = val
+}
 func (p *Connection) SetOpenai(val *OpenAIConnInfo) {
 	p.Openai = val
 }
@@ -651,6 +931,10 @@ func (p *Connection) SetClaude(val *ClaudeConnInfo) {
 
 func (p *Connection) IsSetBaseConnInfo() bool {
 	return p.BaseConnInfo != nil
+}
+
+func (p *Connection) IsSetArk() bool {
+	return p.Ark != nil
 }
 
 func (p *Connection) IsSetOpenai() bool {
@@ -1158,6 +1442,57 @@ func (p *DeleteModelResp) String() string {
 	return fmt.Sprintf("DeleteModelResp(%+v)", *p)
 }
 
+type UpdateModelReq struct {
+	Model *Model     `thrift:"model,1" json:"model"`
+	Base  *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`
+}
+
+func NewUpdateModelReq() *UpdateModelReq {
+	return &UpdateModelReq{}
+}
+
+func (p *UpdateModelReq) InitDefault() {
+}
+
+var UpdateModelReq_Model_DEFAULT *Model
+
+func (p *UpdateModelReq) GetModel() (v *Model) {
+	if !p.IsSetModel() {
+		return UpdateModelReq_Model_DEFAULT
+	}
+	return p.Model
+}
+
+var UpdateModelReq_Base_DEFAULT *base.Base
+
+func (p *UpdateModelReq) GetBase() (v *base.Base) {
+	if !p.IsSetBase() {
+		return UpdateModelReq_Base_DEFAULT
+	}
+	return p.Base
+}
+func (p *UpdateModelReq) SetModel(val *Model) {
+	p.Model = val
+}
+func (p *UpdateModelReq) SetBase(val *base.Base) {
+	p.Base = val
+}
+
+func (p *UpdateModelReq) IsSetModel() bool {
+	return p.Model != nil
+}
+
+func (p *UpdateModelReq) IsSetBase() bool {
+	return p.Base != nil
+}
+
+func (p *UpdateModelReq) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("UpdateModelReq(%+v)", *p)
+}
+
 type UpdateModelResp struct {
 	Code     int64          `thrift:"code,253,required" json:"code"`
 	Msg      string         `thrift:"msg,254,required" json:"msg"`
@@ -1591,9 +1926,9 @@ func (p *BasicConfiguration) String() string {
 }
 
 type PluginConfiguration struct {
-	SaasPluginEnabled bool   `thrift:"saas_plugin_enabled,1" json:"saas_plugin_enabled"`
-	APIToken          string `thrift:"api_token,2" json:"api_token"`
-	SaasAPIBaseURL    string `thrift:"saas_api_base_url,3" json:"saas_api_base_url"`
+	CozeSaasPluginEnabled bool   `thrift:"coze_saas_plugin_enabled,1" json:"coze_saas_plugin_enabled"`
+	CozeAPIToken          string `thrift:"coze_api_token,2" json:"coze_api_token"`
+	CozeSaasAPIBaseURL    string `thrift:"coze_saas_api_base_url,3" json:"coze_saas_api_base_url"`
 }
 
 func NewPluginConfiguration() *PluginConfiguration {
@@ -1603,25 +1938,25 @@ func NewPluginConfiguration() *PluginConfiguration {
 func (p *PluginConfiguration) InitDefault() {
 }
 
-func (p *PluginConfiguration) GetSaasPluginEnabled() (v bool) {
-	return p.SaasPluginEnabled
+func (p *PluginConfiguration) GetCozeSaasPluginEnabled() (v bool) {
+	return p.CozeSaasPluginEnabled
 }
 
-func (p *PluginConfiguration) GetAPIToken() (v string) {
-	return p.APIToken
+func (p *PluginConfiguration) GetCozeAPIToken() (v string) {
+	return p.CozeAPIToken
 }
 
-func (p *PluginConfiguration) GetSaasAPIBaseURL() (v string) {
-	return p.SaasAPIBaseURL
+func (p *PluginConfiguration) GetCozeSaasAPIBaseURL() (v string) {
+	return p.CozeSaasAPIBaseURL
 }
-func (p *PluginConfiguration) SetSaasPluginEnabled(val bool) {
-	p.SaasPluginEnabled = val
+func (p *PluginConfiguration) SetCozeSaasPluginEnabled(val bool) {
+	p.CozeSaasPluginEnabled = val
 }
-func (p *PluginConfiguration) SetAPIToken(val string) {
-	p.APIToken = val
+func (p *PluginConfiguration) SetCozeAPIToken(val string) {
+	p.CozeAPIToken = val
 }
-func (p *PluginConfiguration) SetSaasAPIBaseURL(val string) {
-	p.SaasAPIBaseURL = val
+func (p *PluginConfiguration) SetCozeSaasAPIBaseURL(val string) {
+	p.CozeSaasAPIBaseURL = val
 }
 
 func (p *PluginConfiguration) String() string {
@@ -1979,10 +2314,11 @@ func (p *EmbeddingConfig) String() string {
 type EmbeddingConnection struct {
 	BaseConnInfo  *BaseConnectionInfo `thrift:"base_conn_info,1" json:"base_conn_info"`
 	EmbeddingInfo *EmbeddingInfo      `thrift:"embedding_info,2" json:"embedding_info"`
-	Openai        *OpenAIConnInfo     `thrift:"openai,3,optional" json:"openai,omitempty"`
-	Ollama        *OllamaConnInfo     `thrift:"ollama,4,optional" json:"ollama,omitempty"`
-	Gemini        *GeminiConnInfo     `thrift:"gemini,5,optional" json:"gemini,omitempty"`
-	HTTP          *HttpConnection     `thrift:"http,6,optional" json:"http,omitempty"`
+	Ark           *ArkConnInfo        `thrift:"ark,3,optional" json:"ark,omitempty"`
+	Openai        *OpenAIConnInfo     `thrift:"openai,4,optional" json:"openai,omitempty"`
+	Ollama        *OllamaConnInfo     `thrift:"ollama,5,optional" json:"ollama,omitempty"`
+	Gemini        *GeminiConnInfo     `thrift:"gemini,6,optional" json:"gemini,omitempty"`
+	HTTP          *HttpConnection     `thrift:"http,7,optional" json:"http,omitempty"`
 }
 
 func NewEmbeddingConnection() *EmbeddingConnection {
@@ -2008,6 +2344,15 @@ func (p *EmbeddingConnection) GetEmbeddingInfo() (v *EmbeddingInfo) {
 		return EmbeddingConnection_EmbeddingInfo_DEFAULT
 	}
 	return p.EmbeddingInfo
+}
+
+var EmbeddingConnection_Ark_DEFAULT *ArkConnInfo
+
+func (p *EmbeddingConnection) GetArk() (v *ArkConnInfo) {
+	if !p.IsSetArk() {
+		return EmbeddingConnection_Ark_DEFAULT
+	}
+	return p.Ark
 }
 
 var EmbeddingConnection_Openai_DEFAULT *OpenAIConnInfo
@@ -2051,6 +2396,9 @@ func (p *EmbeddingConnection) SetBaseConnInfo(val *BaseConnectionInfo) {
 func (p *EmbeddingConnection) SetEmbeddingInfo(val *EmbeddingInfo) {
 	p.EmbeddingInfo = val
 }
+func (p *EmbeddingConnection) SetArk(val *ArkConnInfo) {
+	p.Ark = val
+}
 func (p *EmbeddingConnection) SetOpenai(val *OpenAIConnInfo) {
 	p.Openai = val
 }
@@ -2070,6 +2418,10 @@ func (p *EmbeddingConnection) IsSetBaseConnInfo() bool {
 
 func (p *EmbeddingConnection) IsSetEmbeddingInfo() bool {
 	return p.EmbeddingInfo != nil
+}
+
+func (p *EmbeddingConnection) IsSetArk() bool {
+	return p.Ark != nil
 }
 
 func (p *EmbeddingConnection) IsSetOpenai() bool {
@@ -2309,6 +2661,8 @@ type ModelConfigService interface {
 	GetKnowledgeConfig(ctx context.Context, req *GetKnowledgeConfigReq) (r *GetKnowledgeConfigResp, err error)
 
 	UpdateKnowledgeConfig(ctx context.Context, req *UpdateKnowledgeConfigReq) (r *UpdateKnowledgeConfigResp, err error)
+
+	GetModelList(ctx context.Context, req *GetModelListReq) (r *GetModelListResp, err error)
 
 	CreateModel(ctx context.Context, req *CreateModelReq) (r *CreateModelResp, err error)
 

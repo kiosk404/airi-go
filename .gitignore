@@ -43,3 +43,4 @@ node_modules/
 .env.local
 /_test
 frontend/common
+.qwen

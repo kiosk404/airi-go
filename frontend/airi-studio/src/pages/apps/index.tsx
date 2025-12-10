@@ -138,7 +138,7 @@ const AppPage: React.FC = () => {
     const [activeTab, setActiveTab] = useState("airis");
 
     return (
-        <div style={{ width: "100%", height: "91vh", position: "relative", overflow: "hidden" }}>
+        <div style={{ width: "100%", height: "100%", position: "relative", overflow: "hidden", flex: 1 }}>
             {/* 背景 */}
             <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
                 <LightRays

@@ -283,7 +283,7 @@ struct commonParamSchema{
 struct PluginParameter {
     1 :          string                name
     2 :          string                desc
-    3 :          bool                  required
+    3 :          bool                  is_required
     4 :          string                type
     5 :          list<PluginParameter> sub_parameters
     6 :          string                sub_type       // If Type is an array, there is a subtype
