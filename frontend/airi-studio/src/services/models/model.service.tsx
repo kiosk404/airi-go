@@ -3,8 +3,8 @@ import { ApiError } from '@/services/core';
 import type {
     IProviderModelListArgs,
     IConnectionArgs,
-} from '@/api/generated';
-import { ModelClass } from '@/api/generated';
+} from '@/api/generated/modelapi';
+import { ModelClass } from '@/api/generated/app/developer_api/ModelClass';
 
 // Re-export types for UI layer
 export { ModelClass };

@@ -8,7 +8,7 @@ import type {
     ICreateModelRespArgs,
     IDeleteModelReqArgs,
     IDeleteModelRespArgs,
-} from '@/api/generated';
+} from '@/api/generated/modelapi';
 
 const API_BASE = '/api/admin/config/model';
 
