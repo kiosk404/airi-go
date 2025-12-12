@@ -7,23 +7,23 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "./";
 export interface IDeleteModelReq {
-    id?: thrift.Int64;
+    id?: string;
     Base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IDeleteModelReqArgs {
-    id?: number | string | thrift.Int64;
+    id?: string;
     Base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const DeleteModelReqCodec: thrift.IStructCodec<IDeleteModelReqArgs, IDeleteModelReq> = {
     encode(args: IDeleteModelReqArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            id: (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id),
+            id: args.id,
             Base: args.Base
         };
         output.writeStructBegin("DeleteModelReq");
         if (obj.id != null) {
-            output.writeFieldBegin("id", thrift.TType.I64, 1);
-            output.writeI64((typeof obj.id === "number" ? new thrift.Int64(obj.id) : typeof obj.id === "string" ? thrift.Int64.fromDecimalString(obj.id) : obj.id));
+            output.writeFieldBegin("id", thrift.TType.STRING, 1);
+            output.writeString(obj.id);
             output.writeFieldEnd();
         }
         if (obj.Base != null) {
@@ -47,8 +47,8 @@ export const DeleteModelReqCodec: thrift.IStructCodec<IDeleteModelReqArgs, IDele
             }
             switch (fieldId) {
                 case 1:
-                    if (fieldType === thrift.TType.I64) {
-                        const value_1: thrift.Int64 = input.readI64();
+                    if (fieldType === thrift.TType.STRING) {
+                        const value_1: string = input.readString();
                         _args.id = value_1;
                     }
                     else {
@@ -78,7 +78,7 @@ export const DeleteModelReqCodec: thrift.IStructCodec<IDeleteModelReqArgs, IDele
     }
 };
 export class DeleteModelReq extends thrift.StructLike implements IDeleteModelReq {
-    public id?: thrift.Int64;
+    public id?: string;
     public Base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
@@ -90,7 +90,7 @@ export class DeleteModelReq extends thrift.StructLike implements IDeleteModelReq
     constructor(args: IDeleteModelReqArgs = {}) {
         super();
         if (args.id != null) {
-            const value_3: thrift.Int64 = (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id);
+            const value_3: string = args.id;
             this.id = value_3;
         }
         if (args.Base != null) {

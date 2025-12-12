@@ -1,50 +1,100 @@
-import { Layout, Menu, Button, Avatar } from 'tdesign-react';
+import { Layout, Nav, Avatar, Dropdown, Toast, Button } from '@douyinfe/semi-ui';
+import { IconBell, IconHelpCircle, IconExit, IconUser, IconHome, IconFile, IconSetting, IconWrench } from '@douyinfe/semi-icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import {
-    HelpCircleIcon, EarthIcon,
-    BookIcon, RocketIcon, NotificationIcon, ToolsIcon, ControlPlatformIcon
-} from 'tdesign-icons-react';
+import { useAuth } from '@/contexts/AuthContext';
 
-const {Header, Content} = Layout;
-const {HeadMenu, MenuItem} = Menu;
-
+const { Header, Content } = Layout;
 
 export default () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { user, logout } = useAuth();
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            Toast.success('已退出登录');
+            navigate('/login', { replace: true });
+        } catch {
+            Toast.error('退出失败');
+        }
+    };
+
+    // 根据当前路径获取选中的菜单项
+    const getSelectedKey = () => {
+        const path = location.pathname;
+        if (path.startsWith('/workspace')) return 'workspace';
+        if (path.startsWith('/knowledge')) return 'knowledge';
+        if (path.startsWith('/models')) return 'models';
+        if (path.startsWith('/tool')) return 'tool';
+        return 'workspace';
+    };
+
     return (
-        <Layout style={{ height: "100vh", overflow:"hidden", display:"flex", flexDirection:"column" }}>
-            <Header style={{ flexShrink: 0 }}>
-                <HeadMenu
-                    defaultValue={location.pathname}
-                    logo={<RocketIcon size="36px" />}
-                    operations={
-                        <div className="t-menu__operations">
-                            <Button variant='text' shape='square' icon={<NotificationIcon />}></Button>
-                            <Button variant='text' shape='square' icon={<HelpCircleIcon />}></Button>
-                            <Avatar size="medium" hideOnLoadFailed={false} image="https://kiosk007.top/images/avatar.jpg">Kiosk</Avatar>
+        <Layout style={{ height: "100vh", overflow: "hidden" }}>
+            <Header style={{ backgroundColor: 'var(--semi-color-bg-1)' }}>
+                <Nav
+                    mode="horizontal"
+                    selectedKeys={[getSelectedKey()]}
+                    onSelect={(data) => {
+                        const key = data.itemKey as string;
+                        navigate(`/${key}`);
+                    }}
+                    header={{
+                        logo: (
+                            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                        ),
+                        text: 'Airi Studio',
+                    }}
+                    footer={
+                        <div className="flex items-center gap-2">
+                            <Button
+                                theme="borderless"
+                                icon={<IconBell />}
+                                style={{ color: 'var(--semi-color-text-2)' }}
+                            />
+                            <Button
+                                theme="borderless"
+                                icon={<IconHelpCircle />}
+                                style={{ color: 'var(--semi-color-text-2)' }}
+                            />
+                            <Dropdown
+                                trigger="click"
+                                position="bottomRight"
+                                render={
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item icon={<IconUser />}>
+                                            个人信息
+                                        </Dropdown.Item>
+                                        <Dropdown.Divider />
+                                        <Dropdown.Item icon={<IconExit />} onClick={handleLogout}>
+                                            退出登录
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                }
+                            >
+                                <Avatar
+                                    size="small"
+                                    src={user?.avatar_url}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    {user?.nick_name?.[0] || user?.name?.[0] || 'U'}
+                                </Avatar>
+                            </Dropdown>
                         </div>
                     }
                 >
-                    <MenuItem 
-                        value="/workspace" icon={<EarthIcon/>} 
-                        onClick={() => navigate('/workspace')} content={
-                           <span className="font-mono">工作室</span>}/>
-                    <MenuItem 
-                        value="/knowledge" icon={<BookIcon/>} 
-                        onClick={() => navigate('/knowledge')} content={
-                            <span className="font-mono">知识库</span>}/>
-                    <MenuItem
-                        value="/models" icon={<ControlPlatformIcon/>}
-                        onClick={() => navigate('/models')} content={
-                        <span className="font-mono">模型</span>}/>
-                    <MenuItem 
-                        value="/tool" icon={<ToolsIcon/>} 
-                        onClick={() => navigate('/tool')} content={
-                            <span className="font-mono">工具</span>}/>           
-                </HeadMenu>
+                    <Nav.Item itemKey="workspace" text="工作室" icon={<IconHome />} />
+                    <Nav.Item itemKey="knowledge" text="知识库" icon={<IconFile />} />
+                    <Nav.Item itemKey="models" text="模型" icon={<IconSetting />} />
+                    <Nav.Item itemKey="tool" text="工具" icon={<IconWrench />} />
+                </Nav>
             </Header>
-            <Content style={{ backgroundColor: 'white', flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+            <Content style={{ backgroundColor: 'var(--semi-color-bg-0)', flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
                 <Outlet />
             </Content>
         </Layout>

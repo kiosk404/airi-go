@@ -7,13 +7,13 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "./";
 export interface ICreateModelResp {
-    id?: thrift.Int64;
+    id?: string;
     code: thrift.Int64;
     msg: string;
     BaseResp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface ICreateModelRespArgs {
-    id?: number | string | thrift.Int64;
+    id?: string;
     code: number | string | thrift.Int64;
     msg: string;
     BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
@@ -21,15 +21,15 @@ export interface ICreateModelRespArgs {
 export const CreateModelRespCodec: thrift.IStructCodec<ICreateModelRespArgs, ICreateModelResp> = {
     encode(args: ICreateModelRespArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            id: (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id),
+            id: args.id,
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             BaseResp: args.BaseResp
         };
         output.writeStructBegin("CreateModelResp");
         if (obj.id != null) {
-            output.writeFieldBegin("id", thrift.TType.I64, 1);
-            output.writeI64((typeof obj.id === "number" ? new thrift.Int64(obj.id) : typeof obj.id === "string" ? thrift.Int64.fromDecimalString(obj.id) : obj.id));
+            output.writeFieldBegin("id", thrift.TType.STRING, 1);
+            output.writeString(obj.id);
             output.writeFieldEnd();
         }
         if (obj.code != null) {
@@ -72,8 +72,8 @@ export const CreateModelRespCodec: thrift.IStructCodec<ICreateModelRespArgs, ICr
             }
             switch (fieldId) {
                 case 1:
-                    if (fieldType === thrift.TType.I64) {
-                        const value_1: thrift.Int64 = input.readI64();
+                    if (fieldType === thrift.TType.STRING) {
+                        const value_1: string = input.readString();
                         _args.id = value_1;
                     }
                     else {
@@ -128,7 +128,7 @@ export const CreateModelRespCodec: thrift.IStructCodec<ICreateModelRespArgs, ICr
     }
 };
 export class CreateModelResp extends thrift.StructLike implements ICreateModelResp {
-    public id?: thrift.Int64;
+    public id?: string;
     public code: thrift.Int64;
     public msg: string;
     public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
@@ -145,7 +145,7 @@ export class CreateModelResp extends thrift.StructLike implements ICreateModelRe
     constructor(args: ICreateModelRespArgs) {
         super();
         if (args.id != null) {
-            const value_5: thrift.Int64 = (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id);
+            const value_5: string = args.id;
             this.id = value_5;
         }
         if (args.code != null) {

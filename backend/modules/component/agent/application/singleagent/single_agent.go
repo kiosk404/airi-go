@@ -194,3 +194,11 @@ func (s *SingleAgentApplicationService) ValidateAgentDraftAccess(ctx context.Con
 
 	return do, nil
 }
+
+func (s *SingleAgentApplicationService) ListAgentDraft(ctx context.Context, page, pageSize int) ([]*entity.SingleAgent, int64, error) {
+	uid := ctxutil.GetUIDFromCtx(ctx)
+	if uid == nil {
+		return nil, 0, errorx.New(errno.ErrAgentPermissionCode, errorx.KV("msg", "session uid not found"))
+	}
+	return s.DomainSVC.ListAgentDraftByCreator(ctx, *uid, page, pageSize)
+}

@@ -240,12 +240,12 @@ func (u *UserApplicationService) MGetUserInfo(ctx context.Context, req *user.MGe
 
 // Add a simple account verification function
 // 规则：
-// 1. 长度在 6 到 20 个字符之间。
+// 1. 长度在 2 到 20 个字符之间。
 // 2. 不能包含中文字符。
 // 3. 只允许字母、数字和下划线 或 邮箱
 func isValidAccount(account string) bool {
 	// 规则1: 检查长度
-	if len(account) < 6 || len(account) > 20 {
+	if len(account) < 2 || len(account) > 20 {
 		return false
 	}
 

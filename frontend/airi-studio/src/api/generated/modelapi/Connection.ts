@@ -6,7 +6,6 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as BaseConnectionInfo from "./BaseConnectionInfo";
-import * as ArkConnInfo from "./ArkConnInfo";
 import * as OpenAIConnInfo from "./OpenAIConnInfo";
 import * as DeepseekConnInfo from "./DeepseekConnInfo";
 import * as GeminiConnInfo from "./GeminiConnInfo";
@@ -15,7 +14,6 @@ import * as OllamaConnInfo from "./OllamaConnInfo";
 import * as ClaudeConnInfo from "./ClaudeConnInfo";
 export interface IConnection {
     base_conn_info?: BaseConnectionInfo.IBaseConnectionInfo;
-    ark?: ArkConnInfo.IArkConnInfo;
     openai?: OpenAIConnInfo.IOpenAIConnInfo;
     deepseek?: DeepseekConnInfo.IDeepseekConnInfo;
     gemini?: GeminiConnInfo.IGeminiConnInfo;
@@ -25,7 +23,6 @@ export interface IConnection {
 }
 export interface IConnectionArgs {
     base_conn_info?: BaseConnectionInfo.IBaseConnectionInfoArgs;
-    ark?: ArkConnInfo.IArkConnInfoArgs;
     openai?: OpenAIConnInfo.IOpenAIConnInfoArgs;
     deepseek?: DeepseekConnInfo.IDeepseekConnInfoArgs;
     gemini?: GeminiConnInfo.IGeminiConnInfoArgs;
@@ -37,7 +34,6 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
     encode(args: IConnectionArgs, output: thrift.TProtocol): void {
         const obj: any = {
             base_conn_info: args.base_conn_info,
-            ark: args.ark,
             openai: args.openai,
             deepseek: args.deepseek,
             gemini: args.gemini,
@@ -51,38 +47,33 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
             BaseConnectionInfo.BaseConnectionInfoCodec.encode(obj.base_conn_info, output);
             output.writeFieldEnd();
         }
-        if (obj.ark != null) {
-            output.writeFieldBegin("ark", thrift.TType.STRUCT, 2);
-            ArkConnInfo.ArkConnInfoCodec.encode(obj.ark, output);
-            output.writeFieldEnd();
-        }
         if (obj.openai != null) {
-            output.writeFieldBegin("openai", thrift.TType.STRUCT, 3);
+            output.writeFieldBegin("openai", thrift.TType.STRUCT, 2);
             OpenAIConnInfo.OpenAIConnInfoCodec.encode(obj.openai, output);
             output.writeFieldEnd();
         }
         if (obj.deepseek != null) {
-            output.writeFieldBegin("deepseek", thrift.TType.STRUCT, 4);
+            output.writeFieldBegin("deepseek", thrift.TType.STRUCT, 3);
             DeepseekConnInfo.DeepseekConnInfoCodec.encode(obj.deepseek, output);
             output.writeFieldEnd();
         }
         if (obj.gemini != null) {
-            output.writeFieldBegin("gemini", thrift.TType.STRUCT, 5);
+            output.writeFieldBegin("gemini", thrift.TType.STRUCT, 4);
             GeminiConnInfo.GeminiConnInfoCodec.encode(obj.gemini, output);
             output.writeFieldEnd();
         }
         if (obj.qwen != null) {
-            output.writeFieldBegin("qwen", thrift.TType.STRUCT, 6);
+            output.writeFieldBegin("qwen", thrift.TType.STRUCT, 5);
             QwenConnInfo.QwenConnInfoCodec.encode(obj.qwen, output);
             output.writeFieldEnd();
         }
         if (obj.ollama != null) {
-            output.writeFieldBegin("ollama", thrift.TType.STRUCT, 7);
+            output.writeFieldBegin("ollama", thrift.TType.STRUCT, 6);
             OllamaConnInfo.OllamaConnInfoCodec.encode(obj.ollama, output);
             output.writeFieldEnd();
         }
         if (obj.claude != null) {
-            output.writeFieldBegin("claude", thrift.TType.STRUCT, 8);
+            output.writeFieldBegin("claude", thrift.TType.STRUCT, 7);
             ClaudeConnInfo.ClaudeConnInfoCodec.encode(obj.claude, output);
             output.writeFieldEnd();
         }
@@ -112,8 +103,8 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
                     break;
                 case 2:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_2: ArkConnInfo.IArkConnInfo = ArkConnInfo.ArkConnInfoCodec.decode(input);
-                        _args.ark = value_2;
+                        const value_2: OpenAIConnInfo.IOpenAIConnInfo = OpenAIConnInfo.OpenAIConnInfoCodec.decode(input);
+                        _args.openai = value_2;
                     }
                     else {
                         input.skip(fieldType);
@@ -121,8 +112,8 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
                     break;
                 case 3:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_3: OpenAIConnInfo.IOpenAIConnInfo = OpenAIConnInfo.OpenAIConnInfoCodec.decode(input);
-                        _args.openai = value_3;
+                        const value_3: DeepseekConnInfo.IDeepseekConnInfo = DeepseekConnInfo.DeepseekConnInfoCodec.decode(input);
+                        _args.deepseek = value_3;
                     }
                     else {
                         input.skip(fieldType);
@@ -130,8 +121,8 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
                     break;
                 case 4:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: DeepseekConnInfo.IDeepseekConnInfo = DeepseekConnInfo.DeepseekConnInfoCodec.decode(input);
-                        _args.deepseek = value_4;
+                        const value_4: GeminiConnInfo.IGeminiConnInfo = GeminiConnInfo.GeminiConnInfoCodec.decode(input);
+                        _args.gemini = value_4;
                     }
                     else {
                         input.skip(fieldType);
@@ -139,8 +130,8 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
                     break;
                 case 5:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_5: GeminiConnInfo.IGeminiConnInfo = GeminiConnInfo.GeminiConnInfoCodec.decode(input);
-                        _args.gemini = value_5;
+                        const value_5: QwenConnInfo.IQwenConnInfo = QwenConnInfo.QwenConnInfoCodec.decode(input);
+                        _args.qwen = value_5;
                     }
                     else {
                         input.skip(fieldType);
@@ -148,8 +139,8 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
                     break;
                 case 6:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: QwenConnInfo.IQwenConnInfo = QwenConnInfo.QwenConnInfoCodec.decode(input);
-                        _args.qwen = value_6;
+                        const value_6: OllamaConnInfo.IOllamaConnInfo = OllamaConnInfo.OllamaConnInfoCodec.decode(input);
+                        _args.ollama = value_6;
                     }
                     else {
                         input.skip(fieldType);
@@ -157,17 +148,8 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
                     break;
                 case 7:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_7: OllamaConnInfo.IOllamaConnInfo = OllamaConnInfo.OllamaConnInfoCodec.decode(input);
-                        _args.ollama = value_7;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
-                case 8:
-                    if (fieldType === thrift.TType.STRUCT) {
-                        const value_8: ClaudeConnInfo.IClaudeConnInfo = ClaudeConnInfo.ClaudeConnInfoCodec.decode(input);
-                        _args.claude = value_8;
+                        const value_7: ClaudeConnInfo.IClaudeConnInfo = ClaudeConnInfo.ClaudeConnInfoCodec.decode(input);
+                        _args.claude = value_7;
                     }
                     else {
                         input.skip(fieldType);
@@ -182,7 +164,6 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
         input.readStructEnd();
         return {
             base_conn_info: _args.base_conn_info,
-            ark: _args.ark,
             openai: _args.openai,
             deepseek: _args.deepseek,
             gemini: _args.gemini,
@@ -194,7 +175,6 @@ export const ConnectionCodec: thrift.IStructCodec<IConnectionArgs, IConnection> 
 };
 export class Connection extends thrift.StructLike implements IConnection {
     public base_conn_info?: BaseConnectionInfo.IBaseConnectionInfo;
-    public ark?: ArkConnInfo.IArkConnInfo;
     public openai?: OpenAIConnInfo.IOpenAIConnInfo;
     public deepseek?: DeepseekConnInfo.IDeepseekConnInfo;
     public gemini?: GeminiConnInfo.IGeminiConnInfo;
@@ -206,36 +186,32 @@ export class Connection extends thrift.StructLike implements IConnection {
     constructor(args: IConnectionArgs = {}) {
         super();
         if (args.base_conn_info != null) {
-            const value_9: BaseConnectionInfo.IBaseConnectionInfo = new BaseConnectionInfo.BaseConnectionInfo(args.base_conn_info);
-            this.base_conn_info = value_9;
-        }
-        if (args.ark != null) {
-            const value_10: ArkConnInfo.IArkConnInfo = new ArkConnInfo.ArkConnInfo(args.ark);
-            this.ark = value_10;
+            const value_8: BaseConnectionInfo.IBaseConnectionInfo = new BaseConnectionInfo.BaseConnectionInfo(args.base_conn_info);
+            this.base_conn_info = value_8;
         }
         if (args.openai != null) {
-            const value_11: OpenAIConnInfo.IOpenAIConnInfo = new OpenAIConnInfo.OpenAIConnInfo(args.openai);
-            this.openai = value_11;
+            const value_9: OpenAIConnInfo.IOpenAIConnInfo = new OpenAIConnInfo.OpenAIConnInfo(args.openai);
+            this.openai = value_9;
         }
         if (args.deepseek != null) {
-            const value_12: DeepseekConnInfo.IDeepseekConnInfo = new DeepseekConnInfo.DeepseekConnInfo(args.deepseek);
-            this.deepseek = value_12;
+            const value_10: DeepseekConnInfo.IDeepseekConnInfo = new DeepseekConnInfo.DeepseekConnInfo(args.deepseek);
+            this.deepseek = value_10;
         }
         if (args.gemini != null) {
-            const value_13: GeminiConnInfo.IGeminiConnInfo = new GeminiConnInfo.GeminiConnInfo(args.gemini);
-            this.gemini = value_13;
+            const value_11: GeminiConnInfo.IGeminiConnInfo = new GeminiConnInfo.GeminiConnInfo(args.gemini);
+            this.gemini = value_11;
         }
         if (args.qwen != null) {
-            const value_14: QwenConnInfo.IQwenConnInfo = new QwenConnInfo.QwenConnInfo(args.qwen);
-            this.qwen = value_14;
+            const value_12: QwenConnInfo.IQwenConnInfo = new QwenConnInfo.QwenConnInfo(args.qwen);
+            this.qwen = value_12;
         }
         if (args.ollama != null) {
-            const value_15: OllamaConnInfo.IOllamaConnInfo = new OllamaConnInfo.OllamaConnInfo(args.ollama);
-            this.ollama = value_15;
+            const value_13: OllamaConnInfo.IOllamaConnInfo = new OllamaConnInfo.OllamaConnInfo(args.ollama);
+            this.ollama = value_13;
         }
         if (args.claude != null) {
-            const value_16: ClaudeConnInfo.IClaudeConnInfo = new ClaudeConnInfo.ClaudeConnInfo(args.claude);
-            this.claude = value_16;
+            const value_14: ClaudeConnInfo.IClaudeConnInfo = new ClaudeConnInfo.ClaudeConnInfo(args.claude);
+            this.claude = value_14;
         }
     }
     public static read(input: thrift.TProtocol): Connection {

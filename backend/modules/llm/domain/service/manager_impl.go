@@ -55,7 +55,6 @@ func (m modelManageImpl) CreateLLMModel(ctx context.Context, modelClass entity.M
 		return 0, fmt.Errorf("get model meta failed, err: %w", err)
 	}
 	if modelMeta.Connection != nil {
-		conn.Ark = modelMeta.Connection.Ark
 		conn.Openai = modelMeta.Connection.Openai
 		conn.Deepseek = modelMeta.Connection.Deepseek
 		conn.Gemini = modelMeta.Connection.Gemini
@@ -112,4 +111,8 @@ func (m modelManageImpl) ListModelByType(ctx context.Context, modelType entity.M
 
 func (m modelManageImpl) DeleteModelByID(ctx context.Context, id int64) error {
 	return m.ModelManageRepo.DeleteModel(ctx, id)
+}
+
+func (m modelManageImpl) ListAllModelList(ctx context.Context) ([]*entity.ModelInstance, error) {
+	return m.ModelManageRepo.ListModels(ctx)
 }

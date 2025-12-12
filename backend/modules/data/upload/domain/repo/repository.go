@@ -3,8 +3,8 @@ package repo
 import (
 	"context"
 
-	"github.com/kiosk404/airi-go/backend/modules/data/upload/entity"
-	"github.com/kiosk404/airi-go/backend/modules/data/upload/infra/repo/dao"
+	"github.com/kiosk404/airi-go/backend/modules/data/upload/domain/entity"
+	"github.com/kiosk404/airi-go/backend/modules/data/upload/infra/dao"
 	"gorm.io/gorm"
 )
 

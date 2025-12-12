@@ -4,11 +4,11 @@ import (
 	"context"
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
+	"github.com/kiosk404/airi-go/backend/infra/contract/rdb"
 	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
 	"github.com/kiosk404/airi-go/backend/modules/data/upload/domain/repo"
 	"github.com/kiosk404/airi-go/backend/modules/data/upload/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
-	"gorm.io/gorm"
 )
 
 type uploadSVC struct {
@@ -17,7 +17,8 @@ type uploadSVC struct {
 	oss      storage.Storage
 }
 
-func NewUploadSVC(db *gorm.DB, idgen idgen.IDGenerator, oss storage.Storage) UploadService {
+func NewUploadSVC(rdb rdb.Provider, idgen idgen.IDGenerator, oss storage.Storage) UploadService {
+	db := rdb.NewSession(context.Background()).DB()
 	return &uploadSVC{fileRepo: repo.NewFilesRepo(db), idgen: idgen, oss: oss}
 }
 

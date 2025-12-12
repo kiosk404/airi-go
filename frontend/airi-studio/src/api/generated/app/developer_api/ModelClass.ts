@@ -10,5 +10,6 @@ export enum ModelClass {
     Gemini = 3,
     DeepSeek = 4,
     Ollama = 5,
+    Claude = 6,
     Other = 999
 }

@@ -10,6 +10,12 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    proxy: {
+      '/api': {
+        target: process.env.API_NASE_URL || 'http://localhost:9527',
+        changeOrigin: true,
+      },
+    },
   },
   output: {
     assetPrefix: '/',

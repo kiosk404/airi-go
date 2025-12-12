@@ -14,6 +14,7 @@ include "./component/playground/playground.thrift"
 include "./conversation/agent_run_service.thrift"
 include "./conversation/message_service.thrift"
 include "./conversation/conversation_service.thrift"
+include "./upload/upload.thrift"
 
 service BotOpenApiService extends bot_open_api.BotOpenApiService {}
 service DeveloperApiService extends developer_api.DeveloperApiService{}
@@ -29,3 +30,4 @@ service ConversationService extends conversation_service.ConversationService {}
 service PlaygroundService extends playground.PlaygroundService {}
 service IntelligenceService extends intelligence.IntelligenceService {}
 service ResourceService extends resource.ResourceService {}
+service UploadService extends upload.UploadService {}

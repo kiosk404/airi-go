@@ -44,3 +44,5 @@ node_modules/
 /_test
 frontend/common
 .qwen
+# Storage
+BIZ_BOT_ICON/

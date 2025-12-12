@@ -1,4 +1,3 @@
-export * from './ArkConnInfo';
 export * from './BaseConnectionInfo';
 export * from './BasicConfiguration';
 export * from './ClaudeConnInfo';

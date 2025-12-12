@@ -18,6 +18,7 @@ type ModelInstance struct {
 	Extra       ModelExtra
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
+	DeletedAt   time.Time
 }
 
 type ModelClass struct{ *model.ModelClass }

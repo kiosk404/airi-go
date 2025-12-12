@@ -889,6 +889,7 @@ const (
 	ModelClass_Gemini   ModelClass = 3
 	ModelClass_DeepSeek ModelClass = 4
 	ModelClass_Ollama   ModelClass = 5
+	ModelClass_Claude   ModelClass = 6
 	ModelClass_Other    ModelClass = 999
 )
 
@@ -904,6 +905,8 @@ func (p ModelClass) String() string {
 		return "DeepSeek"
 	case ModelClass_Ollama:
 		return "Ollama"
+	case ModelClass_Claude:
+		return "Claude"
 	case ModelClass_Other:
 		return "Other"
 	}
@@ -922,6 +925,8 @@ func ModelClassFromString(s string) (ModelClass, error) {
 		return ModelClass_DeepSeek, nil
 	case "Ollama":
 		return ModelClass_Ollama, nil
+	case "Claude":
+		return ModelClass_Claude, nil
 	case "Other":
 		return ModelClass_Other, nil
 	}

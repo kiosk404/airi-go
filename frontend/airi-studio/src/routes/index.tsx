@@ -5,13 +5,23 @@ import KnowledgePage from "@/pages/knowledge";
 import AppsPage from "@/pages/apps";
 import ModelsPage from "@/pages/models";
 import PlaygroundPage from "@/pages/workspace/playground";
+import LoginPage from "@/pages/login";
+import RequireAuth from "@/components/auth/RequireAuth";
 
 const LoadingFallback = () => <div>loading</div>
 
 export const router = createBrowserRouter([
     {
+        path: "/login",
+        Component: LoginPage,
+    },
+    {
         path: "/",
-        Component: AppLayout,
+        element: (
+            <RequireAuth>
+                <AppLayout />
+            </RequireAuth>
+        ),
         HydrateFallback: LoadingFallback,
         children: [
             { index: true, element: <Navigate to="/apps" replace /> },
@@ -24,6 +34,11 @@ export const router = createBrowserRouter([
     },
     {
         path: "/workspace/playground",
+        element: (
+            <RequireAuth>
+                <AppLayout />
+            </RequireAuth>
+        ),
         HydrateFallback: LoadingFallback,
         children: [
             {

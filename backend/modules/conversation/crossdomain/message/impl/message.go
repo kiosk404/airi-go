@@ -13,6 +13,7 @@ import (
 	model "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/model"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/entity"
 	message "github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/service"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 )
 
@@ -34,7 +35,7 @@ func (c *impl) MessageList(ctx context.Context, req *crossmessage.MessageListReq
 	lm := &entity.ListMeta{
 		ConversationID: req.ConversationID,
 		Limit:          int(req.Limit), // Since the value of limit is checked inside the node, the type cast here is safe
-		UserID:         strconv.FormatInt(req.UserID, 10),
+		UserID:         conv.Int64ToStr(req.UserID),
 		AgentID:        req.BizID,
 		OrderBy:        req.OrderBy,
 	}
@@ -58,10 +59,10 @@ func (c *impl) MessageList(ctx context.Context, req *crossmessage.MessageListReq
 	}
 
 	if lr.PrevCursor > 0 {
-		response.FirstID = strconv.FormatInt(lr.PrevCursor, 10)
+		response.FirstID = conv.Int64ToStr(lr.PrevCursor)
 	}
 	if lr.NextCursor > 0 {
-		response.LastID = strconv.FormatInt(lr.NextCursor, 10)
+		response.LastID = conv.Int64ToStr(lr.NextCursor)
 	}
 	if len(lr.Messages) == 0 {
 		return response, nil

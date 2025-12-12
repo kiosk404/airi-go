@@ -117,6 +117,45 @@ func (sa *SingleAgentDraftDAO) Delete(ctx context.Context, agentID int64) (err e
 	return err
 }
 
+func (sa *SingleAgentDraftDAO) ListByCreator(ctx context.Context, creatorID int64, page, pageSize int) ([]*entity.SingleAgent, int64, error) {
+	sam := sa.dbQuery.SingleAgentDraft
+	offSet := pageSize * (page - 1)
+
+	singleAgents, total, err := sam.WithContext(ctx).
+		Where(sam.CreatorID.Eq(creatorID)).
+		Order(sam.CreatedAt.Desc()).
+		FindByPage(offSet, pageSize)
+	if err != nil {
+		return nil, 0, errorx.WrapByCode(err, errno.ErrAgentGetCode)
+	}
+
+	dos := make([]*entity.SingleAgent, 0, len(singleAgents))
+	for _, singleAgent := range singleAgents {
+		dos = append(dos, sa.singleAgentDraftPo2Do(singleAgent))
+	}
+
+	return dos, total, nil
+}
+
+func (sa *SingleAgentDraftDAO) List(ctx context.Context, page, pageSize int) ([]*entity.SingleAgent, int64, error) {
+	sam := sa.dbQuery.SingleAgentDraft
+	offSet := pageSize * (page - 1)
+
+	singleAgents, total, err := sam.WithContext(ctx).
+		Order(sam.CreatedAt.Desc()).
+		FindByPage(offSet, pageSize)
+	if err != nil {
+		return nil, 0, errorx.WrapByCode(err, errno.ErrAgentGetCode)
+	}
+
+	dos := make([]*entity.SingleAgent, 0, len(singleAgents))
+	for _, singleAgent := range singleAgents {
+		dos = append(dos, sa.singleAgentDraftPo2Do(singleAgent))
+	}
+
+	return dos, total, nil
+}
+
 func (sa *SingleAgentDraftDAO) singleAgentDraftPo2Do(po *model.SingleAgentDraft) *entity.SingleAgent {
 	return &entity.SingleAgent{
 		SingleAgent: &singleagent.SingleAgent{

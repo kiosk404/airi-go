@@ -3,9 +3,10 @@ package sqlite
 import (
 	"fmt"
 	"net/url"
-	"strconv"
 	"strings"
 	"time"
+
+	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 )
 
 type Config struct {
@@ -21,7 +22,7 @@ func (cfg *Config) buildDSN() string {
 	args := []string{
 		"cache=shared",
 		"_pragma=foreign_keys(1)",
-		"_busy_timeout=" + strconv.FormatInt(cfg.Timeout.Milliseconds(), 10),
+		"_busy_timeout=" + conv.Int64ToStr(cfg.Timeout.Milliseconds()),
 	}
 
 	if cfg.Loc != "" {

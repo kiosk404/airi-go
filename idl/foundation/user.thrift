@@ -119,7 +119,7 @@ service UserService {
     ResetPasswordResponse WebAccountPasswordReset(1: ResetPasswordRequest request) (api.post = "/api/foundation/v1/users/reset_password")
 
     // 用户登陆相关接口
-    LoginByPasswordResponse WebAccountLoginByPassword(1: LoginByPasswordRequest request) (api.post = "/api/foundation/v1/users/login_by_password")
+    LoginByPasswordResponse WebAccountLoginByPassword(1: LoginByPasswordRequest request) (api.post = "/api/foundation/v1/users/login")
     LogoutResponse WebLogout(1: LogoutRequest request) (api.post = "/api/foundation/v1/users/logout")
 
     // 修改用户资料相关接口

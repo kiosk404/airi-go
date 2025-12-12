@@ -3,7 +3,6 @@ package runtime
 import (
 	"context"
 	"fmt"
-	"strconv"
 	"time"
 
 	"github.com/cloudwego/eino/schema"
@@ -18,6 +17,7 @@ import (
 	msgEntity "github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/entity"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/json"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 )
 
@@ -84,7 +84,7 @@ func buildKnowledge(_ context.Context, chunk *entity.AgentRespEvent) *msgEntity.
 }
 
 func buildBotStateExt(arm *entity.AgentRunMeta) *msgEntity.BotStateExt {
-	agentID := strconv.FormatInt(arm.AgentID, 10)
+	agentID := conv.Int64ToStr(arm.AgentID)
 	botStateExt := &msgEntity.BotStateExt{
 		AgentID:   agentID,
 		AgentName: arm.Name,
