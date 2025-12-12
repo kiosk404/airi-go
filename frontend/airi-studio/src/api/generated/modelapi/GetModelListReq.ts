@@ -5,19 +5,28 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
+import * as ModelType from "./ModelType";
 import * as __ROOT_NAMESPACE__ from "./";
 export interface IGetModelListReq {
+    model_type?: ModelType.ModelType;
     Base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetModelListReqArgs {
+    model_type?: ModelType.ModelType;
     Base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetModelListReqCodec: thrift.IStructCodec<IGetModelListReqArgs, IGetModelListReq> = {
     encode(args: IGetModelListReqArgs, output: thrift.TProtocol): void {
         const obj: any = {
+            model_type: args.model_type,
             Base: args.Base
         };
         output.writeStructBegin("GetModelListReq");
+        if (obj.model_type != null) {
+            output.writeFieldBegin("model_type", thrift.TType.I32, 1);
+            output.writeI32(obj.model_type);
+            output.writeFieldEnd();
+        }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
             __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
@@ -38,10 +47,19 @@ export const GetModelListReqCodec: thrift.IStructCodec<IGetModelListReqArgs, IGe
                 break;
             }
             switch (fieldId) {
+                case 1:
+                    if (fieldType === thrift.TType.I32) {
+                        const value_1: ModelType.ModelType = input.readI32();
+                        _args.model_type = value_1;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_1: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
-                        _args.Base = value_1;
+                        const value_2: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        _args.Base = value_2;
                     }
                     else {
                         input.skip(fieldType);
@@ -55,19 +73,25 @@ export const GetModelListReqCodec: thrift.IStructCodec<IGetModelListReqArgs, IGe
         }
         input.readStructEnd();
         return {
+            model_type: _args.model_type,
             Base: _args.Base
         };
     }
 };
 export class GetModelListReq extends thrift.StructLike implements IGetModelListReq {
+    public model_type?: ModelType.ModelType;
     public Base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetModelListReqArgs = {}) {
         super();
+        if (args.model_type != null) {
+            const value_3: ModelType.ModelType = args.model_type;
+            this.model_type = value_3;
+        }
         if (args.Base != null) {
-            const value_2: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_2;
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            this.Base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): GetModelListReq {

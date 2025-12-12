@@ -12,6 +12,7 @@ const (
 	ModelClass_Gemini   ModelClass = 3
 	ModelClass_DeepSeek ModelClass = 4
 	ModelClass_Ollama   ModelClass = 5
+	ModelClass_Claude   ModelClass = 6
 	ModelClass_Other    ModelClass = 999
 )
 
@@ -27,6 +28,8 @@ func (p ModelClass) String() string {
 		return "deepseek"
 	case ModelClass_Ollama:
 		return "ollama"
+	case ModelClass_Claude:
+		return "claude"
 	case ModelClass_Other:
 		return "other"
 	}

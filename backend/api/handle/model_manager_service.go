@@ -40,5 +40,15 @@ func DeleteModel(c *gin.Context) {
 // GetModelList .
 // @router /api/admin/model/list [GET]
 func GetModelList(c *gin.Context) {
-
+	var err error
+	var req modelapi.GetModelListReq
+	ctx := c.Request.Context()
+	modeList, err := modelmgrapp.ModelMgrSVC.GetInUseModelList(ctx, req.GetModelType())
+	if err != nil {
+		invalidParamRequestResponse(c, fmt.Sprintf("get builtin model list failed: %v", err))
+		return
+	}
+	resp := new(modelapi.GetModelListResp)
+	resp.ProviderModelList = modeList
+	c.JSON(http.StatusOK, resp)
 }

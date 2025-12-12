@@ -21,6 +21,17 @@ const getModelTypeTag = (type: number) => {
     return <Tag color={color}>{label}</Tag>;
 };
 
+// 格式化 token 数量
+const formatTokens = (tokens: number) => {
+    if (tokens >= 1000000) {
+        return `${(tokens / 1000000).toFixed(2)}M`;
+    }
+    if (tokens >= 1000) {
+        return `${(tokens / 1000).toFixed(2)}K`;
+    }
+    return tokens.toString();
+};
+
 const ModelCard: React.FC<ModelCardProps> = ({ model, onEdit, onDelete }) => {
     return (
         <Card
@@ -86,6 +97,17 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onEdit, onDelete }) => {
                     </Text>
                 </div>
 
+                {model.maxTokens && (
+                    <div style={{ marginBottom: 8, display: "flex", gap: 16 }}>
+                        {model.maxTokens ? (
+                            <span>
+                                <Text type="tertiary">上下文：</Text>
+                                <Text>{formatTokens(model.maxTokens)}</Text>
+                            </span>
+                        ): null}
+                    </div>
+                )}
+
                 {model.capabilities && (
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 12 }}>
                         {model.capabilities.functionCall && (
@@ -94,11 +116,20 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onEdit, onDelete }) => {
                         {model.capabilities.imageUnderstanding && (
                             <Tag size="small" color="green">✓ 图像理解</Tag>
                         )}
+                        {model.capabilities.videoUnderstanding && (
+                            <Tag size="small" color="green">✓ 视频理解</Tag>
+                        )}
+                        {model.capabilities.audioUnderstanding && (
+                            <Tag size="small" color="green">✓ 音频理解</Tag>
+                        )}
                         {model.capabilities.cotDisplay && (
                             <Tag size="small" color="purple">✓ 思维链</Tag>
                         )}
                         {model.capabilities.multiModal && (
                             <Tag size="small" color="orange">✓ 多模态</Tag>
+                        )}
+                        {model.capabilities.prefillResp && (
+                            <Tag size="small" color="green">✓ 预填充响应</Tag>
                         )}
                     </div>
                 )}

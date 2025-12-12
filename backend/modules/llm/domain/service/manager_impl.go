@@ -55,7 +55,6 @@ func (m modelManageImpl) CreateLLMModel(ctx context.Context, modelClass entity.M
 		return 0, fmt.Errorf("get model meta failed, err: %w", err)
 	}
 	if modelMeta.Connection != nil {
-		conn.Ark = modelMeta.Connection.Ark
 		conn.Openai = modelMeta.Connection.Openai
 		conn.Deepseek = modelMeta.Connection.Deepseek
 		conn.Gemini = modelMeta.Connection.Gemini

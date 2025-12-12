@@ -76,3 +76,6 @@ idl-ts:
 	@mkdir -p $(THRIFT_OUT_TS)
 	@cd frontend/airi-studio && pnpm run codegen && cd -
 
+## idl: Generate Go and TypeScript code from Thrift IDL files in ./idl directory.
+.PHONY: idl
+idl: idl-go idl-ts

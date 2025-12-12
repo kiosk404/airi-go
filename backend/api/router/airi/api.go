@@ -49,7 +49,7 @@ func Register(r *gin.Engine) {
 					_model := _admin.Group("/model", _modelMw()...)
 					_model.POST("/create", append(_createmodelMw(), handle.CreateModel)...)
 					_model.POST("/delete", append(_deletemodelMw(), handle.DeleteModel)...)
-					_model.POST("/list", append(_listmodelMw(), handle.GetModelList)...)
+					_model.GET("/list", append(_listmodelMw(), handle.GetModelList)...)
 				}
 			}
 		}

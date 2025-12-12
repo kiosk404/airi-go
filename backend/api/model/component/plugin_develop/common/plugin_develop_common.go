@@ -2453,7 +2453,7 @@ func (p *CommonParamSchema) String() string {
 type PluginParameter struct {
 	Name          string                 `thrift:"name,1" json:"name"`
 	Desc          string                 `thrift:"desc,2" json:"desc"`
-	Required      bool                   `thrift:"required,3" json:"required"`
+	IsRequired    bool                   `thrift:"is_required,3" json:"is_required"`
 	Type          string                 `thrift:"type,4" json:"type"`
 	SubParameters []*PluginParameter     `thrift:"sub_parameters,5,default,list<PluginParameter>" json:"sub_parameters"`
 	SubType       string                 `thrift:"sub_type,6" json:"sub_type"`
@@ -2478,8 +2478,8 @@ func (p *PluginParameter) GetDesc() (v string) {
 	return p.Desc
 }
 
-func (p *PluginParameter) GetRequired() (v bool) {
-	return p.Required
+func (p *PluginParameter) GetIsRequired() (v bool) {
+	return p.IsRequired
 }
 
 func (p *PluginParameter) GetType() (v string) {
@@ -2535,8 +2535,8 @@ func (p *PluginParameter) SetName(val string) {
 func (p *PluginParameter) SetDesc(val string) {
 	p.Desc = val
 }
-func (p *PluginParameter) SetRequired(val bool) {
-	p.Required = val
+func (p *PluginParameter) SetIsRequired(val bool) {
+	p.IsRequired = val
 }
 func (p *PluginParameter) SetType(val string) {
 	p.Type = val

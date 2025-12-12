@@ -22,11 +22,16 @@ export interface ModelListItem {
     modelClass: ModelClass;
     baseUrl: string;
     type: number;
+    maxTokens?: number;
+    minTokens?: number;
     capabilities: {
         functionCall?: boolean;
         imageUnderstanding?: boolean;
+        videoUnderstanding?: boolean;
+        audioUnderstanding?: boolean;
         cotDisplay?: boolean;
         multiModal?: boolean;
+        prefillResp?: boolean;
     };
 }
 
@@ -50,6 +55,14 @@ export interface CreateModelParams {
         project?: string;
         location?: string;
     };
+    // DeepSeek 配置(预留)
+    deepseek?: Record<string, unknown>;
+    // Qwen 配置(预留)
+    qwen?: Record<string, unknown>;
+    // Ollama 配置(预留)
+    ollama?: Record<string, unknown>;
+    // Claude 配置(预留)
+    claude?: Record<string, unknown>;
 }
 
 // ============ 提供商配置 ============
@@ -60,14 +73,14 @@ export const MODEL_PROVIDERS = [
         name: 'OpenAI',
         icon: 'https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico',
         defaultBaseUrl: 'https://api.openai.com/v1',
-        models: ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'gpt-4', 'gpt-3.5-turbo'],
+        models: ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'gpt-4', 'gpt-5'],
     },
     {
         class: ModelClass.DeepSeek,
         name: 'DeepSeek',
         icon: 'https://chat.deepseek.com/favicon.svg',
         defaultBaseUrl: 'https://api.deepseek.com',
-        models: ['deepseek-chat', 'deepseek-coder', 'deepseek-reasoner'],
+        models: ['deepseek-v3', 'deepseek-coder', 'deepseek-r1'],
     },
     {
         class: ModelClass.QWen,
@@ -81,14 +94,21 @@ export const MODEL_PROVIDERS = [
         name: 'Gemini',
         icon: 'https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png',
         defaultBaseUrl: 'https://generativelanguage.googleapis.com/v1beta',
-        models: ['gemini-2.0-flash', 'gemini-1.5-pro', 'gemini-1.5-flash'],
+        models: ['gemini-2.0-flash', 'gemini-2.5-pro', 'gemini-3.0-pro'],
     },
     {
         class: ModelClass.Ollama,
         name: 'Ollama',
         icon: 'https://ollama.com/public/ollama.png',
         defaultBaseUrl: 'http://localhost:11434/v1',
-        models: ['llama3', 'mistral', 'codellama', 'qwen2'],
+        models: ['llama3', 'deepseek-v3', 'gpt-oss', 'qwen2'],
+    },
+    {
+        class: ModelClass.Claude,
+        name: 'Claude',
+        icon: 'https://www.anthropic.com/favicon.ico',
+        defaultBaseUrl: 'https://api.anthropic.com/v1',
+        models: ['claude-3-5-sonnet', 'claude-3-opus', 'claude-3-haiku'],
     },
     {
         class: ModelClass.Other,
@@ -130,12 +150,13 @@ export async function fetchModelList(): Promise<ModelListItem[]> {
                 models.push({
                     id: Number(model.model_id) || 0,
                     name: model.name || '未知模型',
-                    modelId: model.name || '',
+                    modelId: model.protocol_config?.model || model.name ||'',
                     providerName: provider?.name?.zh_cn || providerConfig.name,
-                    providerIcon: provider?.icon_url || providerConfig.icon,
+                    providerIcon: provider?.icon_url || model.icon_url || providerConfig.icon,
                     modelClass: provider?.model_class ?? ModelClass.Other,
                     baseUrl: model.protocol_config?.base_url || '',
                     type: 0,
+                    maxTokens: Number(model.ability?.max_context_tokens) || 0,
                     capabilities: {
                         functionCall: model.ability?.function_call,
                         multiModal: model.ability?.multi_modal,
@@ -169,17 +190,32 @@ export async function createModel(params: CreateModelParams): Promise<number> {
     };
 
     // 添加提供商特殊配置
-    if (params.modelClass === ModelClass.GPT && params.openai) {
-        connection.openai = {
-            by_azure: params.openai.byAzure,
-            api_version: params.openai.apiVersion,
-        };
-    } else if (params.modelClass === ModelClass.Gemini && params.gemini) {
-        connection.gemini = {
-            backend: params.gemini.backend,
-            project: params.gemini.project,
-            location: params.gemini.location,
-        };
+    switch (params.modelClass) {
+        case ModelClass.GPT:
+            connection.openai = {
+                by_azure: params.openai.byAzure,
+                api_version: params.openai.apiVersion,
+            };
+            break;
+        case ModelClass.Gemini:
+            connection.gemini = {
+                backend: params.gemini.backend,
+                project: params.gemini.project,
+                location: params.gemini.location,
+            };
+            break;
+        case ModelClass.Ollama:
+            connection.ollama = {};
+            break;
+        case ModelClass.Claude:
+            connection.claude = {};
+            break;
+        case ModelClass.DeepSeek:
+            connection.deepseek = {};
+            break;
+        case ModelClass.QWen:
+            connection.qwen = {};
+            break;
     }
 
     const resp = await apiClient.createModel({

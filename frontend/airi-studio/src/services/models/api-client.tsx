@@ -10,19 +10,19 @@ import type {
     IDeleteModelRespArgs,
 } from '@/api/generated/modelapi';
 
-const API_BASE = '/api/admin/config/model';
+const API_BASE = '/api/admin/model';
 
 /**
  * 获取模型列表
- * POST /api/admin/config/model/list
+ * GET /api/admin/model/list
  */
 export async function getModelList(): Promise<IGetModelListRespArgs> {
-    return httpClient.post<IGetModelListRespArgs>(`${API_BASE}/list`, {});
+    return httpClient.get<IGetModelListRespArgs>(`${API_BASE}/list`, {});
 }
 
 /**
  * 创建模型
- * POST /api/admin/config/model/create
+ * POST /api/admin/model/create
  */
 export async function createModel(
     req: ICreateModelReqArgs
@@ -32,7 +32,7 @@ export async function createModel(
 
 /**
  * 删除模型
- * POST /api/admin/config/model/delete
+ * POST /api/admin/model/delete
  */
 export async function deleteModel(
     req: IDeleteModelReqArgs

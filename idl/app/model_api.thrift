@@ -5,6 +5,7 @@ include "../app/developer_api.thrift"
 
 
 struct GetModelListReq  {
+    1: ModelType model_type
    255: optional base.Base Base
 }
 
@@ -78,13 +79,12 @@ enum ModelStatus {
 
 struct Connection {
     1: BaseConnectionInfo base_conn_info
-    2: optional ArkConnInfo ark
-    3: optional OpenAIConnInfo openai
-    4: optional DeepseekConnInfo deepseek
-    5: optional GeminiConnInfo gemini
-    6: optional QwenConnInfo qwen
-    7: optional OllamaConnInfo ollama
-    8: optional ClaudeConnInfo claude
+    2: optional OpenAIConnInfo openai
+    3: optional DeepseekConnInfo deepseek
+    4: optional GeminiConnInfo gemini
+    5: optional QwenConnInfo qwen
+    6: optional OllamaConnInfo ollama
+    7: optional ClaudeConnInfo claude
 }
 
 struct BaseConnectionInfo {
@@ -98,11 +98,6 @@ struct EmbeddingInfo {
     1: i32 dims
 }
 
-
-struct ArkConnInfo {
-    1: string region
-    3: string api_type
-}
 
 struct OpenAIConnInfo {
     6: bool by_azure
@@ -272,11 +267,10 @@ enum EmbeddingType {
 struct EmbeddingConnection {
     1: BaseConnectionInfo base_conn_info
     2: EmbeddingInfo embedding_info
-    3: optional ArkConnInfo ark
-    4: optional OpenAIConnInfo openai
-    5: optional OllamaConnInfo ollama
-    6: optional GeminiConnInfo gemini
-    7: optional HttpConnection http
+    3: optional OpenAIConnInfo openai
+    4: optional OllamaConnInfo ollama
+    5: optional GeminiConnInfo gemini
+    6: optional HttpConnection http
 }
 
 struct HttpConnection {
@@ -325,11 +319,11 @@ struct ParserConfig {
 }
 
 service ModelConfigService {
-    GetBasicConfigurationResp GetBasicConfiguration(1:GetBasicConfigurationReq req)(api.get='/api/admin/config/basic/get', api.category="admin")
-    SaveBasicConfigurationResp SaveBasicConfiguration(1:SaveBasicConfigurationReq req)(api.post='/api/admin/config/basic/save', api.category="admin")
-    GetKnowledgeConfigResp GetKnowledgeConfig(1:GetKnowledgeConfigReq req)(api.get='/api/admin/config/knowledge/get', api.category="admin")
-    UpdateKnowledgeConfigResp UpdateKnowledgeConfig(1:UpdateKnowledgeConfigReq req)(api.post='/api/admin/config/knowledge/save', api.category="admin")
-    GetModelListResp GetModelList(1:GetModelListReq req)(api.get='/api/admin/config/model/list', api.category="admin")
-    CreateModelResp CreateModel(1:CreateModelReq req)(api.post='/api/admin/config/model/create', api.category="admin")
-    DeleteModelResp DeleteModel(1:DeleteModelReq req)(api.post='/api/admin/config/model/delete', api.category="admin")
+    GetBasicConfigurationResp GetBasicConfiguration(1:GetBasicConfigurationReq req)(api.get='/api/admin/basic/get', api.category="admin")
+    SaveBasicConfigurationResp SaveBasicConfiguration(1:SaveBasicConfigurationReq req)(api.post='/api/admin/basic/save', api.category="admin")
+    GetKnowledgeConfigResp GetKnowledgeConfig(1:GetKnowledgeConfigReq req)(api.get='/api/admin/knowledge/get', api.category="admin")
+    UpdateKnowledgeConfigResp UpdateKnowledgeConfig(1:UpdateKnowledgeConfigReq req)(api.post='/api/admin/knowledge/save', api.category="admin")
+    GetModelListResp GetModelList(1:GetModelListReq req)(api.get='/api/admin/model/list', api.category="admin")
+    CreateModelResp CreateModel(1:CreateModelReq req)(api.post='/api/admin/model/create', api.category="admin")
+    DeleteModelResp DeleteModel(1:DeleteModelReq req)(api.post='/api/admin/model/delete', api.category="admin")
 }

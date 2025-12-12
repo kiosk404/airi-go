@@ -24,49 +24,49 @@ export const annotations: thrift.IThriftAnnotations = {};
 export const methodAnnotations: thrift.IMethodAnnotations = {
     GetBasicConfiguration: {
         annotations: {
-            'api.get': "/api/admin/config/basic/get",
+            'api.get': "/api/admin/basic/get",
             'api.category': "admin"
         },
         fieldAnnotations: {}
     },
     SaveBasicConfiguration: {
         annotations: {
-            'api.post': "/api/admin/config/basic/save",
+            'api.post': "/api/admin/basic/save",
             'api.category': "admin"
         },
         fieldAnnotations: {}
     },
     GetKnowledgeConfig: {
         annotations: {
-            'api.get': "/api/admin/config/knowledge/get",
+            'api.get': "/api/admin/knowledge/get",
             'api.category': "admin"
         },
         fieldAnnotations: {}
     },
     UpdateKnowledgeConfig: {
         annotations: {
-            'api.post': "/api/admin/config/knowledge/save",
+            'api.post': "/api/admin/knowledge/save",
             'api.category': "admin"
         },
         fieldAnnotations: {}
     },
     GetModelList: {
         annotations: {
-            'api.get': "/api/admin/config/model/list",
+            'api.get': "/api/admin/model/list",
             'api.category': "admin"
         },
         fieldAnnotations: {}
     },
     CreateModel: {
         annotations: {
-            'api.post': "/api/admin/config/model/create",
+            'api.post': "/api/admin/model/create",
             'api.category': "admin"
         },
         fieldAnnotations: {}
     },
     DeleteModel: {
         annotations: {
-            'api.post': "/api/admin/config/model/delete",
+            'api.post': "/api/admin/model/delete",
             'api.category': "admin"
         },
         fieldAnnotations: {}

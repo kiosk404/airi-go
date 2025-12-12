@@ -383,7 +383,8 @@ func (p *ParserType) Value() (driver.Value, error) {
 }
 
 type GetModelListReq struct {
-	Base *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`
+	ModelType ModelType  `thrift:"model_type,1,default,ModelType" json:"model_type"`
+	Base      *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`
 }
 
 func NewGetModelListReq() *GetModelListReq {
@@ -393,6 +394,10 @@ func NewGetModelListReq() *GetModelListReq {
 func (p *GetModelListReq) InitDefault() {
 }
 
+func (p *GetModelListReq) GetModelType() (v ModelType) {
+	return p.ModelType
+}
+
 var GetModelListReq_Base_DEFAULT *base.Base
 
 func (p *GetModelListReq) GetBase() (v *base.Base) {
@@ -400,6 +405,9 @@ func (p *GetModelListReq) GetBase() (v *base.Base) {
 		return GetModelListReq_Base_DEFAULT
 	}
 	return p.Base
+}
+func (p *GetModelListReq) SetModelType(val ModelType) {
+	p.ModelType = val
 }
 func (p *GetModelListReq) SetBase(val *base.Base) {
 	p.Base = val
@@ -817,13 +825,12 @@ func (p *Model) String() string {
 
 type Connection struct {
 	BaseConnInfo *BaseConnectionInfo `thrift:"base_conn_info,1" json:"base_conn_info"`
-	Ark          *ArkConnInfo        `thrift:"ark,2,optional" json:"ark,omitempty"`
-	Openai       *OpenAIConnInfo     `thrift:"openai,3,optional" json:"openai,omitempty"`
-	Deepseek     *DeepseekConnInfo   `thrift:"deepseek,4,optional" json:"deepseek,omitempty"`
-	Gemini       *GeminiConnInfo     `thrift:"gemini,5,optional" json:"gemini,omitempty"`
-	Qwen         *QwenConnInfo       `thrift:"qwen,6,optional" json:"qwen,omitempty"`
-	Ollama       *OllamaConnInfo     `thrift:"ollama,7,optional" json:"ollama,omitempty"`
-	Claude       *ClaudeConnInfo     `thrift:"claude,8,optional" json:"claude,omitempty"`
+	Openai       *OpenAIConnInfo     `thrift:"openai,2,optional" json:"openai,omitempty"`
+	Deepseek     *DeepseekConnInfo   `thrift:"deepseek,3,optional" json:"deepseek,omitempty"`
+	Gemini       *GeminiConnInfo     `thrift:"gemini,4,optional" json:"gemini,omitempty"`
+	Qwen         *QwenConnInfo       `thrift:"qwen,5,optional" json:"qwen,omitempty"`
+	Ollama       *OllamaConnInfo     `thrift:"ollama,6,optional" json:"ollama,omitempty"`
+	Claude       *ClaudeConnInfo     `thrift:"claude,7,optional" json:"claude,omitempty"`
 }
 
 func NewConnection() *Connection {
@@ -840,15 +847,6 @@ func (p *Connection) GetBaseConnInfo() (v *BaseConnectionInfo) {
 		return Connection_BaseConnInfo_DEFAULT
 	}
 	return p.BaseConnInfo
-}
-
-var Connection_Ark_DEFAULT *ArkConnInfo
-
-func (p *Connection) GetArk() (v *ArkConnInfo) {
-	if !p.IsSetArk() {
-		return Connection_Ark_DEFAULT
-	}
-	return p.Ark
 }
 
 var Connection_Openai_DEFAULT *OpenAIConnInfo
@@ -907,9 +905,6 @@ func (p *Connection) GetClaude() (v *ClaudeConnInfo) {
 func (p *Connection) SetBaseConnInfo(val *BaseConnectionInfo) {
 	p.BaseConnInfo = val
 }
-func (p *Connection) SetArk(val *ArkConnInfo) {
-	p.Ark = val
-}
 func (p *Connection) SetOpenai(val *OpenAIConnInfo) {
 	p.Openai = val
 }
@@ -931,10 +926,6 @@ func (p *Connection) SetClaude(val *ClaudeConnInfo) {
 
 func (p *Connection) IsSetBaseConnInfo() bool {
 	return p.BaseConnInfo != nil
-}
-
-func (p *Connection) IsSetArk() bool {
-	return p.Ark != nil
 }
 
 func (p *Connection) IsSetOpenai() bool {
@@ -1040,39 +1031,6 @@ func (p *EmbeddingInfo) String() string {
 		return "<nil>"
 	}
 	return fmt.Sprintf("EmbeddingInfo(%+v)", *p)
-}
-
-type ArkConnInfo struct {
-	Region  string `thrift:"region,1" json:"region"`
-	APIType string `thrift:"api_type,3" json:"api_type"`
-}
-
-func NewArkConnInfo() *ArkConnInfo {
-	return &ArkConnInfo{}
-}
-
-func (p *ArkConnInfo) InitDefault() {
-}
-
-func (p *ArkConnInfo) GetRegion() (v string) {
-	return p.Region
-}
-
-func (p *ArkConnInfo) GetAPIType() (v string) {
-	return p.APIType
-}
-func (p *ArkConnInfo) SetRegion(val string) {
-	p.Region = val
-}
-func (p *ArkConnInfo) SetAPIType(val string) {
-	p.APIType = val
-}
-
-func (p *ArkConnInfo) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("ArkConnInfo(%+v)", *p)
 }
 
 type OpenAIConnInfo struct {
@@ -2314,11 +2272,10 @@ func (p *EmbeddingConfig) String() string {
 type EmbeddingConnection struct {
 	BaseConnInfo  *BaseConnectionInfo `thrift:"base_conn_info,1" json:"base_conn_info"`
 	EmbeddingInfo *EmbeddingInfo      `thrift:"embedding_info,2" json:"embedding_info"`
-	Ark           *ArkConnInfo        `thrift:"ark,3,optional" json:"ark,omitempty"`
-	Openai        *OpenAIConnInfo     `thrift:"openai,4,optional" json:"openai,omitempty"`
-	Ollama        *OllamaConnInfo     `thrift:"ollama,5,optional" json:"ollama,omitempty"`
-	Gemini        *GeminiConnInfo     `thrift:"gemini,6,optional" json:"gemini,omitempty"`
-	HTTP          *HttpConnection     `thrift:"http,7,optional" json:"http,omitempty"`
+	Openai        *OpenAIConnInfo     `thrift:"openai,3,optional" json:"openai,omitempty"`
+	Ollama        *OllamaConnInfo     `thrift:"ollama,4,optional" json:"ollama,omitempty"`
+	Gemini        *GeminiConnInfo     `thrift:"gemini,5,optional" json:"gemini,omitempty"`
+	HTTP          *HttpConnection     `thrift:"http,6,optional" json:"http,omitempty"`
 }
 
 func NewEmbeddingConnection() *EmbeddingConnection {
@@ -2344,15 +2301,6 @@ func (p *EmbeddingConnection) GetEmbeddingInfo() (v *EmbeddingInfo) {
 		return EmbeddingConnection_EmbeddingInfo_DEFAULT
 	}
 	return p.EmbeddingInfo
-}
-
-var EmbeddingConnection_Ark_DEFAULT *ArkConnInfo
-
-func (p *EmbeddingConnection) GetArk() (v *ArkConnInfo) {
-	if !p.IsSetArk() {
-		return EmbeddingConnection_Ark_DEFAULT
-	}
-	return p.Ark
 }
 
 var EmbeddingConnection_Openai_DEFAULT *OpenAIConnInfo
@@ -2396,9 +2344,6 @@ func (p *EmbeddingConnection) SetBaseConnInfo(val *BaseConnectionInfo) {
 func (p *EmbeddingConnection) SetEmbeddingInfo(val *EmbeddingInfo) {
 	p.EmbeddingInfo = val
 }
-func (p *EmbeddingConnection) SetArk(val *ArkConnInfo) {
-	p.Ark = val
-}
 func (p *EmbeddingConnection) SetOpenai(val *OpenAIConnInfo) {
 	p.Openai = val
 }
@@ -2418,10 +2363,6 @@ func (p *EmbeddingConnection) IsSetBaseConnInfo() bool {
 
 func (p *EmbeddingConnection) IsSetEmbeddingInfo() bool {
 	return p.EmbeddingInfo != nil
-}
-
-func (p *EmbeddingConnection) IsSetArk() bool {
-	return p.Ark != nil
 }
 
 func (p *EmbeddingConnection) IsSetOpenai() bool {

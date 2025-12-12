@@ -7,7 +7,6 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as BaseConnectionInfo from "./BaseConnectionInfo";
 import * as EmbeddingInfo from "./EmbeddingInfo";
-import * as ArkConnInfo from "./ArkConnInfo";
 import * as OpenAIConnInfo from "./OpenAIConnInfo";
 import * as OllamaConnInfo from "./OllamaConnInfo";
 import * as GeminiConnInfo from "./GeminiConnInfo";
@@ -15,7 +14,6 @@ import * as HttpConnection from "./HttpConnection";
 export interface IEmbeddingConnection {
     base_conn_info?: BaseConnectionInfo.IBaseConnectionInfo;
     embedding_info?: EmbeddingInfo.IEmbeddingInfo;
-    ark?: ArkConnInfo.IArkConnInfo;
     openai?: OpenAIConnInfo.IOpenAIConnInfo;
     ollama?: OllamaConnInfo.IOllamaConnInfo;
     gemini?: GeminiConnInfo.IGeminiConnInfo;
@@ -24,7 +22,6 @@ export interface IEmbeddingConnection {
 export interface IEmbeddingConnectionArgs {
     base_conn_info?: BaseConnectionInfo.IBaseConnectionInfoArgs;
     embedding_info?: EmbeddingInfo.IEmbeddingInfoArgs;
-    ark?: ArkConnInfo.IArkConnInfoArgs;
     openai?: OpenAIConnInfo.IOpenAIConnInfoArgs;
     ollama?: OllamaConnInfo.IOllamaConnInfoArgs;
     gemini?: GeminiConnInfo.IGeminiConnInfoArgs;
@@ -35,7 +32,6 @@ export const EmbeddingConnectionCodec: thrift.IStructCodec<IEmbeddingConnectionA
         const obj: any = {
             base_conn_info: args.base_conn_info,
             embedding_info: args.embedding_info,
-            ark: args.ark,
             openai: args.openai,
             ollama: args.ollama,
             gemini: args.gemini,
@@ -52,28 +48,23 @@ export const EmbeddingConnectionCodec: thrift.IStructCodec<IEmbeddingConnectionA
             EmbeddingInfo.EmbeddingInfoCodec.encode(obj.embedding_info, output);
             output.writeFieldEnd();
         }
-        if (obj.ark != null) {
-            output.writeFieldBegin("ark", thrift.TType.STRUCT, 3);
-            ArkConnInfo.ArkConnInfoCodec.encode(obj.ark, output);
-            output.writeFieldEnd();
-        }
         if (obj.openai != null) {
-            output.writeFieldBegin("openai", thrift.TType.STRUCT, 4);
+            output.writeFieldBegin("openai", thrift.TType.STRUCT, 3);
             OpenAIConnInfo.OpenAIConnInfoCodec.encode(obj.openai, output);
             output.writeFieldEnd();
         }
         if (obj.ollama != null) {
-            output.writeFieldBegin("ollama", thrift.TType.STRUCT, 5);
+            output.writeFieldBegin("ollama", thrift.TType.STRUCT, 4);
             OllamaConnInfo.OllamaConnInfoCodec.encode(obj.ollama, output);
             output.writeFieldEnd();
         }
         if (obj.gemini != null) {
-            output.writeFieldBegin("gemini", thrift.TType.STRUCT, 6);
+            output.writeFieldBegin("gemini", thrift.TType.STRUCT, 5);
             GeminiConnInfo.GeminiConnInfoCodec.encode(obj.gemini, output);
             output.writeFieldEnd();
         }
         if (obj.http != null) {
-            output.writeFieldBegin("http", thrift.TType.STRUCT, 7);
+            output.writeFieldBegin("http", thrift.TType.STRUCT, 6);
             HttpConnection.HttpConnectionCodec.encode(obj.http, output);
             output.writeFieldEnd();
         }
@@ -112,8 +103,8 @@ export const EmbeddingConnectionCodec: thrift.IStructCodec<IEmbeddingConnectionA
                     break;
                 case 3:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_3: ArkConnInfo.IArkConnInfo = ArkConnInfo.ArkConnInfoCodec.decode(input);
-                        _args.ark = value_3;
+                        const value_3: OpenAIConnInfo.IOpenAIConnInfo = OpenAIConnInfo.OpenAIConnInfoCodec.decode(input);
+                        _args.openai = value_3;
                     }
                     else {
                         input.skip(fieldType);
@@ -121,8 +112,8 @@ export const EmbeddingConnectionCodec: thrift.IStructCodec<IEmbeddingConnectionA
                     break;
                 case 4:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: OpenAIConnInfo.IOpenAIConnInfo = OpenAIConnInfo.OpenAIConnInfoCodec.decode(input);
-                        _args.openai = value_4;
+                        const value_4: OllamaConnInfo.IOllamaConnInfo = OllamaConnInfo.OllamaConnInfoCodec.decode(input);
+                        _args.ollama = value_4;
                     }
                     else {
                         input.skip(fieldType);
@@ -130,8 +121,8 @@ export const EmbeddingConnectionCodec: thrift.IStructCodec<IEmbeddingConnectionA
                     break;
                 case 5:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_5: OllamaConnInfo.IOllamaConnInfo = OllamaConnInfo.OllamaConnInfoCodec.decode(input);
-                        _args.ollama = value_5;
+                        const value_5: GeminiConnInfo.IGeminiConnInfo = GeminiConnInfo.GeminiConnInfoCodec.decode(input);
+                        _args.gemini = value_5;
                     }
                     else {
                         input.skip(fieldType);
@@ -139,17 +130,8 @@ export const EmbeddingConnectionCodec: thrift.IStructCodec<IEmbeddingConnectionA
                     break;
                 case 6:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: GeminiConnInfo.IGeminiConnInfo = GeminiConnInfo.GeminiConnInfoCodec.decode(input);
-                        _args.gemini = value_6;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
-                case 7:
-                    if (fieldType === thrift.TType.STRUCT) {
-                        const value_7: HttpConnection.IHttpConnection = HttpConnection.HttpConnectionCodec.decode(input);
-                        _args.http = value_7;
+                        const value_6: HttpConnection.IHttpConnection = HttpConnection.HttpConnectionCodec.decode(input);
+                        _args.http = value_6;
                     }
                     else {
                         input.skip(fieldType);
@@ -165,7 +147,6 @@ export const EmbeddingConnectionCodec: thrift.IStructCodec<IEmbeddingConnectionA
         return {
             base_conn_info: _args.base_conn_info,
             embedding_info: _args.embedding_info,
-            ark: _args.ark,
             openai: _args.openai,
             ollama: _args.ollama,
             gemini: _args.gemini,
@@ -176,7 +157,6 @@ export const EmbeddingConnectionCodec: thrift.IStructCodec<IEmbeddingConnectionA
 export class EmbeddingConnection extends thrift.StructLike implements IEmbeddingConnection {
     public base_conn_info?: BaseConnectionInfo.IBaseConnectionInfo;
     public embedding_info?: EmbeddingInfo.IEmbeddingInfo;
-    public ark?: ArkConnInfo.IArkConnInfo;
     public openai?: OpenAIConnInfo.IOpenAIConnInfo;
     public ollama?: OllamaConnInfo.IOllamaConnInfo;
     public gemini?: GeminiConnInfo.IGeminiConnInfo;
@@ -186,32 +166,28 @@ export class EmbeddingConnection extends thrift.StructLike implements IEmbedding
     constructor(args: IEmbeddingConnectionArgs = {}) {
         super();
         if (args.base_conn_info != null) {
-            const value_8: BaseConnectionInfo.IBaseConnectionInfo = new BaseConnectionInfo.BaseConnectionInfo(args.base_conn_info);
-            this.base_conn_info = value_8;
+            const value_7: BaseConnectionInfo.IBaseConnectionInfo = new BaseConnectionInfo.BaseConnectionInfo(args.base_conn_info);
+            this.base_conn_info = value_7;
         }
         if (args.embedding_info != null) {
-            const value_9: EmbeddingInfo.IEmbeddingInfo = new EmbeddingInfo.EmbeddingInfo(args.embedding_info);
-            this.embedding_info = value_9;
-        }
-        if (args.ark != null) {
-            const value_10: ArkConnInfo.IArkConnInfo = new ArkConnInfo.ArkConnInfo(args.ark);
-            this.ark = value_10;
+            const value_8: EmbeddingInfo.IEmbeddingInfo = new EmbeddingInfo.EmbeddingInfo(args.embedding_info);
+            this.embedding_info = value_8;
         }
         if (args.openai != null) {
-            const value_11: OpenAIConnInfo.IOpenAIConnInfo = new OpenAIConnInfo.OpenAIConnInfo(args.openai);
-            this.openai = value_11;
+            const value_9: OpenAIConnInfo.IOpenAIConnInfo = new OpenAIConnInfo.OpenAIConnInfo(args.openai);
+            this.openai = value_9;
         }
         if (args.ollama != null) {
-            const value_12: OllamaConnInfo.IOllamaConnInfo = new OllamaConnInfo.OllamaConnInfo(args.ollama);
-            this.ollama = value_12;
+            const value_10: OllamaConnInfo.IOllamaConnInfo = new OllamaConnInfo.OllamaConnInfo(args.ollama);
+            this.ollama = value_10;
         }
         if (args.gemini != null) {
-            const value_13: GeminiConnInfo.IGeminiConnInfo = new GeminiConnInfo.GeminiConnInfo(args.gemini);
-            this.gemini = value_13;
+            const value_11: GeminiConnInfo.IGeminiConnInfo = new GeminiConnInfo.GeminiConnInfo(args.gemini);
+            this.gemini = value_11;
         }
         if (args.http != null) {
-            const value_14: HttpConnection.IHttpConnection = new HttpConnection.HttpConnection(args.http);
-            this.http = value_14;
+            const value_12: HttpConnection.IHttpConnection = new HttpConnection.HttpConnection(args.http);
+            this.http = value_12;
         }
     }
     public static read(input: thrift.TProtocol): EmbeddingConnection {
