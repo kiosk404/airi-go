@@ -4495,7 +4495,7 @@ func (p *FileboxInfo) String() string {
 }
 
 type BotInfo struct {
-	BotId                   int64                  `thrift:"BotId,1" json:"BotId"`
+	BotId                   int64                  `thrift:"BotId,1" json:"bot_id,string"`
 	Name                    string                 `thrift:"Name,2" json:"Name"`
 	Description             string                 `thrift:"Description,3" json:"Description"`
 	IconUri                 string                 `thrift:"IconUri,4" json:"IconUri"`
@@ -5192,7 +5192,7 @@ func (p *ShortcutCommandInfo) String() string {
 }
 
 type OpenAPIBotInfo struct {
-	BotID                int64                  `thrift:"bot_id,1" json:"bot_id"`
+	BotID                int64                  `thrift:"bot_id,1" json:"bot_id,string"`
 	Name                 string                 `thrift:"name,2" json:"name"`
 	Description          string                 `thrift:"description,3" json:"description"`
 	IconURL              string                 `thrift:"icon_url,4" json:"icon_url"`
@@ -7812,7 +7812,7 @@ func (p *UserLabel) String() string {
 type ChatV3ChatDetail struct {
 	ID             string            `thrift:"ID,1,required" json:"ID"`
 	ConversationID string            `thrift:"ConversationID,2,required" json:"ConversationID"`
-	BotID          string            `thrift:"BotID,3,required" json:"BotID"`
+	BotID          string            `thrift:"BotID,3,required" json:"bot_id,string"`
 	CreatedAt      *int32            `thrift:"CreatedAt,4,optional" json:"CreatedAt,omitempty"`
 	CompletedAt    *int32            `thrift:"CompletedAt,5,optional" json:"CompletedAt,omitempty"`
 	FailedAt       *int32            `thrift:"FailedAt,6,optional" json:"FailedAt,omitempty"`
@@ -8290,7 +8290,7 @@ func (p *InterruptRequireInfo) String() string {
 type ChatV3MessageDetail struct {
 	ID               string            `thrift:"ID,1,required" json:"ID"`
 	ConversationID   string            `thrift:"ConversationID,2,required" json:"ConversationID"`
-	BotID            string            `thrift:"BotID,3,required" json:"BotID"`
+	BotID            string            `thrift:"BotID,3,required" json:"bot_id,string"`
 	Role             string            `thrift:"Role,4,required" json:"Role"`
 	Type             string            `thrift:"Type,5,required" json:"Type"`
 	Content          string            `thrift:"Content,6,required" json:"Content"`

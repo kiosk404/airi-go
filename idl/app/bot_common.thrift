@@ -435,7 +435,7 @@ enum BusinessType {
 
 // bot information
 struct BotInfo {
-    1 : i64                BotId            (agw.js_conv="str", api.js_conv="true", api.body="bot_id")      , // bot id
+    1 : i64                BotId            (agw.js_conv="str", go.tag='json:"bot_id,string"', api.js_conv="true", api.body="bot_id")      , // bot id
     2 : string             Name             (api.body="name")                                               , // bot name
     3 : string             Description      (api.body="description")                                        , // Bot description
     4 : string             IconUri          (api.body="icon_uri")                                           , // Bot icon uri
@@ -506,7 +506,7 @@ struct ShortcutCommandInfo {
 
 
 struct OpenAPIBotInfo {
-    1 : i64 bot_id  (api.js_conv="true")  ,                                // bot id
+    1 : i64 bot_id  (api.js_conv="true", go.tag='json:"bot_id,string"'),                                // bot id
     2 : string name,                                  // bot name
     3 : string description,                           // Bot description
     4 : string icon_url,                              // Bot image url
@@ -767,7 +767,7 @@ struct UserLabel {
 struct ChatV3ChatDetail {
     1: required string ID (api.body = "id"),
     2: required string ConversationID (api.body = "conversation_id"),
-    3: required string BotID (api.body = "bot_id"),
+    3: required string BotID (api.body = "bot_id", go.tag='json:"bot_id,string"'),
     4: optional i32 CreatedAt (api.body = "created_at"),
     5: optional i32 CompletedAt (api.body = "completed_at"),
     6: optional i32 FailedAt (api.body = "failed_at"),
@@ -818,7 +818,7 @@ struct InterruptRequireInfo {
 struct ChatV3MessageDetail {
     1: required string ID (api.body = "id"),
     2: required string ConversationID (api.body = "conversation_id"),
-    3: required string BotID (api.body = "bot_id"),
+    3: required string BotID (api.body = "bot_id", go.tag='json:"bot_id,string"'),
     4: required string Role (api.body = "role"),
     5: required string Type (api.body = "type"),
     6: required string Content (api.body = "content"),

@@ -1156,8 +1156,7 @@ func (p *GetDraftIntelligenceInfoResponse) String() string {
 type GetUserRecentlyEditIntelligenceRequest struct {
 	Size           int32                     `thrift:"size,1" json:"size"`
 	Types          []common.IntelligenceType `thrift:"types,2,optional,list<IntelligenceType>" json:"types,omitempty"`
-	EnterpriseID   *string                   `thrift:"enterprise_id,3,optional" json:"enterprise_id,omitempty"`
-	OrganizationID *string                   `thrift:"organization_id,4,optional" json:"organization_id,omitempty"`
+	OrganizationID *string                   `thrift:"organization_id,3,optional" json:"organization_id,omitempty"`
 	Base           *base.Base                `thrift:"Base,255,optional" json:"Base,omitempty"`
 }
 
@@ -1179,15 +1178,6 @@ func (p *GetUserRecentlyEditIntelligenceRequest) GetTypes() (v []common.Intellig
 		return GetUserRecentlyEditIntelligenceRequest_Types_DEFAULT
 	}
 	return p.Types
-}
-
-var GetUserRecentlyEditIntelligenceRequest_EnterpriseID_DEFAULT string
-
-func (p *GetUserRecentlyEditIntelligenceRequest) GetEnterpriseID() (v string) {
-	if !p.IsSetEnterpriseID() {
-		return GetUserRecentlyEditIntelligenceRequest_EnterpriseID_DEFAULT
-	}
-	return *p.EnterpriseID
 }
 
 var GetUserRecentlyEditIntelligenceRequest_OrganizationID_DEFAULT string
@@ -1213,9 +1203,6 @@ func (p *GetUserRecentlyEditIntelligenceRequest) SetSize(val int32) {
 func (p *GetUserRecentlyEditIntelligenceRequest) SetTypes(val []common.IntelligenceType) {
 	p.Types = val
 }
-func (p *GetUserRecentlyEditIntelligenceRequest) SetEnterpriseID(val *string) {
-	p.EnterpriseID = val
-}
 func (p *GetUserRecentlyEditIntelligenceRequest) SetOrganizationID(val *string) {
 	p.OrganizationID = val
 }
@@ -1225,10 +1212,6 @@ func (p *GetUserRecentlyEditIntelligenceRequest) SetBase(val *base.Base) {
 
 func (p *GetUserRecentlyEditIntelligenceRequest) IsSetTypes() bool {
 	return p.Types != nil
-}
-
-func (p *GetUserRecentlyEditIntelligenceRequest) IsSetEnterpriseID() bool {
-	return p.EnterpriseID != nil
 }
 
 func (p *GetUserRecentlyEditIntelligenceRequest) IsSetOrganizationID() bool {

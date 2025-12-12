@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
     Button,
     Input,
@@ -35,6 +35,7 @@ const ModelsPage: React.FC = () => {
     const [filterType, setFilterType] = useState<number | 'all'>('all');
     const [dialogVisible, setDialogVisible] = useState(false);
     const [editingModel, setEditingModel] = useState<ModelListItem | null>(null);
+    const mountedRef = useRef(false);
 
     // 加载模型列表
     const loadModels = useCallback(async () => {
@@ -50,11 +51,15 @@ const ModelsPage: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        loadModels();
+        if (!mountedRef.current) {
+            mountedRef.current = true;
+            loadModels();
+        }
     }, [loadModels]);
 
     // 过滤模型
     const filteredModels = models.filter(model => {
+        console.log('model', model);
         // 类型过滤
         if (filterType !== 'all' && model.type !== filterType) {
             return false;
@@ -83,11 +88,11 @@ const ModelsPage: React.FC = () => {
     };
 
     // 删除模型
-    const handleDelete = async (id: number) => {
+    const handleDelete = async (id: string) => {
         try {
             await deleteModel(id);
             Toast.success('删除成功');
-            loadModels();
+            await loadModels();
         } catch (error) {
             Toast.error(`删除失败: ${error instanceof Error ? error.message : '未知错误'}`);
         }

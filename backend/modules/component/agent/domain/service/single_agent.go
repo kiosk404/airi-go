@@ -17,6 +17,8 @@ type SingleAgent interface {
 	DeleteAgentDraft(ctx context.Context, agentID int64) (err error)
 	UpdateAgentDraftDisplayInfo(ctx context.Context, userID int64, e *entity.AgentDraftDisplayInfo) error
 	GetAgentDraftDisplayInfo(ctx context.Context, userID, agentID int64) (*entity.AgentDraftDisplayInfo, error)
+	ListAgentDraft(ctx context.Context, page, pageSize int) ([]*entity.SingleAgent, int64, error)
+	ListAgentDraftByCreator(ctx context.Context, creatorID int64, page, pageSize int) ([]*entity.SingleAgent, int64, error)
 
 	// online agent
 	CreateSingleAgent(ctx context.Context, version string, e *entity.SingleAgent) (int64, error)

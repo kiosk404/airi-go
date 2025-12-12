@@ -23,7 +23,7 @@ enum VisibilityType {
 }
 
 struct DraftBotCreateData {
-    1:          i64    bot_id (agw.js_conv="str", api.js_conv="true")
+    1:          i64    bot_id (agw.js_conv="str",go.tag='json:"bot_id,string"', api.js_conv="true")
     2:          bool   check_not_pass // True: The machine audit verification failed
     3: optional string check_not_pass_msg // The machine audit verification failed the copy.
 }
@@ -35,7 +35,7 @@ struct DraftBotCreateResponse {
 }
 
 struct DeleteDraftBotRequest {
-    1: required i64 bot_id (agw.js_conv="str", api.js_conv="true")
+    1: required i64 bot_id (agw.js_conv="str", api.js_conv="true", go.tag='json:"bot_id,string"')
 }
 
 struct DeleteDraftBotData {
@@ -48,11 +48,11 @@ struct DeleteDraftBotResponse {
 }
 
 struct DuplicateDraftBotRequest {
-    1: required i64 bot_id (agw.js_conv="str", api.js_conv="true")
+    1: required i64 bot_id (agw.js_conv="str", api.js_conv="true", go.tag='json:"bot_id,string"')
 }
 
 struct UserLabel {
-    1: i64                label_id (agw.js_conv="str", api.js_conv="true")
+    1: i64                label_id (agw.js_conv="str", api.js_conv="true", go.tag='json:"bot_id,string"')
     2: string             label_name
     3: string             icon_uri
     4: string             icon_url
@@ -60,7 +60,7 @@ struct UserLabel {
 }
 
 struct Creator {
-    1: i64 id (agw.js_conv="str", api.js_conv="true")
+    1: i64 id (agw.js_conv="str", api.js_conv="true", go.tag='json:"bot_id,string"')
     2: string name // nickname
     3: string avatar_url
     4: bool   self       // Did you create it yourself?
@@ -69,7 +69,7 @@ struct Creator {
 }
 
 struct DuplicateDraftBotData {
-    1: i64    bot_id (agw.js_conv="str", api.js_conv="true")
+    1: i64    bot_id (agw.js_conv="str",go.tag='json:"bot_id,string"', api.js_conv="true")
     2: string name
     3: Creator user_info
 }
@@ -90,7 +90,7 @@ struct DraftBotDisplayInfoData {
 }
 
 struct UpdateDraftBotDisplayInfoRequest {
-    1: required i64                   bot_id (agw.js_conv="str", api.js_conv="true")
+    1: required i64                   bot_id (agw.js_conv="str", api.js_conv="true", go.tag='json:"bot_id,string"')
     2: optional DraftBotDisplayInfoData display_info
 }
 
@@ -132,7 +132,7 @@ struct GetDraftBotDisplayInfoResponse {
 }
 
 struct GetDraftBotDisplayInfoRequest {
-    1: required i64  bot_id (agw.js_conv="str", api.js_conv="true")
+    1: required i64  bot_id (agw.js_conv="str", api.js_conv="true", go.tag='json:"bot_id,string"')
 }
 
 struct PublishDraftBotResponse {
@@ -285,7 +285,6 @@ struct BotTagInfo {
 
 
 struct PublishDraftBotRequest {
-    1:  required i64                   space_id           (agw.js_conv="str", api.js_conv="true")
     2:  required i64                   bot_id             (agw.js_conv="str", api.js_conv="true")
     3:  WorkInfo                       work_info
     4:  map<string,list<Connector>>    connector_list                // Key represents connector_name enumeration Feishu = "feishu" -- obsolete
@@ -362,7 +361,6 @@ enum HistoryType {
 
 
 struct ListDraftBotHistoryRequest {
-    1: required i64         space_id (agw.js_conv="str", api.js_conv="true")
     2: required i64         bot_id (agw.js_conv="str", api.js_conv="true")
     3: required i32         page_index
     4: required i32         page_size
@@ -413,14 +411,12 @@ enum IconType {
     User      = 2
     Plugin    = 3
     Dataset   = 4
-    Space     = 5
-    Workflow  = 6
-    Imageflow = 7
-    Society   = 8
-    Connector = 9
-    ChatFlow = 10
-    Voice = 11
-    Enterprise = 12
+    Workflow  = 5
+    Imageflow = 6
+    Society   = 7
+    Connector = 8
+    ChatFlow = 9
+    Voice = 10
 }
 
 struct GetIconRequest {
@@ -483,12 +479,10 @@ enum FileBizType {
     BIZ_BOT_DATASET  = 2
     BIZ_DATASET_ICON = 3
     BIZ_PLUGIN_ICON  = 4
-    BIZ_BOT_SPACE    = 5
-    BIZ_BOT_WORKFLOW = 6
-    BIZ_SOCIETY_ICON = 7
-    BIZ_CONNECTOR_ICON = 8
-    BIZ_LIBRARY_VOICE_ICON = 9
-    BIZ_ENTERPRISE_ICON = 10
+    BIZ_BOT_WORKFLOW = 5
+    BIZ_SOCIETY_ICON = 6
+    BIZ_CONNECTOR_ICON = 7
+    BIZ_LIBRARY_VOICE_ICON = 8
 }
 
 struct UploadFileResponse {
@@ -501,10 +495,9 @@ struct GetTypeListRequest {
     1: optional bool   model
     2: optional bool   voice
     3: optional bool   raw_model
-    4: optional string space_id
-    5: optional string cur_model_id // The model ID used by the current bot to handle issues that cannot be displayed by the bot model synchronized by cici/doubao
-    6: optional list<string> cur_model_ids // Compatible with MultiAgent, with multiple cur_model_id
-    7: optional ModelScene model_scene // model scenario
+    4: optional string cur_model_id // The model ID used by the current bot to handle issues that cannot be displayed by the bot model synchronized by cici/doubao
+    5: optional list<string> cur_model_ids // Compatible with MultiAgent, with multiple cur_model_id
+    6: optional ModelScene model_scene // model scenario
 }
 
 enum ModelScene {
@@ -517,6 +510,7 @@ enum ModelClass {
     Gemini          = 3
     DeepSeek        = 4
     Ollama          = 5
+    Claude          = 6
 
     Other           = 999
 }
@@ -726,9 +720,8 @@ struct CheckDraftBotCommitData {
 
 // Check if the draft can be submitted to the request
 struct CheckDraftBotCommitRequest {
-    1: required string space_id
-    2: required string bot_id
-    3: optional string commit_version
+    1: required string bot_id
+    2: optional string commit_version
 }
 
 
@@ -798,9 +791,8 @@ enum UserAuthStatus {
 }
 
 struct PublishConnectorListRequest {
-    1: required i64 space_id (api.js_conv="true")
-    2: required i64 bot_id (api.js_conv="true")
-    3: optional string commit_version
+    1: required i64 bot_id (api.js_conv="true")
+    2: optional string commit_version
 }
 
 struct PublishConnectorInfo {

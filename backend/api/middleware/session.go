@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"regexp"
+
 	"github.com/gin-gonic/gin"
 	httpwarp "github.com/kiosk404/airi-go/backend/api/http"
 	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/application"
@@ -14,9 +16,14 @@ import (
 )
 
 var noNeedSessionCheckPath = map[string]bool{
+	"/favicon.ico":                      true,
 	"/health":                           true,
 	"/api/foundation/v1/users/login":    true,
 	"/api/foundation/v1/users/register": true,
+}
+
+var noNeedSessionCheckPatterns = []*regexp.Regexp{
+	regexp.MustCompile(`^/static/files/.*$`),
 }
 
 func SessionAuthMW() gin.HandlerFunc {
@@ -27,7 +34,7 @@ func SessionAuthMW() gin.HandlerFunc {
 			return
 		}
 
-		if noNeedSessionCheckPath[c.Request.URL.Path] {
+		if noNeedSessionCheck(c.Request.URL.Path) {
 			c.Next()
 			return
 		}
@@ -54,4 +61,20 @@ func SessionAuthMW() gin.HandlerFunc {
 
 		c.Next()
 	}
+}
+
+func noNeedSessionCheck(path string) bool {
+	// 检查精确匹配
+	if noNeedSessionCheckPath[path] {
+		return true
+	}
+
+	// 检查正则模式匹配
+	for _, pattern := range noNeedSessionCheckPatterns {
+		if pattern.MatchString(path) {
+			return true
+		}
+	}
+
+	return false
 }

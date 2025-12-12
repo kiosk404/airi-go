@@ -133,8 +133,7 @@ struct GetDraftIntelligenceInfoResponse {
 struct GetUserRecentlyEditIntelligenceRequest {
     1: i32 size,
     2: optional list<intelligence_common_struct.IntelligenceType> types,
-    3: optional string    enterprise_id,         // Enterprise ID
-    4: optional string    organization_id,      // organization id
+    3: optional string    organization_id,      // organization id
 
     255: optional base.Base Base
 }

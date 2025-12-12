@@ -2,22 +2,31 @@ package application
 
 import (
 	"context"
+	"fmt"
+	"strings"
 
 	"github.com/cloudwego/eino/schema"
+	"github.com/kiosk404/airi-go/backend/api/model/app/developer_api"
 	"github.com/kiosk404/airi-go/backend/api/model/modelapi"
+	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
 	"github.com/kiosk404/airi-go/backend/modules/llm/application/convert"
 	modelmgr "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
+	"github.com/kiosk404/airi-go/backend/modules/llm/domain/entity"
 	modelmgrservice "github.com/kiosk404/airi-go/backend/modules/llm/domain/service"
 	"github.com/kiosk404/airi-go/backend/modules/llm/dto"
 	"github.com/kiosk404/airi-go/backend/modules/llm/pkg"
+	"github.com/kiosk404/airi-go/backend/pkg/i18n"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/ternary"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
 
 type ModelManagerApplicationService struct {
 	appContext *ServiceComponents
 	DomainSVC  modelmgrservice.ModelManager
+	TosClient  storage.Storage
 }
 
 func newApplicationService(c *ServiceComponents, domain modelmgrservice.ModelManager) *ModelManagerApplicationService {
@@ -59,4 +68,222 @@ func (s *ModelManagerApplicationService) CreateModel(ctx context.Context, req mo
 		return 0, err
 	}
 	return id, err
+}
+
+func (s *ModelManagerApplicationService) UpdateModel(ctx context.Context, req modelapi.UpdateModelReq) error {
+	model := req.GetModel()
+	if model == nil {
+		return fmt.Errorf("model is required")
+	}
+
+	// 转换 Connection 为 entity.Connection
+	var connection *entity.Connection
+	if model.Connection != nil && model.Connection.BaseConnInfo != nil {
+		connection = convert.ConnectionDao(dto.ModelConnectionDto(model.Connection))
+	}
+
+	// 转换 Extra 为 DTO
+	extra := dto.ModelExtraDto(model.GetEnableBase64URL())
+
+	modelID := conv.StrToInt64D(model.GetID(), 0)
+	// 调用 domain service 更新模型
+	err := s.DomainSVC.UpdateLLMModel(ctx, modelID, connection, extra)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *ModelManagerApplicationService) DeleteModel(ctx context.Context, req modelapi.DeleteModelReq) error {
+	// 调用 domain service 删除模型
+	modelID := conv.StrToInt64D(req.GetID(), 0)
+	err := s.DomainSVC.DeleteModelByID(ctx, modelID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *ModelManagerApplicationService) GetProviderModelList(ctx context.Context, modelType modelapi.ModelType) ([]*modelapi.ProviderModelList, error) {
+	modelProviderList := getModelProviderList()
+	resp := make([]*modelapi.ProviderModelList, 0, len(modelProviderList))
+
+	allModels, err := s.DomainSVC.ListModelByType(ctx, dto.ModelTypeDto(modelType), 30)
+	if err != nil {
+		return nil, err
+	}
+
+	modelClass2Models := make(map[developer_api.ModelClass][]*modelapi.Model)
+	for _, model := range allModels {
+		m := convert.ToModel(ctx, s.appContext.TosClient, model)
+		modelClass2Models[m.Provider.ModelClass] = append(modelClass2Models[m.Provider.ModelClass], m)
+		if m.Connection != nil && m.Connection.BaseConnInfo != nil {
+			apiKey := m.Connection.BaseConnInfo.APIKey
+			if apiKey != "" {
+				n := len(apiKey)
+				if n <= 4 {
+					m.Connection.BaseConnInfo.APIKey = strings.Repeat("*", n)
+				} else if n <= 8 {
+					m.Connection.BaseConnInfo.APIKey = fmt.Sprintf("%s***%s", apiKey[:2], apiKey[n-2:])
+				} else {
+					m.Connection.BaseConnInfo.APIKey = fmt.Sprintf("%s***%s", apiKey[:4], apiKey[n-4:])
+				}
+			}
+		}
+	}
+
+	for _, provider := range modelProviderList {
+		if provider.IconURI != "" {
+			url, err := s.appContext.TosClient.GetObjectUrl(ctx, provider.IconURI)
+			if err != nil {
+				logs.WarnX(pkg.ModelName, "get model icon url failed, err: %v", err)
+			} else {
+				provider.IconURL = url
+			}
+		}
+		resp = append(resp, &modelapi.ProviderModelList{
+			Provider:  provider,
+			ModelList: modelClass2Models[provider.ModelClass],
+		})
+	}
+
+	return resp, nil
+}
+
+func (s *ModelManagerApplicationService) GetInUseModelList(ctx context.Context, modelType modelapi.ModelType) ([]*modelapi.ProviderModelList, error) {
+	allModels, err := s.DomainSVC.ListModelByType(ctx, dto.ModelTypeDto(modelType), 30)
+	if err != nil {
+		return nil, err
+	}
+
+	modelClass2Models := make(map[developer_api.ModelClass][]*modelapi.Model)
+	modelClass2Provider := make(map[developer_api.ModelClass]*modelapi.ModelProvider)
+
+	for _, model := range allModels {
+		m := convert.ToModel(ctx, s.appContext.TosClient, model)
+		modelClass2Models[m.Provider.ModelClass] = append(modelClass2Models[m.Provider.ModelClass], m)
+
+		// 记录 provider 信息
+		if _, exist := modelClass2Provider[m.Provider.ModelClass]; !exist {
+			if m.Provider.IconURI != "" {
+				url, err := s.appContext.TosClient.GetObjectUrl(ctx, m.Provider.IconURI)
+				if err != nil {
+					logs.WarnX(pkg.ModelName, "get model icon url failed, err: %v", err)
+				} else {
+					m.Provider.IconURL = url
+				}
+			}
+			modelClass2Provider[m.Provider.ModelClass] = m.Provider
+		}
+
+		if m.Connection != nil && m.Connection.BaseConnInfo != nil {
+			apiKey := m.Connection.BaseConnInfo.APIKey
+			if apiKey != "" {
+				n := len(apiKey)
+				if n <= 4 {
+					m.Connection.BaseConnInfo.APIKey = strings.Repeat("*", n)
+				} else if n <= 8 {
+					m.Connection.BaseConnInfo.APIKey = fmt.Sprintf("%s***%s", apiKey[:2], apiKey[n-2:])
+				} else {
+					m.Connection.BaseConnInfo.APIKey = fmt.Sprintf("%s***%s", apiKey[:4], apiKey[n-4:])
+				}
+			}
+		}
+		if m.Provider.IconURI != "" {
+			url, err := s.appContext.TosClient.GetObjectUrl(ctx, m.Provider.IconURI)
+			if err != nil {
+				logs.WarnX(pkg.ModelName, "get model icon url failed, err: %v", err)
+			} else {
+				m.Provider.IconURL = url
+			}
+		}
+	}
+
+	resp := make([]*modelapi.ProviderModelList, 0, len(modelClass2Provider))
+	for modelClass, provider := range modelClass2Provider {
+		resp = append(resp, &modelapi.ProviderModelList{
+			Provider:  provider,
+			ModelList: modelClass2Models[modelClass],
+		})
+	}
+
+	return resp, nil
+}
+
+func (s *ModelManagerApplicationService) GetModelList(ctx context.Context, _ *developer_api.GetTypeListRequest) (
+	resp *developer_api.GetTypeListResponse, err error) {
+
+	mList, err := s.DomainSVC.ListAllModelList(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	locale := i18n.GetLocale(ctx)
+	modelList, err := slices.TransformWithErrorCheck(mList, func(mm *entity.ModelInstance) (*developer_api.Model, error) {
+		return modelDo2To(mm, locale)
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return &developer_api.GetTypeListResponse{
+		Code: 0,
+		Msg:  "success",
+		Data: &developer_api.GetTypeListData{
+			ModelList: modelList,
+		},
+	}, nil
+}
+
+func modelDo2To(m *entity.ModelInstance, locale i18n.Locale) (*developer_api.Model, error) {
+	model := m
+	desc := ""
+	if model.DisplayInfo.Description != nil {
+		desc = ternary.IFElse(locale == i18n.LocaleZH, model.DisplayInfo.Description.ZhCn, model.DisplayInfo.Description.EnUs)
+	}
+
+	modelStatusDetails := &developer_api.ModelStatusDetails{}
+
+	return &developer_api.Model{
+		Name:             model.DisplayInfo.Name,
+		ModelType:        model.ID,
+		ModelClass:       developer_api.ModelClass(model.Provider.ModelClass),
+		ModelIcon:        model.Provider.IconURL,
+		ModelInputPrice:  0,
+		ModelOutputPrice: 0,
+		ModelQuota: &developer_api.ModelQuota{
+			TokenLimit: int32(model.DisplayInfo.MaxTokens),
+			TokenResp:  int32(model.DisplayInfo.OutputTokens),
+			// TokenSystem:       0,
+			// TokenUserIn:       0,
+			// TokenToolsIn:      0,
+			// TokenToolsOut:     0,
+			// TokenData:         0,
+			// TokenHistory:      0,
+			// TokenCutSwitch:    false,
+			PriceIn:           0,
+			PriceOut:          0,
+			SystemPromptLimit: nil,
+		},
+		ModelName:      model.DisplayInfo.Name,
+		ModelClassName: model.Provider.ModelClass.String(),
+		IsOffline:      false,
+		ModelParams:    convert.ConvertModelParameters(model.Parameters),
+		ModelDesc: []*developer_api.ModelDescGroup{
+			{
+				GroupName: "Description",
+				Desc:      []string{desc},
+			},
+		},
+		FuncConfig:     nil,
+		EndpointName:   nil,
+		ModelTagList:   nil,
+		IsUpRequired:   nil,
+		ModelBriefDesc: desc,
+		ModelSeries: &developer_api.ModelSeriesInfo{ // TODO: Replace with real configuration
+			SeriesName: "热门模型",
+		},
+		ModelStatusDetails: modelStatusDetails,
+		ModelAbility:       convert.ConvertModelCapability(model.Capability),
+	}, nil
 }

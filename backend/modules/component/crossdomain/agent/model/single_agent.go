@@ -38,7 +38,6 @@ type AgentEvent struct {
 type SingleAgent struct {
 	AgentID   int64
 	CreatorID int64
-	SpaceID   int64
 	Name      string
 	Desc      string
 	IconURI   string

@@ -6,7 +6,6 @@ import (
 
 type Connection struct {
 	BaseConnInfo *BaseConnectionInfo `json:"base_conn_info" query:"base_conn_info"`
-	Ark          *ArkConnInfo        `json:"ark,omitempty" query:"ark"`
 	Openai       *OpenAIConnInfo     `json:"openai,omitempty" query:"openai"`
 	Deepseek     *DeepseekConnInfo   `json:"deepseek,omitempty" query:"deepseek"`
 	Gemini       *GeminiConnInfo     `json:"gemini,omitempty" query:"gemini"`
@@ -43,31 +42,6 @@ func (p *BaseConnectionInfo) GetModel() (v string) {
 
 func (p *BaseConnectionInfo) GetThinkingType() (v ThinkingType) {
 	return p.ThinkingType
-}
-
-type ArkConnInfo struct {
-	Region  string `json:"region" query:"region"`
-	APIType string `json:"api_type" query:"api_type"`
-}
-
-func NewArkConnInfo() *ArkConnInfo {
-	return &ArkConnInfo{}
-}
-
-func (p *ArkConnInfo) InitDefault() {
-}
-
-func (p *ArkConnInfo) GetRegion() (v string) {
-	return p.Region
-}
-
-func (p *ArkConnInfo) GetAPIType() (v string) {
-	return p.APIType
-}
-
-var fieldIDToName_ArkConnInfo = map[int16]string{
-	1: "region",
-	3: "api_type",
 }
 
 type OpenAIConnInfo struct {

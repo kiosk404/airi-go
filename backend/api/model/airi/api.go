@@ -10,6 +10,7 @@ import (
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/agentrun"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/conversation"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/message"
+	"github.com/kiosk404/airi-go/backend/api/model/file/upload"
 	"github.com/kiosk404/airi-go/backend/api/model/foundation/openapiauth"
 	"github.com/kiosk404/airi-go/backend/api/model/foundation/user"
 	"github.com/kiosk404/airi-go/backend/api/model/llm/manage"
@@ -73,4 +74,8 @@ type IntelligenceService interface {
 
 type ResourceService interface {
 	resource.ResourceService
+}
+
+type UploadService interface {
+	upload.UploadService
 }

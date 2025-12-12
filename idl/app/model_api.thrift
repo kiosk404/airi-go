@@ -5,6 +5,7 @@ include "../app/developer_api.thrift"
 
 
 struct GetModelListReq  {
+    1: ModelType model_type
    255: optional base.Base Base
 }
 
@@ -50,7 +51,7 @@ enum ModelType {
 }
 
 struct Model {
-    1: i64 id
+    1: string id
     2: ModelProvider provider
     3: DisplayInfo display_info
     4: developer_api.ModelAbility capability
@@ -78,13 +79,12 @@ enum ModelStatus {
 
 struct Connection {
     1: BaseConnectionInfo base_conn_info
-    2: optional ArkConnInfo ark
-    3: optional OpenAIConnInfo openai
-    4: optional DeepseekConnInfo deepseek
-    5: optional GeminiConnInfo gemini
-    6: optional QwenConnInfo qwen
-    7: optional OllamaConnInfo ollama
-    8: optional ClaudeConnInfo claude
+    2: optional OpenAIConnInfo openai
+    3: optional DeepseekConnInfo deepseek
+    4: optional GeminiConnInfo gemini
+    5: optional QwenConnInfo qwen
+    6: optional OllamaConnInfo ollama
+    7: optional ClaudeConnInfo claude
 }
 
 struct BaseConnectionInfo {
@@ -98,11 +98,6 @@ struct EmbeddingInfo {
     1: i32 dims
 }
 
-
-struct ArkConnInfo {
-    1: string region
-    3: string api_type
-}
 
 struct OpenAIConnInfo {
     6: bool by_azure
@@ -129,13 +124,13 @@ struct CreateModelReq {
     2: string model_name
     3: Connection connection
     4: bool enable_base64_url
-
+    5: ModelType type
 
     255: optional base.Base Base
 }
 
 struct CreateModelResp {
-    1: i64 id (agw.js_conv="str", api.js_conv="true")
+    1: string id (agw.js_conv="str", api.js_conv="true")
 
     253: required i64 code
     254: required string msg
@@ -143,7 +138,7 @@ struct CreateModelResp {
 }
 
 struct DeleteModelReq {
-    1: i64 id (agw.js_conv="str", api.js_conv="true")
+    1: string id (agw.js_conv="str", api.js_conv="true")
     255: optional base.Base Base
 }
 
@@ -252,7 +247,7 @@ struct KnowledgeConfig {
     2: RerankConfig rerank_config
     3: OCRConfig ocr_config
     4: ParserConfig parser_config
-    5: i64 builtin_model_id
+    5: string builtin_model_id
 }
 
 struct EmbeddingConfig {
@@ -272,11 +267,10 @@ enum EmbeddingType {
 struct EmbeddingConnection {
     1: BaseConnectionInfo base_conn_info
     2: EmbeddingInfo embedding_info
-    3: optional ArkConnInfo ark
-    4: optional OpenAIConnInfo openai
-    5: optional OllamaConnInfo ollama
-    6: optional GeminiConnInfo gemini
-    7: optional HttpConnection http
+    3: optional OpenAIConnInfo openai
+    4: optional OllamaConnInfo ollama
+    5: optional GeminiConnInfo gemini
+    6: optional HttpConnection http
 }
 
 struct HttpConnection {
@@ -325,11 +319,12 @@ struct ParserConfig {
 }
 
 service ModelConfigService {
-    GetBasicConfigurationResp GetBasicConfiguration(1:GetBasicConfigurationReq req)(api.get='/api/admin/config/basic/get', api.category="admin")
-    SaveBasicConfigurationResp SaveBasicConfiguration(1:SaveBasicConfigurationReq req)(api.post='/api/admin/config/basic/save', api.category="admin")
-    GetKnowledgeConfigResp GetKnowledgeConfig(1:GetKnowledgeConfigReq req)(api.get='/api/admin/config/knowledge/get', api.category="admin")
-    UpdateKnowledgeConfigResp UpdateKnowledgeConfig(1:UpdateKnowledgeConfigReq req)(api.post='/api/admin/config/knowledge/save', api.category="admin")
-    GetModelListResp GetModelList(1:GetModelListReq req)(api.get='/api/admin/config/model/list', api.category="admin")
-    CreateModelResp CreateModel(1:CreateModelReq req)(api.post='/api/admin/config/model/create', api.category="admin")
-    DeleteModelResp DeleteModel(1:DeleteModelReq req)(api.post='/api/admin/config/model/delete', api.category="admin")
+    GetBasicConfigurationResp GetBasicConfiguration(1:GetBasicConfigurationReq req)(api.get='/api/admin/basic/get', api.category="admin")
+    SaveBasicConfigurationResp SaveBasicConfiguration(1:SaveBasicConfigurationReq req)(api.post='/api/admin/basic/save', api.category="admin")
+    GetKnowledgeConfigResp GetKnowledgeConfig(1:GetKnowledgeConfigReq req)(api.get='/api/admin/knowledge/get', api.category="admin")
+    UpdateKnowledgeConfigResp UpdateKnowledgeConfig(1:UpdateKnowledgeConfigReq req)(api.post='/api/admin/knowledge/save', api.category="admin")
+    GetModelListResp GetModelList(1:GetModelListReq req)(api.get='/api/admin/model/list', api.category="admin")
+    CreateModelResp CreateModel(1:CreateModelReq req)(api.post='/api/admin/model/create', api.category="admin")
+    UpdateModelResp UpdateModel(1:UpdateModelReq req)(api.post='/api/admin/model/update', api.category="admin")
+    DeleteModelResp DeleteModel(1:DeleteModelReq req)(api.post='/api/admin/model/delete', api.category="admin")
 }

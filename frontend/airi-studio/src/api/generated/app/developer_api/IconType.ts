@@ -9,12 +9,10 @@ export enum IconType {
     User = 2,
     Plugin = 3,
     Dataset = 4,
-    Space = 5,
-    Workflow = 6,
-    Imageflow = 7,
-    Society = 8,
-    Connector = 9,
-    ChatFlow = 10,
-    Voice = 11,
-    Enterprise = 12
+    Workflow = 5,
+    Imageflow = 6,
+    Society = 7,
+    Connector = 8,
+    ChatFlow = 9,
+    Voice = 10
 }

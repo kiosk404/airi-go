@@ -1,6 +1,8 @@
 package handle
 
 import (
+	"context"
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -36,4 +38,73 @@ func GetMessageList(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, resp)
+}
+
+// BreakMessage .
+// @router /api/conversation/break_message [POST]
+func BreakMessage(c *gin.Context) {
+	var err error
+	var req message.BreakMessageRequest
+	ctx := c.Request.Context()
+
+	if err = c.ShouldBindJSON(&req); err != nil {
+		invalidParamRequestResponse(c, err.Error())
+		return
+	}
+
+	if checkErr := checkBMParams(ctx, &req); checkErr != nil {
+		invalidParamRequestResponse(c, checkErr.Error())
+		return
+	}
+
+	resp, err := application.ConversationSVC.BreakMessage(ctx, &req)
+	if err != nil {
+		internalServerErrorResponse(c, err)
+		return
+	}
+	c.JSON(http.StatusOK, resp)
+}
+
+// DeleteMessage .
+// router /api/conversation/delete_message [POST]
+func DeleteMessage(c *gin.Context) {
+	var err error
+	var req message.DeleteMessageRequest
+	ctx := c.Request.Context()
+
+	if err = c.ShouldBindJSON(&req); err != nil {
+		invalidParamRequestResponse(c, err.Error())
+		return
+	}
+
+	if checkErr := checkDMParams(ctx, &req); checkErr != nil {
+		invalidParamRequestResponse(c, checkErr.Error())
+		return
+	}
+
+	resp, err := application.ConversationSVC.DeleteMessage(ctx, &req)
+	if err != nil {
+		internalServerErrorResponse(c, err)
+		return
+	}
+	c.JSON(http.StatusOK, resp)
+}
+
+func checkDMParams(_ context.Context, req *message.DeleteMessageRequest) error {
+	if req.MessageID <= 0 {
+		return errorx.New(errno.ErrConversationInvalidParamCode, errorx.KV("msg", "message id is invalid"))
+	}
+
+	return nil
+}
+
+func checkBMParams(_ context.Context, req *message.BreakMessageRequest) error {
+	if req.AnswerMessageID == nil {
+		return errors.New("answer message id is required")
+	}
+	if *req.AnswerMessageID <= 0 {
+		return errorx.New(errno.ErrConversationInvalidParamCode, errorx.KV("msg", "answer message id is invalid"))
+	}
+
+	return nil
 }

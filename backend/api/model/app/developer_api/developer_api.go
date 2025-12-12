@@ -668,18 +668,16 @@ func (p *ConnectorDynamicStatus) Value() (driver.Value, error) {
 type IconType int64
 
 const (
-	IconType_Bot        IconType = 1
-	IconType_User       IconType = 2
-	IconType_Plugin     IconType = 3
-	IconType_Dataset    IconType = 4
-	IconType_Space      IconType = 5
-	IconType_Workflow   IconType = 6
-	IconType_Imageflow  IconType = 7
-	IconType_Society    IconType = 8
-	IconType_Connector  IconType = 9
-	IconType_ChatFlow   IconType = 10
-	IconType_Voice      IconType = 11
-	IconType_Enterprise IconType = 12
+	IconType_Bot       IconType = 1
+	IconType_User      IconType = 2
+	IconType_Plugin    IconType = 3
+	IconType_Dataset   IconType = 4
+	IconType_Workflow  IconType = 5
+	IconType_Imageflow IconType = 6
+	IconType_Society   IconType = 7
+	IconType_Connector IconType = 8
+	IconType_ChatFlow  IconType = 9
+	IconType_Voice     IconType = 10
 )
 
 func (p IconType) String() string {
@@ -692,8 +690,6 @@ func (p IconType) String() string {
 		return "Plugin"
 	case IconType_Dataset:
 		return "Dataset"
-	case IconType_Space:
-		return "Space"
 	case IconType_Workflow:
 		return "Workflow"
 	case IconType_Imageflow:
@@ -706,8 +702,6 @@ func (p IconType) String() string {
 		return "ChatFlow"
 	case IconType_Voice:
 		return "Voice"
-	case IconType_Enterprise:
-		return "Enterprise"
 	}
 	return "<UNSET>"
 }
@@ -722,8 +716,6 @@ func IconTypeFromString(s string) (IconType, error) {
 		return IconType_Plugin, nil
 	case "Dataset":
 		return IconType_Dataset, nil
-	case "Space":
-		return IconType_Space, nil
 	case "Workflow":
 		return IconType_Workflow, nil
 	case "Imageflow":
@@ -736,8 +728,6 @@ func IconTypeFromString(s string) (IconType, error) {
 		return IconType_ChatFlow, nil
 	case "Voice":
 		return IconType_Voice, nil
-	case "Enterprise":
-		return IconType_Enterprise, nil
 	}
 	return IconType(0), fmt.Errorf("not a valid IconType string")
 }
@@ -765,12 +755,10 @@ const (
 	FileBizType_BIZ_BOT_DATASET        FileBizType = 2
 	FileBizType_BIZ_DATASET_ICON       FileBizType = 3
 	FileBizType_BIZ_PLUGIN_ICON        FileBizType = 4
-	FileBizType_BIZ_BOT_SPACE          FileBizType = 5
-	FileBizType_BIZ_BOT_WORKFLOW       FileBizType = 6
-	FileBizType_BIZ_SOCIETY_ICON       FileBizType = 7
-	FileBizType_BIZ_CONNECTOR_ICON     FileBizType = 8
-	FileBizType_BIZ_LIBRARY_VOICE_ICON FileBizType = 9
-	FileBizType_BIZ_ENTERPRISE_ICON    FileBizType = 10
+	FileBizType_BIZ_BOT_WORKFLOW       FileBizType = 5
+	FileBizType_BIZ_SOCIETY_ICON       FileBizType = 6
+	FileBizType_BIZ_CONNECTOR_ICON     FileBizType = 7
+	FileBizType_BIZ_LIBRARY_VOICE_ICON FileBizType = 8
 )
 
 func (p FileBizType) String() string {
@@ -785,8 +773,6 @@ func (p FileBizType) String() string {
 		return "BIZ_DATASET_ICON"
 	case FileBizType_BIZ_PLUGIN_ICON:
 		return "BIZ_PLUGIN_ICON"
-	case FileBizType_BIZ_BOT_SPACE:
-		return "BIZ_BOT_SPACE"
 	case FileBizType_BIZ_BOT_WORKFLOW:
 		return "BIZ_BOT_WORKFLOW"
 	case FileBizType_BIZ_SOCIETY_ICON:
@@ -795,8 +781,6 @@ func (p FileBizType) String() string {
 		return "BIZ_CONNECTOR_ICON"
 	case FileBizType_BIZ_LIBRARY_VOICE_ICON:
 		return "BIZ_LIBRARY_VOICE_ICON"
-	case FileBizType_BIZ_ENTERPRISE_ICON:
-		return "BIZ_ENTERPRISE_ICON"
 	}
 	return "<UNSET>"
 }
@@ -813,8 +797,6 @@ func FileBizTypeFromString(s string) (FileBizType, error) {
 		return FileBizType_BIZ_DATASET_ICON, nil
 	case "BIZ_PLUGIN_ICON":
 		return FileBizType_BIZ_PLUGIN_ICON, nil
-	case "BIZ_BOT_SPACE":
-		return FileBizType_BIZ_BOT_SPACE, nil
 	case "BIZ_BOT_WORKFLOW":
 		return FileBizType_BIZ_BOT_WORKFLOW, nil
 	case "BIZ_SOCIETY_ICON":
@@ -823,8 +805,6 @@ func FileBizTypeFromString(s string) (FileBizType, error) {
 		return FileBizType_BIZ_CONNECTOR_ICON, nil
 	case "BIZ_LIBRARY_VOICE_ICON":
 		return FileBizType_BIZ_LIBRARY_VOICE_ICON, nil
-	case "BIZ_ENTERPRISE_ICON":
-		return FileBizType_BIZ_ENTERPRISE_ICON, nil
 	}
 	return FileBizType(0), fmt.Errorf("not a valid FileBizType string")
 }
@@ -889,6 +869,7 @@ const (
 	ModelClass_Gemini   ModelClass = 3
 	ModelClass_DeepSeek ModelClass = 4
 	ModelClass_Ollama   ModelClass = 5
+	ModelClass_Claude   ModelClass = 6
 	ModelClass_Other    ModelClass = 999
 )
 
@@ -904,6 +885,8 @@ func (p ModelClass) String() string {
 		return "DeepSeek"
 	case ModelClass_Ollama:
 		return "Ollama"
+	case ModelClass_Claude:
+		return "Claude"
 	case ModelClass_Other:
 		return "Other"
 	}
@@ -922,6 +905,8 @@ func ModelClassFromString(s string) (ModelClass, error) {
 		return ModelClass_DeepSeek, nil
 	case "Ollama":
 		return ModelClass_Ollama, nil
+	case "Claude":
+		return ModelClass_Claude, nil
 	case "Other":
 		return ModelClass_Other, nil
 	}
@@ -1596,7 +1581,7 @@ func (p *MonetizationConf) String() string {
 }
 
 type DraftBotCreateData struct {
-	BotID           int64   `thrift:"bot_id,1" json:"bot_id"`
+	BotID           int64   `thrift:"bot_id,1" json:"bot_id,string"`
 	CheckNotPass    bool    `thrift:"check_not_pass,2" json:"check_not_pass"`
 	CheckNotPassMsg *string `thrift:"check_not_pass_msg,3,optional" json:"check_not_pass_msg,omitempty"`
 }
@@ -1696,7 +1681,7 @@ func (p *DraftBotCreateResponse) String() string {
 }
 
 type DeleteDraftBotRequest struct {
-	BotID int64 `thrift:"bot_id,1,required" json:"bot_id"`
+	BotID int64 `thrift:"bot_id,1,required" json:"bot_id,string"`
 }
 
 func NewDeleteDraftBotRequest() *DeleteDraftBotRequest {
@@ -1788,7 +1773,7 @@ func (p *DeleteDraftBotResponse) String() string {
 }
 
 type DuplicateDraftBotRequest struct {
-	BotID int64 `thrift:"bot_id,1,required" json:"bot_id"`
+	BotID int64 `thrift:"bot_id,1,required" json:"bot_id,string"`
 }
 
 func NewDuplicateDraftBotRequest() *DuplicateDraftBotRequest {
@@ -1813,7 +1798,7 @@ func (p *DuplicateDraftBotRequest) String() string {
 }
 
 type UserLabel struct {
-	LabelID   int64  `thrift:"label_id,1" json:"label_id"`
+	LabelID   int64  `thrift:"label_id,1" json:"bot_id,string"`
 	LabelName string `thrift:"label_name,2" json:"label_name"`
 	IconURI   string `thrift:"icon_uri,3" json:"icon_uri"`
 	IconURL   string `thrift:"icon_url,4" json:"icon_url"`
@@ -1870,7 +1855,7 @@ func (p *UserLabel) String() string {
 }
 
 type Creator struct {
-	ID             int64      `thrift:"id,1" json:"id"`
+	ID             int64      `thrift:"id,1" json:"bot_id,string"`
 	Name           string     `thrift:"name,2" json:"name"`
 	AvatarURL      string     `thrift:"avatar_url,3" json:"avatar_url"`
 	Self           bool       `thrift:"self,4" json:"self"`
@@ -1944,7 +1929,7 @@ func (p *Creator) String() string {
 }
 
 type DuplicateDraftBotData struct {
-	BotID    int64    `thrift:"bot_id,1" json:"bot_id"`
+	BotID    int64    `thrift:"bot_id,1" json:"bot_id,string"`
 	Name     string   `thrift:"name,2" json:"name"`
 	UserInfo *Creator `thrift:"user_info,3" json:"user_info"`
 }
@@ -2111,7 +2096,7 @@ func (p *DraftBotDisplayInfoData) String() string {
 }
 
 type UpdateDraftBotDisplayInfoRequest struct {
-	BotID       int64                    `thrift:"bot_id,1,required" json:"bot_id"`
+	BotID       int64                    `thrift:"bot_id,1,required" json:"bot_id,string"`
 	DisplayInfo *DraftBotDisplayInfoData `thrift:"display_info,2,optional" json:"display_info,omitempty"`
 }
 
@@ -2560,7 +2545,7 @@ func (p *GetDraftBotDisplayInfoResponse) String() string {
 }
 
 type GetDraftBotDisplayInfoRequest struct {
-	BotID int64 `thrift:"bot_id,1,required" json:"bot_id"`
+	BotID int64 `thrift:"bot_id,1,required" json:"bot_id,string"`
 }
 
 func NewGetDraftBotDisplayInfoRequest() *GetDraftBotDisplayInfoRequest {
@@ -3611,7 +3596,6 @@ func (p *BotTagInfo) String() string {
 }
 
 type PublishDraftBotRequest struct {
-	SpaceID               int64                        `thrift:"space_id,1,required" json:"space_id"`
 	BotID                 int64                        `thrift:"bot_id,2,required" json:"bot_id"`
 	WorkInfo              *WorkInfo                    `thrift:"work_info,3" json:"work_info"`
 	ConnectorList         map[string][]*Connector      `thrift:"connector_list,4,default,map<string:list<Connector>>" json:"connector_list"`
@@ -3633,10 +3617,6 @@ func NewPublishDraftBotRequest() *PublishDraftBotRequest {
 }
 
 func (p *PublishDraftBotRequest) InitDefault() {
-}
-
-func (p *PublishDraftBotRequest) GetSpaceID() (v int64) {
-	return p.SpaceID
 }
 
 func (p *PublishDraftBotRequest) GetBotID() (v int64) {
@@ -3748,9 +3728,6 @@ func (p *PublishDraftBotRequest) GetHistoryInfo() (v string) {
 		return PublishDraftBotRequest_HistoryInfo_DEFAULT
 	}
 	return *p.HistoryInfo
-}
-func (p *PublishDraftBotRequest) SetSpaceID(val int64) {
-	p.SpaceID = val
 }
 func (p *PublishDraftBotRequest) SetBotID(val int64) {
 	p.BotID = val
@@ -4321,7 +4298,6 @@ func (p *LayoutInfo) String() string {
 }
 
 type ListDraftBotHistoryRequest struct {
-	SpaceID     int64       `thrift:"space_id,1,required" json:"space_id"`
 	BotID       int64       `thrift:"bot_id,2,required" json:"bot_id"`
 	PageIndex   int32       `thrift:"page_index,3,required" json:"page_index"`
 	PageSize    int32       `thrift:"page_size,4,required" json:"page_size"`
@@ -4334,10 +4310,6 @@ func NewListDraftBotHistoryRequest() *ListDraftBotHistoryRequest {
 }
 
 func (p *ListDraftBotHistoryRequest) InitDefault() {
-}
-
-func (p *ListDraftBotHistoryRequest) GetSpaceID() (v int64) {
-	return p.SpaceID
 }
 
 func (p *ListDraftBotHistoryRequest) GetBotID() (v int64) {
@@ -4363,9 +4335,6 @@ func (p *ListDraftBotHistoryRequest) GetConnectorID() (v string) {
 		return ListDraftBotHistoryRequest_ConnectorID_DEFAULT
 	}
 	return *p.ConnectorID
-}
-func (p *ListDraftBotHistoryRequest) SetSpaceID(val int64) {
-	p.SpaceID = val
 }
 func (p *ListDraftBotHistoryRequest) SetBotID(val int64) {
 	p.BotID = val
@@ -5119,10 +5088,9 @@ type GetTypeListRequest struct {
 	Model       *bool       `thrift:"model,1,optional" json:"model,omitempty"`
 	Voice       *bool       `thrift:"voice,2,optional" json:"voice,omitempty"`
 	RawModel    *bool       `thrift:"raw_model,3,optional" json:"raw_model,omitempty"`
-	SpaceID     *string     `thrift:"space_id,4,optional" json:"space_id,omitempty"`
-	CurModelID  *string     `thrift:"cur_model_id,5,optional" json:"cur_model_id,omitempty"`
-	CurModelIds []string    `thrift:"cur_model_ids,6,optional,list<string>" json:"cur_model_ids,omitempty"`
-	ModelScene  *ModelScene `thrift:"model_scene,7,optional,ModelScene" json:"model_scene,omitempty"`
+	CurModelID  *string     `thrift:"cur_model_id,4,optional" json:"cur_model_id,omitempty"`
+	CurModelIds []string    `thrift:"cur_model_ids,5,optional,list<string>" json:"cur_model_ids,omitempty"`
+	ModelScene  *ModelScene `thrift:"model_scene,6,optional,ModelScene" json:"model_scene,omitempty"`
 }
 
 func NewGetTypeListRequest() *GetTypeListRequest {
@@ -5157,15 +5125,6 @@ func (p *GetTypeListRequest) GetRawModel() (v bool) {
 		return GetTypeListRequest_RawModel_DEFAULT
 	}
 	return *p.RawModel
-}
-
-var GetTypeListRequest_SpaceID_DEFAULT string
-
-func (p *GetTypeListRequest) GetSpaceID() (v string) {
-	if !p.IsSetSpaceID() {
-		return GetTypeListRequest_SpaceID_DEFAULT
-	}
-	return *p.SpaceID
 }
 
 var GetTypeListRequest_CurModelID_DEFAULT string
@@ -5203,9 +5162,6 @@ func (p *GetTypeListRequest) SetVoice(val *bool) {
 func (p *GetTypeListRequest) SetRawModel(val *bool) {
 	p.RawModel = val
 }
-func (p *GetTypeListRequest) SetSpaceID(val *string) {
-	p.SpaceID = val
-}
 func (p *GetTypeListRequest) SetCurModelID(val *string) {
 	p.CurModelID = val
 }
@@ -5226,10 +5182,6 @@ func (p *GetTypeListRequest) IsSetVoice() bool {
 
 func (p *GetTypeListRequest) IsSetRawModel() bool {
 	return p.RawModel != nil
-}
-
-func (p *GetTypeListRequest) IsSetSpaceID() bool {
-	return p.SpaceID != nil
 }
 
 func (p *GetTypeListRequest) IsSetCurModelID() bool {
@@ -6723,9 +6675,8 @@ func (p *CheckDraftBotCommitData) String() string {
 }
 
 type CheckDraftBotCommitRequest struct {
-	SpaceID       string  `thrift:"space_id,1,required" json:"space_id"`
-	BotID         string  `thrift:"bot_id,2,required" json:"bot_id"`
-	CommitVersion *string `thrift:"commit_version,3,optional" json:"commit_version,omitempty"`
+	BotID         string  `thrift:"bot_id,1,required" json:"bot_id"`
+	CommitVersion *string `thrift:"commit_version,2,optional" json:"commit_version,omitempty"`
 }
 
 func NewCheckDraftBotCommitRequest() *CheckDraftBotCommitRequest {
@@ -6733,10 +6684,6 @@ func NewCheckDraftBotCommitRequest() *CheckDraftBotCommitRequest {
 }
 
 func (p *CheckDraftBotCommitRequest) InitDefault() {
-}
-
-func (p *CheckDraftBotCommitRequest) GetSpaceID() (v string) {
-	return p.SpaceID
 }
 
 func (p *CheckDraftBotCommitRequest) GetBotID() (v string) {
@@ -6750,9 +6697,6 @@ func (p *CheckDraftBotCommitRequest) GetCommitVersion() (v string) {
 		return CheckDraftBotCommitRequest_CommitVersion_DEFAULT
 	}
 	return *p.CommitVersion
-}
-func (p *CheckDraftBotCommitRequest) SetSpaceID(val string) {
-	p.SpaceID = val
 }
 func (p *CheckDraftBotCommitRequest) SetBotID(val string) {
 	p.BotID = val
@@ -7022,9 +6966,8 @@ func (p *AuthLoginInfo) String() string {
 }
 
 type PublishConnectorListRequest struct {
-	SpaceID       int64   `thrift:"space_id,1,required" json:"space_id"`
-	BotID         int64   `thrift:"bot_id,2,required" json:"bot_id"`
-	CommitVersion *string `thrift:"commit_version,3,optional" json:"commit_version,omitempty"`
+	BotID         int64   `thrift:"bot_id,1,required" json:"bot_id"`
+	CommitVersion *string `thrift:"commit_version,2,optional" json:"commit_version,omitempty"`
 }
 
 func NewPublishConnectorListRequest() *PublishConnectorListRequest {
@@ -7032,10 +6975,6 @@ func NewPublishConnectorListRequest() *PublishConnectorListRequest {
 }
 
 func (p *PublishConnectorListRequest) InitDefault() {
-}
-
-func (p *PublishConnectorListRequest) GetSpaceID() (v int64) {
-	return p.SpaceID
 }
 
 func (p *PublishConnectorListRequest) GetBotID() (v int64) {
@@ -7049,9 +6988,6 @@ func (p *PublishConnectorListRequest) GetCommitVersion() (v string) {
 		return PublishConnectorListRequest_CommitVersion_DEFAULT
 	}
 	return *p.CommitVersion
-}
-func (p *PublishConnectorListRequest) SetSpaceID(val int64) {
-	p.SpaceID = val
 }
 func (p *PublishConnectorListRequest) SetBotID(val int64) {
 	p.BotID = val

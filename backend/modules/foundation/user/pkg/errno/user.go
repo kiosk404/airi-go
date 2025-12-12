@@ -46,7 +46,7 @@ func init() {
 
 	code.Register(
 		ErrUserInfoInvalidateCode,
-		"invalid email or password, please try again.",
+		"invalid account or password, please try again.",
 		code.WithAffectStability(false),
 	)
 

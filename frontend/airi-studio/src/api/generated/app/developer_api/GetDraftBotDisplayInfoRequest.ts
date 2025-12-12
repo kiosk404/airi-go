@@ -72,7 +72,8 @@ export class GetDraftBotDisplayInfoRequest extends thrift.StructLike implements 
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
             'agw.js_conv': "str",
-            'api.js_conv': "true"
+            'api.js_conv': "true",
+            'go.tag': "json:\"bot_id,string\""
         }
     };
     constructor(args: IGetDraftBotDisplayInfoRequestArgs) {

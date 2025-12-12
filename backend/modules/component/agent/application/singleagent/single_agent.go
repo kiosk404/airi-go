@@ -5,6 +5,7 @@ import (
 
 	"github.com/bytedance/sonic"
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_common"
+	"github.com/kiosk404/airi-go/backend/api/model/app/developer_api"
 	"github.com/kiosk404/airi-go/backend/api/model/playground"
 	"github.com/kiosk404/airi-go/backend/application/ctxutil"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
@@ -193,4 +194,134 @@ func (s *SingleAgentApplicationService) ValidateAgentDraftAccess(ctx context.Con
 	}
 
 	return do, nil
+}
+
+func (s *SingleAgentApplicationService) ListAgentDraft(ctx context.Context, page, pageSize int) ([]*entity.SingleAgent, int64, error) {
+	uid := ctxutil.GetUIDFromCtx(ctx)
+	if uid == nil {
+		return nil, 0, errorx.New(errno.ErrAgentPermissionCode, errorx.KV("msg", "session uid not found"))
+	}
+	return s.DomainSVC.ListAgentDraftByCreator(ctx, *uid, page, pageSize)
+}
+
+func (s *SingleAgentApplicationService) GetAgentDraftDisplayInfo(ctx context.Context, req *developer_api.GetDraftBotDisplayInfoRequest) (*developer_api.GetDraftBotDisplayInfoResponse, error) {
+	uid := ctxutil.GetUIDFromCtx(ctx)
+	if uid == nil {
+		return nil, errorx.New(errno.ErrAgentPermissionCode, errorx.KV("msg", "session required"))
+	}
+
+	_, err := s.ValidateAgentDraftAccess(ctx, req.GetBotID())
+	if err != nil {
+		return nil, err
+	}
+
+	draftInfoDo, err := s.DomainSVC.GetAgentDraftDisplayInfo(ctx, *uid, req.GetBotID())
+	if err != nil {
+		return nil, err
+	}
+
+	return &developer_api.GetDraftBotDisplayInfoResponse{
+		Code: 0,
+		Msg:  "success",
+		Data: draftInfoDo.DisplayInfo,
+	}, nil
+}
+
+func (s *SingleAgentApplicationService) DeleteAgentDraft(ctx context.Context, req *developer_api.DeleteDraftBotRequest) (*developer_api.DeleteDraftBotResponse, error) {
+	_, err := s.ValidateAgentDraftAccess(ctx, req.GetBotID())
+	if err != nil {
+		return nil, err
+	}
+
+	err = s.DomainSVC.DeleteAgentDraft(ctx, req.GetBotID())
+	if err != nil {
+		return nil, err
+	}
+
+	return &developer_api.DeleteDraftBotResponse{
+		Data: &developer_api.DeleteDraftBotData{},
+		Code: 0,
+	}, nil
+}
+
+func (s *SingleAgentApplicationService) UpdateAgentDraftDisplayInfo(ctx context.Context, req *developer_api.UpdateDraftBotDisplayInfoRequest) (*developer_api.UpdateDraftBotDisplayInfoResponse, error) {
+	uid := ctxutil.GetUIDFromCtx(ctx)
+	if uid == nil {
+		return nil, errorx.New(errno.ErrAgentPermissionCode, errorx.KV("msg", "session required"))
+	}
+
+	_, err := s.ValidateAgentDraftAccess(ctx, req.BotID)
+	if err != nil {
+		return nil, err
+	}
+
+	draftInfoDo := &entity.AgentDraftDisplayInfo{
+		AgentID:     req.BotID,
+		DisplayInfo: req.DisplayInfo,
+	}
+
+	err = s.DomainSVC.UpdateAgentDraftDisplayInfo(ctx, *uid, draftInfoDo)
+	if err != nil {
+		return nil, err
+	}
+
+	return &developer_api.UpdateDraftBotDisplayInfoResponse{
+		Code: 0,
+		Msg:  "success",
+	}, nil
+}
+
+func (s *SingleAgentApplicationService) singleAgentDraftDo2Vo(ctx context.Context, do *entity.SingleAgent) (*bot_common.BotInfo, error) {
+	vo := &bot_common.BotInfo{
+		BotId:                   do.AgentID,
+		Name:                    do.Name,
+		Description:             do.Desc,
+		IconUri:                 do.IconURI,
+		OnboardingInfo:          do.OnboardingInfo,
+		ModelInfo:               do.ModelInfo,
+		PromptInfo:              do.Prompt,
+		PluginInfoList:          do.Plugin,
+		Knowledge:               do.Knowledge,
+		WorkflowInfoList:        do.Workflow,
+		SuggestReplyInfo:        do.SuggestReply,
+		CreatorId:               do.CreatorID,
+		TaskInfo:                &bot_common.TaskInfo{},
+		CreateTime:              do.CreatedAt / 1000,
+		UpdateTime:              do.UpdatedAt / 1000,
+		BotMode:                 do.BotMode,
+		BackgroundImageInfoList: do.BackgroundImageInfoList,
+		Status:                  bot_common.BotStatus_Using,
+		DatabaseList:            do.Database,
+		ShortcutSort:            do.ShortcutCommand,
+		LayoutInfo:              do.LayoutInfo,
+	}
+
+	if do.VariablesMetaID != nil {
+		//vars, err := s.appContext.VariablesDomainSVC.GetVariableMetaByID(ctx, *do.VariablesMetaID)
+		//if err != nil {
+		//	return nil, err
+		//}
+		//
+		//if vars != nil {
+		//	vo.VariableList = vars.ToAgentVariables()
+		//}
+	}
+
+	if vo.IconUri != "" {
+		url, err := s.appContext.TosClient.GetObjectUrl(ctx, vo.IconUri)
+		if err != nil {
+			return nil, err
+		}
+		vo.IconUrl = url
+	}
+
+	if vo.ModelInfo == nil || vo.ModelInfo.ModelId == nil {
+		mi, err := s.defaultModelInfo(ctx)
+		if err != nil {
+			return nil, err
+		}
+		vo.ModelInfo = mi
+	}
+
+	return vo, nil
 }

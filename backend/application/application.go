@@ -18,6 +18,7 @@ import (
 	crossmessageimpl "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/impl"
 	searchapp "github.com/kiosk404/airi-go/backend/modules/data/search/application"
 	search "github.com/kiosk404/airi-go/backend/modules/data/search/domain/service"
+	uploadapp "github.com/kiosk404/airi-go/backend/modules/data/upload/application"
 	openauthapp "github.com/kiosk404/airi-go/backend/modules/foundation/openauth/application"
 	userapp "github.com/kiosk404/airi-go/backend/modules/foundation/user/application"
 	modelmgrapp "github.com/kiosk404/airi-go/backend/modules/llm/application"
@@ -37,6 +38,7 @@ type basicServices struct {
 	userSVC     *userapp.UserApplicationService
 	openAuthSVC *openauthapp.OpenAuthApplicationService
 	modelMgrSVC *modelmgrapp.ModelManagerApplicationService
+	uploadSVC   *uploadapp.UploadService
 }
 
 type primaryServices struct {
@@ -99,6 +101,7 @@ func initBasicServices(ctx context.Context, infra *appinfra.AppDependencies, e *
 	openAuthSVC := openauthapp.InitService(infra.DB, infra.IDGenSVC)
 	userSVC := userapp.InitService(ctx, infra.DB, infra.TOSClient, infra.IDGenSVC)
 	modelSVC := modelmgrapp.InitService(ctx, infra.IDGenSVC, infra.DB, infra.TOSClient, infra.ConfigFactory)
+	uploadSVC := uploadapp.InitService(ctx, infra.TOSClient, infra.CacheCli, infra.DB, infra.IDGenSVC)
 
 	return &basicServices{
 		eventbus:    e,
@@ -106,6 +109,7 @@ func initBasicServices(ctx context.Context, infra *appinfra.AppDependencies, e *
 		userSVC:     userSVC,
 		openAuthSVC: openAuthSVC,
 		modelMgrSVC: modelSVC,
+		uploadSVC:   uploadSVC,
 	}, err
 }
 

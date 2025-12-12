@@ -7,7 +7,6 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as HistoryType from "./HistoryType";
 export interface IListDraftBotHistoryRequest {
-    space_id: thrift.Int64;
     bot_id: thrift.Int64;
     page_index: number;
     page_size: number;
@@ -15,7 +14,6 @@ export interface IListDraftBotHistoryRequest {
     connector_id?: string;
 }
 export interface IListDraftBotHistoryRequestArgs {
-    space_id: number | string | thrift.Int64;
     bot_id: number | string | thrift.Int64;
     page_index: number;
     page_size: number;
@@ -25,7 +23,6 @@ export interface IListDraftBotHistoryRequestArgs {
 export const ListDraftBotHistoryRequestCodec: thrift.IStructCodec<IListDraftBotHistoryRequestArgs, IListDraftBotHistoryRequest> = {
     encode(args: IListDraftBotHistoryRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            space_id: (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id),
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
             page_index: args.page_index,
             page_size: args.page_size,
@@ -33,14 +30,6 @@ export const ListDraftBotHistoryRequestCodec: thrift.IStructCodec<IListDraftBotH
             connector_id: args.connector_id
         };
         output.writeStructBegin("ListDraftBotHistoryRequest");
-        if (obj.space_id != null) {
-            output.writeFieldBegin("space_id", thrift.TType.I64, 1);
-            output.writeI64((typeof obj.space_id === "number" ? new thrift.Int64(obj.space_id) : typeof obj.space_id === "string" ? thrift.Int64.fromDecimalString(obj.space_id) : obj.space_id));
-            output.writeFieldEnd();
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (obj.bot_id != null) {
             output.writeFieldBegin("bot_id", thrift.TType.I64, 2);
             output.writeI64((typeof obj.bot_id === "number" ? new thrift.Int64(obj.bot_id) : typeof obj.bot_id === "string" ? thrift.Int64.fromDecimalString(obj.bot_id) : obj.bot_id));
@@ -93,19 +82,10 @@ export const ListDraftBotHistoryRequestCodec: thrift.IStructCodec<IListDraftBotH
                 break;
             }
             switch (fieldId) {
-                case 1:
-                    if (fieldType === thrift.TType.I64) {
-                        const value_1: thrift.Int64 = input.readI64();
-                        _args.space_id = value_1;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
                 case 2:
                     if (fieldType === thrift.TType.I64) {
-                        const value_2: thrift.Int64 = input.readI64();
-                        _args.bot_id = value_2;
+                        const value_1: thrift.Int64 = input.readI64();
+                        _args.bot_id = value_1;
                     }
                     else {
                         input.skip(fieldType);
@@ -113,8 +93,8 @@ export const ListDraftBotHistoryRequestCodec: thrift.IStructCodec<IListDraftBotH
                     break;
                 case 3:
                     if (fieldType === thrift.TType.I32) {
-                        const value_3: number = input.readI32();
-                        _args.page_index = value_3;
+                        const value_2: number = input.readI32();
+                        _args.page_index = value_2;
                     }
                     else {
                         input.skip(fieldType);
@@ -122,8 +102,8 @@ export const ListDraftBotHistoryRequestCodec: thrift.IStructCodec<IListDraftBotH
                     break;
                 case 4:
                     if (fieldType === thrift.TType.I32) {
-                        const value_4: number = input.readI32();
-                        _args.page_size = value_4;
+                        const value_3: number = input.readI32();
+                        _args.page_size = value_3;
                     }
                     else {
                         input.skip(fieldType);
@@ -131,8 +111,8 @@ export const ListDraftBotHistoryRequestCodec: thrift.IStructCodec<IListDraftBotH
                     break;
                 case 5:
                     if (fieldType === thrift.TType.I32) {
-                        const value_5: HistoryType.HistoryType = input.readI32();
-                        _args.history_type = value_5;
+                        const value_4: HistoryType.HistoryType = input.readI32();
+                        _args.history_type = value_4;
                     }
                     else {
                         input.skip(fieldType);
@@ -140,8 +120,8 @@ export const ListDraftBotHistoryRequestCodec: thrift.IStructCodec<IListDraftBotH
                     break;
                 case 6:
                     if (fieldType === thrift.TType.STRING) {
-                        const value_6: string = input.readString();
-                        _args.connector_id = value_6;
+                        const value_5: string = input.readString();
+                        _args.connector_id = value_5;
                     }
                     else {
                         input.skip(fieldType);
@@ -154,9 +134,8 @@ export const ListDraftBotHistoryRequestCodec: thrift.IStructCodec<IListDraftBotH
             input.readFieldEnd();
         }
         input.readStructEnd();
-        if (_args.space_id !== undefined && _args.bot_id !== undefined && _args.page_index !== undefined && _args.page_size !== undefined && _args.history_type !== undefined) {
+        if (_args.bot_id !== undefined && _args.page_index !== undefined && _args.page_size !== undefined && _args.history_type !== undefined) {
             return {
-                space_id: _args.space_id,
                 bot_id: _args.bot_id,
                 page_index: _args.page_index,
                 page_size: _args.page_size,
@@ -170,7 +149,6 @@ export const ListDraftBotHistoryRequestCodec: thrift.IStructCodec<IListDraftBotH
     }
 };
 export class ListDraftBotHistoryRequest extends thrift.StructLike implements IListDraftBotHistoryRequest {
-    public space_id: thrift.Int64;
     public bot_id: thrift.Int64;
     public page_index: number;
     public page_size: number;
@@ -178,10 +156,6 @@ export class ListDraftBotHistoryRequest extends thrift.StructLike implements ILi
     public connector_id?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        space_id: {
-            'agw.js_conv': "str",
-            'api.js_conv': "true"
-        },
         bot_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true"
@@ -189,44 +163,37 @@ export class ListDraftBotHistoryRequest extends thrift.StructLike implements ILi
     };
     constructor(args: IListDraftBotHistoryRequestArgs) {
         super();
-        if (args.space_id != null) {
-            const value_7: thrift.Int64 = (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id);
-            this.space_id = value_7;
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (args.bot_id != null) {
-            const value_8: thrift.Int64 = (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id);
-            this.bot_id = value_8;
+            const value_6: thrift.Int64 = (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id);
+            this.bot_id = value_6;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
         if (args.page_index != null) {
-            const value_9: number = args.page_index;
-            this.page_index = value_9;
+            const value_7: number = args.page_index;
+            this.page_index = value_7;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[page_index] is unset!");
         }
         if (args.page_size != null) {
-            const value_10: number = args.page_size;
-            this.page_size = value_10;
+            const value_8: number = args.page_size;
+            this.page_size = value_8;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[page_size] is unset!");
         }
         if (args.history_type != null) {
-            const value_11: HistoryType.HistoryType = args.history_type;
-            this.history_type = value_11;
+            const value_9: HistoryType.HistoryType = args.history_type;
+            this.history_type = value_9;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[history_type] is unset!");
         }
         if (args.connector_id != null) {
-            const value_12: string = args.connector_id;
-            this.connector_id = value_12;
+            const value_10: string = args.connector_id;
+            this.connector_id = value_10;
         }
     }
     public static read(input: thrift.TProtocol): ListDraftBotHistoryRequest {

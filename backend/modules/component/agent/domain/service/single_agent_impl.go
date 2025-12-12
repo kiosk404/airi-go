@@ -39,11 +39,11 @@ func NewService(
 }
 
 func (s singleAgentImpl) CreateSingleAgentDraft(ctx context.Context, creatorID int64, draft *entity.SingleAgent) (agentID int64, err error) {
-	return s.AgentDraftRepo.CreateWithID(ctx, creatorID, draft.AgentID, draft)
+	return s.AgentDraftRepo.CreateWithID(ctx, draft.AgentID, creatorID, draft)
 }
 
 func (s singleAgentImpl) CreateSingleAgentDraftWithID(ctx context.Context, agentID, creatorID int64, draft *entity.SingleAgent) (int64, error) {
-	return s.AgentDraftRepo.CreateWithID(ctx, creatorID, agentID, draft)
+	return s.AgentDraftRepo.CreateWithID(ctx, agentID, creatorID, draft)
 }
 
 func (s singleAgentImpl) MGetSingleAgentDraft(ctx context.Context, agentIDs []int64) (agents []*entity.SingleAgent, err error) {
@@ -71,6 +71,14 @@ func (s singleAgentImpl) UpdateSingleAgentDraft(ctx context.Context, agentInfo *
 
 func (s singleAgentImpl) DeleteAgentDraft(ctx context.Context, agentID int64) (err error) {
 	return s.AgentDraftRepo.Delete(ctx, agentID)
+}
+
+func (s singleAgentImpl) ListAgentDraftByCreator(ctx context.Context, creatorID int64, page, pageSize int) ([]*entity.SingleAgent, int64, error) {
+	return s.AgentDraftRepo.ListByCreator(ctx, creatorID, page, pageSize)
+}
+
+func (s singleAgentImpl) ListAgentDraft(ctx context.Context, page, pageSize int) ([]*entity.SingleAgent, int64, error) {
+	return s.AgentDraftRepo.List(ctx, page, pageSize)
 }
 
 func (s singleAgentImpl) UpdateAgentDraftDisplayInfo(ctx context.Context, userID int64, e *entity.AgentDraftDisplayInfo) error {

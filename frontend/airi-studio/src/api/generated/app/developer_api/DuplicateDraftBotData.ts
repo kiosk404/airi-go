@@ -103,6 +103,7 @@ export class DuplicateDraftBotData extends thrift.StructLike implements IDuplica
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
             'agw.js_conv': "str",
+            'go.tag': "json:\"bot_id,string\"",
             'api.js_conv': "true"
         }
     };

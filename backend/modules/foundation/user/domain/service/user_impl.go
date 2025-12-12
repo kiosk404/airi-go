@@ -4,13 +4,12 @@ import (
 	"context"
 	"fmt"
 	"regexp"
-	"strconv"
 	"time"
 	"unicode/utf8"
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
 	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
-	uploadEntity "github.com/kiosk404/airi-go/backend/modules/data/upload/entity"
+	uploadEntity "github.com/kiosk404/airi-go/backend/modules/data/upload/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/repo"
 	"github.com/kiosk404/airi-go/backend/modules/foundation/user/infra/repo/gorm_gen/model"
@@ -216,7 +215,7 @@ func (u *userImpl) GetUserInfo(ctx context.Context, userID int64) (user *entity.
 }
 
 func (u *userImpl) UpdateAvatar(ctx context.Context, userID int64, ext string, imagePayload []byte) (url string, err error) {
-	avatarKey := "user_avatar/" + strconv.FormatInt(userID, 10) + "." + ext
+	avatarKey := "user_avatar/" + conv.Int64ToStr(userID) + "." + ext
 	err = u.IconOSS.PutObject(ctx, avatarKey, imagePayload)
 	if err != nil {
 		return "", err

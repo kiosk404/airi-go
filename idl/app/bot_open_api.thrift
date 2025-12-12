@@ -12,7 +12,7 @@ struct OauthAuthorizationCodeResp {
 }
 
 struct GetBotOnlineInfoReq {
-    1 : required i64 bot_id  (api.js_conv="true")           // botId
+    1 : required  i64   bot_id (agw.js_conv="str",go.tag='json:"bot_id,string"', api.js_conv="true")           // botId
     2:  optional string connector_id // Keep it first, don't expose it, and don't use the field
     3 : optional string version        // bot version, get the latest version if you don't pass it on.
 }
@@ -79,7 +79,7 @@ struct ImpersonateAiriUserResponseData {
 }
 
 struct OpenGetBotInfoRequest {
-    1:     i64                        bot_id                    (api.js_conv="true", agw.js_conv="str", agw.cli_conv="str",api.path = "bot_id")
+    1:     i64                        bot_id                    (api.js_conv="true", go.tag='json:"bot_id,string"', agw.js_conv="str", agw.cli_conv="str",api.path = "bot_id")
     2:     optional bool              is_published              (api.query = "is_published")
     3:     optional i64             connector_id                 (api.query = "connector_id", api.js_conv="true")
     255:   optional base.Base         Base (api.none="true")

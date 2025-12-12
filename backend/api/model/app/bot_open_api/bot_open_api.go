@@ -77,7 +77,7 @@ func (p *OauthAuthorizationCodeResp) String() string {
 }
 
 type GetBotOnlineInfoReq struct {
-	BotID       int64   `thrift:"bot_id,1,required" json:"bot_id"`
+	BotID       int64   `thrift:"bot_id,1,required" json:"bot_id,string"`
 	ConnectorID *string `thrift:"connector_id,2,optional" json:"connector_id,omitempty"`
 	Version     *string `thrift:"version,3,optional" json:"version,omitempty"`
 }
@@ -610,7 +610,7 @@ func (p *ImpersonateAiriUserResponseData) String() string {
 }
 
 type OpenGetBotInfoRequest struct {
-	BotID       int64      `thrift:"bot_id,1" json:"bot_id"`
+	BotID       int64      `thrift:"bot_id,1" json:"bot_id,string"`
 	IsPublished *bool      `thrift:"is_published,2,optional" json:"is_published,omitempty"`
 	ConnectorID *int64     `thrift:"connector_id,3,optional" json:"connector_id,omitempty"`
 	Base        *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`

@@ -109,6 +109,8 @@ export class GetBotOnlineInfoReq extends thrift.StructLike implements IGetBotOnl
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
+            'agw.js_conv': "str",
+            'go.tag': "json:\"bot_id,string\"",
             'api.js_conv': "true"
         }
     };

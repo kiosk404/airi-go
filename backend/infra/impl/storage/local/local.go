@@ -108,7 +108,6 @@ func (l *LocalClient) DeleteObject(ctx context.Context, objectKey string) error 
 }
 
 func (l *LocalClient) GetObjectUrl(ctx context.Context, objectKey string, opts ...storage.GetOptFn) (string, error) {
-	// 本地文件系统返回file://协议的URL
 	fullPath := filepath.Join(l.baseDir, objectKey)
 	absPath, err := filepath.Abs(fullPath)
 	if err != nil {
@@ -120,7 +119,16 @@ func (l *LocalClient) GetObjectUrl(ctx context.Context, objectKey string, opts .
 		return "", fmt.Errorf("object %s does not exist", objectKey)
 	}
 
-	return "file://" + absPath, nil
+	// 使用 filepath.ToSlash 确保路径分隔符是 /
+	httpPath := filepath.ToSlash(objectKey)
+
+	// 获取服务器地址
+	host := "http://127.0.0.1:9527"
+	if envHost := os.Getenv("SERVER_HOST"); envHost != "" {
+		host = envHost
+	}
+
+	return host + "/static/files/" + httpPath, nil
 }
 
 func (l *LocalClient) ListAllObjects(ctx context.Context, prefix string, withTagging bool) ([]*storage.FileInfo, error) {

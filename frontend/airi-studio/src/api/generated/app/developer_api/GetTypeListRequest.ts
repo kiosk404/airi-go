@@ -10,7 +10,6 @@ export interface IGetTypeListRequest {
     model?: boolean;
     voice?: boolean;
     raw_model?: boolean;
-    space_id?: string;
     cur_model_id?: string;
     cur_model_ids?: Array<string>;
     model_scene?: ModelScene.ModelScene;
@@ -19,7 +18,6 @@ export interface IGetTypeListRequestArgs {
     model?: boolean;
     voice?: boolean;
     raw_model?: boolean;
-    space_id?: string;
     cur_model_id?: string;
     cur_model_ids?: Array<string>;
     model_scene?: ModelScene.ModelScene;
@@ -30,7 +28,6 @@ export const GetTypeListRequestCodec: thrift.IStructCodec<IGetTypeListRequestArg
             model: args.model,
             voice: args.voice,
             raw_model: args.raw_model,
-            space_id: args.space_id,
             cur_model_id: args.cur_model_id,
             cur_model_ids: args.cur_model_ids,
             model_scene: args.model_scene
@@ -51,18 +48,13 @@ export const GetTypeListRequestCodec: thrift.IStructCodec<IGetTypeListRequestArg
             output.writeBool(obj.raw_model);
             output.writeFieldEnd();
         }
-        if (obj.space_id != null) {
-            output.writeFieldBegin("space_id", thrift.TType.STRING, 4);
-            output.writeString(obj.space_id);
-            output.writeFieldEnd();
-        }
         if (obj.cur_model_id != null) {
-            output.writeFieldBegin("cur_model_id", thrift.TType.STRING, 5);
+            output.writeFieldBegin("cur_model_id", thrift.TType.STRING, 4);
             output.writeString(obj.cur_model_id);
             output.writeFieldEnd();
         }
         if (obj.cur_model_ids != null) {
-            output.writeFieldBegin("cur_model_ids", thrift.TType.LIST, 6);
+            output.writeFieldBegin("cur_model_ids", thrift.TType.LIST, 5);
             output.writeListBegin(thrift.TType.STRING, obj.cur_model_ids.length);
             obj.cur_model_ids.forEach((value_1: string): void => {
                 output.writeString(value_1);
@@ -71,7 +63,7 @@ export const GetTypeListRequestCodec: thrift.IStructCodec<IGetTypeListRequestArg
             output.writeFieldEnd();
         }
         if (obj.model_scene != null) {
-            output.writeFieldBegin("model_scene", thrift.TType.I32, 7);
+            output.writeFieldBegin("model_scene", thrift.TType.I32, 6);
             output.writeI32(obj.model_scene);
             output.writeFieldEnd();
         }
@@ -120,41 +112,32 @@ export const GetTypeListRequestCodec: thrift.IStructCodec<IGetTypeListRequestArg
                 case 4:
                     if (fieldType === thrift.TType.STRING) {
                         const value_5: string = input.readString();
-                        _args.space_id = value_5;
+                        _args.cur_model_id = value_5;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 5:
-                    if (fieldType === thrift.TType.STRING) {
-                        const value_6: string = input.readString();
-                        _args.cur_model_id = value_6;
+                    if (fieldType === thrift.TType.LIST) {
+                        const value_6: Array<string> = new Array<string>();
+                        const metadata_1: thrift.IThriftList = input.readListBegin();
+                        const size_1: number = metadata_1.size;
+                        for (let i_1: number = 0; i_1 < size_1; i_1++) {
+                            const value_7: string = input.readString();
+                            value_6.push(value_7);
+                        }
+                        input.readListEnd();
+                        _args.cur_model_ids = value_6;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 6:
-                    if (fieldType === thrift.TType.LIST) {
-                        const value_7: Array<string> = new Array<string>();
-                        const metadata_1: thrift.IThriftList = input.readListBegin();
-                        const size_1: number = metadata_1.size;
-                        for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_8: string = input.readString();
-                            value_7.push(value_8);
-                        }
-                        input.readListEnd();
-                        _args.cur_model_ids = value_7;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
-                case 7:
                     if (fieldType === thrift.TType.I32) {
-                        const value_9: ModelScene.ModelScene = input.readI32();
-                        _args.model_scene = value_9;
+                        const value_8: ModelScene.ModelScene = input.readI32();
+                        _args.model_scene = value_8;
                     }
                     else {
                         input.skip(fieldType);
@@ -171,7 +154,6 @@ export const GetTypeListRequestCodec: thrift.IStructCodec<IGetTypeListRequestArg
             model: _args.model,
             voice: _args.voice,
             raw_model: _args.raw_model,
-            space_id: _args.space_id,
             cur_model_id: _args.cur_model_id,
             cur_model_ids: _args.cur_model_ids,
             model_scene: _args.model_scene
@@ -182,7 +164,6 @@ export class GetTypeListRequest extends thrift.StructLike implements IGetTypeLis
     public model?: boolean;
     public voice?: boolean;
     public raw_model?: boolean;
-    public space_id?: string;
     public cur_model_id?: string;
     public cur_model_ids?: Array<string>;
     public model_scene?: ModelScene.ModelScene;
@@ -191,36 +172,32 @@ export class GetTypeListRequest extends thrift.StructLike implements IGetTypeLis
     constructor(args: IGetTypeListRequestArgs = {}) {
         super();
         if (args.model != null) {
-            const value_10: boolean = args.model;
-            this.model = value_10;
+            const value_9: boolean = args.model;
+            this.model = value_9;
         }
         if (args.voice != null) {
-            const value_11: boolean = args.voice;
-            this.voice = value_11;
+            const value_10: boolean = args.voice;
+            this.voice = value_10;
         }
         if (args.raw_model != null) {
-            const value_12: boolean = args.raw_model;
-            this.raw_model = value_12;
-        }
-        if (args.space_id != null) {
-            const value_13: string = args.space_id;
-            this.space_id = value_13;
+            const value_11: boolean = args.raw_model;
+            this.raw_model = value_11;
         }
         if (args.cur_model_id != null) {
-            const value_14: string = args.cur_model_id;
-            this.cur_model_id = value_14;
+            const value_12: string = args.cur_model_id;
+            this.cur_model_id = value_12;
         }
         if (args.cur_model_ids != null) {
-            const value_15: Array<string> = new Array<string>();
-            args.cur_model_ids.forEach((value_17: string): void => {
-                const value_18: string = value_17;
-                value_15.push(value_18);
+            const value_13: Array<string> = new Array<string>();
+            args.cur_model_ids.forEach((value_15: string): void => {
+                const value_16: string = value_15;
+                value_13.push(value_16);
             });
-            this.cur_model_ids = value_15;
+            this.cur_model_ids = value_13;
         }
         if (args.model_scene != null) {
-            const value_16: ModelScene.ModelScene = args.model_scene;
-            this.model_scene = value_16;
+            const value_14: ModelScene.ModelScene = args.model_scene;
+            this.model_scene = value_14;
         }
     }
     public static read(input: thrift.TProtocol): GetTypeListRequest {

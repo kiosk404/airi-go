@@ -92,7 +92,8 @@ export class UpdateDraftBotDisplayInfoRequest extends thrift.StructLike implemen
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
             'agw.js_conv': "str",
-            'api.js_conv': "true"
+            'api.js_conv': "true",
+            'go.tag': "json:\"bot_id,string\""
         }
     };
     constructor(args: IUpdateDraftBotDisplayInfoRequestArgs) {

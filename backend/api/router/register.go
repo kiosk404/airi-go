@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/kiosk404/airi-go/backend/api/handle"
 	"github.com/kiosk404/airi-go/backend/api/router/airi"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
@@ -27,7 +28,9 @@ func staticFileRegister(r *gin.Engine) {
 
 	staticFile := path.Join(cwd, "resources/static/index.html")
 
-	r.Static("/static", path.Join(cwd, "/resources/static"))
+	// 注册文件服务路由：/static/files/*filepath
+	r.GET("/static/files/*filepath", handle.GetFile)
+	
 	r.StaticFile("/favicon.png", "./resources/static/favicon.png")
 	r.StaticFile("/", staticFile)
 	r.StaticFile("/sign", staticFile)
@@ -38,10 +41,10 @@ func staticFileRegister(r *gin.Engine) {
 	}
 
 	r.NoRoute(func(ctx *gin.Context) {
-		path := string(ctx.Request.URL.Path)
-		if strings.HasPrefix(path, "/api/") ||
-			strings.HasPrefix(path, "/v1/") ||
-			strings.HasPrefix(path, "/v3/") {
+		requestPath := ctx.Request.URL.Path
+		if strings.HasPrefix(requestPath, "/api/") ||
+			strings.HasPrefix(requestPath, "/v1/") ||
+			strings.HasPrefix(requestPath, "/v3/") {
 			ctx.JSON(404, data{
 				Code: 404,
 				Msg:  "not found",

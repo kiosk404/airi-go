@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"io"
-	"strconv"
 
 	"github.com/cloudwego/eino/schema"
 	"github.com/kiosk404/airi-go/backend/api/model/conversation/message"
@@ -329,16 +328,16 @@ func buildARSM2Message(chunk *entity.AgentRunResponse, req *run.AgentRunRequest)
 	chunkMessageItem := chunk.ChunkMessageItem
 
 	chunkMessage := &run.RunStreamResponse{
-		ConversationID: strconv.FormatInt(chunkMessageItem.ConversationID, 10),
+		ConversationID: conv.Int64ToStr(chunkMessageItem.ConversationID),
 		IsFinish:       ptr.Of(chunk.ChunkMessageItem.IsFinish),
 		Message: &message.ChatMessage{
 			Role:        string(chunkMessageItem.Role),
 			ContentType: string(chunkMessageItem.ContentType),
-			MessageID:   strconv.FormatInt(chunkMessageItem.ID, 10),
-			SectionID:   strconv.FormatInt(chunkMessageItem.SectionID, 10),
+			MessageID:   conv.Int64ToStr(chunkMessageItem.ID),
+			SectionID:   conv.Int64ToStr(chunkMessageItem.SectionID),
 			ContentTime: chunkMessageItem.CreatedAt,
 			ExtraInfo:   buildExt(chunkMessageItem.Ext),
-			ReplyID:     strconv.FormatInt(chunkMessageItem.ReplyID, 10),
+			ReplyID:     conv.Int64ToStr(chunkMessageItem.ReplyID),
 
 			Status:           "",
 			Type:             string(chunkMessageItem.MessageType),
@@ -357,7 +356,7 @@ func buildARSM2Message(chunk *entity.AgentRunResponse, req *run.AgentRunRequest)
 		}
 	} else {
 		chunkMessage.Message.ExtraInfo = buildExt(chunkMessageItem.Ext)
-		chunkMessage.Message.SenderID = ptr.Of(strconv.FormatInt(chunkMessageItem.AgentID, 10))
+		chunkMessage.Message.SenderID = ptr.Of(conv.Int64ToStr(chunkMessageItem.AgentID))
 		chunkMessage.Message.Content = chunkMessageItem.Content
 
 		if chunkMessageItem.MessageType == crossDomainMessage.MessageTypeKnowledge {
@@ -402,14 +401,14 @@ func buildExt(extra map[string]string) *message.ExtraInfo {
 func buildErrMsg(ackChunk *entity.ChunkMessageItem, err *entity.RunError, id int64) []byte {
 	chunkMessage := &run.RunStreamResponse{
 		IsFinish:       ptr.Of(true),
-		ConversationID: strconv.FormatInt(ackChunk.ConversationID, 10),
+		ConversationID: conv.Int64ToStr(ackChunk.ConversationID),
 		Message: &message.ChatMessage{
 			Role:        string(schema.Assistant),
 			ContentType: string(crossDomainMessage.ContentTypeText),
 			Type:        string(crossDomainMessage.MessageTypeAnswer),
-			MessageID:   strconv.FormatInt(id, 10),
-			SectionID:   strconv.FormatInt(ackChunk.SectionID, 10),
-			ReplyID:     strconv.FormatInt(ackChunk.ReplyID, 10),
+			MessageID:   conv.Int64ToStr(id),
+			SectionID:   conv.Int64ToStr(ackChunk.SectionID),
+			ReplyID:     conv.Int64ToStr(ackChunk.ReplyID),
 			Content:     "Something error:" + err.Msg,
 			ExtraInfo:   &message.ExtraInfo{},
 		},

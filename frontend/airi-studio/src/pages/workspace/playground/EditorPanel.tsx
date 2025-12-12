@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Space, Button } from 'tdesign-react';
 import { EditorView } from '@codemirror/view';
 import CodeMirror from "@uiw/react-codemirror"
 import { EditIcon, HelpCircleIcon } from 'tdesign-icons-react';
 import { markdown } from '@codemirror/lang-markdown';
+import type { BotInfo } from '@/services/draftbot';
 
 const { Title } = Typography
 
@@ -52,8 +53,22 @@ const customTheme = EditorView.theme({
     }
 })
 
-const EditorPanel: React.FC = () => {
-  const [value, setValue] = useState(defaultSystemPrompt);
+interface EditorPanelProps {
+    botInfo?: BotInfo | null;
+}
+
+const EditorPanel: React.FC<EditorPanelProps> = ({ botInfo }) => {
+    // 从 botInfo 获取 prompt，如果没有则使用默认值
+    const initialPrompt = botInfo?.PromptInfo?.system_prompt || defaultSystemPrompt;
+    const [value, setValue] = useState(initialPrompt);
+
+    // 当 botInfo 变化时更新 prompt
+    useEffect(() => {
+        if (botInfo?.PromptInfo?.system_prompt) {
+            setValue(botInfo.PromptInfo.system_prompt);
+        }
+    }, [botInfo]);
+
   
   const onChange = React.useCallback((value: string) => {
     setValue(value);

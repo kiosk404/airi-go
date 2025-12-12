@@ -6,33 +6,22 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IPublishConnectorListRequest {
-    space_id: thrift.Int64;
     bot_id: thrift.Int64;
     commit_version?: string;
 }
 export interface IPublishConnectorListRequestArgs {
-    space_id: number | string | thrift.Int64;
     bot_id: number | string | thrift.Int64;
     commit_version?: string;
 }
 export const PublishConnectorListRequestCodec: thrift.IStructCodec<IPublishConnectorListRequestArgs, IPublishConnectorListRequest> = {
     encode(args: IPublishConnectorListRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            space_id: (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id),
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
             commit_version: args.commit_version
         };
         output.writeStructBegin("PublishConnectorListRequest");
-        if (obj.space_id != null) {
-            output.writeFieldBegin("space_id", thrift.TType.I64, 1);
-            output.writeI64((typeof obj.space_id === "number" ? new thrift.Int64(obj.space_id) : typeof obj.space_id === "string" ? thrift.Int64.fromDecimalString(obj.space_id) : obj.space_id));
-            output.writeFieldEnd();
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (obj.bot_id != null) {
-            output.writeFieldBegin("bot_id", thrift.TType.I64, 2);
+            output.writeFieldBegin("bot_id", thrift.TType.I64, 1);
             output.writeI64((typeof obj.bot_id === "number" ? new thrift.Int64(obj.bot_id) : typeof obj.bot_id === "string" ? thrift.Int64.fromDecimalString(obj.bot_id) : obj.bot_id));
             output.writeFieldEnd();
         }
@@ -40,7 +29,7 @@ export const PublishConnectorListRequestCodec: thrift.IStructCodec<IPublishConne
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
         if (obj.commit_version != null) {
-            output.writeFieldBegin("commit_version", thrift.TType.STRING, 3);
+            output.writeFieldBegin("commit_version", thrift.TType.STRING, 2);
             output.writeString(obj.commit_version);
             output.writeFieldEnd();
         }
@@ -62,25 +51,16 @@ export const PublishConnectorListRequestCodec: thrift.IStructCodec<IPublishConne
                 case 1:
                     if (fieldType === thrift.TType.I64) {
                         const value_1: thrift.Int64 = input.readI64();
-                        _args.space_id = value_1;
+                        _args.bot_id = value_1;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 2:
-                    if (fieldType === thrift.TType.I64) {
-                        const value_2: thrift.Int64 = input.readI64();
-                        _args.bot_id = value_2;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
-                case 3:
                     if (fieldType === thrift.TType.STRING) {
-                        const value_3: string = input.readString();
-                        _args.commit_version = value_3;
+                        const value_2: string = input.readString();
+                        _args.commit_version = value_2;
                     }
                     else {
                         input.skip(fieldType);
@@ -93,9 +73,8 @@ export const PublishConnectorListRequestCodec: thrift.IStructCodec<IPublishConne
             input.readFieldEnd();
         }
         input.readStructEnd();
-        if (_args.space_id !== undefined && _args.bot_id !== undefined) {
+        if (_args.bot_id !== undefined) {
             return {
-                space_id: _args.space_id,
                 bot_id: _args.bot_id,
                 commit_version: _args.commit_version
             };
@@ -106,37 +85,26 @@ export const PublishConnectorListRequestCodec: thrift.IStructCodec<IPublishConne
     }
 };
 export class PublishConnectorListRequest extends thrift.StructLike implements IPublishConnectorListRequest {
-    public space_id: thrift.Int64;
     public bot_id: thrift.Int64;
     public commit_version?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        space_id: {
-            'api.js_conv': "true"
-        },
         bot_id: {
             'api.js_conv': "true"
         }
     };
     constructor(args: IPublishConnectorListRequestArgs) {
         super();
-        if (args.space_id != null) {
-            const value_4: thrift.Int64 = (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id);
-            this.space_id = value_4;
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (args.bot_id != null) {
-            const value_5: thrift.Int64 = (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id);
-            this.bot_id = value_5;
+            const value_3: thrift.Int64 = (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id);
+            this.bot_id = value_3;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
         if (args.commit_version != null) {
-            const value_6: string = args.commit_version;
-            this.commit_version = value_6;
+            const value_4: string = args.commit_version;
+            this.commit_version = value_4;
         }
     }
     public static read(input: thrift.TProtocol): PublishConnectorListRequest {

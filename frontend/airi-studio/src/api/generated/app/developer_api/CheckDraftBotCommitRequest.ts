@@ -6,33 +6,22 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ICheckDraftBotCommitRequest {
-    space_id: string;
     bot_id: string;
     commit_version?: string;
 }
 export interface ICheckDraftBotCommitRequestArgs {
-    space_id: string;
     bot_id: string;
     commit_version?: string;
 }
 export const CheckDraftBotCommitRequestCodec: thrift.IStructCodec<ICheckDraftBotCommitRequestArgs, ICheckDraftBotCommitRequest> = {
     encode(args: ICheckDraftBotCommitRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            space_id: args.space_id,
             bot_id: args.bot_id,
             commit_version: args.commit_version
         };
         output.writeStructBegin("CheckDraftBotCommitRequest");
-        if (obj.space_id != null) {
-            output.writeFieldBegin("space_id", thrift.TType.STRING, 1);
-            output.writeString(obj.space_id);
-            output.writeFieldEnd();
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (obj.bot_id != null) {
-            output.writeFieldBegin("bot_id", thrift.TType.STRING, 2);
+            output.writeFieldBegin("bot_id", thrift.TType.STRING, 1);
             output.writeString(obj.bot_id);
             output.writeFieldEnd();
         }
@@ -40,7 +29,7 @@ export const CheckDraftBotCommitRequestCodec: thrift.IStructCodec<ICheckDraftBot
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
         if (obj.commit_version != null) {
-            output.writeFieldBegin("commit_version", thrift.TType.STRING, 3);
+            output.writeFieldBegin("commit_version", thrift.TType.STRING, 2);
             output.writeString(obj.commit_version);
             output.writeFieldEnd();
         }
@@ -62,7 +51,7 @@ export const CheckDraftBotCommitRequestCodec: thrift.IStructCodec<ICheckDraftBot
                 case 1:
                     if (fieldType === thrift.TType.STRING) {
                         const value_1: string = input.readString();
-                        _args.space_id = value_1;
+                        _args.bot_id = value_1;
                     }
                     else {
                         input.skip(fieldType);
@@ -71,16 +60,7 @@ export const CheckDraftBotCommitRequestCodec: thrift.IStructCodec<ICheckDraftBot
                 case 2:
                     if (fieldType === thrift.TType.STRING) {
                         const value_2: string = input.readString();
-                        _args.bot_id = value_2;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
-                case 3:
-                    if (fieldType === thrift.TType.STRING) {
-                        const value_3: string = input.readString();
-                        _args.commit_version = value_3;
+                        _args.commit_version = value_2;
                     }
                     else {
                         input.skip(fieldType);
@@ -93,9 +73,8 @@ export const CheckDraftBotCommitRequestCodec: thrift.IStructCodec<ICheckDraftBot
             input.readFieldEnd();
         }
         input.readStructEnd();
-        if (_args.space_id !== undefined && _args.bot_id !== undefined) {
+        if (_args.bot_id !== undefined) {
             return {
-                space_id: _args.space_id,
                 bot_id: _args.bot_id,
                 commit_version: _args.commit_version
             };
@@ -106,30 +85,22 @@ export const CheckDraftBotCommitRequestCodec: thrift.IStructCodec<ICheckDraftBot
     }
 };
 export class CheckDraftBotCommitRequest extends thrift.StructLike implements ICheckDraftBotCommitRequest {
-    public space_id: string;
     public bot_id: string;
     public commit_version?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICheckDraftBotCommitRequestArgs) {
         super();
-        if (args.space_id != null) {
-            const value_4: string = args.space_id;
-            this.space_id = value_4;
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (args.bot_id != null) {
-            const value_5: string = args.bot_id;
-            this.bot_id = value_5;
+            const value_3: string = args.bot_id;
+            this.bot_id = value_3;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
         if (args.commit_version != null) {
-            const value_6: string = args.commit_version;
-            this.commit_version = value_6;
+            const value_4: string = args.commit_version;
+            this.commit_version = value_4;
         }
     }
     public static read(input: thrift.TProtocol): CheckDraftBotCommitRequest {

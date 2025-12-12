@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 
@@ -18,6 +17,7 @@ import (
 	msgEntity "github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/entity"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/json"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/types/consts"
 )
@@ -203,9 +203,9 @@ func (mh *MesssageEventHanlder) handlerAnswer(ctx context.Context, msg *entity.C
 		msg.Ext = map[string]string{}
 	}
 	if usage != nil {
-		msg.Ext[string(msgEntity.MessageExtKeyToken)] = strconv.FormatInt(usage.TotalCount, 10)
-		msg.Ext[string(msgEntity.MessageExtKeyInputTokens)] = strconv.FormatInt(usage.InputTokens, 10)
-		msg.Ext[string(msgEntity.MessageExtKeyOutputTokens)] = strconv.FormatInt(usage.OutputTokens, 10)
+		msg.Ext[string(msgEntity.MessageExtKeyToken)] = conv.Int64ToStr(usage.TotalCount)
+		msg.Ext[string(msgEntity.MessageExtKeyInputTokens)] = conv.Int64ToStr(usage.InputTokens)
+		msg.Ext[string(msgEntity.MessageExtKeyOutputTokens)] = conv.Int64ToStr(usage.OutputTokens)
 
 		rtDependence.Usage = &agentrun.Usage{
 			LlmPromptTokens:     usage.InputTokens,
@@ -276,9 +276,9 @@ func (mh *MesssageEventHanlder) handlerWfUsage(ctx context.Context, msg *entity.
 		msg.Ext = map[string]string{}
 	}
 	if usage != nil {
-		msg.Ext[string(msgEntity.MessageExtKeyToken)] = strconv.FormatInt(usage.TotalCount, 10)
-		msg.Ext[string(msgEntity.MessageExtKeyInputTokens)] = strconv.FormatInt(usage.InputTokens, 10)
-		msg.Ext[string(msgEntity.MessageExtKeyOutputTokens)] = strconv.FormatInt(usage.OutputTokens, 10)
+		msg.Ext[string(msgEntity.MessageExtKeyToken)] = conv.Int64ToStr(usage.TotalCount)
+		msg.Ext[string(msgEntity.MessageExtKeyInputTokens)] = conv.Int64ToStr(usage.InputTokens)
+		msg.Ext[string(msgEntity.MessageExtKeyOutputTokens)] = conv.Int64ToStr(usage.OutputTokens)
 	}
 
 	_, err := crossmessage.DefaultSVC().Edit(ctx, &msgEntity.Message{

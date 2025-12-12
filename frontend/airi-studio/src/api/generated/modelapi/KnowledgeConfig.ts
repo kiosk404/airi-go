@@ -14,14 +14,14 @@ export interface IKnowledgeConfig {
     rerank_config?: RerankConfig.IRerankConfig;
     ocr_config?: OCRConfig.IOCRConfig;
     parser_config?: ParserConfig.IParserConfig;
-    builtin_model_id?: thrift.Int64;
+    builtin_model_id?: string;
 }
 export interface IKnowledgeConfigArgs {
     embedding_config?: EmbeddingConfig.IEmbeddingConfigArgs;
     rerank_config?: RerankConfig.IRerankConfigArgs;
     ocr_config?: OCRConfig.IOCRConfigArgs;
     parser_config?: ParserConfig.IParserConfigArgs;
-    builtin_model_id?: number | string | thrift.Int64;
+    builtin_model_id?: string;
 }
 export const KnowledgeConfigCodec: thrift.IStructCodec<IKnowledgeConfigArgs, IKnowledgeConfig> = {
     encode(args: IKnowledgeConfigArgs, output: thrift.TProtocol): void {
@@ -30,7 +30,7 @@ export const KnowledgeConfigCodec: thrift.IStructCodec<IKnowledgeConfigArgs, IKn
             rerank_config: args.rerank_config,
             ocr_config: args.ocr_config,
             parser_config: args.parser_config,
-            builtin_model_id: (typeof args.builtin_model_id === "number" ? new thrift.Int64(args.builtin_model_id) : typeof args.builtin_model_id === "string" ? thrift.Int64.fromDecimalString(args.builtin_model_id) : args.builtin_model_id)
+            builtin_model_id: args.builtin_model_id
         };
         output.writeStructBegin("KnowledgeConfig");
         if (obj.embedding_config != null) {
@@ -54,8 +54,8 @@ export const KnowledgeConfigCodec: thrift.IStructCodec<IKnowledgeConfigArgs, IKn
             output.writeFieldEnd();
         }
         if (obj.builtin_model_id != null) {
-            output.writeFieldBegin("builtin_model_id", thrift.TType.I64, 5);
-            output.writeI64((typeof obj.builtin_model_id === "number" ? new thrift.Int64(obj.builtin_model_id) : typeof obj.builtin_model_id === "string" ? thrift.Int64.fromDecimalString(obj.builtin_model_id) : obj.builtin_model_id));
+            output.writeFieldBegin("builtin_model_id", thrift.TType.STRING, 5);
+            output.writeString(obj.builtin_model_id);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -110,8 +110,8 @@ export const KnowledgeConfigCodec: thrift.IStructCodec<IKnowledgeConfigArgs, IKn
                     }
                     break;
                 case 5:
-                    if (fieldType === thrift.TType.I64) {
-                        const value_5: thrift.Int64 = input.readI64();
+                    if (fieldType === thrift.TType.STRING) {
+                        const value_5: string = input.readString();
                         _args.builtin_model_id = value_5;
                     }
                     else {
@@ -139,7 +139,7 @@ export class KnowledgeConfig extends thrift.StructLike implements IKnowledgeConf
     public rerank_config?: RerankConfig.IRerankConfig;
     public ocr_config?: OCRConfig.IOCRConfig;
     public parser_config?: ParserConfig.IParserConfig;
-    public builtin_model_id?: thrift.Int64;
+    public builtin_model_id?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IKnowledgeConfigArgs = {}) {
@@ -161,7 +161,7 @@ export class KnowledgeConfig extends thrift.StructLike implements IKnowledgeConf
             this.parser_config = value_9;
         }
         if (args.builtin_model_id != null) {
-            const value_10: thrift.Int64 = (typeof args.builtin_model_id === "number" ? new thrift.Int64(args.builtin_model_id) : typeof args.builtin_model_id === "string" ? thrift.Int64.fromDecimalString(args.builtin_model_id) : args.builtin_model_id);
+            const value_10: string = args.builtin_model_id;
             this.builtin_model_id = value_10;
         }
     }

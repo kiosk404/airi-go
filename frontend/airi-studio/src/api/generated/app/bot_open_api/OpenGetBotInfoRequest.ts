@@ -122,6 +122,7 @@ export class OpenGetBotInfoRequest extends thrift.StructLike implements IOpenGet
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
             'api.js_conv': "true",
+            'go.tag': "json:\"bot_id,string\"",
             'agw.js_conv': "str",
             'agw.cli_conv': "str",
             'api.path': "bot_id"

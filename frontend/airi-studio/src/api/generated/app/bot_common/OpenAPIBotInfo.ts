@@ -460,7 +460,8 @@ export class OpenAPIBotInfo extends thrift.StructLike implements IOpenAPIBotInfo
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
-            'api.js_conv': "true"
+            'api.js_conv': "true",
+            'go.tag': "json:\"bot_id,string\""
         }
     };
     constructor(args: IOpenAPIBotInfoArgs = {}) {

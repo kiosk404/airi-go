@@ -18,6 +18,7 @@ const (
 
 	ErrUploadHostNotExistCode       = 104000009
 	ErrUploadHostSchemaNotExistCode = 104000010
+	ErrKnowledgePermissionCode      = 104000011
 
 	ErrIDGenError = 104000011
 )

@@ -13,7 +13,6 @@ import * as BotTagInfo from "./BotTagInfo";
 import * as SubmitBotMarketConfig from "./SubmitBotMarketConfig";
 import * as PublishType from "./PublishType";
 export interface IPublishDraftBotRequest {
-    space_id: thrift.Int64;
     bot_id: thrift.Int64;
     work_info?: WorkInfo.IWorkInfo;
     connector_list?: Map<string, Array<Connector.IConnector>>;
@@ -30,7 +29,6 @@ export interface IPublishDraftBotRequest {
     history_info?: string;
 }
 export interface IPublishDraftBotRequestArgs {
-    space_id: number | string | thrift.Int64;
     bot_id: number | string | thrift.Int64;
     work_info?: WorkInfo.IWorkInfoArgs;
     connector_list?: Map<string, Array<Connector.IConnectorArgs>>;
@@ -49,7 +47,6 @@ export interface IPublishDraftBotRequestArgs {
 export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRequestArgs, IPublishDraftBotRequest> = {
     encode(args: IPublishDraftBotRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            space_id: (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id),
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
             work_info: args.work_info,
             connector_list: args.connector_list,
@@ -66,14 +63,6 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
             history_info: args.history_info
         };
         output.writeStructBegin("PublishDraftBotRequest");
-        if (obj.space_id != null) {
-            output.writeFieldBegin("space_id", thrift.TType.I64, 1);
-            output.writeI64((typeof obj.space_id === "number" ? new thrift.Int64(obj.space_id) : typeof obj.space_id === "string" ? thrift.Int64.fromDecimalString(obj.space_id) : obj.space_id));
-            output.writeFieldEnd();
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (obj.bot_id != null) {
             output.writeFieldBegin("bot_id", thrift.TType.I64, 2);
             output.writeI64((typeof obj.bot_id === "number" ? new thrift.Int64(obj.bot_id) : typeof obj.bot_id === "string" ? thrift.Int64.fromDecimalString(obj.bot_id) : obj.bot_id));
@@ -189,19 +178,10 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                 break;
             }
             switch (fieldId) {
-                case 1:
-                    if (fieldType === thrift.TType.I64) {
-                        const value_7: thrift.Int64 = input.readI64();
-                        _args.space_id = value_7;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
                 case 2:
                     if (fieldType === thrift.TType.I64) {
-                        const value_8: thrift.Int64 = input.readI64();
-                        _args.bot_id = value_8;
+                        const value_7: thrift.Int64 = input.readI64();
+                        _args.bot_id = value_7;
                     }
                     else {
                         input.skip(fieldType);
@@ -209,8 +189,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 3:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_9: WorkInfo.IWorkInfo = WorkInfo.WorkInfoCodec.decode(input);
-                        _args.work_info = value_9;
+                        const value_8: WorkInfo.IWorkInfo = WorkInfo.WorkInfoCodec.decode(input);
+                        _args.work_info = value_8;
                     }
                     else {
                         input.skip(fieldType);
@@ -218,23 +198,23 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 4:
                     if (fieldType === thrift.TType.MAP) {
-                        const value_10: Map<string, Array<Connector.IConnector>> = new Map<string, Array<Connector.IConnector>>();
+                        const value_9: Map<string, Array<Connector.IConnector>> = new Map<string, Array<Connector.IConnector>>();
                         const metadata_1: thrift.IThriftMap = input.readMapBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
                             const key_4: string = input.readString();
-                            const value_11: Array<Connector.IConnector> = new Array<Connector.IConnector>();
+                            const value_10: Array<Connector.IConnector> = new Array<Connector.IConnector>();
                             const metadata_2: thrift.IThriftList = input.readListBegin();
                             const size_2: number = metadata_2.size;
                             for (let i_2: number = 0; i_2 < size_2; i_2++) {
-                                const value_12: Connector.IConnector = Connector.ConnectorCodec.decode(input);
-                                value_11.push(value_12);
+                                const value_11: Connector.IConnector = Connector.ConnectorCodec.decode(input);
+                                value_10.push(value_11);
                             }
                             input.readListEnd();
-                            value_10.set(key_4, value_11);
+                            value_9.set(key_4, value_10);
                         }
                         input.readMapEnd();
-                        _args.connector_list = value_10;
+                        _args.connector_list = value_9;
                     }
                     else {
                         input.skip(fieldType);
@@ -242,24 +222,24 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 5:
                     if (fieldType === thrift.TType.MAP) {
-                        const value_13: Map<string, Map<string, string>> = new Map<string, Map<string, string>>();
+                        const value_12: Map<string, Map<string, string>> = new Map<string, Map<string, string>>();
                         const metadata_3: thrift.IThriftMap = input.readMapBegin();
                         const size_3: number = metadata_3.size;
                         for (let i_3: number = 0; i_3 < size_3; i_3++) {
                             const key_5: string = input.readString();
-                            const value_14: Map<string, string> = new Map<string, string>();
+                            const value_13: Map<string, string> = new Map<string, string>();
                             const metadata_4: thrift.IThriftMap = input.readMapBegin();
                             const size_4: number = metadata_4.size;
                             for (let i_4: number = 0; i_4 < size_4; i_4++) {
                                 const key_6: string = input.readString();
-                                const value_15: string = input.readString();
-                                value_14.set(key_6, value_15);
+                                const value_14: string = input.readString();
+                                value_13.set(key_6, value_14);
                             }
                             input.readMapEnd();
-                            value_13.set(key_5, value_14);
+                            value_12.set(key_5, value_13);
                         }
                         input.readMapEnd();
-                        _args.connectors = value_13;
+                        _args.connectors = value_12;
                     }
                     else {
                         input.skip(fieldType);
@@ -267,8 +247,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 6:
                     if (fieldType === thrift.TType.I32) {
-                        const value_16: BotMode.BotMode = input.readI32();
-                        _args.botMode = value_16;
+                        const value_15: BotMode.BotMode = input.readI32();
+                        _args.botMode = value_15;
                     }
                     else {
                         input.skip(fieldType);
@@ -276,15 +256,15 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 7:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_17: Array<AgentInfo.IAgentInfo> = new Array<AgentInfo.IAgentInfo>();
+                        const value_16: Array<AgentInfo.IAgentInfo> = new Array<AgentInfo.IAgentInfo>();
                         const metadata_5: thrift.IThriftList = input.readListBegin();
                         const size_5: number = metadata_5.size;
                         for (let i_5: number = 0; i_5 < size_5; i_5++) {
-                            const value_18: AgentInfo.IAgentInfo = AgentInfo.AgentInfoCodec.decode(input);
-                            value_17.push(value_18);
+                            const value_17: AgentInfo.IAgentInfo = AgentInfo.AgentInfoCodec.decode(input);
+                            value_16.push(value_17);
                         }
                         input.readListEnd();
-                        _args.agents = value_17;
+                        _args.agents = value_16;
                     }
                     else {
                         input.skip(fieldType);
@@ -292,8 +272,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 8:
                     if (fieldType === thrift.TType.STRING) {
-                        const value_19: string = input.readString();
-                        _args.canvas_data = value_19;
+                        const value_18: string = input.readString();
+                        _args.canvas_data = value_18;
                     }
                     else {
                         input.skip(fieldType);
@@ -301,15 +281,15 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 9:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_20: Array<BotTagInfo.IBotTagInfo> = new Array<BotTagInfo.IBotTagInfo>();
+                        const value_19: Array<BotTagInfo.IBotTagInfo> = new Array<BotTagInfo.IBotTagInfo>();
                         const metadata_6: thrift.IThriftList = input.readListBegin();
                         const size_6: number = metadata_6.size;
                         for (let i_6: number = 0; i_6 < size_6; i_6++) {
-                            const value_21: BotTagInfo.IBotTagInfo = BotTagInfo.BotTagInfoCodec.decode(input);
-                            value_20.push(value_21);
+                            const value_20: BotTagInfo.IBotTagInfo = BotTagInfo.BotTagInfoCodec.decode(input);
+                            value_19.push(value_20);
                         }
                         input.readListEnd();
-                        _args.bot_tag_info = value_20;
+                        _args.bot_tag_info = value_19;
                     }
                     else {
                         input.skip(fieldType);
@@ -317,8 +297,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 10:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_22: SubmitBotMarketConfig.ISubmitBotMarketConfig = SubmitBotMarketConfig.SubmitBotMarketConfigCodec.decode(input);
-                        _args.submit_bot_market_config = value_22;
+                        const value_21: SubmitBotMarketConfig.ISubmitBotMarketConfig = SubmitBotMarketConfig.SubmitBotMarketConfigCodec.decode(input);
+                        _args.submit_bot_market_config = value_21;
                     }
                     else {
                         input.skip(fieldType);
@@ -326,8 +306,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 11:
                     if (fieldType === thrift.TType.STRING) {
-                        const value_23: string = input.readString();
-                        _args.publish_id = value_23;
+                        const value_22: string = input.readString();
+                        _args.publish_id = value_22;
                     }
                     else {
                         input.skip(fieldType);
@@ -335,8 +315,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 12:
                     if (fieldType === thrift.TType.STRING) {
-                        const value_24: string = input.readString();
-                        _args.commit_version = value_24;
+                        const value_23: string = input.readString();
+                        _args.commit_version = value_23;
                     }
                     else {
                         input.skip(fieldType);
@@ -344,8 +324,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 13:
                     if (fieldType === thrift.TType.I32) {
-                        const value_25: PublishType.PublishType = input.readI32();
-                        _args.publish_type = value_25;
+                        const value_24: PublishType.PublishType = input.readI32();
+                        _args.publish_type = value_24;
                     }
                     else {
                         input.skip(fieldType);
@@ -353,8 +333,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 14:
                     if (fieldType === thrift.TType.STRING) {
-                        const value_26: string = input.readString();
-                        _args.pre_publish_ext = value_26;
+                        const value_25: string = input.readString();
+                        _args.pre_publish_ext = value_25;
                     }
                     else {
                         input.skip(fieldType);
@@ -362,8 +342,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                     break;
                 case 15:
                     if (fieldType === thrift.TType.STRING) {
-                        const value_27: string = input.readString();
-                        _args.history_info = value_27;
+                        const value_26: string = input.readString();
+                        _args.history_info = value_26;
                     }
                     else {
                         input.skip(fieldType);
@@ -376,9 +356,8 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
             input.readFieldEnd();
         }
         input.readStructEnd();
-        if (_args.space_id !== undefined && _args.bot_id !== undefined) {
+        if (_args.bot_id !== undefined) {
             return {
-                space_id: _args.space_id,
                 bot_id: _args.bot_id,
                 work_info: _args.work_info,
                 connector_list: _args.connector_list,
@@ -401,7 +380,6 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
     }
 };
 export class PublishDraftBotRequest extends thrift.StructLike implements IPublishDraftBotRequest {
-    public space_id: thrift.Int64;
     public bot_id: thrift.Int64;
     public work_info?: WorkInfo.IWorkInfo;
     public connector_list?: Map<string, Array<Connector.IConnector>>;
@@ -418,10 +396,6 @@ export class PublishDraftBotRequest extends thrift.StructLike implements IPublis
     public history_info?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        space_id: {
-            'agw.js_conv': "str",
-            'api.js_conv': "true"
-        },
         bot_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true"
@@ -429,98 +403,91 @@ export class PublishDraftBotRequest extends thrift.StructLike implements IPublis
     };
     constructor(args: IPublishDraftBotRequestArgs) {
         super();
-        if (args.space_id != null) {
-            const value_28: thrift.Int64 = (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id);
-            this.space_id = value_28;
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (args.bot_id != null) {
-            const value_29: thrift.Int64 = (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id);
-            this.bot_id = value_29;
+            const value_27: thrift.Int64 = (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id);
+            this.bot_id = value_27;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
         if (args.work_info != null) {
-            const value_30: WorkInfo.IWorkInfo = new WorkInfo.WorkInfo(args.work_info);
-            this.work_info = value_30;
+            const value_28: WorkInfo.IWorkInfo = new WorkInfo.WorkInfo(args.work_info);
+            this.work_info = value_28;
         }
         if (args.connector_list != null) {
-            const value_31: Map<string, Array<Connector.IConnector>> = new Map<string, Array<Connector.IConnector>>();
-            args.connector_list.forEach((value_43: Array<Connector.IConnectorArgs>, key_7: string): void => {
-                const value_44: Array<Connector.IConnector> = new Array<Connector.IConnector>();
-                value_43.forEach((value_45: Connector.IConnectorArgs): void => {
-                    const value_46: Connector.IConnector = new Connector.Connector(value_45);
-                    value_44.push(value_46);
+            const value_29: Map<string, Array<Connector.IConnector>> = new Map<string, Array<Connector.IConnector>>();
+            args.connector_list.forEach((value_41: Array<Connector.IConnectorArgs>, key_7: string): void => {
+                const value_42: Array<Connector.IConnector> = new Array<Connector.IConnector>();
+                value_41.forEach((value_43: Connector.IConnectorArgs): void => {
+                    const value_44: Connector.IConnector = new Connector.Connector(value_43);
+                    value_42.push(value_44);
                 });
                 const key_8: string = key_7;
-                value_31.set(key_8, value_44);
+                value_29.set(key_8, value_42);
             });
-            this.connector_list = value_31;
+            this.connector_list = value_29;
         }
         if (args.connectors != null) {
-            const value_32: Map<string, Map<string, string>> = new Map<string, Map<string, string>>();
-            args.connectors.forEach((value_47: Map<string, string>, key_9: string): void => {
-                const value_48: Map<string, string> = new Map<string, string>();
-                value_47.forEach((value_49: string, key_11: string): void => {
-                    const value_50: string = value_49;
+            const value_30: Map<string, Map<string, string>> = new Map<string, Map<string, string>>();
+            args.connectors.forEach((value_45: Map<string, string>, key_9: string): void => {
+                const value_46: Map<string, string> = new Map<string, string>();
+                value_45.forEach((value_47: string, key_11: string): void => {
+                    const value_48: string = value_47;
                     const key_12: string = key_11;
-                    value_48.set(key_12, value_50);
+                    value_46.set(key_12, value_48);
                 });
                 const key_10: string = key_9;
-                value_32.set(key_10, value_48);
+                value_30.set(key_10, value_46);
             });
-            this.connectors = value_32;
+            this.connectors = value_30;
         }
         if (args.botMode != null) {
-            const value_33: BotMode.BotMode = args.botMode;
-            this.botMode = value_33;
+            const value_31: BotMode.BotMode = args.botMode;
+            this.botMode = value_31;
         }
         if (args.agents != null) {
-            const value_34: Array<AgentInfo.IAgentInfo> = new Array<AgentInfo.IAgentInfo>();
-            args.agents.forEach((value_51: AgentInfo.IAgentInfoArgs): void => {
-                const value_52: AgentInfo.IAgentInfo = new AgentInfo.AgentInfo(value_51);
-                value_34.push(value_52);
+            const value_32: Array<AgentInfo.IAgentInfo> = new Array<AgentInfo.IAgentInfo>();
+            args.agents.forEach((value_49: AgentInfo.IAgentInfoArgs): void => {
+                const value_50: AgentInfo.IAgentInfo = new AgentInfo.AgentInfo(value_49);
+                value_32.push(value_50);
             });
-            this.agents = value_34;
+            this.agents = value_32;
         }
         if (args.canvas_data != null) {
-            const value_35: string = args.canvas_data;
-            this.canvas_data = value_35;
+            const value_33: string = args.canvas_data;
+            this.canvas_data = value_33;
         }
         if (args.bot_tag_info != null) {
-            const value_36: Array<BotTagInfo.IBotTagInfo> = new Array<BotTagInfo.IBotTagInfo>();
-            args.bot_tag_info.forEach((value_53: BotTagInfo.IBotTagInfoArgs): void => {
-                const value_54: BotTagInfo.IBotTagInfo = new BotTagInfo.BotTagInfo(value_53);
-                value_36.push(value_54);
+            const value_34: Array<BotTagInfo.IBotTagInfo> = new Array<BotTagInfo.IBotTagInfo>();
+            args.bot_tag_info.forEach((value_51: BotTagInfo.IBotTagInfoArgs): void => {
+                const value_52: BotTagInfo.IBotTagInfo = new BotTagInfo.BotTagInfo(value_51);
+                value_34.push(value_52);
             });
-            this.bot_tag_info = value_36;
+            this.bot_tag_info = value_34;
         }
         if (args.submit_bot_market_config != null) {
-            const value_37: SubmitBotMarketConfig.ISubmitBotMarketConfig = new SubmitBotMarketConfig.SubmitBotMarketConfig(args.submit_bot_market_config);
-            this.submit_bot_market_config = value_37;
+            const value_35: SubmitBotMarketConfig.ISubmitBotMarketConfig = new SubmitBotMarketConfig.SubmitBotMarketConfig(args.submit_bot_market_config);
+            this.submit_bot_market_config = value_35;
         }
         if (args.publish_id != null) {
-            const value_38: string = args.publish_id;
-            this.publish_id = value_38;
+            const value_36: string = args.publish_id;
+            this.publish_id = value_36;
         }
         if (args.commit_version != null) {
-            const value_39: string = args.commit_version;
-            this.commit_version = value_39;
+            const value_37: string = args.commit_version;
+            this.commit_version = value_37;
         }
         if (args.publish_type != null) {
-            const value_40: PublishType.PublishType = args.publish_type;
-            this.publish_type = value_40;
+            const value_38: PublishType.PublishType = args.publish_type;
+            this.publish_type = value_38;
         }
         if (args.pre_publish_ext != null) {
-            const value_41: string = args.pre_publish_ext;
-            this.pre_publish_ext = value_41;
+            const value_39: string = args.pre_publish_ext;
+            this.pre_publish_ext = value_39;
         }
         if (args.history_info != null) {
-            const value_42: string = args.history_info;
-            this.history_info = value_42;
+            const value_40: string = args.history_info;
+            this.history_info = value_40;
         }
     }
     public static read(input: thrift.TProtocol): PublishDraftBotRequest {

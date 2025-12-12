@@ -13,6 +13,7 @@ import (
 
 	"github.com/dgraph-io/ristretto/v2"
 	"github.com/kiosk404/airi-go/backend/infra/contract/cache"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 )
 
 var Nil error = fmt.Errorf("ristretto: nil")
@@ -345,7 +346,7 @@ func (c *RistrettoClient) IncrBy(ctx context.Context, key string, increment int6
 	}
 
 	newValue := current + increment
-	newValueStr := strconv.FormatInt(newValue, 10)
+	newValueStr := conv.Int64ToStr(newValue)
 
 	// 创建新的缓存值
 	cacheValue := &CacheValue{

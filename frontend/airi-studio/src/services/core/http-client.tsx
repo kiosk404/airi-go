@@ -48,19 +48,30 @@ class HttpClient {
           const response = await fetch(url, config);
 
           if (!response.ok) {
-              const errorText = await response.text();
+              let errorMessage = `Unknown Error: ${response.status}`;
+              try {
+                  const errorData = await response.json();
+                  errorMessage = errorData.Msg || errorData.msg || errorData.message || errorMessage;
+              } catch {
+                  // 如果无法解析 JSON，尝试使用文本
+                  const errorText = await response.text();
+                  errorMessage = errorText || errorMessage;
+              }
               throw new ApiError(
                   response.status,
-                  errorText || `Unknown Error: ${response.status}`,
+                  errorMessage,
                   {url, status: response.status}
               );
           }
 
           const data = await response.json();
 
-          // 检查业务错误码
-          if (data.code !== undefined && data.code !== 0) {
-              throw new ApiError(data.code, data.message, data.details);
+          // 检查业务错误码（支持 Code 和 code 两种格式）
+          const errorCode = data.Code !== undefined ? data.Code : data.code;
+          const errorMessage = data.Msg !== undefined ? data.Msg : data.message;
+
+          if (errorCode !== undefined && errorCode !== 0) {
+              throw new ApiError(errorCode, errorMessage, data.details);
           }
 
           return data

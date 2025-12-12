@@ -15,7 +15,7 @@ BACKEND_VERSION_PACKAGE=airi-go/backend/pkg/version
 # 定义thriftgo的通用参数
 THRIFT_OUT_GO := ./backend/api/model
 THRIFT_PACKAGE_PREFIX_GO := github.com/kiosk404/airi-go/backend/api/model
-THRIFT_OUT_TS := ./frontend/src/airi-studio/api/generated
+THRIFT_OUT_TS := ./frontend/airi-studio/api/generated
 THRIFT_IDL_DIR := ./idl
 
 # ==============================================================================
@@ -76,3 +76,6 @@ idl-ts:
 	@mkdir -p $(THRIFT_OUT_TS)
 	@cd frontend/airi-studio && pnpm run codegen && cd -
 
+## idl: Generate Go and TypeScript code from Thrift IDL files in ./idl directory.
+.PHONY: idl
+idl: idl-go idl-ts

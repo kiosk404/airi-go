@@ -40,7 +40,7 @@ export const methodAnnotations: thrift.IMethodAnnotations = {
     },
     WebAccountLoginByPassword: {
         annotations: {
-            'api.post': "/api/foundation/v1/users/login_by_password"
+            'api.post': "/api/foundation/v1/users/login"
         },
         fieldAnnotations: {}
     },

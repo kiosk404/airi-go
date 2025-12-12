@@ -412,7 +412,7 @@ func (t ToolInfo) ToPluginParameters() ([]*common.PluginParameter, error) {
 		params = append(params, &common.PluginParameter{
 			Name:          paramVal.Name,
 			Desc:          paramVal.Description,
-			Required:      paramVal.Required,
+			IsRequired:    paramVal.Required,
 			Type:          schemaVal.Type,
 			SubType:       arrayItemType,
 			Format:        assistType,
@@ -487,7 +487,7 @@ func toPluginParameter(paramMeta paramMetaInfo, sc *openapi3.Schema) (*common.Pl
 		Name:          paramMeta.name,
 		Type:          sc.Type,
 		Desc:          paramMeta.desc,
-		Required:      paramMeta.required,
+		IsRequired:    paramMeta.required,
 		Format:        assistType,
 		SubParameters: []*common.PluginParameter{},
 	}

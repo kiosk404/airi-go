@@ -7,6 +7,7 @@ export * from './base';
 export * from './component';
 export * from './constants';
 export * from './conversation';
+export * from './file';
 export * from './foundation';
 export * from './llm';
 export * from './modelapi';

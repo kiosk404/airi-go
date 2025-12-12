@@ -811,6 +811,7 @@ export class BotInfo extends thrift.StructLike implements IBotInfo {
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         BotId: {
             'agw.js_conv': "str",
+            'go.tag': "json:\"bot_id,string\"",
             'api.js_conv': "true",
             'api.body': "bot_id"
         },
