@@ -190,32 +190,25 @@ export async function createModel(params: CreateModelParams): Promise<number> {
     };
 
     // 添加提供商特殊配置
-    switch (params.modelClass) {
-        case ModelClass.GPT:
-            connection.openai = {
-                by_azure: params.openai.byAzure,
-                api_version: params.openai.apiVersion,
-            };
-            break;
-        case ModelClass.Gemini:
-            connection.gemini = {
-                backend: params.gemini.backend,
-                project: params.gemini.project,
-                location: params.gemini.location,
-            };
-            break;
-        case ModelClass.Ollama:
-            connection.ollama = {};
-            break;
-        case ModelClass.Claude:
-            connection.claude = {};
-            break;
-        case ModelClass.DeepSeek:
-            connection.deepseek = {};
-            break;
-        case ModelClass.QWen:
-            connection.qwen = {};
-            break;
+    if (params.modelClass === ModelClass.GPT && params.openai) {
+        connection.openai = {
+            by_azure: params.openai.byAzure,
+            api_version: params.openai.apiVersion,
+        };
+    } else if (params.modelClass === ModelClass.Gemini && params.gemini) {
+        connection.gemini = {
+            backend: params.gemini.backend,
+            project: params.gemini.project,
+            location: params.gemini.location,
+        };
+    } else if (params.modelClass === ModelClass.Ollama && params.ollama) {
+        connection.ollama = {};
+    } else if (params.modelClass === ModelClass.Claude && params.claude) {
+        connection.claude = {};
+    } else if (params.modelClass === ModelClass.DeepSeek && params.deepseek) {
+        connection.deepseek = {};
+    } else if (params.modelClass === ModelClass.QWen && params.qwen) {
+        connection.qwen = {};
     }
 
     const resp = await apiClient.createModel({
