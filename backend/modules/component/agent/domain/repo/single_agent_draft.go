@@ -25,4 +25,5 @@ type SingleAgentDraftRepo interface {
 	Save(ctx context.Context, agentInfo *entity.SingleAgent) (err error)
 	GetDisplayInfo(ctx context.Context, userID, agentID int64) (*entity.AgentDraftDisplayInfo, error)
 	UpdateDisplayInfo(ctx context.Context, userID int64, e *entity.AgentDraftDisplayInfo) error
+	ListByCreator(ctx context.Context, creatorID int64, page, pageSize int) ([]*entity.SingleAgent, int64, error)
 }

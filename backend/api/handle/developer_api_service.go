@@ -1,14 +1,35 @@
 package handle
 
 import (
+	"crypto/sha256"
+	"encoding/base64"
+	"fmt"
+	"io"
+	"math/rand"
 	"net/http"
+	"path"
+	"strconv"
+	"strings"
+	"time"
 	"unicode/utf8"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kiosk404/airi-go/backend/api/model/app/developer_api"
 	"github.com/kiosk404/airi-go/backend/api/model/playground"
+	"github.com/kiosk404/airi-go/backend/application/ctxutil"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/application/singleagent"
+	uploadapp "github.com/kiosk404/airi-go/backend/modules/data/upload/application"
+	"github.com/kiosk404/airi-go/backend/modules/data/upload/pkg/errno"
+	modelmgr "github.com/kiosk404/airi-go/backend/modules/llm/application"
+	"github.com/kiosk404/airi-go/backend/pkg/errorx"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 )
+
+// CheckDraftBotCommit .
+// @router /api/draftbot/commit_check [POST]
+func CheckDraftBotCommit(c *gin.Context) {
+
+}
 
 // DraftBotCreate .
 // @router /api/draftbot/create [POST]
@@ -52,6 +73,72 @@ func DraftBotCreate(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
+// DeleteBotDelete .
+// @router /api/draftbot/delete [POST]
+func DeleteBotDelete(c *gin.Context) {
+
+}
+
+// GetDraftBotDisplayInfo .
+// @router /api/draftbot/get_display_info [POST]
+func GetDraftBotDisplayInfo(c *gin.Context) {
+
+}
+
+// UpdateDraftBotDisplayInfo .
+// @router /api/draftbot/update_display_info [POST]
+func UpdateDraftBotDisplayInfo(c *gin.Context) {
+
+}
+
+// DraftBotList .
+// @router /api/draftbot/list [POST]
+func DraftBotList(c *gin.Context) {
+	var err error
+	ctx := c.Request.Context()
+
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	pageSize, _ := strconv.Atoi(c.DefaultQuery("page_size", "10"))
+
+	agents, total, err := singleagent.SingleAgentSVC.ListAgentDraft(ctx, page, pageSize)
+	if err != nil {
+		internalServerErrorResponse(c, err)
+		return
+	}
+
+	type AgentItem struct {
+		ID          string
+		Name        string
+		Description string
+		IconURI     string
+		CreatedAt   int64
+		UpdatedAt   int64
+	}
+
+	items := make([]AgentItem, 0, len(agents))
+	for _, agent := range agents {
+		items = append(items, AgentItem{
+			ID:          strconv.FormatInt(agent.AgentID, 10),
+			Name:        agent.Name,
+			Description: agent.Desc,
+			IconURI:     agent.IconURI,
+			CreatedAt:   agent.CreatedAt,
+			UpdatedAt:   agent.UpdatedAt,
+		})
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":    0,
+		"message": "success",
+		"data": gin.H{
+			"items":     items,
+			"total":     total,
+			"page":      page,
+			"page_size": pageSize,
+		},
+	})
+}
+
 // DraftBotUpdateInfo .
 // @router /api/playground_api/draftbot/update_draft_bot_info [POST]
 func DraftBotUpdateInfo(c *gin.Context) {
@@ -81,4 +168,135 @@ func DraftBotUpdateInfo(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, resp)
+}
+
+// UploadFile .
+// @router /api/bot/upload_file [POST]
+func UploadFile(c *gin.Context) {
+	ctx := c.Request.Context()
+
+	// 检查Content-Type，支持multipart/form-data和JSON两种格式
+	contentType := c.Request.Header.Get("Content-Type")
+	if strings.HasPrefix(contentType, "multipart/form-data") {
+		file, header, err := c.Request.FormFile("file")
+		if err != nil {
+			invalidParamRequestResponse(c, "file is required")
+			return
+		}
+		defer file.Close()
+
+		// 读取文件内容
+		fileContent, err := io.ReadAll(file)
+		if err != nil {
+			internalServerErrorResponse(c, err)
+			return
+		}
+
+		// 从表单参数获取file_type和biz_type
+		fileType := c.PostForm("file_type")
+		bizTypeStr := c.PostForm("biz_type")
+		if fileType == "" {
+			fileType = strings.TrimPrefix(path.Ext(header.Filename), ".")
+			if fileType == "" {
+				invalidParamRequestResponse(c, "file_type is required")
+				return
+			}
+		}
+
+		// 转换biz_type
+		bizType := developer_api.FileBizType(0) // 默认BIZ_UNKNOWN
+		if bizTypeStr != "" {
+			if bizTypeInt, err := strconv.ParseInt(bizTypeStr, 10, 32); err == nil {
+				bizType = developer_api.FileBizType(bizTypeInt)
+			}
+		}
+
+		// 获取用户ID
+		userID := ctxutil.GetUIDFromCtx(ctx)
+		if userID == nil {
+			internalServerErrorResponse(c, errorx.New(errno.ErrUploadPermissionCode, errorx.KV("msg", "session required")))
+			return
+		}
+
+		secret := createSecret(ptr.From(userID), fileType)
+		fileName := fmt.Sprintf("%d_%d_%s.%s", ptr.From(userID), time.Now().UnixNano(), secret, fileType)
+		objectName := fmt.Sprintf("%s/%s", bizType.String(), fileName)
+
+		resp, err := uploadapp.SVC.UploadFile(ctx, fileContent, objectName)
+		if err != nil {
+			internalServerErrorResponse(c, err)
+			return
+		}
+
+		c.JSON(http.StatusOK, resp)
+	} else {
+		// 处理JSON格式的文件上传（保持原有逻辑）
+		var req developer_api.UploadFileRequest
+		if err := c.ShouldBindJSON(&req); err != nil {
+			invalidParamRequestResponse(c, err.Error())
+			return
+		}
+		resp := new(developer_api.UploadFileResponse)
+		fileContent, err := base64.StdEncoding.DecodeString(req.Data)
+		if err != nil {
+			internalServerErrorResponse(c, err)
+			return
+		}
+		userID := ctxutil.GetUIDFromCtx(ctx)
+		if userID == nil {
+			internalServerErrorResponse(c, errorx.New(errno.ErrUploadPermissionCode, errorx.KV("msg", "session required")))
+			return
+		}
+		secret := createSecret(ptr.From(userID), req.FileHead.FileType)
+		fileName := fmt.Sprintf("%d_%d_%s.%s", ptr.From(userID), time.Now().UnixNano(), secret, req.FileHead.FileType)
+		objectName := fmt.Sprintf("%s/%s", req.FileHead.BizType.String(), fileName)
+		resp, err = uploadapp.SVC.UploadFile(ctx, fileContent, objectName)
+
+		if err != nil {
+			internalServerErrorResponse(c, err)
+			return
+		}
+
+		c.JSON(http.StatusOK, resp)
+	}
+}
+
+// GetTypeList .
+// @router /api/bot/get_type_list [POST]
+func GetTypeList(c *gin.Context) {
+	var err error
+	var req developer_api.GetTypeListRequest
+	ctx := c.Request.Context()
+	// 绑定并校验参数
+	if err = c.ShouldBindJSON(&req); err != nil {
+		invalidParamRequestResponse(c, err.Error())
+		return
+	}
+
+	resp, err := modelmgr.ModelMgrSVC.GetModelList(ctx, &req)
+	if err != nil {
+		internalServerErrorResponse(c, err)
+		return
+	}
+	c.JSON(http.StatusOK, resp)
+}
+
+const baseWord = "1Aa2Bb3Cc4Dd5Ee6Ff7Gg8Hh9Ii0JjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+func createSecret(uid int64, fileType string) string {
+	num := 10
+	input := fmt.Sprintf("upload_%d_Ma*9)fhi_%d_gou_%s_rand_%d", uid, time.Now().Unix(), fileType, rand.Intn(100000))
+	// Do md5, take the first 20,//mapIntToBase62 map the number to Base62
+	hash := sha256.Sum256([]byte(fmt.Sprintf("%s", input)))
+	hashString := base64.StdEncoding.EncodeToString(hash[:])
+	if len(hashString) > num {
+		hashString = hashString[:num]
+	}
+
+	result := ""
+	for _, char := range hashString {
+		index := int(char) % 62
+		result += string(baseWord[index])
+	}
+	return result
 }

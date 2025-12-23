@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/imagex"
+	uploadconsts "github.com/kiosk404/airi-go/backend/modules/data/upload/pkg/consts"
 	"github.com/kiosk404/airi-go/backend/pkg/ctxcache"
 	"github.com/kiosk404/airi-go/backend/types/consts"
 )
@@ -24,7 +25,7 @@ func (l *LocalClient) GetUploadHost(ctx context.Context) string {
 	if !ok {
 		return ""
 	}
-	return currentHost + consts.ApplyUploadActionURI
+	return currentHost + uploadconsts.ApplyUploadActionURI
 }
 
 func (l *LocalClient) GetServerID() string {

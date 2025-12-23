@@ -88,16 +88,16 @@ const avatarWrapperStyle: React.CSSProperties = {
     marginRight: '30px',
 };
 
-function DropDownMenu({ name }: { name: string }) {
+function DropDownMenu({ }: { name: string }) {
     // 处理编辑按钮的点击事件
-    const handleEditClick = () => {
-        console.log(`Edit ${name}`);
-    }
+    // const handleEditClick = () => {
+    //     console.log(`Edit ${name}`);
+    // }
 
     // 处理删除按钮的点击事件
-    const handleDeleteClick = () => {
-        console.log(`Delete ${name}`);
-    }
+    // const handleDeleteClick = () => {
+    //     console.log(`Delete ${name}`);
+    // }
 
     return (
         <>

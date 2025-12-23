@@ -76,10 +76,11 @@ func (m *ModelMgrDao) ListModels(ctx context.Context) (do []*entity.ModelInstanc
 func (m *ModelMgrDao) DeleteModel(ctx context.Context, id int64) (err error) {
 	mgrDao := m.dbQuery.ModelInstance
 
-	_, err = mgrDao.WithContext(ctx).Where(mgrDao.ID.Eq(id)).Delete()
+	result, err := mgrDao.WithContext(ctx).Where(mgrDao.ID.Eq(id)).Delete()
 	if err != nil {
 		return errorx.WrapByCode(err, errno.ErrModelNotFoundCode, errorx.KV("msg", "DeleteModel"))
 	}
+	logs.InfoX(pkg.ModelName, "DeleteModel result effected: %v", result.RowsAffected)
 
 	return nil
 }
@@ -175,8 +176,16 @@ func (m *ModelMgrDao) modelInstanceDo2Po(do *model.ModelInstance) *entity.ModelI
 			PrefillResp:        do.Capability.PrefillResp,
 		},
 		Parameters: do.Parameters,
-		Extra:      entity.ModelExtra{ModelExtra: ptr.Of(instancemodle.ModelExtra{})},
+		Extra:      entity.ModelExtra{ModelExtra: ptr.Of(ModelExtra(do.Extra))},
 		CreatedAt:  time.Unix(do.CreatedAt, 0),
 		UpdatedAt:  time.Unix(do.UpdatedAt, 0),
 	}
+}
+
+func ModelExtra(do *string) instancemodle.ModelExtra {
+	var extra instancemodle.ModelExtra
+	if err := json.Unmarshal([]byte(*do), &extra); err != nil {
+		return instancemodle.ModelExtra{}
+	}
+	return extra
 }

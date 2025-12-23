@@ -7,11 +7,13 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "./";
 import * as Connection from "./Connection";
+import * as ModelType from "./ModelType";
 export interface ICreateModelReq {
     model_class?: __ROOT_NAMESPACE__.ModelClass;
     model_name?: string;
     connection?: Connection.IConnection;
     enable_base64_url?: boolean;
+    type?: ModelType.ModelType;
     Base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface ICreateModelReqArgs {
@@ -19,6 +21,7 @@ export interface ICreateModelReqArgs {
     model_name?: string;
     connection?: Connection.IConnectionArgs;
     enable_base64_url?: boolean;
+    type?: ModelType.ModelType;
     Base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICreateModelReq> = {
@@ -28,6 +31,7 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
             model_name: args.model_name,
             connection: args.connection,
             enable_base64_url: args.enable_base64_url,
+            type: args.type,
             Base: args.Base
         };
         output.writeStructBegin("CreateModelReq");
@@ -49,6 +53,11 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
         if (obj.enable_base64_url != null) {
             output.writeFieldBegin("enable_base64_url", thrift.TType.BOOL, 4);
             output.writeBool(obj.enable_base64_url);
+            output.writeFieldEnd();
+        }
+        if (obj.type != null) {
+            output.writeFieldBegin("type", thrift.TType.I32, 5);
+            output.writeI32(obj.type);
             output.writeFieldEnd();
         }
         if (obj.Base != null) {
@@ -107,10 +116,19 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
                         input.skip(fieldType);
                     }
                     break;
+                case 5:
+                    if (fieldType === thrift.TType.I32) {
+                        const value_5: ModelType.ModelType = input.readI32();
+                        _args.type = value_5;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_5: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
-                        _args.Base = value_5;
+                        const value_6: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        _args.Base = value_6;
                     }
                     else {
                         input.skip(fieldType);
@@ -128,6 +146,7 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
             model_name: _args.model_name,
             connection: _args.connection,
             enable_base64_url: _args.enable_base64_url,
+            type: _args.type,
             Base: _args.Base
         };
     }
@@ -137,30 +156,35 @@ export class CreateModelReq extends thrift.StructLike implements ICreateModelReq
     public model_name?: string;
     public connection?: Connection.IConnection;
     public enable_base64_url?: boolean;
+    public type?: ModelType.ModelType;
     public Base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICreateModelReqArgs = {}) {
         super();
         if (args.model_class != null) {
-            const value_6: __ROOT_NAMESPACE__.ModelClass = args.model_class;
-            this.model_class = value_6;
+            const value_7: __ROOT_NAMESPACE__.ModelClass = args.model_class;
+            this.model_class = value_7;
         }
         if (args.model_name != null) {
-            const value_7: string = args.model_name;
-            this.model_name = value_7;
+            const value_8: string = args.model_name;
+            this.model_name = value_8;
         }
         if (args.connection != null) {
-            const value_8: Connection.IConnection = new Connection.Connection(args.connection);
-            this.connection = value_8;
+            const value_9: Connection.IConnection = new Connection.Connection(args.connection);
+            this.connection = value_9;
         }
         if (args.enable_base64_url != null) {
-            const value_9: boolean = args.enable_base64_url;
-            this.enable_base64_url = value_9;
+            const value_10: boolean = args.enable_base64_url;
+            this.enable_base64_url = value_10;
+        }
+        if (args.type != null) {
+            const value_11: ModelType.ModelType = args.type;
+            this.type = value_11;
         }
         if (args.Base != null) {
-            const value_10: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_10;
+            const value_12: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            this.Base = value_12;
         }
     }
     public static read(input: thrift.TProtocol): CreateModelReq {

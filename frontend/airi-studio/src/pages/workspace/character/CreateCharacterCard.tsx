@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import {Card, Form, Input, Upload, Button } from 'tdesign-react';
 import { PlusIcon, FolderIcon, FileIcon } from "tdesign-icons-react";
-import { Modal, TextArea } from '@douyinfe/semi-ui';
+import { Modal, TextArea, Toast } from '@douyinfe/semi-ui';
+import { createCharacter } from "@/services/character";
 
 type CreateCharacterModalProps = {
     dialogVisible: boolean;
     setDialogVisible: (visible: boolean) => void;
+    onSuccess?: () => void;
 }
 
-function CreateCharacterModal({dialogVisible, setDialogVisible} : CreateCharacterModalProps) {
+function CreateCharacterModal({dialogVisible, setDialogVisible, onSuccess} : CreateCharacterModalProps) {
     const [formData, setFormData] = useState({
         avatar: '',
         name: '',
@@ -17,19 +19,43 @@ function CreateCharacterModal({dialogVisible, setDialogVisible} : CreateCharacte
     const [loading, setLoading] = useState(false);
 
     /** 处理创建角色的表单提交 **/
-    const handleSubmit = () => {
-        console.log('fromData 提交的数据', formData)
-        setLoading(false);
-        setDialogVisible(false);
+    const handleSubmit = async () => {
+        if (!formData.name.trim()) {
+            Toast.error('请输入角色名称');
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const response = await createCharacter({
+                name: formData.name,
+                description: formData.description,
+                icon_uri: formData.avatar || 'default_icon', // 使用默认图标
+            });
+
+            if (response.code === 0) {
+                Toast.success('创建成功');
+                setDialogVisible(false);
+                setFormData({ avatar: '', name: '', description: '' });
+                onSuccess?.();
+            } else {
+                Toast.error(response.msg || '创建失败');
+            }
+        } catch (error) {
+            console.error('Create character failed:', error);
+            Toast.error('创建失败');
+        } finally {
+            setLoading(false);
+        }
     }
 
-   
+
     const handleAvatarUpload = (files: any) => {
         console.log('上传头像', files)
     }
 
     const handleInputChange = (name: string, value: string) => {
-        console.log(name, value)
+        setFormData(prev => ({ ...prev, [name]: value }));
     }
 
     const footer = (
@@ -47,7 +73,7 @@ function CreateCharacterModal({dialogVisible, setDialogVisible} : CreateCharacte
     );
 
     return (
-        <Modal 
+        <Modal
             title="创建角色"
             visible={dialogVisible}
             onCancel={() => setDialogVisible(false)}
@@ -56,7 +82,7 @@ function CreateCharacterModal({dialogVisible, setDialogVisible} : CreateCharacte
             maskClosable={false}
             width="500px"
         >
-           <div style={{ padding: 0 }}>
+            <div style={{ padding: 0 }}>
                 <div style={{ padding: '32px' }}>
                     <Form layout="vertical">
                         <div style={{ marginBottom: '24px' }}>
@@ -64,13 +90,13 @@ function CreateCharacterModal({dialogVisible, setDialogVisible} : CreateCharacte
 
                             <div style={{ display: 'flex', gap: '24px',  alignItems: 'center' }}>
                                 {/** 头像上传 **/}
-                                <Upload action="/api/upload" accept="image/*" multiple={false} onSuccess={(files)=> handleAvatarUpload(files)}>
+                                <Upload action="/api/bot/upload_file" accept="image/*" multiple={false} onSuccess={(files)=> handleAvatarUpload(files)}>
                                     <div style={{ width: '50px', height: '50px', border: '1px dashed #d9d9d9', cursor: 'pointer', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
                                         {formData.avatar ? (
-                                            <img src={formData.avatar} alt="角色头像" style={{ width: '100%', height: '100%', objectFit: 'cover'}} /> ) 
+                                                <img src={formData.avatar} alt="角色头像" style={{ width: '100%', height: '100%', objectFit: 'cover'}} /> )
                                             : (
                                                 <span style={{ color: '#999'}}>🤖</span>
-                                        )}
+                                            )}
                                     </div>
                                 </Upload>
 
@@ -79,7 +105,7 @@ function CreateCharacterModal({dialogVisible, setDialogVisible} : CreateCharacte
                                     <Input placeholder="给你的角色起个名字吧" value={formData.name} onChange={(val) => handleInputChange('name', val)}></Input>
                                 </div>
 
-                                
+
                             </div>
                         </div>
 
@@ -87,24 +113,26 @@ function CreateCharacterModal({dialogVisible, setDialogVisible} : CreateCharacte
                             <div style={{ fontSize: '16px', marginBottom: '16px'}}> 角色描述</div>
 
                             {/** 描述输入 **/}
-                            <TextArea 
-                                placeholder="请输入角色的描述" 
-                                value={formData.description} 
-                                onChange={(val) => handleInputChange('description', val)} 
+                            <TextArea
+                                placeholder="请输入角色的描述"
+                                value={formData.description}
+                                onChange={(val) => handleInputChange('description', val)}
                                 maxCount={100}
                             />
                         </div>
                     </Form>
                 </div>
-           </div>
+            </div>
 
         </Modal>
     )
 }
 
-interface CreateCardProps {};
+interface CreateCardProps {
+    onSuccess?: () => void;
+}
 
-const CreateCharacterCard: React.FC<CreateCardProps> = () => {
+const CreateCharacterCard: React.FC<CreateCardProps> = ({ onSuccess }) => {
     const [dialogVisible, setDialogVisible] = useState(false);
 
     const handleCreateCharacter = () => {
@@ -142,10 +170,9 @@ const CreateCharacterCard: React.FC<CreateCardProps> = () => {
                 </div>
             </div>
 
-            <CreateCharacterModal dialogVisible={dialogVisible} setDialogVisible={setDialogVisible}/>
+            <CreateCharacterModal dialogVisible={dialogVisible} setDialogVisible={setDialogVisible} onSuccess={onSuccess}/>
         </Card>
     )
 }
 
 export default CreateCharacterCard;
-

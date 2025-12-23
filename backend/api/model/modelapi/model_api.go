@@ -691,7 +691,7 @@ func (p *DisplayInfo) String() string {
 }
 
 type Model struct {
-	ID              int64                           `thrift:"id,1" json:"id"`
+	ID              string                          `thrift:"id,1" json:"id"`
 	Provider        *ModelProvider                  `thrift:"provider,2" json:"provider"`
 	DisplayInfo     *DisplayInfo                    `thrift:"display_info,3" json:"display_info"`
 	Capability      *developer_api.ModelAbility     `thrift:"capability,4" json:"capability"`
@@ -710,7 +710,7 @@ func NewModel() *Model {
 func (p *Model) InitDefault() {
 }
 
-func (p *Model) GetID() (v int64) {
+func (p *Model) GetID() (v string) {
 	return p.ID
 }
 
@@ -769,7 +769,7 @@ func (p *Model) GetEnableBase64URL() (v bool) {
 func (p *Model) GetDeleteAtMs() (v int64) {
 	return p.DeleteAtMs
 }
-func (p *Model) SetID(val int64) {
+func (p *Model) SetID(val string) {
 	p.ID = val
 }
 func (p *Model) SetProvider(val *ModelProvider) {
@@ -1180,6 +1180,7 @@ type CreateModelReq struct {
 	ModelName       string                   `thrift:"model_name,2" json:"model_name"`
 	Connection      *Connection              `thrift:"connection,3" json:"connection"`
 	EnableBase64URL bool                     `thrift:"enable_base64_url,4" json:"enable_base64_url"`
+	Type            ModelType                `thrift:"type,5,default,ModelType" json:"type"`
 	Base            *base.Base               `thrift:"Base,255,optional" json:"Base,omitempty"`
 }
 
@@ -1211,6 +1212,10 @@ func (p *CreateModelReq) GetEnableBase64URL() (v bool) {
 	return p.EnableBase64URL
 }
 
+func (p *CreateModelReq) GetType() (v ModelType) {
+	return p.Type
+}
+
 var CreateModelReq_Base_DEFAULT *base.Base
 
 func (p *CreateModelReq) GetBase() (v *base.Base) {
@@ -1230,6 +1235,9 @@ func (p *CreateModelReq) SetConnection(val *Connection) {
 }
 func (p *CreateModelReq) SetEnableBase64URL(val bool) {
 	p.EnableBase64URL = val
+}
+func (p *CreateModelReq) SetType(val ModelType) {
+	p.Type = val
 }
 func (p *CreateModelReq) SetBase(val *base.Base) {
 	p.Base = val
@@ -1251,7 +1259,7 @@ func (p *CreateModelReq) String() string {
 }
 
 type CreateModelResp struct {
-	ID       int64          `thrift:"id,1" json:"id"`
+	ID       string         `thrift:"id,1" json:"id"`
 	Code     int64          `thrift:"code,253,required" json:"code"`
 	Msg      string         `thrift:"msg,254,required" json:"msg"`
 	BaseResp *base.BaseResp `thrift:"BaseResp,255,required" json:"BaseResp"`
@@ -1264,7 +1272,7 @@ func NewCreateModelResp() *CreateModelResp {
 func (p *CreateModelResp) InitDefault() {
 }
 
-func (p *CreateModelResp) GetID() (v int64) {
+func (p *CreateModelResp) GetID() (v string) {
 	return p.ID
 }
 
@@ -1284,7 +1292,7 @@ func (p *CreateModelResp) GetBaseResp() (v *base.BaseResp) {
 	}
 	return p.BaseResp
 }
-func (p *CreateModelResp) SetID(val int64) {
+func (p *CreateModelResp) SetID(val string) {
 	p.ID = val
 }
 func (p *CreateModelResp) SetCode(val int64) {
@@ -1309,7 +1317,7 @@ func (p *CreateModelResp) String() string {
 }
 
 type DeleteModelReq struct {
-	ID   int64      `thrift:"id,1" json:"id"`
+	ID   string     `thrift:"id,1" json:"id"`
 	Base *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`
 }
 
@@ -1320,7 +1328,7 @@ func NewDeleteModelReq() *DeleteModelReq {
 func (p *DeleteModelReq) InitDefault() {
 }
 
-func (p *DeleteModelReq) GetID() (v int64) {
+func (p *DeleteModelReq) GetID() (v string) {
 	return p.ID
 }
 
@@ -1332,7 +1340,7 @@ func (p *DeleteModelReq) GetBase() (v *base.Base) {
 	}
 	return p.Base
 }
-func (p *DeleteModelReq) SetID(val int64) {
+func (p *DeleteModelReq) SetID(val string) {
 	p.ID = val
 }
 func (p *DeleteModelReq) SetBase(val *base.Base) {
@@ -2131,7 +2139,7 @@ type KnowledgeConfig struct {
 	RerankConfig    *RerankConfig    `thrift:"rerank_config,2" json:"rerank_config"`
 	OcrConfig       *OCRConfig       `thrift:"ocr_config,3" json:"ocr_config"`
 	ParserConfig    *ParserConfig    `thrift:"parser_config,4" json:"parser_config"`
-	BuiltinModelID  int64            `thrift:"builtin_model_id,5" json:"builtin_model_id"`
+	BuiltinModelID  string           `thrift:"builtin_model_id,5" json:"builtin_model_id"`
 }
 
 func NewKnowledgeConfig() *KnowledgeConfig {
@@ -2177,7 +2185,7 @@ func (p *KnowledgeConfig) GetParserConfig() (v *ParserConfig) {
 	return p.ParserConfig
 }
 
-func (p *KnowledgeConfig) GetBuiltinModelID() (v int64) {
+func (p *KnowledgeConfig) GetBuiltinModelID() (v string) {
 	return p.BuiltinModelID
 }
 func (p *KnowledgeConfig) SetEmbeddingConfig(val *EmbeddingConfig) {
@@ -2192,7 +2200,7 @@ func (p *KnowledgeConfig) SetOcrConfig(val *OCRConfig) {
 func (p *KnowledgeConfig) SetParserConfig(val *ParserConfig) {
 	p.ParserConfig = val
 }
-func (p *KnowledgeConfig) SetBuiltinModelID(val int64) {
+func (p *KnowledgeConfig) SetBuiltinModelID(val string) {
 	p.BuiltinModelID = val
 }
 
@@ -2606,6 +2614,8 @@ type ModelConfigService interface {
 	GetModelList(ctx context.Context, req *GetModelListReq) (r *GetModelListResp, err error)
 
 	CreateModel(ctx context.Context, req *CreateModelReq) (r *CreateModelResp, err error)
+
+	UpdateModel(ctx context.Context, req *UpdateModelReq) (r *UpdateModelResp, err error)
 
 	DeleteModel(ctx context.Context, req *DeleteModelReq) (r *DeleteModelResp, err error)
 }

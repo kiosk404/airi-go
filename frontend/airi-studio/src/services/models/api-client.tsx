@@ -8,6 +8,8 @@ import type {
     ICreateModelRespArgs,
     IDeleteModelReqArgs,
     IDeleteModelRespArgs,
+    IUpdateModelReqArgs,
+    IUpdateModelRespArgs
 } from '@/api/generated/modelapi';
 
 const API_BASE = '/api/admin/model';
@@ -28,6 +30,16 @@ export async function createModel(
     req: ICreateModelReqArgs
 ): Promise<ICreateModelRespArgs> {
     return httpClient.post<ICreateModelRespArgs>(`${API_BASE}/create`, req);
+}
+
+/**
+ * 更新模型
+ * POST /api/admin/model/update
+ */
+export async function updateModel(
+    req: IUpdateModelReqArgs
+): Promise<IUpdateModelRespArgs> {
+    return httpClient.post<IUpdateModelRespArgs>(`${API_BASE}/update`, req);
 }
 
 /**

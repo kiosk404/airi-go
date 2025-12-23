@@ -24,6 +24,14 @@ func _breakmessageMw() []gin.HandlerFunc {
 	return nil
 }
 
+func _createMw() []gin.HandlerFunc {
+	return nil
+}
+
+func _clearMw() []gin.HandlerFunc {
+	return nil
+}
+
 func _agentrunMw() []gin.HandlerFunc {
 	// your code...
 	return nil
@@ -56,6 +64,10 @@ func _draftbotMw() []gin.HandlerFunc {
 
 func _draftbotcreateMw() []gin.HandlerFunc {
 	// your code...
+	return nil
+}
+
+func _draftbotlistMw() []gin.HandlerFunc {
 	return nil
 }
 
@@ -865,6 +877,10 @@ func _createmodelMw() []gin.HandlerFunc {
 	return nil
 }
 
+func _updatemodelMw() []gin.HandlerFunc {
+	return nil
+}
+
 func _deletemodelMw() []gin.HandlerFunc {
 	return nil
 }
@@ -903,12 +919,11 @@ func _registerMw() []gin.HandlerFunc {
 	return nil
 }
 
-func _v20Mw() []gin.HandlerFunc {
-	// your code...
+func _loginbypasswordMw() []gin.HandlerFunc {
 	return nil
 }
 
-func _passportwebemailregisterv2postMw() []gin.HandlerFunc {
+func _v20Mw() []gin.HandlerFunc {
 	// your code...
 	return nil
 }
@@ -918,7 +933,11 @@ func _logoutMw() []gin.HandlerFunc {
 	return nil
 }
 
-func _passportweblogoutgetMw() []gin.HandlerFunc {
+func _sessionMw() []gin.HandlerFunc {
+	return nil
+}
+
+func _uploadavatarMw() []gin.HandlerFunc {
 	// your code...
 	return nil
 }

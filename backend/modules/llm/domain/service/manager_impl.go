@@ -112,3 +112,7 @@ func (m modelManageImpl) ListModelByType(ctx context.Context, modelType entity.M
 func (m modelManageImpl) DeleteModelByID(ctx context.Context, id int64) error {
 	return m.ModelManageRepo.DeleteModel(ctx, id)
 }
+
+func (m modelManageImpl) ListAllModelList(ctx context.Context) ([]*entity.ModelInstance, error) {
+	return m.ModelManageRepo.ListModels(ctx)
+}

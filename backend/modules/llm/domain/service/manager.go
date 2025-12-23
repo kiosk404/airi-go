@@ -11,5 +11,6 @@ type ModelManager interface {
 	UpdateLLMModel(ctx context.Context, modelID int64, conn *entity.Connection, extra *entity.ModelExtra) error
 	GetModelByID(ctx context.Context, id int64) (*entity.ModelInstance, error)
 	ListModelByType(ctx context.Context, modelType entity.ModelType, limit int) ([]*entity.ModelInstance, error)
+	ListAllModelList(ctx context.Context) ([]*entity.ModelInstance, error)
 	DeleteModelByID(ctx context.Context, id int64) error
 }

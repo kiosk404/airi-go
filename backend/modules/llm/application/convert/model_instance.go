@@ -9,6 +9,7 @@ import (
 	modelmgr "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/llm/pkg"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ternary"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
@@ -51,7 +52,7 @@ func ToModel(ctx context.Context, oss storage.Storage, model *entity.ModelInstan
 	}
 
 	m := &modelapi.Model{
-		ID:              model.ID,
+		ID:              conv.Int64ToStr(model.ID),
 		Provider:        convertModelProvider(model.Provider),
 		DisplayInfo:     convertModelDisplayInfo(model.DisplayInfo),
 		Capability:      convertModelCapability(model.Capability),
@@ -263,4 +264,12 @@ func encryptConn(ctx context.Context, conn entity.Connection) (entity.Connection
 
 func decryptConn(ctx context.Context, conn entity.Connection) (entity.Connection, error) {
 	return conn, nil
+}
+
+func ConvertModelCapability(capability modelmgr.ModelAbility) *developer_api.ModelAbility {
+	return convertModelCapability(capability)
+}
+
+func ConvertModelParameters(parameters []modelmgr.ModelParameter) []*developer_api.ModelParameter {
+	return convertModelParameters(parameters)
 }

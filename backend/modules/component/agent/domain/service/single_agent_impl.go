@@ -73,6 +73,10 @@ func (s singleAgentImpl) DeleteAgentDraft(ctx context.Context, agentID int64) (e
 	return s.AgentDraftRepo.Delete(ctx, agentID)
 }
 
+func (s singleAgentImpl) ListAgentDraftByCreator(ctx context.Context, creatorID int64, page, pageSize int) ([]*entity.SingleAgent, int64, error) {
+	return s.AgentDraftRepo.ListByCreator(ctx, creatorID, page, pageSize)
+}
+
 func (s singleAgentImpl) UpdateAgentDraftDisplayInfo(ctx context.Context, userID int64, e *entity.AgentDraftDisplayInfo) error {
 	do, err := s.AgentDraftRepo.GetDisplayInfo(ctx, userID, e.AgentID)
 	if err != nil {

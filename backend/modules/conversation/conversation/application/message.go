@@ -15,6 +15,7 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/conversation/message/domain/entity"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/json"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
 )
@@ -40,8 +41,8 @@ func (c *ConversationApplicationService) GetMessageList(ctx context.Context, mr 
 			Cursor:         mr.Cursor,
 			NextCursor:     "0",
 			NextHasMore:    false,
-			ConversationID: strconv.FormatInt(currentConversation.ID, 10),
-			LastSectionID:  ptr.Of(strconv.FormatInt(currentConversation.SectionID, 10)),
+			ConversationID: conv.Int64ToStr(currentConversation.ID),
+			LastSectionID:  ptr.Of(conv.Int64ToStr(currentConversation.SectionID)),
 		}, nil
 	}
 
@@ -93,9 +94,9 @@ func (c *ConversationApplicationService) buildAgentInfo(ctx context.Context, age
 
 		result = slices.Transform(agentInfos, func(a *singleAgentEntity.SingleAgent) *message.MsgParticipantInfo {
 			return &message.MsgParticipantInfo{
-				ID:        strconv.FormatInt(a.AgentID, 10),
+				ID:        conv.Int64ToStr(a.AgentID),
 				Name:      a.Name,
-				UserID:    strconv.FormatInt(a.CreatorID, 10),
+				UserID:    conv.Int64ToStr(a.CreatorID),
 				Desc:      a.Desc,
 				AvatarURL: a.IconURI,
 			}
@@ -121,11 +122,11 @@ func (c *ConversationApplicationService) buildMessageListResponse(ctx context.Co
 
 	resp := &message.GetMessageListResponse{
 		MessageList:             messages,
-		Cursor:                  strconv.FormatInt(mListMessages.PrevCursor, 10),
-		NextCursor:              strconv.FormatInt(mListMessages.NextCursor, 10),
-		ConversationID:          strconv.FormatInt(currentConversation.ID, 10),
-		LastSectionID:           ptr.Of(strconv.FormatInt(currentConversation.SectionID, 10)),
-		ConnectorConversationID: strconv.FormatInt(currentConversation.ID, 10),
+		Cursor:                  conv.Int64ToStr(mListMessages.PrevCursor),
+		NextCursor:              conv.Int64ToStr(mListMessages.NextCursor),
+		ConversationID:          conv.Int64ToStr(currentConversation.ID),
+		LastSectionID:           ptr.Of(conv.Int64ToStr(currentConversation.SectionID)),
+		ConnectorConversationID: conv.Int64ToStr(currentConversation.ID),
 	}
 
 	if mListMessages.Direction == entity.ScrollPageDirectionPrev {
@@ -139,13 +140,13 @@ func (c *ConversationApplicationService) buildMessageListResponse(ctx context.Co
 
 func (c *ConversationApplicationService) buildDomainMsg2VOMessage(ctx context.Context, dm *entity.Message, runToQuestionIDMap map[int64]int64) *message.ChatMessage {
 	cm := &message.ChatMessage{
-		MessageID:        strconv.FormatInt(dm.ID, 10),
+		MessageID:        conv.Int64ToStr(dm.ID),
 		Role:             string(dm.Role),
 		Type:             string(dm.MessageType),
 		Content:          dm.Content,
 		ContentType:      string(dm.ContentType),
 		ReplyID:          "0",
-		SectionID:        strconv.FormatInt(dm.SectionID, 10),
+		SectionID:        conv.Int64ToStr(dm.SectionID),
 		ExtraInfo:        buildDExt2ApiExt(dm.Ext),
 		ContentTime:      dm.CreatedAt,
 		Status:           "available",
@@ -163,8 +164,8 @@ func (c *ConversationApplicationService) buildDomainMsg2VOMessage(ctx context.Co
 	}
 
 	if dm.MessageType != model.MessageTypeQuestion {
-		cm.ReplyID = strconv.FormatInt(runToQuestionIDMap[dm.RunID], 10)
-		cm.SenderID = ptr.Of(strconv.FormatInt(dm.AgentID, 10))
+		cm.ReplyID = conv.Int64ToStr(runToQuestionIDMap[dm.RunID])
+		cm.SenderID = ptr.Of(conv.Int64ToStr(dm.AgentID))
 	}
 	return cm
 }
@@ -269,4 +270,64 @@ func loadDirectionToScrollDirection(direction *message.LoadDirection) entity.Scr
 		return entity.ScrollPageDirectionNext
 	}
 	return entity.ScrollPageDirectionPrev
+}
+
+func (c *ConversationApplicationService) DeleteMessage(ctx context.Context, mr *message.DeleteMessageRequest) (*message.DeleteMessageResponse, error) {
+	resp := new(message.DeleteMessageResponse)
+	messageInfo, err := c.MessageDomainSVC.GetByID(ctx, mr.MessageID)
+	if err != nil {
+		return resp, err
+	}
+	if messageInfo == nil {
+		return resp, errorx.New(errno.ErrConversationMessageNotFound)
+	}
+
+	userID := ctxutil.GetUIDFromCtx(ctx)
+	if messageInfo.UserID != conv.Int64ToStr(*userID) {
+		return resp, errorx.New(errno.ErrConversationPermissionCode, errorx.KV("msg", "permission denied"))
+	}
+
+	err = c.AgentRunDomainSVC.Delete(ctx, []int64{messageInfo.RunID})
+	if err != nil {
+		return resp, err
+	}
+
+	err = c.MessageDomainSVC.Delete(ctx, &entity.DeleteMeta{
+		RunIDs: []int64{messageInfo.RunID},
+	})
+	if err != nil {
+		return resp, nil
+	}
+
+	return resp, nil
+}
+
+func (c *ConversationApplicationService) BreakMessage(ctx context.Context, mr *message.BreakMessageRequest) (*message.BreakMessageResponse, error) {
+	resp := new(message.BreakMessageResponse)
+	messageInfo, err := c.MessageDomainSVC.GetByID(ctx, mr.GetAnswerMessageID())
+	if err != nil {
+		return resp, err
+	}
+	if messageInfo == nil {
+		return resp, errorx.New(errno.ErrConversationMessageNotFound)
+	}
+
+	userID := ctxutil.GetUIDFromCtx(ctx)
+	if messageInfo.UserID != conv.Int64ToStr(*userID) {
+		return resp, errorx.New(errno.ErrConversationPermissionCode, errorx.KV("msg", "permission denied"))
+	}
+
+	if messageInfo.ConversationID != mr.ConversationID {
+		return resp, errorx.New(errno.ErrConversationPermissionCode, errorx.KV("msg", "conversation not match"))
+	}
+
+	err = c.MessageDomainSVC.Broken(ctx, &entity.BrokenMeta{
+		ID:       *mr.AnswerMessageID,
+		Position: mr.BrokenPos,
+	})
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
 }

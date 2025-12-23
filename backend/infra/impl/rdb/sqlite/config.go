@@ -21,7 +21,7 @@ func (cfg *Config) buildDSN() string {
 	args := []string{
 		"cache=shared",
 		"_pragma=foreign_keys(1)",
-		"_busy_timeout=" + strconv.FormatInt(cfg.Timeout.Milliseconds(), 10),
+		"_busy_timeout=" + conv.Int64ToStr(cfg.Timeout.Milliseconds(), 10),
 	}
 
 	if cfg.Loc != "" {

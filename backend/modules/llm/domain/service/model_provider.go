@@ -11,14 +11,14 @@ func getModelProviderList() []*model.ModelProvider {
 		{
 			Name:        &model.I18nText{ZhCn: "OpenAI", EnUs: "OpenAI"},
 			IconURI:     "openai-icon",
-			IconURL:     "https://openai.com/favicon.ico",
+			IconURL:     "https://ollama.com/public/ollama.png",
 			Description: &model.I18nText{ZhCn: "OpenAI models", EnUs: "OpenAI models"},
 			ModelClass:  model.ModelClass_GPT,
 		},
 		{
 			Name:        &model.I18nText{ZhCn: "Ollama", EnUs: "Ollama"},
 			IconURI:     "Ollama",
-			IconURL:     "https://ollama.com/favicon.ico",
+			IconURL:     "https://ollama.com/public/ollama.png",
 			Description: &model.I18nText{ZhCn: "Ollama models", EnUs: "Ollama models"},
 			ModelClass:  model.ModelClass_Ollama,
 		},
