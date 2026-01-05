@@ -36,7 +36,7 @@ struct UpdateDraftBotInfoAgwRequest {
 }
 
 struct GetDraftBotInfoAgwRequest {
-    1: required i64  bot_id  (api.js_conv='true',agw.js_conv="str") // Draft bot_id
+    1: required i64  bot_id  (api.js_conv='true',agw.js_conv="str",go.tag='json:"bot_id,string"') // Draft bot_id
     2: optional string  version  // Check the history, the id of the historical version, corresponding to the id of the bot_draft_history
     3: optional string  commit_version // Query specifies commit_version version, pre-release use, seems to be the same thing as version, but the acquisition logic is different
 
@@ -101,7 +101,7 @@ struct OnboardingContent {
 
 struct GetBotPopupInfoRequest {
     1: required list<BotPopupType> bot_popup_types
-    2: required i64                bot_id          (agw.js_conv="str" api.js_conv="true")
+    2: required i64                bot_id          (agw.js_conv="str",go.tag='json:"bot_id,string"', api.js_conv="true")
 
     255: base.Base Base (api.none="true")
 }
@@ -132,7 +132,7 @@ struct UpdateBotPopupInfoResponse {
 
 struct UpdateBotPopupInfoRequest {
     1: required BotPopupType bot_popup_type
-    2: required i64          bot_id         (agw.js_conv="str" api.js_conv="true")
+    2: required i64          bot_id         (agw.js_conv="str" go.tag='json:"bot_id,string"' api.js_conv="true")
 
     255: base.Base Base (api.none="true")
 }

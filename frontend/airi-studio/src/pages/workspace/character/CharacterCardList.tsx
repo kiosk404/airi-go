@@ -3,12 +3,12 @@ import { IconStar, IconMore, IconEdit, IconDelete } from "@douyinfe/semi-icons";
 import { useNavigate } from "react-router-dom";
 
 interface CharacterCardProps {
-    id: number;                     // 角色id
+    id: string;                     // 角色id
     name: string;                   // 角色名
     description: string;            // 简介
     updatedAt: number;              // 更新时间戳（毫秒）
     isStarred?: boolean;            // 是否收藏
-    onStarToggle?: (id: number) => void;  // 收藏状态切换回调
+    onStarToggle?: (id: string) => void;  // 收藏状态切换回调
 }
 
 // 格式化时间戳为可读字符串

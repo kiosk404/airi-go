@@ -1498,7 +1498,7 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
         this._handler = handler;
     }
     public process(input: thrift.TProtocol, output: thrift.TProtocol, context: Context): Promise<Buffer> {
-        return new Promise<Buffer>((resolve, reject): void => {
+        return new Promise<Buffer>((resolve): void => {
             const metadata: thrift.IThriftMessage = input.readMessageBegin();
             const fieldName: string = metadata.fieldName;
             const requestId: number = metadata.requestId;

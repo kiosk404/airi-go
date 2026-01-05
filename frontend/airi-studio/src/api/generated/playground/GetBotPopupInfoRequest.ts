@@ -126,6 +126,7 @@ export class GetBotPopupInfoRequest extends thrift.StructLike implements IGetBot
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
             'agw.js_conv': "str",
+            'go.tag': "json:\"bot_id,string\"",
             'api.js_conv': "true"
         },
         Base: {

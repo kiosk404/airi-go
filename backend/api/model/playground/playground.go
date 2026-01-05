@@ -455,7 +455,7 @@ func (p *UpdateDraftBotInfoAgwRequest) String() string {
 }
 
 type GetDraftBotInfoAgwRequest struct {
-	BotID         int64      `thrift:"bot_id,1,required" json:"bot_id"`
+	BotID         int64      `thrift:"bot_id,1,required" json:"bot_id,string"`
 	Version       *string    `thrift:"version,2,optional" json:"version,omitempty"`
 	CommitVersion *string    `thrift:"commit_version,3,optional" json:"commit_version,omitempty"`
 	Base          *base.Base `thrift:"Base,255" json:"Base"`
@@ -996,7 +996,7 @@ func (p *OnboardingContent) String() string {
 
 type GetBotPopupInfoRequest struct {
 	BotPopupTypes []BotPopupType `thrift:"bot_popup_types,1,required,list<BotPopupType>" json:"bot_popup_types"`
-	BotID         int64          `thrift:"bot_id,2,required" json:"bot_id"`
+	BotID         int64          `thrift:"bot_id,2,required" json:"bot_id,string"`
 	Base          *base.Base     `thrift:"Base,255" json:"Base"`
 }
 
@@ -1188,7 +1188,7 @@ func (p *UpdateBotPopupInfoResponse) String() string {
 
 type UpdateBotPopupInfoRequest struct {
 	BotPopupType BotPopupType `thrift:"bot_popup_type,1,required,BotPopupType" json:"bot_popup_type"`
-	BotID        int64        `thrift:"bot_id,2,required" json:"bot_id"`
+	BotID        int64        `thrift:"bot_id,2,required" json:"bot_id,string"`
 	Base         *base.Base   `thrift:"Base,255" json:"Base"`
 }
 

@@ -5,7 +5,7 @@ import CharacterCardSpace from "./CharacterCardList";
 import { listCharacters, type CharacterItem } from "@/services/character";
 
 interface Character {
-    id: number;
+    id: string;
     name: string;
     description: string;
     isStarred: boolean;
@@ -23,7 +23,7 @@ const WorkSpaceContent: React.FC = () => {
             const response = await listCharacters({ page: 1, page_size: 50 });
             if (response.code === 0 && response.data?.items !== undefined) {
                 const list = response.data.items.map((item: CharacterItem) => ({
-                    id: Number(item.id),
+                    id: item.id,
                     name: item.name,
                     description: item.description || '',
                     isStarred: false, // TODO: 后续从后端获取收藏状态
@@ -45,7 +45,7 @@ const WorkSpaceContent: React.FC = () => {
         loadCharacters().catch(console.error);
     }, []);
 
-    const handleStarToggle = (id: number) => {
+    const handleStarToggle = (id: string) => {
         setCharacters(characters.map(c => c.id === id ? {...c, isStarred: !c.isStarred} : c));
     };
 
@@ -60,7 +60,6 @@ const WorkSpaceContent: React.FC = () => {
             ) : (
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 24 }}>
                     <CreateCharacterCard onSuccess={loadCharacters} />
-
                     {characters.map((character) => (
                         <CharacterCardSpace
                             key={character.id}

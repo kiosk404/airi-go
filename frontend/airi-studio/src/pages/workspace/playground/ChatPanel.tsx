@@ -1,5 +1,5 @@
 import { Layout, Typography } from '@douyinfe/semi-ui';
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import { Chat } from '@douyinfe/semi-ui';
 import { useParams } from 'react-router-dom';
 import * as conversationApi from '@/services/conversation';
@@ -53,25 +53,6 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botId, conversationId: propConver
     const [messages, setMessages] = useState<Message[]>([]);
     const [isStreaming, setIsStreaming] = useState(false);
     const abortControllerRef = useRef<AbortController | null>(null);
-
-    // 初始化：创建或获取会话
-    useEffect(() => {
-        if (currentBotId && !currentConversationId.current) {
-            void initConversation();
-        }
-    }, [currentBotId]);
-
-    // 初始化会话
-    const initConversation = async () => {
-        try {
-            const resp = await conversationApi.createConversation({ BotId: currentBotId });
-            if (resp.ConversationData?.Id) {
-                currentConversationId.current = resp.ConversationData.Id;
-            }
-        } catch (error) {
-            console.error('Failed to create conversation:', error);
-        }
-    };
 
     // 消息变化
     const handleChatsChange = useCallback((chats?: Message[]) => {

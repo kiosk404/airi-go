@@ -130,7 +130,8 @@ export class GetDraftBotInfoAgwRequest extends thrift.StructLike implements IGet
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
             'api.js_conv': "true",
-            'agw.js_conv': "str"
+            'agw.js_conv': "str",
+            'go.tag': "json:\"bot_id,string\""
         },
         Base: {
             'api.none': "true"

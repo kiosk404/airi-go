@@ -35,6 +35,7 @@ func Register(r *gin.Engine) {
 			_playground := _api.Group("/playground_api")
 			_playground_draftbot := _playground.Group("/draftbot")
 			{
+				_playground_draftbot.POST("/get_draft_bot_info", append(_getdraftbotinfoagwMw(), handle.GetDraftBotInfoAgw)...)
 				_playground_draftbot.POST("/update_draft_bot_info", append(_updatedraftbotinfoagwMw(), handle.DraftBotUpdateInfo)...)
 			}
 		}

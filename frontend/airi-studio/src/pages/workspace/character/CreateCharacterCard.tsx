@@ -31,7 +31,7 @@ function CreateCharacterModal({dialogVisible, setDialogVisible, onSuccess} : Cre
             const response = await createCharacter({
                 name: formData.name,
                 description: formData.description,
-                icon_uri: formData.avatar || 'default_icon', // 使用默认图标
+                icon_uri: formData.avatar || 'default_icon/default_agent_icon.png', // 使用默认图标
             });
 
             if (response.code === 0) {

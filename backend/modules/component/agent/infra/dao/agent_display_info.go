@@ -3,11 +3,9 @@ package dao
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 
 	"github.com/kiosk404/airi-go/backend/api/model/app/developer_api"
-	"github.com/kiosk404/airi-go/backend/infra/contract/cache"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
@@ -33,10 +31,11 @@ func (sa *SingleAgentDraftDAO) UpdateDisplayInfo(ctx context.Context, userID int
 	return nil
 }
 
+// GetDisplayInfo 前端展示详情信息缓存
 func (sa *SingleAgentDraftDAO) GetDisplayInfo(ctx context.Context, userID, agentID int64) (*entity.AgentDraftDisplayInfo, error) {
 	key := makeAgentDisplayInfoKey(userID, agentID)
 	data, err := sa.cacheClient.Get(ctx, key).Result()
-	if errors.Is(err, cache.Nil) {
+	if err != nil {
 		tabStatusDefault := developer_api.TabStatus_Default
 		return &entity.AgentDraftDisplayInfo{
 			AgentID: agentID,
@@ -65,9 +64,6 @@ func (sa *SingleAgentDraftDAO) GetDisplayInfo(ctx context.Context, userID, agent
 				},
 			},
 		}, nil
-	}
-	if err != nil {
-		return nil, errorx.WrapByCode(err, errno.ErrAgentGetDraftBotDisplayInfoNotFound)
 	}
 
 	e := &entity.AgentDraftDisplayInfo{}
