@@ -214,12 +214,11 @@ func (p *GetDraftIntelligenceListOption) String() string {
 }
 
 type GetDraftIntelligenceListRequest struct {
-	SpaceID      int64                           `thrift:"space_id,1,required" json:"space_id"`
-	Name         *string                         `thrift:"name,2,optional" json:"name,omitempty"`
-	HasPublished *bool                           `thrift:"has_published,3,optional" json:"has_published,omitempty"`
-	Status       []common.IntelligenceStatus     `thrift:"status,4,optional,list<IntelligenceStatus>" json:"status,omitempty"`
-	Types        []common.IntelligenceType       `thrift:"types,5,optional,list<IntelligenceType>" json:"types,omitempty"`
-	SearchScope  *SearchScope                    `thrift:"search_scope,6,optional,SearchScope" json:"search_scope,omitempty"`
+	Name         *string                         `thrift:"name,1,optional" json:"name,omitempty"`
+	HasPublished *bool                           `thrift:"has_published,2,optional" json:"has_published,omitempty"`
+	Status       []common.IntelligenceStatus     `thrift:"status,3,optional,list<IntelligenceStatus>" json:"status,omitempty"`
+	Types        []common.IntelligenceType       `thrift:"types,4,optional,list<IntelligenceType>" json:"types,omitempty"`
+	SearchScope  *SearchScope                    `thrift:"search_scope,5,optional,SearchScope" json:"search_scope,omitempty"`
 	IsFav        *bool                           `thrift:"is_fav,51,optional" json:"is_fav,omitempty"`
 	RecentlyOpen *bool                           `thrift:"recently_open,52,optional" json:"recently_open,omitempty"`
 	Option       *GetDraftIntelligenceListOption `thrift:"option,99,optional" json:"option,omitempty"`
@@ -234,10 +233,6 @@ func NewGetDraftIntelligenceListRequest() *GetDraftIntelligenceListRequest {
 }
 
 func (p *GetDraftIntelligenceListRequest) InitDefault() {
-}
-
-func (p *GetDraftIntelligenceListRequest) GetSpaceID() (v int64) {
-	return p.SpaceID
 }
 
 var GetDraftIntelligenceListRequest_Name_DEFAULT string
@@ -347,9 +342,6 @@ func (p *GetDraftIntelligenceListRequest) GetBase() (v *base.Base) {
 	}
 	return p.Base
 }
-func (p *GetDraftIntelligenceListRequest) SetSpaceID(val int64) {
-	p.SpaceID = val
-}
 func (p *GetDraftIntelligenceListRequest) SetName(val *string) {
 	p.Name = val
 }
@@ -443,9 +435,8 @@ func (p *GetDraftIntelligenceListRequest) String() string {
 }
 
 type IntelligencePublishInfo struct {
-	PublishTime  string                  `thrift:"publish_time,1" json:"publish_time"`
-	HasPublished bool                    `thrift:"has_published,2" json:"has_published"`
-	Connectors   []*common.ConnectorInfo `thrift:"connectors,3,default,list<common.ConnectorInfo>" json:"connectors"`
+	PublishTime  string `thrift:"publish_time,1" json:"publish_time"`
+	HasPublished bool   `thrift:"has_published,2" json:"has_published"`
 }
 
 func NewIntelligencePublishInfo() *IntelligencePublishInfo {
@@ -462,18 +453,11 @@ func (p *IntelligencePublishInfo) GetPublishTime() (v string) {
 func (p *IntelligencePublishInfo) GetHasPublished() (v bool) {
 	return p.HasPublished
 }
-
-func (p *IntelligencePublishInfo) GetConnectors() (v []*common.ConnectorInfo) {
-	return p.Connectors
-}
 func (p *IntelligencePublishInfo) SetPublishTime(val string) {
 	p.PublishTime = val
 }
 func (p *IntelligencePublishInfo) SetHasPublished(val bool) {
 	p.HasPublished = val
-}
-func (p *IntelligencePublishInfo) SetConnectors(val []*common.ConnectorInfo) {
-	p.Connectors = val
 }
 
 func (p *IntelligencePublishInfo) String() string {

@@ -1,7 +1,7 @@
 import { Button, Typography, Space, Select, Tag, Collapse } from "tdesign-react"
 import { AddIcon } from "tdesign-icons-react"
-import React, { useState } from "react"
-import type { BotInfo, DraftBotDisplayInfoData } from '@/services/draftbot';
+import React, { useState, useMemo } from "react"
+import type { BotInfo, DraftBotDisplayInfoData, BotOptionData, ModelDetail } from '@/services/draftbot';
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
@@ -13,19 +13,35 @@ const PanelHeader = ({ title }: { title: string }) => (
     </div>
 )
 
-const modelList = [
-    { label: "ollama", value: "1", description: "deepseek-r1:1.5b", avator: "https://ollama.com/public/ollama.png"},
-    { label: "qwen", value: "2", description: "qwen3-coder", avator: "https://assets.alicdn.com/g/qwenweb/qwen-webui-fe/0.0.191/static/favicon.png"},
-]
+interface ModelListItem {
+    label: string;
+    value: string;
+    description: string;
+    avator: string;
+}
 
 interface SkillPanelProps {
     botInfo?: BotInfo | null;
     displayInfo?: DraftBotDisplayInfoData | null;
+    botOptionData?: BotOptionData | null;
 }
 
-const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo}) => {
+const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo, botOptionData }) => {
+    // 从 bot_option_data 中获取模型列表
+    const modelList = useMemo<ModelListItem[]>(() => {
+        if (!botOptionData?.model_detail_map) {
+            return [];
+        }
+        return Object.entries(botOptionData.model_detail_map).map(([key, model]: [string, ModelDetail]) => ({
+            label: model.name || model.model_name || '未知模型',
+            value: model.model_id || key,
+            description: model.model_name || '',
+            avator: model.model_icon_url || 'https://ollama.com/public/ollama.png',
+        }));
+    }, [botOptionData?.model_detail_map]);
+
     // 根据 botInfo 中的 ModelInfo 选择默认模型
-    const defaultModelValue = botInfo?.ModelInfo?.model_id || modelList[0].value;
+    const defaultModelValue = botInfo?.ModelInfo?.model_id || modelList[0]?.value || '';
     const [selectedValue, setSelectedValue] = useState(defaultModelValue);
     const selectedModel = modelList.find((model) => model.value === selectedValue) || modelList[0];
 
@@ -43,34 +59,38 @@ const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo}) => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #e0e0e0' }}>
                 <Title level="h5" style={{ margin: 0 }}>技能</Title>
                 <Space>
-                    <Select
-                        value={selectedModel.description}
-                        onChange={(value) => setSelectedValue(value as string)}
-                        borderless
-                        showArrow
-                        size="medium"
-                        valueType="value"
-                        filterable
-                        prefixIcon={<img src={selectedModel.avator} style={{ marginRight: '8px', width: '21px', borderRadius: '25%' }} />}
-                    >
-                        {modelList.map((model, idx) =>(
-                            <Option style={{ height: '60px'}} key={idx} value={model.value} label={model.label}>
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <img src={model.avator} style={{ maxWidth: '25px', borderRadius: '25%'}} />
-                                    <div style={{marginLeft: '16px'}}>
-                                        <div>{model.label}</div>
-                                        <div style={{ color: 'var(--td-gray-color-9', fontSize: '13px' }}>{model.description}</div>
+                    {modelList.length > 0 ? (
+                        <Select
+                            value={selectedValue}
+                            onChange={(value) => setSelectedValue(value as string)}
+                            borderless
+                            showArrow
+                            size="medium"
+                            valueType="value"
+                            filterable
+                            prefixIcon={selectedModel?.avator ? <img src={selectedModel.avator} style={{ marginRight: '8px', width: '21px', borderRadius: '25%' }} /> : undefined}
+                        >
+                            {modelList.map((model, idx) =>(
+                                <Option style={{ height: '60px'}} key={idx} value={model.value} label={model.label}>
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <img src={model.avator} style={{ maxWidth: '25px', borderRadius: '25%'}} />
+                                        <div style={{marginLeft: '16px'}}>
+                                            <div>{model.label}</div>
+                                            <div style={{ color: 'var(--td-gray-color-9', fontSize: '13px' }}>{model.description}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </Option>
-                        ))}
-                    </Select>
+                                </Option>
+                            ))}
+                        </Select>
+                    ) : (
+                        <span style={{ color: '#888', fontSize: '14px' }}>暂无可用模型</span>
+                    )}
                 </Space>
             </div>
 
             <div style={{ flex: 1, overflowY: 'auto', padding: '16px', borderLeft: '1px solid #e0e0e0'}}>
                 <Collapse defaultValue={['plugin']}>
-                    <Collapse.Panel header={<PanelHeader title={`插件 (${plugins.length})`} />} value="plugin">
+                    <Collapse.Panel header={<PanelHeader title={`插件`} />} value="plugin">
                         {plugins.length > 0 ? (
                             plugins.map((plugin, idx) => (
                                 <div key={idx} style={{ display: 'flex', alignItems: 'center', marginBottom: idx < plugins.length - 1 ? 12 : 0 }}>
@@ -85,7 +105,7 @@ const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo}) => {
                             <Paragraph style={{ margin: 0, color: '#888'}}>暂无插件，点击 + 添加插件</Paragraph>
                         )}
                     </Collapse.Panel>
-                    <Collapse.Panel header={<PanelHeader title={`工作流 (${workflows.length})`} />} value="workflow">
+                    <Collapse.Panel header={<PanelHeader title={`工作流`} />} value="workflow">
                         {workflows.length > 0 ? (
                             workflows.map((wf, idx) => (
                                 <div key={idx} style={{ marginBottom: idx < workflows.length - 1 ? 8 : 0 }}>
@@ -99,7 +119,7 @@ const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo}) => {
                     <Collapse.Panel header={<PanelHeader title="知识" />} value="knowledge">
                         <Paragraph style={{ margin: 0, color: '#888'}}>将文档、URL、三方数据源上传为文本知识库后，用户发送消息时，智能体能够引用文本知识中的内容回答用户问题。</Paragraph>
                     </Collapse.Panel>
-                    <Collapse.Panel header={<PanelHeader title={`表格 (${databases.length})`} />} value="table">
+                    <Collapse.Panel header={<PanelHeader title={`表格`} />} value="table">
                         {databases.length > 0 ? (
                             databases.map((db, idx) => (
                                 <div key={idx} style={{ marginBottom: idx < databases.length - 1 ? 8 : 0 }}>

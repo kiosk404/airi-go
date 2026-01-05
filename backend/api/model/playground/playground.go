@@ -63,6 +63,53 @@ func (p *Branch) Value() (driver.Value, error) {
 	return int64(*p), nil
 }
 
+type DataSetType int64
+
+const (
+	DataSetType_Text  DataSetType = 0
+	DataSetType_Table DataSetType = 1
+	DataSetType_Image DataSetType = 2
+)
+
+func (p DataSetType) String() string {
+	switch p {
+	case DataSetType_Text:
+		return "Text"
+	case DataSetType_Table:
+		return "Table"
+	case DataSetType_Image:
+		return "Image"
+	}
+	return "<UNSET>"
+}
+
+func DataSetTypeFromString(s string) (DataSetType, error) {
+	switch s {
+	case "Text":
+		return DataSetType_Text, nil
+	case "Table":
+		return DataSetType_Table, nil
+	case "Image":
+		return DataSetType_Image, nil
+	}
+	return DataSetType(0), fmt.Errorf("not a valid DataSetType string")
+}
+
+func DataSetTypePtr(v DataSetType) *DataSetType { return &v }
+func (p *DataSetType) Scan(value interface{}) (err error) {
+	var result sql.NullInt64
+	err = result.Scan(value)
+	*p = DataSetType(result.Int64)
+	return
+}
+
+func (p *DataSetType) Value() (driver.Value, error) {
+	if p == nil {
+		return nil, nil
+	}
+	return int64(*p), nil
+}
+
 type BotMarketStatus int64
 
 const (
@@ -869,6 +916,12 @@ func (p *GetDraftBotInfoAgwData) String() string {
 }
 
 type BotOptionData struct {
+	ModelDetailMap      map[int64]*ModelDetail      `thrift:"model_detail_map,1,optional" json:"model_detail_map,omitempty"`
+	PluginDetailMap     map[int64]*PluginDetal      `thrift:"plugin_detail_map,2,optional" json:"plugin_detail_map,omitempty"`
+	PluginAPIDetailMap  map[int64]*PluginAPIDetal   `thrift:"plugin_api_detail_map,3,optional" json:"plugin_api_detail_map,omitempty"`
+	WorkflowDetailMap   map[int64]*WorkflowDetail   `thrift:"workflow_detail_map,4,optional" json:"workflow_detail_map,omitempty"`
+	KnowledgeDetailMap  map[string]*KnowledgeDetail `thrift:"knowledge_detail_map,5,optional" json:"knowledge_detail_map,omitempty"`
+	ShortcutCommandList []*ShortcutCommand          `thrift:"shortcut_command_list,6,optional,list<ShortcutCommand>" json:"shortcut_command_list,omitempty"`
 }
 
 func NewBotOptionData() *BotOptionData {
@@ -878,11 +931,846 @@ func NewBotOptionData() *BotOptionData {
 func (p *BotOptionData) InitDefault() {
 }
 
+var BotOptionData_ModelDetailMap_DEFAULT map[int64]*ModelDetail
+
+func (p *BotOptionData) GetModelDetailMap() (v map[int64]*ModelDetail) {
+	if !p.IsSetModelDetailMap() {
+		return BotOptionData_ModelDetailMap_DEFAULT
+	}
+	return p.ModelDetailMap
+}
+
+var BotOptionData_PluginDetailMap_DEFAULT map[int64]*PluginDetal
+
+func (p *BotOptionData) GetPluginDetailMap() (v map[int64]*PluginDetal) {
+	if !p.IsSetPluginDetailMap() {
+		return BotOptionData_PluginDetailMap_DEFAULT
+	}
+	return p.PluginDetailMap
+}
+
+var BotOptionData_PluginAPIDetailMap_DEFAULT map[int64]*PluginAPIDetal
+
+func (p *BotOptionData) GetPluginAPIDetailMap() (v map[int64]*PluginAPIDetal) {
+	if !p.IsSetPluginAPIDetailMap() {
+		return BotOptionData_PluginAPIDetailMap_DEFAULT
+	}
+	return p.PluginAPIDetailMap
+}
+
+var BotOptionData_WorkflowDetailMap_DEFAULT map[int64]*WorkflowDetail
+
+func (p *BotOptionData) GetWorkflowDetailMap() (v map[int64]*WorkflowDetail) {
+	if !p.IsSetWorkflowDetailMap() {
+		return BotOptionData_WorkflowDetailMap_DEFAULT
+	}
+	return p.WorkflowDetailMap
+}
+
+var BotOptionData_KnowledgeDetailMap_DEFAULT map[string]*KnowledgeDetail
+
+func (p *BotOptionData) GetKnowledgeDetailMap() (v map[string]*KnowledgeDetail) {
+	if !p.IsSetKnowledgeDetailMap() {
+		return BotOptionData_KnowledgeDetailMap_DEFAULT
+	}
+	return p.KnowledgeDetailMap
+}
+
+var BotOptionData_ShortcutCommandList_DEFAULT []*ShortcutCommand
+
+func (p *BotOptionData) GetShortcutCommandList() (v []*ShortcutCommand) {
+	if !p.IsSetShortcutCommandList() {
+		return BotOptionData_ShortcutCommandList_DEFAULT
+	}
+	return p.ShortcutCommandList
+}
+func (p *BotOptionData) SetModelDetailMap(val map[int64]*ModelDetail) {
+	p.ModelDetailMap = val
+}
+func (p *BotOptionData) SetPluginDetailMap(val map[int64]*PluginDetal) {
+	p.PluginDetailMap = val
+}
+func (p *BotOptionData) SetPluginAPIDetailMap(val map[int64]*PluginAPIDetal) {
+	p.PluginAPIDetailMap = val
+}
+func (p *BotOptionData) SetWorkflowDetailMap(val map[int64]*WorkflowDetail) {
+	p.WorkflowDetailMap = val
+}
+func (p *BotOptionData) SetKnowledgeDetailMap(val map[string]*KnowledgeDetail) {
+	p.KnowledgeDetailMap = val
+}
+func (p *BotOptionData) SetShortcutCommandList(val []*ShortcutCommand) {
+	p.ShortcutCommandList = val
+}
+
+func (p *BotOptionData) IsSetModelDetailMap() bool {
+	return p.ModelDetailMap != nil
+}
+
+func (p *BotOptionData) IsSetPluginDetailMap() bool {
+	return p.PluginDetailMap != nil
+}
+
+func (p *BotOptionData) IsSetPluginAPIDetailMap() bool {
+	return p.PluginAPIDetailMap != nil
+}
+
+func (p *BotOptionData) IsSetWorkflowDetailMap() bool {
+	return p.WorkflowDetailMap != nil
+}
+
+func (p *BotOptionData) IsSetKnowledgeDetailMap() bool {
+	return p.KnowledgeDetailMap != nil
+}
+
+func (p *BotOptionData) IsSetShortcutCommandList() bool {
+	return p.ShortcutCommandList != nil
+}
+
 func (p *BotOptionData) String() string {
 	if p == nil {
 		return "<nil>"
 	}
 	return fmt.Sprintf("BotOptionData(%+v)", *p)
+}
+
+type ModelDetail struct {
+	Name         *string `thrift:"name,1,optional" json:"name,omitempty"`
+	ModelName    *string `thrift:"model_name,2,optional" json:"model_name,omitempty"`
+	ModelID      *int64  `thrift:"model_id,3,optional" json:"model_id,omitempty"`
+	ModelFamily  *int64  `thrift:"model_family,4,optional" json:"model_family,omitempty"`
+	ModelIconURL *string `thrift:"model_icon_url,5,optional" json:"model_icon_url,omitempty"`
+}
+
+func NewModelDetail() *ModelDetail {
+	return &ModelDetail{}
+}
+
+func (p *ModelDetail) InitDefault() {
+}
+
+var ModelDetail_Name_DEFAULT string
+
+func (p *ModelDetail) GetName() (v string) {
+	if !p.IsSetName() {
+		return ModelDetail_Name_DEFAULT
+	}
+	return *p.Name
+}
+
+var ModelDetail_ModelName_DEFAULT string
+
+func (p *ModelDetail) GetModelName() (v string) {
+	if !p.IsSetModelName() {
+		return ModelDetail_ModelName_DEFAULT
+	}
+	return *p.ModelName
+}
+
+var ModelDetail_ModelID_DEFAULT int64
+
+func (p *ModelDetail) GetModelID() (v int64) {
+	if !p.IsSetModelID() {
+		return ModelDetail_ModelID_DEFAULT
+	}
+	return *p.ModelID
+}
+
+var ModelDetail_ModelFamily_DEFAULT int64
+
+func (p *ModelDetail) GetModelFamily() (v int64) {
+	if !p.IsSetModelFamily() {
+		return ModelDetail_ModelFamily_DEFAULT
+	}
+	return *p.ModelFamily
+}
+
+var ModelDetail_ModelIconURL_DEFAULT string
+
+func (p *ModelDetail) GetModelIconURL() (v string) {
+	if !p.IsSetModelIconURL() {
+		return ModelDetail_ModelIconURL_DEFAULT
+	}
+	return *p.ModelIconURL
+}
+func (p *ModelDetail) SetName(val *string) {
+	p.Name = val
+}
+func (p *ModelDetail) SetModelName(val *string) {
+	p.ModelName = val
+}
+func (p *ModelDetail) SetModelID(val *int64) {
+	p.ModelID = val
+}
+func (p *ModelDetail) SetModelFamily(val *int64) {
+	p.ModelFamily = val
+}
+func (p *ModelDetail) SetModelIconURL(val *string) {
+	p.ModelIconURL = val
+}
+
+func (p *ModelDetail) IsSetName() bool {
+	return p.Name != nil
+}
+
+func (p *ModelDetail) IsSetModelName() bool {
+	return p.ModelName != nil
+}
+
+func (p *ModelDetail) IsSetModelID() bool {
+	return p.ModelID != nil
+}
+
+func (p *ModelDetail) IsSetModelFamily() bool {
+	return p.ModelFamily != nil
+}
+
+func (p *ModelDetail) IsSetModelIconURL() bool {
+	return p.ModelIconURL != nil
+}
+
+func (p *ModelDetail) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("ModelDetail(%+v)", *p)
+}
+
+type PluginDetal struct {
+	ID           *int64                 `thrift:"id,1,optional" json:"id,omitempty"`
+	Name         *string                `thrift:"name,2,optional" json:"name,omitempty"`
+	Description  *string                `thrift:"description,3,optional" json:"description,omitempty"`
+	IconURL      *string                `thrift:"icon_url,4,optional" json:"icon_url,omitempty"`
+	PluginType   *int64                 `thrift:"plugin_type,5,optional" json:"plugin_type,omitempty"`
+	PluginStatus *int64                 `thrift:"plugin_status,6,optional" json:"plugin_status,omitempty"`
+	IsOfficial   *bool                  `thrift:"is_official,7,optional" json:"is_official,omitempty"`
+	PluginFrom   *bot_common.PluginFrom `thrift:"plugin_from,9,optional,PluginFrom" json:"plugin_from,omitempty"`
+}
+
+func NewPluginDetal() *PluginDetal {
+	return &PluginDetal{}
+}
+
+func (p *PluginDetal) InitDefault() {
+}
+
+var PluginDetal_ID_DEFAULT int64
+
+func (p *PluginDetal) GetID() (v int64) {
+	if !p.IsSetID() {
+		return PluginDetal_ID_DEFAULT
+	}
+	return *p.ID
+}
+
+var PluginDetal_Name_DEFAULT string
+
+func (p *PluginDetal) GetName() (v string) {
+	if !p.IsSetName() {
+		return PluginDetal_Name_DEFAULT
+	}
+	return *p.Name
+}
+
+var PluginDetal_Description_DEFAULT string
+
+func (p *PluginDetal) GetDescription() (v string) {
+	if !p.IsSetDescription() {
+		return PluginDetal_Description_DEFAULT
+	}
+	return *p.Description
+}
+
+var PluginDetal_IconURL_DEFAULT string
+
+func (p *PluginDetal) GetIconURL() (v string) {
+	if !p.IsSetIconURL() {
+		return PluginDetal_IconURL_DEFAULT
+	}
+	return *p.IconURL
+}
+
+var PluginDetal_PluginType_DEFAULT int64
+
+func (p *PluginDetal) GetPluginType() (v int64) {
+	if !p.IsSetPluginType() {
+		return PluginDetal_PluginType_DEFAULT
+	}
+	return *p.PluginType
+}
+
+var PluginDetal_PluginStatus_DEFAULT int64
+
+func (p *PluginDetal) GetPluginStatus() (v int64) {
+	if !p.IsSetPluginStatus() {
+		return PluginDetal_PluginStatus_DEFAULT
+	}
+	return *p.PluginStatus
+}
+
+var PluginDetal_IsOfficial_DEFAULT bool
+
+func (p *PluginDetal) GetIsOfficial() (v bool) {
+	if !p.IsSetIsOfficial() {
+		return PluginDetal_IsOfficial_DEFAULT
+	}
+	return *p.IsOfficial
+}
+
+var PluginDetal_PluginFrom_DEFAULT bot_common.PluginFrom
+
+func (p *PluginDetal) GetPluginFrom() (v bot_common.PluginFrom) {
+	if !p.IsSetPluginFrom() {
+		return PluginDetal_PluginFrom_DEFAULT
+	}
+	return *p.PluginFrom
+}
+func (p *PluginDetal) SetID(val *int64) {
+	p.ID = val
+}
+func (p *PluginDetal) SetName(val *string) {
+	p.Name = val
+}
+func (p *PluginDetal) SetDescription(val *string) {
+	p.Description = val
+}
+func (p *PluginDetal) SetIconURL(val *string) {
+	p.IconURL = val
+}
+func (p *PluginDetal) SetPluginType(val *int64) {
+	p.PluginType = val
+}
+func (p *PluginDetal) SetPluginStatus(val *int64) {
+	p.PluginStatus = val
+}
+func (p *PluginDetal) SetIsOfficial(val *bool) {
+	p.IsOfficial = val
+}
+func (p *PluginDetal) SetPluginFrom(val *bot_common.PluginFrom) {
+	p.PluginFrom = val
+}
+
+func (p *PluginDetal) IsSetID() bool {
+	return p.ID != nil
+}
+
+func (p *PluginDetal) IsSetName() bool {
+	return p.Name != nil
+}
+
+func (p *PluginDetal) IsSetDescription() bool {
+	return p.Description != nil
+}
+
+func (p *PluginDetal) IsSetIconURL() bool {
+	return p.IconURL != nil
+}
+
+func (p *PluginDetal) IsSetPluginType() bool {
+	return p.PluginType != nil
+}
+
+func (p *PluginDetal) IsSetPluginStatus() bool {
+	return p.PluginStatus != nil
+}
+
+func (p *PluginDetal) IsSetIsOfficial() bool {
+	return p.IsOfficial != nil
+}
+
+func (p *PluginDetal) IsSetPluginFrom() bool {
+	return p.PluginFrom != nil
+}
+
+func (p *PluginDetal) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("PluginDetal(%+v)", *p)
+}
+
+type PluginAPIDetal struct {
+	ID          *int64             `thrift:"id,1,optional" json:"id,omitempty"`
+	Name        *string            `thrift:"name,2,optional" json:"name,omitempty"`
+	Description *string            `thrift:"description,3,optional" json:"description,omitempty"`
+	Parameters  []*PluginParameter `thrift:"parameters,4,optional,list<PluginParameter>" json:"parameters,omitempty"`
+	PluginID    *int64             `thrift:"plugin_id,5,optional" json:"plugin_id,omitempty"`
+}
+
+func NewPluginAPIDetal() *PluginAPIDetal {
+	return &PluginAPIDetal{}
+}
+
+func (p *PluginAPIDetal) InitDefault() {
+}
+
+var PluginAPIDetal_ID_DEFAULT int64
+
+func (p *PluginAPIDetal) GetID() (v int64) {
+	if !p.IsSetID() {
+		return PluginAPIDetal_ID_DEFAULT
+	}
+	return *p.ID
+}
+
+var PluginAPIDetal_Name_DEFAULT string
+
+func (p *PluginAPIDetal) GetName() (v string) {
+	if !p.IsSetName() {
+		return PluginAPIDetal_Name_DEFAULT
+	}
+	return *p.Name
+}
+
+var PluginAPIDetal_Description_DEFAULT string
+
+func (p *PluginAPIDetal) GetDescription() (v string) {
+	if !p.IsSetDescription() {
+		return PluginAPIDetal_Description_DEFAULT
+	}
+	return *p.Description
+}
+
+var PluginAPIDetal_Parameters_DEFAULT []*PluginParameter
+
+func (p *PluginAPIDetal) GetParameters() (v []*PluginParameter) {
+	if !p.IsSetParameters() {
+		return PluginAPIDetal_Parameters_DEFAULT
+	}
+	return p.Parameters
+}
+
+var PluginAPIDetal_PluginID_DEFAULT int64
+
+func (p *PluginAPIDetal) GetPluginID() (v int64) {
+	if !p.IsSetPluginID() {
+		return PluginAPIDetal_PluginID_DEFAULT
+	}
+	return *p.PluginID
+}
+func (p *PluginAPIDetal) SetID(val *int64) {
+	p.ID = val
+}
+func (p *PluginAPIDetal) SetName(val *string) {
+	p.Name = val
+}
+func (p *PluginAPIDetal) SetDescription(val *string) {
+	p.Description = val
+}
+func (p *PluginAPIDetal) SetParameters(val []*PluginParameter) {
+	p.Parameters = val
+}
+func (p *PluginAPIDetal) SetPluginID(val *int64) {
+	p.PluginID = val
+}
+
+func (p *PluginAPIDetal) IsSetID() bool {
+	return p.ID != nil
+}
+
+func (p *PluginAPIDetal) IsSetName() bool {
+	return p.Name != nil
+}
+
+func (p *PluginAPIDetal) IsSetDescription() bool {
+	return p.Description != nil
+}
+
+func (p *PluginAPIDetal) IsSetParameters() bool {
+	return p.Parameters != nil
+}
+
+func (p *PluginAPIDetal) IsSetPluginID() bool {
+	return p.PluginID != nil
+}
+
+func (p *PluginAPIDetal) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("PluginAPIDetal(%+v)", *p)
+}
+
+type PluginParameter struct {
+	Name          *string            `thrift:"name,1,optional" json:"name,omitempty"`
+	Description   *string            `thrift:"description,2,optional" json:"description,omitempty"`
+	IsRequired    *bool              `thrift:"is_required,3,optional" json:"is_required,omitempty"`
+	Type          *string            `thrift:"type,4,optional" json:"type,omitempty"`
+	SubParameters []*PluginParameter `thrift:"sub_parameters,5,optional,list<PluginParameter>" json:"sub_parameters,omitempty"`
+	SubType       *string            `thrift:"sub_type,6,optional" json:"sub_type,omitempty"`
+	AssistType    *int64             `thrift:"assist_type,7,optional" json:"assist_type,omitempty"`
+}
+
+func NewPluginParameter() *PluginParameter {
+	return &PluginParameter{}
+}
+
+func (p *PluginParameter) InitDefault() {
+}
+
+var PluginParameter_Name_DEFAULT string
+
+func (p *PluginParameter) GetName() (v string) {
+	if !p.IsSetName() {
+		return PluginParameter_Name_DEFAULT
+	}
+	return *p.Name
+}
+
+var PluginParameter_Description_DEFAULT string
+
+func (p *PluginParameter) GetDescription() (v string) {
+	if !p.IsSetDescription() {
+		return PluginParameter_Description_DEFAULT
+	}
+	return *p.Description
+}
+
+var PluginParameter_IsRequired_DEFAULT bool
+
+func (p *PluginParameter) GetIsRequired() (v bool) {
+	if !p.IsSetIsRequired() {
+		return PluginParameter_IsRequired_DEFAULT
+	}
+	return *p.IsRequired
+}
+
+var PluginParameter_Type_DEFAULT string
+
+func (p *PluginParameter) GetType() (v string) {
+	if !p.IsSetType() {
+		return PluginParameter_Type_DEFAULT
+	}
+	return *p.Type
+}
+
+var PluginParameter_SubParameters_DEFAULT []*PluginParameter
+
+func (p *PluginParameter) GetSubParameters() (v []*PluginParameter) {
+	if !p.IsSetSubParameters() {
+		return PluginParameter_SubParameters_DEFAULT
+	}
+	return p.SubParameters
+}
+
+var PluginParameter_SubType_DEFAULT string
+
+func (p *PluginParameter) GetSubType() (v string) {
+	if !p.IsSetSubType() {
+		return PluginParameter_SubType_DEFAULT
+	}
+	return *p.SubType
+}
+
+var PluginParameter_AssistType_DEFAULT int64
+
+func (p *PluginParameter) GetAssistType() (v int64) {
+	if !p.IsSetAssistType() {
+		return PluginParameter_AssistType_DEFAULT
+	}
+	return *p.AssistType
+}
+func (p *PluginParameter) SetName(val *string) {
+	p.Name = val
+}
+func (p *PluginParameter) SetDescription(val *string) {
+	p.Description = val
+}
+func (p *PluginParameter) SetIsRequired(val *bool) {
+	p.IsRequired = val
+}
+func (p *PluginParameter) SetType(val *string) {
+	p.Type = val
+}
+func (p *PluginParameter) SetSubParameters(val []*PluginParameter) {
+	p.SubParameters = val
+}
+func (p *PluginParameter) SetSubType(val *string) {
+	p.SubType = val
+}
+func (p *PluginParameter) SetAssistType(val *int64) {
+	p.AssistType = val
+}
+
+func (p *PluginParameter) IsSetName() bool {
+	return p.Name != nil
+}
+
+func (p *PluginParameter) IsSetDescription() bool {
+	return p.Description != nil
+}
+
+func (p *PluginParameter) IsSetIsRequired() bool {
+	return p.IsRequired != nil
+}
+
+func (p *PluginParameter) IsSetType() bool {
+	return p.Type != nil
+}
+
+func (p *PluginParameter) IsSetSubParameters() bool {
+	return p.SubParameters != nil
+}
+
+func (p *PluginParameter) IsSetSubType() bool {
+	return p.SubType != nil
+}
+
+func (p *PluginParameter) IsSetAssistType() bool {
+	return p.AssistType != nil
+}
+
+func (p *PluginParameter) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("PluginParameter(%+v)", *p)
+}
+
+type WorkflowDetail struct {
+	ID          *int64          `thrift:"id,1,optional" json:"id,omitempty"`
+	Name        *string         `thrift:"name,2,optional" json:"name,omitempty"`
+	Description *string         `thrift:"description,3,optional" json:"description,omitempty"`
+	IconURL     *string         `thrift:"icon_url,4,optional" json:"icon_url,omitempty"`
+	Status      *int64          `thrift:"status,5,optional" json:"status,omitempty"`
+	Type        *int64          `thrift:"type,6,optional" json:"type,omitempty"`
+	PluginID    *int64          `thrift:"plugin_id,7,optional" json:"plugin_id,omitempty"`
+	IsOfficial  *bool           `thrift:"is_official,8,optional" json:"is_official,omitempty"`
+	APIDetail   *PluginAPIDetal `thrift:"api_detail,9,optional" json:"api_detail,omitempty"`
+}
+
+func NewWorkflowDetail() *WorkflowDetail {
+	return &WorkflowDetail{}
+}
+
+func (p *WorkflowDetail) InitDefault() {
+}
+
+var WorkflowDetail_ID_DEFAULT int64
+
+func (p *WorkflowDetail) GetID() (v int64) {
+	if !p.IsSetID() {
+		return WorkflowDetail_ID_DEFAULT
+	}
+	return *p.ID
+}
+
+var WorkflowDetail_Name_DEFAULT string
+
+func (p *WorkflowDetail) GetName() (v string) {
+	if !p.IsSetName() {
+		return WorkflowDetail_Name_DEFAULT
+	}
+	return *p.Name
+}
+
+var WorkflowDetail_Description_DEFAULT string
+
+func (p *WorkflowDetail) GetDescription() (v string) {
+	if !p.IsSetDescription() {
+		return WorkflowDetail_Description_DEFAULT
+	}
+	return *p.Description
+}
+
+var WorkflowDetail_IconURL_DEFAULT string
+
+func (p *WorkflowDetail) GetIconURL() (v string) {
+	if !p.IsSetIconURL() {
+		return WorkflowDetail_IconURL_DEFAULT
+	}
+	return *p.IconURL
+}
+
+var WorkflowDetail_Status_DEFAULT int64
+
+func (p *WorkflowDetail) GetStatus() (v int64) {
+	if !p.IsSetStatus() {
+		return WorkflowDetail_Status_DEFAULT
+	}
+	return *p.Status
+}
+
+var WorkflowDetail_Type_DEFAULT int64
+
+func (p *WorkflowDetail) GetType() (v int64) {
+	if !p.IsSetType() {
+		return WorkflowDetail_Type_DEFAULT
+	}
+	return *p.Type
+}
+
+var WorkflowDetail_PluginID_DEFAULT int64
+
+func (p *WorkflowDetail) GetPluginID() (v int64) {
+	if !p.IsSetPluginID() {
+		return WorkflowDetail_PluginID_DEFAULT
+	}
+	return *p.PluginID
+}
+
+var WorkflowDetail_IsOfficial_DEFAULT bool
+
+func (p *WorkflowDetail) GetIsOfficial() (v bool) {
+	if !p.IsSetIsOfficial() {
+		return WorkflowDetail_IsOfficial_DEFAULT
+	}
+	return *p.IsOfficial
+}
+
+var WorkflowDetail_APIDetail_DEFAULT *PluginAPIDetal
+
+func (p *WorkflowDetail) GetAPIDetail() (v *PluginAPIDetal) {
+	if !p.IsSetAPIDetail() {
+		return WorkflowDetail_APIDetail_DEFAULT
+	}
+	return p.APIDetail
+}
+func (p *WorkflowDetail) SetID(val *int64) {
+	p.ID = val
+}
+func (p *WorkflowDetail) SetName(val *string) {
+	p.Name = val
+}
+func (p *WorkflowDetail) SetDescription(val *string) {
+	p.Description = val
+}
+func (p *WorkflowDetail) SetIconURL(val *string) {
+	p.IconURL = val
+}
+func (p *WorkflowDetail) SetStatus(val *int64) {
+	p.Status = val
+}
+func (p *WorkflowDetail) SetType(val *int64) {
+	p.Type = val
+}
+func (p *WorkflowDetail) SetPluginID(val *int64) {
+	p.PluginID = val
+}
+func (p *WorkflowDetail) SetIsOfficial(val *bool) {
+	p.IsOfficial = val
+}
+func (p *WorkflowDetail) SetAPIDetail(val *PluginAPIDetal) {
+	p.APIDetail = val
+}
+
+func (p *WorkflowDetail) IsSetID() bool {
+	return p.ID != nil
+}
+
+func (p *WorkflowDetail) IsSetName() bool {
+	return p.Name != nil
+}
+
+func (p *WorkflowDetail) IsSetDescription() bool {
+	return p.Description != nil
+}
+
+func (p *WorkflowDetail) IsSetIconURL() bool {
+	return p.IconURL != nil
+}
+
+func (p *WorkflowDetail) IsSetStatus() bool {
+	return p.Status != nil
+}
+
+func (p *WorkflowDetail) IsSetType() bool {
+	return p.Type != nil
+}
+
+func (p *WorkflowDetail) IsSetPluginID() bool {
+	return p.PluginID != nil
+}
+
+func (p *WorkflowDetail) IsSetIsOfficial() bool {
+	return p.IsOfficial != nil
+}
+
+func (p *WorkflowDetail) IsSetAPIDetail() bool {
+	return p.APIDetail != nil
+}
+
+func (p *WorkflowDetail) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("WorkflowDetail(%+v)", *p)
+}
+
+type KnowledgeDetail struct {
+	ID         *string     `thrift:"id,1,optional" json:"id,omitempty"`
+	Name       *string     `thrift:"name,2,optional" json:"name,omitempty"`
+	IconURL    *string     `thrift:"icon_url,3,optional" json:"icon_url,omitempty"`
+	FormatType DataSetType `thrift:"format_type,4,default,DataSetType" json:"format_type"`
+}
+
+func NewKnowledgeDetail() *KnowledgeDetail {
+	return &KnowledgeDetail{}
+}
+
+func (p *KnowledgeDetail) InitDefault() {
+}
+
+var KnowledgeDetail_ID_DEFAULT string
+
+func (p *KnowledgeDetail) GetID() (v string) {
+	if !p.IsSetID() {
+		return KnowledgeDetail_ID_DEFAULT
+	}
+	return *p.ID
+}
+
+var KnowledgeDetail_Name_DEFAULT string
+
+func (p *KnowledgeDetail) GetName() (v string) {
+	if !p.IsSetName() {
+		return KnowledgeDetail_Name_DEFAULT
+	}
+	return *p.Name
+}
+
+var KnowledgeDetail_IconURL_DEFAULT string
+
+func (p *KnowledgeDetail) GetIconURL() (v string) {
+	if !p.IsSetIconURL() {
+		return KnowledgeDetail_IconURL_DEFAULT
+	}
+	return *p.IconURL
+}
+
+func (p *KnowledgeDetail) GetFormatType() (v DataSetType) {
+	return p.FormatType
+}
+func (p *KnowledgeDetail) SetID(val *string) {
+	p.ID = val
+}
+func (p *KnowledgeDetail) SetName(val *string) {
+	p.Name = val
+}
+func (p *KnowledgeDetail) SetIconURL(val *string) {
+	p.IconURL = val
+}
+func (p *KnowledgeDetail) SetFormatType(val DataSetType) {
+	p.FormatType = val
+}
+
+func (p *KnowledgeDetail) IsSetID() bool {
+	return p.ID != nil
+}
+
+func (p *KnowledgeDetail) IsSetName() bool {
+	return p.Name != nil
+}
+
+func (p *KnowledgeDetail) IsSetIconURL() bool {
+	return p.IconURL != nil
+}
+
+func (p *KnowledgeDetail) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("KnowledgeDetail(%+v)", *p)
 }
 
 type UserInfo struct {

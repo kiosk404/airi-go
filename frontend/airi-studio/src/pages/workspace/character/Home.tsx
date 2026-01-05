@@ -2,34 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Spin, Toast } from "@douyinfe/semi-ui";
 import CreateCharacterCard from "./CreateCharacterCard";
 import CharacterCardSpace from "./CharacterCardList";
-import { listCharacters, type CharacterItem } from "@/services/character";
-
-interface Character {
-    id: string;
-    name: string;
-    description: string;
-    isStarred: boolean;
-    updateAt: number;
-}
+import { listCharacters, type IntelligenceData } from "@/services/character";
 
 const WorkSpaceContent: React.FC = () => {
-    const [characters, setCharacters] = useState<Character[]>([]);
+    const [characters, setCharacters] = useState<IntelligenceData[]>([]);
     const [loading, setLoading] = useState(true);
 
     // 从后端加载角色列表
     const loadCharacters = async () => {
         setLoading(true);
         try {
-            const response = await listCharacters({ page: 1, page_size: 50 });
-            if (response.code === 0 && response.data?.items !== undefined) {
-                const list = response.data.items.map((item: CharacterItem) => ({
-                    id: item.id,
-                    name: item.name,
-                    description: item.description || '',
-                    isStarred: false, // TODO: 后续从后端获取收藏状态
-                    updateAt: item.updated_at,
-                }));
-                setCharacters(list);
+            const response = await listCharacters({ size: 50 });
+            if (response.code === 0 && response.data?.intelligences) {
+                setCharacters(response.data.intelligences);
             } else {
                 Toast.error(response.msg || '获取角色列表失败');
             }
@@ -46,7 +31,11 @@ const WorkSpaceContent: React.FC = () => {
     }, []);
 
     const handleStarToggle = (id: string) => {
-        setCharacters(characters.map(c => c.id === id ? {...c, isStarred: !c.isStarred} : c));
+        setCharacters(characters.map(c =>
+            c.basic_info.id === id
+                ? { ...c, favorite_info: { is_fav: !c.favorite_info?.is_fav } }
+                : c
+        ));
     };
 
     return (
@@ -60,15 +49,17 @@ const WorkSpaceContent: React.FC = () => {
             ) : (
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 24 }}>
                     <CreateCharacterCard onSuccess={loadCharacters} />
-                    {characters.map((character) => (
+                    {characters.map((item) => (
                         <CharacterCardSpace
-                            key={character.id}
-                            id={character.id}
-                            name={character.name}
-                            description={character.description}
-                            isStarred={character.isStarred}
+                            key={item.basic_info.id}
+                            id={item.basic_info.id}
+                            name={item.basic_info.name}
+                            avatar={item.basic_info.icon_url || item.basic_info.icon_uri}
+                            description={item.basic_info.description || ''}
+                            isStarred={item.favorite_info?.is_fav || false}
                             onStarToggle={handleStarToggle}
-                            updatedAt={character.updateAt}
+                            onDelete={loadCharacters}
+                            updatedAt={parseInt(item.basic_info.update_time) || 0}
                         />
                     ))}
                 </div>

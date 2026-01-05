@@ -3,30 +3,32 @@ package service
 import (
 	"context"
 	"fmt"
+	"math/rand/v2"
 
 	"github.com/cloudwego/eino/compose"
 	"github.com/cloudwego/eino/schema"
+	"github.com/jinzhu/copier"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/repo"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/service/agentflow"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/modules/conversation/agent_run/pkg"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
-	"github.com/kiosk404/airi-go/backend/pkg/jsoncache"
+	"github.com/kiosk404/airi-go/backend/pkg/kvstore"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
 
 type singleAgentImpl struct {
 	AgentDraftRepo   repo.SingleAgentDraftRepo
 	AgentVersionRepo repo.SingleAgentVersionRepo
-	PublishInfoRepo  *jsoncache.JsonCache[entity.PublishInfo]
+	PublishInfoRepo  *kvstore.KVStore[entity.PublishInfo]
 
 	CPStore compose.CheckPointStore
 }
 
 func NewService(
 	agentDraft repo.SingleAgentDraftRepo, agentVersion repo.SingleAgentVersionRepo,
-	publishInfoRepo *jsoncache.JsonCache[entity.PublishInfo],
+	publishInfoRepo *kvstore.KVStore[entity.PublishInfo],
 	cps compose.CheckPointStore) SingleAgent {
 	s := &singleAgentImpl{
 		AgentDraftRepo:   agentDraft,
@@ -151,6 +153,27 @@ func (s singleAgentImpl) UpdateAgentDraftDisplayInfo(ctx context.Context, userID
 	}
 
 	return s.AgentDraftRepo.UpdateDisplayInfo(ctx, userID, do)
+}
+
+func (s singleAgentImpl) DuplicateInMemory(ctx context.Context, req *entity.DuplicateInfo) (newAgent *entity.SingleAgent, err error) {
+	srcAgent := req.DraftAgent
+	if srcAgent == nil {
+		return nil, errorx.New(errno.ErrAgentInvalidParamCode,
+			errorx.KVf("msg", "srcAgent is nil"))
+	}
+
+	newAgent = &entity.SingleAgent{}
+	err = copier.CopyWithOption(newAgent, srcAgent, copier.Option{DeepCopy: true, IgnoreEmpty: true})
+	if err != nil {
+		return nil, err
+	}
+
+	copySuffixNum := rand.IntN(1000)
+	newAgent.Name = fmt.Sprintf("%v%03d", srcAgent.Name, copySuffixNum)
+	newAgent.CreatorID = req.UserID
+	newAgent.AgentID = req.NewAgentID
+
+	return newAgent, nil
 }
 
 func (s singleAgentImpl) GetAgentDraftDisplayInfo(ctx context.Context, userID, agentID int64) (*entity.AgentDraftDisplayInfo, error) {

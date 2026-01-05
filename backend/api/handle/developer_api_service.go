@@ -6,13 +6,11 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
-	"strconv"
 	"time"
 	"unicode/utf8"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kiosk404/airi-go/backend/api/model/app/developer_api"
-	"github.com/kiosk404/airi-go/backend/api/model/playground"
 	"github.com/kiosk404/airi-go/backend/application/ctxutil"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/application/singleagent"
 	uploadapp "github.com/kiosk404/airi-go/backend/modules/data/upload/application"
@@ -123,85 +121,6 @@ func UpdateDraftBotDisplayInfo(c *gin.Context) {
 	}
 
 	resp, err := singleagent.SingleAgentSVC.UpdateAgentDraftDisplayInfo(ctx, &req)
-	if err != nil {
-		internalServerErrorResponse(c, err)
-		return
-	}
-
-	c.JSON(http.StatusOK, resp)
-}
-
-// DraftBotList .
-// @router /api/draftbot/list [POST]
-func DraftBotList(c *gin.Context) {
-	var err error
-	ctx := c.Request.Context()
-
-	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
-	pageSize, _ := strconv.Atoi(c.DefaultQuery("page_size", "10"))
-
-	agents, total, err := singleagent.SingleAgentSVC.ListAgentDraft(ctx, page, pageSize)
-	if err != nil {
-		internalServerErrorResponse(c, err)
-		return
-	}
-
-	type AgentItem struct {
-		ID          string `json:"id"`
-		Name        string `json:"name"`
-		Description string `json:"description"`
-		IconURI     string `json:"icon_uri"`
-		CreatedAt   int64  `json:"created_at"`
-		UpdatedAt   int64  `json:"updated_at"`
-	}
-
-	items := make([]AgentItem, 0, len(agents))
-	for _, agent := range agents {
-		items = append(items, AgentItem{
-			ID:          strconv.FormatInt(agent.AgentID, 10),
-			Name:        agent.Name,
-			Description: agent.Desc,
-			IconURI:     agent.IconURI,
-			CreatedAt:   agent.CreatedAt,
-			UpdatedAt:   agent.UpdatedAt,
-		})
-	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"code":    0,
-		"message": "success",
-		"data": gin.H{
-			"items":     items,
-			"total":     total,
-			"page":      page,
-			"page_size": pageSize,
-		},
-	})
-}
-
-// DraftBotUpdateInfo .
-// @router /api/playground_api/draftbot/update_draft_bot_info [POST]
-func DraftBotUpdateInfo(c *gin.Context) {
-	var req playground.UpdateDraftBotInfoAgwRequest
-	ctx := c.Request.Context()
-
-	// 绑定并校验参数
-	if err := c.ShouldBindJSON(&req); err != nil {
-		invalidParamRequestResponse(c, err.Error())
-		return
-	}
-
-	if req.BotInfo == nil {
-		invalidParamRequestResponse(c, "bot info is nil")
-		return
-	}
-
-	if req.BotInfo.BotId == nil {
-		invalidParamRequestResponse(c, "bot id is nil")
-		return
-	}
-
-	resp, err := singleagent.SingleAgentSVC.UpdateSingleAgentDraft(ctx, &req)
 	if err != nil {
 		internalServerErrorResponse(c, err)
 		return

@@ -25,12 +25,11 @@ struct GetDraftIntelligenceListOption {
 }
 
 struct GetDraftIntelligenceListRequest {
-    1: required i64 space_id (agw.js_conv="str", api.js_conv="true"),
-    2: optional string name,
-    3: optional bool has_published,
-    4: optional list<intelligence_common_struct.IntelligenceStatus> status,
-    5: optional list<intelligence_common_struct.IntelligenceType> types,
-    6: optional SearchScope search_scope,
+    1: optional string name,
+    2: optional bool has_published,
+    3: optional list<intelligence_common_struct.IntelligenceStatus> status,
+    4: optional list<intelligence_common_struct.IntelligenceType> types,
+    5: optional SearchScope search_scope,
 
     51: optional bool is_fav,
     52: optional bool recently_open,
@@ -46,7 +45,6 @@ struct GetDraftIntelligenceListRequest {
 struct IntelligencePublishInfo {
     1: string                      publish_time,
     2: bool                        has_published,
-    3: list<common_struct.ConnectorInfo> connectors,
 }
 
 struct IntelligencePermissionInfo {

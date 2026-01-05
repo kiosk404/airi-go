@@ -31,6 +31,13 @@ func GetMessageList(c *gin.Context) {
 		return
 	}
 
+	// 检查 Scene 参数
+	if req.Scene == nil {
+		checkErr := errorx.New(errno.ErrConversationInvalidParamCode, errorx.KV("msg", "scene is required"))
+		invalidParamRequestResponse(c, checkErr.Error())
+		return
+	}
+
 	resp, err := application.ConversationSVC.GetMessageList(ctx, &req)
 	if err != nil {
 		internalServerErrorResponse(c, err)

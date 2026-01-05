@@ -2,12 +2,17 @@ package singleagent
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/kiosk404/airi-go/backend/api/model/playground"
 	"github.com/kiosk404/airi-go/backend/application/ctxutil"
+	"github.com/kiosk404/airi-go/backend/modules/component/agent/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg/errno"
+	modelmgr "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr"
+	model "github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
 )
 
 func (s *SingleAgentApplicationService) GetAgentBotInfo(ctx context.Context, req *playground.GetDraftBotInfoAgwRequest) (*playground.GetDraftBotInfoAgwResponse, error) {
@@ -36,11 +41,11 @@ func (s *SingleAgentApplicationService) GetAgentBotInfo(ctx context.Context, req
 	//if err != nil {
 	//	return nil, err
 	//}
-	//
-	//modelInfos, err := s.fetchModelDetails(ctx, agentInfo)
-	//if err != nil {
-	//	return nil, err
-	//}
+
+	modelInfos, err := s.fetchModelDetails(ctx, agentInfo)
+	if err != nil {
+		return nil, err
+	}
 	//
 	//toolInfos, err := s.fetchToolDetails(ctx, agentInfo, req)
 	//if err != nil {
@@ -69,9 +74,9 @@ func (s *SingleAgentApplicationService) GetAgentBotInfo(ctx context.Context, req
 
 	return &playground.GetDraftBotInfoAgwResponse{
 		Data: &playground.GetDraftBotInfoAgwData{
-			BotInfo:       vo,
+			BotInfo: vo,
 			BotOptionData: &playground.BotOptionData{
-				//ModelDetailMap:      modelInfoDo2Vo(modelInfos),
+				ModelDetailMap: modelInfoDo2Vo(modelInfos),
 				//KnowledgeDetailMap:  knowledgeInfoDo2Vo(klInfos),
 				//PluginAPIDetailMap:  toolInfoDo2Vo(toolInfos),
 				//PluginDetailMap:     s.pluginInfoDo2Vo(ctx, pluginInfos),
@@ -84,21 +89,38 @@ func (s *SingleAgentApplicationService) GetAgentBotInfo(ctx context.Context, req
 	}, nil
 }
 
-//
-//func (s *SingleAgentApplicationService) fetchModelDetails(ctx context.Context, agentInfo *entity.SingleAgent) ([]*modelmgr.Model, error) {
-//	if agentInfo.ModelInfo.ModelId == nil {
-//		return nil, nil
-//	}
-//
-//	modelID := agentInfo.ModelInfo.GetModelId()
-//	modelInfos, err := config.ModelConf().MGetModelByID(ctx, []int64{modelID})
-//
-//	if err != nil {
-//		return nil, fmt.Errorf("fetch model(%d) details failed: %v", modelID, err)
-//	}
-//
-//	return modelInfos, nil
-//}
+func modelInfoDo2Vo(modelInfos []*model.Model) map[int64]*playground.ModelDetail {
+	return slices.ToMap(modelInfos, func(e *model.Model) (int64, *playground.ModelDetail) {
+		return e.ID, toModelDetail(e)
+	})
+}
+
+func toModelDetail(m *model.Model) *playground.ModelDetail {
+	return &playground.ModelDetail{
+		Name:         ptr.Of(m.DisplayInfo.Name),
+		ModelName:    ptr.Of(m.Connection.BaseConnInfo.Model),
+		ModelID:      ptr.Of(m.ID),
+		ModelFamily:  ptr.Of(int64(m.Provider.ModelClass)),
+		ModelIconURL: ptr.Of(m.Provider.IconURL),
+	}
+}
+
+func (s *SingleAgentApplicationService) fetchModelDetails(ctx context.Context, agentInfo *entity.SingleAgent) ([]*model.Model, error) {
+	if agentInfo.ModelInfo.ModelId == nil {
+		return nil, nil
+	}
+
+	modelID := agentInfo.ModelInfo.GetModelId()
+
+	modelInfo, err := modelmgr.DefaultSVC().GetModelByID(ctx, modelID)
+
+	if err != nil {
+		return nil, fmt.Errorf("fetch model(%d) details failed: %v", modelID, err)
+	}
+
+	return []*model.Model{modelInfo}, nil
+}
+
 //
 //func (s *SingleAgentApplicationService) fetchKnowledgeDetails(ctx context.Context, agentInfo *entity.SingleAgent) ([]*knowledgeModel.Knowledge, error) {
 //	knowledgeIDs := make([]int64, 0, len(agentInfo.Knowledge.KnowledgeInfo))

@@ -91,6 +91,25 @@ export interface SuggestReplyInfo {
     enabled?: boolean;
 }
 
+/** 模型详情 */
+export interface ModelDetail {
+    name?: string;
+    model_name?: string;
+    model_id?: string;
+    model_family?: string;
+    model_icon_url?: string;
+}
+
+/** Bot 选项数据 */
+export interface BotOptionData {
+    model_detail_map?: Record<string, ModelDetail>;
+    plugin_detail_map?: Record<string, unknown>;
+    plugin_api_detail_map?: Record<string, unknown>;
+    workflow_detail_map?: Record<string, unknown>;
+    knowledge_detail_map?: Record<string, unknown>;
+    shortcut_command_list?: unknown[];
+}
+
 /** Bot 完整信息 */
 export interface BotInfo {
     BotId: string;
@@ -124,6 +143,7 @@ export interface GetDraftBotInfoRequest {
 /** 获取 Bot 信息数据 */
 export interface GetDraftBotInfoData {
     bot_info?: BotInfo;
+    bot_option_data?: BotOptionData;
     editable?: boolean;
     has_unpublished_change?: boolean;
 }

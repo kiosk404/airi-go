@@ -12,6 +12,7 @@ type CreateCharacterModalProps = {
 function CreateCharacterModal({dialogVisible, setDialogVisible, onSuccess} : CreateCharacterModalProps) {
     const [formData, setFormData] = useState({
         avatar: '',
+        avatar_url: '',
         name: '',
         description: ''
     })
@@ -37,7 +38,7 @@ function CreateCharacterModal({dialogVisible, setDialogVisible, onSuccess} : Cre
             if (response.code === 0) {
                 Toast.success('创建成功');
                 setDialogVisible(false);
-                setFormData({ avatar: '', name: '', description: '' });
+                setFormData({ avatar: '', avatar_url: '', name: '', description: '' });
                 onSuccess?.();
             } else {
                 Toast.error(response.msg || '创建失败');
@@ -67,6 +68,7 @@ function CreateCharacterModal({dialogVisible, setDialogVisible, onSuccess} : Cre
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'x-requested-with': 'XMLHttpRequest',
                     },
                     body: JSON.stringify({
                         file_head: {
@@ -78,8 +80,9 @@ function CreateCharacterModal({dialogVisible, setDialogVisible, onSuccess} : Cre
                 });
 
                 const result = await response.json();
-                if (result.code === 0 && result.url) {
-                    setFormData(prev => ({ ...prev, avatar: result.url }));
+                if (result.code === 0 && result.data?.upload_url) {
+                    setFormData(prev => ({ ...prev,
+                        avatar: result.data.upload_uri, avatar_url: result.data.upload_url }));
                     Toast.success('头像上传成功');
                 } else {
                     Toast.error(result.msg || '上传失败');
@@ -162,8 +165,8 @@ function CreateCharacterModal({dialogVisible, setDialogVisible, onSuccess} : Cre
                                     }}
                                     onClick={handleAvatarClick}
                                 >
-                                    {formData.avatar ? (
-                                        <img src={formData.avatar} alt="角色头像" style={{ width: '100%', height: '100%', objectFit: 'cover'}} />
+                                    {formData.avatar_url ? (
+                                        <img src={formData.avatar_url} alt="角色头像" style={{ width: '100%', height: '100%', objectFit: 'cover'}} />
                                     ) : (
                                         <span style={{ color: '#999'}}>{uploading ? '...' : '🤖'}</span>
                                     )}

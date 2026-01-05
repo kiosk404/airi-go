@@ -23,8 +23,15 @@ func Register(r *gin.Engine) {
 			_draftbot.POST("/delete", append(_deletedraftbotMw(), handle.DeleteBotDelete)...)
 			_draftbot.POST("/get_display_info", append(_getdraftbotdisplayinfoMw(), handle.GetDraftBotDisplayInfo)...)
 			_draftbot.POST("/update_display_info", append(_updatedraftbotdisplayinfoMw(), handle.UpdateDraftBotDisplayInfo)...)
-
-			_draftbot.GET("/list", append(_draftbotlistMw(), handle.DraftBotList)...)
+		}
+		{
+			_intelligence_api := _api.Group("/intelligence_api", _intelligence_apiMw()...)
+			{
+				_search := _intelligence_api.Group("/search", _searchMw()...)
+				//_search.POST("/get_draft_intelligence_info", append(_getdraftintelligenceinfoMw(), handle.GetDraftIntelligenceInfo)...)
+				_search.POST("/get_draft_intelligence_list", append(_getdraftintelligencelistMw(), handle.GetDraftIntelligenceList)...)
+				//_search.POST("/get_recently_edit_intelligence", append(_getuserrecentlyeditintelligenceMw(), handle.GetUserRecentlyEditIntelligence)...)
+			}
 		}
 		{
 			_bot := _api.Group("/bot", _botMw()...)

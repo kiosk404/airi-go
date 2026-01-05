@@ -7,7 +7,7 @@ import SkillPanel from './SkillPanel.tsx';
 import { Shuffle } from "@/components/base/bit"
 import { useNavigate, useParams } from 'react-router-dom';
 import * as draftbotApi from '@/services/draftbot';
-import type { BotInfo, DraftBotDisplayInfoData } from '@/services/draftbot';
+import type { BotInfo, DraftBotDisplayInfoData, BotOptionData } from '@/services/draftbot';
 
 
 const { Header } = Layout;
@@ -62,6 +62,7 @@ const PlaygroundPage: React.FC = () => {
 
     const [botInfo, setBotInfo] = useState<BotInfo | null>(null);
     const [displayInfo, setDisplayInfo] = useState<DraftBotDisplayInfoData | null>(null);
+    const [botOptionData, setBotOptionData] = useState<BotOptionData | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -85,6 +86,10 @@ const PlaygroundPage: React.FC = () => {
 
                 if (botInfoResp.data?.bot_info) {
                     setBotInfo(botInfoResp.data.bot_info);
+                }
+
+                if (botInfoResp.data?.bot_option_data) {
+                    setBotOptionData(botInfoResp.data.bot_option_data);
                 }
             } catch (error) {
                 console.error('Failed to fetch bot data:', error);
@@ -119,7 +124,7 @@ const PlaygroundPage: React.FC = () => {
                     <EditorPanel botInfo={botInfo} />
                 </div>
                 <div style={{ flex: 1, borderRight: '1px solid #e0e0e0', overflow: 'auto' }}>
-                    <SkillPanel botInfo={botInfo} displayInfo={displayInfo} />
+                    <SkillPanel botInfo={botInfo} displayInfo={displayInfo} botOptionData={botOptionData} />
                 </div>
                 <div style={{ flex: 1, overflow: 'auto' }}>
                     <ChatPanel botId={botId} />
