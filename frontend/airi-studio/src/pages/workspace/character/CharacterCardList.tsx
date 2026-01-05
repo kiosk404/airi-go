@@ -1,14 +1,17 @@
-import { Avatar, Card, Dropdown, Button } from "@douyinfe/semi-ui";
+import {Avatar, Card, Dropdown, Button, Toast} from "@douyinfe/semi-ui";
 import { IconStar, IconMore, IconEdit, IconDelete } from "@douyinfe/semi-icons";
 import { useNavigate } from "react-router-dom";
+import { deleteCharacter } from "@/services/character/api-client";
 
 interface CharacterCardProps {
     id: string;                     // 角色id
     name: string;                   // 角色名
+    avatar: string;                 // 头像url
     description: string;            // 简介
     updatedAt: number;              // 更新时间戳（毫秒）
     isStarred?: boolean;            // 是否收藏
     onStarToggle?: (id: string) => void;  // 收藏状态切换回调
+    onDelete?: (id: string) => void;  // 删除成功回调
 }
 
 // 格式化时间戳为可读字符串
@@ -23,7 +26,7 @@ const formatTime = (timestamp: number): string => {
 };
 
 const CharacterCardSpace: React.FC<CharacterCardProps> = ({
-                                                              id, name, description, updatedAt, isStarred = false, onStarToggle }) => {
+                                                              id, name, avatar, description, updatedAt, isStarred = false, onStarToggle, onDelete }) => {
 
     const navigate = useNavigate();
 
@@ -41,9 +44,18 @@ const CharacterCardSpace: React.FC<CharacterCardProps> = ({
         console.log(`编辑角色: ${name} (ID: ${id})`);
     };
 
-    const handleDelete = (e: React.MouseEvent) => {
+    const handleDelete = async (e: React.MouseEvent) => {
         e.stopPropagation();
-        console.log(`删除角色: ${name} (ID: ${id})`);
+        try {
+            await deleteCharacter({
+                bot_id: id
+            });
+            Toast.success('删除成功');
+            onDelete?.(id)  // 删除成功后调用回调函数
+        } catch (error) {
+            Toast.error('删除失败');
+            console.error(`删除角色失败: ${name} (ID: ${id})`, error);
+        }
     };
 
     return (
@@ -84,7 +96,7 @@ const CharacterCardSpace: React.FC<CharacterCardProps> = ({
                             <Avatar
                                 shape="square"
                                 style={{ width: '55px', height: '55px' }}
-                                src="https://raw.githubusercontent.com/moeru-ai/airi/refs/heads/main/docs/content/public/logo-dark.avif"
+                                src={avatar}
                             />
                         </div>
                     </div>

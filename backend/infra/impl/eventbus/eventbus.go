@@ -36,14 +36,12 @@ func (c consumerServiceImpl) RegisterConsumer(nameServer, topic, group string, c
 		return nsq.RegisterConsumer(nameServer, topic, group, consumerHandler, opts...)
 	case "rmq":
 		return rmq.RegisterConsumer(nameServer, topic, group, consumerHandler, opts...)
-	case "gochannel":
+	default:
 		if err := gochannel.InitGoChannel(); err != nil {
 			return err
 		}
 		return gochannel.RegisterConsumer(nameServer, topic, group, consumerHandler, opts...)
 	}
-
-	return fmt.Errorf("invalid mq type: %s , only support nsq, kafka, rmq", tp)
 }
 
 func NewProducer(nameServer, topic, group string, retries int) (eventbus.Producer, error) {

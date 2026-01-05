@@ -1,6 +1,8 @@
 package singleagent
 
 import (
+	"context"
+
 	"github.com/cloudwego/eino/compose"
 	"github.com/kiosk404/airi-go/backend/infra/contract/cache"
 	"github.com/kiosk404/airi-go/backend/infra/contract/idgen"
@@ -12,7 +14,8 @@ import (
 	singleagent "github.com/kiosk404/airi-go/backend/modules/component/agent/domain/service"
 	search "github.com/kiosk404/airi-go/backend/modules/data/search/domain/service"
 	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/service"
-	"github.com/kiosk404/airi-go/backend/pkg/jsoncache"
+	modelmgr "github.com/kiosk404/airi-go/backend/modules/llm/domain/service"
+	"github.com/kiosk404/airi-go/backend/pkg/kvstore"
 )
 
 type (
@@ -30,12 +33,13 @@ type ServiceComponents struct {
 	UserDomainSVC user.User
 	CPStore       compose.CheckPointStore
 	EventBus      search.ProjectEventBus
+	ModelMgrSVC   modelmgr.ModelManager
 }
 
 func InitService(c *ServiceComponents) (*SingleAgentApplicationService, error) {
 	agentDraft := repo.NewSingleAgentRepo(c.DB, c.IDGen, c.Cache)
 	agentVersion := repo.NewSingleAgentVersionRepo(c.DB, c.IDGen)
-	publishInfoRepo := jsoncache.New[entity.PublishInfo]("agent:publish:last:", c.Cache)
+	publishInfoRepo := kvstore.New[entity.PublishInfo](c.DB.NewSession(context.Background()).DB())
 	cps := c.CPStore
 
 	singleAgentDomainSVC := singleagent.NewService(agentDraft, agentVersion, publishInfoRepo, cps)

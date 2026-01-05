@@ -79,12 +79,14 @@ export interface GetMessageListRequest {
     page_num?: number;
     page_size?: number;
     cursor?: string;
+    scene?: number;
 }
 
 /** 获取消息列表响应 */
 export interface GetMessageListResponse {
     code: number;
     msg: string;
+    conversation_id?: string;
     messages?: ChatMessage[];
     has_more?: boolean;
     cursor?: string;

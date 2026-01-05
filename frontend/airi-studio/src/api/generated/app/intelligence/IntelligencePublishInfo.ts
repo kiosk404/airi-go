@@ -5,23 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
 export interface IIntelligencePublishInfo {
     publish_time?: string;
     has_published?: boolean;
-    connectors?: Array<__ROOT_NAMESPACE__.IConnectorInfo>;
 }
 export interface IIntelligencePublishInfoArgs {
     publish_time?: string;
     has_published?: boolean;
-    connectors?: Array<__ROOT_NAMESPACE__.IConnectorInfoArgs>;
 }
 export const IntelligencePublishInfoCodec: thrift.IStructCodec<IIntelligencePublishInfoArgs, IIntelligencePublishInfo> = {
     encode(args: IIntelligencePublishInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
             publish_time: args.publish_time,
-            has_published: args.has_published,
-            connectors: args.connectors
+            has_published: args.has_published
         };
         output.writeStructBegin("IntelligencePublishInfo");
         if (obj.publish_time != null) {
@@ -32,15 +28,6 @@ export const IntelligencePublishInfoCodec: thrift.IStructCodec<IIntelligencePubl
         if (obj.has_published != null) {
             output.writeFieldBegin("has_published", thrift.TType.BOOL, 2);
             output.writeBool(obj.has_published);
-            output.writeFieldEnd();
-        }
-        if (obj.connectors != null) {
-            output.writeFieldBegin("connectors", thrift.TType.LIST, 3);
-            output.writeListBegin(thrift.TType.STRUCT, obj.connectors.length);
-            obj.connectors.forEach((value_1: __ROOT_NAMESPACE__.IConnectorInfoArgs): void => {
-                __ROOT_NAMESPACE__.ConnectorInfoCodec.encode(value_1, output);
-            });
-            output.writeListEnd();
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -60,8 +47,8 @@ export const IntelligencePublishInfoCodec: thrift.IStructCodec<IIntelligencePubl
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.STRING) {
-                        const value_2: string = input.readString();
-                        _args.publish_time = value_2;
+                        const value_1: string = input.readString();
+                        _args.publish_time = value_1;
                     }
                     else {
                         input.skip(fieldType);
@@ -69,24 +56,8 @@ export const IntelligencePublishInfoCodec: thrift.IStructCodec<IIntelligencePubl
                     break;
                 case 2:
                     if (fieldType === thrift.TType.BOOL) {
-                        const value_3: boolean = input.readBool();
-                        _args.has_published = value_3;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
-                case 3:
-                    if (fieldType === thrift.TType.LIST) {
-                        const value_4: Array<__ROOT_NAMESPACE__.IConnectorInfo> = new Array<__ROOT_NAMESPACE__.IConnectorInfo>();
-                        const metadata_1: thrift.IThriftList = input.readListBegin();
-                        const size_1: number = metadata_1.size;
-                        for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_5: __ROOT_NAMESPACE__.IConnectorInfo = __ROOT_NAMESPACE__.ConnectorInfoCodec.decode(input);
-                            value_4.push(value_5);
-                        }
-                        input.readListEnd();
-                        _args.connectors = value_4;
+                        const value_2: boolean = input.readBool();
+                        _args.has_published = value_2;
                     }
                     else {
                         input.skip(fieldType);
@@ -101,34 +72,24 @@ export const IntelligencePublishInfoCodec: thrift.IStructCodec<IIntelligencePubl
         input.readStructEnd();
         return {
             publish_time: _args.publish_time,
-            has_published: _args.has_published,
-            connectors: _args.connectors
+            has_published: _args.has_published
         };
     }
 };
 export class IntelligencePublishInfo extends thrift.StructLike implements IIntelligencePublishInfo {
     public publish_time?: string;
     public has_published?: boolean;
-    public connectors?: Array<__ROOT_NAMESPACE__.IConnectorInfo>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IIntelligencePublishInfoArgs = {}) {
         super();
         if (args.publish_time != null) {
-            const value_6: string = args.publish_time;
-            this.publish_time = value_6;
+            const value_3: string = args.publish_time;
+            this.publish_time = value_3;
         }
         if (args.has_published != null) {
-            const value_7: boolean = args.has_published;
-            this.has_published = value_7;
-        }
-        if (args.connectors != null) {
-            const value_8: Array<__ROOT_NAMESPACE__.IConnectorInfo> = new Array<__ROOT_NAMESPACE__.IConnectorInfo>();
-            args.connectors.forEach((value_9: __ROOT_NAMESPACE__.IConnectorInfoArgs): void => {
-                const value_10: __ROOT_NAMESPACE__.IConnectorInfo = new __ROOT_NAMESPACE__.ConnectorInfo(value_9);
-                value_8.push(value_10);
-            });
-            this.connectors = value_8;
+            const value_4: boolean = args.has_published;
+            this.has_published = value_4;
         }
     }
     public static read(input: thrift.TProtocol): IntelligencePublishInfo {

@@ -1,6 +1,7 @@
 include "../../base.thrift"
 include "../../app/bot_common.thrift"
 include "./prompt_resource.thrift"
+include "./shortcut_command.thrift"
 
 namespace go playground
 
@@ -72,12 +73,75 @@ struct GetDraftBotInfoAgwData {
 }
 
 struct BotOptionData {
-//    1: optional map<i64,ModelDetail>        model_detail_map      // model details
-//    2: optional map<i64,PluginDetal>        plugin_detail_map     // plugin details
-//    3: optional map<i64,PluginAPIDetal>     plugin_api_detail_map // Plugin API Details
-//    4: optional map<i64,WorkflowDetail>     workflow_detail_map   // Workflow Details
-//    5: optional map<string,KnowledgeDetail> knowledge_detail_map  // Knowledge Details
-//    6: optional list<shortcut_command.ShortcutCommand>   shortcut_command_list  // Quick command list
+    1: optional map<i64,ModelDetail>        model_detail_map      // model details
+    2: optional map<i64,PluginDetal>        plugin_detail_map     // plugin details
+    3: optional map<i64,PluginAPIDetal>     plugin_api_detail_map // Plugin API Details
+    4: optional map<i64,WorkflowDetail>     workflow_detail_map   // Workflow Details
+    5: optional map<string,KnowledgeDetail> knowledge_detail_map  // Knowledge Details
+    6: optional list<shortcut_command.ShortcutCommand>   shortcut_command_list  // Quick command list
+}
+
+
+struct ModelDetail {
+    1: optional string name           // Model display name (to the user)
+    2: optional string model_name     // Model name (for internal)
+    3: optional i64    model_id       (agw.js_conv="str" api.js_conv="true") // Model ID
+    4: optional i64    model_family   // Model Category
+    5: optional string model_icon_url // IconURL
+}
+
+struct PluginDetal {
+    1: optional i64    id            (agw.js_conv="str" api.js_conv="true")
+    2: optional string name
+    3: optional string description
+    4: optional string icon_url
+    5: optional i64    plugin_type (agw.js_conv="str" api.js_conv="true")
+    6: optional i64    plugin_status (agw.js_conv="str" api.js_conv="true")
+    7: optional bool   is_official
+    9: optional bot_common.PluginFrom plugin_from //
+}
+
+struct PluginAPIDetal {
+    1: optional i64                   id          (agw.js_conv="str" api.js_conv="true")
+    2: optional string                name
+    3: optional string                description
+    4: optional list<PluginParameter> parameters
+    5: optional i64                   plugin_id   (agw.js_conv="str" api.js_conv="true")
+}
+
+struct PluginParameter {
+    1: optional string                name
+    2: optional string                description
+    3: optional bool                  is_required
+    4: optional string                type
+    5: optional list<PluginParameter> sub_parameters
+    6: optional string                sub_type       // If Type is an array, there is a subtype
+    7: optional i64                   assist_type
+}
+
+struct WorkflowDetail {
+    1: optional i64    id          (agw.js_conv="str" api.js_conv="true")
+    2: optional string name
+    3: optional string description
+    4: optional string icon_url
+    5: optional i64    status
+    6: optional i64    type        // Type 1: Official Template
+    7: optional i64    plugin_id   (agw.js_conv="str" api.js_conv="true") // Plugin ID corresponding to workfklow
+    8: optional bool   is_official
+    9: optional PluginAPIDetal api_detail
+}
+
+struct KnowledgeDetail {
+    1: optional string id
+    2: optional string name
+    3: optional string icon_url
+    4: DataSetType format_type
+}
+
+enum DataSetType {
+    Text = 0 // Text
+    Table = 1 // table
+    Image = 2 // image
 }
 
 enum BotMarketStatus {

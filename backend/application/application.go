@@ -16,6 +16,8 @@ import (
 	conversationapp "github.com/kiosk404/airi-go/backend/modules/conversation/conversation/application"
 	crossmessage "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message"
 	crossmessageimpl "github.com/kiosk404/airi-go/backend/modules/conversation/crossdomain/message/impl"
+	crosssearch "github.com/kiosk404/airi-go/backend/modules/data/crossdomain/search"
+	searchImpl "github.com/kiosk404/airi-go/backend/modules/data/crossdomain/search/impl"
 	searchapp "github.com/kiosk404/airi-go/backend/modules/data/search/application"
 	search "github.com/kiosk404/airi-go/backend/modules/data/search/domain/service"
 	uploadapp "github.com/kiosk404/airi-go/backend/modules/data/upload/application"
@@ -83,7 +85,7 @@ func Init(ctx context.Context) (err error) {
 	crossplugin.SetDefaultSVC(crosspluginimpl.InitDomainService(primaryServices.pluginSVC.DomainSVC, infra.TOSClient))
 	crossagent.SetDefaultSVC(crossagentimpl.InitDomainService(complexServices.singleAgentSVC.DomainSVC, infra.ImageXClient))
 	crossmessage.SetDefaultSVC(crossmessageimpl.InitDomainService(complexServices.conversationSVC.MessageDomainSVC))
-	//crosssearch.SetDefaultSVC(searchImpl.InitDomainService(complexServices.searchSVC.DomainSVC))
+	crosssearch.SetDefaultSVC(searchImpl.InitDomainService(complexServices.searchSVC.DomainSVC))
 
 	return nil
 }
@@ -131,12 +133,17 @@ func initComplexServices(ctx context.Context, primaryServices *primaryServices) 
 		return nil, err
 	}
 
+	searchSVC, err := searchapp.InitService(ctx, primaryServices.toSearchComponents(singleAgentSVC))
+	if err != nil {
+		return nil, err
+	}
 	conversationSVC := conversationapp.InitService(primaryServices.toConversationComponents(singleAgentSVC))
 
 	return &complexServices{
 		primaryServices: primaryServices,
 		singleAgentSVC:  singleAgentSVC,
 		conversationSVC: conversationSVC,
+		searchSVC:       searchSVC,
 	}, nil
 }
 
@@ -152,11 +159,12 @@ func (p *basicServices) toPluginServiceComponents() *pluginapp.ServiceComponents
 
 func (p *primaryServices) toSingleAgentServiceComponents() *singleagentapp.ServiceComponents {
 	return &singleagentapp.ServiceComponents{
-		IDGen:     p.basicServices.infra.IDGenSVC,
-		DB:        p.basicServices.infra.DB,
-		Cache:     p.basicServices.infra.CacheCli,
-		TosClient: p.basicServices.infra.TOSClient,
-		CPStore:   checkpoint.NewInMemoryStore(),
+		IDGen:       p.basicServices.infra.IDGenSVC,
+		DB:          p.basicServices.infra.DB,
+		Cache:       p.basicServices.infra.CacheCli,
+		TosClient:   p.basicServices.infra.TOSClient,
+		CPStore:     checkpoint.NewInMemoryStore(),
+		ModelMgrSVC: p.basicServices.modelMgrSVC.DomainSVC,
 	}
 }
 
@@ -169,5 +177,17 @@ func (p *primaryServices) toConversationComponents(singleAgentSVC *singleagentap
 		TosClient:            infra.TOSClient,
 		ImageX:               infra.ImageXClient,
 		SingleAgentDomainSVC: singleAgentSVC.DomainSVC,
+	}
+}
+
+func (p *primaryServices) toSearchComponents(singleAgentSVC *singleagentapp.SingleAgentApplicationService) *searchapp.ServiceComponents {
+	infra := p.basicServices.infra
+	return &searchapp.ServiceComponents{
+		DB:                   infra.DB,
+		Cache:                infra.CacheCli,
+		TOS:                  infra.TOSClient,
+		SingleAgentDomainSVC: singleAgentSVC.DomainSVC,
+		PluginDomainSVC:      p.pluginSVC.DomainSVC,
+		UserDomainSVC:        p.basicServices.userSVC.DomainSVC,
 	}
 }

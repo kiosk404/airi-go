@@ -76,8 +76,8 @@ const EditorPanel: React.FC<EditorPanelProps> = ({ botInfo }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background:"#fff" }}>
-        <div style={{ display: 'flex', justifyContent: "space-between", alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #e0e0e0' }}>
-            <Title level="h5" style={{ margin: 0 }}>人设与回复逻辑</Title>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 16px', height: '50px', borderBottom: '1px solid #e0e0e0' }}>
+            <Title level="h5" style={{ margin: 0, lineHeight: '50px' }}>人设与回复逻辑</Title>
             <Space>
                 <Button shape='square' variant='text' icon={<EditIcon />} />  
                 <Button shape='square' variant='text' icon={<HelpCircleIcon />} />

@@ -118,14 +118,13 @@ type IntelligenceBasicInfo struct {
 	Description    string             `thrift:"description,3" json:"description"`
 	IconURI        string             `thrift:"icon_uri,4" json:"icon_uri"`
 	IconURL        string             `thrift:"icon_url,5" json:"icon_url"`
-	SpaceID        int64              `thrift:"space_id,6" json:"space_id"`
-	OwnerID        int64              `thrift:"owner_id,7" json:"owner_id"`
-	CreateTime     int64              `thrift:"create_time,8" json:"create_time"`
-	UpdateTime     int64              `thrift:"update_time,9" json:"update_time"`
-	Status         IntelligenceStatus `thrift:"status,10,default,IntelligenceStatus" json:"status"`
-	PublishTime    int64              `thrift:"publish_time,11" json:"publish_time"`
-	EnterpriseID   *string            `thrift:"enterprise_id,12,optional" json:"enterprise_id,omitempty"`
-	OrganizationID *int64             `thrift:"organization_id,13,optional" json:"organization_id,omitempty"`
+	OwnerID        int64              `thrift:"owner_id,6" json:"owner_id"`
+	CreateTime     int64              `thrift:"create_time,7" json:"create_time"`
+	UpdateTime     int64              `thrift:"update_time,8" json:"update_time"`
+	Status         IntelligenceStatus `thrift:"status,9,default,IntelligenceStatus" json:"status"`
+	PublishTime    int64              `thrift:"publish_time,10" json:"publish_time"`
+	EnterpriseID   *string            `thrift:"enterprise_id,11,optional" json:"enterprise_id,omitempty"`
+	OrganizationID *int64             `thrift:"organization_id,12,optional" json:"organization_id,omitempty"`
 }
 
 func NewIntelligenceBasicInfo() *IntelligenceBasicInfo {
@@ -153,10 +152,6 @@ func (p *IntelligenceBasicInfo) GetIconURI() (v string) {
 
 func (p *IntelligenceBasicInfo) GetIconURL() (v string) {
 	return p.IconURL
-}
-
-func (p *IntelligenceBasicInfo) GetSpaceID() (v int64) {
-	return p.SpaceID
 }
 
 func (p *IntelligenceBasicInfo) GetOwnerID() (v int64) {
@@ -210,9 +205,6 @@ func (p *IntelligenceBasicInfo) SetIconURI(val string) {
 }
 func (p *IntelligenceBasicInfo) SetIconURL(val string) {
 	p.IconURL = val
-}
-func (p *IntelligenceBasicInfo) SetSpaceID(val int64) {
-	p.SpaceID = val
 }
 func (p *IntelligenceBasicInfo) SetOwnerID(val int64) {
 	p.OwnerID = val

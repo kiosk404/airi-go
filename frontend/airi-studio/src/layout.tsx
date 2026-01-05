@@ -27,7 +27,7 @@ export default () => {
         if (path.startsWith('/knowledge')) return 'knowledge';
         if (path.startsWith('/models')) return 'models';
         if (path.startsWith('/tool')) return 'tool';
-        return 'workspace';
+        return '';
     };
 
     return (
@@ -42,11 +42,9 @@ export default () => {
                     }}
                     header={{
                         logo: (
-                            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                                </svg>
-                            </div>
+                            <img src="/logo.png"
+                            alt="Logo"
+                            className="w-8 h-8 rounded-lg object-cover" />
                         ),
                         text: 'Airi Studio',
                     }}

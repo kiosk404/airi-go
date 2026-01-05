@@ -12,7 +12,6 @@ export interface IIntelligenceBasicInfo {
     description?: string;
     icon_uri?: string;
     icon_url?: string;
-    space_id?: thrift.Int64;
     owner_id?: thrift.Int64;
     create_time?: thrift.Int64;
     update_time?: thrift.Int64;
@@ -27,7 +26,6 @@ export interface IIntelligenceBasicInfoArgs {
     description?: string;
     icon_uri?: string;
     icon_url?: string;
-    space_id?: number | string | thrift.Int64;
     owner_id?: number | string | thrift.Int64;
     create_time?: number | string | thrift.Int64;
     update_time?: number | string | thrift.Int64;
@@ -44,7 +42,6 @@ export const IntelligenceBasicInfoCodec: thrift.IStructCodec<IIntelligenceBasicI
             description: args.description,
             icon_uri: args.icon_uri,
             icon_url: args.icon_url,
-            space_id: (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id),
             owner_id: (typeof args.owner_id === "number" ? new thrift.Int64(args.owner_id) : typeof args.owner_id === "string" ? thrift.Int64.fromDecimalString(args.owner_id) : args.owner_id),
             create_time: (typeof args.create_time === "number" ? new thrift.Int64(args.create_time) : typeof args.create_time === "string" ? thrift.Int64.fromDecimalString(args.create_time) : args.create_time),
             update_time: (typeof args.update_time === "number" ? new thrift.Int64(args.update_time) : typeof args.update_time === "string" ? thrift.Int64.fromDecimalString(args.update_time) : args.update_time),
@@ -79,43 +76,38 @@ export const IntelligenceBasicInfoCodec: thrift.IStructCodec<IIntelligenceBasicI
             output.writeString(obj.icon_url);
             output.writeFieldEnd();
         }
-        if (obj.space_id != null) {
-            output.writeFieldBegin("space_id", thrift.TType.I64, 6);
-            output.writeI64((typeof obj.space_id === "number" ? new thrift.Int64(obj.space_id) : typeof obj.space_id === "string" ? thrift.Int64.fromDecimalString(obj.space_id) : obj.space_id));
-            output.writeFieldEnd();
-        }
         if (obj.owner_id != null) {
-            output.writeFieldBegin("owner_id", thrift.TType.I64, 7);
+            output.writeFieldBegin("owner_id", thrift.TType.I64, 6);
             output.writeI64((typeof obj.owner_id === "number" ? new thrift.Int64(obj.owner_id) : typeof obj.owner_id === "string" ? thrift.Int64.fromDecimalString(obj.owner_id) : obj.owner_id));
             output.writeFieldEnd();
         }
         if (obj.create_time != null) {
-            output.writeFieldBegin("create_time", thrift.TType.I64, 8);
+            output.writeFieldBegin("create_time", thrift.TType.I64, 7);
             output.writeI64((typeof obj.create_time === "number" ? new thrift.Int64(obj.create_time) : typeof obj.create_time === "string" ? thrift.Int64.fromDecimalString(obj.create_time) : obj.create_time));
             output.writeFieldEnd();
         }
         if (obj.update_time != null) {
-            output.writeFieldBegin("update_time", thrift.TType.I64, 9);
+            output.writeFieldBegin("update_time", thrift.TType.I64, 8);
             output.writeI64((typeof obj.update_time === "number" ? new thrift.Int64(obj.update_time) : typeof obj.update_time === "string" ? thrift.Int64.fromDecimalString(obj.update_time) : obj.update_time));
             output.writeFieldEnd();
         }
         if (obj.status != null) {
-            output.writeFieldBegin("status", thrift.TType.I32, 10);
+            output.writeFieldBegin("status", thrift.TType.I32, 9);
             output.writeI32(obj.status);
             output.writeFieldEnd();
         }
         if (obj.publish_time != null) {
-            output.writeFieldBegin("publish_time", thrift.TType.I64, 11);
+            output.writeFieldBegin("publish_time", thrift.TType.I64, 10);
             output.writeI64((typeof obj.publish_time === "number" ? new thrift.Int64(obj.publish_time) : typeof obj.publish_time === "string" ? thrift.Int64.fromDecimalString(obj.publish_time) : obj.publish_time));
             output.writeFieldEnd();
         }
         if (obj.enterprise_id != null) {
-            output.writeFieldBegin("enterprise_id", thrift.TType.STRING, 12);
+            output.writeFieldBegin("enterprise_id", thrift.TType.STRING, 11);
             output.writeString(obj.enterprise_id);
             output.writeFieldEnd();
         }
         if (obj.organization_id != null) {
-            output.writeFieldBegin("organization_id", thrift.TType.I64, 13);
+            output.writeFieldBegin("organization_id", thrift.TType.I64, 12);
             output.writeI64((typeof obj.organization_id === "number" ? new thrift.Int64(obj.organization_id) : typeof obj.organization_id === "string" ? thrift.Int64.fromDecimalString(obj.organization_id) : obj.organization_id));
             output.writeFieldEnd();
         }
@@ -182,7 +174,7 @@ export const IntelligenceBasicInfoCodec: thrift.IStructCodec<IIntelligenceBasicI
                 case 6:
                     if (fieldType === thrift.TType.I64) {
                         const value_6: thrift.Int64 = input.readI64();
-                        _args.space_id = value_6;
+                        _args.owner_id = value_6;
                     }
                     else {
                         input.skip(fieldType);
@@ -191,7 +183,7 @@ export const IntelligenceBasicInfoCodec: thrift.IStructCodec<IIntelligenceBasicI
                 case 7:
                     if (fieldType === thrift.TType.I64) {
                         const value_7: thrift.Int64 = input.readI64();
-                        _args.owner_id = value_7;
+                        _args.create_time = value_7;
                     }
                     else {
                         input.skip(fieldType);
@@ -200,52 +192,43 @@ export const IntelligenceBasicInfoCodec: thrift.IStructCodec<IIntelligenceBasicI
                 case 8:
                     if (fieldType === thrift.TType.I64) {
                         const value_8: thrift.Int64 = input.readI64();
-                        _args.create_time = value_8;
+                        _args.update_time = value_8;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 9:
-                    if (fieldType === thrift.TType.I64) {
-                        const value_9: thrift.Int64 = input.readI64();
-                        _args.update_time = value_9;
+                    if (fieldType === thrift.TType.I32) {
+                        const value_9: IntelligenceStatus.IntelligenceStatus = input.readI32();
+                        _args.status = value_9;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 10:
-                    if (fieldType === thrift.TType.I32) {
-                        const value_10: IntelligenceStatus.IntelligenceStatus = input.readI32();
-                        _args.status = value_10;
+                    if (fieldType === thrift.TType.I64) {
+                        const value_10: thrift.Int64 = input.readI64();
+                        _args.publish_time = value_10;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 11:
-                    if (fieldType === thrift.TType.I64) {
-                        const value_11: thrift.Int64 = input.readI64();
-                        _args.publish_time = value_11;
+                    if (fieldType === thrift.TType.STRING) {
+                        const value_11: string = input.readString();
+                        _args.enterprise_id = value_11;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 12:
-                    if (fieldType === thrift.TType.STRING) {
-                        const value_12: string = input.readString();
-                        _args.enterprise_id = value_12;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
-                case 13:
                     if (fieldType === thrift.TType.I64) {
-                        const value_13: thrift.Int64 = input.readI64();
-                        _args.organization_id = value_13;
+                        const value_12: thrift.Int64 = input.readI64();
+                        _args.organization_id = value_12;
                     }
                     else {
                         input.skip(fieldType);
@@ -264,7 +247,6 @@ export const IntelligenceBasicInfoCodec: thrift.IStructCodec<IIntelligenceBasicI
             description: _args.description,
             icon_uri: _args.icon_uri,
             icon_url: _args.icon_url,
-            space_id: _args.space_id,
             owner_id: _args.owner_id,
             create_time: _args.create_time,
             update_time: _args.update_time,
@@ -281,7 +263,6 @@ export class IntelligenceBasicInfo extends thrift.StructLike implements IIntelli
     public description?: string;
     public icon_uri?: string;
     public icon_url?: string;
-    public space_id?: thrift.Int64;
     public owner_id?: thrift.Int64;
     public create_time?: thrift.Int64;
     public update_time?: thrift.Int64;
@@ -292,10 +273,6 @@ export class IntelligenceBasicInfo extends thrift.StructLike implements IIntelli
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         id: {
-            'agw.js_conv': "str",
-            'api.js_conv': "true"
-        },
-        space_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true"
         },
@@ -319,56 +296,52 @@ export class IntelligenceBasicInfo extends thrift.StructLike implements IIntelli
     constructor(args: IIntelligenceBasicInfoArgs = {}) {
         super();
         if (args.id != null) {
-            const value_14: thrift.Int64 = (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id);
-            this.id = value_14;
+            const value_13: thrift.Int64 = (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id);
+            this.id = value_13;
         }
         if (args.name != null) {
-            const value_15: string = args.name;
-            this.name = value_15;
+            const value_14: string = args.name;
+            this.name = value_14;
         }
         if (args.description != null) {
-            const value_16: string = args.description;
-            this.description = value_16;
+            const value_15: string = args.description;
+            this.description = value_15;
         }
         if (args.icon_uri != null) {
-            const value_17: string = args.icon_uri;
-            this.icon_uri = value_17;
+            const value_16: string = args.icon_uri;
+            this.icon_uri = value_16;
         }
         if (args.icon_url != null) {
-            const value_18: string = args.icon_url;
-            this.icon_url = value_18;
-        }
-        if (args.space_id != null) {
-            const value_19: thrift.Int64 = (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id);
-            this.space_id = value_19;
+            const value_17: string = args.icon_url;
+            this.icon_url = value_17;
         }
         if (args.owner_id != null) {
-            const value_20: thrift.Int64 = (typeof args.owner_id === "number" ? new thrift.Int64(args.owner_id) : typeof args.owner_id === "string" ? thrift.Int64.fromDecimalString(args.owner_id) : args.owner_id);
-            this.owner_id = value_20;
+            const value_18: thrift.Int64 = (typeof args.owner_id === "number" ? new thrift.Int64(args.owner_id) : typeof args.owner_id === "string" ? thrift.Int64.fromDecimalString(args.owner_id) : args.owner_id);
+            this.owner_id = value_18;
         }
         if (args.create_time != null) {
-            const value_21: thrift.Int64 = (typeof args.create_time === "number" ? new thrift.Int64(args.create_time) : typeof args.create_time === "string" ? thrift.Int64.fromDecimalString(args.create_time) : args.create_time);
-            this.create_time = value_21;
+            const value_19: thrift.Int64 = (typeof args.create_time === "number" ? new thrift.Int64(args.create_time) : typeof args.create_time === "string" ? thrift.Int64.fromDecimalString(args.create_time) : args.create_time);
+            this.create_time = value_19;
         }
         if (args.update_time != null) {
-            const value_22: thrift.Int64 = (typeof args.update_time === "number" ? new thrift.Int64(args.update_time) : typeof args.update_time === "string" ? thrift.Int64.fromDecimalString(args.update_time) : args.update_time);
-            this.update_time = value_22;
+            const value_20: thrift.Int64 = (typeof args.update_time === "number" ? new thrift.Int64(args.update_time) : typeof args.update_time === "string" ? thrift.Int64.fromDecimalString(args.update_time) : args.update_time);
+            this.update_time = value_20;
         }
         if (args.status != null) {
-            const value_23: IntelligenceStatus.IntelligenceStatus = args.status;
-            this.status = value_23;
+            const value_21: IntelligenceStatus.IntelligenceStatus = args.status;
+            this.status = value_21;
         }
         if (args.publish_time != null) {
-            const value_24: thrift.Int64 = (typeof args.publish_time === "number" ? new thrift.Int64(args.publish_time) : typeof args.publish_time === "string" ? thrift.Int64.fromDecimalString(args.publish_time) : args.publish_time);
-            this.publish_time = value_24;
+            const value_22: thrift.Int64 = (typeof args.publish_time === "number" ? new thrift.Int64(args.publish_time) : typeof args.publish_time === "string" ? thrift.Int64.fromDecimalString(args.publish_time) : args.publish_time);
+            this.publish_time = value_22;
         }
         if (args.enterprise_id != null) {
-            const value_25: string = args.enterprise_id;
-            this.enterprise_id = value_25;
+            const value_23: string = args.enterprise_id;
+            this.enterprise_id = value_23;
         }
         if (args.organization_id != null) {
-            const value_26: thrift.Int64 = (typeof args.organization_id === "number" ? new thrift.Int64(args.organization_id) : typeof args.organization_id === "string" ? thrift.Int64.fromDecimalString(args.organization_id) : args.organization_id);
-            this.organization_id = value_26;
+            const value_24: thrift.Int64 = (typeof args.organization_id === "number" ? new thrift.Int64(args.organization_id) : typeof args.organization_id === "string" ? thrift.Int64.fromDecimalString(args.organization_id) : args.organization_id);
+            this.organization_id = value_24;
         }
     }
     public static read(input: thrift.TProtocol): IntelligenceBasicInfo {

@@ -1,11 +1,12 @@
-import { Layout, Typography } from '@douyinfe/semi-ui';
-import React, { useCallback, useState, useRef } from 'react';
+import { Layout, Typography, Spin, Avatar } from '@douyinfe/semi-ui';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { Chat } from '@douyinfe/semi-ui';
 import { useParams } from 'react-router-dom';
 import * as conversationApi from '@/services/conversation';
-import { Scene } from '@/services/conversation';
+import { Scene, MsgParticipantType } from '@/services/conversation';
+import { BotInfo } from '@/services/draftbot';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 const { Header, Content } = Layout;
 
 // 消息类型定义
@@ -39,20 +40,75 @@ const defaultHints = [
 ];
 
 interface ChatPanelProps {
-    botId?: string;
+    botInfo?: BotInfo;
     conversationId?: string;
 }
 
-const ChatPanel: React.FC<ChatPanelProps> = ({ botId, conversationId: propConversationId }) => {
+const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConversationId }) => {
     const params = useParams<{ id: string }>();
 
+    console.log("kiosk: ", botInfo)
+
     // 优先使用 props，否则从 URL 获取
-    const currentBotId = botId ?? (params.id || '');
+    const currentBotId = botInfo && botInfo.BotId ? botInfo.BotId : (params.id || '');
     const currentConversationId = useRef<string>(propConversationId ?? '');
 
     const [messages, setMessages] = useState<Message[]>([]);
     const [isStreaming, setIsStreaming] = useState(false);
+    const [isLoadingHistory, setIsLoadingHistory] = useState(false);
     const abortControllerRef = useRef<AbortController | null>(null);
+
+    // 将后端消息转换为前端消息格式
+    const convertToMessage = useCallback((msg: conversationApi.ChatMessage): Message => {
+        const isUser = msg.sender?.type === MsgParticipantType.User;
+        return {
+            id: msg.id || `msg-${Date.now()}-${Math.random()}`,
+            role: isUser ? 'user' : 'assistant',
+            content: msg.content || '',
+            createAt: msg.create_time || Date.now(),
+            status: 'complete',
+        };
+    }, []);
+
+    // 加载历史消息
+    const loadMessageHistory = useCallback(async () => {
+        if (!currentBotId) return;
+
+        setIsLoadingHistory(true);
+        try {
+            // 直接获取消息列表，后端会根据 bot_id 返回或创建会话
+            const resp = await conversationApi.getMessageList({
+                bot_id: currentBotId,
+                conversation_id: currentConversationId.current || undefined,
+                page_size: 50,
+                scene: Scene.Playground,
+                cursor: "0"
+            });
+
+            if (resp.code === 0) {
+                // 如果返回了 conversation_id，保存起来
+                if (resp.conversation_id) {
+                    currentConversationId.current = resp.conversation_id;
+                }
+
+                if (resp.messages && resp.messages.length > 0) {
+                    const historyMessages = resp.messages.map(convertToMessage);
+                    // 按时间正序排列
+                    historyMessages.sort((a, b) => a.createAt - b.createAt);
+                    setMessages(historyMessages);
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load message history:', error);
+        } finally {
+            setIsLoadingHistory(false);
+        }
+    }, [currentBotId, convertToMessage]);
+
+    // 组件加载时获取历史消息
+    useEffect(() => {
+        loadMessageHistory();
+    }, [loadMessageHistory]);
 
     // 消息变化
     const handleChatsChange = useCallback((chats?: Message[]) => {
@@ -223,8 +279,11 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botId, conversationId: propConver
             <Header style={{
                 backgroundColor: 'var(--semi-color-bg-1)',
                 padding: '0 16px',
+                height: '50px',
                 borderBottom: '1px solid var(--semi-color-border)',
                 flexShrink: 0,
+                display: 'flex',
+                alignItems: 'center',
             }}>
                 <Title heading={5} style={{ margin: 0, lineHeight: '56px' }}>
                     预览与调试
@@ -234,26 +293,64 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botId, conversationId: propConver
                 flex: 1,
                 overflow: 'hidden',
                 backgroundColor: 'var(--semi-color-bg-0)',
+                position: 'relative',
             }}>
-                <Chat
-                    chats={messages}
-                    onChatsChange={handleChatsChange as any}
-                    onMessageSend={handleMessageSend}
-                    onMessageReset={handleMessageReset}
-                    onClear={handleClearContext}
-                    onStopGenerator={handleStopGenerate}
-                    onHintClick={handleHintClick}
-                    roleConfig={roleConfig}
-                    hints={defaultHints}
-                    showStopGenerate={isStreaming}
-                    placeholder="输入消息开始对话..."
-                    sendHotKey="enter"
-                    align="leftRight"
-                    mode="bubble"
-                    style={{ height: '100%' }}
-                    action="#"
-                    uploadProps={{ action: '', disabled: true}}
-                />
+                {isLoadingHistory ? (
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                        <Spin size="large" tip="加载历史消息..." />
+                    </div>
+                ) : (
+                    <>
+                        {messages.length === 0 && (
+                            <div style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 120,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                pointerEvents: 'none',
+                                zIndex: 1,
+                            }}>
+                                <Avatar
+                                    src={botInfo?.IconUrl || roleConfig.assistant.avatar}
+                                    size="extra-large"
+                                    style={{ width: 80, height: 80, marginBottom: 16 }}
+                                />
+                                <Text strong style={{ fontSize: 18, marginBottom: 8 }}>
+                                    {botInfo?.Name || 'Airi'}
+                                </Text>
+                                {botInfo?.Description && (
+                                    <Text type="tertiary" style={{ textAlign: 'center', maxWidth: 300 }}>
+                                        {botInfo.Description}
+                                    </Text>
+                                )}
+                            </div>
+                        )}
+                        <Chat
+                            chats={messages}
+                            onChatsChange={handleChatsChange as any}
+                            onMessageSend={handleMessageSend}
+                            onMessageReset={handleMessageReset}
+                            onClear={handleClearContext}
+                            onStopGenerator={handleStopGenerate}
+                            onHintClick={handleHintClick}
+                            roleConfig={roleConfig}
+                            hints={messages.length > 0 ? defaultHints : []}
+                            showStopGenerate={isStreaming}
+                            placeholder="输入消息开始对话..."
+                            sendHotKey="enter"
+                            align="leftRight"
+                            mode="bubble"
+                            style={{ height: '100%' }}
+                            action="#"
+                            uploadProps={{ action: '', disabled: true}}
+                        />
+                    </>
+                )}
             </Content>
         </Layout>
     );

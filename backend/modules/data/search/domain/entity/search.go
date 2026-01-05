@@ -15,7 +15,6 @@ const (
 )
 
 type SearchProjectsRequest struct {
-	SpaceID   int64
 	ProjectID int64
 	OwnerID   int64
 	Name      string

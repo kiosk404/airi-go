@@ -9,7 +9,6 @@ type ProjectDocument struct {
 	Type           common.IntelligenceType   `json:"type"`
 	Status         common.IntelligenceStatus `json:"status,omitempty"`
 	Name           *string                   `json:"name,omitempty"`
-	SpaceID        *int64                    `json:"space_id,omitempty"`
 	OwnerID        *int64                    `json:"owner_id,omitempty"`
 	HasPublished   *int                      `json:"has_published,omitempty"`
 	CreateTimeMS   *int64                    `json:"create_time,omitempty"`
@@ -27,14 +26,6 @@ func (a *ProjectDocument) GetName() string {
 		return ""
 	}
 	return *a.Name
-}
-
-// GetSpaceID
-func (a *ProjectDocument) GetSpaceID() int64 {
-	if a.SpaceID == nil {
-		return 0
-	}
-	return *a.SpaceID
 }
 
 // GetOwnerID

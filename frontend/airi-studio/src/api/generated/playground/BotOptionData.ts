@@ -5,18 +5,104 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
+import * as ModelDetail from "./ModelDetail";
+import * as PluginDetal from "./PluginDetal";
+import * as PluginAPIDetal from "./PluginAPIDetal";
+import * as WorkflowDetail from "./WorkflowDetail";
+import * as KnowledgeDetail from "./KnowledgeDetail";
+import * as __ROOT_NAMESPACE__ from "./";
 export interface IBotOptionData {
+    model_detail_map?: Map<thrift.Int64, ModelDetail.IModelDetail>;
+    plugin_detail_map?: Map<thrift.Int64, PluginDetal.IPluginDetal>;
+    plugin_api_detail_map?: Map<thrift.Int64, PluginAPIDetal.IPluginAPIDetal>;
+    workflow_detail_map?: Map<thrift.Int64, WorkflowDetail.IWorkflowDetail>;
+    knowledge_detail_map?: Map<string, KnowledgeDetail.IKnowledgeDetail>;
+    shortcut_command_list?: Array<__ROOT_NAMESPACE__.IShortcutCommand>;
 }
 export interface IBotOptionDataArgs {
+    model_detail_map?: Map<number | string | thrift.Int64, ModelDetail.IModelDetailArgs>;
+    plugin_detail_map?: Map<number | string | thrift.Int64, PluginDetal.IPluginDetalArgs>;
+    plugin_api_detail_map?: Map<number | string | thrift.Int64, PluginAPIDetal.IPluginAPIDetalArgs>;
+    workflow_detail_map?: Map<number | string | thrift.Int64, WorkflowDetail.IWorkflowDetailArgs>;
+    knowledge_detail_map?: Map<string, KnowledgeDetail.IKnowledgeDetailArgs>;
+    shortcut_command_list?: Array<__ROOT_NAMESPACE__.IShortcutCommandArgs>;
 }
 export const BotOptionDataCodec: thrift.IStructCodec<IBotOptionDataArgs, IBotOptionData> = {
     encode(args: IBotOptionDataArgs, output: thrift.TProtocol): void {
+        const obj: any = {
+            model_detail_map: args.model_detail_map,
+            plugin_detail_map: args.plugin_detail_map,
+            plugin_api_detail_map: args.plugin_api_detail_map,
+            workflow_detail_map: args.workflow_detail_map,
+            knowledge_detail_map: args.knowledge_detail_map,
+            shortcut_command_list: args.shortcut_command_list
+        };
         output.writeStructBegin("BotOptionData");
+        if (obj.model_detail_map != null) {
+            output.writeFieldBegin("model_detail_map", thrift.TType.MAP, 1);
+            output.writeMapBegin(thrift.TType.I64, thrift.TType.STRUCT, obj.model_detail_map.size);
+            obj.model_detail_map.forEach((value_1: ModelDetail.IModelDetailArgs, key_1: number | string | thrift.Int64): void => {
+                output.writeI64((typeof key_1 === "number" ? new thrift.Int64(key_1) : typeof key_1 === "string" ? thrift.Int64.fromDecimalString(key_1) : key_1));
+                ModelDetail.ModelDetailCodec.encode(value_1, output);
+            });
+            output.writeMapEnd();
+            output.writeFieldEnd();
+        }
+        if (obj.plugin_detail_map != null) {
+            output.writeFieldBegin("plugin_detail_map", thrift.TType.MAP, 2);
+            output.writeMapBegin(thrift.TType.I64, thrift.TType.STRUCT, obj.plugin_detail_map.size);
+            obj.plugin_detail_map.forEach((value_2: PluginDetal.IPluginDetalArgs, key_2: number | string | thrift.Int64): void => {
+                output.writeI64((typeof key_2 === "number" ? new thrift.Int64(key_2) : typeof key_2 === "string" ? thrift.Int64.fromDecimalString(key_2) : key_2));
+                PluginDetal.PluginDetalCodec.encode(value_2, output);
+            });
+            output.writeMapEnd();
+            output.writeFieldEnd();
+        }
+        if (obj.plugin_api_detail_map != null) {
+            output.writeFieldBegin("plugin_api_detail_map", thrift.TType.MAP, 3);
+            output.writeMapBegin(thrift.TType.I64, thrift.TType.STRUCT, obj.plugin_api_detail_map.size);
+            obj.plugin_api_detail_map.forEach((value_3: PluginAPIDetal.IPluginAPIDetalArgs, key_3: number | string | thrift.Int64): void => {
+                output.writeI64((typeof key_3 === "number" ? new thrift.Int64(key_3) : typeof key_3 === "string" ? thrift.Int64.fromDecimalString(key_3) : key_3));
+                PluginAPIDetal.PluginAPIDetalCodec.encode(value_3, output);
+            });
+            output.writeMapEnd();
+            output.writeFieldEnd();
+        }
+        if (obj.workflow_detail_map != null) {
+            output.writeFieldBegin("workflow_detail_map", thrift.TType.MAP, 4);
+            output.writeMapBegin(thrift.TType.I64, thrift.TType.STRUCT, obj.workflow_detail_map.size);
+            obj.workflow_detail_map.forEach((value_4: WorkflowDetail.IWorkflowDetailArgs, key_4: number | string | thrift.Int64): void => {
+                output.writeI64((typeof key_4 === "number" ? new thrift.Int64(key_4) : typeof key_4 === "string" ? thrift.Int64.fromDecimalString(key_4) : key_4));
+                WorkflowDetail.WorkflowDetailCodec.encode(value_4, output);
+            });
+            output.writeMapEnd();
+            output.writeFieldEnd();
+        }
+        if (obj.knowledge_detail_map != null) {
+            output.writeFieldBegin("knowledge_detail_map", thrift.TType.MAP, 5);
+            output.writeMapBegin(thrift.TType.STRING, thrift.TType.STRUCT, obj.knowledge_detail_map.size);
+            obj.knowledge_detail_map.forEach((value_5: KnowledgeDetail.IKnowledgeDetailArgs, key_5: string): void => {
+                output.writeString(key_5);
+                KnowledgeDetail.KnowledgeDetailCodec.encode(value_5, output);
+            });
+            output.writeMapEnd();
+            output.writeFieldEnd();
+        }
+        if (obj.shortcut_command_list != null) {
+            output.writeFieldBegin("shortcut_command_list", thrift.TType.LIST, 6);
+            output.writeListBegin(thrift.TType.STRUCT, obj.shortcut_command_list.length);
+            obj.shortcut_command_list.forEach((value_6: __ROOT_NAMESPACE__.IShortcutCommandArgs): void => {
+                __ROOT_NAMESPACE__.ShortcutCommandCodec.encode(value_6, output);
+            });
+            output.writeListEnd();
+            output.writeFieldEnd();
+        }
         output.writeFieldStop();
         output.writeStructEnd();
         return;
     },
     decode(input: thrift.TProtocol): IBotOptionData {
+        let _args: any = {};
         input.readStructBegin();
         while (true) {
             const ret: thrift.IThriftField = input.readFieldBegin();
@@ -26,6 +112,107 @@ export const BotOptionDataCodec: thrift.IStructCodec<IBotOptionDataArgs, IBotOpt
                 break;
             }
             switch (fieldId) {
+                case 1:
+                    if (fieldType === thrift.TType.MAP) {
+                        const value_7: Map<thrift.Int64, ModelDetail.IModelDetail> = new Map<thrift.Int64, ModelDetail.IModelDetail>();
+                        const metadata_1: thrift.IThriftMap = input.readMapBegin();
+                        const size_1: number = metadata_1.size;
+                        for (let i_1: number = 0; i_1 < size_1; i_1++) {
+                            const key_6: thrift.Int64 = input.readI64();
+                            const value_8: ModelDetail.IModelDetail = ModelDetail.ModelDetailCodec.decode(input);
+                            value_7.set(key_6, value_8);
+                        }
+                        input.readMapEnd();
+                        _args.model_detail_map = value_7;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
+                case 2:
+                    if (fieldType === thrift.TType.MAP) {
+                        const value_9: Map<thrift.Int64, PluginDetal.IPluginDetal> = new Map<thrift.Int64, PluginDetal.IPluginDetal>();
+                        const metadata_2: thrift.IThriftMap = input.readMapBegin();
+                        const size_2: number = metadata_2.size;
+                        for (let i_2: number = 0; i_2 < size_2; i_2++) {
+                            const key_7: thrift.Int64 = input.readI64();
+                            const value_10: PluginDetal.IPluginDetal = PluginDetal.PluginDetalCodec.decode(input);
+                            value_9.set(key_7, value_10);
+                        }
+                        input.readMapEnd();
+                        _args.plugin_detail_map = value_9;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
+                case 3:
+                    if (fieldType === thrift.TType.MAP) {
+                        const value_11: Map<thrift.Int64, PluginAPIDetal.IPluginAPIDetal> = new Map<thrift.Int64, PluginAPIDetal.IPluginAPIDetal>();
+                        const metadata_3: thrift.IThriftMap = input.readMapBegin();
+                        const size_3: number = metadata_3.size;
+                        for (let i_3: number = 0; i_3 < size_3; i_3++) {
+                            const key_8: thrift.Int64 = input.readI64();
+                            const value_12: PluginAPIDetal.IPluginAPIDetal = PluginAPIDetal.PluginAPIDetalCodec.decode(input);
+                            value_11.set(key_8, value_12);
+                        }
+                        input.readMapEnd();
+                        _args.plugin_api_detail_map = value_11;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
+                case 4:
+                    if (fieldType === thrift.TType.MAP) {
+                        const value_13: Map<thrift.Int64, WorkflowDetail.IWorkflowDetail> = new Map<thrift.Int64, WorkflowDetail.IWorkflowDetail>();
+                        const metadata_4: thrift.IThriftMap = input.readMapBegin();
+                        const size_4: number = metadata_4.size;
+                        for (let i_4: number = 0; i_4 < size_4; i_4++) {
+                            const key_9: thrift.Int64 = input.readI64();
+                            const value_14: WorkflowDetail.IWorkflowDetail = WorkflowDetail.WorkflowDetailCodec.decode(input);
+                            value_13.set(key_9, value_14);
+                        }
+                        input.readMapEnd();
+                        _args.workflow_detail_map = value_13;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
+                case 5:
+                    if (fieldType === thrift.TType.MAP) {
+                        const value_15: Map<string, KnowledgeDetail.IKnowledgeDetail> = new Map<string, KnowledgeDetail.IKnowledgeDetail>();
+                        const metadata_5: thrift.IThriftMap = input.readMapBegin();
+                        const size_5: number = metadata_5.size;
+                        for (let i_5: number = 0; i_5 < size_5; i_5++) {
+                            const key_10: string = input.readString();
+                            const value_16: KnowledgeDetail.IKnowledgeDetail = KnowledgeDetail.KnowledgeDetailCodec.decode(input);
+                            value_15.set(key_10, value_16);
+                        }
+                        input.readMapEnd();
+                        _args.knowledge_detail_map = value_15;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
+                case 6:
+                    if (fieldType === thrift.TType.LIST) {
+                        const value_17: Array<__ROOT_NAMESPACE__.IShortcutCommand> = new Array<__ROOT_NAMESPACE__.IShortcutCommand>();
+                        const metadata_6: thrift.IThriftList = input.readListBegin();
+                        const size_6: number = metadata_6.size;
+                        for (let i_6: number = 0; i_6 < size_6; i_6++) {
+                            const value_18: __ROOT_NAMESPACE__.IShortcutCommand = __ROOT_NAMESPACE__.ShortcutCommandCodec.decode(input);
+                            value_17.push(value_18);
+                        }
+                        input.readListEnd();
+                        _args.shortcut_command_list = value_17;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
                 default: {
                     input.skip(fieldType);
                 }
@@ -33,14 +220,80 @@ export const BotOptionDataCodec: thrift.IStructCodec<IBotOptionDataArgs, IBotOpt
             input.readFieldEnd();
         }
         input.readStructEnd();
-        return {};
+        return {
+            model_detail_map: _args.model_detail_map,
+            plugin_detail_map: _args.plugin_detail_map,
+            plugin_api_detail_map: _args.plugin_api_detail_map,
+            workflow_detail_map: _args.workflow_detail_map,
+            knowledge_detail_map: _args.knowledge_detail_map,
+            shortcut_command_list: _args.shortcut_command_list
+        };
     }
 };
 export class BotOptionData extends thrift.StructLike implements IBotOptionData {
+    public model_detail_map?: Map<thrift.Int64, ModelDetail.IModelDetail>;
+    public plugin_detail_map?: Map<thrift.Int64, PluginDetal.IPluginDetal>;
+    public plugin_api_detail_map?: Map<thrift.Int64, PluginAPIDetal.IPluginAPIDetal>;
+    public workflow_detail_map?: Map<thrift.Int64, WorkflowDetail.IWorkflowDetail>;
+    public knowledge_detail_map?: Map<string, KnowledgeDetail.IKnowledgeDetail>;
+    public shortcut_command_list?: Array<__ROOT_NAMESPACE__.IShortcutCommand>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IBotOptionDataArgs = {}) {
         super();
+        if (args.model_detail_map != null) {
+            const value_19: Map<thrift.Int64, ModelDetail.IModelDetail> = new Map<thrift.Int64, ModelDetail.IModelDetail>();
+            args.model_detail_map.forEach((value_25: ModelDetail.IModelDetailArgs, key_11: number | string | thrift.Int64): void => {
+                const value_26: ModelDetail.IModelDetail = new ModelDetail.ModelDetail(value_25);
+                const key_12: thrift.Int64 = (typeof key_11 === "number" ? new thrift.Int64(key_11) : typeof key_11 === "string" ? thrift.Int64.fromDecimalString(key_11) : key_11);
+                value_19.set(key_12, value_26);
+            });
+            this.model_detail_map = value_19;
+        }
+        if (args.plugin_detail_map != null) {
+            const value_20: Map<thrift.Int64, PluginDetal.IPluginDetal> = new Map<thrift.Int64, PluginDetal.IPluginDetal>();
+            args.plugin_detail_map.forEach((value_27: PluginDetal.IPluginDetalArgs, key_13: number | string | thrift.Int64): void => {
+                const value_28: PluginDetal.IPluginDetal = new PluginDetal.PluginDetal(value_27);
+                const key_14: thrift.Int64 = (typeof key_13 === "number" ? new thrift.Int64(key_13) : typeof key_13 === "string" ? thrift.Int64.fromDecimalString(key_13) : key_13);
+                value_20.set(key_14, value_28);
+            });
+            this.plugin_detail_map = value_20;
+        }
+        if (args.plugin_api_detail_map != null) {
+            const value_21: Map<thrift.Int64, PluginAPIDetal.IPluginAPIDetal> = new Map<thrift.Int64, PluginAPIDetal.IPluginAPIDetal>();
+            args.plugin_api_detail_map.forEach((value_29: PluginAPIDetal.IPluginAPIDetalArgs, key_15: number | string | thrift.Int64): void => {
+                const value_30: PluginAPIDetal.IPluginAPIDetal = new PluginAPIDetal.PluginAPIDetal(value_29);
+                const key_16: thrift.Int64 = (typeof key_15 === "number" ? new thrift.Int64(key_15) : typeof key_15 === "string" ? thrift.Int64.fromDecimalString(key_15) : key_15);
+                value_21.set(key_16, value_30);
+            });
+            this.plugin_api_detail_map = value_21;
+        }
+        if (args.workflow_detail_map != null) {
+            const value_22: Map<thrift.Int64, WorkflowDetail.IWorkflowDetail> = new Map<thrift.Int64, WorkflowDetail.IWorkflowDetail>();
+            args.workflow_detail_map.forEach((value_31: WorkflowDetail.IWorkflowDetailArgs, key_17: number | string | thrift.Int64): void => {
+                const value_32: WorkflowDetail.IWorkflowDetail = new WorkflowDetail.WorkflowDetail(value_31);
+                const key_18: thrift.Int64 = (typeof key_17 === "number" ? new thrift.Int64(key_17) : typeof key_17 === "string" ? thrift.Int64.fromDecimalString(key_17) : key_17);
+                value_22.set(key_18, value_32);
+            });
+            this.workflow_detail_map = value_22;
+        }
+        if (args.knowledge_detail_map != null) {
+            const value_23: Map<string, KnowledgeDetail.IKnowledgeDetail> = new Map<string, KnowledgeDetail.IKnowledgeDetail>();
+            args.knowledge_detail_map.forEach((value_33: KnowledgeDetail.IKnowledgeDetailArgs, key_19: string): void => {
+                const value_34: KnowledgeDetail.IKnowledgeDetail = new KnowledgeDetail.KnowledgeDetail(value_33);
+                const key_20: string = key_19;
+                value_23.set(key_20, value_34);
+            });
+            this.knowledge_detail_map = value_23;
+        }
+        if (args.shortcut_command_list != null) {
+            const value_24: Array<__ROOT_NAMESPACE__.IShortcutCommand> = new Array<__ROOT_NAMESPACE__.IShortcutCommand>();
+            args.shortcut_command_list.forEach((value_35: __ROOT_NAMESPACE__.IShortcutCommandArgs): void => {
+                const value_36: __ROOT_NAMESPACE__.IShortcutCommand = new __ROOT_NAMESPACE__.ShortcutCommand(value_35);
+                value_24.push(value_36);
+            });
+            this.shortcut_command_list = value_24;
+        }
     }
     public static read(input: thrift.TProtocol): BotOptionData {
         return new BotOptionData(BotOptionDataCodec.decode(input));

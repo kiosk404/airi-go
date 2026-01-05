@@ -7,6 +7,7 @@ import (
 
 	"github.com/kiosk404/airi-go/backend/infra/contract/cache"
 	"github.com/kiosk404/airi-go/backend/infra/contract/eventbus"
+	"github.com/kiosk404/airi-go/backend/infra/contract/rdb"
 	searchC "github.com/kiosk404/airi-go/backend/infra/contract/search"
 	"github.com/kiosk404/airi-go/backend/infra/contract/storage"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/application/singleagent"
@@ -16,11 +17,10 @@ import (
 	user "github.com/kiosk404/airi-go/backend/modules/foundation/user/domain/service"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 	"github.com/kiosk404/airi-go/backend/types/consts"
-	"gorm.io/gorm"
 )
 
 type ServiceComponents struct {
-	DB                   *gorm.DB
+	DB                   rdb.Provider
 	Cache                cache.Cmdable
 	TOS                  storage.Storage
 	ESClient             searchC.Client

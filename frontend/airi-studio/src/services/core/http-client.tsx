@@ -2,6 +2,12 @@
 * HTTP client service
 */
 
+import JSONBIG from 'json-bigint';
+
+const JSONBigString = JSONBIG({
+    storeAsString: true,
+});
+
 export interface ApiResponse<T> {
     code: number;
     message: string;
@@ -47,15 +53,16 @@ class HttpClient {
       try {
           const response = await fetch(url, config);
 
+          const responseText = await response.text();
+
           if (!response.ok) {
               let errorMessage = `Unknown Error: ${response.status}`;
               try {
-                  const errorData = await response.json();
+                  const errorData = await JSONBigString.parse(responseText);
                   errorMessage = errorData.Msg || errorData.msg || errorData.message || errorMessage;
               } catch {
-                  // 如果无法解析 JSON，尝试使用文本
-                  const errorText = await response.text();
-                  errorMessage = errorText || errorMessage;
+                  // 解析失败，使用原始JSON
+                  errorMessage = responseText || errorMessage;
               }
               throw new ApiError(
                   response.status,
@@ -64,7 +71,7 @@ class HttpClient {
               );
           }
 
-          const data = await response.json();
+          const data = await JSONBigString.parse(responseText);
 
           // 检查业务错误码（支持 Code 和 code 两种格式）
           const errorCode = data.Code !== undefined ? data.Code : data.code;

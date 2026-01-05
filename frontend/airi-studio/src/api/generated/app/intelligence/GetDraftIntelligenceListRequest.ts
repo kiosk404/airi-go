@@ -10,7 +10,6 @@ import * as SearchScope from "./SearchScope";
 import * as GetDraftIntelligenceListOption from "./GetDraftIntelligenceListOption";
 import * as OrderBy from "../../component/plugin_develop/common/OrderBy";
 export interface IGetDraftIntelligenceListRequest {
-    space_id: thrift.Int64;
     name?: string;
     has_published?: boolean;
     status?: Array<__ROOT_NAMESPACE__.IntelligenceStatus>;
@@ -25,7 +24,6 @@ export interface IGetDraftIntelligenceListRequest {
     Base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetDraftIntelligenceListRequestArgs {
-    space_id: number | string | thrift.Int64;
     name?: string;
     has_published?: boolean;
     status?: Array<__ROOT_NAMESPACE__.IntelligenceStatus>;
@@ -42,7 +40,6 @@ export interface IGetDraftIntelligenceListRequestArgs {
 export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraftIntelligenceListRequestArgs, IGetDraftIntelligenceListRequest> = {
     encode(args: IGetDraftIntelligenceListRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            space_id: (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id),
             name: args.name,
             has_published: args.has_published,
             status: args.status,
@@ -57,26 +54,18 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
             Base: args.Base
         };
         output.writeStructBegin("GetDraftIntelligenceListRequest");
-        if (obj.space_id != null) {
-            output.writeFieldBegin("space_id", thrift.TType.I64, 1);
-            output.writeI64((typeof obj.space_id === "number" ? new thrift.Int64(obj.space_id) : typeof obj.space_id === "string" ? thrift.Int64.fromDecimalString(obj.space_id) : obj.space_id));
-            output.writeFieldEnd();
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (obj.name != null) {
-            output.writeFieldBegin("name", thrift.TType.STRING, 2);
+            output.writeFieldBegin("name", thrift.TType.STRING, 1);
             output.writeString(obj.name);
             output.writeFieldEnd();
         }
         if (obj.has_published != null) {
-            output.writeFieldBegin("has_published", thrift.TType.BOOL, 3);
+            output.writeFieldBegin("has_published", thrift.TType.BOOL, 2);
             output.writeBool(obj.has_published);
             output.writeFieldEnd();
         }
         if (obj.status != null) {
-            output.writeFieldBegin("status", thrift.TType.LIST, 4);
+            output.writeFieldBegin("status", thrift.TType.LIST, 3);
             output.writeListBegin(thrift.TType.I32, obj.status.length);
             obj.status.forEach((value_1: __ROOT_NAMESPACE__.IntelligenceStatus): void => {
                 output.writeI32(value_1);
@@ -85,7 +74,7 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
             output.writeFieldEnd();
         }
         if (obj.types != null) {
-            output.writeFieldBegin("types", thrift.TType.LIST, 5);
+            output.writeFieldBegin("types", thrift.TType.LIST, 4);
             output.writeListBegin(thrift.TType.I32, obj.types.length);
             obj.types.forEach((value_2: __ROOT_NAMESPACE__.IntelligenceType): void => {
                 output.writeI32(value_2);
@@ -94,7 +83,7 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
             output.writeFieldEnd();
         }
         if (obj.search_scope != null) {
-            output.writeFieldBegin("search_scope", thrift.TType.I32, 6);
+            output.writeFieldBegin("search_scope", thrift.TType.I32, 5);
             output.writeI32(obj.search_scope);
             output.writeFieldEnd();
         }
@@ -149,27 +138,34 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
             }
             switch (fieldId) {
                 case 1:
-                    if (fieldType === thrift.TType.I64) {
-                        const value_3: thrift.Int64 = input.readI64();
-                        _args.space_id = value_3;
+                    if (fieldType === thrift.TType.STRING) {
+                        const value_3: string = input.readString();
+                        _args.name = value_3;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 2:
-                    if (fieldType === thrift.TType.STRING) {
-                        const value_4: string = input.readString();
-                        _args.name = value_4;
+                    if (fieldType === thrift.TType.BOOL) {
+                        const value_4: boolean = input.readBool();
+                        _args.has_published = value_4;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 3:
-                    if (fieldType === thrift.TType.BOOL) {
-                        const value_5: boolean = input.readBool();
-                        _args.has_published = value_5;
+                    if (fieldType === thrift.TType.LIST) {
+                        const value_5: Array<__ROOT_NAMESPACE__.IntelligenceStatus> = new Array<__ROOT_NAMESPACE__.IntelligenceStatus>();
+                        const metadata_1: thrift.IThriftList = input.readListBegin();
+                        const size_1: number = metadata_1.size;
+                        for (let i_1: number = 0; i_1 < size_1; i_1++) {
+                            const value_6: __ROOT_NAMESPACE__.IntelligenceStatus = input.readI32();
+                            value_5.push(value_6);
+                        }
+                        input.readListEnd();
+                        _args.status = value_5;
                     }
                     else {
                         input.skip(fieldType);
@@ -177,40 +173,24 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 4:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_6: Array<__ROOT_NAMESPACE__.IntelligenceStatus> = new Array<__ROOT_NAMESPACE__.IntelligenceStatus>();
-                        const metadata_1: thrift.IThriftList = input.readListBegin();
-                        const size_1: number = metadata_1.size;
-                        for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_7: __ROOT_NAMESPACE__.IntelligenceStatus = input.readI32();
-                            value_6.push(value_7);
+                        const value_7: Array<__ROOT_NAMESPACE__.IntelligenceType> = new Array<__ROOT_NAMESPACE__.IntelligenceType>();
+                        const metadata_2: thrift.IThriftList = input.readListBegin();
+                        const size_2: number = metadata_2.size;
+                        for (let i_2: number = 0; i_2 < size_2; i_2++) {
+                            const value_8: __ROOT_NAMESPACE__.IntelligenceType = input.readI32();
+                            value_7.push(value_8);
                         }
                         input.readListEnd();
-                        _args.status = value_6;
+                        _args.types = value_7;
                     }
                     else {
                         input.skip(fieldType);
                     }
                     break;
                 case 5:
-                    if (fieldType === thrift.TType.LIST) {
-                        const value_8: Array<__ROOT_NAMESPACE__.IntelligenceType> = new Array<__ROOT_NAMESPACE__.IntelligenceType>();
-                        const metadata_2: thrift.IThriftList = input.readListBegin();
-                        const size_2: number = metadata_2.size;
-                        for (let i_2: number = 0; i_2 < size_2; i_2++) {
-                            const value_9: __ROOT_NAMESPACE__.IntelligenceType = input.readI32();
-                            value_8.push(value_9);
-                        }
-                        input.readListEnd();
-                        _args.types = value_8;
-                    }
-                    else {
-                        input.skip(fieldType);
-                    }
-                    break;
-                case 6:
                     if (fieldType === thrift.TType.I32) {
-                        const value_10: SearchScope.SearchScope = input.readI32();
-                        _args.search_scope = value_10;
+                        const value_9: SearchScope.SearchScope = input.readI32();
+                        _args.search_scope = value_9;
                     }
                     else {
                         input.skip(fieldType);
@@ -218,8 +198,8 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 51:
                     if (fieldType === thrift.TType.BOOL) {
-                        const value_11: boolean = input.readBool();
-                        _args.is_fav = value_11;
+                        const value_10: boolean = input.readBool();
+                        _args.is_fav = value_10;
                     }
                     else {
                         input.skip(fieldType);
@@ -227,8 +207,8 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 52:
                     if (fieldType === thrift.TType.BOOL) {
-                        const value_12: boolean = input.readBool();
-                        _args.recently_open = value_12;
+                        const value_11: boolean = input.readBool();
+                        _args.recently_open = value_11;
                     }
                     else {
                         input.skip(fieldType);
@@ -236,8 +216,8 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 99:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_13: GetDraftIntelligenceListOption.IGetDraftIntelligenceListOption = GetDraftIntelligenceListOption.GetDraftIntelligenceListOptionCodec.decode(input);
-                        _args.option = value_13;
+                        const value_12: GetDraftIntelligenceListOption.IGetDraftIntelligenceListOption = GetDraftIntelligenceListOption.GetDraftIntelligenceListOptionCodec.decode(input);
+                        _args.option = value_12;
                     }
                     else {
                         input.skip(fieldType);
@@ -245,8 +225,8 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 100:
                     if (fieldType === thrift.TType.I32) {
-                        const value_14: OrderBy.OrderBy = input.readI32();
-                        _args.order_by = value_14;
+                        const value_13: OrderBy.OrderBy = input.readI32();
+                        _args.order_by = value_13;
                     }
                     else {
                         input.skip(fieldType);
@@ -254,8 +234,8 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 101:
                     if (fieldType === thrift.TType.STRING) {
-                        const value_15: string = input.readString();
-                        _args.cursor_id = value_15;
+                        const value_14: string = input.readString();
+                        _args.cursor_id = value_14;
                     }
                     else {
                         input.skip(fieldType);
@@ -263,8 +243,8 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 102:
                     if (fieldType === thrift.TType.I32) {
-                        const value_16: number = input.readI32();
-                        _args.size = value_16;
+                        const value_15: number = input.readI32();
+                        _args.size = value_15;
                     }
                     else {
                         input.skip(fieldType);
@@ -272,8 +252,8 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_17: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
-                        _args.Base = value_17;
+                        const value_16: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        _args.Base = value_16;
                     }
                     else {
                         input.skip(fieldType);
@@ -286,30 +266,23 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
             input.readFieldEnd();
         }
         input.readStructEnd();
-        if (_args.space_id !== undefined) {
-            return {
-                space_id: _args.space_id,
-                name: _args.name,
-                has_published: _args.has_published,
-                status: _args.status,
-                types: _args.types,
-                search_scope: _args.search_scope,
-                is_fav: _args.is_fav,
-                recently_open: _args.recently_open,
-                option: _args.option,
-                order_by: _args.order_by,
-                cursor_id: _args.cursor_id,
-                size: _args.size,
-                Base: _args.Base
-            };
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Unable to read GetDraftIntelligenceListRequest from input");
-        }
+        return {
+            name: _args.name,
+            has_published: _args.has_published,
+            status: _args.status,
+            types: _args.types,
+            search_scope: _args.search_scope,
+            is_fav: _args.is_fav,
+            recently_open: _args.recently_open,
+            option: _args.option,
+            order_by: _args.order_by,
+            cursor_id: _args.cursor_id,
+            size: _args.size,
+            Base: _args.Base
+        };
     }
 };
 export class GetDraftIntelligenceListRequest extends thrift.StructLike implements IGetDraftIntelligenceListRequest {
-    public space_id: thrift.Int64;
     public name?: string;
     public has_published?: boolean;
     public status?: Array<__ROOT_NAMESPACE__.IntelligenceStatus>;
@@ -323,76 +296,64 @@ export class GetDraftIntelligenceListRequest extends thrift.StructLike implement
     public size?: number;
     public Base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
-    public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        space_id: {
-            'agw.js_conv': "str",
-            'api.js_conv': "true"
-        }
-    };
-    constructor(args: IGetDraftIntelligenceListRequestArgs) {
+    public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
+    constructor(args: IGetDraftIntelligenceListRequestArgs = {}) {
         super();
-        if (args.space_id != null) {
-            const value_18: thrift.Int64 = (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id);
-            this.space_id = value_18;
-        }
-        else {
-            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
-        }
         if (args.name != null) {
-            const value_19: string = args.name;
-            this.name = value_19;
+            const value_17: string = args.name;
+            this.name = value_17;
         }
         if (args.has_published != null) {
-            const value_20: boolean = args.has_published;
-            this.has_published = value_20;
+            const value_18: boolean = args.has_published;
+            this.has_published = value_18;
         }
         if (args.status != null) {
-            const value_21: Array<__ROOT_NAMESPACE__.IntelligenceStatus> = new Array<__ROOT_NAMESPACE__.IntelligenceStatus>();
-            args.status.forEach((value_31: __ROOT_NAMESPACE__.IntelligenceStatus): void => {
-                const value_32: __ROOT_NAMESPACE__.IntelligenceStatus = value_31;
-                value_21.push(value_32);
+            const value_19: Array<__ROOT_NAMESPACE__.IntelligenceStatus> = new Array<__ROOT_NAMESPACE__.IntelligenceStatus>();
+            args.status.forEach((value_29: __ROOT_NAMESPACE__.IntelligenceStatus): void => {
+                const value_30: __ROOT_NAMESPACE__.IntelligenceStatus = value_29;
+                value_19.push(value_30);
             });
-            this.status = value_21;
+            this.status = value_19;
         }
         if (args.types != null) {
-            const value_22: Array<__ROOT_NAMESPACE__.IntelligenceType> = new Array<__ROOT_NAMESPACE__.IntelligenceType>();
-            args.types.forEach((value_33: __ROOT_NAMESPACE__.IntelligenceType): void => {
-                const value_34: __ROOT_NAMESPACE__.IntelligenceType = value_33;
-                value_22.push(value_34);
+            const value_20: Array<__ROOT_NAMESPACE__.IntelligenceType> = new Array<__ROOT_NAMESPACE__.IntelligenceType>();
+            args.types.forEach((value_31: __ROOT_NAMESPACE__.IntelligenceType): void => {
+                const value_32: __ROOT_NAMESPACE__.IntelligenceType = value_31;
+                value_20.push(value_32);
             });
-            this.types = value_22;
+            this.types = value_20;
         }
         if (args.search_scope != null) {
-            const value_23: SearchScope.SearchScope = args.search_scope;
-            this.search_scope = value_23;
+            const value_21: SearchScope.SearchScope = args.search_scope;
+            this.search_scope = value_21;
         }
         if (args.is_fav != null) {
-            const value_24: boolean = args.is_fav;
-            this.is_fav = value_24;
+            const value_22: boolean = args.is_fav;
+            this.is_fav = value_22;
         }
         if (args.recently_open != null) {
-            const value_25: boolean = args.recently_open;
-            this.recently_open = value_25;
+            const value_23: boolean = args.recently_open;
+            this.recently_open = value_23;
         }
         if (args.option != null) {
-            const value_26: GetDraftIntelligenceListOption.IGetDraftIntelligenceListOption = new GetDraftIntelligenceListOption.GetDraftIntelligenceListOption(args.option);
-            this.option = value_26;
+            const value_24: GetDraftIntelligenceListOption.IGetDraftIntelligenceListOption = new GetDraftIntelligenceListOption.GetDraftIntelligenceListOption(args.option);
+            this.option = value_24;
         }
         if (args.order_by != null) {
-            const value_27: OrderBy.OrderBy = args.order_by;
-            this.order_by = value_27;
+            const value_25: OrderBy.OrderBy = args.order_by;
+            this.order_by = value_25;
         }
         if (args.cursor_id != null) {
-            const value_28: string = args.cursor_id;
-            this.cursor_id = value_28;
+            const value_26: string = args.cursor_id;
+            this.cursor_id = value_26;
         }
         if (args.size != null) {
-            const value_29: number = args.size;
-            this.size = value_29;
+            const value_27: number = args.size;
+            this.size = value_27;
         }
         if (args.Base != null) {
-            const value_30: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_30;
+            const value_28: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            this.Base = value_28;
         }
     }
     public static read(input: thrift.TProtocol): GetDraftIntelligenceListRequest {

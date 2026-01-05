@@ -66,11 +66,10 @@ export default function LoginPage() {
                 style={{ padding: '32px' }}
             >
                 <div className="text-center mb-8">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center">
-                        <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
+                    <img src="/logo.png"
+                         alt="Logo"
+                         className="w-8 h-8 rounded-lg object-cover"
+                    />
                     <Title heading={3} style={{ marginBottom: 4 }}>Airi Studio</Title>
                     <Text type="tertiary">AI 应用开发平台</Text>
                 </div>
