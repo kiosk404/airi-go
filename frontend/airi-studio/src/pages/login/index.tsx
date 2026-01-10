@@ -68,7 +68,7 @@ export default function LoginPage() {
                 <div className="text-center mb-8">
                     <img src="/logo.png"
                          alt="Logo"
-                         className="w-8 h-8 rounded-lg object-cover"
+                         className="w-16 h-16 mx-auto mb-4 rounded-lg object-cover"
                     />
                     <Title heading={3} style={{ marginBottom: 4 }}>Airi Studio</Title>
                     <Text type="tertiary">AI 应用开发平台</Text>
