@@ -5,14 +5,15 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as LLM_DOMAIN_MANAGE_NS from "../domain/manage";
+import * as BASE_NS from "../../base";
 export interface IGetModelResponse {
-    model?: __ROOT_NAMESPACE__.IModel;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    model?: LLM_DOMAIN_MANAGE_NS.IModel;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IGetModelResponseArgs {
-    model?: __ROOT_NAMESPACE__.IModelArgs;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    model?: LLM_DOMAIN_MANAGE_NS.IModelArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, IGetModelResponse> = {
     encode(args: IGetModelResponseArgs, output: thrift.TProtocol): void {
@@ -23,12 +24,12 @@ export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, I
         output.writeStructBegin("GetModelResponse");
         if (obj.model != null) {
             output.writeFieldBegin("model", thrift.TType.STRUCT, 1);
-            __ROOT_NAMESPACE__.ModelCodec.encode(obj.model, output);
+            LLM_DOMAIN_MANAGE_NS.ModelCodec.encode(obj.model, output);
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -48,7 +49,7 @@ export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, I
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_1: __ROOT_NAMESPACE__.IModel = __ROOT_NAMESPACE__.ModelCodec.decode(input);
+                        const value_1: LLM_DOMAIN_MANAGE_NS.IModel = LLM_DOMAIN_MANAGE_NS.ModelCodec.decode(input);
                         _args.model = value_1;
                     }
                     else {
@@ -57,7 +58,7 @@ export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, I
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_2: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_2: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_2;
                     }
                     else {
@@ -78,18 +79,18 @@ export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, I
     }
 };
 export class GetModelResponse extends thrift.StructLike implements IGetModelResponse {
-    public model?: __ROOT_NAMESPACE__.IModel;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public model?: LLM_DOMAIN_MANAGE_NS.IModel;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetModelResponseArgs = {}) {
         super();
         if (args.model != null) {
-            const value_3: __ROOT_NAMESPACE__.IModel = new __ROOT_NAMESPACE__.Model(args.model);
+            const value_3: LLM_DOMAIN_MANAGE_NS.IModel = new LLM_DOMAIN_MANAGE_NS.Model(args.model);
             this.model = value_3;
         }
         if (args.BaseResp != null) {
-            const value_4: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_4: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_4;
         }
     }

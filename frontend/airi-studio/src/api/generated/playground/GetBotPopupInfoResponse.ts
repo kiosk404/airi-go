@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as BotPopupInfoData from "./BotPopupInfoData";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetBotPopupInfoResponse {
     data: BotPopupInfoData.IBotPopupInfoData;
     code: thrift.Int64;

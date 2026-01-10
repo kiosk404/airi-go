@@ -5,28 +5,29 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IDebugAPIResponse {
     code?: thrift.Int64;
     msg?: string;
-    response_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
+    response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     success?: boolean;
     resp?: string;
     reason?: string;
     raw_resp?: string;
     raw_req?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IDebugAPIResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    response_params?: Array<__ROOT_NAMESPACE__.IAPIParameterArgs>;
+    response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs>;
     success?: boolean;
     resp?: string;
     reason?: string;
     raw_resp?: string;
     raw_req?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const DebugAPIResponseCodec: thrift.IStructCodec<IDebugAPIResponseArgs, IDebugAPIResponse> = {
     encode(args: IDebugAPIResponseArgs, output: thrift.TProtocol): void {
@@ -55,8 +56,8 @@ export const DebugAPIResponseCodec: thrift.IStructCodec<IDebugAPIResponseArgs, I
         if (obj.response_params != null) {
             output.writeFieldBegin("response_params", thrift.TType.LIST, 3);
             output.writeListBegin(thrift.TType.STRUCT, obj.response_params.length);
-            obj.response_params.forEach((value_1: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                __ROOT_NAMESPACE__.APIParameterCodec.encode(value_1, output);
+            obj.response_params.forEach((value_1: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -88,7 +89,7 @@ export const DebugAPIResponseCodec: thrift.IStructCodec<IDebugAPIResponseArgs, I
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -126,11 +127,11 @@ export const DebugAPIResponseCodec: thrift.IStructCodec<IDebugAPIResponseArgs, I
                     break;
                 case 3:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_4: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
+                        const value_4: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_5: __ROOT_NAMESPACE__.IAPIParameter = __ROOT_NAMESPACE__.APIParameterCodec.decode(input);
+                            const value_5: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.decode(input);
                             value_4.push(value_5);
                         }
                         input.readListEnd();
@@ -187,7 +188,7 @@ export const DebugAPIResponseCodec: thrift.IStructCodec<IDebugAPIResponseArgs, I
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_11: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_11: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_11;
                     }
                     else {
@@ -217,13 +218,13 @@ export const DebugAPIResponseCodec: thrift.IStructCodec<IDebugAPIResponseArgs, I
 export class DebugAPIResponse extends thrift.StructLike implements IDebugAPIResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public response_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
+    public response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     public success?: boolean;
     public resp?: string;
     public reason?: string;
     public raw_resp?: string;
     public raw_req?: string;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IDebugAPIResponseArgs = {}) {
@@ -237,9 +238,9 @@ export class DebugAPIResponse extends thrift.StructLike implements IDebugAPIResp
             this.msg = value_13;
         }
         if (args.response_params != null) {
-            const value_14: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
-            args.response_params.forEach((value_21: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                const value_22: __ROOT_NAMESPACE__.IAPIParameter = new __ROOT_NAMESPACE__.APIParameter(value_21);
+            const value_14: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
+            args.response_params.forEach((value_21: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                const value_22: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameter(value_21);
                 value_14.push(value_22);
             });
             this.response_params = value_14;
@@ -265,7 +266,7 @@ export class DebugAPIResponse extends thrift.StructLike implements IDebugAPIResp
             this.raw_req = value_19;
         }
         if (args.BaseResp != null) {
-            const value_20: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_20: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_20;
         }
     }

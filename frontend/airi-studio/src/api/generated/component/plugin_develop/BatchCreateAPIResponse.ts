@@ -5,22 +5,23 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IBatchCreateAPIResponse {
     code?: thrift.Int64;
     msg?: string;
-    paths_duplicated?: Array<__ROOT_NAMESPACE__.IPluginAPIInfo>;
-    paths_created?: Array<__ROOT_NAMESPACE__.IPluginAPIInfo>;
+    paths_duplicated?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
+    paths_created?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     edit_version?: number;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    BaseResp: BASE_NS.IBaseResp;
 }
 export interface IBatchCreateAPIResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    paths_duplicated?: Array<__ROOT_NAMESPACE__.IPluginAPIInfoArgs>;
-    paths_created?: Array<__ROOT_NAMESPACE__.IPluginAPIInfoArgs>;
+    paths_duplicated?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs>;
+    paths_created?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs>;
     edit_version?: number;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    BaseResp: BASE_NS.IBaseRespArgs;
 }
 export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIResponseArgs, IBatchCreateAPIResponse> = {
     encode(args: IBatchCreateAPIResponseArgs, output: thrift.TProtocol): void {
@@ -46,8 +47,8 @@ export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIRes
         if (obj.paths_duplicated != null) {
             output.writeFieldBegin("paths_duplicated", thrift.TType.LIST, 3);
             output.writeListBegin(thrift.TType.STRUCT, obj.paths_duplicated.length);
-            obj.paths_duplicated.forEach((value_1: __ROOT_NAMESPACE__.IPluginAPIInfoArgs): void => {
-                __ROOT_NAMESPACE__.PluginAPIInfoCodec.encode(value_1, output);
+            obj.paths_duplicated.forEach((value_1: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginAPIInfoCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -55,8 +56,8 @@ export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIRes
         if (obj.paths_created != null) {
             output.writeFieldBegin("paths_created", thrift.TType.LIST, 4);
             output.writeListBegin(thrift.TType.STRUCT, obj.paths_created.length);
-            obj.paths_created.forEach((value_2: __ROOT_NAMESPACE__.IPluginAPIInfoArgs): void => {
-                __ROOT_NAMESPACE__.PluginAPIInfoCodec.encode(value_2, output);
+            obj.paths_created.forEach((value_2: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginAPIInfoCodec.encode(value_2, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -68,7 +69,7 @@ export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIRes
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         else {
@@ -109,11 +110,11 @@ export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIRes
                     break;
                 case 3:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_5: Array<__ROOT_NAMESPACE__.IPluginAPIInfo> = new Array<__ROOT_NAMESPACE__.IPluginAPIInfo>();
+                        const value_5: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_6: __ROOT_NAMESPACE__.IPluginAPIInfo = __ROOT_NAMESPACE__.PluginAPIInfoCodec.decode(input);
+                            const value_6: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginAPIInfoCodec.decode(input);
                             value_5.push(value_6);
                         }
                         input.readListEnd();
@@ -125,11 +126,11 @@ export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIRes
                     break;
                 case 4:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_7: Array<__ROOT_NAMESPACE__.IPluginAPIInfo> = new Array<__ROOT_NAMESPACE__.IPluginAPIInfo>();
+                        const value_7: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>();
                         const metadata_2: thrift.IThriftList = input.readListBegin();
                         const size_2: number = metadata_2.size;
                         for (let i_2: number = 0; i_2 < size_2; i_2++) {
-                            const value_8: __ROOT_NAMESPACE__.IPluginAPIInfo = __ROOT_NAMESPACE__.PluginAPIInfoCodec.decode(input);
+                            const value_8: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginAPIInfoCodec.decode(input);
                             value_7.push(value_8);
                         }
                         input.readListEnd();
@@ -150,7 +151,7 @@ export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIRes
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_10: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_10: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_10;
                     }
                     else {
@@ -182,10 +183,10 @@ export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIRes
 export class BatchCreateAPIResponse extends thrift.StructLike implements IBatchCreateAPIResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public paths_duplicated?: Array<__ROOT_NAMESPACE__.IPluginAPIInfo>;
-    public paths_created?: Array<__ROOT_NAMESPACE__.IPluginAPIInfo>;
+    public paths_duplicated?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
+    public paths_created?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     public edit_version?: number;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public BaseResp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IBatchCreateAPIResponseArgs) {
@@ -199,17 +200,17 @@ export class BatchCreateAPIResponse extends thrift.StructLike implements IBatchC
             this.msg = value_12;
         }
         if (args.paths_duplicated != null) {
-            const value_13: Array<__ROOT_NAMESPACE__.IPluginAPIInfo> = new Array<__ROOT_NAMESPACE__.IPluginAPIInfo>();
-            args.paths_duplicated.forEach((value_17: __ROOT_NAMESPACE__.IPluginAPIInfoArgs): void => {
-                const value_18: __ROOT_NAMESPACE__.IPluginAPIInfo = new __ROOT_NAMESPACE__.PluginAPIInfo(value_17);
+            const value_13: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>();
+            args.paths_duplicated.forEach((value_17: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs): void => {
+                const value_18: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginAPIInfo(value_17);
                 value_13.push(value_18);
             });
             this.paths_duplicated = value_13;
         }
         if (args.paths_created != null) {
-            const value_14: Array<__ROOT_NAMESPACE__.IPluginAPIInfo> = new Array<__ROOT_NAMESPACE__.IPluginAPIInfo>();
-            args.paths_created.forEach((value_19: __ROOT_NAMESPACE__.IPluginAPIInfoArgs): void => {
-                const value_20: __ROOT_NAMESPACE__.IPluginAPIInfo = new __ROOT_NAMESPACE__.PluginAPIInfo(value_19);
+            const value_14: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>();
+            args.paths_created.forEach((value_19: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs): void => {
+                const value_20: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginAPIInfo(value_19);
                 value_14.push(value_20);
             });
             this.paths_created = value_14;
@@ -219,7 +220,7 @@ export class BatchCreateAPIResponse extends thrift.StructLike implements IBatchC
             this.edit_version = value_15;
         }
         if (args.BaseResp != null) {
-            const value_16: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_16: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_16;
         }
         else {

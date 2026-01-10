@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as RESOURCE_COMMON_NS from "./common";
+import * as BASE_NS from "../base";
 export interface IResourceCopyDetailResponse {
     code?: thrift.Int64;
     msg?: string;
-    task_detail?: __ROOT_NAMESPACE__.IResourceCopyTaskDetail;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    task_detail?: RESOURCE_COMMON_NS.IResourceCopyTaskDetail;
+    BaseResp: BASE_NS.IBaseResp;
 }
 export interface IResourceCopyDetailResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    task_detail?: __ROOT_NAMESPACE__.IResourceCopyTaskDetailArgs;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    task_detail?: RESOURCE_COMMON_NS.IResourceCopyTaskDetailArgs;
+    BaseResp: BASE_NS.IBaseRespArgs;
 }
 export const ResourceCopyDetailResponseCodec: thrift.IStructCodec<IResourceCopyDetailResponseArgs, IResourceCopyDetailResponse> = {
     encode(args: IResourceCopyDetailResponseArgs, output: thrift.TProtocol): void {
@@ -39,12 +40,12 @@ export const ResourceCopyDetailResponseCodec: thrift.IStructCodec<IResourceCopyD
         }
         if (obj.task_detail != null) {
             output.writeFieldBegin("task_detail", thrift.TType.STRUCT, 3);
-            __ROOT_NAMESPACE__.ResourceCopyTaskDetailCodec.encode(obj.task_detail, output);
+            RESOURCE_COMMON_NS.ResourceCopyTaskDetailCodec.encode(obj.task_detail, output);
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         else {
@@ -85,7 +86,7 @@ export const ResourceCopyDetailResponseCodec: thrift.IStructCodec<IResourceCopyD
                     break;
                 case 3:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_3: __ROOT_NAMESPACE__.IResourceCopyTaskDetail = __ROOT_NAMESPACE__.ResourceCopyTaskDetailCodec.decode(input);
+                        const value_3: RESOURCE_COMMON_NS.IResourceCopyTaskDetail = RESOURCE_COMMON_NS.ResourceCopyTaskDetailCodec.decode(input);
                         _args.task_detail = value_3;
                     }
                     else {
@@ -94,7 +95,7 @@ export const ResourceCopyDetailResponseCodec: thrift.IStructCodec<IResourceCopyD
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_4: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_4;
                     }
                     else {
@@ -124,8 +125,8 @@ export const ResourceCopyDetailResponseCodec: thrift.IStructCodec<IResourceCopyD
 export class ResourceCopyDetailResponse extends thrift.StructLike implements IResourceCopyDetailResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public task_detail?: __ROOT_NAMESPACE__.IResourceCopyTaskDetail;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public task_detail?: RESOURCE_COMMON_NS.IResourceCopyTaskDetail;
+    public BaseResp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IResourceCopyDetailResponseArgs) {
@@ -139,11 +140,11 @@ export class ResourceCopyDetailResponse extends thrift.StructLike implements IRe
             this.msg = value_6;
         }
         if (args.task_detail != null) {
-            const value_7: __ROOT_NAMESPACE__.IResourceCopyTaskDetail = new __ROOT_NAMESPACE__.ResourceCopyTaskDetail(args.task_detail);
+            const value_7: RESOURCE_COMMON_NS.IResourceCopyTaskDetail = new RESOURCE_COMMON_NS.ResourceCopyTaskDetail(args.task_detail);
             this.task_detail = value_7;
         }
         if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_8;
         }
         else {

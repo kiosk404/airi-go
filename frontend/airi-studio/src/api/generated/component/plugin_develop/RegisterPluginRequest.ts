@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IRegisterPluginRequest {
     ai_plugin?: string;
     openapi?: string;
     client_id?: string;
     client_secret?: string;
     service_token?: string;
-    plugin_type?: __ROOT_NAMESPACE__.PluginType;
+    plugin_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType;
     space_id?: thrift.Int64;
     import_from_file?: boolean;
     project_id?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IRegisterPluginRequestArgs {
     ai_plugin?: string;
@@ -24,11 +25,11 @@ export interface IRegisterPluginRequestArgs {
     client_id?: string;
     client_secret?: string;
     service_token?: string;
-    plugin_type?: __ROOT_NAMESPACE__.PluginType;
+    plugin_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType;
     space_id?: number | string | thrift.Int64;
     import_from_file?: boolean;
     project_id?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const RegisterPluginRequestCodec: thrift.IStructCodec<IRegisterPluginRequestArgs, IRegisterPluginRequest> = {
     encode(args: IRegisterPluginRequestArgs, output: thrift.TProtocol): void {
@@ -92,7 +93,7 @@ export const RegisterPluginRequestCodec: thrift.IStructCodec<IRegisterPluginRequ
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -157,7 +158,7 @@ export const RegisterPluginRequestCodec: thrift.IStructCodec<IRegisterPluginRequ
                     break;
                 case 7:
                     if (fieldType === thrift.TType.I32) {
-                        const value_6: __ROOT_NAMESPACE__.PluginType = input.readI32();
+                        const value_6: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType = input.readI32();
                         _args.plugin_type = value_6;
                     }
                     else {
@@ -193,7 +194,7 @@ export const RegisterPluginRequestCodec: thrift.IStructCodec<IRegisterPluginRequ
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_10: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_10: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_10;
                     }
                     else {
@@ -227,11 +228,11 @@ export class RegisterPluginRequest extends thrift.StructLike implements IRegiste
     public client_id?: string;
     public client_secret?: string;
     public service_token?: string;
-    public plugin_type?: __ROOT_NAMESPACE__.PluginType;
+    public plugin_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType;
     public space_id?: thrift.Int64;
     public import_from_file?: boolean;
     public project_id?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         space_id: {
@@ -264,7 +265,7 @@ export class RegisterPluginRequest extends thrift.StructLike implements IRegiste
             this.service_token = value_15;
         }
         if (args.plugin_type != null) {
-            const value_16: __ROOT_NAMESPACE__.PluginType = args.plugin_type;
+            const value_16: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType = args.plugin_type;
             this.plugin_type = value_16;
         }
         if (args.space_id != null) {
@@ -280,7 +281,7 @@ export class RegisterPluginRequest extends thrift.StructLike implements IRegiste
             this.project_id = value_19;
         }
         if (args.Base != null) {
-            const value_20: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_20: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_20;
         }
     }

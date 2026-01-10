@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as RESOURCE_COMMON_NS from "./common";
+import * as BASE_NS from "../base";
 export interface IResourceCopyRetryResponse {
     code?: thrift.Int64;
     msg?: string;
-    failed_reasons?: Array<__ROOT_NAMESPACE__.IResourceCopyFailedReason>;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    failed_reasons?: Array<RESOURCE_COMMON_NS.IResourceCopyFailedReason>;
+    BaseResp: BASE_NS.IBaseResp;
 }
 export interface IResourceCopyRetryResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    failed_reasons?: Array<__ROOT_NAMESPACE__.IResourceCopyFailedReasonArgs>;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    failed_reasons?: Array<RESOURCE_COMMON_NS.IResourceCopyFailedReasonArgs>;
+    BaseResp: BASE_NS.IBaseRespArgs;
 }
 export const ResourceCopyRetryResponseCodec: thrift.IStructCodec<IResourceCopyRetryResponseArgs, IResourceCopyRetryResponse> = {
     encode(args: IResourceCopyRetryResponseArgs, output: thrift.TProtocol): void {
@@ -40,15 +41,15 @@ export const ResourceCopyRetryResponseCodec: thrift.IStructCodec<IResourceCopyRe
         if (obj.failed_reasons != null) {
             output.writeFieldBegin("failed_reasons", thrift.TType.LIST, 4);
             output.writeListBegin(thrift.TType.STRUCT, obj.failed_reasons.length);
-            obj.failed_reasons.forEach((value_1: __ROOT_NAMESPACE__.IResourceCopyFailedReasonArgs): void => {
-                __ROOT_NAMESPACE__.ResourceCopyFailedReasonCodec.encode(value_1, output);
+            obj.failed_reasons.forEach((value_1: RESOURCE_COMMON_NS.IResourceCopyFailedReasonArgs): void => {
+                RESOURCE_COMMON_NS.ResourceCopyFailedReasonCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         else {
@@ -89,11 +90,11 @@ export const ResourceCopyRetryResponseCodec: thrift.IStructCodec<IResourceCopyRe
                     break;
                 case 4:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_4: Array<__ROOT_NAMESPACE__.IResourceCopyFailedReason> = new Array<__ROOT_NAMESPACE__.IResourceCopyFailedReason>();
+                        const value_4: Array<RESOURCE_COMMON_NS.IResourceCopyFailedReason> = new Array<RESOURCE_COMMON_NS.IResourceCopyFailedReason>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_5: __ROOT_NAMESPACE__.IResourceCopyFailedReason = __ROOT_NAMESPACE__.ResourceCopyFailedReasonCodec.decode(input);
+                            const value_5: RESOURCE_COMMON_NS.IResourceCopyFailedReason = RESOURCE_COMMON_NS.ResourceCopyFailedReasonCodec.decode(input);
                             value_4.push(value_5);
                         }
                         input.readListEnd();
@@ -105,7 +106,7 @@ export const ResourceCopyRetryResponseCodec: thrift.IStructCodec<IResourceCopyRe
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_6: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_6;
                     }
                     else {
@@ -135,8 +136,8 @@ export const ResourceCopyRetryResponseCodec: thrift.IStructCodec<IResourceCopyRe
 export class ResourceCopyRetryResponse extends thrift.StructLike implements IResourceCopyRetryResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public failed_reasons?: Array<__ROOT_NAMESPACE__.IResourceCopyFailedReason>;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public failed_reasons?: Array<RESOURCE_COMMON_NS.IResourceCopyFailedReason>;
+    public BaseResp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IResourceCopyRetryResponseArgs) {
@@ -150,15 +151,15 @@ export class ResourceCopyRetryResponse extends thrift.StructLike implements IRes
             this.msg = value_8;
         }
         if (args.failed_reasons != null) {
-            const value_9: Array<__ROOT_NAMESPACE__.IResourceCopyFailedReason> = new Array<__ROOT_NAMESPACE__.IResourceCopyFailedReason>();
-            args.failed_reasons.forEach((value_11: __ROOT_NAMESPACE__.IResourceCopyFailedReasonArgs): void => {
-                const value_12: __ROOT_NAMESPACE__.IResourceCopyFailedReason = new __ROOT_NAMESPACE__.ResourceCopyFailedReason(value_11);
+            const value_9: Array<RESOURCE_COMMON_NS.IResourceCopyFailedReason> = new Array<RESOURCE_COMMON_NS.IResourceCopyFailedReason>();
+            args.failed_reasons.forEach((value_11: RESOURCE_COMMON_NS.IResourceCopyFailedReasonArgs): void => {
+                const value_12: RESOURCE_COMMON_NS.IResourceCopyFailedReason = new RESOURCE_COMMON_NS.ResourceCopyFailedReason(value_11);
                 value_9.push(value_12);
             });
             this.failed_reasons = value_9;
         }
         if (args.BaseResp != null) {
-            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_10: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_10;
         }
         else {

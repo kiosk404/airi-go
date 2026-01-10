@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as UpdateDraftBotInfoAgwData from "./UpdateDraftBotInfoAgwData";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface IUpdateDraftBotInfoAgwResponse {
     data: UpdateDraftBotInfoAgwData.IUpdateDraftBotInfoAgwData;
     code: thrift.Int64;

@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as KnowledgeConfig from "./KnowledgeConfig";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface IUpdateKnowledgeConfigReq {
     knowledge_config?: KnowledgeConfig.IKnowledgeConfig;
     Base?: __ROOT_NAMESPACE__.IBase;

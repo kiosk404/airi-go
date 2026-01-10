@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as OAuthPluginInfo from "./OAuthPluginInfo";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IGetQueriedOAuthPluginListResponse {
     oauth_plugin_list?: Array<OAuthPluginInfo.IOAuthPluginInfo>;
     code?: thrift.Int64;

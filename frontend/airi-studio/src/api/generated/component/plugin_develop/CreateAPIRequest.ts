@@ -5,34 +5,35 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface ICreateAPIRequest {
     plugin_id: thrift.Int64;
     name: string;
     desc: string;
     path?: string;
-    method?: __ROOT_NAMESPACE__.APIMethod;
-    api_extend?: __ROOT_NAMESPACE__.IAPIExtend;
-    request_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
-    response_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
+    method?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIMethod;
+    api_extend?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIExtend;
+    request_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
+    response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     disabled?: boolean;
     edit_version?: number;
     function_name?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface ICreateAPIRequestArgs {
     plugin_id: number | string | thrift.Int64;
     name: string;
     desc: string;
     path?: string;
-    method?: __ROOT_NAMESPACE__.APIMethod;
-    api_extend?: __ROOT_NAMESPACE__.IAPIExtendArgs;
-    request_params?: Array<__ROOT_NAMESPACE__.IAPIParameterArgs>;
-    response_params?: Array<__ROOT_NAMESPACE__.IAPIParameterArgs>;
+    method?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIMethod;
+    api_extend?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIExtendArgs;
+    request_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs>;
+    response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs>;
     disabled?: boolean;
     edit_version?: number;
     function_name?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, ICreateAPIRequest> = {
     encode(args: ICreateAPIRequestArgs, output: thrift.TProtocol): void {
@@ -87,14 +88,14 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
         }
         if (obj.api_extend != null) {
             output.writeFieldBegin("api_extend", thrift.TType.STRUCT, 6);
-            __ROOT_NAMESPACE__.APIExtendCodec.encode(obj.api_extend, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIExtendCodec.encode(obj.api_extend, output);
             output.writeFieldEnd();
         }
         if (obj.request_params != null) {
             output.writeFieldBegin("request_params", thrift.TType.LIST, 7);
             output.writeListBegin(thrift.TType.STRUCT, obj.request_params.length);
-            obj.request_params.forEach((value_1: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                __ROOT_NAMESPACE__.APIParameterCodec.encode(value_1, output);
+            obj.request_params.forEach((value_1: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -102,8 +103,8 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
         if (obj.response_params != null) {
             output.writeFieldBegin("response_params", thrift.TType.LIST, 8);
             output.writeListBegin(thrift.TType.STRUCT, obj.response_params.length);
-            obj.response_params.forEach((value_2: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                __ROOT_NAMESPACE__.APIParameterCodec.encode(value_2, output);
+            obj.response_params.forEach((value_2: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.encode(value_2, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -125,7 +126,7 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -181,7 +182,7 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
                     break;
                 case 5:
                     if (fieldType === thrift.TType.I32) {
-                        const value_7: __ROOT_NAMESPACE__.APIMethod = input.readI32();
+                        const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIMethod = input.readI32();
                         _args.method = value_7;
                     }
                     else {
@@ -190,7 +191,7 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
                     break;
                 case 6:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_8: __ROOT_NAMESPACE__.IAPIExtend = __ROOT_NAMESPACE__.APIExtendCodec.decode(input);
+                        const value_8: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIExtend = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIExtendCodec.decode(input);
                         _args.api_extend = value_8;
                     }
                     else {
@@ -199,11 +200,11 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
                     break;
                 case 7:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_9: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
+                        const value_9: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_10: __ROOT_NAMESPACE__.IAPIParameter = __ROOT_NAMESPACE__.APIParameterCodec.decode(input);
+                            const value_10: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.decode(input);
                             value_9.push(value_10);
                         }
                         input.readListEnd();
@@ -215,11 +216,11 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
                     break;
                 case 8:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_11: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
+                        const value_11: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
                         const metadata_2: thrift.IThriftList = input.readListBegin();
                         const size_2: number = metadata_2.size;
                         for (let i_2: number = 0; i_2 < size_2; i_2++) {
-                            const value_12: __ROOT_NAMESPACE__.IAPIParameter = __ROOT_NAMESPACE__.APIParameterCodec.decode(input);
+                            const value_12: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.decode(input);
                             value_11.push(value_12);
                         }
                         input.readListEnd();
@@ -258,7 +259,7 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_16: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_16: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_16;
                     }
                     else {
@@ -298,14 +299,14 @@ export class CreateAPIRequest extends thrift.StructLike implements ICreateAPIReq
     public name: string;
     public desc: string;
     public path?: string;
-    public method?: __ROOT_NAMESPACE__.APIMethod;
-    public api_extend?: __ROOT_NAMESPACE__.IAPIExtend;
-    public request_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
-    public response_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
+    public method?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIMethod;
+    public api_extend?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIExtend;
+    public request_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
+    public response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     public disabled?: boolean;
     public edit_version?: number;
     public function_name?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -340,25 +341,25 @@ export class CreateAPIRequest extends thrift.StructLike implements ICreateAPIReq
             this.path = value_20;
         }
         if (args.method != null) {
-            const value_21: __ROOT_NAMESPACE__.APIMethod = args.method;
+            const value_21: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIMethod = args.method;
             this.method = value_21;
         }
         if (args.api_extend != null) {
-            const value_22: __ROOT_NAMESPACE__.IAPIExtend = new __ROOT_NAMESPACE__.APIExtend(args.api_extend);
+            const value_22: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIExtend = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIExtend(args.api_extend);
             this.api_extend = value_22;
         }
         if (args.request_params != null) {
-            const value_23: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
-            args.request_params.forEach((value_29: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                const value_30: __ROOT_NAMESPACE__.IAPIParameter = new __ROOT_NAMESPACE__.APIParameter(value_29);
+            const value_23: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
+            args.request_params.forEach((value_29: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                const value_30: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameter(value_29);
                 value_23.push(value_30);
             });
             this.request_params = value_23;
         }
         if (args.response_params != null) {
-            const value_24: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
-            args.response_params.forEach((value_31: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                const value_32: __ROOT_NAMESPACE__.IAPIParameter = new __ROOT_NAMESPACE__.APIParameter(value_31);
+            const value_24: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
+            args.response_params.forEach((value_31: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                const value_32: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameter(value_31);
                 value_24.push(value_32);
             });
             this.response_params = value_24;
@@ -376,7 +377,7 @@ export class CreateAPIRequest extends thrift.StructLike implements ICreateAPIReq
             this.function_name = value_27;
         }
         if (args.Base != null) {
-            const value_28: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_28: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_28;
         }
     }

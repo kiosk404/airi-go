@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface ICheckAndLockPluginEditResponse {
     code: number;
     msg: string;
-    data?: __ROOT_NAMESPACE__.ICheckAndLockPluginEditData;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICheckAndLockPluginEditData;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface ICheckAndLockPluginEditResponseArgs {
     code: number;
     msg: string;
-    data?: __ROOT_NAMESPACE__.ICheckAndLockPluginEditDataArgs;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICheckAndLockPluginEditDataArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const CheckAndLockPluginEditResponseCodec: thrift.IStructCodec<ICheckAndLockPluginEditResponseArgs, ICheckAndLockPluginEditResponse> = {
     encode(args: ICheckAndLockPluginEditResponseArgs, output: thrift.TProtocol): void {
@@ -45,12 +46,12 @@ export const CheckAndLockPluginEditResponseCodec: thrift.IStructCodec<ICheckAndL
         }
         if (obj.data != null) {
             output.writeFieldBegin("data", thrift.TType.STRUCT, 3);
-            __ROOT_NAMESPACE__.CheckAndLockPluginEditDataCodec.encode(obj.data, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CheckAndLockPluginEditDataCodec.encode(obj.data, output);
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -88,7 +89,7 @@ export const CheckAndLockPluginEditResponseCodec: thrift.IStructCodec<ICheckAndL
                     break;
                 case 3:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_3: __ROOT_NAMESPACE__.ICheckAndLockPluginEditData = __ROOT_NAMESPACE__.CheckAndLockPluginEditDataCodec.decode(input);
+                        const value_3: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICheckAndLockPluginEditData = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CheckAndLockPluginEditDataCodec.decode(input);
                         _args.data = value_3;
                     }
                     else {
@@ -97,7 +98,7 @@ export const CheckAndLockPluginEditResponseCodec: thrift.IStructCodec<ICheckAndL
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_4: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_4;
                     }
                     else {
@@ -127,8 +128,8 @@ export const CheckAndLockPluginEditResponseCodec: thrift.IStructCodec<ICheckAndL
 export class CheckAndLockPluginEditResponse extends thrift.StructLike implements ICheckAndLockPluginEditResponse {
     public code: number;
     public msg: string;
-    public data?: __ROOT_NAMESPACE__.ICheckAndLockPluginEditData;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICheckAndLockPluginEditData;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICheckAndLockPluginEditResponseArgs) {
@@ -148,11 +149,11 @@ export class CheckAndLockPluginEditResponse extends thrift.StructLike implements
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[msg] is unset!");
         }
         if (args.data != null) {
-            const value_7: __ROOT_NAMESPACE__.ICheckAndLockPluginEditData = new __ROOT_NAMESPACE__.CheckAndLockPluginEditData(args.data);
+            const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICheckAndLockPluginEditData = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CheckAndLockPluginEditData(args.data);
             this.data = value_7;
         }
         if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_8;
         }
     }

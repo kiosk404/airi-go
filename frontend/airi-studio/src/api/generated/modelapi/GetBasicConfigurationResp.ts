@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as BasicConfiguration from "./BasicConfiguration";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetBasicConfigurationResp {
     configuration?: BasicConfiguration.IBasicConfiguration;
     code: thrift.Int64;

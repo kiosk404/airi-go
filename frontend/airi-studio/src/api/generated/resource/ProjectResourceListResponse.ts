@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as RESOURCE_COMMON_NS from "./common";
+import * as BASE_NS from "../base";
 export interface IProjectResourceListResponse {
     code?: thrift.Int64;
     msg?: string;
-    resource_groups?: Array<__ROOT_NAMESPACE__.IProjectResourceGroup>;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    resource_groups?: Array<RESOURCE_COMMON_NS.IProjectResourceGroup>;
+    BaseResp: BASE_NS.IBaseResp;
 }
 export interface IProjectResourceListResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    resource_groups?: Array<__ROOT_NAMESPACE__.IProjectResourceGroupArgs>;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    resource_groups?: Array<RESOURCE_COMMON_NS.IProjectResourceGroupArgs>;
+    BaseResp: BASE_NS.IBaseRespArgs;
 }
 export const ProjectResourceListResponseCodec: thrift.IStructCodec<IProjectResourceListResponseArgs, IProjectResourceListResponse> = {
     encode(args: IProjectResourceListResponseArgs, output: thrift.TProtocol): void {
@@ -40,15 +41,15 @@ export const ProjectResourceListResponseCodec: thrift.IStructCodec<IProjectResou
         if (obj.resource_groups != null) {
             output.writeFieldBegin("resource_groups", thrift.TType.LIST, 3);
             output.writeListBegin(thrift.TType.STRUCT, obj.resource_groups.length);
-            obj.resource_groups.forEach((value_1: __ROOT_NAMESPACE__.IProjectResourceGroupArgs): void => {
-                __ROOT_NAMESPACE__.ProjectResourceGroupCodec.encode(value_1, output);
+            obj.resource_groups.forEach((value_1: RESOURCE_COMMON_NS.IProjectResourceGroupArgs): void => {
+                RESOURCE_COMMON_NS.ProjectResourceGroupCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         else {
@@ -89,11 +90,11 @@ export const ProjectResourceListResponseCodec: thrift.IStructCodec<IProjectResou
                     break;
                 case 3:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_4: Array<__ROOT_NAMESPACE__.IProjectResourceGroup> = new Array<__ROOT_NAMESPACE__.IProjectResourceGroup>();
+                        const value_4: Array<RESOURCE_COMMON_NS.IProjectResourceGroup> = new Array<RESOURCE_COMMON_NS.IProjectResourceGroup>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_5: __ROOT_NAMESPACE__.IProjectResourceGroup = __ROOT_NAMESPACE__.ProjectResourceGroupCodec.decode(input);
+                            const value_5: RESOURCE_COMMON_NS.IProjectResourceGroup = RESOURCE_COMMON_NS.ProjectResourceGroupCodec.decode(input);
                             value_4.push(value_5);
                         }
                         input.readListEnd();
@@ -105,7 +106,7 @@ export const ProjectResourceListResponseCodec: thrift.IStructCodec<IProjectResou
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_6: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_6;
                     }
                     else {
@@ -135,8 +136,8 @@ export const ProjectResourceListResponseCodec: thrift.IStructCodec<IProjectResou
 export class ProjectResourceListResponse extends thrift.StructLike implements IProjectResourceListResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public resource_groups?: Array<__ROOT_NAMESPACE__.IProjectResourceGroup>;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public resource_groups?: Array<RESOURCE_COMMON_NS.IProjectResourceGroup>;
+    public BaseResp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IProjectResourceListResponseArgs) {
@@ -150,15 +151,15 @@ export class ProjectResourceListResponse extends thrift.StructLike implements IP
             this.msg = value_8;
         }
         if (args.resource_groups != null) {
-            const value_9: Array<__ROOT_NAMESPACE__.IProjectResourceGroup> = new Array<__ROOT_NAMESPACE__.IProjectResourceGroup>();
-            args.resource_groups.forEach((value_11: __ROOT_NAMESPACE__.IProjectResourceGroupArgs): void => {
-                const value_12: __ROOT_NAMESPACE__.IProjectResourceGroup = new __ROOT_NAMESPACE__.ProjectResourceGroup(value_11);
+            const value_9: Array<RESOURCE_COMMON_NS.IProjectResourceGroup> = new Array<RESOURCE_COMMON_NS.IProjectResourceGroup>();
+            args.resource_groups.forEach((value_11: RESOURCE_COMMON_NS.IProjectResourceGroupArgs): void => {
+                const value_12: RESOURCE_COMMON_NS.IProjectResourceGroup = new RESOURCE_COMMON_NS.ProjectResourceGroup(value_11);
                 value_9.push(value_12);
             });
             this.resource_groups = value_9;
         }
         if (args.BaseResp != null) {
-            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_10: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_10;
         }
         else {

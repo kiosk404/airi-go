@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetUserAuthorityRequest {
     plugin_id: thrift.Int64;
-    creation_method: __ROOT_NAMESPACE__.CreationMethod;
+    creation_method: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     project_id?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IGetUserAuthorityRequestArgs {
     plugin_id: number | string | thrift.Int64;
-    creation_method: __ROOT_NAMESPACE__.CreationMethod;
+    creation_method: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     project_id?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const GetUserAuthorityRequestCodec: thrift.IStructCodec<IGetUserAuthorityRequestArgs, IGetUserAuthorityRequest> = {
     encode(args: IGetUserAuthorityRequestArgs, output: thrift.TProtocol): void {
@@ -50,7 +51,7 @@ export const GetUserAuthorityRequestCodec: thrift.IStructCodec<IGetUserAuthority
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -79,7 +80,7 @@ export const GetUserAuthorityRequestCodec: thrift.IStructCodec<IGetUserAuthority
                     break;
                 case 2:
                     if (fieldType === thrift.TType.I32) {
-                        const value_2: __ROOT_NAMESPACE__.CreationMethod = input.readI32();
+                        const value_2: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod = input.readI32();
                         _args.creation_method = value_2;
                     }
                     else {
@@ -97,7 +98,7 @@ export const GetUserAuthorityRequestCodec: thrift.IStructCodec<IGetUserAuthority
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_4: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_4;
                     }
                     else {
@@ -126,9 +127,9 @@ export const GetUserAuthorityRequestCodec: thrift.IStructCodec<IGetUserAuthority
 };
 export class GetUserAuthorityRequest extends thrift.StructLike implements IGetUserAuthorityRequest {
     public plugin_id: thrift.Int64;
-    public creation_method: __ROOT_NAMESPACE__.CreationMethod;
+    public creation_method: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     public project_id?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -153,7 +154,7 @@ export class GetUserAuthorityRequest extends thrift.StructLike implements IGetUs
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[plugin_id] is unset!");
         }
         if (args.creation_method != null) {
-            const value_6: __ROOT_NAMESPACE__.CreationMethod = args.creation_method;
+            const value_6: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod = args.creation_method;
             this.creation_method = value_6;
         }
         else {
@@ -164,7 +165,7 @@ export class GetUserAuthorityRequest extends thrift.StructLike implements IGetUs
             this.project_id = value_7;
         }
         if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_8: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_8;
         }
     }

@@ -5,14 +5,15 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as FOUNDATION_DOMAIN_USER_NS from "../domain/user";
+import * as BASE_NS from "../../base";
 export interface IGetUserInfoResponse {
-    user_info?: __ROOT_NAMESPACE__.IUserInfoDetail;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IGetUserInfoResponseArgs {
-    user_info?: __ROOT_NAMESPACE__.IUserInfoDetailArgs;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetailArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const GetUserInfoResponseCodec: thrift.IStructCodec<IGetUserInfoResponseArgs, IGetUserInfoResponse> = {
     encode(args: IGetUserInfoResponseArgs, output: thrift.TProtocol): void {
@@ -23,12 +24,12 @@ export const GetUserInfoResponseCodec: thrift.IStructCodec<IGetUserInfoResponseA
         output.writeStructBegin("GetUserInfoResponse");
         if (obj.user_info != null) {
             output.writeFieldBegin("user_info", thrift.TType.STRUCT, 1);
-            __ROOT_NAMESPACE__.UserInfoDetailCodec.encode(obj.user_info, output);
+            FOUNDATION_DOMAIN_USER_NS.UserInfoDetailCodec.encode(obj.user_info, output);
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -48,7 +49,7 @@ export const GetUserInfoResponseCodec: thrift.IStructCodec<IGetUserInfoResponseA
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_1: __ROOT_NAMESPACE__.IUserInfoDetail = __ROOT_NAMESPACE__.UserInfoDetailCodec.decode(input);
+                        const value_1: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail = FOUNDATION_DOMAIN_USER_NS.UserInfoDetailCodec.decode(input);
                         _args.user_info = value_1;
                     }
                     else {
@@ -57,7 +58,7 @@ export const GetUserInfoResponseCodec: thrift.IStructCodec<IGetUserInfoResponseA
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_2: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_2: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_2;
                     }
                     else {
@@ -78,18 +79,18 @@ export const GetUserInfoResponseCodec: thrift.IStructCodec<IGetUserInfoResponseA
     }
 };
 export class GetUserInfoResponse extends thrift.StructLike implements IGetUserInfoResponse {
-    public user_info?: __ROOT_NAMESPACE__.IUserInfoDetail;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetUserInfoResponseArgs = {}) {
         super();
         if (args.user_info != null) {
-            const value_3: __ROOT_NAMESPACE__.IUserInfoDetail = new __ROOT_NAMESPACE__.UserInfoDetail(args.user_info);
+            const value_3: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail = new FOUNDATION_DOMAIN_USER_NS.UserInfoDetail(args.user_info);
             this.user_info = value_3;
         }
         if (args.BaseResp != null) {
-            const value_4: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_4: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_4;
         }
     }

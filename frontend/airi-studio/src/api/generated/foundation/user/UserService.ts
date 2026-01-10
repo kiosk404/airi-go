@@ -70,11 +70,15 @@ export const methodAnnotations: thrift.IMethodAnnotations = {
         fieldAnnotations: {}
     },
     GetUserInfo: {
-        annotations: {},
+        annotations: {
+            'api.get': "/api/foundation/v1/users/:user_id"
+        },
         fieldAnnotations: {}
     },
     MGetUserInfo: {
-        annotations: {},
+        annotations: {
+            'api.get': "/api/foundation/v1/users/mget"
+        },
         fieldAnnotations: {}
     }
 };

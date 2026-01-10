@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as I18nText from "./I18nText";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../app/developer_api";
 export interface IModelProvider {
     name?: I18nText.II18nText;
     icon_uri?: string;

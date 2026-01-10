@@ -5,22 +5,23 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IDebugAPIRequest {
     plugin_id: thrift.Int64;
     api_id: thrift.Int64;
     parameters: string;
-    operation: __ROOT_NAMESPACE__.DebugOperation;
+    operation: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DebugOperation;
     edit_version?: number;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IDebugAPIRequestArgs {
     plugin_id: number | string | thrift.Int64;
     api_id: number | string | thrift.Int64;
     parameters: string;
-    operation: __ROOT_NAMESPACE__.DebugOperation;
+    operation: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DebugOperation;
     edit_version?: number;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const DebugAPIRequestCodec: thrift.IStructCodec<IDebugAPIRequestArgs, IDebugAPIRequest> = {
     encode(args: IDebugAPIRequestArgs, output: thrift.TProtocol): void {
@@ -72,7 +73,7 @@ export const DebugAPIRequestCodec: thrift.IStructCodec<IDebugAPIRequestArgs, IDe
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -119,7 +120,7 @@ export const DebugAPIRequestCodec: thrift.IStructCodec<IDebugAPIRequestArgs, IDe
                     break;
                 case 4:
                     if (fieldType === thrift.TType.I32) {
-                        const value_4: __ROOT_NAMESPACE__.DebugOperation = input.readI32();
+                        const value_4: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DebugOperation = input.readI32();
                         _args.operation = value_4;
                     }
                     else {
@@ -137,7 +138,7 @@ export const DebugAPIRequestCodec: thrift.IStructCodec<IDebugAPIRequestArgs, IDe
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_6: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_6;
                     }
                     else {
@@ -170,9 +171,9 @@ export class DebugAPIRequest extends thrift.StructLike implements IDebugAPIReque
     public plugin_id: thrift.Int64;
     public api_id: thrift.Int64;
     public parameters: string;
-    public operation: __ROOT_NAMESPACE__.DebugOperation;
+    public operation: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DebugOperation;
     public edit_version?: number;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -206,7 +207,7 @@ export class DebugAPIRequest extends thrift.StructLike implements IDebugAPIReque
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[parameters] is unset!");
         }
         if (args.operation != null) {
-            const value_10: __ROOT_NAMESPACE__.DebugOperation = args.operation;
+            const value_10: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DebugOperation = args.operation;
             this.operation = value_10;
         }
         else {
@@ -217,7 +218,7 @@ export class DebugAPIRequest extends thrift.StructLike implements IDebugAPIReque
             this.edit_version = value_11;
         }
         if (args.Base != null) {
-            const value_12: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_12: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_12;
         }
     }

@@ -58,8 +58,8 @@ class HttpClient {
           if (!response.ok) {
               let errorMessage = `Unknown Error: ${response.status}`;
               try {
-                  const errorData = await JSONBigString.parse(responseText);
-                  errorMessage = errorData.Msg || errorData.msg || errorData.message || errorMessage;
+                  const errorData = JSONBigString.parse(responseText) as Record<string, unknown>;
+                  errorMessage = (errorData.Msg || errorData.msg || errorData.message || errorMessage) as string;
               } catch {
                   // 解析失败，使用原始JSON
                   errorMessage = responseText || errorMessage;
@@ -71,17 +71,17 @@ class HttpClient {
               );
           }
 
-          const data = await JSONBigString.parse(responseText);
+          const data = JSONBigString.parse(responseText) as Record<string, unknown>;
 
           // 检查业务错误码（支持 Code 和 code 两种格式）
           const errorCode = data.Code !== undefined ? data.Code : data.code;
           const errorMessage = data.Msg !== undefined ? data.Msg : data.message;
 
           if (errorCode !== undefined && errorCode !== 0) {
-              throw new ApiError(errorCode, errorMessage, data.details);
+              throw new ApiError(errorCode as number, errorMessage as string, data.details);
           }
 
-          return data
+          return data as T
       } catch (error) {
           if (error instanceof ApiError) {
               throw error;

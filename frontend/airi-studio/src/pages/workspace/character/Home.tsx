@@ -32,7 +32,7 @@ const WorkSpaceContent: React.FC = () => {
 
     const handleStarToggle = (id: string) => {
         setCharacters(characters.map(c =>
-            c.basic_info.id === id
+            c.basic_info?.id === id
                 ? { ...c, favorite_info: { is_fav: !c.favorite_info?.is_fav } }
                 : c
         ));
@@ -51,15 +51,15 @@ const WorkSpaceContent: React.FC = () => {
                     <CreateCharacterCard onSuccess={loadCharacters} />
                     {characters.map((item) => (
                         <CharacterCardSpace
-                            key={item.basic_info.id}
-                            id={item.basic_info.id}
-                            name={item.basic_info.name}
-                            avatar={item.basic_info.icon_url || item.basic_info.icon_uri}
-                            description={item.basic_info.description || ''}
+                            key={String(item.basic_info?.id || '')}
+                            id={String(item.basic_info?.id || '')}
+                            name={item.basic_info?.name || ''}
+                            avatar={item.basic_info?.icon_url || item.basic_info?.icon_uri || ''}
+                            description={item.basic_info?.description || ''}
                             isStarred={item.favorite_info?.is_fav || false}
                             onStarToggle={handleStarToggle}
                             onDelete={loadCharacters}
-                            updatedAt={parseInt(item.basic_info.update_time) || 0}
+                            updatedAt={parseInt(String(item.basic_info?.update_time)) || 0}
                         />
                     ))}
                 </div>

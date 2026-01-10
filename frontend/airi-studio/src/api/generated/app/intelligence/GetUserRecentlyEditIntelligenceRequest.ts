@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as APP_INTELLIGENCE_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetUserRecentlyEditIntelligenceRequest {
     size?: number;
-    types?: Array<__ROOT_NAMESPACE__.IntelligenceType>;
+    types?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>;
     organization_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IGetUserRecentlyEditIntelligenceRequestArgs {
     size?: number;
-    types?: Array<__ROOT_NAMESPACE__.IntelligenceType>;
+    types?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>;
     organization_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const GetUserRecentlyEditIntelligenceRequestCodec: thrift.IStructCodec<IGetUserRecentlyEditIntelligenceRequestArgs, IGetUserRecentlyEditIntelligenceRequest> = {
     encode(args: IGetUserRecentlyEditIntelligenceRequestArgs, output: thrift.TProtocol): void {
@@ -35,7 +36,7 @@ export const GetUserRecentlyEditIntelligenceRequestCodec: thrift.IStructCodec<IG
         if (obj.types != null) {
             output.writeFieldBegin("types", thrift.TType.LIST, 2);
             output.writeListBegin(thrift.TType.I32, obj.types.length);
-            obj.types.forEach((value_1: __ROOT_NAMESPACE__.IntelligenceType): void => {
+            obj.types.forEach((value_1: APP_INTELLIGENCE_COMMON_NS.IntelligenceType): void => {
                 output.writeI32(value_1);
             });
             output.writeListEnd();
@@ -48,7 +49,7 @@ export const GetUserRecentlyEditIntelligenceRequestCodec: thrift.IStructCodec<IG
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -77,11 +78,11 @@ export const GetUserRecentlyEditIntelligenceRequestCodec: thrift.IStructCodec<IG
                     break;
                 case 2:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_3: Array<__ROOT_NAMESPACE__.IntelligenceType> = new Array<__ROOT_NAMESPACE__.IntelligenceType>();
+                        const value_3: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType> = new Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_4: __ROOT_NAMESPACE__.IntelligenceType = input.readI32();
+                            const value_4: APP_INTELLIGENCE_COMMON_NS.IntelligenceType = input.readI32();
                             value_3.push(value_4);
                         }
                         input.readListEnd();
@@ -102,7 +103,7 @@ export const GetUserRecentlyEditIntelligenceRequestCodec: thrift.IStructCodec<IG
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_6: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_6;
                     }
                     else {
@@ -126,9 +127,9 @@ export const GetUserRecentlyEditIntelligenceRequestCodec: thrift.IStructCodec<IG
 };
 export class GetUserRecentlyEditIntelligenceRequest extends thrift.StructLike implements IGetUserRecentlyEditIntelligenceRequest {
     public size?: number;
-    public types?: Array<__ROOT_NAMESPACE__.IntelligenceType>;
+    public types?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>;
     public organization_id?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetUserRecentlyEditIntelligenceRequestArgs = {}) {
@@ -138,9 +139,9 @@ export class GetUserRecentlyEditIntelligenceRequest extends thrift.StructLike im
             this.size = value_7;
         }
         if (args.types != null) {
-            const value_8: Array<__ROOT_NAMESPACE__.IntelligenceType> = new Array<__ROOT_NAMESPACE__.IntelligenceType>();
-            args.types.forEach((value_11: __ROOT_NAMESPACE__.IntelligenceType): void => {
-                const value_12: __ROOT_NAMESPACE__.IntelligenceType = value_11;
+            const value_8: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType> = new Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>();
+            args.types.forEach((value_11: APP_INTELLIGENCE_COMMON_NS.IntelligenceType): void => {
+                const value_12: APP_INTELLIGENCE_COMMON_NS.IntelligenceType = value_11;
                 value_8.push(value_12);
             });
             this.types = value_8;
@@ -150,7 +151,7 @@ export class GetUserRecentlyEditIntelligenceRequest extends thrift.StructLike im
             this.organization_id = value_9;
         }
         if (args.Base != null) {
-            const value_10: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_10: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_10;
         }
     }

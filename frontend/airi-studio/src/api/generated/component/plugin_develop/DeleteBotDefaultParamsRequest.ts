@@ -5,7 +5,8 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IDeleteBotDefaultParamsRequest {
     bot_id?: thrift.Int64;
     dev_id?: string;
@@ -14,10 +15,10 @@ export interface IDeleteBotDefaultParamsRequest {
     delete_bot?: boolean;
     space_id?: thrift.Int64;
     plugin_referrer_id?: string;
-    plugin_referrer_scene?: __ROOT_NAMESPACE__.PluginReferrerScene;
+    plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     workflow_id?: string;
     api_id?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IDeleteBotDefaultParamsRequestArgs {
     bot_id?: number | string | thrift.Int64;
@@ -27,10 +28,10 @@ export interface IDeleteBotDefaultParamsRequestArgs {
     delete_bot?: boolean;
     space_id?: number | string | thrift.Int64;
     plugin_referrer_id?: string;
-    plugin_referrer_scene?: __ROOT_NAMESPACE__.PluginReferrerScene;
+    plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     workflow_id?: string;
     api_id?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const DeleteBotDefaultParamsRequestCodec: thrift.IStructCodec<IDeleteBotDefaultParamsRequestArgs, IDeleteBotDefaultParamsRequest> = {
     encode(args: IDeleteBotDefaultParamsRequestArgs, output: thrift.TProtocol): void {
@@ -100,7 +101,7 @@ export const DeleteBotDefaultParamsRequestCodec: thrift.IStructCodec<IDeleteBotD
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -183,7 +184,7 @@ export const DeleteBotDefaultParamsRequestCodec: thrift.IStructCodec<IDeleteBotD
                     break;
                 case 8:
                     if (fieldType === thrift.TType.I32) {
-                        const value_8: __ROOT_NAMESPACE__.PluginReferrerScene = input.readI32();
+                        const value_8: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene = input.readI32();
                         _args.plugin_referrer_scene = value_8;
                     }
                     else {
@@ -210,7 +211,7 @@ export const DeleteBotDefaultParamsRequestCodec: thrift.IStructCodec<IDeleteBotD
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_11: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_11: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_11;
                     }
                     else {
@@ -247,10 +248,10 @@ export class DeleteBotDefaultParamsRequest extends thrift.StructLike implements 
     public delete_bot?: boolean;
     public space_id?: thrift.Int64;
     public plugin_referrer_id?: string;
-    public plugin_referrer_scene?: __ROOT_NAMESPACE__.PluginReferrerScene;
+    public plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     public workflow_id?: string;
     public api_id?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
@@ -297,7 +298,7 @@ export class DeleteBotDefaultParamsRequest extends thrift.StructLike implements 
             this.plugin_referrer_id = value_18;
         }
         if (args.plugin_referrer_scene != null) {
-            const value_19: __ROOT_NAMESPACE__.PluginReferrerScene = args.plugin_referrer_scene;
+            const value_19: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene = args.plugin_referrer_scene;
             this.plugin_referrer_scene = value_19;
         }
         if (args.workflow_id != null) {
@@ -309,7 +310,7 @@ export class DeleteBotDefaultParamsRequest extends thrift.StructLike implements 
             this.api_id = value_21;
         }
         if (args.Base != null) {
-            const value_22: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_22: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_22;
         }
     }

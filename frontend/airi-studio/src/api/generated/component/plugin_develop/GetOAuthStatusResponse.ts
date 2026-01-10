@@ -5,22 +5,23 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetOAuthStatusResponse {
     is_oauth?: boolean;
-    status?: __ROOT_NAMESPACE__.OAuthStatus;
+    status?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OAuthStatus;
     content?: string;
     code?: thrift.Int64;
     msg?: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    BaseResp: BASE_NS.IBaseResp;
 }
 export interface IGetOAuthStatusResponseArgs {
     is_oauth?: boolean;
-    status?: __ROOT_NAMESPACE__.OAuthStatus;
+    status?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OAuthStatus;
     content?: string;
     code?: number | string | thrift.Int64;
     msg?: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    BaseResp: BASE_NS.IBaseRespArgs;
 }
 export const GetOAuthStatusResponseCodec: thrift.IStructCodec<IGetOAuthStatusResponseArgs, IGetOAuthStatusResponse> = {
     encode(args: IGetOAuthStatusResponseArgs, output: thrift.TProtocol): void {
@@ -60,7 +61,7 @@ export const GetOAuthStatusResponseCodec: thrift.IStructCodec<IGetOAuthStatusRes
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         else {
@@ -92,7 +93,7 @@ export const GetOAuthStatusResponseCodec: thrift.IStructCodec<IGetOAuthStatusRes
                     break;
                 case 2:
                     if (fieldType === thrift.TType.I32) {
-                        const value_2: __ROOT_NAMESPACE__.OAuthStatus = input.readI32();
+                        const value_2: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OAuthStatus = input.readI32();
                         _args.status = value_2;
                     }
                     else {
@@ -128,7 +129,7 @@ export const GetOAuthStatusResponseCodec: thrift.IStructCodec<IGetOAuthStatusRes
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_6: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_6;
                     }
                     else {
@@ -159,11 +160,11 @@ export const GetOAuthStatusResponseCodec: thrift.IStructCodec<IGetOAuthStatusRes
 };
 export class GetOAuthStatusResponse extends thrift.StructLike implements IGetOAuthStatusResponse {
     public is_oauth?: boolean;
-    public status?: __ROOT_NAMESPACE__.OAuthStatus;
+    public status?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OAuthStatus;
     public content?: string;
     public code?: thrift.Int64;
     public msg?: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public BaseResp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetOAuthStatusResponseArgs) {
@@ -173,7 +174,7 @@ export class GetOAuthStatusResponse extends thrift.StructLike implements IGetOAu
             this.is_oauth = value_7;
         }
         if (args.status != null) {
-            const value_8: __ROOT_NAMESPACE__.OAuthStatus = args.status;
+            const value_8: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OAuthStatus = args.status;
             this.status = value_8;
         }
         if (args.content != null) {
@@ -189,7 +190,7 @@ export class GetOAuthStatusResponse extends thrift.StructLike implements IGetOAu
             this.msg = value_11;
         }
         if (args.BaseResp != null) {
-            const value_12: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_12;
         }
         else {

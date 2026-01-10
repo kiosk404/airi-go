@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ModelType from "./ModelType";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetModelListReq {
     model_type?: ModelType.ModelType;
     Base?: __ROOT_NAMESPACE__.IBase;

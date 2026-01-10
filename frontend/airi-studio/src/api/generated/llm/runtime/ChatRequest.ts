@@ -5,20 +5,21 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as LLM_DOMAIN_RUNTIME_NS from "../domain/runtime";
+import * as BASE_NS from "../../base";
 export interface IChatRequest {
-    model_config?: __ROOT_NAMESPACE__.IModelConfig;
-    messages?: Array<__ROOT_NAMESPACE__.IMessage>;
-    tools?: Array<__ROOT_NAMESPACE__.ITool>;
-    biz_param?: __ROOT_NAMESPACE__.IBizParam;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    model_config?: LLM_DOMAIN_RUNTIME_NS.IModelConfig;
+    messages?: Array<LLM_DOMAIN_RUNTIME_NS.IMessage>;
+    tools?: Array<LLM_DOMAIN_RUNTIME_NS.ITool>;
+    biz_param?: LLM_DOMAIN_RUNTIME_NS.IBizParam;
+    Base?: BASE_NS.IBase;
 }
 export interface IChatRequestArgs {
-    model_config?: __ROOT_NAMESPACE__.IModelConfigArgs;
-    messages?: Array<__ROOT_NAMESPACE__.IMessageArgs>;
-    tools?: Array<__ROOT_NAMESPACE__.IToolArgs>;
-    biz_param?: __ROOT_NAMESPACE__.IBizParamArgs;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    model_config?: LLM_DOMAIN_RUNTIME_NS.IModelConfigArgs;
+    messages?: Array<LLM_DOMAIN_RUNTIME_NS.IMessageArgs>;
+    tools?: Array<LLM_DOMAIN_RUNTIME_NS.IToolArgs>;
+    biz_param?: LLM_DOMAIN_RUNTIME_NS.IBizParamArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatRequest> = {
     encode(args: IChatRequestArgs, output: thrift.TProtocol): void {
@@ -32,14 +33,14 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
         output.writeStructBegin("ChatRequest");
         if (obj.model_config != null) {
             output.writeFieldBegin("model_config", thrift.TType.STRUCT, 1);
-            __ROOT_NAMESPACE__.ModelConfigCodec.encode(obj.model_config, output);
+            LLM_DOMAIN_RUNTIME_NS.ModelConfigCodec.encode(obj.model_config, output);
             output.writeFieldEnd();
         }
         if (obj.messages != null) {
             output.writeFieldBegin("messages", thrift.TType.LIST, 2);
             output.writeListBegin(thrift.TType.STRUCT, obj.messages.length);
-            obj.messages.forEach((value_1: __ROOT_NAMESPACE__.IMessageArgs): void => {
-                __ROOT_NAMESPACE__.MessageCodec.encode(value_1, output);
+            obj.messages.forEach((value_1: LLM_DOMAIN_RUNTIME_NS.IMessageArgs): void => {
+                LLM_DOMAIN_RUNTIME_NS.MessageCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -47,20 +48,20 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
         if (obj.tools != null) {
             output.writeFieldBegin("tools", thrift.TType.LIST, 3);
             output.writeListBegin(thrift.TType.STRUCT, obj.tools.length);
-            obj.tools.forEach((value_2: __ROOT_NAMESPACE__.IToolArgs): void => {
-                __ROOT_NAMESPACE__.ToolCodec.encode(value_2, output);
+            obj.tools.forEach((value_2: LLM_DOMAIN_RUNTIME_NS.IToolArgs): void => {
+                LLM_DOMAIN_RUNTIME_NS.ToolCodec.encode(value_2, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
         }
         if (obj.biz_param != null) {
             output.writeFieldBegin("biz_param", thrift.TType.STRUCT, 4);
-            __ROOT_NAMESPACE__.BizParamCodec.encode(obj.biz_param, output);
+            LLM_DOMAIN_RUNTIME_NS.BizParamCodec.encode(obj.biz_param, output);
             output.writeFieldEnd();
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -80,7 +81,7 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_3: __ROOT_NAMESPACE__.IModelConfig = __ROOT_NAMESPACE__.ModelConfigCodec.decode(input);
+                        const value_3: LLM_DOMAIN_RUNTIME_NS.IModelConfig = LLM_DOMAIN_RUNTIME_NS.ModelConfigCodec.decode(input);
                         _args.model_config = value_3;
                     }
                     else {
@@ -89,11 +90,11 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
                     break;
                 case 2:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_4: Array<__ROOT_NAMESPACE__.IMessage> = new Array<__ROOT_NAMESPACE__.IMessage>();
+                        const value_4: Array<LLM_DOMAIN_RUNTIME_NS.IMessage> = new Array<LLM_DOMAIN_RUNTIME_NS.IMessage>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_5: __ROOT_NAMESPACE__.IMessage = __ROOT_NAMESPACE__.MessageCodec.decode(input);
+                            const value_5: LLM_DOMAIN_RUNTIME_NS.IMessage = LLM_DOMAIN_RUNTIME_NS.MessageCodec.decode(input);
                             value_4.push(value_5);
                         }
                         input.readListEnd();
@@ -105,11 +106,11 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
                     break;
                 case 3:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_6: Array<__ROOT_NAMESPACE__.ITool> = new Array<__ROOT_NAMESPACE__.ITool>();
+                        const value_6: Array<LLM_DOMAIN_RUNTIME_NS.ITool> = new Array<LLM_DOMAIN_RUNTIME_NS.ITool>();
                         const metadata_2: thrift.IThriftList = input.readListBegin();
                         const size_2: number = metadata_2.size;
                         for (let i_2: number = 0; i_2 < size_2; i_2++) {
-                            const value_7: __ROOT_NAMESPACE__.ITool = __ROOT_NAMESPACE__.ToolCodec.decode(input);
+                            const value_7: LLM_DOMAIN_RUNTIME_NS.ITool = LLM_DOMAIN_RUNTIME_NS.ToolCodec.decode(input);
                             value_6.push(value_7);
                         }
                         input.readListEnd();
@@ -121,7 +122,7 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
                     break;
                 case 4:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_8: __ROOT_NAMESPACE__.IBizParam = __ROOT_NAMESPACE__.BizParamCodec.decode(input);
+                        const value_8: LLM_DOMAIN_RUNTIME_NS.IBizParam = LLM_DOMAIN_RUNTIME_NS.BizParamCodec.decode(input);
                         _args.biz_param = value_8;
                     }
                     else {
@@ -130,7 +131,7 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_9: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_9: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_9;
                     }
                     else {
@@ -154,41 +155,41 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
     }
 };
 export class ChatRequest extends thrift.StructLike implements IChatRequest {
-    public model_config?: __ROOT_NAMESPACE__.IModelConfig;
-    public messages?: Array<__ROOT_NAMESPACE__.IMessage>;
-    public tools?: Array<__ROOT_NAMESPACE__.ITool>;
-    public biz_param?: __ROOT_NAMESPACE__.IBizParam;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public model_config?: LLM_DOMAIN_RUNTIME_NS.IModelConfig;
+    public messages?: Array<LLM_DOMAIN_RUNTIME_NS.IMessage>;
+    public tools?: Array<LLM_DOMAIN_RUNTIME_NS.ITool>;
+    public biz_param?: LLM_DOMAIN_RUNTIME_NS.IBizParam;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IChatRequestArgs = {}) {
         super();
         if (args.model_config != null) {
-            const value_10: __ROOT_NAMESPACE__.IModelConfig = new __ROOT_NAMESPACE__.ModelConfig(args.model_config);
+            const value_10: LLM_DOMAIN_RUNTIME_NS.IModelConfig = new LLM_DOMAIN_RUNTIME_NS.ModelConfig(args.model_config);
             this.model_config = value_10;
         }
         if (args.messages != null) {
-            const value_11: Array<__ROOT_NAMESPACE__.IMessage> = new Array<__ROOT_NAMESPACE__.IMessage>();
-            args.messages.forEach((value_15: __ROOT_NAMESPACE__.IMessageArgs): void => {
-                const value_16: __ROOT_NAMESPACE__.IMessage = new __ROOT_NAMESPACE__.Message(value_15);
+            const value_11: Array<LLM_DOMAIN_RUNTIME_NS.IMessage> = new Array<LLM_DOMAIN_RUNTIME_NS.IMessage>();
+            args.messages.forEach((value_15: LLM_DOMAIN_RUNTIME_NS.IMessageArgs): void => {
+                const value_16: LLM_DOMAIN_RUNTIME_NS.IMessage = new LLM_DOMAIN_RUNTIME_NS.Message(value_15);
                 value_11.push(value_16);
             });
             this.messages = value_11;
         }
         if (args.tools != null) {
-            const value_12: Array<__ROOT_NAMESPACE__.ITool> = new Array<__ROOT_NAMESPACE__.ITool>();
-            args.tools.forEach((value_17: __ROOT_NAMESPACE__.IToolArgs): void => {
-                const value_18: __ROOT_NAMESPACE__.ITool = new __ROOT_NAMESPACE__.Tool(value_17);
+            const value_12: Array<LLM_DOMAIN_RUNTIME_NS.ITool> = new Array<LLM_DOMAIN_RUNTIME_NS.ITool>();
+            args.tools.forEach((value_17: LLM_DOMAIN_RUNTIME_NS.IToolArgs): void => {
+                const value_18: LLM_DOMAIN_RUNTIME_NS.ITool = new LLM_DOMAIN_RUNTIME_NS.Tool(value_17);
                 value_12.push(value_18);
             });
             this.tools = value_12;
         }
         if (args.biz_param != null) {
-            const value_13: __ROOT_NAMESPACE__.IBizParam = new __ROOT_NAMESPACE__.BizParam(args.biz_param);
+            const value_13: LLM_DOMAIN_RUNTIME_NS.IBizParam = new LLM_DOMAIN_RUNTIME_NS.BizParam(args.biz_param);
             this.biz_param = value_13;
         }
         if (args.Base != null) {
-            const value_14: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_14: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_14;
         }
     }

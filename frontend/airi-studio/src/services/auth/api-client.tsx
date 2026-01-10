@@ -2,57 +2,25 @@ import { httpClient } from '@/services/core';
 
 const API_BASE = '/api/foundation/v1/users';
 
-/** 用户信息 */
-export interface UserInfo {
-    user_id?: string;
-    name?: string;
-    nick_name?: string;
-    description?: string;
-    avatar_uri?: string;
-    avatar_url?: string;
-    account?: string;
-    locale?: string;
-    create_time?: number;
-    update_time?: number;
-}
+import type { ILoginByPasswordRequestArgs } from "@/api/generated/foundation/user/LoginByPasswordRequest";
+import type { ILoginByPasswordResponseArgs } from "@/api/generated/foundation/user/LoginByPasswordResponse";
+import type { IUserRegisterRequestArgs } from "@/api/generated/foundation/user/UserRegisterRequest";
+import type { IUserRegisterResponseArgs } from "@/api/generated/foundation/user/UserRegisterResponse";
+import type { IGetUserInfoResponseArgs } from "@/api/generated/foundation/user/GetUserInfoResponse";
+import type { IUserInfoDetailArgs} from "@/api/generated/foundation/domain/user/UserInfoDetail";
 
-/** 登录请求 */
-export interface LoginRequest {
-    account: string;
-    password: string;
-}
-
-/** 登录响应 */
-export interface LoginResponse {
-    user_info?: UserInfo;
-    token?: string;
-    expire_time?: number;
-}
-
-/** 注册请求 */
-export interface RegisterRequest {
-    account: string;
-    password: string;
-    locale?: string;
-}
-
-/** 注册响应 */
-export interface RegisterResponse {
-    user_info?: UserInfo;
-    token?: string;
-    expire_time?: number;
-}
-
-/** 获取用户信息响应 */
-export interface GetUserInfoResponse {
-    user_info?: UserInfo;
-}
+export type UserInfo = IUserInfoDetailArgs
+export type LoginRequest = ILoginByPasswordRequestArgs
+export type LoginResponse = ILoginByPasswordResponseArgs
+export type RegisterRequest = IUserRegisterRequestArgs
+export type RegisterResponse = IUserRegisterResponseArgs
+export type GetUserInfoResponse = IGetUserInfoResponseArgs
 
 // ============ API 方法 ============
 
 /**
  * 密码登录
- * POST /api/foundation/v1/user/login
+ * POST /api/foundation/v1/users/login
  */
 export async function loginByPassword(req: LoginRequest): Promise<LoginResponse> {
     return httpClient.post<LoginResponse>(`${API_BASE}/login`, req);

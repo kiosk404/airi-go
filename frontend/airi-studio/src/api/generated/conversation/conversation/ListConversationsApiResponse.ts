@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ListConversationData from "./ListConversationData";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IListConversationsApiResponse {
     code?: thrift.Int64;
     msg?: string;

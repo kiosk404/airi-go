@@ -1,159 +1,61 @@
 /**
  * DraftBot API Client
  * 对应后端接口: /api/draftbot/* 和 /api/playground_api/draftbot/*
+ *
+ * 类型定义复用自 @/api/generated
  */
 
 import { httpClient } from '@/services/core';
 
+// ============ 从 IDL 生成的类型中导入 ============
+
+// Playground - 获取 Bot 信息
+import type { IGetDraftBotInfoAgwRequestArgs } from '@/api/generated/playground/GetDraftBotInfoAgwRequest';
+import type { IGetDraftBotInfoAgwResponseArgs } from '@/api/generated/playground/GetDraftBotInfoAgwResponse';
+import type { IGetDraftBotInfoAgwDataArgs } from '@/api/generated/playground/GetDraftBotInfoAgwData';
+import type { IBotOptionDataArgs } from '@/api/generated/playground/BotOptionData';
+import type { IModelDetailArgs } from '@/api/generated/playground/ModelDetail';
+
+// Bot 通用类型
+import type { IBotInfoArgs } from '@/api/generated/app/bot_common/BotInfo';
+import type { IModelInfoArgs } from '@/api/generated/app/bot_common/ModelInfo';
+import type { IPluginInfoArgs } from '@/api/generated/app/bot_common/PluginInfo';
+import type { IWorkflowInfoArgs } from '@/api/generated/app/bot_common/WorkflowInfo';
+import type { IDatabaseArgs } from '@/api/generated/app/bot_common/Database';
+import type { IVariableArgs } from '@/api/generated/app/intelligence/common/Variable';
+
+// Developer API - 显示信息
+import type { IGetDraftBotDisplayInfoRequestArgs } from '@/api/generated/app/developer_api/GetDraftBotDisplayInfoRequest';
+import type { IGetDraftBotDisplayInfoResponseArgs } from '@/api/generated/app/developer_api/GetDraftBotDisplayInfoResponse';
+import type { IDraftBotDisplayInfoDataArgs } from '@/api/generated/app/developer_api/DraftBotDisplayInfoData';
+import type { ITabDisplayItemsArgs } from '@/api/generated/app/developer_api/TabDisplayItems';
+
+// ============ 重新导出类型（简化外部使用） ============
+
+// 请求/响应类型
+export type GetDraftBotInfoRequest = IGetDraftBotInfoAgwRequestArgs;
+export type GetDraftBotInfoResponse = IGetDraftBotInfoAgwResponseArgs;
+export type GetDraftBotInfoData = IGetDraftBotInfoAgwDataArgs;
+
+export type GetDisplayInfoRequest = IGetDraftBotDisplayInfoRequestArgs;
+export type GetDisplayInfoResponse = IGetDraftBotDisplayInfoResponseArgs;
+export type DraftBotDisplayInfoData = IDraftBotDisplayInfoDataArgs;
+export type TabDisplayItems = ITabDisplayItemsArgs;
+
+// Bot 相关类型
+export type BotInfo = IBotInfoArgs;
+export type BotOptionData = IBotOptionDataArgs;
+export type ModelDetail = IModelDetailArgs;
+export type ModelInfo = IModelInfoArgs;
+export type PluginInfo = IPluginInfoArgs;
+export type WorkflowInfo = IWorkflowInfoArgs;
+export type Database = IDatabaseArgs;
+export type Variable = IVariableArgs;
+
+// ============ API 端点 ============
+
 const API_BASE = '/api/draftbot';
 const PLAYGROUND_API_BASE = '/api/playground_api/draftbot';
-
-// ============ 类型定义 ============
-
-/** Bot 显示信息请求 */
-export interface GetDisplayInfoRequest {
-    bot_id: string;
-}
-
-/** Tab 显示信息 */
-export interface TabDisplayItems {
-    plugin_tab_status?: number;
-    workflow_tab_status?: number;
-    knowledge_tab_status?: number;
-    database_tab_status?: number;
-}
-
-/** 显示信息数据 */
-export interface DraftBotDisplayInfoData {
-    tab_display_info?: TabDisplayItems;
-}
-
-/** Bot 显示信息响应 */
-export interface GetDisplayInfoResponse {
-    code: number;
-    msg: string;
-    data?: DraftBotDisplayInfoData;
-}
-
-/** 模型信息 */
-export interface ModelInfo {
-    model_id?: string;
-    model_name?: string;
-    provider?: string;
-}
-
-/** Prompt 信息 */
-export interface PromptInfo {
-    system_prompt?: string;
-    user_prompt?: string;
-}
-
-/** 插件信息 */
-export interface PluginInfo {
-    api_id?: string;
-    name?: string;
-    description?: string;
-    icon?: string;
-}
-
-/** 工作流信息 */
-export interface WorkflowInfo {
-    workflow_id?: string;
-    name?: string;
-}
-
-/** 开场白信息 */
-export interface OnboardingInfo {
-    prologue?: string;
-    suggested_questions?: string[];
-}
-
-/** 知识库信息 */
-export interface Knowledge {
-    knowledge_ids?: string[];
-}
-
-/** 变量信息 */
-export interface Variable {
-    name?: string;
-    type?: string;
-    default_value?: string;
-}
-
-/** 数据库信息 */
-export interface Database {
-    database_id?: string;
-    name?: string;
-}
-
-/** 建议回复信息 */
-export interface SuggestReplyInfo {
-    enabled?: boolean;
-}
-
-/** 模型详情 */
-export interface ModelDetail {
-    name?: string;
-    model_name?: string;
-    model_id?: string;
-    model_family?: string;
-    model_icon_url?: string;
-}
-
-/** Bot 选项数据 */
-export interface BotOptionData {
-    model_detail_map?: Record<string, ModelDetail>;
-    plugin_detail_map?: Record<string, unknown>;
-    plugin_api_detail_map?: Record<string, unknown>;
-    workflow_detail_map?: Record<string, unknown>;
-    knowledge_detail_map?: Record<string, unknown>;
-    shortcut_command_list?: unknown[];
-}
-
-/** Bot 完整信息 */
-export interface BotInfo {
-    BotId: string;
-    Name: string;
-    Description: string;
-    IconUri: string;
-    IconUrl?: string;
-    CreatorId: string;
-    CreateTime: number;
-    UpdateTime: number;
-    Version?: string;
-    ModelInfo?: ModelInfo;
-    PromptInfo?: PromptInfo;
-    PluginInfoList?: PluginInfo[];
-    WorkflowInfoList?: WorkflowInfo[];
-    OnboardingInfo?: OnboardingInfo;
-    Knowledge?: Knowledge;
-    VariableList?: Variable[];
-    DatabaseList?: Database[];
-    SuggestReplyInfo?: SuggestReplyInfo;
-    BotMode?: number;
-    BackgroundImageInfoList?: unknown[];
-    ShortcutSort?: string[];
-}
-
-/** 获取 Bot 信息请求 */
-export interface GetDraftBotInfoRequest {
-    bot_id: string;
-}
-
-/** 获取 Bot 信息数据 */
-export interface GetDraftBotInfoData {
-    bot_info?: BotInfo;
-    bot_option_data?: BotOptionData;
-    editable?: boolean;
-    has_unpublished_change?: boolean;
-}
-
-/** 获取 Bot 信息响应 */
-export interface GetDraftBotInfoResponse {
-    code: number;
-    msg: string;
-    data?: GetDraftBotInfoData;
-}
 
 // ============ API 方法 ============
 

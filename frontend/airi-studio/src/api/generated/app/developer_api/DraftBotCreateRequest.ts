@@ -7,7 +7,7 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as VisibilityType from "./VisibilityType";
 import * as MonetizationConf from "./MonetizationConf";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../bot_common";
 export interface IDraftBotCreateRequest {
     name?: string;
     description?: string;

@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as PromptResource from "./PromptResource";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetOfficialPromptResourceListResponse {
     PromptResourceList?: Array<PromptResource.IPromptResource>;
     code: thrift.Int64;

@@ -44,9 +44,12 @@ export default () => {
                         logo: (
                             <img src="/logo.png"
                             alt="Logo"
-                            className="w-8 h-8 rounded-lg object-cover" />
+                            className="w-8 h-8 rounded-lg object-cover"
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => navigate('/')}
+                            />
                         ),
-                        text: 'Airi Studio',
+                        text: <span style={{ cursor: 'pointer'}} onClick={() => navigate('/')}>Airi Studio</span>,
                     }}
                     footer={
                         <div className="flex items-center gap-2">

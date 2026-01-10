@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as APP_BOT_COMMON_NS from "../bot_common";
+import * as BASE_NS from "../../base";
 export interface IOpenGetBotInfoResponse {
-    data?: __ROOT_NAMESPACE__.IOpenAPIBotInfo;
+    data?: APP_BOT_COMMON_NS.IOpenAPIBotInfo;
     code?: thrift.Int64;
     msg?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IOpenGetBotInfoResponseArgs {
-    data?: __ROOT_NAMESPACE__.IOpenAPIBotInfoArgs;
+    data?: APP_BOT_COMMON_NS.IOpenAPIBotInfoArgs;
     code?: number | string | thrift.Int64;
     msg?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const OpenGetBotInfoResponseCodec: thrift.IStructCodec<IOpenGetBotInfoResponseArgs, IOpenGetBotInfoResponse> = {
     encode(args: IOpenGetBotInfoResponseArgs, output: thrift.TProtocol): void {
@@ -29,7 +30,7 @@ export const OpenGetBotInfoResponseCodec: thrift.IStructCodec<IOpenGetBotInfoRes
         output.writeStructBegin("OpenGetBotInfoResponse");
         if (obj.data != null) {
             output.writeFieldBegin("data", thrift.TType.STRUCT, 1);
-            __ROOT_NAMESPACE__.OpenAPIBotInfoCodec.encode(obj.data, output);
+            APP_BOT_COMMON_NS.OpenAPIBotInfoCodec.encode(obj.data, output);
             output.writeFieldEnd();
         }
         if (obj.code != null) {
@@ -44,7 +45,7 @@ export const OpenGetBotInfoResponseCodec: thrift.IStructCodec<IOpenGetBotInfoRes
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -64,7 +65,7 @@ export const OpenGetBotInfoResponseCodec: thrift.IStructCodec<IOpenGetBotInfoRes
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_1: __ROOT_NAMESPACE__.IOpenAPIBotInfo = __ROOT_NAMESPACE__.OpenAPIBotInfoCodec.decode(input);
+                        const value_1: APP_BOT_COMMON_NS.IOpenAPIBotInfo = APP_BOT_COMMON_NS.OpenAPIBotInfoCodec.decode(input);
                         _args.data = value_1;
                     }
                     else {
@@ -91,7 +92,7 @@ export const OpenGetBotInfoResponseCodec: thrift.IStructCodec<IOpenGetBotInfoRes
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_4: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_4;
                     }
                     else {
@@ -114,16 +115,16 @@ export const OpenGetBotInfoResponseCodec: thrift.IStructCodec<IOpenGetBotInfoRes
     }
 };
 export class OpenGetBotInfoResponse extends thrift.StructLike implements IOpenGetBotInfoResponse {
-    public data?: __ROOT_NAMESPACE__.IOpenAPIBotInfo;
+    public data?: APP_BOT_COMMON_NS.IOpenAPIBotInfo;
     public code?: thrift.Int64;
     public msg?: string;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IOpenGetBotInfoResponseArgs = {}) {
         super();
         if (args.data != null) {
-            const value_5: __ROOT_NAMESPACE__.IOpenAPIBotInfo = new __ROOT_NAMESPACE__.OpenAPIBotInfo(args.data);
+            const value_5: APP_BOT_COMMON_NS.IOpenAPIBotInfo = new APP_BOT_COMMON_NS.OpenAPIBotInfo(args.data);
             this.data = value_5;
         }
         if (args.code != null) {
@@ -135,7 +136,7 @@ export class OpenGetBotInfoResponse extends thrift.StructLike implements IOpenGe
             this.msg = value_7;
         }
         if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_8;
         }
     }

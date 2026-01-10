@@ -5,24 +5,25 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetPluginAPIsRequest {
     plugin_id: thrift.Int64;
     api_ids?: Array<string>;
     page?: number;
     size?: number;
-    order?: __ROOT_NAMESPACE__.IAPIListOrder;
+    order?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIListOrder;
     preview_version_ts?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IGetPluginAPIsRequestArgs {
     plugin_id: number | string | thrift.Int64;
     api_ids?: Array<string>;
     page?: number;
     size?: number;
-    order?: __ROOT_NAMESPACE__.IAPIListOrderArgs;
+    order?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIListOrderArgs;
     preview_version_ts?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const GetPluginAPIsRequestCodec: thrift.IStructCodec<IGetPluginAPIsRequestArgs, IGetPluginAPIsRequest> = {
     encode(args: IGetPluginAPIsRequestArgs, output: thrift.TProtocol): void {
@@ -65,7 +66,7 @@ export const GetPluginAPIsRequestCodec: thrift.IStructCodec<IGetPluginAPIsReques
         }
         if (obj.order != null) {
             output.writeFieldBegin("order", thrift.TType.STRUCT, 5);
-            __ROOT_NAMESPACE__.APIListOrderCodec.encode(obj.order, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIListOrderCodec.encode(obj.order, output);
             output.writeFieldEnd();
         }
         if (obj.preview_version_ts != null) {
@@ -75,7 +76,7 @@ export const GetPluginAPIsRequestCodec: thrift.IStructCodec<IGetPluginAPIsReques
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -138,7 +139,7 @@ export const GetPluginAPIsRequestCodec: thrift.IStructCodec<IGetPluginAPIsReques
                     break;
                 case 5:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_7: __ROOT_NAMESPACE__.IAPIListOrder = __ROOT_NAMESPACE__.APIListOrderCodec.decode(input);
+                        const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIListOrder = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIListOrderCodec.decode(input);
                         _args.order = value_7;
                     }
                     else {
@@ -156,7 +157,7 @@ export const GetPluginAPIsRequestCodec: thrift.IStructCodec<IGetPluginAPIsReques
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_9: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_9: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_9;
                     }
                     else {
@@ -191,9 +192,9 @@ export class GetPluginAPIsRequest extends thrift.StructLike implements IGetPlugi
     public api_ids?: Array<string>;
     public page?: number;
     public size?: number;
-    public order?: __ROOT_NAMESPACE__.IAPIListOrder;
+    public order?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIListOrder;
     public preview_version_ts?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -226,7 +227,7 @@ export class GetPluginAPIsRequest extends thrift.StructLike implements IGetPlugi
             this.size = value_13;
         }
         if (args.order != null) {
-            const value_14: __ROOT_NAMESPACE__.IAPIListOrder = new __ROOT_NAMESPACE__.APIListOrder(args.order);
+            const value_14: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIListOrder = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIListOrder(args.order);
             this.order = value_14;
         }
         if (args.preview_version_ts != null) {
@@ -234,7 +235,7 @@ export class GetPluginAPIsRequest extends thrift.StructLike implements IGetPlugi
             this.preview_version_ts = value_15;
         }
         if (args.Base != null) {
-            const value_16: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_16: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_16;
         }
     }

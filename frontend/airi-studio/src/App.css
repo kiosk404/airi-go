@@ -3,10 +3,18 @@
 
 body {
   margin: 0;
-  color: #fff;
   font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* 确保 Semi UI AIChatInput 编辑器文字颜色正确 */
+.semi-aiChatInput-editor-content .tiptap {
+  color: var(--semi-color-text-0, #1c1f23);
+}
+
+.semi-aiChatInput-editor-content .tiptap p {
+  color: var(--semi-color-text-0, #1c1f23);
 }
 
 .content {

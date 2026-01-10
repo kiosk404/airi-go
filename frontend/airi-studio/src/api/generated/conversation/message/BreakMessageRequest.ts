@@ -5,7 +5,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../common";
 export interface IBreakMessageRequest {
     conversation_id: thrift.Int64;
     query_message_id: thrift.Int64;

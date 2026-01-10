@@ -5,20 +5,21 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IUpdateBotDefaultParamsRequest {
     space_id?: thrift.Int64;
     bot_id?: thrift.Int64;
     dev_id?: string;
     plugin_id?: thrift.Int64;
     api_name?: string;
-    request_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
-    response_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
+    request_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
+    response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     plugin_referrer_id?: string;
-    plugin_referrer_scene?: __ROOT_NAMESPACE__.PluginReferrerScene;
-    response_style?: __ROOT_NAMESPACE__.IResponseStyle;
+    plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
+    response_style?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyle;
     workflow_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IUpdateBotDefaultParamsRequestArgs {
     space_id?: number | string | thrift.Int64;
@@ -26,13 +27,13 @@ export interface IUpdateBotDefaultParamsRequestArgs {
     dev_id?: string;
     plugin_id?: number | string | thrift.Int64;
     api_name?: string;
-    request_params?: Array<__ROOT_NAMESPACE__.IAPIParameterArgs>;
-    response_params?: Array<__ROOT_NAMESPACE__.IAPIParameterArgs>;
+    request_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs>;
+    response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs>;
     plugin_referrer_id?: string;
-    plugin_referrer_scene?: __ROOT_NAMESPACE__.PluginReferrerScene;
-    response_style?: __ROOT_NAMESPACE__.IResponseStyleArgs;
+    plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
+    response_style?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyleArgs;
     workflow_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotDefaultParamsRequestArgs, IUpdateBotDefaultParamsRequest> = {
     encode(args: IUpdateBotDefaultParamsRequestArgs, output: thrift.TProtocol): void {
@@ -79,8 +80,8 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
         if (obj.request_params != null) {
             output.writeFieldBegin("request_params", thrift.TType.LIST, 6);
             output.writeListBegin(thrift.TType.STRUCT, obj.request_params.length);
-            obj.request_params.forEach((value_1: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                __ROOT_NAMESPACE__.APIParameterCodec.encode(value_1, output);
+            obj.request_params.forEach((value_1: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -88,8 +89,8 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
         if (obj.response_params != null) {
             output.writeFieldBegin("response_params", thrift.TType.LIST, 7);
             output.writeListBegin(thrift.TType.STRUCT, obj.response_params.length);
-            obj.response_params.forEach((value_2: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                __ROOT_NAMESPACE__.APIParameterCodec.encode(value_2, output);
+            obj.response_params.forEach((value_2: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.encode(value_2, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -106,7 +107,7 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
         }
         if (obj.response_style != null) {
             output.writeFieldBegin("response_style", thrift.TType.STRUCT, 10);
-            __ROOT_NAMESPACE__.ResponseStyleCodec.encode(obj.response_style, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ResponseStyleCodec.encode(obj.response_style, output);
             output.writeFieldEnd();
         }
         if (obj.workflow_id != null) {
@@ -116,7 +117,7 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -181,11 +182,11 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
                     break;
                 case 6:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_8: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
+                        const value_8: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_9: __ROOT_NAMESPACE__.IAPIParameter = __ROOT_NAMESPACE__.APIParameterCodec.decode(input);
+                            const value_9: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.decode(input);
                             value_8.push(value_9);
                         }
                         input.readListEnd();
@@ -197,11 +198,11 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
                     break;
                 case 7:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_10: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
+                        const value_10: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
                         const metadata_2: thrift.IThriftList = input.readListBegin();
                         const size_2: number = metadata_2.size;
                         for (let i_2: number = 0; i_2 < size_2; i_2++) {
-                            const value_11: __ROOT_NAMESPACE__.IAPIParameter = __ROOT_NAMESPACE__.APIParameterCodec.decode(input);
+                            const value_11: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameterCodec.decode(input);
                             value_10.push(value_11);
                         }
                         input.readListEnd();
@@ -222,7 +223,7 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
                     break;
                 case 9:
                     if (fieldType === thrift.TType.I32) {
-                        const value_13: __ROOT_NAMESPACE__.PluginReferrerScene = input.readI32();
+                        const value_13: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene = input.readI32();
                         _args.plugin_referrer_scene = value_13;
                     }
                     else {
@@ -231,7 +232,7 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
                     break;
                 case 10:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_14: __ROOT_NAMESPACE__.IResponseStyle = __ROOT_NAMESPACE__.ResponseStyleCodec.decode(input);
+                        const value_14: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyle = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ResponseStyleCodec.decode(input);
                         _args.response_style = value_14;
                     }
                     else {
@@ -249,7 +250,7 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_16: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_16: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_16;
                     }
                     else {
@@ -285,13 +286,13 @@ export class UpdateBotDefaultParamsRequest extends thrift.StructLike implements 
     public dev_id?: string;
     public plugin_id?: thrift.Int64;
     public api_name?: string;
-    public request_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
-    public response_params?: Array<__ROOT_NAMESPACE__.IAPIParameter>;
+    public request_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
+    public response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     public plugin_referrer_id?: string;
-    public plugin_referrer_scene?: __ROOT_NAMESPACE__.PluginReferrerScene;
-    public response_style?: __ROOT_NAMESPACE__.IResponseStyle;
+    public plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
+    public response_style?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyle;
     public workflow_id?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         space_id: {
@@ -327,17 +328,17 @@ export class UpdateBotDefaultParamsRequest extends thrift.StructLike implements 
             this.api_name = value_21;
         }
         if (args.request_params != null) {
-            const value_22: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
-            args.request_params.forEach((value_29: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                const value_30: __ROOT_NAMESPACE__.IAPIParameter = new __ROOT_NAMESPACE__.APIParameter(value_29);
+            const value_22: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
+            args.request_params.forEach((value_29: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                const value_30: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameter(value_29);
                 value_22.push(value_30);
             });
             this.request_params = value_22;
         }
         if (args.response_params != null) {
-            const value_23: Array<__ROOT_NAMESPACE__.IAPIParameter> = new Array<__ROOT_NAMESPACE__.IAPIParameter>();
-            args.response_params.forEach((value_31: __ROOT_NAMESPACE__.IAPIParameterArgs): void => {
-                const value_32: __ROOT_NAMESPACE__.IAPIParameter = new __ROOT_NAMESPACE__.APIParameter(value_31);
+            const value_23: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>();
+            args.response_params.forEach((value_31: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs): void => {
+                const value_32: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.APIParameter(value_31);
                 value_23.push(value_32);
             });
             this.response_params = value_23;
@@ -347,11 +348,11 @@ export class UpdateBotDefaultParamsRequest extends thrift.StructLike implements 
             this.plugin_referrer_id = value_24;
         }
         if (args.plugin_referrer_scene != null) {
-            const value_25: __ROOT_NAMESPACE__.PluginReferrerScene = args.plugin_referrer_scene;
+            const value_25: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene = args.plugin_referrer_scene;
             this.plugin_referrer_scene = value_25;
         }
         if (args.response_style != null) {
-            const value_26: __ROOT_NAMESPACE__.IResponseStyle = new __ROOT_NAMESPACE__.ResponseStyle(args.response_style);
+            const value_26: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyle = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ResponseStyle(args.response_style);
             this.response_style = value_26;
         }
         if (args.workflow_id != null) {
@@ -359,7 +360,7 @@ export class UpdateBotDefaultParamsRequest extends thrift.StructLike implements 
             this.workflow_id = value_27;
         }
         if (args.Base != null) {
-            const value_28: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_28: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_28;
         }
     }

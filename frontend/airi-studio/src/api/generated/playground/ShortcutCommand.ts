@@ -9,7 +9,7 @@ import * as SendType from "./SendType";
 import * as Components from "./Components";
 import * as ToolInfo from "./ToolInfo";
 import * as ShortcutFileInfo from "./ShortcutFileInfo";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../app/bot_common";
 export interface IShortcutCommand {
     object_id?: thrift.Int64;
     command_name?: string;

@@ -5,36 +5,37 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetDevPluginListRequest {
-    status?: Array<__ROOT_NAMESPACE__.PluginStatus>;
+    status?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus>;
     page?: number;
     size?: number;
     dev_id: thrift.Int64;
     space_id?: thrift.Int64;
-    scope_type?: __ROOT_NAMESPACE__.ScopeType;
-    order_by?: __ROOT_NAMESPACE__.OrderBy;
+    scope_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ScopeType;
+    order_by?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OrderBy;
     publish_status?: boolean;
     name?: string;
-    plugin_type_for_filter?: __ROOT_NAMESPACE__.PluginTypeForFilter;
+    plugin_type_for_filter?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginTypeForFilter;
     project_id?: thrift.Int64;
     plugin_ids?: Array<thrift.Int64>;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IGetDevPluginListRequestArgs {
-    status?: Array<__ROOT_NAMESPACE__.PluginStatus>;
+    status?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus>;
     page?: number;
     size?: number;
     dev_id: number | string | thrift.Int64;
     space_id?: number | string | thrift.Int64;
-    scope_type?: __ROOT_NAMESPACE__.ScopeType;
-    order_by?: __ROOT_NAMESPACE__.OrderBy;
+    scope_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ScopeType;
+    order_by?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OrderBy;
     publish_status?: boolean;
     name?: string;
-    plugin_type_for_filter?: __ROOT_NAMESPACE__.PluginTypeForFilter;
+    plugin_type_for_filter?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginTypeForFilter;
     project_id?: number | string | thrift.Int64;
     plugin_ids?: Array<number | string | thrift.Int64>;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginListRequestArgs, IGetDevPluginListRequest> = {
     encode(args: IGetDevPluginListRequestArgs, output: thrift.TProtocol): void {
@@ -57,7 +58,7 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
         if (obj.status != null) {
             output.writeFieldBegin("status", thrift.TType.LIST, 1);
             output.writeListBegin(thrift.TType.I32, obj.status.length);
-            obj.status.forEach((value_1: __ROOT_NAMESPACE__.PluginStatus): void => {
+            obj.status.forEach((value_1: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus): void => {
                 output.writeI32(value_1);
             });
             output.writeListEnd();
@@ -127,7 +128,7 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -147,11 +148,11 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_3: Array<__ROOT_NAMESPACE__.PluginStatus> = new Array<__ROOT_NAMESPACE__.PluginStatus>();
+                        const value_3: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_4: __ROOT_NAMESPACE__.PluginStatus = input.readI32();
+                            const value_4: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus = input.readI32();
                             value_3.push(value_4);
                         }
                         input.readListEnd();
@@ -199,7 +200,7 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
                     break;
                 case 6:
                     if (fieldType === thrift.TType.I32) {
-                        const value_9: __ROOT_NAMESPACE__.ScopeType = input.readI32();
+                        const value_9: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ScopeType = input.readI32();
                         _args.scope_type = value_9;
                     }
                     else {
@@ -208,7 +209,7 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
                     break;
                 case 7:
                     if (fieldType === thrift.TType.I32) {
-                        const value_10: __ROOT_NAMESPACE__.OrderBy = input.readI32();
+                        const value_10: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OrderBy = input.readI32();
                         _args.order_by = value_10;
                     }
                     else {
@@ -235,7 +236,7 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
                     break;
                 case 10:
                     if (fieldType === thrift.TType.I32) {
-                        const value_13: __ROOT_NAMESPACE__.PluginTypeForFilter = input.readI32();
+                        const value_13: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginTypeForFilter = input.readI32();
                         _args.plugin_type_for_filter = value_13;
                     }
                     else {
@@ -269,7 +270,7 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_17: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_17: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_17;
                     }
                     else {
@@ -306,19 +307,19 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
     }
 };
 export class GetDevPluginListRequest extends thrift.StructLike implements IGetDevPluginListRequest {
-    public status?: Array<__ROOT_NAMESPACE__.PluginStatus>;
+    public status?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus>;
     public page?: number;
     public size?: number;
     public dev_id: thrift.Int64;
     public space_id?: thrift.Int64;
-    public scope_type?: __ROOT_NAMESPACE__.ScopeType;
-    public order_by?: __ROOT_NAMESPACE__.OrderBy;
+    public scope_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ScopeType;
+    public order_by?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OrderBy;
     public publish_status?: boolean;
     public name?: string;
-    public plugin_type_for_filter?: __ROOT_NAMESPACE__.PluginTypeForFilter;
+    public plugin_type_for_filter?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginTypeForFilter;
     public project_id?: thrift.Int64;
     public plugin_ids?: Array<thrift.Int64>;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         dev_id: {
@@ -352,9 +353,9 @@ export class GetDevPluginListRequest extends thrift.StructLike implements IGetDe
     constructor(args: IGetDevPluginListRequestArgs) {
         super();
         if (args.status != null) {
-            const value_18: Array<__ROOT_NAMESPACE__.PluginStatus> = new Array<__ROOT_NAMESPACE__.PluginStatus>();
-            args.status.forEach((value_31: __ROOT_NAMESPACE__.PluginStatus): void => {
-                const value_32: __ROOT_NAMESPACE__.PluginStatus = value_31;
+            const value_18: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus>();
+            args.status.forEach((value_31: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus): void => {
+                const value_32: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus = value_31;
                 value_18.push(value_32);
             });
             this.status = value_18;
@@ -379,11 +380,11 @@ export class GetDevPluginListRequest extends thrift.StructLike implements IGetDe
             this.space_id = value_22;
         }
         if (args.scope_type != null) {
-            const value_23: __ROOT_NAMESPACE__.ScopeType = args.scope_type;
+            const value_23: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ScopeType = args.scope_type;
             this.scope_type = value_23;
         }
         if (args.order_by != null) {
-            const value_24: __ROOT_NAMESPACE__.OrderBy = args.order_by;
+            const value_24: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.OrderBy = args.order_by;
             this.order_by = value_24;
         }
         if (args.publish_status != null) {
@@ -395,7 +396,7 @@ export class GetDevPluginListRequest extends thrift.StructLike implements IGetDe
             this.name = value_26;
         }
         if (args.plugin_type_for_filter != null) {
-            const value_27: __ROOT_NAMESPACE__.PluginTypeForFilter = args.plugin_type_for_filter;
+            const value_27: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginTypeForFilter = args.plugin_type_for_filter;
             this.plugin_type_for_filter = value_27;
         }
         if (args.project_id != null) {
@@ -411,7 +412,7 @@ export class GetDevPluginListRequest extends thrift.StructLike implements IGetDe
             this.plugin_ids = value_29;
         }
         if (args.Base != null) {
-            const value_30: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_30: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_30;
         }
     }

@@ -5,14 +5,15 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as FOUNDATION_DOMAIN_USER_NS from "../domain/user";
+import * as BASE_NS from "../../base";
 export interface IMGetUserInfoResponse {
-    user_infos?: Array<__ROOT_NAMESPACE__.IUserInfoDetail>;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    user_infos?: Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail>;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IMGetUserInfoResponseArgs {
-    user_infos?: Array<__ROOT_NAMESPACE__.IUserInfoDetailArgs>;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    user_infos?: Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetailArgs>;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const MGetUserInfoResponseCodec: thrift.IStructCodec<IMGetUserInfoResponseArgs, IMGetUserInfoResponse> = {
     encode(args: IMGetUserInfoResponseArgs, output: thrift.TProtocol): void {
@@ -24,15 +25,15 @@ export const MGetUserInfoResponseCodec: thrift.IStructCodec<IMGetUserInfoRespons
         if (obj.user_infos != null) {
             output.writeFieldBegin("user_infos", thrift.TType.LIST, 1);
             output.writeListBegin(thrift.TType.STRUCT, obj.user_infos.length);
-            obj.user_infos.forEach((value_1: __ROOT_NAMESPACE__.IUserInfoDetailArgs): void => {
-                __ROOT_NAMESPACE__.UserInfoDetailCodec.encode(value_1, output);
+            obj.user_infos.forEach((value_1: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetailArgs): void => {
+                FOUNDATION_DOMAIN_USER_NS.UserInfoDetailCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -52,11 +53,11 @@ export const MGetUserInfoResponseCodec: thrift.IStructCodec<IMGetUserInfoRespons
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_2: Array<__ROOT_NAMESPACE__.IUserInfoDetail> = new Array<__ROOT_NAMESPACE__.IUserInfoDetail>();
+                        const value_2: Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail> = new Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_3: __ROOT_NAMESPACE__.IUserInfoDetail = __ROOT_NAMESPACE__.UserInfoDetailCodec.decode(input);
+                            const value_3: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail = FOUNDATION_DOMAIN_USER_NS.UserInfoDetailCodec.decode(input);
                             value_2.push(value_3);
                         }
                         input.readListEnd();
@@ -68,7 +69,7 @@ export const MGetUserInfoResponseCodec: thrift.IStructCodec<IMGetUserInfoRespons
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_4: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_4;
                     }
                     else {
@@ -89,22 +90,22 @@ export const MGetUserInfoResponseCodec: thrift.IStructCodec<IMGetUserInfoRespons
     }
 };
 export class MGetUserInfoResponse extends thrift.StructLike implements IMGetUserInfoResponse {
-    public user_infos?: Array<__ROOT_NAMESPACE__.IUserInfoDetail>;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public user_infos?: Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail>;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IMGetUserInfoResponseArgs = {}) {
         super();
         if (args.user_infos != null) {
-            const value_5: Array<__ROOT_NAMESPACE__.IUserInfoDetail> = new Array<__ROOT_NAMESPACE__.IUserInfoDetail>();
-            args.user_infos.forEach((value_7: __ROOT_NAMESPACE__.IUserInfoDetailArgs): void => {
-                const value_8: __ROOT_NAMESPACE__.IUserInfoDetail = new __ROOT_NAMESPACE__.UserInfoDetail(value_7);
+            const value_5: Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail> = new Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail>();
+            args.user_infos.forEach((value_7: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetailArgs): void => {
+                const value_8: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail = new FOUNDATION_DOMAIN_USER_NS.UserInfoDetail(value_7);
                 value_5.push(value_8);
             });
             this.user_infos = value_5;
         }
         if (args.BaseResp != null) {
-            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_6: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_6;
         }
     }

@@ -5,20 +5,21 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetDevPluginListResponse {
     code?: number;
     msg?: string;
-    plugin_list?: Array<__ROOT_NAMESPACE__.IPluginInfoForPlayground>;
+    plugin_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground>;
     total?: thrift.Int64;
-    baseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    baseResp?: BASE_NS.IBaseResp;
 }
 export interface IGetDevPluginListResponseArgs {
     code?: number;
     msg?: string;
-    plugin_list?: Array<__ROOT_NAMESPACE__.IPluginInfoForPlaygroundArgs>;
+    plugin_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlaygroundArgs>;
     total?: number | string | thrift.Int64;
-    baseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    baseResp?: BASE_NS.IBaseRespArgs;
 }
 export const GetDevPluginListResponseCodec: thrift.IStructCodec<IGetDevPluginListResponseArgs, IGetDevPluginListResponse> = {
     encode(args: IGetDevPluginListResponseArgs, output: thrift.TProtocol): void {
@@ -43,8 +44,8 @@ export const GetDevPluginListResponseCodec: thrift.IStructCodec<IGetDevPluginLis
         if (obj.plugin_list != null) {
             output.writeFieldBegin("plugin_list", thrift.TType.LIST, 3);
             output.writeListBegin(thrift.TType.STRUCT, obj.plugin_list.length);
-            obj.plugin_list.forEach((value_1: __ROOT_NAMESPACE__.IPluginInfoForPlaygroundArgs): void => {
-                __ROOT_NAMESPACE__.PluginInfoForPlaygroundCodec.encode(value_1, output);
+            obj.plugin_list.forEach((value_1: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlaygroundArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginInfoForPlaygroundCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -56,7 +57,7 @@ export const GetDevPluginListResponseCodec: thrift.IStructCodec<IGetDevPluginLis
         }
         if (obj.baseResp != null) {
             output.writeFieldBegin("baseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.baseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.baseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -94,11 +95,11 @@ export const GetDevPluginListResponseCodec: thrift.IStructCodec<IGetDevPluginLis
                     break;
                 case 3:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_4: Array<__ROOT_NAMESPACE__.IPluginInfoForPlayground> = new Array<__ROOT_NAMESPACE__.IPluginInfoForPlayground>();
+                        const value_4: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_5: __ROOT_NAMESPACE__.IPluginInfoForPlayground = __ROOT_NAMESPACE__.PluginInfoForPlaygroundCodec.decode(input);
+                            const value_5: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginInfoForPlaygroundCodec.decode(input);
                             value_4.push(value_5);
                         }
                         input.readListEnd();
@@ -119,7 +120,7 @@ export const GetDevPluginListResponseCodec: thrift.IStructCodec<IGetDevPluginLis
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_7: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_7: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.baseResp = value_7;
                     }
                     else {
@@ -145,9 +146,9 @@ export const GetDevPluginListResponseCodec: thrift.IStructCodec<IGetDevPluginLis
 export class GetDevPluginListResponse extends thrift.StructLike implements IGetDevPluginListResponse {
     public code?: number;
     public msg?: string;
-    public plugin_list?: Array<__ROOT_NAMESPACE__.IPluginInfoForPlayground>;
+    public plugin_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground>;
     public total?: thrift.Int64;
-    public baseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public baseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         total: {
@@ -169,9 +170,9 @@ export class GetDevPluginListResponse extends thrift.StructLike implements IGetD
             this.msg = value_9;
         }
         if (args.plugin_list != null) {
-            const value_10: Array<__ROOT_NAMESPACE__.IPluginInfoForPlayground> = new Array<__ROOT_NAMESPACE__.IPluginInfoForPlayground>();
-            args.plugin_list.forEach((value_13: __ROOT_NAMESPACE__.IPluginInfoForPlaygroundArgs): void => {
-                const value_14: __ROOT_NAMESPACE__.IPluginInfoForPlayground = new __ROOT_NAMESPACE__.PluginInfoForPlayground(value_13);
+            const value_10: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground>();
+            args.plugin_list.forEach((value_13: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlaygroundArgs): void => {
+                const value_14: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginInfoForPlayground(value_13);
                 value_10.push(value_14);
             });
             this.plugin_list = value_10;
@@ -181,7 +182,7 @@ export class GetDevPluginListResponse extends thrift.StructLike implements IGetD
             this.total = value_11;
         }
         if (args.baseResp != null) {
-            const value_12: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.baseResp);
+            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.baseResp);
             this.baseResp = value_12;
         }
     }

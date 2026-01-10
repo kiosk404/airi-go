@@ -128,6 +128,121 @@ function updateImports(filePath, movedFiles) {
     }
 }
 
+/**
+ * Fix __ROOT_NAMESPACE__ imports that point to "./" but should point to other namespaces
+ * This happens when thrift files include other thrift files - the generator incorrectly
+ * resolves cross-namespace references to the current directory instead of the correct namespace
+ */
+function fixRootNamespaceImports(filePath, currentDirPath, typeMap) {
+    let content = fs.readFileSync(filePath, 'utf-8');
+
+    // Check if file imports from "./" as __ROOT_NAMESPACE__
+    const hasRootNamespaceImport = content.includes('import * as __ROOT_NAMESPACE__ from "./"');
+    if (!hasRootNamespaceImport) return false;
+
+    // Find all types used with __ROOT_NAMESPACE__ prefix
+    const usedTypes = new Set();
+    const typeUsageRegex = /\b__ROOT_NAMESPACE__\.(\w+)/g;
+    let match;
+    while ((match = typeUsageRegex.exec(content)) !== null) {
+        // Extract base type name (remove I prefix for interfaces, Codec/Args suffix)
+        let typeName = match[1];
+        if (typeName.startsWith('I') && typeName.length > 1 && typeName[1] === typeName[1].toUpperCase()) {
+            // Could be an interface like IMsgParticipantInfo -> MsgParticipantInfo
+            const baseName = typeName.substring(1);
+            if (typeMap.has(baseName)) {
+                usedTypes.add(baseName);
+            } else if (typeMap.has(typeName)) {
+                usedTypes.add(typeName);
+            }
+        } else if (typeName.endsWith('Codec')) {
+            const baseName = typeName.replace(/Codec$/, '');
+            if (typeMap.has(baseName)) {
+                usedTypes.add(baseName);
+            }
+        } else if (typeName.endsWith('Args')) {
+            const baseName = typeName.replace(/Args$/, '');
+            if (typeMap.has(baseName)) {
+                usedTypes.add(baseName);
+            }
+        } else if (typeMap.has(typeName)) {
+            usedTypes.add(typeName);
+        }
+    }
+
+    if (usedTypes.size === 0) return false;
+
+    // Group types by their namespace directory
+    const typesByDir = new Map();
+    for (const typeName of usedTypes) {
+        const typeInfo = typeMap.get(typeName);
+        if (typeInfo && typeInfo.dirPath !== currentDirPath) {
+            if (!typesByDir.has(typeInfo.dirPath)) {
+                typesByDir.set(typeInfo.dirPath, []);
+            }
+            typesByDir.get(typeInfo.dirPath).push(typeName);
+        }
+    }
+
+    if (typesByDir.size === 0) return false;
+
+    // If all types are from a single directory, we can just change the import path
+    if (typesByDir.size === 1) {
+        const [targetDir] = typesByDir.keys();
+        const relativePath = path.relative(currentDirPath, targetDir) || '.';
+        const normalizedPath = relativePath.startsWith('.') ? relativePath : './' + relativePath;
+
+        content = content.replace(
+            'import * as __ROOT_NAMESPACE__ from "./"',
+            `import * as __ROOT_NAMESPACE__ from "${normalizedPath}"`
+        );
+
+        fs.writeFileSync(filePath, content);
+        console.log(`  Fixed __ROOT_NAMESPACE__ import in ${path.basename(filePath)} -> ${normalizedPath}`);
+        return true;
+    }
+
+    // Multiple namespaces - need to add separate imports and replace usages
+    // This is more complex, we need to:
+    // 1. Remove the __ROOT_NAMESPACE__ import
+    // 2. Add individual imports for each namespace
+    // 3. Replace __ROOT_NAMESPACE__.Type with NamespaceName.Type
+
+    const importLines = [];
+    const replacements = new Map(); // old prefix -> new prefix
+
+    for (const [targetDir, types] of typesByDir) {
+        const relativePath = path.relative(currentDirPath, targetDir) || '.';
+        const normalizedPath = relativePath.startsWith('.') ? relativePath : './' + relativePath;
+        // Create a namespace alias from the directory path
+        const nsAlias = targetDir.replace(/\//g, '_').toUpperCase() + '_NS';
+        importLines.push(`import * as ${nsAlias} from "${normalizedPath}";`);
+
+        for (const typeName of types) {
+            // Map all variants of the type name
+            replacements.set(`__ROOT_NAMESPACE__.${typeName}`, `${nsAlias}.${typeName}`);
+            replacements.set(`__ROOT_NAMESPACE__.I${typeName}`, `${nsAlias}.I${typeName}`);
+            replacements.set(`__ROOT_NAMESPACE__.${typeName}Codec`, `${nsAlias}.${typeName}Codec`);
+            replacements.set(`__ROOT_NAMESPACE__.I${typeName}Args`, `${nsAlias}.I${typeName}Args`);
+        }
+    }
+
+    // Remove the old import
+    content = content.replace(
+        /import \* as __ROOT_NAMESPACE__ from "\.\/";?\n?/,
+        importLines.join('\n') + '\n'
+    );
+
+    // Apply replacements
+    for (const [oldStr, newStr] of replacements) {
+        content = content.split(oldStr).join(newStr);
+    }
+
+    fs.writeFileSync(filePath, content);
+    console.log(`  Fixed multi-namespace imports in ${path.basename(filePath)}`);
+    return true;
+}
+
 function organizeFiles() {
     if (!fs.existsSync(GENERATED_DIR)) {
         console.log('Generated directory does not exist:', GENERATED_DIR);
@@ -187,6 +302,27 @@ function organizeFiles() {
     // Update imports in root files
     for (const file of rootFiles) {
         updateImports(path.join(GENERATED_DIR, file), movedFiles);
+    }
+
+    // Fourth pass: fix __ROOT_NAMESPACE__ imports (cross-namespace includes)
+    console.log('\nFixing __ROOT_NAMESPACE__ imports...');
+    let fixedCount = 0;
+    for (const [dirPath, fileList] of dirFiles) {
+        const targetDir = path.join(GENERATED_DIR, dirPath);
+        for (const file of fileList) {
+            if (fixRootNamespaceImports(path.join(targetDir, file), dirPath, typeMap)) {
+                fixedCount++;
+            }
+        }
+    }
+    // Also check root files
+    for (const file of rootFiles) {
+        if (fixRootNamespaceImports(path.join(GENERATED_DIR, file), '', typeMap)) {
+            fixedCount++;
+        }
+    }
+    if (fixedCount > 0) {
+        console.log(`  Fixed ${fixedCount} files with __ROOT_NAMESPACE__ imports`);
     }
 
     // Create index.ts for each namespace directory

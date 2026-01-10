@@ -5,7 +5,8 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetBotDefaultParamsRequest {
     space_id?: thrift.Int64;
     bot_id?: thrift.Int64;
@@ -13,11 +14,11 @@ export interface IGetBotDefaultParamsRequest {
     plugin_id?: thrift.Int64;
     api_name?: string;
     plugin_referrer_id?: string;
-    plugin_referrer_scene?: __ROOT_NAMESPACE__.PluginReferrerScene;
+    plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     plugin_is_debug?: boolean;
     workflow_id?: string;
     plugin_publish_version_ts?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IGetBotDefaultParamsRequestArgs {
     space_id?: number | string | thrift.Int64;
@@ -26,11 +27,11 @@ export interface IGetBotDefaultParamsRequestArgs {
     plugin_id?: number | string | thrift.Int64;
     api_name?: string;
     plugin_referrer_id?: string;
-    plugin_referrer_scene?: __ROOT_NAMESPACE__.PluginReferrerScene;
+    plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     plugin_is_debug?: boolean;
     workflow_id?: string;
     plugin_publish_version_ts?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const GetBotDefaultParamsRequestCodec: thrift.IStructCodec<IGetBotDefaultParamsRequestArgs, IGetBotDefaultParamsRequest> = {
     encode(args: IGetBotDefaultParamsRequestArgs, output: thrift.TProtocol): void {
@@ -100,7 +101,7 @@ export const GetBotDefaultParamsRequestCodec: thrift.IStructCodec<IGetBotDefault
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -174,7 +175,7 @@ export const GetBotDefaultParamsRequestCodec: thrift.IStructCodec<IGetBotDefault
                     break;
                 case 7:
                     if (fieldType === thrift.TType.I32) {
-                        const value_7: __ROOT_NAMESPACE__.PluginReferrerScene = input.readI32();
+                        const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene = input.readI32();
                         _args.plugin_referrer_scene = value_7;
                     }
                     else {
@@ -210,7 +211,7 @@ export const GetBotDefaultParamsRequestCodec: thrift.IStructCodec<IGetBotDefault
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_11: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_11: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_11;
                     }
                     else {
@@ -246,11 +247,11 @@ export class GetBotDefaultParamsRequest extends thrift.StructLike implements IGe
     public plugin_id?: thrift.Int64;
     public api_name?: string;
     public plugin_referrer_id?: string;
-    public plugin_referrer_scene?: __ROOT_NAMESPACE__.PluginReferrerScene;
+    public plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     public plugin_is_debug?: boolean;
     public workflow_id?: string;
     public plugin_publish_version_ts?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         space_id: {
@@ -290,7 +291,7 @@ export class GetBotDefaultParamsRequest extends thrift.StructLike implements IGe
             this.plugin_referrer_id = value_17;
         }
         if (args.plugin_referrer_scene != null) {
-            const value_18: __ROOT_NAMESPACE__.PluginReferrerScene = args.plugin_referrer_scene;
+            const value_18: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene = args.plugin_referrer_scene;
             this.plugin_referrer_scene = value_18;
         }
         if (args.plugin_is_debug != null) {
@@ -306,7 +307,7 @@ export class GetBotDefaultParamsRequest extends thrift.StructLike implements IGe
             this.plugin_publish_version_ts = value_21;
         }
         if (args.Base != null) {
-            const value_22: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_22: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_22;
         }
     }

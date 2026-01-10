@@ -5,42 +5,43 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetPluginInfoResponse {
     code?: thrift.Int64;
     msg?: string;
-    meta_info?: __ROOT_NAMESPACE__.IPluginMetaInfo;
-    code_info?: __ROOT_NAMESPACE__.ICodeInfo;
+    meta_info?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginMetaInfo;
+    code_info?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICodeInfo;
     status?: boolean;
     published?: boolean;
-    creator?: __ROOT_NAMESPACE__.ICreator;
-    statistic_data?: __ROOT_NAMESPACE__.IPluginStatisticData;
-    plugin_product_status?: __ROOT_NAMESPACE__.ProductStatus;
+    creator?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICreator;
+    statistic_data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginStatisticData;
+    plugin_product_status?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ProductStatus;
     privacy_status?: boolean;
     privacy_info?: string;
-    creation_method?: __ROOT_NAMESPACE__.CreationMethod;
+    creation_method?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     ide_code_runtime?: string;
     edit_version?: number;
-    plugin_type?: __ROOT_NAMESPACE__.PluginType;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    plugin_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IGetPluginInfoResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    meta_info?: __ROOT_NAMESPACE__.IPluginMetaInfoArgs;
-    code_info?: __ROOT_NAMESPACE__.ICodeInfoArgs;
+    meta_info?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginMetaInfoArgs;
+    code_info?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICodeInfoArgs;
     status?: boolean;
     published?: boolean;
-    creator?: __ROOT_NAMESPACE__.ICreatorArgs;
-    statistic_data?: __ROOT_NAMESPACE__.IPluginStatisticDataArgs;
-    plugin_product_status?: __ROOT_NAMESPACE__.ProductStatus;
+    creator?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICreatorArgs;
+    statistic_data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginStatisticDataArgs;
+    plugin_product_status?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ProductStatus;
     privacy_status?: boolean;
     privacy_info?: string;
-    creation_method?: __ROOT_NAMESPACE__.CreationMethod;
+    creation_method?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     ide_code_runtime?: string;
     edit_version?: number;
-    plugin_type?: __ROOT_NAMESPACE__.PluginType;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    plugin_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoResponseArgs, IGetPluginInfoResponse> = {
     encode(args: IGetPluginInfoResponseArgs, output: thrift.TProtocol): void {
@@ -75,12 +76,12 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
         }
         if (obj.meta_info != null) {
             output.writeFieldBegin("meta_info", thrift.TType.STRUCT, 3);
-            __ROOT_NAMESPACE__.PluginMetaInfoCodec.encode(obj.meta_info, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginMetaInfoCodec.encode(obj.meta_info, output);
             output.writeFieldEnd();
         }
         if (obj.code_info != null) {
             output.writeFieldBegin("code_info", thrift.TType.STRUCT, 4);
-            __ROOT_NAMESPACE__.CodeInfoCodec.encode(obj.code_info, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CodeInfoCodec.encode(obj.code_info, output);
             output.writeFieldEnd();
         }
         if (obj.status != null) {
@@ -95,12 +96,12 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
         }
         if (obj.creator != null) {
             output.writeFieldBegin("creator", thrift.TType.STRUCT, 7);
-            __ROOT_NAMESPACE__.CreatorCodec.encode(obj.creator, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreatorCodec.encode(obj.creator, output);
             output.writeFieldEnd();
         }
         if (obj.statistic_data != null) {
             output.writeFieldBegin("statistic_data", thrift.TType.STRUCT, 8);
-            __ROOT_NAMESPACE__.PluginStatisticDataCodec.encode(obj.statistic_data, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatisticDataCodec.encode(obj.statistic_data, output);
             output.writeFieldEnd();
         }
         if (obj.plugin_product_status != null) {
@@ -140,7 +141,7 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -178,7 +179,7 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
                     break;
                 case 3:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_3: __ROOT_NAMESPACE__.IPluginMetaInfo = __ROOT_NAMESPACE__.PluginMetaInfoCodec.decode(input);
+                        const value_3: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginMetaInfo = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginMetaInfoCodec.decode(input);
                         _args.meta_info = value_3;
                     }
                     else {
@@ -187,7 +188,7 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
                     break;
                 case 4:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.ICodeInfo = __ROOT_NAMESPACE__.CodeInfoCodec.decode(input);
+                        const value_4: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICodeInfo = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CodeInfoCodec.decode(input);
                         _args.code_info = value_4;
                     }
                     else {
@@ -214,7 +215,7 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
                     break;
                 case 7:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_7: __ROOT_NAMESPACE__.ICreator = __ROOT_NAMESPACE__.CreatorCodec.decode(input);
+                        const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICreator = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreatorCodec.decode(input);
                         _args.creator = value_7;
                     }
                     else {
@@ -223,7 +224,7 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
                     break;
                 case 8:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_8: __ROOT_NAMESPACE__.IPluginStatisticData = __ROOT_NAMESPACE__.PluginStatisticDataCodec.decode(input);
+                        const value_8: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginStatisticData = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatisticDataCodec.decode(input);
                         _args.statistic_data = value_8;
                     }
                     else {
@@ -232,7 +233,7 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
                     break;
                 case 9:
                     if (fieldType === thrift.TType.I32) {
-                        const value_9: __ROOT_NAMESPACE__.ProductStatus = input.readI32();
+                        const value_9: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ProductStatus = input.readI32();
                         _args.plugin_product_status = value_9;
                     }
                     else {
@@ -259,7 +260,7 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
                     break;
                 case 12:
                     if (fieldType === thrift.TType.I32) {
-                        const value_12: __ROOT_NAMESPACE__.CreationMethod = input.readI32();
+                        const value_12: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod = input.readI32();
                         _args.creation_method = value_12;
                     }
                     else {
@@ -286,7 +287,7 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
                     break;
                 case 15:
                     if (fieldType === thrift.TType.I32) {
-                        const value_15: __ROOT_NAMESPACE__.PluginType = input.readI32();
+                        const value_15: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType = input.readI32();
                         _args.plugin_type = value_15;
                     }
                     else {
@@ -295,7 +296,7 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_16: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_16: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_16;
                     }
                     else {
@@ -332,20 +333,20 @@ export const GetPluginInfoResponseCodec: thrift.IStructCodec<IGetPluginInfoRespo
 export class GetPluginInfoResponse extends thrift.StructLike implements IGetPluginInfoResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public meta_info?: __ROOT_NAMESPACE__.IPluginMetaInfo;
-    public code_info?: __ROOT_NAMESPACE__.ICodeInfo;
+    public meta_info?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginMetaInfo;
+    public code_info?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICodeInfo;
     public status?: boolean;
     public published?: boolean;
-    public creator?: __ROOT_NAMESPACE__.ICreator;
-    public statistic_data?: __ROOT_NAMESPACE__.IPluginStatisticData;
-    public plugin_product_status?: __ROOT_NAMESPACE__.ProductStatus;
+    public creator?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICreator;
+    public statistic_data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginStatisticData;
+    public plugin_product_status?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ProductStatus;
     public privacy_status?: boolean;
     public privacy_info?: string;
-    public creation_method?: __ROOT_NAMESPACE__.CreationMethod;
+    public creation_method?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     public ide_code_runtime?: string;
     public edit_version?: number;
-    public plugin_type?: __ROOT_NAMESPACE__.PluginType;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public plugin_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetPluginInfoResponseArgs = {}) {
@@ -359,11 +360,11 @@ export class GetPluginInfoResponse extends thrift.StructLike implements IGetPlug
             this.msg = value_18;
         }
         if (args.meta_info != null) {
-            const value_19: __ROOT_NAMESPACE__.IPluginMetaInfo = new __ROOT_NAMESPACE__.PluginMetaInfo(args.meta_info);
+            const value_19: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginMetaInfo = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginMetaInfo(args.meta_info);
             this.meta_info = value_19;
         }
         if (args.code_info != null) {
-            const value_20: __ROOT_NAMESPACE__.ICodeInfo = new __ROOT_NAMESPACE__.CodeInfo(args.code_info);
+            const value_20: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICodeInfo = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CodeInfo(args.code_info);
             this.code_info = value_20;
         }
         if (args.status != null) {
@@ -375,15 +376,15 @@ export class GetPluginInfoResponse extends thrift.StructLike implements IGetPlug
             this.published = value_22;
         }
         if (args.creator != null) {
-            const value_23: __ROOT_NAMESPACE__.ICreator = new __ROOT_NAMESPACE__.Creator(args.creator);
+            const value_23: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ICreator = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.Creator(args.creator);
             this.creator = value_23;
         }
         if (args.statistic_data != null) {
-            const value_24: __ROOT_NAMESPACE__.IPluginStatisticData = new __ROOT_NAMESPACE__.PluginStatisticData(args.statistic_data);
+            const value_24: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginStatisticData = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatisticData(args.statistic_data);
             this.statistic_data = value_24;
         }
         if (args.plugin_product_status != null) {
-            const value_25: __ROOT_NAMESPACE__.ProductStatus = args.plugin_product_status;
+            const value_25: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ProductStatus = args.plugin_product_status;
             this.plugin_product_status = value_25;
         }
         if (args.privacy_status != null) {
@@ -395,7 +396,7 @@ export class GetPluginInfoResponse extends thrift.StructLike implements IGetPlug
             this.privacy_info = value_27;
         }
         if (args.creation_method != null) {
-            const value_28: __ROOT_NAMESPACE__.CreationMethod = args.creation_method;
+            const value_28: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod = args.creation_method;
             this.creation_method = value_28;
         }
         if (args.ide_code_runtime != null) {
@@ -407,11 +408,11 @@ export class GetPluginInfoResponse extends thrift.StructLike implements IGetPlug
             this.edit_version = value_30;
         }
         if (args.plugin_type != null) {
-            const value_31: __ROOT_NAMESPACE__.PluginType = args.plugin_type;
+            const value_31: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType = args.plugin_type;
             this.plugin_type = value_31;
         }
         if (args.BaseResp != null) {
-            const value_32: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_32: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_32;
         }
     }

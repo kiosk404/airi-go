@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as GetDraftIntelligenceInfoData from "./GetDraftIntelligenceInfoData";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IGetDraftIntelligenceInfoResponse {
     data?: GetDraftIntelligenceInfoData.IGetDraftIntelligenceInfoData;
     code?: number;

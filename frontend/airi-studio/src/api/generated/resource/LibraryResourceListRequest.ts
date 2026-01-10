@@ -5,28 +5,29 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as RESOURCE_COMMON_NS from "./common";
+import * as BASE_NS from "../base";
 export interface ILibraryResourceListRequest {
     user_filter?: number;
-    res_type_filter?: Array<__ROOT_NAMESPACE__.ResType>;
+    res_type_filter?: Array<RESOURCE_COMMON_NS.ResType>;
     name?: string;
-    publish_status_filter?: __ROOT_NAMESPACE__.PublishStatus;
+    publish_status_filter?: RESOURCE_COMMON_NS.PublishStatus;
     size?: number;
     cursor?: string;
     search_keys?: Array<string>;
     is_get_imageflow?: boolean;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface ILibraryResourceListRequestArgs {
     user_filter?: number;
-    res_type_filter?: Array<__ROOT_NAMESPACE__.ResType>;
+    res_type_filter?: Array<RESOURCE_COMMON_NS.ResType>;
     name?: string;
-    publish_status_filter?: __ROOT_NAMESPACE__.PublishStatus;
+    publish_status_filter?: RESOURCE_COMMON_NS.PublishStatus;
     size?: number;
     cursor?: string;
     search_keys?: Array<string>;
     is_get_imageflow?: boolean;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResourceListRequestArgs, ILibraryResourceListRequest> = {
     encode(args: ILibraryResourceListRequestArgs, output: thrift.TProtocol): void {
@@ -50,7 +51,7 @@ export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResour
         if (obj.res_type_filter != null) {
             output.writeFieldBegin("res_type_filter", thrift.TType.LIST, 2);
             output.writeListBegin(thrift.TType.I32, obj.res_type_filter.length);
-            obj.res_type_filter.forEach((value_1: __ROOT_NAMESPACE__.ResType): void => {
+            obj.res_type_filter.forEach((value_1: RESOURCE_COMMON_NS.ResType): void => {
                 output.writeI32(value_1);
             });
             output.writeListEnd();
@@ -92,7 +93,7 @@ export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResour
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -121,11 +122,11 @@ export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResour
                     break;
                 case 2:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_4: Array<__ROOT_NAMESPACE__.ResType> = new Array<__ROOT_NAMESPACE__.ResType>();
+                        const value_4: Array<RESOURCE_COMMON_NS.ResType> = new Array<RESOURCE_COMMON_NS.ResType>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_5: __ROOT_NAMESPACE__.ResType = input.readI32();
+                            const value_5: RESOURCE_COMMON_NS.ResType = input.readI32();
                             value_4.push(value_5);
                         }
                         input.readListEnd();
@@ -146,7 +147,7 @@ export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResour
                     break;
                 case 4:
                     if (fieldType === thrift.TType.I32) {
-                        const value_7: __ROOT_NAMESPACE__.PublishStatus = input.readI32();
+                        const value_7: RESOURCE_COMMON_NS.PublishStatus = input.readI32();
                         _args.publish_status_filter = value_7;
                     }
                     else {
@@ -198,7 +199,7 @@ export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResour
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_13: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_13: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_13;
                     }
                     else {
@@ -227,14 +228,14 @@ export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResour
 };
 export class LibraryResourceListRequest extends thrift.StructLike implements ILibraryResourceListRequest {
     public user_filter?: number;
-    public res_type_filter?: Array<__ROOT_NAMESPACE__.ResType>;
+    public res_type_filter?: Array<RESOURCE_COMMON_NS.ResType>;
     public name?: string;
-    public publish_status_filter?: __ROOT_NAMESPACE__.PublishStatus;
+    public publish_status_filter?: RESOURCE_COMMON_NS.PublishStatus;
     public size?: number;
     public cursor?: string;
     public search_keys?: Array<string>;
     public is_get_imageflow?: boolean;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ILibraryResourceListRequestArgs = {}) {
@@ -244,9 +245,9 @@ export class LibraryResourceListRequest extends thrift.StructLike implements ILi
             this.user_filter = value_14;
         }
         if (args.res_type_filter != null) {
-            const value_15: Array<__ROOT_NAMESPACE__.ResType> = new Array<__ROOT_NAMESPACE__.ResType>();
-            args.res_type_filter.forEach((value_23: __ROOT_NAMESPACE__.ResType): void => {
-                const value_24: __ROOT_NAMESPACE__.ResType = value_23;
+            const value_15: Array<RESOURCE_COMMON_NS.ResType> = new Array<RESOURCE_COMMON_NS.ResType>();
+            args.res_type_filter.forEach((value_23: RESOURCE_COMMON_NS.ResType): void => {
+                const value_24: RESOURCE_COMMON_NS.ResType = value_23;
                 value_15.push(value_24);
             });
             this.res_type_filter = value_15;
@@ -256,7 +257,7 @@ export class LibraryResourceListRequest extends thrift.StructLike implements ILi
             this.name = value_16;
         }
         if (args.publish_status_filter != null) {
-            const value_17: __ROOT_NAMESPACE__.PublishStatus = args.publish_status_filter;
+            const value_17: RESOURCE_COMMON_NS.PublishStatus = args.publish_status_filter;
             this.publish_status_filter = value_17;
         }
         if (args.size != null) {
@@ -280,7 +281,7 @@ export class LibraryResourceListRequest extends thrift.StructLike implements ILi
             this.is_get_imageflow = value_21;
         }
         if (args.Base != null) {
-            const value_22: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_22: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_22;
         }
     }

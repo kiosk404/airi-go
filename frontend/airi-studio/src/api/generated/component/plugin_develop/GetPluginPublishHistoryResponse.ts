@@ -5,20 +5,21 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetPluginPublishHistoryResponse {
     code?: thrift.Int64;
     msg?: string;
-    plugin_publish_info_list?: Array<__ROOT_NAMESPACE__.IPluginPublishInfo>;
+    plugin_publish_info_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo>;
     total?: number;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IGetPluginPublishHistoryResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    plugin_publish_info_list?: Array<__ROOT_NAMESPACE__.IPluginPublishInfoArgs>;
+    plugin_publish_info_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfoArgs>;
     total?: number;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const GetPluginPublishHistoryResponseCodec: thrift.IStructCodec<IGetPluginPublishHistoryResponseArgs, IGetPluginPublishHistoryResponse> = {
     encode(args: IGetPluginPublishHistoryResponseArgs, output: thrift.TProtocol): void {
@@ -43,8 +44,8 @@ export const GetPluginPublishHistoryResponseCodec: thrift.IStructCodec<IGetPlugi
         if (obj.plugin_publish_info_list != null) {
             output.writeFieldBegin("plugin_publish_info_list", thrift.TType.LIST, 3);
             output.writeListBegin(thrift.TType.STRUCT, obj.plugin_publish_info_list.length);
-            obj.plugin_publish_info_list.forEach((value_1: __ROOT_NAMESPACE__.IPluginPublishInfoArgs): void => {
-                __ROOT_NAMESPACE__.PluginPublishInfoCodec.encode(value_1, output);
+            obj.plugin_publish_info_list.forEach((value_1: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfoArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginPublishInfoCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -56,7 +57,7 @@ export const GetPluginPublishHistoryResponseCodec: thrift.IStructCodec<IGetPlugi
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -94,11 +95,11 @@ export const GetPluginPublishHistoryResponseCodec: thrift.IStructCodec<IGetPlugi
                     break;
                 case 3:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_4: Array<__ROOT_NAMESPACE__.IPluginPublishInfo> = new Array<__ROOT_NAMESPACE__.IPluginPublishInfo>();
+                        const value_4: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_5: __ROOT_NAMESPACE__.IPluginPublishInfo = __ROOT_NAMESPACE__.PluginPublishInfoCodec.decode(input);
+                            const value_5: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginPublishInfoCodec.decode(input);
                             value_4.push(value_5);
                         }
                         input.readListEnd();
@@ -119,7 +120,7 @@ export const GetPluginPublishHistoryResponseCodec: thrift.IStructCodec<IGetPlugi
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_7: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_7: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_7;
                     }
                     else {
@@ -145,9 +146,9 @@ export const GetPluginPublishHistoryResponseCodec: thrift.IStructCodec<IGetPlugi
 export class GetPluginPublishHistoryResponse extends thrift.StructLike implements IGetPluginPublishHistoryResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public plugin_publish_info_list?: Array<__ROOT_NAMESPACE__.IPluginPublishInfo>;
+    public plugin_publish_info_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo>;
     public total?: number;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetPluginPublishHistoryResponseArgs = {}) {
@@ -161,9 +162,9 @@ export class GetPluginPublishHistoryResponse extends thrift.StructLike implement
             this.msg = value_9;
         }
         if (args.plugin_publish_info_list != null) {
-            const value_10: Array<__ROOT_NAMESPACE__.IPluginPublishInfo> = new Array<__ROOT_NAMESPACE__.IPluginPublishInfo>();
-            args.plugin_publish_info_list.forEach((value_13: __ROOT_NAMESPACE__.IPluginPublishInfoArgs): void => {
-                const value_14: __ROOT_NAMESPACE__.IPluginPublishInfo = new __ROOT_NAMESPACE__.PluginPublishInfo(value_13);
+            const value_10: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo>();
+            args.plugin_publish_info_list.forEach((value_13: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfoArgs): void => {
+                const value_14: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginPublishInfo(value_13);
                 value_10.push(value_14);
             });
             this.plugin_publish_info_list = value_10;
@@ -173,7 +174,7 @@ export class GetPluginPublishHistoryResponse extends thrift.StructLike implement
             this.total = value_11;
         }
         if (args.BaseResp != null) {
-            const value_12: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_12;
         }
     }

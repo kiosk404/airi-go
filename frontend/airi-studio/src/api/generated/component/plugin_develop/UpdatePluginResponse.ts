@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IUpdatePluginResponse {
     code?: thrift.Int64;
     msg?: string;
-    data: __ROOT_NAMESPACE__.IUpdatePluginData;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    data: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IUpdatePluginData;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IUpdatePluginResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    data: __ROOT_NAMESPACE__.IUpdatePluginDataArgs;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    data: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IUpdatePluginDataArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const UpdatePluginResponseCodec: thrift.IStructCodec<IUpdatePluginResponseArgs, IUpdatePluginResponse> = {
     encode(args: IUpdatePluginResponseArgs, output: thrift.TProtocol): void {
@@ -39,7 +40,7 @@ export const UpdatePluginResponseCodec: thrift.IStructCodec<IUpdatePluginRespons
         }
         if (obj.data != null) {
             output.writeFieldBegin("data", thrift.TType.STRUCT, 3);
-            __ROOT_NAMESPACE__.UpdatePluginDataCodec.encode(obj.data, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.UpdatePluginDataCodec.encode(obj.data, output);
             output.writeFieldEnd();
         }
         else {
@@ -47,7 +48,7 @@ export const UpdatePluginResponseCodec: thrift.IStructCodec<IUpdatePluginRespons
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -85,7 +86,7 @@ export const UpdatePluginResponseCodec: thrift.IStructCodec<IUpdatePluginRespons
                     break;
                 case 3:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_3: __ROOT_NAMESPACE__.IUpdatePluginData = __ROOT_NAMESPACE__.UpdatePluginDataCodec.decode(input);
+                        const value_3: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IUpdatePluginData = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.UpdatePluginDataCodec.decode(input);
                         _args.data = value_3;
                     }
                     else {
@@ -94,7 +95,7 @@ export const UpdatePluginResponseCodec: thrift.IStructCodec<IUpdatePluginRespons
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_4: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_4;
                     }
                     else {
@@ -124,8 +125,8 @@ export const UpdatePluginResponseCodec: thrift.IStructCodec<IUpdatePluginRespons
 export class UpdatePluginResponse extends thrift.StructLike implements IUpdatePluginResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public data: __ROOT_NAMESPACE__.IUpdatePluginData;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public data: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IUpdatePluginData;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUpdatePluginResponseArgs) {
@@ -139,14 +140,14 @@ export class UpdatePluginResponse extends thrift.StructLike implements IUpdatePl
             this.msg = value_6;
         }
         if (args.data != null) {
-            const value_7: __ROOT_NAMESPACE__.IUpdatePluginData = new __ROOT_NAMESPACE__.UpdatePluginData(args.data);
+            const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IUpdatePluginData = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.UpdatePluginData(args.data);
             this.data = value_7;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[data] is unset!");
         }
         if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_8;
         }
     }

@@ -5,16 +5,17 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as APP_BOT_COMMON_NS from "../app/bot_common";
+import * as BASE_NS from "../base";
 export interface IUpdateDraftBotInfoAgwRequest {
-    bot_info?: __ROOT_NAMESPACE__.IBotInfoForUpdate;
+    bot_info?: APP_BOT_COMMON_NS.IBotInfoForUpdate;
     base_commit_version?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IUpdateDraftBotInfoAgwRequestArgs {
-    bot_info?: __ROOT_NAMESPACE__.IBotInfoForUpdateArgs;
+    bot_info?: APP_BOT_COMMON_NS.IBotInfoForUpdateArgs;
     base_commit_version?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const UpdateDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IUpdateDraftBotInfoAgwRequestArgs, IUpdateDraftBotInfoAgwRequest> = {
     encode(args: IUpdateDraftBotInfoAgwRequestArgs, output: thrift.TProtocol): void {
@@ -26,7 +27,7 @@ export const UpdateDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IUpdateDraft
         output.writeStructBegin("UpdateDraftBotInfoAgwRequest");
         if (obj.bot_info != null) {
             output.writeFieldBegin("bot_info", thrift.TType.STRUCT, 1);
-            __ROOT_NAMESPACE__.BotInfoForUpdateCodec.encode(obj.bot_info, output);
+            APP_BOT_COMMON_NS.BotInfoForUpdateCodec.encode(obj.bot_info, output);
             output.writeFieldEnd();
         }
         if (obj.base_commit_version != null) {
@@ -36,7 +37,7 @@ export const UpdateDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IUpdateDraft
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -56,7 +57,7 @@ export const UpdateDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IUpdateDraft
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_1: __ROOT_NAMESPACE__.IBotInfoForUpdate = __ROOT_NAMESPACE__.BotInfoForUpdateCodec.decode(input);
+                        const value_1: APP_BOT_COMMON_NS.IBotInfoForUpdate = APP_BOT_COMMON_NS.BotInfoForUpdateCodec.decode(input);
                         _args.bot_info = value_1;
                     }
                     else {
@@ -74,7 +75,7 @@ export const UpdateDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IUpdateDraft
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_3: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_3: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_3;
                     }
                     else {
@@ -96,9 +97,9 @@ export const UpdateDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IUpdateDraft
     }
 };
 export class UpdateDraftBotInfoAgwRequest extends thrift.StructLike implements IUpdateDraftBotInfoAgwRequest {
-    public bot_info?: __ROOT_NAMESPACE__.IBotInfoForUpdate;
+    public bot_info?: APP_BOT_COMMON_NS.IBotInfoForUpdate;
     public base_commit_version?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         base_commit_version: {
@@ -112,7 +113,7 @@ export class UpdateDraftBotInfoAgwRequest extends thrift.StructLike implements I
     constructor(args: IUpdateDraftBotInfoAgwRequestArgs = {}) {
         super();
         if (args.bot_info != null) {
-            const value_4: __ROOT_NAMESPACE__.IBotInfoForUpdate = new __ROOT_NAMESPACE__.BotInfoForUpdate(args.bot_info);
+            const value_4: APP_BOT_COMMON_NS.IBotInfoForUpdate = new APP_BOT_COMMON_NS.BotInfoForUpdate(args.bot_info);
             this.bot_info = value_4;
         }
         if (args.base_commit_version != null) {
@@ -120,7 +121,7 @@ export class UpdateDraftBotInfoAgwRequest extends thrift.StructLike implements I
             this.base_commit_version = value_5;
         }
         if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_6: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_6;
         }
     }

@@ -5,24 +5,25 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as APP_DEVELOPER_API_NS from "../app/developer_api";
+import * as BASE_NS from "../base";
 import * as Connection from "./Connection";
 import * as ModelType from "./ModelType";
 export interface ICreateModelReq {
-    model_class?: __ROOT_NAMESPACE__.ModelClass;
+    model_class?: APP_DEVELOPER_API_NS.ModelClass;
     model_name?: string;
     connection?: Connection.IConnection;
     enable_base64_url?: boolean;
     type?: ModelType.ModelType;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface ICreateModelReqArgs {
-    model_class?: __ROOT_NAMESPACE__.ModelClass;
+    model_class?: APP_DEVELOPER_API_NS.ModelClass;
     model_name?: string;
     connection?: Connection.IConnectionArgs;
     enable_base64_url?: boolean;
     type?: ModelType.ModelType;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICreateModelReq> = {
     encode(args: ICreateModelReqArgs, output: thrift.TProtocol): void {
@@ -62,7 +63,7 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -82,7 +83,7 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.I32) {
-                        const value_1: __ROOT_NAMESPACE__.ModelClass = input.readI32();
+                        const value_1: APP_DEVELOPER_API_NS.ModelClass = input.readI32();
                         _args.model_class = value_1;
                     }
                     else {
@@ -127,7 +128,7 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_6: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_6;
                     }
                     else {
@@ -152,18 +153,18 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
     }
 };
 export class CreateModelReq extends thrift.StructLike implements ICreateModelReq {
-    public model_class?: __ROOT_NAMESPACE__.ModelClass;
+    public model_class?: APP_DEVELOPER_API_NS.ModelClass;
     public model_name?: string;
     public connection?: Connection.IConnection;
     public enable_base64_url?: boolean;
     public type?: ModelType.ModelType;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICreateModelReqArgs = {}) {
         super();
         if (args.model_class != null) {
-            const value_7: __ROOT_NAMESPACE__.ModelClass = args.model_class;
+            const value_7: APP_DEVELOPER_API_NS.ModelClass = args.model_class;
             this.model_class = value_7;
         }
         if (args.model_name != null) {
@@ -183,7 +184,7 @@ export class CreateModelReq extends thrift.StructLike implements ICreateModelReq
             this.type = value_11;
         }
         if (args.Base != null) {
-            const value_12: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_12: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_12;
         }
     }

@@ -5,15 +5,16 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as APP_INTELLIGENCE_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 import * as SearchScope from "./SearchScope";
 import * as GetDraftIntelligenceListOption from "./GetDraftIntelligenceListOption";
 import * as OrderBy from "../../component/plugin_develop/common/OrderBy";
 export interface IGetDraftIntelligenceListRequest {
     name?: string;
     has_published?: boolean;
-    status?: Array<__ROOT_NAMESPACE__.IntelligenceStatus>;
-    types?: Array<__ROOT_NAMESPACE__.IntelligenceType>;
+    status?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus>;
+    types?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>;
     search_scope?: SearchScope.SearchScope;
     is_fav?: boolean;
     recently_open?: boolean;
@@ -21,13 +22,13 @@ export interface IGetDraftIntelligenceListRequest {
     order_by?: OrderBy.OrderBy;
     cursor_id?: string;
     size?: number;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IGetDraftIntelligenceListRequestArgs {
     name?: string;
     has_published?: boolean;
-    status?: Array<__ROOT_NAMESPACE__.IntelligenceStatus>;
-    types?: Array<__ROOT_NAMESPACE__.IntelligenceType>;
+    status?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus>;
+    types?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>;
     search_scope?: SearchScope.SearchScope;
     is_fav?: boolean;
     recently_open?: boolean;
@@ -35,7 +36,7 @@ export interface IGetDraftIntelligenceListRequestArgs {
     order_by?: OrderBy.OrderBy;
     cursor_id?: string;
     size?: number;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraftIntelligenceListRequestArgs, IGetDraftIntelligenceListRequest> = {
     encode(args: IGetDraftIntelligenceListRequestArgs, output: thrift.TProtocol): void {
@@ -67,7 +68,7 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
         if (obj.status != null) {
             output.writeFieldBegin("status", thrift.TType.LIST, 3);
             output.writeListBegin(thrift.TType.I32, obj.status.length);
-            obj.status.forEach((value_1: __ROOT_NAMESPACE__.IntelligenceStatus): void => {
+            obj.status.forEach((value_1: APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus): void => {
                 output.writeI32(value_1);
             });
             output.writeListEnd();
@@ -76,7 +77,7 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
         if (obj.types != null) {
             output.writeFieldBegin("types", thrift.TType.LIST, 4);
             output.writeListBegin(thrift.TType.I32, obj.types.length);
-            obj.types.forEach((value_2: __ROOT_NAMESPACE__.IntelligenceType): void => {
+            obj.types.forEach((value_2: APP_INTELLIGENCE_COMMON_NS.IntelligenceType): void => {
                 output.writeI32(value_2);
             });
             output.writeListEnd();
@@ -119,7 +120,7 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -157,11 +158,11 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 3:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_5: Array<__ROOT_NAMESPACE__.IntelligenceStatus> = new Array<__ROOT_NAMESPACE__.IntelligenceStatus>();
+                        const value_5: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus> = new Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_6: __ROOT_NAMESPACE__.IntelligenceStatus = input.readI32();
+                            const value_6: APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus = input.readI32();
                             value_5.push(value_6);
                         }
                         input.readListEnd();
@@ -173,11 +174,11 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 4:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_7: Array<__ROOT_NAMESPACE__.IntelligenceType> = new Array<__ROOT_NAMESPACE__.IntelligenceType>();
+                        const value_7: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType> = new Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>();
                         const metadata_2: thrift.IThriftList = input.readListBegin();
                         const size_2: number = metadata_2.size;
                         for (let i_2: number = 0; i_2 < size_2; i_2++) {
-                            const value_8: __ROOT_NAMESPACE__.IntelligenceType = input.readI32();
+                            const value_8: APP_INTELLIGENCE_COMMON_NS.IntelligenceType = input.readI32();
                             value_7.push(value_8);
                         }
                         input.readListEnd();
@@ -252,7 +253,7 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_16: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_16: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_16;
                     }
                     else {
@@ -285,8 +286,8 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
 export class GetDraftIntelligenceListRequest extends thrift.StructLike implements IGetDraftIntelligenceListRequest {
     public name?: string;
     public has_published?: boolean;
-    public status?: Array<__ROOT_NAMESPACE__.IntelligenceStatus>;
-    public types?: Array<__ROOT_NAMESPACE__.IntelligenceType>;
+    public status?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus>;
+    public types?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>;
     public search_scope?: SearchScope.SearchScope;
     public is_fav?: boolean;
     public recently_open?: boolean;
@@ -294,7 +295,7 @@ export class GetDraftIntelligenceListRequest extends thrift.StructLike implement
     public order_by?: OrderBy.OrderBy;
     public cursor_id?: string;
     public size?: number;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetDraftIntelligenceListRequestArgs = {}) {
@@ -308,17 +309,17 @@ export class GetDraftIntelligenceListRequest extends thrift.StructLike implement
             this.has_published = value_18;
         }
         if (args.status != null) {
-            const value_19: Array<__ROOT_NAMESPACE__.IntelligenceStatus> = new Array<__ROOT_NAMESPACE__.IntelligenceStatus>();
-            args.status.forEach((value_29: __ROOT_NAMESPACE__.IntelligenceStatus): void => {
-                const value_30: __ROOT_NAMESPACE__.IntelligenceStatus = value_29;
+            const value_19: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus> = new Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus>();
+            args.status.forEach((value_29: APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus): void => {
+                const value_30: APP_INTELLIGENCE_COMMON_NS.IntelligenceStatus = value_29;
                 value_19.push(value_30);
             });
             this.status = value_19;
         }
         if (args.types != null) {
-            const value_20: Array<__ROOT_NAMESPACE__.IntelligenceType> = new Array<__ROOT_NAMESPACE__.IntelligenceType>();
-            args.types.forEach((value_31: __ROOT_NAMESPACE__.IntelligenceType): void => {
-                const value_32: __ROOT_NAMESPACE__.IntelligenceType = value_31;
+            const value_20: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType> = new Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>();
+            args.types.forEach((value_31: APP_INTELLIGENCE_COMMON_NS.IntelligenceType): void => {
+                const value_32: APP_INTELLIGENCE_COMMON_NS.IntelligenceType = value_31;
                 value_20.push(value_32);
             });
             this.types = value_20;
@@ -352,7 +353,7 @@ export class GetDraftIntelligenceListRequest extends thrift.StructLike implement
             this.size = value_27;
         }
         if (args.Base != null) {
-            const value_28: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_28: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_28;
         }
     }

@@ -5,7 +5,8 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as CONVERSATION_COMMON_NS from "../common";
+import * as CONVERSATION_MESSAGE_NS from "../message";
 import * as Tool from "../../llm/domain/runtime/Tool";
 import * as DiffModeIdentifier from "./DiffModeIdentifier";
 export interface IAgentRunRequest {
@@ -15,14 +16,14 @@ export interface IAgentRunRequest {
     extra?: Map<string, string>;
     custom_variables?: Map<string, string>;
     draft_mode?: boolean;
-    scene?: __ROOT_NAMESPACE__.Scene;
+    scene?: CONVERSATION_COMMON_NS.Scene;
     content_type?: string;
     regen_message_id?: thrift.Int64;
     local_message_id?: string;
     preset_bot?: string;
     insert_history_message_list?: Array<string>;
     device_id?: string;
-    mention_list?: Array<__ROOT_NAMESPACE__.IMsgParticipantInfo>;
+    mention_list?: Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfo>;
     toolList?: Array<Tool.ITool>;
     commit_version?: string;
     sub_scene?: string;
@@ -36,14 +37,14 @@ export interface IAgentRunRequestArgs {
     extra?: Map<string, string>;
     custom_variables?: Map<string, string>;
     draft_mode?: boolean;
-    scene?: __ROOT_NAMESPACE__.Scene;
+    scene?: CONVERSATION_COMMON_NS.Scene;
     content_type?: string;
     regen_message_id?: number | string | thrift.Int64;
     local_message_id?: string;
     preset_bot?: string;
     insert_history_message_list?: Array<string>;
     device_id?: string;
-    mention_list?: Array<__ROOT_NAMESPACE__.IMsgParticipantInfoArgs>;
+    mention_list?: Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfoArgs>;
     toolList?: Array<Tool.IToolArgs>;
     commit_version?: string;
     sub_scene?: string;
@@ -162,8 +163,8 @@ export const AgentRunRequestCodec: thrift.IStructCodec<IAgentRunRequestArgs, IAg
         if (obj.mention_list != null) {
             output.writeFieldBegin("mention_list", thrift.TType.LIST, 18);
             output.writeListBegin(thrift.TType.STRUCT, obj.mention_list.length);
-            obj.mention_list.forEach((value_4: __ROOT_NAMESPACE__.IMsgParticipantInfoArgs): void => {
-                __ROOT_NAMESPACE__.MsgParticipantInfoCodec.encode(value_4, output);
+            obj.mention_list.forEach((value_4: CONVERSATION_MESSAGE_NS.IMsgParticipantInfoArgs): void => {
+                CONVERSATION_MESSAGE_NS.MsgParticipantInfoCodec.encode(value_4, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -284,7 +285,7 @@ export const AgentRunRequestCodec: thrift.IStructCodec<IAgentRunRequestArgs, IAg
                     break;
                 case 11:
                     if (fieldType === thrift.TType.I32) {
-                        const value_14: __ROOT_NAMESPACE__.Scene = input.readI32();
+                        const value_14: CONVERSATION_COMMON_NS.Scene = input.readI32();
                         _args.scene = value_14;
                     }
                     else {
@@ -354,11 +355,11 @@ export const AgentRunRequestCodec: thrift.IStructCodec<IAgentRunRequestArgs, IAg
                     break;
                 case 18:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_22: Array<__ROOT_NAMESPACE__.IMsgParticipantInfo> = new Array<__ROOT_NAMESPACE__.IMsgParticipantInfo>();
+                        const value_22: Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfo> = new Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfo>();
                         const metadata_4: thrift.IThriftList = input.readListBegin();
                         const size_4: number = metadata_4.size;
                         for (let i_4: number = 0; i_4 < size_4; i_4++) {
-                            const value_23: __ROOT_NAMESPACE__.IMsgParticipantInfo = __ROOT_NAMESPACE__.MsgParticipantInfoCodec.decode(input);
+                            const value_23: CONVERSATION_MESSAGE_NS.IMsgParticipantInfo = CONVERSATION_MESSAGE_NS.MsgParticipantInfoCodec.decode(input);
                             value_22.push(value_23);
                         }
                         input.readListEnd();
@@ -462,14 +463,14 @@ export class AgentRunRequest extends thrift.StructLike implements IAgentRunReque
     public extra?: Map<string, string>;
     public custom_variables?: Map<string, string>;
     public draft_mode?: boolean;
-    public scene?: __ROOT_NAMESPACE__.Scene;
+    public scene?: CONVERSATION_COMMON_NS.Scene;
     public content_type?: string;
     public regen_message_id?: thrift.Int64;
     public local_message_id?: string;
     public preset_bot?: string;
     public insert_history_message_list?: Array<string>;
     public device_id?: string;
-    public mention_list?: Array<__ROOT_NAMESPACE__.IMsgParticipantInfo>;
+    public mention_list?: Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfo>;
     public toolList?: Array<Tool.ITool>;
     public commit_version?: string;
     public sub_scene?: string;
@@ -535,7 +536,7 @@ export class AgentRunRequest extends thrift.StructLike implements IAgentRunReque
             this.draft_mode = value_35;
         }
         if (args.scene != null) {
-            const value_36: __ROOT_NAMESPACE__.Scene = args.scene;
+            const value_36: CONVERSATION_COMMON_NS.Scene = args.scene;
             this.scene = value_36;
         }
         if (args.content_type != null) {
@@ -567,9 +568,9 @@ export class AgentRunRequest extends thrift.StructLike implements IAgentRunReque
             this.device_id = value_42;
         }
         if (args.mention_list != null) {
-            const value_43: Array<__ROOT_NAMESPACE__.IMsgParticipantInfo> = new Array<__ROOT_NAMESPACE__.IMsgParticipantInfo>();
-            args.mention_list.forEach((value_55: __ROOT_NAMESPACE__.IMsgParticipantInfoArgs): void => {
-                const value_56: __ROOT_NAMESPACE__.IMsgParticipantInfo = new __ROOT_NAMESPACE__.MsgParticipantInfo(value_55);
+            const value_43: Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfo> = new Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfo>();
+            args.mention_list.forEach((value_55: CONVERSATION_MESSAGE_NS.IMsgParticipantInfoArgs): void => {
+                const value_56: CONVERSATION_MESSAGE_NS.IMsgParticipantInfo = new CONVERSATION_MESSAGE_NS.MsgParticipantInfo(value_55);
                 value_43.push(value_56);
             });
             this.mention_list = value_43;

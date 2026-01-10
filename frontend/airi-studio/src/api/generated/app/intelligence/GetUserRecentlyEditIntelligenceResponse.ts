@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as GetUserRecentlyEditIntelligenceData from "./GetUserRecentlyEditIntelligenceData";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IGetUserRecentlyEditIntelligenceResponse {
     data?: GetUserRecentlyEditIntelligenceData.IGetUserRecentlyEditIntelligenceData;
     code?: number;

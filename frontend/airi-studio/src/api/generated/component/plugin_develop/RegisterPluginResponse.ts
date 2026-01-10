@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IRegisterPluginResponse {
     code?: thrift.Int64;
     msg?: string;
-    data?: __ROOT_NAMESPACE__.IRegisterPluginData;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IRegisterPluginData;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IRegisterPluginResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    data?: __ROOT_NAMESPACE__.IRegisterPluginDataArgs;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IRegisterPluginDataArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const RegisterPluginResponseCodec: thrift.IStructCodec<IRegisterPluginResponseArgs, IRegisterPluginResponse> = {
     encode(args: IRegisterPluginResponseArgs, output: thrift.TProtocol): void {
@@ -39,12 +40,12 @@ export const RegisterPluginResponseCodec: thrift.IStructCodec<IRegisterPluginRes
         }
         if (obj.data != null) {
             output.writeFieldBegin("data", thrift.TType.STRUCT, 3);
-            __ROOT_NAMESPACE__.RegisterPluginDataCodec.encode(obj.data, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.RegisterPluginDataCodec.encode(obj.data, output);
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -82,7 +83,7 @@ export const RegisterPluginResponseCodec: thrift.IStructCodec<IRegisterPluginRes
                     break;
                 case 3:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_3: __ROOT_NAMESPACE__.IRegisterPluginData = __ROOT_NAMESPACE__.RegisterPluginDataCodec.decode(input);
+                        const value_3: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IRegisterPluginData = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.RegisterPluginDataCodec.decode(input);
                         _args.data = value_3;
                     }
                     else {
@@ -91,7 +92,7 @@ export const RegisterPluginResponseCodec: thrift.IStructCodec<IRegisterPluginRes
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_4: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_4;
                     }
                     else {
@@ -116,8 +117,8 @@ export const RegisterPluginResponseCodec: thrift.IStructCodec<IRegisterPluginRes
 export class RegisterPluginResponse extends thrift.StructLike implements IRegisterPluginResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public data?: __ROOT_NAMESPACE__.IRegisterPluginData;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IRegisterPluginData;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IRegisterPluginResponseArgs = {}) {
@@ -131,11 +132,11 @@ export class RegisterPluginResponse extends thrift.StructLike implements IRegist
             this.msg = value_6;
         }
         if (args.data != null) {
-            const value_7: __ROOT_NAMESPACE__.IRegisterPluginData = new __ROOT_NAMESPACE__.RegisterPluginData(args.data);
+            const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IRegisterPluginData = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.RegisterPluginData(args.data);
             this.data = value_7;
         }
         if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_8;
         }
     }

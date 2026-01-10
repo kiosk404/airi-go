@@ -7,135 +7,54 @@ import { httpClient } from '@/services/core';
 
 const API_BASE = '/api/conversation';
 
-// ============ 枚举定义 ============
 
-/** 场景类型 */
-export enum Scene {
-    Default = 0,
-    Explore = 1,
-    BotStore = 2,
-    AiriHome = 3,
-    Playground = 4,
-    Evaluation = 5,
-    AgentAPP = 6,
-    PromptOptimize = 7,
-    GenerateAgentInfo = 8,
-    SceneOpenApi = 9,
-    SceneWorkflow = 50,
-}
+// 从 IDL 生成的类型中导入
+import { Scene } from '@/api/generated/conversation/common';
+import { MsgParticipantType } from '@/api/generated/conversation/message/MsgParticipantType';
+import type { IAgentRunRequestArgs } from '@/api/generated/conversation/run/AgentRunRequest';
+import type { IRunStreamResponseArgs } from '@/api/generated/conversation/run/RunStreamResponse';
+import type { IGetMessageListRequestArgs } from '@/api/generated/conversation/message/GetMessageListRequest';
+import type { IGetMessageListResponseArgs } from '@/api/generated/conversation/message/GetMessageListResponse';
+import type { IChatMessageArgs } from '@/api/generated/conversation/message/ChatMessage';
+import type { IMsgParticipantInfoArgs } from '@/api/generated/conversation/message/MsgParticipantInfo';
+import type { IBreakMessageRequestArgs } from '@/api/generated/conversation/message/BreakMessageRequest';
+import type { IBreakMessageResponseArgs } from '@/api/generated/conversation/message/BreakMessageResponse';
+import type { IDeleteMessageRequestArgs } from '@/api/generated/conversation/message/DeleteMessageRequest';
+import type { IDeleteMessageResponseArgs } from '@/api/generated/conversation/message/DeleteMessageResponse';
+import type { ICreateConversationRequestArgs } from '@/api/generated/conversation/conversation/CreateConversationRequest';
+import type { ICreateConversationResponseArgs } from '@/api/generated/conversation/conversation/CreateConversationResponse';
+import type { IClearConversationHistoryRequestArgs } from '@/api/generated/conversation/conversation/ClearConversationHistoryRequest';
+import type { IClearConversationHistoryResponseArgs } from '@/api/generated/conversation/conversation/ClearConversationHistoryResponse';
 
-/** 消息参与者类型 */
-export enum MsgParticipantType {
-    Bot = 1,
-    User = 2,
-}
+// 重新导出枚举和类型供外部使用
+export { Scene, MsgParticipantType };
+export type AgentRunRequest = IAgentRunRequestArgs;
+export type RunStreamResponse = IRunStreamResponseArgs;
+export type GetMessageListRequest = IGetMessageListRequestArgs;
+export type GetMessageListResponse = IGetMessageListResponseArgs;
+export type ChatMessage = IChatMessageArgs;
+export type MsgParticipantInfo = IMsgParticipantInfoArgs;
+export type BreakMessageRequest = IBreakMessageRequestArgs;
+export type BreakMessageResponse = IBreakMessageResponseArgs;
+export type DeleteMessageRequest = IDeleteMessageRequestArgs;
+export type DeleteMessageResponse = IDeleteMessageResponseArgs;
+export type CreateConversationRequest = ICreateConversationRequestArgs;
+export type CreateConversationResponse = ICreateConversationResponseArgs;
+export type ClearConversationRequest = IClearConversationHistoryRequestArgs;
+export type ClearConversationResponse = IClearConversationHistoryResponseArgs;
 
-// ============ 类型定义 ============
-
-/** 聊天请求 */
-export interface AgentRunRequest {
-    bot_id: string;
-    conversation_id: string;
-    query: string;
-    scene?: Scene;
-    content_type?: string;
-    draft_mode?: boolean;
-    extra?: Record<string, string>;
-    custom_variables?: Record<string, string>;
-}
-
-/** SSE 消息事件 */
-export interface RunStreamResponse {
-    message: ChatMessage;
-    is_finish?: boolean;
-    index: number;
-    conversation_id: string;
-    seq_id: number;
-}
-
-/** 聊天消息 */
-export interface ChatMessage {
-    id?: string;
-    content?: string;
-    role?: string;
-    type?: number;
-    sender?: MsgParticipantInfo;
-    create_time?: number;
-    status?: number;
-}
-
-/** 消息参与者信息 */
-export interface MsgParticipantInfo {
-    type?: MsgParticipantType;
-    id?: string;
-    name?: string;
-    avatar?: string;
-}
-
-/** 获取消息列表请求 */
-export interface GetMessageListRequest {
-    bot_id: string;
-    conversation_id?: string;
-    page_num?: number;
-    page_size?: number;
-    cursor?: string;
-    scene?: number;
-}
-
-/** 获取消息列表响应 */
-export interface GetMessageListResponse {
-    code: number;
-    msg: string;
-    conversation_id?: string;
-    messages?: ChatMessage[];
-    has_more?: boolean;
-    cursor?: string;
-}
-
-/** 创建会话请求 */
-export interface CreateConversationRequest {
-    BotId?: string;
-    MetaData?: Record<string, string>;
-}
-
-/** 会话数据 */
-export interface ConversationData {
-    Id: string;
-    CreatedAt: number;
-    MetaData?: Record<string, string>;
-    CreatorID?: string;
-    LastSectionID?: string;
-    Name?: string;
-}
-
-/** 创建会话响应 */
-export interface CreateConversationResponse {
-    code: number;
-    msg: string;
-    ConversationData?: ConversationData;
-}
-
-/** 清除会话历史请求 */
-export interface ClearConversationRequest {
-    ConversationID: string;
-}
-
-/** 清除会话历史响应 */
-export interface ClearConversationResponse {
-    code: number;
-    msg: string;
-    data?: {
-        id: string;
-        conversation_id: string;
-    };
-}
+export const RunEvent = {
+    Done: 'done',
+    Error: 'error',
+    Message: 'message',
+}as const
 
 // ============ API 方法 ============
 
 /**
  * 发送聊天消息 (SSE 流式)
  * POST /api/conversation/chat
- * 返回 EventSource 用于接收流式响应
+ * 返回 AbortController 用于取消请求
  */
 export function chat(
     req: AgentRunRequest,
@@ -166,6 +85,7 @@ export function chat(
 
         const decoder = new TextDecoder();
         let buffer = '';
+        let currentEvent = '';
 
         while (true) {
             const { done, value } = await reader.read();
@@ -176,23 +96,42 @@ export function chat(
             buffer = lines.pop() || '';
 
             for (const line of lines) {
-                if (line.startsWith('data:')) {
-                    const dataStr = line.slice(5).trim();
+                const trimmedLine = line.trim();
+
+                if (trimmedLine.startsWith('event:')) {
+                    currentEvent = trimmedLine.slice(6).trim();
+                } else if (trimmedLine.startsWith('data:')) {
+                    const dataStr = trimmedLine.slice(5).trim();
+
+                    if (currentEvent === RunEvent.Done || dataStr === '[DONE]') {
+                        onDone?.();
+                        currentEvent = '';
+                        continue;
+                    }
+
+                    if (currentEvent === RunEvent.Error) {
+                        try {
+                            const errorData = JSON.parse(dataStr);
+                            onError?.(new Error(errorData.msg || errorData.message || 'Unknown error'));
+                        } catch {
+                            onError?.(new Error(dataStr || 'Unknown error'));
+                        }
+                        currentEvent = '';
+                        continue;
+                    }
+
                     if (dataStr) {
                         try {
-                            const data = JSON.parse(dataStr);
+                            const data = JSON.parse(dataStr) as RunStreamResponse;
                             onMessage(data);
                         } catch (e) {
                             console.warn('Failed to parse SSE data:', dataStr);
                         }
                     }
-                } else if (line.startsWith('event:')) {
-                    const event = line.slice(6).trim();
-                    if (event === 'done') {
-                        onDone?.();
-                    } else if (event === 'error') {
-                        // 错误会在下一个 data 行
-                    }
+                    currentEvent = '';
+                } else if (trimmedLine === '') {
+                    // 空行，重置事件类型
+                    currentEvent = '';
                 }
             }
         }
@@ -229,4 +168,20 @@ export async function createConversation(req: CreateConversationRequest): Promis
  */
 export async function clearConversation(req: ClearConversationRequest): Promise<ClearConversationResponse> {
     return httpClient.post<ClearConversationResponse>(`${API_BASE}/clear`, req);
+}
+
+/**
+ * 删除消息
+ * POST /api/conversation/delete_message
+ */
+export async function deleteMessage(req: DeleteMessageRequest): Promise<DeleteMessageResponse> {
+    return httpClient.post<DeleteMessageResponse>(`${API_BASE}/delete_message`, req);
+}
+
+/**
+ * 中断消息生成
+ * POST /api/conversation/break_message
+ */
+export async function breakMessage(req: BreakMessageRequest): Promise<BreakMessageResponse> {
+    return httpClient.post<BreakMessageResponse>(`${API_BASE}/break_message`, req);
 }

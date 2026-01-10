@@ -5,24 +5,25 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IConvert2OpenAPIResponse {
     code?: thrift.Int64;
     msg?: string;
     openapi?: string;
     ai_plugin?: string;
-    plugin_data_format?: __ROOT_NAMESPACE__.PluginDataFormat;
-    duplicate_api_infos?: Array<__ROOT_NAMESPACE__.IDuplicateAPIInfo>;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    plugin_data_format?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginDataFormat;
+    duplicate_api_infos?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo>;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IConvert2OpenAPIResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     openapi?: string;
     ai_plugin?: string;
-    plugin_data_format?: __ROOT_NAMESPACE__.PluginDataFormat;
-    duplicate_api_infos?: Array<__ROOT_NAMESPACE__.IDuplicateAPIInfoArgs>;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    plugin_data_format?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginDataFormat;
+    duplicate_api_infos?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfoArgs>;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const Convert2OpenAPIResponseCodec: thrift.IStructCodec<IConvert2OpenAPIResponseArgs, IConvert2OpenAPIResponse> = {
     encode(args: IConvert2OpenAPIResponseArgs, output: thrift.TProtocol): void {
@@ -64,15 +65,15 @@ export const Convert2OpenAPIResponseCodec: thrift.IStructCodec<IConvert2OpenAPIR
         if (obj.duplicate_api_infos != null) {
             output.writeFieldBegin("duplicate_api_infos", thrift.TType.LIST, 6);
             output.writeListBegin(thrift.TType.STRUCT, obj.duplicate_api_infos.length);
-            obj.duplicate_api_infos.forEach((value_1: __ROOT_NAMESPACE__.IDuplicateAPIInfoArgs): void => {
-                __ROOT_NAMESPACE__.DuplicateAPIInfoCodec.encode(value_1, output);
+            obj.duplicate_api_infos.forEach((value_1: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfoArgs): void => {
+                COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DuplicateAPIInfoCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -128,7 +129,7 @@ export const Convert2OpenAPIResponseCodec: thrift.IStructCodec<IConvert2OpenAPIR
                     break;
                 case 5:
                     if (fieldType === thrift.TType.I32) {
-                        const value_6: __ROOT_NAMESPACE__.PluginDataFormat = input.readI32();
+                        const value_6: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginDataFormat = input.readI32();
                         _args.plugin_data_format = value_6;
                     }
                     else {
@@ -137,11 +138,11 @@ export const Convert2OpenAPIResponseCodec: thrift.IStructCodec<IConvert2OpenAPIR
                     break;
                 case 6:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_7: Array<__ROOT_NAMESPACE__.IDuplicateAPIInfo> = new Array<__ROOT_NAMESPACE__.IDuplicateAPIInfo>();
+                        const value_7: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_8: __ROOT_NAMESPACE__.IDuplicateAPIInfo = __ROOT_NAMESPACE__.DuplicateAPIInfoCodec.decode(input);
+                            const value_8: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DuplicateAPIInfoCodec.decode(input);
                             value_7.push(value_8);
                         }
                         input.readListEnd();
@@ -153,7 +154,7 @@ export const Convert2OpenAPIResponseCodec: thrift.IStructCodec<IConvert2OpenAPIR
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_9: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_9: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_9;
                     }
                     else {
@@ -183,9 +184,9 @@ export class Convert2OpenAPIResponse extends thrift.StructLike implements IConve
     public msg?: string;
     public openapi?: string;
     public ai_plugin?: string;
-    public plugin_data_format?: __ROOT_NAMESPACE__.PluginDataFormat;
-    public duplicate_api_infos?: Array<__ROOT_NAMESPACE__.IDuplicateAPIInfo>;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public plugin_data_format?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginDataFormat;
+    public duplicate_api_infos?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo>;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IConvert2OpenAPIResponseArgs = {}) {
@@ -207,19 +208,19 @@ export class Convert2OpenAPIResponse extends thrift.StructLike implements IConve
             this.ai_plugin = value_13;
         }
         if (args.plugin_data_format != null) {
-            const value_14: __ROOT_NAMESPACE__.PluginDataFormat = args.plugin_data_format;
+            const value_14: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginDataFormat = args.plugin_data_format;
             this.plugin_data_format = value_14;
         }
         if (args.duplicate_api_infos != null) {
-            const value_15: Array<__ROOT_NAMESPACE__.IDuplicateAPIInfo> = new Array<__ROOT_NAMESPACE__.IDuplicateAPIInfo>();
-            args.duplicate_api_infos.forEach((value_17: __ROOT_NAMESPACE__.IDuplicateAPIInfoArgs): void => {
-                const value_18: __ROOT_NAMESPACE__.IDuplicateAPIInfo = new __ROOT_NAMESPACE__.DuplicateAPIInfo(value_17);
+            const value_15: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo>();
+            args.duplicate_api_infos.forEach((value_17: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfoArgs): void => {
+                const value_18: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DuplicateAPIInfo(value_17);
                 value_15.push(value_18);
             });
             this.duplicate_api_infos = value_15;
         }
         if (args.BaseResp != null) {
-            const value_16: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_16: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_16;
         }
     }

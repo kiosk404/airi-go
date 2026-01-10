@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as APP_INTELLIGENCE_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IGetDraftIntelligenceInfoRequest {
     intelligence_id?: thrift.Int64;
-    intelligence_type?: __ROOT_NAMESPACE__.IntelligenceType;
+    intelligence_type?: APP_INTELLIGENCE_COMMON_NS.IntelligenceType;
     version?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IGetDraftIntelligenceInfoRequestArgs {
     intelligence_id?: number | string | thrift.Int64;
-    intelligence_type?: __ROOT_NAMESPACE__.IntelligenceType;
+    intelligence_type?: APP_INTELLIGENCE_COMMON_NS.IntelligenceType;
     version?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const GetDraftIntelligenceInfoRequestCodec: thrift.IStructCodec<IGetDraftIntelligenceInfoRequestArgs, IGetDraftIntelligenceInfoRequest> = {
     encode(args: IGetDraftIntelligenceInfoRequestArgs, output: thrift.TProtocol): void {
@@ -44,7 +45,7 @@ export const GetDraftIntelligenceInfoRequestCodec: thrift.IStructCodec<IGetDraft
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -73,7 +74,7 @@ export const GetDraftIntelligenceInfoRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 2:
                     if (fieldType === thrift.TType.I32) {
-                        const value_2: __ROOT_NAMESPACE__.IntelligenceType = input.readI32();
+                        const value_2: APP_INTELLIGENCE_COMMON_NS.IntelligenceType = input.readI32();
                         _args.intelligence_type = value_2;
                     }
                     else {
@@ -91,7 +92,7 @@ export const GetDraftIntelligenceInfoRequestCodec: thrift.IStructCodec<IGetDraft
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_4: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_4;
                     }
                     else {
@@ -115,9 +116,9 @@ export const GetDraftIntelligenceInfoRequestCodec: thrift.IStructCodec<IGetDraft
 };
 export class GetDraftIntelligenceInfoRequest extends thrift.StructLike implements IGetDraftIntelligenceInfoRequest {
     public intelligence_id?: thrift.Int64;
-    public intelligence_type?: __ROOT_NAMESPACE__.IntelligenceType;
+    public intelligence_type?: APP_INTELLIGENCE_COMMON_NS.IntelligenceType;
     public version?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         intelligence_id: {
@@ -136,7 +137,7 @@ export class GetDraftIntelligenceInfoRequest extends thrift.StructLike implement
             this.intelligence_id = value_5;
         }
         if (args.intelligence_type != null) {
-            const value_6: __ROOT_NAMESPACE__.IntelligenceType = args.intelligence_type;
+            const value_6: APP_INTELLIGENCE_COMMON_NS.IntelligenceType = args.intelligence_type;
             this.intelligence_type = value_6;
         }
         if (args.version != null) {
@@ -144,7 +145,7 @@ export class GetDraftIntelligenceInfoRequest extends thrift.StructLike implement
             this.version = value_7;
         }
         if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_8: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_8;
         }
     }

@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ShortcutCommand from "./ShortcutCommand";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface ICreateShortcutCommandResponse {
     shortcuts?: ShortcutCommand.IShortcutCommand;
     BaseResp: __ROOT_NAMESPACE__.IBaseResp;

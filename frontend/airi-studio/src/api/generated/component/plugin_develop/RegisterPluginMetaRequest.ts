@@ -5,48 +5,49 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as COMPONENT_PLUGIN_DEVELOP_COMMON_NS from "./common";
+import * as BASE_NS from "../../base";
 export interface IRegisterPluginMetaRequest {
     name: string;
     desc: string;
     url?: string;
-    icon: __ROOT_NAMESPACE__.IPluginIcon;
-    auth_type?: __ROOT_NAMESPACE__.AuthorizationType;
-    location?: __ROOT_NAMESPACE__.AuthorizationServiceLocation;
+    icon: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginIcon;
+    auth_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationType;
+    location?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationServiceLocation;
     key?: string;
     service_token?: string;
     oauth_info?: string;
     space_id: thrift.Int64;
-    common_params?: Map<__ROOT_NAMESPACE__.ParameterLocation, Array<__ROOT_NAMESPACE__.IcommonParamSchema>>;
-    creation_method?: __ROOT_NAMESPACE__.CreationMethod;
+    common_params?: Map<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation, Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema>>;
+    creation_method?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     ide_code_runtime?: string;
-    plugin_type?: __ROOT_NAMESPACE__.PluginType;
+    plugin_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType;
     project_id?: thrift.Int64;
     sub_auth_type?: number;
     auth_payload?: string;
     fixed_export_ip?: boolean;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IRegisterPluginMetaRequestArgs {
     name: string;
     desc: string;
     url?: string;
-    icon: __ROOT_NAMESPACE__.IPluginIconArgs;
-    auth_type?: __ROOT_NAMESPACE__.AuthorizationType;
-    location?: __ROOT_NAMESPACE__.AuthorizationServiceLocation;
+    icon: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginIconArgs;
+    auth_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationType;
+    location?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationServiceLocation;
     key?: string;
     service_token?: string;
     oauth_info?: string;
     space_id: number | string | thrift.Int64;
-    common_params?: Map<__ROOT_NAMESPACE__.ParameterLocation, Array<__ROOT_NAMESPACE__.IcommonParamSchemaArgs>>;
-    creation_method?: __ROOT_NAMESPACE__.CreationMethod;
+    common_params?: Map<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation, Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchemaArgs>>;
+    creation_method?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     ide_code_runtime?: string;
-    plugin_type?: __ROOT_NAMESPACE__.PluginType;
+    plugin_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType;
     project_id?: number | string | thrift.Int64;
     sub_auth_type?: number;
     auth_payload?: string;
     fixed_export_ip?: boolean;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPluginMetaRequestArgs, IRegisterPluginMetaRequest> = {
     encode(args: IRegisterPluginMetaRequestArgs, output: thrift.TProtocol): void {
@@ -95,7 +96,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
         }
         if (obj.icon != null) {
             output.writeFieldBegin("icon", thrift.TType.STRUCT, 4);
-            __ROOT_NAMESPACE__.PluginIconCodec.encode(obj.icon, output);
+            COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginIconCodec.encode(obj.icon, output);
             output.writeFieldEnd();
         }
         else {
@@ -137,11 +138,11 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
         if (obj.common_params != null) {
             output.writeFieldBegin("common_params", thrift.TType.MAP, 11);
             output.writeMapBegin(thrift.TType.I32, thrift.TType.LIST, obj.common_params.size);
-            obj.common_params.forEach((value_1: Array<__ROOT_NAMESPACE__.IcommonParamSchemaArgs>, key_1: __ROOT_NAMESPACE__.ParameterLocation): void => {
+            obj.common_params.forEach((value_1: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchemaArgs>, key_1: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation): void => {
                 output.writeI32(key_1);
                 output.writeListBegin(thrift.TType.STRUCT, value_1.length);
-                value_1.forEach((value_2: __ROOT_NAMESPACE__.IcommonParamSchemaArgs): void => {
-                    __ROOT_NAMESPACE__.commonParamSchemaCodec.encode(value_2, output);
+                value_1.forEach((value_2: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchemaArgs): void => {
+                    COMPONENT_PLUGIN_DEVELOP_COMMON_NS.commonParamSchemaCodec.encode(value_2, output);
                 });
                 output.writeListEnd();
             });
@@ -185,7 +186,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -232,7 +233,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
                     break;
                 case 4:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: __ROOT_NAMESPACE__.IPluginIcon = __ROOT_NAMESPACE__.PluginIconCodec.decode(input);
+                        const value_6: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginIcon = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginIconCodec.decode(input);
                         _args.icon = value_6;
                     }
                     else {
@@ -241,7 +242,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
                     break;
                 case 5:
                     if (fieldType === thrift.TType.I32) {
-                        const value_7: __ROOT_NAMESPACE__.AuthorizationType = input.readI32();
+                        const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationType = input.readI32();
                         _args.auth_type = value_7;
                     }
                     else {
@@ -250,7 +251,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
                     break;
                 case 6:
                     if (fieldType === thrift.TType.I32) {
-                        const value_8: __ROOT_NAMESPACE__.AuthorizationServiceLocation = input.readI32();
+                        const value_8: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationServiceLocation = input.readI32();
                         _args.location = value_8;
                     }
                     else {
@@ -295,16 +296,16 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
                     break;
                 case 11:
                     if (fieldType === thrift.TType.MAP) {
-                        const value_13: Map<__ROOT_NAMESPACE__.ParameterLocation, Array<__ROOT_NAMESPACE__.IcommonParamSchema>> = new Map<__ROOT_NAMESPACE__.ParameterLocation, Array<__ROOT_NAMESPACE__.IcommonParamSchema>>();
+                        const value_13: Map<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation, Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema>> = new Map<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation, Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema>>();
                         const metadata_1: thrift.IThriftMap = input.readMapBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const key_2: __ROOT_NAMESPACE__.ParameterLocation = input.readI32();
-                            const value_14: Array<__ROOT_NAMESPACE__.IcommonParamSchema> = new Array<__ROOT_NAMESPACE__.IcommonParamSchema>();
+                            const key_2: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation = input.readI32();
+                            const value_14: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema>();
                             const metadata_2: thrift.IThriftList = input.readListBegin();
                             const size_2: number = metadata_2.size;
                             for (let i_2: number = 0; i_2 < size_2; i_2++) {
-                                const value_15: __ROOT_NAMESPACE__.IcommonParamSchema = __ROOT_NAMESPACE__.commonParamSchemaCodec.decode(input);
+                                const value_15: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema = COMPONENT_PLUGIN_DEVELOP_COMMON_NS.commonParamSchemaCodec.decode(input);
                                 value_14.push(value_15);
                             }
                             input.readListEnd();
@@ -319,7 +320,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
                     break;
                 case 12:
                     if (fieldType === thrift.TType.I32) {
-                        const value_16: __ROOT_NAMESPACE__.CreationMethod = input.readI32();
+                        const value_16: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod = input.readI32();
                         _args.creation_method = value_16;
                     }
                     else {
@@ -337,7 +338,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
                     break;
                 case 14:
                     if (fieldType === thrift.TType.I32) {
-                        const value_18: __ROOT_NAMESPACE__.PluginType = input.readI32();
+                        const value_18: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType = input.readI32();
                         _args.plugin_type = value_18;
                     }
                     else {
@@ -382,7 +383,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_23: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_23: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_23;
                     }
                     else {
@@ -428,22 +429,22 @@ export class RegisterPluginMetaRequest extends thrift.StructLike implements IReg
     public name: string;
     public desc: string;
     public url?: string;
-    public icon: __ROOT_NAMESPACE__.IPluginIcon;
-    public auth_type?: __ROOT_NAMESPACE__.AuthorizationType;
-    public location?: __ROOT_NAMESPACE__.AuthorizationServiceLocation;
+    public icon: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginIcon;
+    public auth_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationType;
+    public location?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationServiceLocation;
     public key?: string;
     public service_token?: string;
     public oauth_info?: string;
     public space_id: thrift.Int64;
-    public common_params?: Map<__ROOT_NAMESPACE__.ParameterLocation, Array<__ROOT_NAMESPACE__.IcommonParamSchema>>;
-    public creation_method?: __ROOT_NAMESPACE__.CreationMethod;
+    public common_params?: Map<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation, Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema>>;
+    public creation_method?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     public ide_code_runtime?: string;
-    public plugin_type?: __ROOT_NAMESPACE__.PluginType;
+    public plugin_type?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType;
     public project_id?: thrift.Int64;
     public sub_auth_type?: number;
     public auth_payload?: string;
     public fixed_export_ip?: boolean;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         space_id: {
@@ -474,18 +475,18 @@ export class RegisterPluginMetaRequest extends thrift.StructLike implements IReg
             this.url = value_26;
         }
         if (args.icon != null) {
-            const value_27: __ROOT_NAMESPACE__.IPluginIcon = new __ROOT_NAMESPACE__.PluginIcon(args.icon);
+            const value_27: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginIcon = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginIcon(args.icon);
             this.icon = value_27;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[icon] is unset!");
         }
         if (args.auth_type != null) {
-            const value_28: __ROOT_NAMESPACE__.AuthorizationType = args.auth_type;
+            const value_28: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationType = args.auth_type;
             this.auth_type = value_28;
         }
         if (args.location != null) {
-            const value_29: __ROOT_NAMESPACE__.AuthorizationServiceLocation = args.location;
+            const value_29: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.AuthorizationServiceLocation = args.location;
             this.location = value_29;
         }
         if (args.key != null) {
@@ -508,20 +509,20 @@ export class RegisterPluginMetaRequest extends thrift.StructLike implements IReg
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
         }
         if (args.common_params != null) {
-            const value_34: Map<__ROOT_NAMESPACE__.ParameterLocation, Array<__ROOT_NAMESPACE__.IcommonParamSchema>> = new Map<__ROOT_NAMESPACE__.ParameterLocation, Array<__ROOT_NAMESPACE__.IcommonParamSchema>>();
-            args.common_params.forEach((value_43: Array<__ROOT_NAMESPACE__.IcommonParamSchemaArgs>, key_3: __ROOT_NAMESPACE__.ParameterLocation): void => {
-                const value_44: Array<__ROOT_NAMESPACE__.IcommonParamSchema> = new Array<__ROOT_NAMESPACE__.IcommonParamSchema>();
-                value_43.forEach((value_45: __ROOT_NAMESPACE__.IcommonParamSchemaArgs): void => {
-                    const value_46: __ROOT_NAMESPACE__.IcommonParamSchema = new __ROOT_NAMESPACE__.commonParamSchema(value_45);
+            const value_34: Map<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation, Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema>> = new Map<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation, Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema>>();
+            args.common_params.forEach((value_43: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchemaArgs>, key_3: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation): void => {
+                const value_44: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema> = new Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema>();
+                value_43.forEach((value_45: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchemaArgs): void => {
+                    const value_46: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IcommonParamSchema = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.commonParamSchema(value_45);
                     value_44.push(value_46);
                 });
-                const key_4: __ROOT_NAMESPACE__.ParameterLocation = key_3;
+                const key_4: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ParameterLocation = key_3;
                 value_34.set(key_4, value_44);
             });
             this.common_params = value_34;
         }
         if (args.creation_method != null) {
-            const value_35: __ROOT_NAMESPACE__.CreationMethod = args.creation_method;
+            const value_35: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod = args.creation_method;
             this.creation_method = value_35;
         }
         if (args.ide_code_runtime != null) {
@@ -529,7 +530,7 @@ export class RegisterPluginMetaRequest extends thrift.StructLike implements IReg
             this.ide_code_runtime = value_36;
         }
         if (args.plugin_type != null) {
-            const value_37: __ROOT_NAMESPACE__.PluginType = args.plugin_type;
+            const value_37: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginType = args.plugin_type;
             this.plugin_type = value_37;
         }
         if (args.project_id != null) {
@@ -549,7 +550,7 @@ export class RegisterPluginMetaRequest extends thrift.StructLike implements IReg
             this.fixed_export_ip = value_41;
         }
         if (args.Base != null) {
-            const value_42: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_42: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_42;
         }
     }

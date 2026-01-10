@@ -5,22 +5,23 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as RESOURCE_COMMON_NS from "./common";
+import * as BASE_NS from "../base";
 export interface ILibraryResourceListResponse {
     code?: thrift.Int64;
     msg?: string;
-    resource_list?: Array<__ROOT_NAMESPACE__.IResourceInfo>;
+    resource_list?: Array<RESOURCE_COMMON_NS.IResourceInfo>;
     cursor?: string;
     has_more?: boolean;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    BaseResp: BASE_NS.IBaseResp;
 }
 export interface ILibraryResourceListResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    resource_list?: Array<__ROOT_NAMESPACE__.IResourceInfoArgs>;
+    resource_list?: Array<RESOURCE_COMMON_NS.IResourceInfoArgs>;
     cursor?: string;
     has_more?: boolean;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    BaseResp: BASE_NS.IBaseRespArgs;
 }
 export const LibraryResourceListResponseCodec: thrift.IStructCodec<ILibraryResourceListResponseArgs, ILibraryResourceListResponse> = {
     encode(args: ILibraryResourceListResponseArgs, output: thrift.TProtocol): void {
@@ -46,8 +47,8 @@ export const LibraryResourceListResponseCodec: thrift.IStructCodec<ILibraryResou
         if (obj.resource_list != null) {
             output.writeFieldBegin("resource_list", thrift.TType.LIST, 3);
             output.writeListBegin(thrift.TType.STRUCT, obj.resource_list.length);
-            obj.resource_list.forEach((value_1: __ROOT_NAMESPACE__.IResourceInfoArgs): void => {
-                __ROOT_NAMESPACE__.ResourceInfoCodec.encode(value_1, output);
+            obj.resource_list.forEach((value_1: RESOURCE_COMMON_NS.IResourceInfoArgs): void => {
+                RESOURCE_COMMON_NS.ResourceInfoCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -64,7 +65,7 @@ export const LibraryResourceListResponseCodec: thrift.IStructCodec<ILibraryResou
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         else {
@@ -105,11 +106,11 @@ export const LibraryResourceListResponseCodec: thrift.IStructCodec<ILibraryResou
                     break;
                 case 3:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_4: Array<__ROOT_NAMESPACE__.IResourceInfo> = new Array<__ROOT_NAMESPACE__.IResourceInfo>();
+                        const value_4: Array<RESOURCE_COMMON_NS.IResourceInfo> = new Array<RESOURCE_COMMON_NS.IResourceInfo>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_5: __ROOT_NAMESPACE__.IResourceInfo = __ROOT_NAMESPACE__.ResourceInfoCodec.decode(input);
+                            const value_5: RESOURCE_COMMON_NS.IResourceInfo = RESOURCE_COMMON_NS.ResourceInfoCodec.decode(input);
                             value_4.push(value_5);
                         }
                         input.readListEnd();
@@ -139,7 +140,7 @@ export const LibraryResourceListResponseCodec: thrift.IStructCodec<ILibraryResou
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_8: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_8: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_8;
                     }
                     else {
@@ -171,10 +172,10 @@ export const LibraryResourceListResponseCodec: thrift.IStructCodec<ILibraryResou
 export class LibraryResourceListResponse extends thrift.StructLike implements ILibraryResourceListResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public resource_list?: Array<__ROOT_NAMESPACE__.IResourceInfo>;
+    public resource_list?: Array<RESOURCE_COMMON_NS.IResourceInfo>;
     public cursor?: string;
     public has_more?: boolean;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public BaseResp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ILibraryResourceListResponseArgs) {
@@ -188,9 +189,9 @@ export class LibraryResourceListResponse extends thrift.StructLike implements IL
             this.msg = value_10;
         }
         if (args.resource_list != null) {
-            const value_11: Array<__ROOT_NAMESPACE__.IResourceInfo> = new Array<__ROOT_NAMESPACE__.IResourceInfo>();
-            args.resource_list.forEach((value_15: __ROOT_NAMESPACE__.IResourceInfoArgs): void => {
-                const value_16: __ROOT_NAMESPACE__.IResourceInfo = new __ROOT_NAMESPACE__.ResourceInfo(value_15);
+            const value_11: Array<RESOURCE_COMMON_NS.IResourceInfo> = new Array<RESOURCE_COMMON_NS.IResourceInfo>();
+            args.resource_list.forEach((value_15: RESOURCE_COMMON_NS.IResourceInfoArgs): void => {
+                const value_16: RESOURCE_COMMON_NS.IResourceInfo = new RESOURCE_COMMON_NS.ResourceInfo(value_15);
                 value_11.push(value_16);
             });
             this.resource_list = value_11;
@@ -204,7 +205,7 @@ export class LibraryResourceListResponse extends thrift.StructLike implements IL
             this.has_more = value_13;
         }
         if (args.BaseResp != null) {
-            const value_14: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_14: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_14;
         }
         else {

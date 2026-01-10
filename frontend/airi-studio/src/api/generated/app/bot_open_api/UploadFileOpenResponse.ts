@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as File from "../../conversation/run/File";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IUploadFileOpenResponse {
     File?: File.IFile;
     code: thrift.Int64;

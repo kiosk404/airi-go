@@ -5,14 +5,15 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as LLM_DOMAIN_RUNTIME_NS from "../domain/runtime";
+import * as BASE_NS from "../../base";
 export interface IChatResponse {
-    message?: __ROOT_NAMESPACE__.IMessage;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    message?: LLM_DOMAIN_RUNTIME_NS.IMessage;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IChatResponseArgs {
-    message?: __ROOT_NAMESPACE__.IMessageArgs;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    message?: LLM_DOMAIN_RUNTIME_NS.IMessageArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const ChatResponseCodec: thrift.IStructCodec<IChatResponseArgs, IChatResponse> = {
     encode(args: IChatResponseArgs, output: thrift.TProtocol): void {
@@ -23,12 +24,12 @@ export const ChatResponseCodec: thrift.IStructCodec<IChatResponseArgs, IChatResp
         output.writeStructBegin("ChatResponse");
         if (obj.message != null) {
             output.writeFieldBegin("message", thrift.TType.STRUCT, 1);
-            __ROOT_NAMESPACE__.MessageCodec.encode(obj.message, output);
+            LLM_DOMAIN_RUNTIME_NS.MessageCodec.encode(obj.message, output);
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -48,7 +49,7 @@ export const ChatResponseCodec: thrift.IStructCodec<IChatResponseArgs, IChatResp
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_1: __ROOT_NAMESPACE__.IMessage = __ROOT_NAMESPACE__.MessageCodec.decode(input);
+                        const value_1: LLM_DOMAIN_RUNTIME_NS.IMessage = LLM_DOMAIN_RUNTIME_NS.MessageCodec.decode(input);
                         _args.message = value_1;
                     }
                     else {
@@ -57,7 +58,7 @@ export const ChatResponseCodec: thrift.IStructCodec<IChatResponseArgs, IChatResp
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_2: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_2: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_2;
                     }
                     else {
@@ -78,18 +79,18 @@ export const ChatResponseCodec: thrift.IStructCodec<IChatResponseArgs, IChatResp
     }
 };
 export class ChatResponse extends thrift.StructLike implements IChatResponse {
-    public message?: __ROOT_NAMESPACE__.IMessage;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public message?: LLM_DOMAIN_RUNTIME_NS.IMessage;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IChatResponseArgs = {}) {
         super();
         if (args.message != null) {
-            const value_3: __ROOT_NAMESPACE__.IMessage = new __ROOT_NAMESPACE__.Message(args.message);
+            const value_3: LLM_DOMAIN_RUNTIME_NS.IMessage = new LLM_DOMAIN_RUNTIME_NS.Message(args.message);
             this.message = value_3;
         }
         if (args.BaseResp != null) {
-            const value_4: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_4: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_4;
         }
     }

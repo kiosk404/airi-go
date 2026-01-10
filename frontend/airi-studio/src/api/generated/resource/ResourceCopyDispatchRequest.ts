@@ -5,22 +5,23 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as RESOURCE_COMMON_NS from "./common";
+import * as BASE_NS from "../base";
 export interface IResourceCopyDispatchRequest {
-    scene?: __ROOT_NAMESPACE__.ResourceCopyScene;
+    scene?: RESOURCE_COMMON_NS.ResourceCopyScene;
     res_id?: thrift.Int64;
-    res_type?: __ROOT_NAMESPACE__.ResType;
+    res_type?: RESOURCE_COMMON_NS.ResType;
     project_id?: thrift.Int64;
     res_name?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    Base?: BASE_NS.IBase;
 }
 export interface IResourceCopyDispatchRequestArgs {
-    scene?: __ROOT_NAMESPACE__.ResourceCopyScene;
+    scene?: RESOURCE_COMMON_NS.ResourceCopyScene;
     res_id?: number | string | thrift.Int64;
-    res_type?: __ROOT_NAMESPACE__.ResType;
+    res_type?: RESOURCE_COMMON_NS.ResType;
     project_id?: number | string | thrift.Int64;
     res_name?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    Base?: BASE_NS.IBaseArgs;
 }
 export const ResourceCopyDispatchRequestCodec: thrift.IStructCodec<IResourceCopyDispatchRequestArgs, IResourceCopyDispatchRequest> = {
     encode(args: IResourceCopyDispatchRequestArgs, output: thrift.TProtocol): void {
@@ -60,7 +61,7 @@ export const ResourceCopyDispatchRequestCodec: thrift.IStructCodec<IResourceCopy
         }
         if (obj.Base != null) {
             output.writeFieldBegin("Base", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseCodec.encode(obj.Base, output);
+            BASE_NS.BaseCodec.encode(obj.Base, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -80,7 +81,7 @@ export const ResourceCopyDispatchRequestCodec: thrift.IStructCodec<IResourceCopy
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.I32) {
-                        const value_1: __ROOT_NAMESPACE__.ResourceCopyScene = input.readI32();
+                        const value_1: RESOURCE_COMMON_NS.ResourceCopyScene = input.readI32();
                         _args.scene = value_1;
                     }
                     else {
@@ -98,7 +99,7 @@ export const ResourceCopyDispatchRequestCodec: thrift.IStructCodec<IResourceCopy
                     break;
                 case 3:
                     if (fieldType === thrift.TType.I32) {
-                        const value_3: __ROOT_NAMESPACE__.ResType = input.readI32();
+                        const value_3: RESOURCE_COMMON_NS.ResType = input.readI32();
                         _args.res_type = value_3;
                     }
                     else {
@@ -125,7 +126,7 @@ export const ResourceCopyDispatchRequestCodec: thrift.IStructCodec<IResourceCopy
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_6: __ROOT_NAMESPACE__.IBase = __ROOT_NAMESPACE__.BaseCodec.decode(input);
+                        const value_6: BASE_NS.IBase = BASE_NS.BaseCodec.decode(input);
                         _args.Base = value_6;
                     }
                     else {
@@ -150,12 +151,12 @@ export const ResourceCopyDispatchRequestCodec: thrift.IStructCodec<IResourceCopy
     }
 };
 export class ResourceCopyDispatchRequest extends thrift.StructLike implements IResourceCopyDispatchRequest {
-    public scene?: __ROOT_NAMESPACE__.ResourceCopyScene;
+    public scene?: RESOURCE_COMMON_NS.ResourceCopyScene;
     public res_id?: thrift.Int64;
-    public res_type?: __ROOT_NAMESPACE__.ResType;
+    public res_type?: RESOURCE_COMMON_NS.ResType;
     public project_id?: thrift.Int64;
     public res_name?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public Base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         res_id: {
@@ -170,7 +171,7 @@ export class ResourceCopyDispatchRequest extends thrift.StructLike implements IR
     constructor(args: IResourceCopyDispatchRequestArgs = {}) {
         super();
         if (args.scene != null) {
-            const value_7: __ROOT_NAMESPACE__.ResourceCopyScene = args.scene;
+            const value_7: RESOURCE_COMMON_NS.ResourceCopyScene = args.scene;
             this.scene = value_7;
         }
         if (args.res_id != null) {
@@ -178,7 +179,7 @@ export class ResourceCopyDispatchRequest extends thrift.StructLike implements IR
             this.res_id = value_8;
         }
         if (args.res_type != null) {
-            const value_9: __ROOT_NAMESPACE__.ResType = args.res_type;
+            const value_9: RESOURCE_COMMON_NS.ResType = args.res_type;
             this.res_type = value_9;
         }
         if (args.project_id != null) {
@@ -190,7 +191,7 @@ export class ResourceCopyDispatchRequest extends thrift.StructLike implements IR
             this.res_name = value_11;
         }
         if (args.Base != null) {
-            const value_12: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
+            const value_12: BASE_NS.IBase = new BASE_NS.Base(args.Base);
             this.Base = value_12;
         }
     }

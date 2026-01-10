@@ -7,7 +7,7 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ResourceType from "./ResourceType";
 import * as BehaviorType from "./BehaviorType";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface IReportUserBehaviorRequest {
     ResourceID: thrift.Int64;
     ResourceType: ResourceType.ResourceType;

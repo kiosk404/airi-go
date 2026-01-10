@@ -5,82 +5,39 @@
 
 import { httpClient } from '@/services/core';
 
+// ============ API 端点 ============
+
 const API_BASE = '/api/draftbot';
 const INTELLIGENCE_API_BASE = '/api/intelligence_api/search';
 
-// ============ 类型定义 ============
 
-/** Intelligence 基础信息 */
-export interface IntelligenceBasicInfo {
-    id: string;
-    name: string;
-    description: string;
-    icon_uri: string;
-    icon_url: string;
-    owner_id: string;
-    create_time: string;
-    update_time: string;
-    status: number;
-    publish_time?: string;
-}
+// ============ 从 IDL 生成的类型中导入 ============
 
-/** Intelligence 数据项 */
-export interface IntelligenceData {
-    basic_info: IntelligenceBasicInfo;
-    type: number;
-    publish_info?: {
-        publish_time?: string;
-    };
-    permission_info?: unknown;
-    owner_info?: unknown;
-    favorite_info?: {
-        is_fav?: boolean;
-    };
-}
+// Intelligence 列表相关
+import type { IGetDraftIntelligenceListRequestArgs } from '@/api/generated/app/intelligence/GetDraftIntelligenceListRequest';
+import type { IGetDraftIntelligenceListResponseArgs } from '@/api/generated/app/intelligence/GetDraftIntelligenceListResponse';
+import type { IDraftIntelligenceListDataArgs } from '@/api/generated/app/intelligence/DraftIntelligenceListData';
+import type { IIntelligenceDataArgs } from '@/api/generated/app/intelligence/IntelligenceData';
+import type { IIntelligenceBasicInfoArgs } from '@/api/generated/app/intelligence/common/IntelligenceBasicInfo';
 
-/** 获取角色列表请求参数 */
-export interface ListCharacterParams {
-    name?: string;
-    size?: number;
-    cursor_id?: string;
-}
+// Bot 创建/删除相关
+import type { IDraftBotCreateRequestArgs } from '@/api/generated/app/developer_api/DraftBotCreateRequest';
+import type { IDraftBotCreateResponseArgs } from '@/api/generated/app/developer_api/DraftBotCreateResponse';
+import type { IDeleteDraftBotRequestArgs } from '@/api/generated/app/developer_api/DeleteDraftBotRequest';
+import type { IDeleteDraftBotResponseArgs } from '@/api/generated/app/developer_api/DeleteDraftBotResponse';
 
-/** 获取角色列表响应 */
-export interface ListCharacterResponse {
-    code: number;
-    msg: string;
-    data: {
-        intelligences: IntelligenceData[];
-        total: number;
-        has_more: boolean;
-        next_cursor_id?: string;
-    };
-}
+// ============ 重新导出类型（简化外部使用） ============
 
-/** 创建角色请求参数 */
-export interface CreateCharacterParams {
-    name: string;
-    description?: string;
-    icon_uri: string;
-}
+export type GetDraftIntelligenceListRequest = IGetDraftIntelligenceListRequestArgs;
+export type GetDraftIntelligenceListResponse = IGetDraftIntelligenceListResponseArgs;
+export type DraftIntelligenceListData = IDraftIntelligenceListDataArgs;
+export type IntelligenceData = IIntelligenceDataArgs;
+export type IntelligenceBasicInfo = IIntelligenceBasicInfoArgs;
 
-/** 创建角色响应 */
-export interface CreateCharacterResponse {
-    code: number;
-    msg: string;
-    data: {
-        bot_id: string;
-    };
-}
-
-export interface DeleteCharacterParams {
-    bot_id: string;
-}
-
-export interface DeleteCharacterResponse {
-    code: number;
-    msg: string;
-}
+export type DraftBotCreateRequest = IDraftBotCreateRequestArgs;
+export type DraftBotCreateResponse = IDraftBotCreateResponseArgs;
+export type DeleteDraftBotRequest = IDeleteDraftBotRequestArgs;
+export type DeleteDraftBotResponse = IDeleteDraftBotResponseArgs;
 
 // ============ API 方法 ============
 
@@ -88,12 +45,12 @@ export interface DeleteCharacterResponse {
  * 获取角色列表
  * POST /api/intelligence_api/search/get_draft_intelligence_list
  */
-export async function listCharacters(params: ListCharacterParams): Promise<ListCharacterResponse> {
-    return httpClient.post<ListCharacterResponse>(`${INTELLIGENCE_API_BASE}/get_draft_intelligence_list`, {
+export async function listCharacters(params: GetDraftIntelligenceListRequest): Promise<GetDraftIntelligenceListResponse> {
+    return httpClient.post<GetDraftIntelligenceListResponse>(`${INTELLIGENCE_API_BASE}/get_draft_intelligence_list`, {
         name: params.name,
         size: params.size || 50,
         cursor_id: params.cursor_id,
-        types: [1], // IntelligenceType.Bot = 1
+        types: params.types || [1], // IntelligenceType.Bot = 1
     });
 }
 
@@ -101,14 +58,14 @@ export async function listCharacters(params: ListCharacterParams): Promise<ListC
  * 创建角色
  * POST /api/draftbot/create
  */
-export async function createCharacter(params: CreateCharacterParams): Promise<CreateCharacterResponse> {
-    return httpClient.post<CreateCharacterResponse>(`${API_BASE}/create`, params);
+export async function createCharacter(params: DraftBotCreateRequest): Promise<DraftBotCreateResponse> {
+    return httpClient.post<DraftBotCreateResponse>(`${API_BASE}/create`, params);
 }
 
 /**
  * 删除角色
  * POST /api/draftbot/delete
  */
-export async function deleteCharacter(params: DeleteCharacterParams): Promise<DeleteCharacterResponse> {
-    return httpClient.post<DeleteCharacterResponse>(`${API_BASE}/delete`, params);
+export async function deleteCharacter(params: DeleteDraftBotRequest): Promise<DeleteDraftBotResponse> {
+    return httpClient.post<DeleteDraftBotResponse>(`${API_BASE}/delete`, params);
 }

@@ -130,7 +130,7 @@ service UserService {
     GetUserInfoByTokenResponse GetUserInfoByToken(1: GetUserInfoByTokenRequest request) (api.get = "/api/foundation/v1/users/session")
 
     // 获取用户信息
-    GetUserInfoResponse GetUserInfo(1: GetUserInfoRequest request)
+    GetUserInfoResponse GetUserInfo(1: GetUserInfoRequest request) (api.get = "/api/foundation/v1/users/:user_id")
     // 批量获取用户信息
-    MGetUserInfoResponse MGetUserInfo(1: MGetUserInfoRequest request)
+    MGetUserInfoResponse MGetUserInfo(1: MGetUserInfoRequest request) (api.get = "/api/foundation/v1/users/mget")
 }

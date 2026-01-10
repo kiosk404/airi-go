@@ -5,18 +5,19 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as FOUNDATION_DOMAIN_USER_NS from "../domain/user";
+import * as BASE_NS from "../../base";
 export interface IUserRegisterResponse {
-    user_info?: __ROOT_NAMESPACE__.IUserInfoDetail;
+    user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail;
     token?: string;
     expire_time?: thrift.Int64;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    BaseResp?: BASE_NS.IBaseResp;
 }
 export interface IUserRegisterResponseArgs {
-    user_info?: __ROOT_NAMESPACE__.IUserInfoDetailArgs;
+    user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetailArgs;
     token?: string;
     expire_time?: number | string | thrift.Int64;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    BaseResp?: BASE_NS.IBaseRespArgs;
 }
 export const UserRegisterResponseCodec: thrift.IStructCodec<IUserRegisterResponseArgs, IUserRegisterResponse> = {
     encode(args: IUserRegisterResponseArgs, output: thrift.TProtocol): void {
@@ -29,7 +30,7 @@ export const UserRegisterResponseCodec: thrift.IStructCodec<IUserRegisterRespons
         output.writeStructBegin("UserRegisterResponse");
         if (obj.user_info != null) {
             output.writeFieldBegin("user_info", thrift.TType.STRUCT, 1);
-            __ROOT_NAMESPACE__.UserInfoDetailCodec.encode(obj.user_info, output);
+            FOUNDATION_DOMAIN_USER_NS.UserInfoDetailCodec.encode(obj.user_info, output);
             output.writeFieldEnd();
         }
         if (obj.token != null) {
@@ -44,7 +45,7 @@ export const UserRegisterResponseCodec: thrift.IStructCodec<IUserRegisterRespons
         }
         if (obj.BaseResp != null) {
             output.writeFieldBegin("BaseResp", thrift.TType.STRUCT, 255);
-            __ROOT_NAMESPACE__.BaseRespCodec.encode(obj.BaseResp, output);
+            BASE_NS.BaseRespCodec.encode(obj.BaseResp, output);
             output.writeFieldEnd();
         }
         output.writeFieldStop();
@@ -64,7 +65,7 @@ export const UserRegisterResponseCodec: thrift.IStructCodec<IUserRegisterRespons
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_1: __ROOT_NAMESPACE__.IUserInfoDetail = __ROOT_NAMESPACE__.UserInfoDetailCodec.decode(input);
+                        const value_1: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail = FOUNDATION_DOMAIN_USER_NS.UserInfoDetailCodec.decode(input);
                         _args.user_info = value_1;
                     }
                     else {
@@ -91,7 +92,7 @@ export const UserRegisterResponseCodec: thrift.IStructCodec<IUserRegisterRespons
                     break;
                 case 255:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_4: __ROOT_NAMESPACE__.IBaseResp = __ROOT_NAMESPACE__.BaseRespCodec.decode(input);
+                        const value_4: BASE_NS.IBaseResp = BASE_NS.BaseRespCodec.decode(input);
                         _args.BaseResp = value_4;
                     }
                     else {
@@ -114,10 +115,10 @@ export const UserRegisterResponseCodec: thrift.IStructCodec<IUserRegisterRespons
     }
 };
 export class UserRegisterResponse extends thrift.StructLike implements IUserRegisterResponse {
-    public user_info?: __ROOT_NAMESPACE__.IUserInfoDetail;
+    public user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail;
     public token?: string;
     public expire_time?: thrift.Int64;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public BaseResp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         token: {
@@ -130,7 +131,7 @@ export class UserRegisterResponse extends thrift.StructLike implements IUserRegi
     constructor(args: IUserRegisterResponseArgs = {}) {
         super();
         if (args.user_info != null) {
-            const value_5: __ROOT_NAMESPACE__.IUserInfoDetail = new __ROOT_NAMESPACE__.UserInfoDetail(args.user_info);
+            const value_5: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail = new FOUNDATION_DOMAIN_USER_NS.UserInfoDetail(args.user_info);
             this.user_info = value_5;
         }
         if (args.token != null) {
@@ -142,7 +143,7 @@ export class UserRegisterResponse extends thrift.StructLike implements IUserRegi
             this.expire_time = value_7;
         }
         if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
             this.BaseResp = value_8;
         }
     }

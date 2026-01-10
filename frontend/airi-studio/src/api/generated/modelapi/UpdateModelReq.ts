@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as Model from "../llm/domain/manage/Model";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface IUpdateModelReq {
     model?: Model.IModel;
     Base?: __ROOT_NAMESPACE__.IBase;

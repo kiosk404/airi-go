@@ -5,7 +5,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 */
 import * as thrift from "@creditkarma/thrift-server-core";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../common";
 export interface IClearConversationCtxRequest {
     conversation_id: thrift.Int64;
     scene?: __ROOT_NAMESPACE__.Scene;

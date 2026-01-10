@@ -297,6 +297,7 @@ func (c *ConversationApplicationService) pullStream(ctx context.Context, sseSend
 		chunk, recvErr := arStream.Recv()
 		if recvErr != nil {
 			if errors.Is(recvErr, io.EOF) {
+				sseSender.Send(ctx, buildDoneEvent(run.RunEventDone))
 				return
 			}
 			sseSender.Send(ctx, buildErrorEvent(errno.ErrConversationAgentRunError, recvErr.Error()))

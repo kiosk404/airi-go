@@ -9,6 +9,7 @@ import (
 func buildDoneEvent(event string) *sse.Event {
 	return &sse.Event{
 		Event: event,
+		Data:  "[DONE]",
 	}
 }
 

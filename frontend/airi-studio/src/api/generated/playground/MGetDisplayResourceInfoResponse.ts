@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as DisplayResourceInfo from "./DisplayResourceInfo";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../base";
 export interface IMGetDisplayResourceInfoResponse {
     ResourceList?: Array<DisplayResourceInfo.IDisplayResourceInfo>;
     BaseResp: __ROOT_NAMESPACE__.IBaseResp;

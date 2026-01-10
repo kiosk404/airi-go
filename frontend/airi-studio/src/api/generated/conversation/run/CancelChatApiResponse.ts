@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ChatV3ChatDetail from "./ChatV3ChatDetail";
-import * as __ROOT_NAMESPACE__ from "./";
+import * as __ROOT_NAMESPACE__ from "../../base";
 export interface ICancelChatApiResponse {
     ChatV3ChatDetail?: ChatV3ChatDetail.IChatV3ChatDetail;
     BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
