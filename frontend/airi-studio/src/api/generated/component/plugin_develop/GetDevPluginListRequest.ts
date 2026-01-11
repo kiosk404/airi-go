@@ -20,7 +20,7 @@ export interface IGetDevPluginListRequest {
     plugin_type_for_filter?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginTypeForFilter;
     project_id?: thrift.Int64;
     plugin_ids?: Array<thrift.Int64>;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IGetDevPluginListRequestArgs {
     status?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginStatus>;
@@ -35,7 +35,7 @@ export interface IGetDevPluginListRequestArgs {
     plugin_type_for_filter?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginTypeForFilter;
     project_id?: number | string | thrift.Int64;
     plugin_ids?: Array<number | string | thrift.Int64>;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginListRequestArgs, IGetDevPluginListRequest> = {
     encode(args: IGetDevPluginListRequestArgs, output: thrift.TProtocol): void {
@@ -52,7 +52,7 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
             plugin_type_for_filter: args.plugin_type_for_filter,
             project_id: (typeof args.project_id === "number" ? new thrift.Int64(args.project_id) : typeof args.project_id === "string" ? thrift.Int64.fromDecimalString(args.project_id) : args.project_id),
             plugin_ids: args.plugin_ids,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetDevPluginListRequest");
         if (obj.status != null) {
@@ -298,7 +298,7 @@ export const GetDevPluginListRequestCodec: thrift.IStructCodec<IGetDevPluginList
                 plugin_type_for_filter: _args.plugin_type_for_filter,
                 project_id: _args.project_id,
                 plugin_ids: _args.plugin_ids,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -319,7 +319,7 @@ export class GetDevPluginListRequest extends thrift.StructLike implements IGetDe
     public plugin_type_for_filter?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginTypeForFilter;
     public project_id?: thrift.Int64;
     public plugin_ids?: Array<thrift.Int64>;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         dev_id: {
@@ -411,9 +411,9 @@ export class GetDevPluginListRequest extends thrift.StructLike implements IGetDe
             });
             this.plugin_ids = value_29;
         }
-        if (args.Base != null) {
-            const value_30: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_30;
+        if (args.base != null) {
+            const value_30: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_30;
         }
     }
     public static read(input: thrift.TProtocol): GetDevPluginListRequest {

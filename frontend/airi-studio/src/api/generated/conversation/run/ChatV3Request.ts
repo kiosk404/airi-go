@@ -9,45 +9,45 @@ import * as EnterMessage from "./EnterMessage";
 import * as CustomConfig from "./CustomConfig";
 import * as ShortcutCommandDetail from "./ShortcutCommandDetail";
 export interface IChatV3Request {
-    BotID: thrift.Int64;
-    ConversationID?: thrift.Int64;
-    User: string;
-    Stream?: boolean;
-    AdditionalMessages?: Array<EnterMessage.IEnterMessage>;
-    CustomVariables?: Map<string, string>;
-    MetaData?: Map<string, string>;
-    CustomConfig?: CustomConfig.ICustomConfig;
-    ExtraParams?: Map<string, string>;
-    ConnectorID?: thrift.Int64;
-    ShortcutCommand?: ShortcutCommandDetail.IShortcutCommandDetail;
+    bot_i_d: thrift.Int64;
+    conversation_i_d?: thrift.Int64;
+    user: string;
+    stream?: boolean;
+    additional_messages?: Array<EnterMessage.IEnterMessage>;
+    custom_variables?: Map<string, string>;
+    meta_data?: Map<string, string>;
+    custom_config?: CustomConfig.ICustomConfig;
+    extra_params?: Map<string, string>;
+    connector_i_d?: thrift.Int64;
+    shortcut_command?: ShortcutCommandDetail.IShortcutCommandDetail;
 }
 export interface IChatV3RequestArgs {
-    BotID: number | string | thrift.Int64;
-    ConversationID?: number | string | thrift.Int64;
-    User: string;
-    Stream?: boolean;
-    AdditionalMessages?: Array<EnterMessage.IEnterMessageArgs>;
-    CustomVariables?: Map<string, string>;
-    MetaData?: Map<string, string>;
-    CustomConfig?: CustomConfig.ICustomConfigArgs;
-    ExtraParams?: Map<string, string>;
-    ConnectorID?: number | string | thrift.Int64;
-    ShortcutCommand?: ShortcutCommandDetail.IShortcutCommandDetailArgs;
+    bot_i_d: number | string | thrift.Int64;
+    conversation_i_d?: number | string | thrift.Int64;
+    user: string;
+    stream?: boolean;
+    additional_messages?: Array<EnterMessage.IEnterMessageArgs>;
+    custom_variables?: Map<string, string>;
+    meta_data?: Map<string, string>;
+    custom_config?: CustomConfig.ICustomConfigArgs;
+    extra_params?: Map<string, string>;
+    connector_i_d?: number | string | thrift.Int64;
+    shortcut_command?: ShortcutCommandDetail.IShortcutCommandDetailArgs;
 }
 export const ChatV3RequestCodec: thrift.IStructCodec<IChatV3RequestArgs, IChatV3Request> = {
     encode(args: IChatV3RequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            BotID: (typeof args.BotID === "number" ? new thrift.Int64(args.BotID) : typeof args.BotID === "string" ? thrift.Int64.fromDecimalString(args.BotID) : args.BotID),
-            ConversationID: (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID),
-            User: args.User,
-            Stream: args.Stream,
-            AdditionalMessages: args.AdditionalMessages,
-            CustomVariables: args.CustomVariables,
-            MetaData: args.MetaData,
-            CustomConfig: args.CustomConfig,
-            ExtraParams: args.ExtraParams,
-            ConnectorID: (typeof args.ConnectorID === "number" ? new thrift.Int64(args.ConnectorID) : typeof args.ConnectorID === "string" ? thrift.Int64.fromDecimalString(args.ConnectorID) : args.ConnectorID),
-            ShortcutCommand: args.ShortcutCommand
+            BotID: (typeof args.bot_i_d === "number" ? new thrift.Int64(args.bot_i_d) : typeof args.bot_i_d === "string" ? thrift.Int64.fromDecimalString(args.bot_i_d) : args.bot_i_d),
+            ConversationID: (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d),
+            User: args.user,
+            Stream: args.stream,
+            AdditionalMessages: args.additional_messages,
+            CustomVariables: args.custom_variables,
+            MetaData: args.meta_data,
+            CustomConfig: args.custom_config,
+            ExtraParams: args.extra_params,
+            ConnectorID: (typeof args.connector_i_d === "number" ? new thrift.Int64(args.connector_i_d) : typeof args.connector_i_d === "string" ? thrift.Int64.fromDecimalString(args.connector_i_d) : args.connector_i_d),
+            ShortcutCommand: args.shortcut_command
         };
         output.writeStructBegin("ChatV3Request");
         if (obj.BotID != null) {
@@ -284,17 +284,17 @@ export const ChatV3RequestCodec: thrift.IStructCodec<IChatV3RequestArgs, IChatV3
         input.readStructEnd();
         if (_args.BotID !== undefined && _args.User !== undefined) {
             return {
-                BotID: _args.BotID,
-                ConversationID: _args.ConversationID,
-                User: _args.User,
-                Stream: _args.Stream,
-                AdditionalMessages: _args.AdditionalMessages,
-                CustomVariables: _args.CustomVariables,
-                MetaData: _args.MetaData,
-                CustomConfig: _args.CustomConfig,
-                ExtraParams: _args.ExtraParams,
-                ConnectorID: _args.ConnectorID,
-                ShortcutCommand: _args.ShortcutCommand
+                bot_i_d: _args.BotID,
+                conversation_i_d: _args.ConversationID,
+                user: _args.User,
+                stream: _args.Stream,
+                additional_messages: _args.AdditionalMessages,
+                custom_variables: _args.CustomVariables,
+                meta_data: _args.MetaData,
+                custom_config: _args.CustomConfig,
+                extra_params: _args.ExtraParams,
+                connector_i_d: _args.ConnectorID,
+                shortcut_command: _args.ShortcutCommand
             };
         }
         else {
@@ -303,126 +303,126 @@ export const ChatV3RequestCodec: thrift.IStructCodec<IChatV3RequestArgs, IChatV3
     }
 };
 export class ChatV3Request extends thrift.StructLike implements IChatV3Request {
-    public BotID: thrift.Int64;
-    public ConversationID?: thrift.Int64;
-    public User: string;
-    public Stream?: boolean;
-    public AdditionalMessages?: Array<EnterMessage.IEnterMessage>;
-    public CustomVariables?: Map<string, string>;
-    public MetaData?: Map<string, string>;
-    public CustomConfig?: CustomConfig.ICustomConfig;
-    public ExtraParams?: Map<string, string>;
-    public ConnectorID?: thrift.Int64;
-    public ShortcutCommand?: ShortcutCommandDetail.IShortcutCommandDetail;
+    public bot_i_d: thrift.Int64;
+    public conversation_i_d?: thrift.Int64;
+    public user: string;
+    public stream?: boolean;
+    public additional_messages?: Array<EnterMessage.IEnterMessage>;
+    public custom_variables?: Map<string, string>;
+    public meta_data?: Map<string, string>;
+    public custom_config?: CustomConfig.ICustomConfig;
+    public extra_params?: Map<string, string>;
+    public connector_i_d?: thrift.Int64;
+    public shortcut_command?: ShortcutCommandDetail.IShortcutCommandDetail;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        BotID: {
+        bot_i_d: {
             'api.body': "bot_id",
             'api.js_conv': "true"
         },
-        ConversationID: {
+        conversation_i_d: {
             'api.query': "conversation_id",
             'api.js_conv': "true"
         },
-        User: {
+        user: {
             'api.body': "user_id"
         },
-        Stream: {
+        stream: {
             'api.body': "stream"
         },
-        AdditionalMessages: {
+        additional_messages: {
             'api.body': "additional_messages"
         },
-        CustomVariables: {
+        custom_variables: {
             'api.body': "custom_variables"
         },
-        MetaData: {
+        meta_data: {
             'api.body': "meta_data"
         },
-        CustomConfig: {
+        custom_config: {
             'api.body': "custom_config"
         },
-        ExtraParams: {
+        extra_params: {
             'api.body': "extra_params"
         },
-        ConnectorID: {
+        connector_i_d: {
             'api.body': "connector_id",
             'api.js_conv': "true"
         },
-        ShortcutCommand: {
+        shortcut_command: {
             'api.body': "shortcut_command"
         }
     };
     constructor(args: IChatV3RequestArgs) {
         super();
-        if (args.BotID != null) {
-            const value_20: thrift.Int64 = (typeof args.BotID === "number" ? new thrift.Int64(args.BotID) : typeof args.BotID === "string" ? thrift.Int64.fromDecimalString(args.BotID) : args.BotID);
-            this.BotID = value_20;
+        if (args.bot_i_d != null) {
+            const value_20: thrift.Int64 = (typeof args.bot_i_d === "number" ? new thrift.Int64(args.bot_i_d) : typeof args.bot_i_d === "string" ? thrift.Int64.fromDecimalString(args.bot_i_d) : args.bot_i_d);
+            this.bot_i_d = value_20;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BotID] is unset!");
         }
-        if (args.ConversationID != null) {
-            const value_21: thrift.Int64 = (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID);
-            this.ConversationID = value_21;
+        if (args.conversation_i_d != null) {
+            const value_21: thrift.Int64 = (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d);
+            this.conversation_i_d = value_21;
         }
-        if (args.User != null) {
-            const value_22: string = args.User;
-            this.User = value_22;
+        if (args.user != null) {
+            const value_22: string = args.user;
+            this.user = value_22;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[User] is unset!");
         }
-        if (args.Stream != null) {
-            const value_23: boolean = args.Stream;
-            this.Stream = value_23;
+        if (args.stream != null) {
+            const value_23: boolean = args.stream;
+            this.stream = value_23;
         }
-        if (args.AdditionalMessages != null) {
+        if (args.additional_messages != null) {
             const value_24: Array<EnterMessage.IEnterMessage> = new Array<EnterMessage.IEnterMessage>();
-            args.AdditionalMessages.forEach((value_31: EnterMessage.IEnterMessageArgs): void => {
+            args.additional_messages.forEach((value_31: EnterMessage.IEnterMessageArgs): void => {
                 const value_32: EnterMessage.IEnterMessage = new EnterMessage.EnterMessage(value_31);
                 value_24.push(value_32);
             });
-            this.AdditionalMessages = value_24;
+            this.additional_messages = value_24;
         }
-        if (args.CustomVariables != null) {
+        if (args.custom_variables != null) {
             const value_25: Map<string, string> = new Map<string, string>();
-            args.CustomVariables.forEach((value_33: string, key_7: string): void => {
+            args.custom_variables.forEach((value_33: string, key_7: string): void => {
                 const value_34: string = value_33;
                 const key_8: string = key_7;
                 value_25.set(key_8, value_34);
             });
-            this.CustomVariables = value_25;
+            this.custom_variables = value_25;
         }
-        if (args.MetaData != null) {
+        if (args.meta_data != null) {
             const value_26: Map<string, string> = new Map<string, string>();
-            args.MetaData.forEach((value_35: string, key_9: string): void => {
+            args.meta_data.forEach((value_35: string, key_9: string): void => {
                 const value_36: string = value_35;
                 const key_10: string = key_9;
                 value_26.set(key_10, value_36);
             });
-            this.MetaData = value_26;
+            this.meta_data = value_26;
         }
-        if (args.CustomConfig != null) {
-            const value_27: CustomConfig.ICustomConfig = new CustomConfig.CustomConfig(args.CustomConfig);
-            this.CustomConfig = value_27;
+        if (args.custom_config != null) {
+            const value_27: CustomConfig.ICustomConfig = new CustomConfig.CustomConfig(args.custom_config);
+            this.custom_config = value_27;
         }
-        if (args.ExtraParams != null) {
+        if (args.extra_params != null) {
             const value_28: Map<string, string> = new Map<string, string>();
-            args.ExtraParams.forEach((value_37: string, key_11: string): void => {
+            args.extra_params.forEach((value_37: string, key_11: string): void => {
                 const value_38: string = value_37;
                 const key_12: string = key_11;
                 value_28.set(key_12, value_38);
             });
-            this.ExtraParams = value_28;
+            this.extra_params = value_28;
         }
-        if (args.ConnectorID != null) {
-            const value_29: thrift.Int64 = (typeof args.ConnectorID === "number" ? new thrift.Int64(args.ConnectorID) : typeof args.ConnectorID === "string" ? thrift.Int64.fromDecimalString(args.ConnectorID) : args.ConnectorID);
-            this.ConnectorID = value_29;
+        if (args.connector_i_d != null) {
+            const value_29: thrift.Int64 = (typeof args.connector_i_d === "number" ? new thrift.Int64(args.connector_i_d) : typeof args.connector_i_d === "string" ? thrift.Int64.fromDecimalString(args.connector_i_d) : args.connector_i_d);
+            this.connector_i_d = value_29;
         }
-        if (args.ShortcutCommand != null) {
-            const value_30: ShortcutCommandDetail.IShortcutCommandDetail = new ShortcutCommandDetail.ShortcutCommandDetail(args.ShortcutCommand);
-            this.ShortcutCommand = value_30;
+        if (args.shortcut_command != null) {
+            const value_30: ShortcutCommandDetail.IShortcutCommandDetail = new ShortcutCommandDetail.ShortcutCommandDetail(args.shortcut_command);
+            this.shortcut_command = value_30;
         }
     }
     public static read(input: thrift.TProtocol): ChatV3Request {

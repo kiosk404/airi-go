@@ -12,7 +12,7 @@ export interface IGetUpdatedAPIsResponse {
     created_api_names?: Array<string>;
     deleted_api_names?: Array<string>;
     updated_api_names?: Array<string>;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IGetUpdatedAPIsResponseArgs {
     code?: number | string | thrift.Int64;
@@ -20,7 +20,7 @@ export interface IGetUpdatedAPIsResponseArgs {
     created_api_names?: Array<string>;
     deleted_api_names?: Array<string>;
     updated_api_names?: Array<string>;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const GetUpdatedAPIsResponseCodec: thrift.IStructCodec<IGetUpdatedAPIsResponseArgs, IGetUpdatedAPIsResponse> = {
     encode(args: IGetUpdatedAPIsResponseArgs, output: thrift.TProtocol): void {
@@ -30,7 +30,7 @@ export const GetUpdatedAPIsResponseCodec: thrift.IStructCodec<IGetUpdatedAPIsRes
             created_api_names: args.created_api_names,
             deleted_api_names: args.deleted_api_names,
             updated_api_names: args.updated_api_names,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetUpdatedAPIsResponse");
         if (obj.code != null) {
@@ -178,7 +178,7 @@ export const GetUpdatedAPIsResponseCodec: thrift.IStructCodec<IGetUpdatedAPIsRes
             created_api_names: _args.created_api_names,
             deleted_api_names: _args.deleted_api_names,
             updated_api_names: _args.updated_api_names,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -188,7 +188,7 @@ export class GetUpdatedAPIsResponse extends thrift.StructLike implements IGetUpd
     public created_api_names?: Array<string>;
     public deleted_api_names?: Array<string>;
     public updated_api_names?: Array<string>;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetUpdatedAPIsResponseArgs = {}) {
@@ -225,9 +225,9 @@ export class GetUpdatedAPIsResponse extends thrift.StructLike implements IGetUpd
             });
             this.updated_api_names = value_17;
         }
-        if (args.BaseResp != null) {
-            const value_18: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_18;
+        if (args.base_resp != null) {
+            const value_18: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_18;
         }
     }
     public static read(input: thrift.TProtocol): GetUpdatedAPIsResponse {

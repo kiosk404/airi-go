@@ -17,7 +17,7 @@ export interface IPublishDraftBotRequest {
     work_info?: WorkInfo.IWorkInfo;
     connector_list?: Map<string, Array<Connector.IConnector>>;
     connectors?: Map<string, Map<string, string>>;
-    botMode?: BotMode.BotMode;
+    bot_mode?: BotMode.BotMode;
     agents?: Array<AgentInfo.IAgentInfo>;
     canvas_data?: string;
     bot_tag_info?: Array<BotTagInfo.IBotTagInfo>;
@@ -33,7 +33,7 @@ export interface IPublishDraftBotRequestArgs {
     work_info?: WorkInfo.IWorkInfoArgs;
     connector_list?: Map<string, Array<Connector.IConnectorArgs>>;
     connectors?: Map<string, Map<string, string>>;
-    botMode?: BotMode.BotMode;
+    bot_mode?: BotMode.BotMode;
     agents?: Array<AgentInfo.IAgentInfoArgs>;
     canvas_data?: string;
     bot_tag_info?: Array<BotTagInfo.IBotTagInfoArgs>;
@@ -51,7 +51,7 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
             work_info: args.work_info,
             connector_list: args.connector_list,
             connectors: args.connectors,
-            botMode: args.botMode,
+            botMode: args.bot_mode,
             agents: args.agents,
             canvas_data: args.canvas_data,
             bot_tag_info: args.bot_tag_info,
@@ -362,7 +362,7 @@ export const PublishDraftBotRequestCodec: thrift.IStructCodec<IPublishDraftBotRe
                 work_info: _args.work_info,
                 connector_list: _args.connector_list,
                 connectors: _args.connectors,
-                botMode: _args.botMode,
+                bot_mode: _args.botMode,
                 agents: _args.agents,
                 canvas_data: _args.canvas_data,
                 bot_tag_info: _args.bot_tag_info,
@@ -384,7 +384,7 @@ export class PublishDraftBotRequest extends thrift.StructLike implements IPublis
     public work_info?: WorkInfo.IWorkInfo;
     public connector_list?: Map<string, Array<Connector.IConnector>>;
     public connectors?: Map<string, Map<string, string>>;
-    public botMode?: BotMode.BotMode;
+    public bot_mode?: BotMode.BotMode;
     public agents?: Array<AgentInfo.IAgentInfo>;
     public canvas_data?: string;
     public bot_tag_info?: Array<BotTagInfo.IBotTagInfo>;
@@ -441,9 +441,9 @@ export class PublishDraftBotRequest extends thrift.StructLike implements IPublis
             });
             this.connectors = value_30;
         }
-        if (args.botMode != null) {
-            const value_31: BotMode.BotMode = args.botMode;
-            this.botMode = value_31;
+        if (args.bot_mode != null) {
+            const value_31: BotMode.BotMode = args.bot_mode;
+            this.bot_mode = value_31;
         }
         if (args.agents != null) {
             const value_32: Array<AgentInfo.IAgentInfo> = new Array<AgentInfo.IAgentInfo>();

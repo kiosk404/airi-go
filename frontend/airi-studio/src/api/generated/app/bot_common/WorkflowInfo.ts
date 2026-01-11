@@ -8,36 +8,36 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as WorkflowMode from "./WorkflowMode";
 import * as PluginParameter from "../../component/plugin_develop/common/PluginParameter";
 export interface IWorkflowInfo {
-    WorkflowId?: thrift.Int64;
-    PluginId?: thrift.Int64;
-    ApiId?: thrift.Int64;
-    FlowMode?: WorkflowMode.WorkflowMode;
-    WorkflowName?: string;
-    Desc?: string;
-    Parameters?: Array<PluginParameter.IPluginParameter>;
-    PluginIcon?: string;
+    workflow_id?: thrift.Int64;
+    plugin_id?: thrift.Int64;
+    api_id?: thrift.Int64;
+    flow_mode?: WorkflowMode.WorkflowMode;
+    workflow_name?: string;
+    desc?: string;
+    parameters?: Array<PluginParameter.IPluginParameter>;
+    plugin_icon?: string;
 }
 export interface IWorkflowInfoArgs {
-    WorkflowId?: number | string | thrift.Int64;
-    PluginId?: number | string | thrift.Int64;
-    ApiId?: number | string | thrift.Int64;
-    FlowMode?: WorkflowMode.WorkflowMode;
-    WorkflowName?: string;
-    Desc?: string;
-    Parameters?: Array<PluginParameter.IPluginParameterArgs>;
-    PluginIcon?: string;
+    workflow_id?: number | string | thrift.Int64;
+    plugin_id?: number | string | thrift.Int64;
+    api_id?: number | string | thrift.Int64;
+    flow_mode?: WorkflowMode.WorkflowMode;
+    workflow_name?: string;
+    desc?: string;
+    parameters?: Array<PluginParameter.IPluginParameterArgs>;
+    plugin_icon?: string;
 }
 export const WorkflowInfoCodec: thrift.IStructCodec<IWorkflowInfoArgs, IWorkflowInfo> = {
     encode(args: IWorkflowInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            WorkflowId: (typeof args.WorkflowId === "number" ? new thrift.Int64(args.WorkflowId) : typeof args.WorkflowId === "string" ? thrift.Int64.fromDecimalString(args.WorkflowId) : args.WorkflowId),
-            PluginId: (typeof args.PluginId === "number" ? new thrift.Int64(args.PluginId) : typeof args.PluginId === "string" ? thrift.Int64.fromDecimalString(args.PluginId) : args.PluginId),
-            ApiId: (typeof args.ApiId === "number" ? new thrift.Int64(args.ApiId) : typeof args.ApiId === "string" ? thrift.Int64.fromDecimalString(args.ApiId) : args.ApiId),
-            FlowMode: args.FlowMode,
-            WorkflowName: args.WorkflowName,
-            Desc: args.Desc,
-            Parameters: args.Parameters,
-            PluginIcon: args.PluginIcon
+            WorkflowId: (typeof args.workflow_id === "number" ? new thrift.Int64(args.workflow_id) : typeof args.workflow_id === "string" ? thrift.Int64.fromDecimalString(args.workflow_id) : args.workflow_id),
+            PluginId: (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id),
+            ApiId: (typeof args.api_id === "number" ? new thrift.Int64(args.api_id) : typeof args.api_id === "string" ? thrift.Int64.fromDecimalString(args.api_id) : args.api_id),
+            FlowMode: args.flow_mode,
+            WorkflowName: args.workflow_name,
+            Desc: args.desc,
+            Parameters: args.parameters,
+            PluginIcon: args.plugin_icon
         };
         output.writeStructBegin("WorkflowInfo");
         if (obj.WorkflowId != null) {
@@ -186,100 +186,100 @@ export const WorkflowInfoCodec: thrift.IStructCodec<IWorkflowInfoArgs, IWorkflow
         }
         input.readStructEnd();
         return {
-            WorkflowId: _args.WorkflowId,
-            PluginId: _args.PluginId,
-            ApiId: _args.ApiId,
-            FlowMode: _args.FlowMode,
-            WorkflowName: _args.WorkflowName,
-            Desc: _args.Desc,
-            Parameters: _args.Parameters,
-            PluginIcon: _args.PluginIcon
+            workflow_id: _args.WorkflowId,
+            plugin_id: _args.PluginId,
+            api_id: _args.ApiId,
+            flow_mode: _args.FlowMode,
+            workflow_name: _args.WorkflowName,
+            desc: _args.Desc,
+            parameters: _args.Parameters,
+            plugin_icon: _args.PluginIcon
         };
     }
 };
 export class WorkflowInfo extends thrift.StructLike implements IWorkflowInfo {
-    public WorkflowId?: thrift.Int64;
-    public PluginId?: thrift.Int64;
-    public ApiId?: thrift.Int64;
-    public FlowMode?: WorkflowMode.WorkflowMode;
-    public WorkflowName?: string;
-    public Desc?: string;
-    public Parameters?: Array<PluginParameter.IPluginParameter>;
-    public PluginIcon?: string;
+    public workflow_id?: thrift.Int64;
+    public plugin_id?: thrift.Int64;
+    public api_id?: thrift.Int64;
+    public flow_mode?: WorkflowMode.WorkflowMode;
+    public workflow_name?: string;
+    public desc?: string;
+    public parameters?: Array<PluginParameter.IPluginParameter>;
+    public plugin_icon?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        WorkflowId: {
+        workflow_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "workflow_id"
         },
-        PluginId: {
+        plugin_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "plugin_id"
         },
-        ApiId: {
+        api_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "api_id"
         },
-        FlowMode: {
+        flow_mode: {
             'agw.js_conv': "str",
             'api.body': "flow_mode"
         },
-        WorkflowName: {
+        workflow_name: {
             'api.body': "workflow_name"
         },
-        Desc: {
+        desc: {
             'api.body': "desc",
             'api.body': "desc"
         },
-        Parameters: {
+        parameters: {
             'api.body': "parameters",
             'api.body': "parameters"
         },
-        PluginIcon: {
+        plugin_icon: {
             'api.body': "plugin_icon",
             'api.body': "plugin_icon"
         }
     };
     constructor(args: IWorkflowInfoArgs = {}) {
         super();
-        if (args.WorkflowId != null) {
-            const value_11: thrift.Int64 = (typeof args.WorkflowId === "number" ? new thrift.Int64(args.WorkflowId) : typeof args.WorkflowId === "string" ? thrift.Int64.fromDecimalString(args.WorkflowId) : args.WorkflowId);
-            this.WorkflowId = value_11;
+        if (args.workflow_id != null) {
+            const value_11: thrift.Int64 = (typeof args.workflow_id === "number" ? new thrift.Int64(args.workflow_id) : typeof args.workflow_id === "string" ? thrift.Int64.fromDecimalString(args.workflow_id) : args.workflow_id);
+            this.workflow_id = value_11;
         }
-        if (args.PluginId != null) {
-            const value_12: thrift.Int64 = (typeof args.PluginId === "number" ? new thrift.Int64(args.PluginId) : typeof args.PluginId === "string" ? thrift.Int64.fromDecimalString(args.PluginId) : args.PluginId);
-            this.PluginId = value_12;
+        if (args.plugin_id != null) {
+            const value_12: thrift.Int64 = (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id);
+            this.plugin_id = value_12;
         }
-        if (args.ApiId != null) {
-            const value_13: thrift.Int64 = (typeof args.ApiId === "number" ? new thrift.Int64(args.ApiId) : typeof args.ApiId === "string" ? thrift.Int64.fromDecimalString(args.ApiId) : args.ApiId);
-            this.ApiId = value_13;
+        if (args.api_id != null) {
+            const value_13: thrift.Int64 = (typeof args.api_id === "number" ? new thrift.Int64(args.api_id) : typeof args.api_id === "string" ? thrift.Int64.fromDecimalString(args.api_id) : args.api_id);
+            this.api_id = value_13;
         }
-        if (args.FlowMode != null) {
-            const value_14: WorkflowMode.WorkflowMode = args.FlowMode;
-            this.FlowMode = value_14;
+        if (args.flow_mode != null) {
+            const value_14: WorkflowMode.WorkflowMode = args.flow_mode;
+            this.flow_mode = value_14;
         }
-        if (args.WorkflowName != null) {
-            const value_15: string = args.WorkflowName;
-            this.WorkflowName = value_15;
+        if (args.workflow_name != null) {
+            const value_15: string = args.workflow_name;
+            this.workflow_name = value_15;
         }
-        if (args.Desc != null) {
-            const value_16: string = args.Desc;
-            this.Desc = value_16;
+        if (args.desc != null) {
+            const value_16: string = args.desc;
+            this.desc = value_16;
         }
-        if (args.Parameters != null) {
+        if (args.parameters != null) {
             const value_17: Array<PluginParameter.IPluginParameter> = new Array<PluginParameter.IPluginParameter>();
-            args.Parameters.forEach((value_19: PluginParameter.IPluginParameterArgs): void => {
+            args.parameters.forEach((value_19: PluginParameter.IPluginParameterArgs): void => {
                 const value_20: PluginParameter.IPluginParameter = new PluginParameter.PluginParameter(value_19);
                 value_17.push(value_20);
             });
-            this.Parameters = value_17;
+            this.parameters = value_17;
         }
-        if (args.PluginIcon != null) {
-            const value_18: string = args.PluginIcon;
-            this.PluginIcon = value_18;
+        if (args.plugin_icon != null) {
+            const value_18: string = args.plugin_icon;
+            this.plugin_icon = value_18;
         }
     }
     public static read(input: thrift.TProtocol): WorkflowInfo {

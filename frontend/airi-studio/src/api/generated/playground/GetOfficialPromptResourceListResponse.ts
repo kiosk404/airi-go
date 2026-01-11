@@ -8,24 +8,24 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as PromptResource from "./PromptResource";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetOfficialPromptResourceListResponse {
-    PromptResourceList?: Array<PromptResource.IPromptResource>;
+    prompt_resource_list?: Array<PromptResource.IPromptResource>;
     code: thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IGetOfficialPromptResourceListResponseArgs {
-    PromptResourceList?: Array<PromptResource.IPromptResourceArgs>;
+    prompt_resource_list?: Array<PromptResource.IPromptResourceArgs>;
     code: number | string | thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const GetOfficialPromptResourceListResponseCodec: thrift.IStructCodec<IGetOfficialPromptResourceListResponseArgs, IGetOfficialPromptResourceListResponse> = {
     encode(args: IGetOfficialPromptResourceListResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            PromptResourceList: args.PromptResourceList,
+            PromptResourceList: args.prompt_resource_list,
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetOfficialPromptResourceListResponse");
         if (obj.PromptResourceList != null) {
@@ -128,10 +128,10 @@ export const GetOfficialPromptResourceListResponseCodec: thrift.IStructCodec<IGe
         input.readStructEnd();
         if (_args.code !== undefined && _args.msg !== undefined && _args.BaseResp !== undefined) {
             return {
-                PromptResourceList: _args.PromptResourceList,
+                prompt_resource_list: _args.PromptResourceList,
                 code: _args.code,
                 msg: _args.msg,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -140,25 +140,25 @@ export const GetOfficialPromptResourceListResponseCodec: thrift.IStructCodec<IGe
     }
 };
 export class GetOfficialPromptResourceListResponse extends thrift.StructLike implements IGetOfficialPromptResourceListResponse {
-    public PromptResourceList?: Array<PromptResource.IPromptResource>;
+    public prompt_resource_list?: Array<PromptResource.IPromptResource>;
     public code: thrift.Int64;
     public msg: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        PromptResourceList: {
+        prompt_resource_list: {
             'api.body': "data"
         }
     };
     constructor(args: IGetOfficialPromptResourceListResponseArgs) {
         super();
-        if (args.PromptResourceList != null) {
+        if (args.prompt_resource_list != null) {
             const value_7: Array<PromptResource.IPromptResource> = new Array<PromptResource.IPromptResource>();
-            args.PromptResourceList.forEach((value_11: PromptResource.IPromptResourceArgs): void => {
+            args.prompt_resource_list.forEach((value_11: PromptResource.IPromptResourceArgs): void => {
                 const value_12: PromptResource.IPromptResource = new PromptResource.PromptResource(value_11);
                 value_7.push(value_12);
             });
-            this.PromptResourceList = value_7;
+            this.prompt_resource_list = value_7;
         }
         if (args.code != null) {
             const value_8: thrift.Int64 = (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code);
@@ -174,9 +174,9 @@ export class GetOfficialPromptResourceListResponse extends thrift.StructLike imp
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[msg] is unset!");
         }
-        if (args.BaseResp != null) {
-            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_10;
+        if (args.base_resp != null) {
+            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_10;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

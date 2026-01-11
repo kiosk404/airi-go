@@ -6,24 +6,24 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IPromptResource {
-    ID?: thrift.Int64;
-    Name?: string;
-    Description?: string;
-    PromptText?: string;
+    i_d?: thrift.Int64;
+    name?: string;
+    description?: string;
+    prompt_text?: string;
 }
 export interface IPromptResourceArgs {
-    ID?: number | string | thrift.Int64;
-    Name?: string;
-    Description?: string;
-    PromptText?: string;
+    i_d?: number | string | thrift.Int64;
+    name?: string;
+    description?: string;
+    prompt_text?: string;
 }
 export const PromptResourceCodec: thrift.IStructCodec<IPromptResourceArgs, IPromptResource> = {
     encode(args: IPromptResourceArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ID: (typeof args.ID === "number" ? new thrift.Int64(args.ID) : typeof args.ID === "string" ? thrift.Int64.fromDecimalString(args.ID) : args.ID),
-            Name: args.Name,
-            Description: args.Description,
-            PromptText: args.PromptText
+            ID: (typeof args.i_d === "number" ? new thrift.Int64(args.i_d) : typeof args.i_d === "string" ? thrift.Int64.fromDecimalString(args.i_d) : args.i_d),
+            Name: args.name,
+            Description: args.description,
+            PromptText: args.prompt_text
         };
         output.writeStructBegin("PromptResource");
         if (obj.ID != null) {
@@ -105,52 +105,52 @@ export const PromptResourceCodec: thrift.IStructCodec<IPromptResourceArgs, IProm
         }
         input.readStructEnd();
         return {
-            ID: _args.ID,
-            Name: _args.Name,
-            Description: _args.Description,
-            PromptText: _args.PromptText
+            i_d: _args.ID,
+            name: _args.Name,
+            description: _args.Description,
+            prompt_text: _args.PromptText
         };
     }
 };
 export class PromptResource extends thrift.StructLike implements IPromptResource {
-    public ID?: thrift.Int64;
-    public Name?: string;
-    public Description?: string;
-    public PromptText?: string;
+    public i_d?: thrift.Int64;
+    public name?: string;
+    public description?: string;
+    public prompt_text?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ID: {
+        i_d: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "id"
         },
-        Name: {
+        name: {
             'api.body': "name"
         },
-        Description: {
+        description: {
             'api.body': "description"
         },
-        PromptText: {
+        prompt_text: {
             'api.body': "prompt_text"
         }
     };
     constructor(args: IPromptResourceArgs = {}) {
         super();
-        if (args.ID != null) {
-            const value_5: thrift.Int64 = (typeof args.ID === "number" ? new thrift.Int64(args.ID) : typeof args.ID === "string" ? thrift.Int64.fromDecimalString(args.ID) : args.ID);
-            this.ID = value_5;
+        if (args.i_d != null) {
+            const value_5: thrift.Int64 = (typeof args.i_d === "number" ? new thrift.Int64(args.i_d) : typeof args.i_d === "string" ? thrift.Int64.fromDecimalString(args.i_d) : args.i_d);
+            this.i_d = value_5;
         }
-        if (args.Name != null) {
-            const value_6: string = args.Name;
-            this.Name = value_6;
+        if (args.name != null) {
+            const value_6: string = args.name;
+            this.name = value_6;
         }
-        if (args.Description != null) {
-            const value_7: string = args.Description;
-            this.Description = value_7;
+        if (args.description != null) {
+            const value_7: string = args.description;
+            this.description = value_7;
         }
-        if (args.PromptText != null) {
-            const value_8: string = args.PromptText;
-            this.PromptText = value_8;
+        if (args.prompt_text != null) {
+            const value_8: string = args.prompt_text;
+            this.prompt_text = value_8;
         }
     }
     public static read(input: thrift.TProtocol): PromptResource {

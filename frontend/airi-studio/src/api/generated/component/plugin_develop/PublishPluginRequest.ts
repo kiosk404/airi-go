@@ -12,7 +12,7 @@ export interface IPublishPluginRequest {
     privacy_info?: string;
     version_name?: string;
     version_desc?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IPublishPluginRequestArgs {
     plugin_id: number | string | thrift.Int64;
@@ -20,7 +20,7 @@ export interface IPublishPluginRequestArgs {
     privacy_info?: string;
     version_name?: string;
     version_desc?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const PublishPluginRequestCodec: thrift.IStructCodec<IPublishPluginRequestArgs, IPublishPluginRequest> = {
     encode(args: IPublishPluginRequestArgs, output: thrift.TProtocol): void {
@@ -30,7 +30,7 @@ export const PublishPluginRequestCodec: thrift.IStructCodec<IPublishPluginReques
             privacy_info: args.privacy_info,
             version_name: args.version_name,
             version_desc: args.version_desc,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("PublishPluginRequest");
         if (obj.plugin_id != null) {
@@ -149,7 +149,7 @@ export const PublishPluginRequestCodec: thrift.IStructCodec<IPublishPluginReques
                 privacy_info: _args.privacy_info,
                 version_name: _args.version_name,
                 version_desc: _args.version_desc,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -163,7 +163,7 @@ export class PublishPluginRequest extends thrift.StructLike implements IPublishP
     public privacy_info?: string;
     public version_name?: string;
     public version_desc?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -195,9 +195,9 @@ export class PublishPluginRequest extends thrift.StructLike implements IPublishP
             const value_11: string = args.version_desc;
             this.version_desc = value_11;
         }
-        if (args.Base != null) {
-            const value_12: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_12;
+        if (args.base != null) {
+            const value_12: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_12;
         }
     }
     public static read(input: thrift.TProtocol): PublishPluginRequest {

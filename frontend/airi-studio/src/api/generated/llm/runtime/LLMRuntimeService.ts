@@ -361,7 +361,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public Chat(req: ChatRequest.IChatRequestArgs, context?: Context): Promise<ChatResponse.IChatResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("Chat", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("Chat", thrift.MessageType.CALL, this.increment_request_id());
         const args: IChat__ArgsArgs = { req };
         Chat__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -399,7 +399,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ChatStream(req: ChatRequest.IChatRequestArgs, context?: Context): Promise<ChatResponse.IChatResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ChatStream", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ChatStream", thrift.MessageType.CALL, this.increment_request_id());
         const args: IChatStream__ArgsArgs = { req };
         ChatStream__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -461,11 +461,11 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_Chat": {
-                    resolve(this.process_Chat(requestId, input, output, context));
+                    resolve(this.process__chat(requestId, input, output, context));
                     break;
                 }
                 case "process_ChatStream": {
-                    resolve(this.process_ChatStream(requestId, input, output, context));
+                    resolve(this.process__chat_stream(requestId, input, output, context));
                     break;
                 }
                 default: {

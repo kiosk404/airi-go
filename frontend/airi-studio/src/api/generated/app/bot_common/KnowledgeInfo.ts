@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IKnowledgeInfo {
-    Id?: string;
-    Name?: string;
+    id?: string;
+    name?: string;
 }
 export interface IKnowledgeInfoArgs {
-    Id?: string;
-    Name?: string;
+    id?: string;
+    name?: string;
 }
 export const KnowledgeInfoCodec: thrift.IStructCodec<IKnowledgeInfoArgs, IKnowledgeInfo> = {
     encode(args: IKnowledgeInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Id: args.Id,
-            Name: args.Name
+            Id: args.id,
+            Name: args.name
         };
         output.writeStructBegin("KnowledgeInfo");
         if (obj.Id != null) {
@@ -71,32 +71,32 @@ export const KnowledgeInfoCodec: thrift.IStructCodec<IKnowledgeInfoArgs, IKnowle
         }
         input.readStructEnd();
         return {
-            Id: _args.Id,
-            Name: _args.Name
+            id: _args.Id,
+            name: _args.Name
         };
     }
 };
 export class KnowledgeInfo extends thrift.StructLike implements IKnowledgeInfo {
-    public Id?: string;
-    public Name?: string;
+    public id?: string;
+    public name?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Id: {
+        id: {
             'api.body': "id"
         },
-        Name: {
+        name: {
             'api.body': "name"
         }
     };
     constructor(args: IKnowledgeInfoArgs = {}) {
         super();
-        if (args.Id != null) {
-            const value_3: string = args.Id;
-            this.Id = value_3;
+        if (args.id != null) {
+            const value_3: string = args.id;
+            this.id = value_3;
         }
-        if (args.Name != null) {
-            const value_4: string = args.Name;
-            this.Name = value_4;
+        if (args.name != null) {
+            const value_4: string = args.name;
+            this.name = value_4;
         }
     }
     public static read(input: thrift.TProtocol): KnowledgeInfo {

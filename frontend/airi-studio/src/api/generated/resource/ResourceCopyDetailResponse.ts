@@ -11,13 +11,13 @@ export interface IResourceCopyDetailResponse {
     code?: thrift.Int64;
     msg?: string;
     task_detail?: RESOURCE_COMMON_NS.IResourceCopyTaskDetail;
-    BaseResp: BASE_NS.IBaseResp;
+    base_resp: BASE_NS.IBaseResp;
 }
 export interface IResourceCopyDetailResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     task_detail?: RESOURCE_COMMON_NS.IResourceCopyTaskDetailArgs;
-    BaseResp: BASE_NS.IBaseRespArgs;
+    base_resp: BASE_NS.IBaseRespArgs;
 }
 export const ResourceCopyDetailResponseCodec: thrift.IStructCodec<IResourceCopyDetailResponseArgs, IResourceCopyDetailResponse> = {
     encode(args: IResourceCopyDetailResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const ResourceCopyDetailResponseCodec: thrift.IStructCodec<IResourceCopyD
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             task_detail: args.task_detail,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("ResourceCopyDetailResponse");
         if (obj.code != null) {
@@ -114,7 +114,7 @@ export const ResourceCopyDetailResponseCodec: thrift.IStructCodec<IResourceCopyD
                 code: _args.code,
                 msg: _args.msg,
                 task_detail: _args.task_detail,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -126,7 +126,7 @@ export class ResourceCopyDetailResponse extends thrift.StructLike implements IRe
     public code?: thrift.Int64;
     public msg?: string;
     public task_detail?: RESOURCE_COMMON_NS.IResourceCopyTaskDetail;
-    public BaseResp: BASE_NS.IBaseResp;
+    public base_resp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IResourceCopyDetailResponseArgs) {
@@ -143,9 +143,9 @@ export class ResourceCopyDetailResponse extends thrift.StructLike implements IRe
             const value_7: RESOURCE_COMMON_NS.IResourceCopyTaskDetail = new RESOURCE_COMMON_NS.ResourceCopyTaskDetail(args.task_detail);
             this.task_detail = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface ILogoutResponse {
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface ILogoutResponseArgs {
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const LogoutResponseCodec: thrift.IStructCodec<ILogoutResponseArgs, ILogoutResponse> = {
     encode(args: ILogoutResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("LogoutResponse");
         if (obj.BaseResp != null) {
@@ -55,19 +55,19 @@ export const LogoutResponseCodec: thrift.IStructCodec<ILogoutResponseArgs, ILogo
         }
         input.readStructEnd();
         return {
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
 export class LogoutResponse extends thrift.StructLike implements ILogoutResponse {
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ILogoutResponseArgs = {}) {
         super();
-        if (args.BaseResp != null) {
-            const value_2: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_2;
+        if (args.base_resp != null) {
+            const value_2: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_2;
         }
     }
     public static read(input: thrift.TProtocol): LogoutResponse {

@@ -7,27 +7,27 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as FieldItem from "./FieldItem";
 export interface ITableDetail {
-    TableId?: string;
-    TableName?: string;
-    TableDesc?: string;
-    FieldList?: Array<FieldItem.IFieldItem>;
-    PromptDisabled?: boolean;
+    table_id?: string;
+    table_name?: string;
+    table_desc?: string;
+    field_list?: Array<FieldItem.IFieldItem>;
+    prompt_disabled?: boolean;
 }
 export interface ITableDetailArgs {
-    TableId?: string;
-    TableName?: string;
-    TableDesc?: string;
-    FieldList?: Array<FieldItem.IFieldItemArgs>;
-    PromptDisabled?: boolean;
+    table_id?: string;
+    table_name?: string;
+    table_desc?: string;
+    field_list?: Array<FieldItem.IFieldItemArgs>;
+    prompt_disabled?: boolean;
 }
 export const TableDetailCodec: thrift.IStructCodec<ITableDetailArgs, ITableDetail> = {
     encode(args: ITableDetailArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            TableId: args.TableId,
-            TableName: args.TableName,
-            TableDesc: args.TableDesc,
-            FieldList: args.FieldList,
-            PromptDisabled: args.PromptDisabled
+            TableId: args.table_id,
+            TableName: args.table_name,
+            TableDesc: args.table_desc,
+            FieldList: args.field_list,
+            PromptDisabled: args.prompt_disabled
         };
         output.writeStructBegin("TableDetail");
         if (obj.TableId != null) {
@@ -134,51 +134,51 @@ export const TableDetailCodec: thrift.IStructCodec<ITableDetailArgs, ITableDetai
         }
         input.readStructEnd();
         return {
-            TableId: _args.TableId,
-            TableName: _args.TableName,
-            TableDesc: _args.TableDesc,
-            FieldList: _args.FieldList,
-            PromptDisabled: _args.PromptDisabled
+            table_id: _args.TableId,
+            table_name: _args.TableName,
+            table_desc: _args.TableDesc,
+            field_list: _args.FieldList,
+            prompt_disabled: _args.PromptDisabled
         };
     }
 };
 export class TableDetail extends thrift.StructLike implements ITableDetail {
-    public TableId?: string;
-    public TableName?: string;
-    public TableDesc?: string;
-    public FieldList?: Array<FieldItem.IFieldItem>;
-    public PromptDisabled?: boolean;
+    public table_id?: string;
+    public table_name?: string;
+    public table_desc?: string;
+    public field_list?: Array<FieldItem.IFieldItem>;
+    public prompt_disabled?: boolean;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        PromptDisabled: {
+        prompt_disabled: {
             'api.body': "prompt_disabled"
         }
     };
     constructor(args: ITableDetailArgs = {}) {
         super();
-        if (args.TableId != null) {
-            const value_8: string = args.TableId;
-            this.TableId = value_8;
+        if (args.table_id != null) {
+            const value_8: string = args.table_id;
+            this.table_id = value_8;
         }
-        if (args.TableName != null) {
-            const value_9: string = args.TableName;
-            this.TableName = value_9;
+        if (args.table_name != null) {
+            const value_9: string = args.table_name;
+            this.table_name = value_9;
         }
-        if (args.TableDesc != null) {
-            const value_10: string = args.TableDesc;
-            this.TableDesc = value_10;
+        if (args.table_desc != null) {
+            const value_10: string = args.table_desc;
+            this.table_desc = value_10;
         }
-        if (args.FieldList != null) {
+        if (args.field_list != null) {
             const value_11: Array<FieldItem.IFieldItem> = new Array<FieldItem.IFieldItem>();
-            args.FieldList.forEach((value_13: FieldItem.IFieldItemArgs): void => {
+            args.field_list.forEach((value_13: FieldItem.IFieldItemArgs): void => {
                 const value_14: FieldItem.IFieldItem = new FieldItem.FieldItem(value_13);
                 value_11.push(value_14);
             });
-            this.FieldList = value_11;
+            this.field_list = value_11;
         }
-        if (args.PromptDisabled != null) {
-            const value_12: boolean = args.PromptDisabled;
-            this.PromptDisabled = value_12;
+        if (args.prompt_disabled != null) {
+            const value_12: boolean = args.prompt_disabled;
+            this.prompt_disabled = value_12;
         }
     }
     public static read(input: thrift.TProtocol): TableDetail {

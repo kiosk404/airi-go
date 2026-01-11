@@ -10,19 +10,19 @@ import * as __ROOT_NAMESPACE__ from "../base";
 export interface ICreateShortcutCommandRequest {
     object_id?: string;
     shortcuts?: ShortcutCommand.IShortcutCommand;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface ICreateShortcutCommandRequestArgs {
     object_id?: string;
     shortcuts?: ShortcutCommand.IShortcutCommandArgs;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const CreateShortcutCommandRequestCodec: thrift.IStructCodec<ICreateShortcutCommandRequestArgs, ICreateShortcutCommandRequest> = {
     encode(args: ICreateShortcutCommandRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             object_id: args.object_id,
             shortcuts: args.shortcuts,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("CreateShortcutCommandRequest");
         if (obj.object_id != null) {
@@ -92,14 +92,14 @@ export const CreateShortcutCommandRequestCodec: thrift.IStructCodec<ICreateShort
         return {
             object_id: _args.object_id,
             shortcuts: _args.shortcuts,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class CreateShortcutCommandRequest extends thrift.StructLike implements ICreateShortcutCommandRequest {
     public object_id?: string;
     public shortcuts?: ShortcutCommand.IShortcutCommand;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICreateShortcutCommandRequestArgs = {}) {
@@ -112,9 +112,9 @@ export class CreateShortcutCommandRequest extends thrift.StructLike implements I
             const value_5: ShortcutCommand.IShortcutCommand = new ShortcutCommand.ShortcutCommand(args.shortcuts);
             this.shortcuts = value_5;
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): CreateShortcutCommandRequest {

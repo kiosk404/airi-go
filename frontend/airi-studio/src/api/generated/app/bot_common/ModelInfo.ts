@@ -9,42 +9,42 @@ import * as ShortMemoryPolicy from "./ShortMemoryPolicy";
 import * as ModelResponseFormat from "./ModelResponseFormat";
 import * as ModelStyle from "./ModelStyle";
 export interface IModelInfo {
-    ModelId?: thrift.Int64;
-    Temperature?: number;
-    MaxTokens?: number;
-    TopP?: number;
-    FrequencyPenalty?: number;
-    PresencePenalty?: number;
-    ShortMemoryPolicy?: ShortMemoryPolicy.IShortMemoryPolicy;
-    TopK?: number;
-    ResponseFormat?: ModelResponseFormat.ModelResponseFormat;
-    ModelStyle?: ModelStyle.ModelStyle;
+    model_id?: thrift.Int64;
+    temperature?: number;
+    max_tokens?: number;
+    top_p?: number;
+    frequency_penalty?: number;
+    presence_penalty?: number;
+    short_memory_policy?: ShortMemoryPolicy.IShortMemoryPolicy;
+    top_k?: number;
+    response_format?: ModelResponseFormat.ModelResponseFormat;
+    model_style?: ModelStyle.ModelStyle;
 }
 export interface IModelInfoArgs {
-    ModelId?: number | string | thrift.Int64;
-    Temperature?: number;
-    MaxTokens?: number;
-    TopP?: number;
-    FrequencyPenalty?: number;
-    PresencePenalty?: number;
-    ShortMemoryPolicy?: ShortMemoryPolicy.IShortMemoryPolicyArgs;
-    TopK?: number;
-    ResponseFormat?: ModelResponseFormat.ModelResponseFormat;
-    ModelStyle?: ModelStyle.ModelStyle;
+    model_id?: number | string | thrift.Int64;
+    temperature?: number;
+    max_tokens?: number;
+    top_p?: number;
+    frequency_penalty?: number;
+    presence_penalty?: number;
+    short_memory_policy?: ShortMemoryPolicy.IShortMemoryPolicyArgs;
+    top_k?: number;
+    response_format?: ModelResponseFormat.ModelResponseFormat;
+    model_style?: ModelStyle.ModelStyle;
 }
 export const ModelInfoCodec: thrift.IStructCodec<IModelInfoArgs, IModelInfo> = {
     encode(args: IModelInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ModelId: (typeof args.ModelId === "number" ? new thrift.Int64(args.ModelId) : typeof args.ModelId === "string" ? thrift.Int64.fromDecimalString(args.ModelId) : args.ModelId),
-            Temperature: args.Temperature,
-            MaxTokens: args.MaxTokens,
-            TopP: args.TopP,
-            FrequencyPenalty: args.FrequencyPenalty,
-            PresencePenalty: args.PresencePenalty,
-            ShortMemoryPolicy: args.ShortMemoryPolicy,
-            TopK: args.TopK,
-            ResponseFormat: args.ResponseFormat,
-            ModelStyle: args.ModelStyle
+            ModelId: (typeof args.model_id === "number" ? new thrift.Int64(args.model_id) : typeof args.model_id === "string" ? thrift.Int64.fromDecimalString(args.model_id) : args.model_id),
+            Temperature: args.temperature,
+            MaxTokens: args.max_tokens,
+            TopP: args.top_p,
+            FrequencyPenalty: args.frequency_penalty,
+            PresencePenalty: args.presence_penalty,
+            ShortMemoryPolicy: args.short_memory_policy,
+            TopK: args.top_k,
+            ResponseFormat: args.response_format,
+            ModelStyle: args.model_style
         };
         output.writeStructBegin("ModelInfo");
         if (obj.ModelId != null) {
@@ -210,106 +210,116 @@ export const ModelInfoCodec: thrift.IStructCodec<IModelInfoArgs, IModelInfo> = {
         }
         input.readStructEnd();
         return {
-            ModelId: _args.ModelId,
-            Temperature: _args.Temperature,
-            MaxTokens: _args.MaxTokens,
-            TopP: _args.TopP,
-            FrequencyPenalty: _args.FrequencyPenalty,
-            PresencePenalty: _args.PresencePenalty,
-            ShortMemoryPolicy: _args.ShortMemoryPolicy,
-            TopK: _args.TopK,
-            ResponseFormat: _args.ResponseFormat,
-            ModelStyle: _args.ModelStyle
+            model_id: _args.ModelId,
+            temperature: _args.Temperature,
+            max_tokens: _args.MaxTokens,
+            top_p: _args.TopP,
+            frequency_penalty: _args.FrequencyPenalty,
+            presence_penalty: _args.PresencePenalty,
+            short_memory_policy: _args.ShortMemoryPolicy,
+            top_k: _args.TopK,
+            response_format: _args.ResponseFormat,
+            model_style: _args.ModelStyle
         };
     }
 };
 export class ModelInfo extends thrift.StructLike implements IModelInfo {
-    public ModelId?: thrift.Int64;
-    public Temperature?: number;
-    public MaxTokens?: number;
-    public TopP?: number;
-    public FrequencyPenalty?: number;
-    public PresencePenalty?: number;
-    public ShortMemoryPolicy?: ShortMemoryPolicy.IShortMemoryPolicy;
-    public TopK?: number;
-    public ResponseFormat?: ModelResponseFormat.ModelResponseFormat;
-    public ModelStyle?: ModelStyle.ModelStyle;
+    public model_id?: thrift.Int64;
+    public temperature?: number;
+    public max_tokens?: number;
+    public top_p?: number;
+    public frequency_penalty?: number;
+    public presence_penalty?: number;
+    public short_memory_policy?: ShortMemoryPolicy.IShortMemoryPolicy;
+    public top_k?: number;
+    public response_format?: ModelResponseFormat.ModelResponseFormat;
+    public model_style?: ModelStyle.ModelStyle;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ModelId: {
+        model_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
-            'api.body': "model_id"
+            'api.body': "model_id",
+            'go.tag': "json:\"model_id\""
         },
-        Temperature: {
-            'api.body': "temperature"
+        temperature: {
+            'api.body': "temperature",
+            'go.tag': "json:\"temperature\""
         },
-        MaxTokens: {
-            'api.body': "max_tokens"
+        max_tokens: {
+            'api.body': "max_tokens",
+            'go.tag': "json:\"max_tokens\""
         },
-        TopP: {
-            'api.body': "top_p"
+        top_p: {
+            'api.body': "top_p",
+            'go.tag': "json:\"top_p\""
         },
-        FrequencyPenalty: {
-            'api.body': "frequency_penalty"
+        frequency_penalty: {
+            'api.body': "frequency_penalty",
+            'go.tag': "json:\"frequency_penalty\""
         },
-        PresencePenalty: {
-            'api.body': "presence_penalty"
+        presence_penalty: {
+            'api.body': "presence_penalty",
+            'go.tag': "json:\"presence_penalty\""
         },
-        ShortMemoryPolicy: {
-            'api.body': "short_memory_policy"
+        short_memory_policy: {
+            'api.body': "short_memory_policy",
+            'go.tag': "json:\"short_memory_policy\""
         },
-        TopK: {
-            'api.body': "top_k"
+        top_k: {
+            'api.body': "top_k",
+            'go.tag': "json:\"top_k\""
         },
-        ResponseFormat: {
-            'api.body': "response_format"
+        response_format: {
+            'api.body': "response_format",
+            'go.tag': "json:\"response_format\""
         },
-        ModelStyle: {
-            'api.body': "model_style"
+        model_style: {
+            'api.body': "model_style",
+            'go.tag': "json:\"model_style\""
         }
     };
     constructor(args: IModelInfoArgs = {}) {
         super();
-        if (args.ModelId != null) {
-            const value_11: thrift.Int64 = (typeof args.ModelId === "number" ? new thrift.Int64(args.ModelId) : typeof args.ModelId === "string" ? thrift.Int64.fromDecimalString(args.ModelId) : args.ModelId);
-            this.ModelId = value_11;
+        if (args.model_id != null) {
+            const value_11: thrift.Int64 = (typeof args.model_id === "number" ? new thrift.Int64(args.model_id) : typeof args.model_id === "string" ? thrift.Int64.fromDecimalString(args.model_id) : args.model_id);
+            this.model_id = value_11;
         }
-        if (args.Temperature != null) {
-            const value_12: number = args.Temperature;
-            this.Temperature = value_12;
+        if (args.temperature != null) {
+            const value_12: number = args.temperature;
+            this.temperature = value_12;
         }
-        if (args.MaxTokens != null) {
-            const value_13: number = args.MaxTokens;
-            this.MaxTokens = value_13;
+        if (args.max_tokens != null) {
+            const value_13: number = args.max_tokens;
+            this.max_tokens = value_13;
         }
-        if (args.TopP != null) {
-            const value_14: number = args.TopP;
-            this.TopP = value_14;
+        if (args.top_p != null) {
+            const value_14: number = args.top_p;
+            this.top_p = value_14;
         }
-        if (args.FrequencyPenalty != null) {
-            const value_15: number = args.FrequencyPenalty;
-            this.FrequencyPenalty = value_15;
+        if (args.frequency_penalty != null) {
+            const value_15: number = args.frequency_penalty;
+            this.frequency_penalty = value_15;
         }
-        if (args.PresencePenalty != null) {
-            const value_16: number = args.PresencePenalty;
-            this.PresencePenalty = value_16;
+        if (args.presence_penalty != null) {
+            const value_16: number = args.presence_penalty;
+            this.presence_penalty = value_16;
         }
-        if (args.ShortMemoryPolicy != null) {
-            const value_17: ShortMemoryPolicy.IShortMemoryPolicy = new ShortMemoryPolicy.ShortMemoryPolicy(args.ShortMemoryPolicy);
-            this.ShortMemoryPolicy = value_17;
+        if (args.short_memory_policy != null) {
+            const value_17: ShortMemoryPolicy.IShortMemoryPolicy = new ShortMemoryPolicy.ShortMemoryPolicy(args.short_memory_policy);
+            this.short_memory_policy = value_17;
         }
-        if (args.TopK != null) {
-            const value_18: number = args.TopK;
-            this.TopK = value_18;
+        if (args.top_k != null) {
+            const value_18: number = args.top_k;
+            this.top_k = value_18;
         }
-        if (args.ResponseFormat != null) {
-            const value_19: ModelResponseFormat.ModelResponseFormat = args.ResponseFormat;
-            this.ResponseFormat = value_19;
+        if (args.response_format != null) {
+            const value_19: ModelResponseFormat.ModelResponseFormat = args.response_format;
+            this.response_format = value_19;
         }
-        if (args.ModelStyle != null) {
-            const value_20: ModelStyle.ModelStyle = args.ModelStyle;
-            this.ModelStyle = value_20;
+        if (args.model_style != null) {
+            const value_20: ModelStyle.ModelStyle = args.model_style;
+            this.model_style = value_20;
         }
     }
     public static read(input: thrift.TProtocol): ModelInfo {

@@ -188,6 +188,7 @@ func (sa *SingleAgentDraftDAO) singleAgentDraftPo2Do(po *model.SingleAgentDraft)
 func (sa *SingleAgentDraftDAO) singleAgentDraftDo2Po(do *entity.SingleAgent) *model.SingleAgentDraft {
 	return &model.SingleAgentDraft{
 		AgentID:                 do.AgentID,
+		CreatorID:               do.CreatorID,
 		Name:                    do.Name,
 		Description:             ptr.Of(do.Desc),
 		IconURI:                 do.IconURI,

@@ -1,7 +1,7 @@
-import { Layout, Typography, Spin, Avatar, Button, Tooltip } from '@douyinfe/semi-ui';
-import { IconDelete } from '@douyinfe/semi-icons';
-import React, { useCallback, useState, useRef, useEffect } from 'react';
-import { AIChatInput } from '@douyinfe/semi-ui';
+import { Layout, Typography, Spin, Avatar, Button, Tooltip, Toast } from '@douyinfe/semi-ui';
+import { IconDelete, IconCopy, IconQuote } from '@douyinfe/semi-icons';
+import React, { useCallback, useState, useRef, useEffect, useMemo } from 'react';
+import { AIChatInput, AIChatDialogue } from '@douyinfe/semi-ui';
 import { useParams } from 'react-router-dom';
 import * as conversationApi from '@/services/conversation';
 import { Scene } from '@/services/conversation';
@@ -11,56 +11,92 @@ const { Title, Text } = Typography;
 const { Header, Content } = Layout;
 
 // 消息类型定义
-interface Message {
-    id: string;
+interface ChatMessage {
+    id: string | number;
     role: 'user' | 'assistant' | 'system';
     content: string;
-    createAt: number;
-    status?: 'loading' | 'complete' | 'error';
+    createdAt?: number;
+    status?: 'loading' | 'complete' | 'error' | 'incomplete';
 }
 
-const roleConfig = {
-    user: {
-        name: 'User',
-        avatar: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/docs-icon.png',
-    },
-    assistant: {
-        name: 'Airi',
-        avatar: 'https://raw.githubusercontent.com/moeru-ai/airi/refs/heads/main/docs/content/public/maskable_icon_x192.avif',
-    },
-    system: {
-        name: 'System',
-        avatar: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/other/logo.png',
-    },
-};
+// 角色配置类型
+interface RoleMetadata {
+    name?: string;
+    avatar?: string;
+}
+
+interface ChatRoleConfig {
+    user?: RoleMetadata;
+    assistant?: RoleMetadata;
+    system?: RoleMetadata;
+}
 
 interface ChatPanelProps {
     botInfo?: BotInfo;
     conversationId?: string;
 }
 
+// 引用类型
+interface Reference {
+    id: string;
+    type ?: 'text' | 'file' | 'image' | 'code';
+    content?: string;
+    name?: string;
+    url?: string;
+}
+
 const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConversationId }) => {
     const params = useParams<{ id: string }>();
 
-    // 优先使用 props，否则从 URL 获取
-    const currentBotId = botInfo && botInfo.BotId ? botInfo.BotId : (params.id || '');
+    const currentBotId = botInfo && botInfo.bot_id ? botInfo.bot_id : (params.id || '');
     const currentConversationId = useRef<string>(propConversationId ?? '');
 
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<ChatMessage[]>([]);
+    const [hints, setHints] = useState<string[]>([]);
     const [isStreaming, setIsStreaming] = useState(false);
     const [isLoadingHistory, setIsLoadingHistory] = useState(false);
-    const abortControllerRef = useRef<AbortController | null>(null);
+    const [references, setReferences] = useState<Reference[]>([]);
 
-    // 将后端消息转换为前端消息格式
-    const convertToMessage = useCallback((msg: conversationApi.ChatMessage): Message => {
+    const abortControllerRef = useRef<AbortController | null>(null);
+    const dialogueRef = useRef<any>(null);
+    const chatInputRef = useRef<any>(null);
+
+    // 角色配置
+    const roleConfig: ChatRoleConfig = {
+        user: {
+            name: 'User',
+            avatar: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/docs-icon.png',
+        },
+        assistant: {
+            name: botInfo?.name || 'Airi',
+            avatar: botInfo?.icon_url || '🤖',
+        },
+        system: {
+            name: 'System',
+            avatar: '⚙️',
+        },
+    };
+
+    // 将后端消息转换为 AIChatDialogue 消息格式
+    const convertToMessage = useCallback((msg: conversationApi.ChatMessage): ChatMessage | null => {
+        if (msg.type === 'generate_answer_finish' || msg.type === 'follow_up' || msg.type === 'verbose') {
+            return null;
+        }
         const isUser = msg.role === 'user';
         return {
             id: msg.message_id || `msg-${Date.now()}-${Math.random()}`,
             role: isUser ? 'user' : 'assistant',
             content: msg.content || '',
-            createAt: typeof msg.content_time === 'number' ? msg.content_time : Date.now(),
+            createdAt: typeof msg.content_time === 'number' ? msg.content_time : Date.now(),
             status: 'complete',
         };
+    }, []);
+
+    // 从消息列表中提取 hints（建议问题）
+    const extractHints = useCallback((messageList: conversationApi.ChatMessage[]): string[] => {
+        return messageList
+            .filter(msg => msg.type === 'follow_up' && msg.content)
+            .map(msg => msg.content || '');
     }, []);
 
     // 加载历史消息
@@ -69,7 +105,6 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
 
         setIsLoadingHistory(true);
         try {
-            // 直接获取消息列表，后端会根据 bot_id 返回或创建会话
             const resp = await conversationApi.getMessageList({
                 bot_id: String(currentBotId),
                 conversation_id: currentConversationId.current || undefined,
@@ -79,15 +114,16 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
             });
 
             if (resp.code === 0) {
-                // 如果返回了 conversation_id，保存起来
                 if (resp.conversation_id) {
                     currentConversationId.current = resp.conversation_id;
                 }
 
                 if (resp.message_list && resp.message_list.length > 0) {
-                    const historyMessages = resp.message_list.map(convertToMessage);
-                    // 按时间正序排列
-                    historyMessages.sort((a: Message, b: Message) => a.createAt - b.createAt);
+                    // 转换普通消息
+                    const historyMessages = resp.message_list
+                        .map(convertToMessage)
+                        .filter((msg): msg is ChatMessage => msg !== null);
+                    historyMessages.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
                     setMessages(historyMessages);
                 }
             }
@@ -96,63 +132,65 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
         } finally {
             setIsLoadingHistory(false);
         }
-    }, [currentBotId, convertToMessage]);
+    }, [currentBotId, convertToMessage, extractHints]);
 
     // 组件加载时获取历史消息
     useEffect(() => {
-        loadMessageHistory();
+        void loadMessageHistory();
     }, [loadMessageHistory]);
 
     // 发送消息核心逻辑
-    const sendMessage = useCallback((content: string, _attachment?: unknown[]) => {
+    const sendMessage = useCallback((content: string) => {
         if (!currentBotId || isStreaming) return;
 
-        console.log('[ChatPanel] sendMessage called with:', {
-            botId: currentBotId,
-            conversationId: currentConversationId.current,
-            content,
-        });
-
         // 添加用户消息
-        const userMessage: Message = {
+        const userMessage: ChatMessage = {
             id: `user-${Date.now()}`,
             role: 'user',
             content: content,
-            createAt: Date.now(),
+            createdAt: Date.now(),
             status: 'complete',
         };
 
         // 添加 AI 消息占位
-        const assistantMessage: Message = {
+        const assistantMessage: ChatMessage = {
             id: `assistant-${Date.now()}`,
             role: 'assistant',
             content: '',
-            createAt: Date.now(),
+            createdAt: Date.now(),
             status: 'loading',
         };
 
         setMessages(prev => [...prev, userMessage, assistantMessage]);
         setIsStreaming(true);
 
+        // 滚动到底部
+        setTimeout(() => dialogueRef.current?.scrollToBottom(true), 100);
+
         // 发送请求
         abortControllerRef.current = conversationApi.chat(
             {
                 bot_id: currentBotId,
                 conversation_id: currentConversationId.current,
-                query: userMessage.content,
+                query: content,
                 scene: Scene.Playground,
                 content_type: 'text',
                 draft_mode: true,
             },
             // onMessage
             (data) => {
+                // 忽略 ack 类型的消息
+                if (data.message?.type === 'ack') {
+                    return;
+                }
+
                 setMessages(prev => {
                     const newMessages = [...prev];
                     const lastIdx = newMessages.length - 1;
                     if (lastIdx >= 0 && newMessages[lastIdx].role === 'assistant') {
                         newMessages[lastIdx] = {
                             ...newMessages[lastIdx],
-                            content: newMessages[lastIdx].content + (data.message?.content || ''),
+                            content: (newMessages[lastIdx].content || '') + (data.message?.content || ''),
                             status: data.is_finish ? 'complete' : 'loading',
                         };
                     }
@@ -168,7 +206,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                     if (lastIdx >= 0 && newMessages[lastIdx].role === 'assistant') {
                         newMessages[lastIdx] = {
                             ...newMessages[lastIdx],
-                            content: newMessages[lastIdx].content || '抱歉，发生了错误，请重试。',
+                            content: (newMessages[lastIdx].content as string) || '抱歉，发生了错误，请重试。',
                             status: 'error',
                         };
                     }
@@ -195,10 +233,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
     }, [currentBotId, isStreaming]);
 
     // 处理消息发送 - 适配 AIChatInput
-    // MessageContent 结构: { references, attachments, inputContents, setup }
-    // inputContents 是数组，每个元素有 type 和对应内容（如 { type: 'text', text: '...' }）
     const handleMessageSend = useCallback((messageContent: any) => {
-        // 从 inputContents 数组中提取文本内容
         const inputContents = messageContent?.inputContents || [];
         const textContent = inputContents
             .filter((item: { type: string }) => item.type === 'text')
@@ -207,19 +242,28 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
 
         if (!currentBotId || isStreaming || !textContent.trim()) return;
 
+        // 发送消息后清空 hints
+        setHints([]);
         sendMessage(textContent);
+    }, [currentBotId, isStreaming, sendMessage]);
+
+    // 处理 hint 点击
+    const handleHintClick = useCallback((hint: string) => {
+        if (!currentBotId || isStreaming || !hint.trim()) return;
+
+        // 点击 hint 后清空 hints 并发送消息
+        setHints([]);
+        sendMessage(hint);
     }, [currentBotId, isStreaming, sendMessage]);
 
     // 处理清除上下文
     const handleClearContext = useCallback(async () => {
-        // 中止当前流式请求
         if (abortControllerRef.current) {
             abortControllerRef.current.abort();
             abortControllerRef.current = null;
         }
         setIsStreaming(false);
 
-        // 调用后端清除会话
         if (currentConversationId.current) {
             try {
                 await conversationApi.clearConversation({ conversation_id: currentConversationId.current });
@@ -239,7 +283,6 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
         }
         setIsStreaming(false);
 
-        // 标记最后一条消息为完成
         setMessages(prev => {
             const newMessages = [...prev];
             const lastIdx = newMessages.length - 1;
@@ -253,62 +296,82 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
         });
     }, []);
 
-    // 消息列表滚动到底部
-    const messagesEndRef = useRef<HTMLDivElement>(null);
+    // 消息变化时滚动到底部
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        dialogueRef.current?.scrollToBottom(true);
     }, [messages]);
 
-    // 渲染单条消息
-    const renderMessage = (msg: Message) => {
-        const config = roleConfig[msg.role];
-        const isUser = msg.role === 'user';
-        const isLoading = msg.status === 'loading' && !msg.content;
+    // 处理引用删除
+    const handleReferenceDelete = useCallback((item: Reference) => {
+        setReferences(prev => prev.filter(ref => ref.id !== item.id));
+    }, []);
 
-        return (
-            <div
-                key={msg.id}
-                style={{
-                    display: 'flex',
-                    flexDirection: isUser ? 'row-reverse' : 'row',
-                    alignItems: 'flex-start',
-                    marginBottom: 16,
-                    gap: 12,
-                }}
-            >
-                <Avatar
-                    src={isUser ? config.avatar : (botInfo?.IconUrl || config.avatar)}
-                    size="small"
-                    style={{ flexShrink: 0 }}
-                />
-                <div
-                    style={{
-                        maxWidth: '70%',
-                        padding: '10px 14px',
-                        borderRadius: 12,
-                        backgroundColor: isUser
-                            ? 'var(--semi-color-primary)'
-                            : 'var(--semi-color-fill-0)',
-                        color: isUser ? '#fff' : 'var(--semi-color-text-0)',
-                        wordBreak: 'break-word',
-                    }}
-                >
-                    {isLoading ? (
-                        <Spin size="small" />
-                    ) : (
-                        <div style={{ whiteSpace: 'pre-wrap' }}>
-                            {msg.content}
-                        </div>
-                    )}
-                    {msg.status === 'error' && (
-                        <Text type="danger" size="small" style={{ display: 'block', marginTop: 4 }}>
-                            发送失败
-                        </Text>
-                    )}
+    // 处理引用点击
+    const handleReferenceClick = useCallback((item: Reference) => {
+        console.log('Reference clicked:', item);
+        // 可以在这里实现点击引用后的逻辑，比如预览文件等
+    }, []);
+
+    // 引用消息到输入框
+    const handleQuoteMessage = useCallback((message: ChatMessage) => {
+        const contentPreview = message.content.length > 100
+            ? message.content.substring(0, 100) + '...'
+            : message.content;
+        const ref: Reference = {
+            id: `quote-${message.id}-${Date.now()}`,
+            type: 'text',
+            content: contentPreview,
+        };
+        setReferences(prev => {
+            // 避免重复添加同一消息的引用
+            if (prev.some(r => r.content === contentPreview)) {
+                return prev;
+            }
+            return [...prev, ref];
+        });
+    }, []);
+
+    // 复制消息内容
+    const handleCopyMessage = useCallback((message: ChatMessage) => {
+        navigator.clipboard.writeText(message.content).then(() => {
+            Toast.success('已复制到剪贴板');
+        }).catch(() => {
+            Toast.error('复制失败');
+        });
+    }, []);
+
+    // 对话框渲染配置 - 自定义操作按钮
+    const dialogueRenderConfig = useMemo(() => ({
+        renderDialogueAction: (props: any) => {
+            const { message, className } = props;
+            // 只为已完成的消息显示操作按钮
+            if (message?.status === 'loading') {
+                return null;
+            }
+            return (
+                <div className={className} style={{ display: 'flex', gap: 4 }}>
+                    <Tooltip content="复制">
+                        <Button
+                            icon={<IconCopy size="small" />}
+                            size="small"
+                            theme="borderless"
+                            type="tertiary"
+                            onClick={() => handleCopyMessage(message)}
+                        />
+                    </Tooltip>
+                    <Tooltip content="引用">
+                        <Button
+                            icon={<IconQuote size="small" />}
+                            size="small"
+                            theme="borderless"
+                            type="tertiary"
+                            onClick={() => handleQuoteMessage(message)}
+                        />
+                    </Tooltip>
                 </div>
-            </div>
-        );
-    };
+            );
+        },
+    }), [handleCopyMessage, handleQuoteMessage]);
 
     return (
         <Layout style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -327,16 +390,14 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                 </Title>
                 <div style={{ display: 'flex', gap: 8 }}>
                     {messages.length > 0 && (
-                        <>
-                            <Tooltip content="清空对话">
-                                <Button
-                                    icon={<IconDelete />}
-                                    theme="borderless"
-                                    onClick={handleClearContext}
-                                    disabled={isStreaming}
-                                />
-                            </Tooltip>
-                        </>
+                        <Tooltip content="清空对话">
+                            <Button
+                                icon={<IconDelete />}
+                                theme="borderless"
+                                onClick={handleClearContext}
+                                disabled={isStreaming}
+                            />
+                        </Tooltip>
                     )}
                 </div>
             </Header>
@@ -353,13 +414,8 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                     </div>
                 ) : (
                     <>
-                        {/* 消息列表区域 */}
-                        <div style={{
-                            flex: 1,
-                            overflow: 'auto',
-                            padding: '16px 24px',
-                            position: 'relative',
-                        }}>
+                        {/* 对话区域 */}
+                        <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
                             {messages.length === 0 ? (
                                 <div style={{
                                     height: '100%',
@@ -369,24 +425,32 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                                     alignItems: 'center',
                                 }}>
                                     <Avatar
-                                        src={botInfo?.IconUrl || roleConfig.assistant.avatar}
+                                        src={botInfo?.icon_url || roleConfig.assistant?.avatar}
                                         size="extra-large"
                                         style={{ width: 80, height: 80, marginBottom: 16 }}
                                     />
                                     <Text strong style={{ fontSize: 18, marginBottom: 8 }}>
-                                        {botInfo?.Name || 'Airi'}
+                                        {botInfo?.name || 'Airi'}
                                     </Text>
-                                    {botInfo?.Description && (
+                                    {botInfo?.description && (
                                         <Text type="tertiary" style={{ textAlign: 'center', maxWidth: 300 }}>
-                                            {botInfo.Description}
+                                            {botInfo.description}
                                         </Text>
                                     )}
                                 </div>
                             ) : (
-                                <>
-                                    {messages.map(renderMessage)}
-                                    <div ref={messagesEndRef} />
-                                </>
+                                <AIChatDialogue
+                                    ref={dialogueRef}
+                                    chats={messages as any}
+                                    roleConfig={roleConfig as any}
+                                    onChatsChange={(chats) => chats && setMessages(chats as ChatMessage[])}
+                                    mode="bubble"
+                                    align="leftRight"
+                                    hints={hints}
+                                    dialogueRenderConfig={dialogueRenderConfig}
+                                    onHintClick={handleHintClick}
+                                    style={{ flex: 1, overflow: 'auto' }}
+                                />
                             )}
                         </div>
 
@@ -396,18 +460,18 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                             borderTop: '1px solid var(--semi-color-border)',
                             backgroundColor: 'var(--semi-color-bg-1)',
                         }}>
-                            <div className="chat-input-wrapper">
-                                <AIChatInput
-                                    placeholder="输入消息开始对话..."
-                                    onMessageSend={handleMessageSend}
-                                    onStopGenerate={handleStopGenerate}
-                                    generating={isStreaming}
-                                    uploadProps={{
-                                        action: '#',
-                                    }}
-                                    showUploadFile={false}
-                                />
-                            </div>
+                            <AIChatInput
+                                placeholder="输入消息开始对话..."
+                                onMessageSend={handleMessageSend}
+                                onStopGenerate={handleStopGenerate}
+                                generating={isStreaming}
+                                uploadProps={{ action: '#' }}
+                                showUploadFile={false}
+                                ref={chatInputRef}
+                                onReferenceDelete={handleReferenceDelete as any}
+                                onReferenceClick={handleReferenceClick as any}
+                                references={references as any}
+                            />
                         </div>
                     </>
                 )}

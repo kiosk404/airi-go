@@ -28,111 +28,111 @@ import * as HookInfo from "./HookInfo";
 import * as UserQueryCollectConf from "../developer_api/UserQueryCollectConf";
 import * as LayoutInfo from "../developer_api/LayoutInfo";
 export interface IBotInfoForUpdate {
-    BotId?: thrift.Int64;
-    Name?: string;
-    Description?: string;
-    IconUri?: string;
-    IconUrl?: string;
-    CreatorId?: thrift.Int64;
-    CreateTime?: thrift.Int64;
-    UpdateTime?: thrift.Int64;
-    ConnectorId?: thrift.Int64;
-    Version?: string;
-    ModelInfo?: ModelInfo.IModelInfo;
-    PromptInfo?: PromptInfo.IPromptInfo;
-    PluginInfoList?: Array<PluginInfo.IPluginInfo>;
-    WorkflowInfoList?: Array<WorkflowInfo.IWorkflowInfo>;
-    OnboardingInfo?: OnboardingInfo.IOnboardingInfo;
-    Knowledge?: Knowledge.IKnowledge;
-    VariableList?: Array<Variable.IVariable>;
-    TaskInfo?: TaskInfo.ITaskInfo;
-    DatabaseList?: Array<Database.IDatabase>;
-    SuggestReplyInfo?: SuggestReplyInfo.ISuggestReplyInfo;
-    VoicesInfo?: VoicesInfo.IVoicesInfo;
-    BotExtInfo?: BotExtInfo.IBotExtInfo;
-    BotMode?: BotMode.BotMode;
-    Agents?: Array<AgentForUpdate.IAgentForUpdate>;
-    BotSpecies?: BotSpecies.BotSpecies;
-    BotTagInfo?: BotTagInfo.IBotTagInfo;
-    FileboxInfo?: FileboxInfo.IFileboxInfo;
-    MultiAgentInfo?: MultiAgentInfo.IMultiAgentInfo;
-    BackgroundImageInfoList?: Array<BackgroundImageInfo.IBackgroundImageInfo>;
-    ShortcutSort?: Array<string>;
-    HookInfo?: HookInfo.IHookInfo;
-    UserQueryCollectConf?: UserQueryCollectConf.IUserQueryCollectConf;
-    LayoutInfo?: LayoutInfo.ILayoutInfo;
+    bot_id?: thrift.Int64;
+    name?: string;
+    description?: string;
+    icon_uri?: string;
+    icon_url?: string;
+    creator_id?: thrift.Int64;
+    create_time?: thrift.Int64;
+    update_time?: thrift.Int64;
+    connector_id?: thrift.Int64;
+    version?: string;
+    model_info?: ModelInfo.IModelInfo;
+    prompt_info?: PromptInfo.IPromptInfo;
+    plugin_info_list?: Array<PluginInfo.IPluginInfo>;
+    workflow_info_list?: Array<WorkflowInfo.IWorkflowInfo>;
+    onboarding_info?: OnboardingInfo.IOnboardingInfo;
+    knowledge?: Knowledge.IKnowledge;
+    variable_list?: Array<Variable.IVariable>;
+    task_info?: TaskInfo.ITaskInfo;
+    database_list?: Array<Database.IDatabase>;
+    suggest_reply_info?: SuggestReplyInfo.ISuggestReplyInfo;
+    voices_info?: VoicesInfo.IVoicesInfo;
+    bot_ext_info?: BotExtInfo.IBotExtInfo;
+    bot_mode?: BotMode.BotMode;
+    agents?: Array<AgentForUpdate.IAgentForUpdate>;
+    bot_species?: BotSpecies.BotSpecies;
+    bot_tag_info?: BotTagInfo.IBotTagInfo;
+    filebox_info?: FileboxInfo.IFileboxInfo;
+    multi_agent_info?: MultiAgentInfo.IMultiAgentInfo;
+    background_image_info_list?: Array<BackgroundImageInfo.IBackgroundImageInfo>;
+    shortcut_sort?: Array<string>;
+    hook_info?: HookInfo.IHookInfo;
+    user_query_collect_conf?: UserQueryCollectConf.IUserQueryCollectConf;
+    layout_info?: LayoutInfo.ILayoutInfo;
 }
 export interface IBotInfoForUpdateArgs {
-    BotId?: number | string | thrift.Int64;
-    Name?: string;
-    Description?: string;
-    IconUri?: string;
-    IconUrl?: string;
-    CreatorId?: number | string | thrift.Int64;
-    CreateTime?: number | string | thrift.Int64;
-    UpdateTime?: number | string | thrift.Int64;
-    ConnectorId?: number | string | thrift.Int64;
-    Version?: string;
-    ModelInfo?: ModelInfo.IModelInfoArgs;
-    PromptInfo?: PromptInfo.IPromptInfoArgs;
-    PluginInfoList?: Array<PluginInfo.IPluginInfoArgs>;
-    WorkflowInfoList?: Array<WorkflowInfo.IWorkflowInfoArgs>;
-    OnboardingInfo?: OnboardingInfo.IOnboardingInfoArgs;
-    Knowledge?: Knowledge.IKnowledgeArgs;
-    VariableList?: Array<Variable.IVariableArgs>;
-    TaskInfo?: TaskInfo.ITaskInfoArgs;
-    DatabaseList?: Array<Database.IDatabaseArgs>;
-    SuggestReplyInfo?: SuggestReplyInfo.ISuggestReplyInfoArgs;
-    VoicesInfo?: VoicesInfo.IVoicesInfoArgs;
-    BotExtInfo?: BotExtInfo.IBotExtInfoArgs;
-    BotMode?: BotMode.BotMode;
-    Agents?: Array<AgentForUpdate.IAgentForUpdateArgs>;
-    BotSpecies?: BotSpecies.BotSpecies;
-    BotTagInfo?: BotTagInfo.IBotTagInfoArgs;
-    FileboxInfo?: FileboxInfo.IFileboxInfoArgs;
-    MultiAgentInfo?: MultiAgentInfo.IMultiAgentInfoArgs;
-    BackgroundImageInfoList?: Array<BackgroundImageInfo.IBackgroundImageInfoArgs>;
-    ShortcutSort?: Array<string>;
-    HookInfo?: HookInfo.IHookInfoArgs;
-    UserQueryCollectConf?: UserQueryCollectConf.IUserQueryCollectConfArgs;
-    LayoutInfo?: LayoutInfo.ILayoutInfoArgs;
+    bot_id?: number | string | thrift.Int64;
+    name?: string;
+    description?: string;
+    icon_uri?: string;
+    icon_url?: string;
+    creator_id?: number | string | thrift.Int64;
+    create_time?: number | string | thrift.Int64;
+    update_time?: number | string | thrift.Int64;
+    connector_id?: number | string | thrift.Int64;
+    version?: string;
+    model_info?: ModelInfo.IModelInfoArgs;
+    prompt_info?: PromptInfo.IPromptInfoArgs;
+    plugin_info_list?: Array<PluginInfo.IPluginInfoArgs>;
+    workflow_info_list?: Array<WorkflowInfo.IWorkflowInfoArgs>;
+    onboarding_info?: OnboardingInfo.IOnboardingInfoArgs;
+    knowledge?: Knowledge.IKnowledgeArgs;
+    variable_list?: Array<Variable.IVariableArgs>;
+    task_info?: TaskInfo.ITaskInfoArgs;
+    database_list?: Array<Database.IDatabaseArgs>;
+    suggest_reply_info?: SuggestReplyInfo.ISuggestReplyInfoArgs;
+    voices_info?: VoicesInfo.IVoicesInfoArgs;
+    bot_ext_info?: BotExtInfo.IBotExtInfoArgs;
+    bot_mode?: BotMode.BotMode;
+    agents?: Array<AgentForUpdate.IAgentForUpdateArgs>;
+    bot_species?: BotSpecies.BotSpecies;
+    bot_tag_info?: BotTagInfo.IBotTagInfoArgs;
+    filebox_info?: FileboxInfo.IFileboxInfoArgs;
+    multi_agent_info?: MultiAgentInfo.IMultiAgentInfoArgs;
+    background_image_info_list?: Array<BackgroundImageInfo.IBackgroundImageInfoArgs>;
+    shortcut_sort?: Array<string>;
+    hook_info?: HookInfo.IHookInfoArgs;
+    user_query_collect_conf?: UserQueryCollectConf.IUserQueryCollectConfArgs;
+    layout_info?: LayoutInfo.ILayoutInfoArgs;
 }
 export const BotInfoForUpdateCodec: thrift.IStructCodec<IBotInfoForUpdateArgs, IBotInfoForUpdate> = {
     encode(args: IBotInfoForUpdateArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            BotId: (typeof args.BotId === "number" ? new thrift.Int64(args.BotId) : typeof args.BotId === "string" ? thrift.Int64.fromDecimalString(args.BotId) : args.BotId),
-            Name: args.Name,
-            Description: args.Description,
-            IconUri: args.IconUri,
-            IconUrl: args.IconUrl,
-            CreatorId: (typeof args.CreatorId === "number" ? new thrift.Int64(args.CreatorId) : typeof args.CreatorId === "string" ? thrift.Int64.fromDecimalString(args.CreatorId) : args.CreatorId),
-            CreateTime: (typeof args.CreateTime === "number" ? new thrift.Int64(args.CreateTime) : typeof args.CreateTime === "string" ? thrift.Int64.fromDecimalString(args.CreateTime) : args.CreateTime),
-            UpdateTime: (typeof args.UpdateTime === "number" ? new thrift.Int64(args.UpdateTime) : typeof args.UpdateTime === "string" ? thrift.Int64.fromDecimalString(args.UpdateTime) : args.UpdateTime),
-            ConnectorId: (typeof args.ConnectorId === "number" ? new thrift.Int64(args.ConnectorId) : typeof args.ConnectorId === "string" ? thrift.Int64.fromDecimalString(args.ConnectorId) : args.ConnectorId),
-            Version: args.Version,
-            ModelInfo: args.ModelInfo,
-            PromptInfo: args.PromptInfo,
-            PluginInfoList: args.PluginInfoList,
-            WorkflowInfoList: args.WorkflowInfoList,
-            OnboardingInfo: args.OnboardingInfo,
-            Knowledge: args.Knowledge,
-            VariableList: args.VariableList,
-            TaskInfo: args.TaskInfo,
-            DatabaseList: args.DatabaseList,
-            SuggestReplyInfo: args.SuggestReplyInfo,
-            VoicesInfo: args.VoicesInfo,
-            BotExtInfo: args.BotExtInfo,
-            BotMode: args.BotMode,
-            Agents: args.Agents,
-            BotSpecies: args.BotSpecies,
-            BotTagInfo: args.BotTagInfo,
-            FileboxInfo: args.FileboxInfo,
-            MultiAgentInfo: args.MultiAgentInfo,
-            BackgroundImageInfoList: args.BackgroundImageInfoList,
-            ShortcutSort: args.ShortcutSort,
-            HookInfo: args.HookInfo,
-            UserQueryCollectConf: args.UserQueryCollectConf,
-            LayoutInfo: args.LayoutInfo
+            BotId: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
+            Name: args.name,
+            Description: args.description,
+            IconUri: args.icon_uri,
+            IconUrl: args.icon_url,
+            CreatorId: (typeof args.creator_id === "number" ? new thrift.Int64(args.creator_id) : typeof args.creator_id === "string" ? thrift.Int64.fromDecimalString(args.creator_id) : args.creator_id),
+            CreateTime: (typeof args.create_time === "number" ? new thrift.Int64(args.create_time) : typeof args.create_time === "string" ? thrift.Int64.fromDecimalString(args.create_time) : args.create_time),
+            UpdateTime: (typeof args.update_time === "number" ? new thrift.Int64(args.update_time) : typeof args.update_time === "string" ? thrift.Int64.fromDecimalString(args.update_time) : args.update_time),
+            ConnectorId: (typeof args.connector_id === "number" ? new thrift.Int64(args.connector_id) : typeof args.connector_id === "string" ? thrift.Int64.fromDecimalString(args.connector_id) : args.connector_id),
+            Version: args.version,
+            ModelInfo: args.model_info,
+            PromptInfo: args.prompt_info,
+            PluginInfoList: args.plugin_info_list,
+            WorkflowInfoList: args.workflow_info_list,
+            OnboardingInfo: args.onboarding_info,
+            Knowledge: args.knowledge,
+            VariableList: args.variable_list,
+            TaskInfo: args.task_info,
+            DatabaseList: args.database_list,
+            SuggestReplyInfo: args.suggest_reply_info,
+            VoicesInfo: args.voices_info,
+            BotExtInfo: args.bot_ext_info,
+            BotMode: args.bot_mode,
+            Agents: args.agents,
+            BotSpecies: args.bot_species,
+            BotTagInfo: args.bot_tag_info,
+            FileboxInfo: args.filebox_info,
+            MultiAgentInfo: args.multi_agent_info,
+            BackgroundImageInfoList: args.background_image_info_list,
+            ShortcutSort: args.shortcut_sort,
+            HookInfo: args.hook_info,
+            UserQueryCollectConf: args.user_query_collect_conf,
+            LayoutInfo: args.layout_info
         };
         output.writeStructBegin("BotInfoForUpdate");
         if (obj.BotId != null) {
@@ -697,382 +697,382 @@ export const BotInfoForUpdateCodec: thrift.IStructCodec<IBotInfoForUpdateArgs, I
         }
         input.readStructEnd();
         return {
-            BotId: _args.BotId,
-            Name: _args.Name,
-            Description: _args.Description,
-            IconUri: _args.IconUri,
-            IconUrl: _args.IconUrl,
-            CreatorId: _args.CreatorId,
-            CreateTime: _args.CreateTime,
-            UpdateTime: _args.UpdateTime,
-            ConnectorId: _args.ConnectorId,
-            Version: _args.Version,
-            ModelInfo: _args.ModelInfo,
-            PromptInfo: _args.PromptInfo,
-            PluginInfoList: _args.PluginInfoList,
-            WorkflowInfoList: _args.WorkflowInfoList,
-            OnboardingInfo: _args.OnboardingInfo,
-            Knowledge: _args.Knowledge,
-            VariableList: _args.VariableList,
-            TaskInfo: _args.TaskInfo,
-            DatabaseList: _args.DatabaseList,
-            SuggestReplyInfo: _args.SuggestReplyInfo,
-            VoicesInfo: _args.VoicesInfo,
-            BotExtInfo: _args.BotExtInfo,
-            BotMode: _args.BotMode,
-            Agents: _args.Agents,
-            BotSpecies: _args.BotSpecies,
-            BotTagInfo: _args.BotTagInfo,
-            FileboxInfo: _args.FileboxInfo,
-            MultiAgentInfo: _args.MultiAgentInfo,
-            BackgroundImageInfoList: _args.BackgroundImageInfoList,
-            ShortcutSort: _args.ShortcutSort,
-            HookInfo: _args.HookInfo,
-            UserQueryCollectConf: _args.UserQueryCollectConf,
-            LayoutInfo: _args.LayoutInfo
+            bot_id: _args.BotId,
+            name: _args.Name,
+            description: _args.Description,
+            icon_uri: _args.IconUri,
+            icon_url: _args.IconUrl,
+            creator_id: _args.CreatorId,
+            create_time: _args.CreateTime,
+            update_time: _args.UpdateTime,
+            connector_id: _args.ConnectorId,
+            version: _args.Version,
+            model_info: _args.ModelInfo,
+            prompt_info: _args.PromptInfo,
+            plugin_info_list: _args.PluginInfoList,
+            workflow_info_list: _args.WorkflowInfoList,
+            onboarding_info: _args.OnboardingInfo,
+            knowledge: _args.Knowledge,
+            variable_list: _args.VariableList,
+            task_info: _args.TaskInfo,
+            database_list: _args.DatabaseList,
+            suggest_reply_info: _args.SuggestReplyInfo,
+            voices_info: _args.VoicesInfo,
+            bot_ext_info: _args.BotExtInfo,
+            bot_mode: _args.BotMode,
+            agents: _args.Agents,
+            bot_species: _args.BotSpecies,
+            bot_tag_info: _args.BotTagInfo,
+            filebox_info: _args.FileboxInfo,
+            multi_agent_info: _args.MultiAgentInfo,
+            background_image_info_list: _args.BackgroundImageInfoList,
+            shortcut_sort: _args.ShortcutSort,
+            hook_info: _args.HookInfo,
+            user_query_collect_conf: _args.UserQueryCollectConf,
+            layout_info: _args.LayoutInfo
         };
     }
 };
 export class BotInfoForUpdate extends thrift.StructLike implements IBotInfoForUpdate {
-    public BotId?: thrift.Int64;
-    public Name?: string;
-    public Description?: string;
-    public IconUri?: string;
-    public IconUrl?: string;
-    public CreatorId?: thrift.Int64;
-    public CreateTime?: thrift.Int64;
-    public UpdateTime?: thrift.Int64;
-    public ConnectorId?: thrift.Int64;
-    public Version?: string;
-    public ModelInfo?: ModelInfo.IModelInfo;
-    public PromptInfo?: PromptInfo.IPromptInfo;
-    public PluginInfoList?: Array<PluginInfo.IPluginInfo>;
-    public WorkflowInfoList?: Array<WorkflowInfo.IWorkflowInfo>;
-    public OnboardingInfo?: OnboardingInfo.IOnboardingInfo;
-    public Knowledge?: Knowledge.IKnowledge;
-    public VariableList?: Array<Variable.IVariable>;
-    public TaskInfo?: TaskInfo.ITaskInfo;
-    public DatabaseList?: Array<Database.IDatabase>;
-    public SuggestReplyInfo?: SuggestReplyInfo.ISuggestReplyInfo;
-    public VoicesInfo?: VoicesInfo.IVoicesInfo;
-    public BotExtInfo?: BotExtInfo.IBotExtInfo;
-    public BotMode?: BotMode.BotMode;
-    public Agents?: Array<AgentForUpdate.IAgentForUpdate>;
-    public BotSpecies?: BotSpecies.BotSpecies;
-    public BotTagInfo?: BotTagInfo.IBotTagInfo;
-    public FileboxInfo?: FileboxInfo.IFileboxInfo;
-    public MultiAgentInfo?: MultiAgentInfo.IMultiAgentInfo;
-    public BackgroundImageInfoList?: Array<BackgroundImageInfo.IBackgroundImageInfo>;
-    public ShortcutSort?: Array<string>;
-    public HookInfo?: HookInfo.IHookInfo;
-    public UserQueryCollectConf?: UserQueryCollectConf.IUserQueryCollectConf;
-    public LayoutInfo?: LayoutInfo.ILayoutInfo;
+    public bot_id?: thrift.Int64;
+    public name?: string;
+    public description?: string;
+    public icon_uri?: string;
+    public icon_url?: string;
+    public creator_id?: thrift.Int64;
+    public create_time?: thrift.Int64;
+    public update_time?: thrift.Int64;
+    public connector_id?: thrift.Int64;
+    public version?: string;
+    public model_info?: ModelInfo.IModelInfo;
+    public prompt_info?: PromptInfo.IPromptInfo;
+    public plugin_info_list?: Array<PluginInfo.IPluginInfo>;
+    public workflow_info_list?: Array<WorkflowInfo.IWorkflowInfo>;
+    public onboarding_info?: OnboardingInfo.IOnboardingInfo;
+    public knowledge?: Knowledge.IKnowledge;
+    public variable_list?: Array<Variable.IVariable>;
+    public task_info?: TaskInfo.ITaskInfo;
+    public database_list?: Array<Database.IDatabase>;
+    public suggest_reply_info?: SuggestReplyInfo.ISuggestReplyInfo;
+    public voices_info?: VoicesInfo.IVoicesInfo;
+    public bot_ext_info?: BotExtInfo.IBotExtInfo;
+    public bot_mode?: BotMode.BotMode;
+    public agents?: Array<AgentForUpdate.IAgentForUpdate>;
+    public bot_species?: BotSpecies.BotSpecies;
+    public bot_tag_info?: BotTagInfo.IBotTagInfo;
+    public filebox_info?: FileboxInfo.IFileboxInfo;
+    public multi_agent_info?: MultiAgentInfo.IMultiAgentInfo;
+    public background_image_info_list?: Array<BackgroundImageInfo.IBackgroundImageInfo>;
+    public shortcut_sort?: Array<string>;
+    public hook_info?: HookInfo.IHookInfo;
+    public user_query_collect_conf?: UserQueryCollectConf.IUserQueryCollectConf;
+    public layout_info?: LayoutInfo.ILayoutInfo;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        BotId: {
+        bot_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "bot_id",
             'go.tag': "json:\"bot_id,omitempty,string\""
         },
-        Name: {
+        name: {
             'api.body': "name",
             'go.tag': "json:\"name,omitempty\""
         },
-        Description: {
+        description: {
             'api.body': "description",
             'go.tag': "json:\"description,omitempty\""
         },
-        IconUri: {
+        icon_uri: {
             'api.body': "icon_uri",
             'go.tag': "json:\"icon_uri,omitempty\""
         },
-        IconUrl: {
+        icon_url: {
             'api.body': "icon_url",
             'go.tag': "json:\"icon_url,omitempty\""
         },
-        CreatorId: {
+        creator_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "creator_id",
             'go.tag': "json:\"creator_id,omitempty\""
         },
-        CreateTime: {
+        create_time: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "create_time",
             'go.tag': "json:\"create_time,omitempty\""
         },
-        UpdateTime: {
+        update_time: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "update_time",
             'go.tag': "json:\"update_time,omitempty\""
         },
-        ConnectorId: {
+        connector_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "connector_id",
             'go.tag': "json:\"connector_id,omitempty\""
         },
-        Version: {
+        version: {
             'api.body': "version",
             'go.tag': "json:\"version,omitempty\""
         },
-        ModelInfo: {
+        model_info: {
             'api.body': "model_info",
             'go.tag': "json:\"model_info,omitempty\""
         },
-        PromptInfo: {
+        prompt_info: {
             'api.body': "prompt_info",
             'go.tag': "json:\"prompt_info,omitempty\""
         },
-        PluginInfoList: {
+        plugin_info_list: {
             'api.body': "plugin_info_list",
             'go.tag': "json:\"plugin_info_list,omitempty\""
         },
-        WorkflowInfoList: {
+        workflow_info_list: {
             'api.body': "workflow_info_list",
             'go.tag': "json:\"workflow_info_list,omitempty\""
         },
-        OnboardingInfo: {
+        onboarding_info: {
             'api.body': "onboarding_info",
             'go.tag': "json:\"onboarding_info,omitempty\""
         },
-        Knowledge: {
+        knowledge: {
             'api.body': "knowledge",
             'go.tag': "json:\"knowledge,omitempty\""
         },
-        VariableList: {
+        variable_list: {
             'api.body': "variable_list",
             'go.tag': "json:\"variable_list,omitempty\""
         },
-        TaskInfo: {
+        task_info: {
             'api.body': "task_info",
             'go.tag': "json:\"task_info,omitempty\""
         },
-        DatabaseList: {
+        database_list: {
             'api.body': "database_list",
             'go.tag': "json:\"database_list,omitempty\""
         },
-        SuggestReplyInfo: {
+        suggest_reply_info: {
             'api.body': "suggest_reply_info",
             'go.tag': "json:\"suggest_reply_info,omitempty\""
         },
-        VoicesInfo: {
+        voices_info: {
             'api.body': "voices_info",
             'go.tag': "json:\"voices_info,omitempty\""
         },
-        BotExtInfo: {
+        bot_ext_info: {
             'api.body': "bot_ext_info",
             'go.tag': "json:\"bot_ext_info,omitempty\""
         },
-        BotMode: {
+        bot_mode: {
             'api.body': "bot_mode",
             'go.tag': "json:\"bot_mode,omitempty\""
         },
-        Agents: {
+        agents: {
             'api.body': "agents",
             'go.tag': "json:\"agents,omitempty\""
         },
-        BotSpecies: {
+        bot_species: {
             'api.body': "bot_species",
             'go.tag': "json:\"bot_species,omitempty\""
         },
-        BotTagInfo: {
+        bot_tag_info: {
             'api.body': "bot_tag_info",
             'go.tag': "json:\"bot_tag_info,omitempty\""
         },
-        FileboxInfo: {
+        filebox_info: {
             'api.body': "filebox_info",
             'go.tag': "json:\"filebox_info,omitempty\""
         },
-        MultiAgentInfo: {
+        multi_agent_info: {
             'api.body': "multi_agent_info",
             'go.tag': "json:\"multi_agent_info,omitempty\""
         },
-        BackgroundImageInfoList: {
+        background_image_info_list: {
             'api.body': "background_image_info_list",
             'go.tag': "json:\"background_image_info_list,omitempty\""
         },
-        ShortcutSort: {
+        shortcut_sort: {
             'api.body': "shortcut_sort",
             'go.tag': "json:\"shortcut_sort,omitempty\""
         },
-        HookInfo: {
+        hook_info: {
             'api.body': "hook_info",
             'go.tag': "json:\"hook_info,omitempty\""
         },
-        UserQueryCollectConf: {
+        user_query_collect_conf: {
             'api.body': "user_query_collect_conf",
             'go.tag': "json:\"user_query_collect_conf,omitempty\""
         },
-        LayoutInfo: {
+        layout_info: {
             'api.body': "layout_info",
             'go.tag': "json:\"layout_info,omitempty\""
         }
     };
     constructor(args: IBotInfoForUpdateArgs = {}) {
         super();
-        if (args.BotId != null) {
-            const value_48: thrift.Int64 = (typeof args.BotId === "number" ? new thrift.Int64(args.BotId) : typeof args.BotId === "string" ? thrift.Int64.fromDecimalString(args.BotId) : args.BotId);
-            this.BotId = value_48;
+        if (args.bot_id != null) {
+            const value_48: thrift.Int64 = (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id);
+            this.bot_id = value_48;
         }
-        if (args.Name != null) {
-            const value_49: string = args.Name;
-            this.Name = value_49;
+        if (args.name != null) {
+            const value_49: string = args.name;
+            this.name = value_49;
         }
-        if (args.Description != null) {
-            const value_50: string = args.Description;
-            this.Description = value_50;
+        if (args.description != null) {
+            const value_50: string = args.description;
+            this.description = value_50;
         }
-        if (args.IconUri != null) {
-            const value_51: string = args.IconUri;
-            this.IconUri = value_51;
+        if (args.icon_uri != null) {
+            const value_51: string = args.icon_uri;
+            this.icon_uri = value_51;
         }
-        if (args.IconUrl != null) {
-            const value_52: string = args.IconUrl;
-            this.IconUrl = value_52;
+        if (args.icon_url != null) {
+            const value_52: string = args.icon_url;
+            this.icon_url = value_52;
         }
-        if (args.CreatorId != null) {
-            const value_53: thrift.Int64 = (typeof args.CreatorId === "number" ? new thrift.Int64(args.CreatorId) : typeof args.CreatorId === "string" ? thrift.Int64.fromDecimalString(args.CreatorId) : args.CreatorId);
-            this.CreatorId = value_53;
+        if (args.creator_id != null) {
+            const value_53: thrift.Int64 = (typeof args.creator_id === "number" ? new thrift.Int64(args.creator_id) : typeof args.creator_id === "string" ? thrift.Int64.fromDecimalString(args.creator_id) : args.creator_id);
+            this.creator_id = value_53;
         }
-        if (args.CreateTime != null) {
-            const value_54: thrift.Int64 = (typeof args.CreateTime === "number" ? new thrift.Int64(args.CreateTime) : typeof args.CreateTime === "string" ? thrift.Int64.fromDecimalString(args.CreateTime) : args.CreateTime);
-            this.CreateTime = value_54;
+        if (args.create_time != null) {
+            const value_54: thrift.Int64 = (typeof args.create_time === "number" ? new thrift.Int64(args.create_time) : typeof args.create_time === "string" ? thrift.Int64.fromDecimalString(args.create_time) : args.create_time);
+            this.create_time = value_54;
         }
-        if (args.UpdateTime != null) {
-            const value_55: thrift.Int64 = (typeof args.UpdateTime === "number" ? new thrift.Int64(args.UpdateTime) : typeof args.UpdateTime === "string" ? thrift.Int64.fromDecimalString(args.UpdateTime) : args.UpdateTime);
-            this.UpdateTime = value_55;
+        if (args.update_time != null) {
+            const value_55: thrift.Int64 = (typeof args.update_time === "number" ? new thrift.Int64(args.update_time) : typeof args.update_time === "string" ? thrift.Int64.fromDecimalString(args.update_time) : args.update_time);
+            this.update_time = value_55;
         }
-        if (args.ConnectorId != null) {
-            const value_56: thrift.Int64 = (typeof args.ConnectorId === "number" ? new thrift.Int64(args.ConnectorId) : typeof args.ConnectorId === "string" ? thrift.Int64.fromDecimalString(args.ConnectorId) : args.ConnectorId);
-            this.ConnectorId = value_56;
+        if (args.connector_id != null) {
+            const value_56: thrift.Int64 = (typeof args.connector_id === "number" ? new thrift.Int64(args.connector_id) : typeof args.connector_id === "string" ? thrift.Int64.fromDecimalString(args.connector_id) : args.connector_id);
+            this.connector_id = value_56;
         }
-        if (args.Version != null) {
-            const value_57: string = args.Version;
-            this.Version = value_57;
+        if (args.version != null) {
+            const value_57: string = args.version;
+            this.version = value_57;
         }
-        if (args.ModelInfo != null) {
-            const value_58: ModelInfo.IModelInfo = new ModelInfo.ModelInfo(args.ModelInfo);
-            this.ModelInfo = value_58;
+        if (args.model_info != null) {
+            const value_58: ModelInfo.IModelInfo = new ModelInfo.ModelInfo(args.model_info);
+            this.model_info = value_58;
         }
-        if (args.PromptInfo != null) {
-            const value_59: PromptInfo.IPromptInfo = new PromptInfo.PromptInfo(args.PromptInfo);
-            this.PromptInfo = value_59;
+        if (args.prompt_info != null) {
+            const value_59: PromptInfo.IPromptInfo = new PromptInfo.PromptInfo(args.prompt_info);
+            this.prompt_info = value_59;
         }
-        if (args.PluginInfoList != null) {
+        if (args.plugin_info_list != null) {
             const value_60: Array<PluginInfo.IPluginInfo> = new Array<PluginInfo.IPluginInfo>();
-            args.PluginInfoList.forEach((value_81: PluginInfo.IPluginInfoArgs): void => {
+            args.plugin_info_list.forEach((value_81: PluginInfo.IPluginInfoArgs): void => {
                 const value_82: PluginInfo.IPluginInfo = new PluginInfo.PluginInfo(value_81);
                 value_60.push(value_82);
             });
-            this.PluginInfoList = value_60;
+            this.plugin_info_list = value_60;
         }
-        if (args.WorkflowInfoList != null) {
+        if (args.workflow_info_list != null) {
             const value_61: Array<WorkflowInfo.IWorkflowInfo> = new Array<WorkflowInfo.IWorkflowInfo>();
-            args.WorkflowInfoList.forEach((value_83: WorkflowInfo.IWorkflowInfoArgs): void => {
+            args.workflow_info_list.forEach((value_83: WorkflowInfo.IWorkflowInfoArgs): void => {
                 const value_84: WorkflowInfo.IWorkflowInfo = new WorkflowInfo.WorkflowInfo(value_83);
                 value_61.push(value_84);
             });
-            this.WorkflowInfoList = value_61;
+            this.workflow_info_list = value_61;
         }
-        if (args.OnboardingInfo != null) {
-            const value_62: OnboardingInfo.IOnboardingInfo = new OnboardingInfo.OnboardingInfo(args.OnboardingInfo);
-            this.OnboardingInfo = value_62;
+        if (args.onboarding_info != null) {
+            const value_62: OnboardingInfo.IOnboardingInfo = new OnboardingInfo.OnboardingInfo(args.onboarding_info);
+            this.onboarding_info = value_62;
         }
-        if (args.Knowledge != null) {
-            const value_63: Knowledge.IKnowledge = new Knowledge.Knowledge(args.Knowledge);
-            this.Knowledge = value_63;
+        if (args.knowledge != null) {
+            const value_63: Knowledge.IKnowledge = new Knowledge.Knowledge(args.knowledge);
+            this.knowledge = value_63;
         }
-        if (args.VariableList != null) {
+        if (args.variable_list != null) {
             const value_64: Array<Variable.IVariable> = new Array<Variable.IVariable>();
-            args.VariableList.forEach((value_85: Variable.IVariableArgs): void => {
+            args.variable_list.forEach((value_85: Variable.IVariableArgs): void => {
                 const value_86: Variable.IVariable = new Variable.Variable(value_85);
                 value_64.push(value_86);
             });
-            this.VariableList = value_64;
+            this.variable_list = value_64;
         }
-        if (args.TaskInfo != null) {
-            const value_65: TaskInfo.ITaskInfo = new TaskInfo.TaskInfo(args.TaskInfo);
-            this.TaskInfo = value_65;
+        if (args.task_info != null) {
+            const value_65: TaskInfo.ITaskInfo = new TaskInfo.TaskInfo(args.task_info);
+            this.task_info = value_65;
         }
-        if (args.DatabaseList != null) {
+        if (args.database_list != null) {
             const value_66: Array<Database.IDatabase> = new Array<Database.IDatabase>();
-            args.DatabaseList.forEach((value_87: Database.IDatabaseArgs): void => {
+            args.database_list.forEach((value_87: Database.IDatabaseArgs): void => {
                 const value_88: Database.IDatabase = new Database.Database(value_87);
                 value_66.push(value_88);
             });
-            this.DatabaseList = value_66;
+            this.database_list = value_66;
         }
-        if (args.SuggestReplyInfo != null) {
-            const value_67: SuggestReplyInfo.ISuggestReplyInfo = new SuggestReplyInfo.SuggestReplyInfo(args.SuggestReplyInfo);
-            this.SuggestReplyInfo = value_67;
+        if (args.suggest_reply_info != null) {
+            const value_67: SuggestReplyInfo.ISuggestReplyInfo = new SuggestReplyInfo.SuggestReplyInfo(args.suggest_reply_info);
+            this.suggest_reply_info = value_67;
         }
-        if (args.VoicesInfo != null) {
-            const value_68: VoicesInfo.IVoicesInfo = new VoicesInfo.VoicesInfo(args.VoicesInfo);
-            this.VoicesInfo = value_68;
+        if (args.voices_info != null) {
+            const value_68: VoicesInfo.IVoicesInfo = new VoicesInfo.VoicesInfo(args.voices_info);
+            this.voices_info = value_68;
         }
-        if (args.BotExtInfo != null) {
-            const value_69: BotExtInfo.IBotExtInfo = new BotExtInfo.BotExtInfo(args.BotExtInfo);
-            this.BotExtInfo = value_69;
+        if (args.bot_ext_info != null) {
+            const value_69: BotExtInfo.IBotExtInfo = new BotExtInfo.BotExtInfo(args.bot_ext_info);
+            this.bot_ext_info = value_69;
         }
-        if (args.BotMode != null) {
-            const value_70: BotMode.BotMode = args.BotMode;
-            this.BotMode = value_70;
+        if (args.bot_mode != null) {
+            const value_70: BotMode.BotMode = args.bot_mode;
+            this.bot_mode = value_70;
         }
-        if (args.Agents != null) {
+        if (args.agents != null) {
             const value_71: Array<AgentForUpdate.IAgentForUpdate> = new Array<AgentForUpdate.IAgentForUpdate>();
-            args.Agents.forEach((value_89: AgentForUpdate.IAgentForUpdateArgs): void => {
+            args.agents.forEach((value_89: AgentForUpdate.IAgentForUpdateArgs): void => {
                 const value_90: AgentForUpdate.IAgentForUpdate = new AgentForUpdate.AgentForUpdate(value_89);
                 value_71.push(value_90);
             });
-            this.Agents = value_71;
+            this.agents = value_71;
         }
-        if (args.BotSpecies != null) {
-            const value_72: BotSpecies.BotSpecies = args.BotSpecies;
-            this.BotSpecies = value_72;
+        if (args.bot_species != null) {
+            const value_72: BotSpecies.BotSpecies = args.bot_species;
+            this.bot_species = value_72;
         }
-        if (args.BotTagInfo != null) {
-            const value_73: BotTagInfo.IBotTagInfo = new BotTagInfo.BotTagInfo(args.BotTagInfo);
-            this.BotTagInfo = value_73;
+        if (args.bot_tag_info != null) {
+            const value_73: BotTagInfo.IBotTagInfo = new BotTagInfo.BotTagInfo(args.bot_tag_info);
+            this.bot_tag_info = value_73;
         }
-        if (args.FileboxInfo != null) {
-            const value_74: FileboxInfo.IFileboxInfo = new FileboxInfo.FileboxInfo(args.FileboxInfo);
-            this.FileboxInfo = value_74;
+        if (args.filebox_info != null) {
+            const value_74: FileboxInfo.IFileboxInfo = new FileboxInfo.FileboxInfo(args.filebox_info);
+            this.filebox_info = value_74;
         }
-        if (args.MultiAgentInfo != null) {
-            const value_75: MultiAgentInfo.IMultiAgentInfo = new MultiAgentInfo.MultiAgentInfo(args.MultiAgentInfo);
-            this.MultiAgentInfo = value_75;
+        if (args.multi_agent_info != null) {
+            const value_75: MultiAgentInfo.IMultiAgentInfo = new MultiAgentInfo.MultiAgentInfo(args.multi_agent_info);
+            this.multi_agent_info = value_75;
         }
-        if (args.BackgroundImageInfoList != null) {
+        if (args.background_image_info_list != null) {
             const value_76: Array<BackgroundImageInfo.IBackgroundImageInfo> = new Array<BackgroundImageInfo.IBackgroundImageInfo>();
-            args.BackgroundImageInfoList.forEach((value_91: BackgroundImageInfo.IBackgroundImageInfoArgs): void => {
+            args.background_image_info_list.forEach((value_91: BackgroundImageInfo.IBackgroundImageInfoArgs): void => {
                 const value_92: BackgroundImageInfo.IBackgroundImageInfo = new BackgroundImageInfo.BackgroundImageInfo(value_91);
                 value_76.push(value_92);
             });
-            this.BackgroundImageInfoList = value_76;
+            this.background_image_info_list = value_76;
         }
-        if (args.ShortcutSort != null) {
+        if (args.shortcut_sort != null) {
             const value_77: Array<string> = new Array<string>();
-            args.ShortcutSort.forEach((value_93: string): void => {
+            args.shortcut_sort.forEach((value_93: string): void => {
                 const value_94: string = value_93;
                 value_77.push(value_94);
             });
-            this.ShortcutSort = value_77;
+            this.shortcut_sort = value_77;
         }
-        if (args.HookInfo != null) {
-            const value_78: HookInfo.IHookInfo = new HookInfo.HookInfo(args.HookInfo);
-            this.HookInfo = value_78;
+        if (args.hook_info != null) {
+            const value_78: HookInfo.IHookInfo = new HookInfo.HookInfo(args.hook_info);
+            this.hook_info = value_78;
         }
-        if (args.UserQueryCollectConf != null) {
-            const value_79: UserQueryCollectConf.IUserQueryCollectConf = new UserQueryCollectConf.UserQueryCollectConf(args.UserQueryCollectConf);
-            this.UserQueryCollectConf = value_79;
+        if (args.user_query_collect_conf != null) {
+            const value_79: UserQueryCollectConf.IUserQueryCollectConf = new UserQueryCollectConf.UserQueryCollectConf(args.user_query_collect_conf);
+            this.user_query_collect_conf = value_79;
         }
-        if (args.LayoutInfo != null) {
-            const value_80: LayoutInfo.ILayoutInfo = new LayoutInfo.LayoutInfo(args.LayoutInfo);
-            this.LayoutInfo = value_80;
+        if (args.layout_info != null) {
+            const value_80: LayoutInfo.ILayoutInfo = new LayoutInfo.LayoutInfo(args.layout_info);
+            this.layout_info = value_80;
         }
     }
     public static read(input: thrift.TProtocol): BotInfoForUpdate {

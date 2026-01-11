@@ -10,13 +10,13 @@ export interface IOpenGetBotInfoRequest {
     bot_id?: thrift.Int64;
     is_published?: boolean;
     connector_id?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IOpenGetBotInfoRequestArgs {
     bot_id?: number | string | thrift.Int64;
     is_published?: boolean;
     connector_id?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const OpenGetBotInfoRequestCodec: thrift.IStructCodec<IOpenGetBotInfoRequestArgs, IOpenGetBotInfoRequest> = {
     encode(args: IOpenGetBotInfoRequestArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const OpenGetBotInfoRequestCodec: thrift.IStructCodec<IOpenGetBotInfoRequ
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
             is_published: args.is_published,
             connector_id: (typeof args.connector_id === "number" ? new thrift.Int64(args.connector_id) : typeof args.connector_id === "string" ? thrift.Int64.fromDecimalString(args.connector_id) : args.connector_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("OpenGetBotInfoRequest");
         if (obj.bot_id != null) {
@@ -109,7 +109,7 @@ export const OpenGetBotInfoRequestCodec: thrift.IStructCodec<IOpenGetBotInfoRequ
             bot_id: _args.bot_id,
             is_published: _args.is_published,
             connector_id: _args.connector_id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -117,7 +117,7 @@ export class OpenGetBotInfoRequest extends thrift.StructLike implements IOpenGet
     public bot_id?: thrift.Int64;
     public is_published?: boolean;
     public connector_id?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
@@ -134,7 +134,7 @@ export class OpenGetBotInfoRequest extends thrift.StructLike implements IOpenGet
             'api.query': "connector_id",
             'api.js_conv': "true"
         },
-        Base: {
+        base: {
             'api.none': "true"
         }
     };
@@ -152,9 +152,9 @@ export class OpenGetBotInfoRequest extends thrift.StructLike implements IOpenGet
             const value_7: thrift.Int64 = (typeof args.connector_id === "number" ? new thrift.Int64(args.connector_id) : typeof args.connector_id === "string" ? thrift.Int64.fromDecimalString(args.connector_id) : args.connector_id);
             this.connector_id = value_7;
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): OpenGetBotInfoRequest {

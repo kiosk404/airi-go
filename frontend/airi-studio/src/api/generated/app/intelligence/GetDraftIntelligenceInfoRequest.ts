@@ -11,13 +11,13 @@ export interface IGetDraftIntelligenceInfoRequest {
     intelligence_id?: thrift.Int64;
     intelligence_type?: APP_INTELLIGENCE_COMMON_NS.IntelligenceType;
     version?: thrift.Int64;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IGetDraftIntelligenceInfoRequestArgs {
     intelligence_id?: number | string | thrift.Int64;
     intelligence_type?: APP_INTELLIGENCE_COMMON_NS.IntelligenceType;
     version?: number | string | thrift.Int64;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const GetDraftIntelligenceInfoRequestCodec: thrift.IStructCodec<IGetDraftIntelligenceInfoRequestArgs, IGetDraftIntelligenceInfoRequest> = {
     encode(args: IGetDraftIntelligenceInfoRequestArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const GetDraftIntelligenceInfoRequestCodec: thrift.IStructCodec<IGetDraft
             intelligence_id: (typeof args.intelligence_id === "number" ? new thrift.Int64(args.intelligence_id) : typeof args.intelligence_id === "string" ? thrift.Int64.fromDecimalString(args.intelligence_id) : args.intelligence_id),
             intelligence_type: args.intelligence_type,
             version: (typeof args.version === "number" ? new thrift.Int64(args.version) : typeof args.version === "string" ? thrift.Int64.fromDecimalString(args.version) : args.version),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetDraftIntelligenceInfoRequest");
         if (obj.intelligence_id != null) {
@@ -110,7 +110,7 @@ export const GetDraftIntelligenceInfoRequestCodec: thrift.IStructCodec<IGetDraft
             intelligence_id: _args.intelligence_id,
             intelligence_type: _args.intelligence_type,
             version: _args.version,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -118,7 +118,7 @@ export class GetDraftIntelligenceInfoRequest extends thrift.StructLike implement
     public intelligence_id?: thrift.Int64;
     public intelligence_type?: APP_INTELLIGENCE_COMMON_NS.IntelligenceType;
     public version?: thrift.Int64;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         intelligence_id: {
@@ -144,9 +144,9 @@ export class GetDraftIntelligenceInfoRequest extends thrift.StructLike implement
             const value_7: thrift.Int64 = (typeof args.version === "number" ? new thrift.Int64(args.version) : typeof args.version === "string" ? thrift.Int64.fromDecimalString(args.version) : args.version);
             this.version = value_7;
         }
-        if (args.Base != null) {
-            const value_8: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): GetDraftIntelligenceInfoRequest {

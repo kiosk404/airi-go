@@ -12,6 +12,8 @@ import { httpClient } from '@/services/core';
 // Playground - 获取 Bot 信息
 import type { IGetDraftBotInfoAgwRequestArgs } from '@/api/generated/playground/GetDraftBotInfoAgwRequest';
 import type { IGetDraftBotInfoAgwResponseArgs } from '@/api/generated/playground/GetDraftBotInfoAgwResponse';
+import type { IUpdateDraftBotInfoAgwRequestArgs } from "@/api/generated/playground/UpdateDraftBotInfoAgwRequest";
+import type { IUpdateDraftBotInfoAgwResponseArgs } from "@/api/generated/playground/UpdateDraftBotInfoAgwResponse";
 import type { IGetDraftBotInfoAgwDataArgs } from '@/api/generated/playground/GetDraftBotInfoAgwData';
 import type { IBotOptionDataArgs } from '@/api/generated/playground/BotOptionData';
 import type { IModelDetailArgs } from '@/api/generated/playground/ModelDetail';
@@ -36,6 +38,8 @@ import type { ITabDisplayItemsArgs } from '@/api/generated/app/developer_api/Tab
 export type GetDraftBotInfoRequest = IGetDraftBotInfoAgwRequestArgs;
 export type GetDraftBotInfoResponse = IGetDraftBotInfoAgwResponseArgs;
 export type GetDraftBotInfoData = IGetDraftBotInfoAgwDataArgs;
+export type UpdateDraftBotInfoRequest = IUpdateDraftBotInfoAgwRequestArgs;
+export type UpdateDraftBotInfoResponse = IUpdateDraftBotInfoAgwResponseArgs;
 
 export type GetDisplayInfoRequest = IGetDraftBotDisplayInfoRequestArgs;
 export type GetDisplayInfoResponse = IGetDraftBotDisplayInfoResponseArgs;
@@ -73,4 +77,12 @@ export async function getDisplayInfo(req: GetDisplayInfoRequest): Promise<GetDis
  */
 export async function getDraftBotInfo(req: GetDraftBotInfoRequest): Promise<GetDraftBotInfoResponse> {
     return httpClient.post<GetDraftBotInfoResponse>(`${PLAYGROUND_API_BASE}/get_draft_bot_info`, req);
+}
+
+/**
+ * 获取 Bot 完整信息
+ * POST /api/playground_api/draftbot/update_draft_bot_info
+ */
+export async function updateDraftBotInfo(req: UpdateDraftBotInfoRequest): Promise<UpdateDraftBotInfoResponse> {
+    return httpClient.post<UpdateDraftBotInfoResponse>(`${PLAYGROUND_API_BASE}/update_draft_bot_info`, req);
 }

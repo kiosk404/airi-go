@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as InterruptPlugin from "./InterruptPlugin";
 export interface ISubmitToolOutputs {
-    ToolCalls?: Array<InterruptPlugin.IInterruptPlugin>;
+    tool_calls?: Array<InterruptPlugin.IInterruptPlugin>;
 }
 export interface ISubmitToolOutputsArgs {
-    ToolCalls?: Array<InterruptPlugin.IInterruptPluginArgs>;
+    tool_calls?: Array<InterruptPlugin.IInterruptPluginArgs>;
 }
 export const SubmitToolOutputsCodec: thrift.IStructCodec<ISubmitToolOutputsArgs, ISubmitToolOutputs> = {
     encode(args: ISubmitToolOutputsArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ToolCalls: args.ToolCalls
+            ToolCalls: args.tool_calls
         };
         output.writeStructBegin("SubmitToolOutputs");
         if (obj.ToolCalls != null) {
@@ -66,27 +66,27 @@ export const SubmitToolOutputsCodec: thrift.IStructCodec<ISubmitToolOutputsArgs,
         }
         input.readStructEnd();
         return {
-            ToolCalls: _args.ToolCalls
+            tool_calls: _args.ToolCalls
         };
     }
 };
 export class SubmitToolOutputs extends thrift.StructLike implements ISubmitToolOutputs {
-    public ToolCalls?: Array<InterruptPlugin.IInterruptPlugin>;
+    public tool_calls?: Array<InterruptPlugin.IInterruptPlugin>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ToolCalls: {
+        tool_calls: {
             'api.body': "tool_calls"
         }
     };
     constructor(args: ISubmitToolOutputsArgs = {}) {
         super();
-        if (args.ToolCalls != null) {
+        if (args.tool_calls != null) {
             const value_4: Array<InterruptPlugin.IInterruptPlugin> = new Array<InterruptPlugin.IInterruptPlugin>();
-            args.ToolCalls.forEach((value_5: InterruptPlugin.IInterruptPluginArgs): void => {
+            args.tool_calls.forEach((value_5: InterruptPlugin.IInterruptPluginArgs): void => {
                 const value_6: InterruptPlugin.IInterruptPlugin = new InterruptPlugin.InterruptPlugin(value_5);
                 value_4.push(value_6);
             });
-            this.ToolCalls = value_4;
+            this.tool_calls = value_4;
         }
     }
     public static read(input: thrift.TProtocol): SubmitToolOutputs {

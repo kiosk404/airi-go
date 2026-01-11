@@ -1920,7 +1920,7 @@ func (p *AuthToken) String() string {
 }
 
 type PromptInfo struct {
-	Prompt *string `thrift:"Prompt,1,optional" json:"Prompt,omitempty"`
+	Prompt *string `thrift:"Prompt,1,optional" json:"prompt"`
 }
 
 func NewPromptInfo() *PromptInfo {
@@ -1954,16 +1954,16 @@ func (p *PromptInfo) String() string {
 }
 
 type ModelInfo struct {
-	ModelId           *int64               `thrift:"ModelId,1,optional" json:"ModelId,omitempty"`
-	Temperature       *float64             `thrift:"Temperature,2,optional" json:"Temperature,omitempty"`
-	MaxTokens         *int32               `thrift:"MaxTokens,3,optional" json:"MaxTokens,omitempty"`
-	TopP              *float64             `thrift:"TopP,4,optional" json:"TopP,omitempty"`
-	FrequencyPenalty  *float64             `thrift:"FrequencyPenalty,5,optional" json:"FrequencyPenalty,omitempty"`
-	PresencePenalty   *float64             `thrift:"PresencePenalty,6,optional" json:"PresencePenalty,omitempty"`
-	ShortMemoryPolicy *ShortMemoryPolicy   `thrift:"ShortMemoryPolicy,7,optional" json:"ShortMemoryPolicy,omitempty"`
-	TopK              *int32               `thrift:"TopK,8,optional" json:"TopK,omitempty"`
-	ResponseFormat    *ModelResponseFormat `thrift:"ResponseFormat,9,optional,ModelResponseFormat" json:"ResponseFormat,omitempty"`
-	ModelStyle        *ModelStyle          `thrift:"ModelStyle,10,optional,ModelStyle" json:"ModelStyle,omitempty"`
+	ModelId           *int64               `thrift:"ModelId,1,optional" json:"model_id"`
+	Temperature       *float64             `thrift:"Temperature,2,optional" json:"temperature"`
+	MaxTokens         *int32               `thrift:"MaxTokens,3,optional" json:"max_tokens"`
+	TopP              *float64             `thrift:"TopP,4,optional" json:"top_p"`
+	FrequencyPenalty  *float64             `thrift:"FrequencyPenalty,5,optional" json:"frequency_penalty"`
+	PresencePenalty   *float64             `thrift:"PresencePenalty,6,optional" json:"presence_penalty"`
+	ShortMemoryPolicy *ShortMemoryPolicy   `thrift:"ShortMemoryPolicy,7,optional" json:"short_memory_policy"`
+	TopK              *int32               `thrift:"TopK,8,optional" json:"top_k"`
+	ResponseFormat    *ModelResponseFormat `thrift:"ResponseFormat,9,optional,ModelResponseFormat" json:"response_format"`
+	ModelStyle        *ModelStyle          `thrift:"ModelStyle,10,optional,ModelStyle" json:"model_style"`
 }
 
 func NewModelInfo() *ModelInfo {
@@ -4003,29 +4003,29 @@ func (p *Database) String() string {
 }
 
 type Agent struct {
-	AgentId             int64                `thrift:"AgentId,1" json:"AgentId"`
-	AgentName           string               `thrift:"AgentName,2" json:"AgentName"`
-	PromptInfo          *PromptInfo          `thrift:"PromptInfo,3" json:"PromptInfo"`
-	PluginInfoList      []*PluginInfo        `thrift:"PluginInfoList,4,default,list<PluginInfo>" json:"PluginInfoList"`
-	Knowledge           *Knowledge           `thrift:"Knowledge,5" json:"Knowledge"`
-	WorkflowInfoList    []*WorkflowInfo      `thrift:"WorkflowInfoList,6,default,list<WorkflowInfo>" json:"WorkflowInfoList"`
-	ModelInfo           *ModelInfo           `thrift:"ModelInfo,7" json:"ModelInfo"`
-	Intents             []*Intent            `thrift:"Intents,8,default,list<Intent>" json:"Intents"`
-	AgentType           AgentType            `thrift:"AgentType,9,default,AgentType" json:"AgentType"`
-	RootAgent           bool                 `thrift:"RootAgent,10" json:"RootAgent"`
-	ReferenceId         int64                `thrift:"ReferenceId,11" json:"ReferenceId"`
-	FirstVersion        string               `thrift:"FirstVersion,12" json:"FirstVersion"`
-	LastVersion         string               `thrift:"LastVersion,13" json:"LastVersion"`
-	AgentPosition       *AgentPosition       `thrift:"AgentPosition,14" json:"AgentPosition"`
-	IconUri             string               `thrift:"IconUri,15" json:"IconUri"`
-	JumpConfig          *JumpConfig          `thrift:"JumpConfig,16" json:"JumpConfig"`
-	SuggestReplyInfo    *SuggestReplyInfo    `thrift:"SuggestReplyInfo,17" json:"SuggestReplyInfo"`
-	Description         string               `thrift:"Description,18" json:"Description"`
-	VersionCompat       AgentVersionCompat   `thrift:"VersionCompat,19,default,AgentVersionCompat" json:"VersionCompat"`
-	HookInfo            *HookInfo            `thrift:"HookInfo,20,optional" json:"HookInfo,omitempty"`
-	CurrentVersion      *string              `thrift:"CurrentVersion,21,optional" json:"CurrentVersion,omitempty"`
-	ReferenceInfoStatus *ReferenceInfoStatus `thrift:"ReferenceInfoStatus,22,optional,ReferenceInfoStatus" json:"ReferenceInfoStatus,omitempty"`
-	UpdateType          *ReferenceUpdateType `thrift:"UpdateType,23,optional,ReferenceUpdateType" json:"UpdateType,omitempty"`
+	AgentId             int64                `thrift:"AgentId,1" json:"agent_id,omitempty"`
+	AgentName           string               `thrift:"AgentName,2" json:"agent_name"`
+	PromptInfo          *PromptInfo          `thrift:"PromptInfo,3" json:"prompt_info"`
+	PluginInfoList      []*PluginInfo        `thrift:"PluginInfoList,4,default,list<PluginInfo>" json:"plugin_info_list"`
+	Knowledge           *Knowledge           `thrift:"Knowledge,5" json:"knowledge"`
+	WorkflowInfoList    []*WorkflowInfo      `thrift:"WorkflowInfoList,6,default,list<WorkflowInfo>" json:"workflow_info_list"`
+	ModelInfo           *ModelInfo           `thrift:"ModelInfo,7" json:"model_info"`
+	Intents             []*Intent            `thrift:"Intents,8,default,list<Intent>" json:"intents"`
+	AgentType           AgentType            `thrift:"AgentType,9,default,AgentType" json:"agent_type"`
+	RootAgent           bool                 `thrift:"RootAgent,10" json:"root_agent"`
+	ReferenceId         int64                `thrift:"ReferenceId,11" json:"reference_id,omitempty"`
+	FirstVersion        string               `thrift:"FirstVersion,12" json:"first_version,omitempty"`
+	LastVersion         string               `thrift:"LastVersion,13" json:"last_version,omitempty"`
+	AgentPosition       *AgentPosition       `thrift:"AgentPosition,14" json:"agent_position,omitempty"`
+	IconUri             string               `thrift:"IconUri,15" json:"icon_uri,omitempty"`
+	JumpConfig          *JumpConfig          `thrift:"JumpConfig,16" json:"jump_config,omitempty"`
+	SuggestReplyInfo    *SuggestReplyInfo    `thrift:"SuggestReplyInfo,17" json:"suggest_reply_info,omitempty"`
+	Description         string               `thrift:"Description,18" json:"description"`
+	VersionCompat       AgentVersionCompat   `thrift:"VersionCompat,19,default,AgentVersionCompat" json:"version_compat,omitempty"`
+	HookInfo            *HookInfo            `thrift:"HookInfo,20,optional" json:"hook_info,omitempty"`
+	CurrentVersion      *string              `thrift:"CurrentVersion,21,optional" json:"current_version,omitempty"`
+	ReferenceInfoStatus *ReferenceInfoStatus `thrift:"ReferenceInfoStatus,22,optional,ReferenceInfoStatus" json:"reference_info_status,omitempty"`
+	UpdateType          *ReferenceUpdateType `thrift:"UpdateType,23,optional,ReferenceUpdateType" json:"update_type,omitempty"`
 }
 
 func NewAgent() *Agent {
@@ -4496,40 +4496,40 @@ func (p *FileboxInfo) String() string {
 
 type BotInfo struct {
 	BotId                   int64                  `thrift:"BotId,1" json:"bot_id,string"`
-	Name                    string                 `thrift:"Name,2" json:"Name"`
-	Description             string                 `thrift:"Description,3" json:"Description"`
-	IconUri                 string                 `thrift:"IconUri,4" json:"IconUri"`
-	IconUrl                 string                 `thrift:"IconUrl,5" json:"IconUrl"`
-	CreatorId               int64                  `thrift:"CreatorId,6" json:"CreatorId"`
-	CreateTime              int64                  `thrift:"CreateTime,7" json:"CreateTime"`
-	UpdateTime              int64                  `thrift:"UpdateTime,8" json:"UpdateTime"`
-	ConnectorId             int64                  `thrift:"ConnectorId,9" json:"ConnectorId"`
-	Version                 string                 `thrift:"Version,10" json:"Version"`
-	ModelInfo               *ModelInfo             `thrift:"ModelInfo,11" json:"ModelInfo"`
-	PromptInfo              *PromptInfo            `thrift:"PromptInfo,12" json:"PromptInfo"`
-	PluginInfoList          []*PluginInfo          `thrift:"PluginInfoList,13,default,list<PluginInfo>" json:"PluginInfoList"`
-	WorkflowInfoList        []*WorkflowInfo        `thrift:"WorkflowInfoList,14,default,list<WorkflowInfo>" json:"WorkflowInfoList"`
-	OnboardingInfo          *OnboardingInfo        `thrift:"OnboardingInfo,15" json:"OnboardingInfo"`
-	Knowledge               *Knowledge             `thrift:"Knowledge,16" json:"Knowledge"`
-	VariableList            []*Variable            `thrift:"VariableList,17,default,list<Variable>" json:"VariableList"`
-	TaskInfo                *TaskInfo              `thrift:"TaskInfo,18" json:"TaskInfo"`
-	DatabaseList            []*Database            `thrift:"DatabaseList,19,default,list<Database>" json:"DatabaseList"`
-	SuggestReplyInfo        *SuggestReplyInfo      `thrift:"SuggestReplyInfo,20" json:"SuggestReplyInfo"`
-	VoicesInfo              *VoicesInfo            `thrift:"VoicesInfo,21" json:"VoicesInfo"`
-	BotExtInfo              *BotExtInfo            `thrift:"BotExtInfo,22" json:"BotExtInfo"`
-	BotMode                 BotMode                `thrift:"BotMode,23,default,BotMode" json:"BotMode"`
-	Agents                  []*Agent               `thrift:"Agents,24,default,list<Agent>" json:"Agents"`
-	BotSpecies              BotSpecies             `thrift:"BotSpecies,25,default,BotSpecies" json:"BotSpecies"`
-	BotTagInfo              *BotTagInfo            `thrift:"BotTagInfo,26" json:"BotTagInfo"`
-	FileboxInfo             *FileboxInfo           `thrift:"FileboxInfo,27" json:"FileboxInfo"`
-	MultiAgentInfo          *MultiAgentInfo        `thrift:"MultiAgentInfo,28" json:"MultiAgentInfo"`
-	BackgroundImageInfoList []*BackgroundImageInfo `thrift:"BackgroundImageInfoList,29,default,list<BackgroundImageInfo>" json:"BackgroundImageInfoList"`
-	ShortcutSort            []string               `thrift:"ShortcutSort,30,default,list<string>" json:"ShortcutSort"`
-	Status                  BotStatus              `thrift:"Status,31,default,BotStatus" json:"Status"`
-	HookInfo                *HookInfo              `thrift:"HookInfo,32,optional" json:"HookInfo,omitempty"`
-	UserQueryCollectConf    *UserQueryCollectConf  `thrift:"UserQueryCollectConf,33" json:"UserQueryCollectConf"`
-	LayoutInfo              *LayoutInfo            `thrift:"LayoutInfo,34" json:"LayoutInfo"`
-	BusinessType            BusinessType           `thrift:"BusinessType,35,default,BusinessType" json:"BusinessType"`
+	Name                    string                 `thrift:"Name,2" json:"name"`
+	Description             string                 `thrift:"Description,3" json:"description"`
+	IconUri                 string                 `thrift:"IconUri,4" json:"icon_uri"`
+	IconUrl                 string                 `thrift:"IconUrl,5" json:"icon_url"`
+	CreatorId               int64                  `thrift:"CreatorId,6" json:"creator_id,string"`
+	CreateTime              int64                  `thrift:"CreateTime,7" json:"create_time,string"`
+	UpdateTime              int64                  `thrift:"UpdateTime,8" json:"update_time,string"`
+	ConnectorId             int64                  `thrift:"ConnectorId,9" json:"connector_id,string"`
+	Version                 string                 `thrift:"Version,10" json:"version"`
+	ModelInfo               *ModelInfo             `thrift:"ModelInfo,11" json:"model_info"`
+	PromptInfo              *PromptInfo            `thrift:"PromptInfo,12" json:"prompt_info"`
+	PluginInfoList          []*PluginInfo          `thrift:"PluginInfoList,13,default,list<PluginInfo>" json:"plugin_info_list"`
+	WorkflowInfoList        []*WorkflowInfo        `thrift:"WorkflowInfoList,14,default,list<WorkflowInfo>" json:"workflow_info_list"`
+	OnboardingInfo          *OnboardingInfo        `thrift:"OnboardingInfo,15" json:"onboarding_info"`
+	Knowledge               *Knowledge             `thrift:"Knowledge,16" json:"knowledge"`
+	VariableList            []*Variable            `thrift:"VariableList,17,default,list<Variable>" json:"variable_list"`
+	TaskInfo                *TaskInfo              `thrift:"TaskInfo,18" json:"task_info"`
+	DatabaseList            []*Database            `thrift:"DatabaseList,19,default,list<Database>" json:"database_list"`
+	SuggestReplyInfo        *SuggestReplyInfo      `thrift:"SuggestReplyInfo,20" json:"suggest_reply_info"`
+	VoicesInfo              *VoicesInfo            `thrift:"VoicesInfo,21" json:"voices_info"`
+	BotExtInfo              *BotExtInfo            `thrift:"BotExtInfo,22" json:"bot_ext_info"`
+	BotMode                 BotMode                `thrift:"BotMode,23,default,BotMode" json:"bot_mode"`
+	Agents                  []*Agent               `thrift:"Agents,24,default,list<Agent>" json:"agents"`
+	BotSpecies              BotSpecies             `thrift:"BotSpecies,25,default,BotSpecies" json:"bot_species"`
+	BotTagInfo              *BotTagInfo            `thrift:"BotTagInfo,26" json:"bot_tag_info"`
+	FileboxInfo             *FileboxInfo           `thrift:"FileboxInfo,27" json:"filebox_info"`
+	MultiAgentInfo          *MultiAgentInfo        `thrift:"MultiAgentInfo,28" json:"multi_agent_info"`
+	BackgroundImageInfoList []*BackgroundImageInfo `thrift:"BackgroundImageInfoList,29,default,list<BackgroundImageInfo>" json:"background_image_info_list"`
+	ShortcutSort            []string               `thrift:"ShortcutSort,30,default,list<string>" json:"shortcut_sort"`
+	Status                  BotStatus              `thrift:"Status,31,default,BotStatus" json:"status"`
+	HookInfo                *HookInfo              `thrift:"HookInfo,32,optional" json:"hook_info,omitempty"`
+	UserQueryCollectConf    *UserQueryCollectConf  `thrift:"UserQueryCollectConf,33" json:"user_query_collect_conf"`
+	LayoutInfo              *LayoutInfo            `thrift:"LayoutInfo,34" json:"layout_info"`
+	BusinessType            BusinessType           `thrift:"BusinessType,35,default,BusinessType" json:"business_type"`
 }
 
 func NewBotInfo() *BotInfo {

@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as Creator from "./Creator";
 export interface ICheckAndLockPluginEditData {
-    Occupied?: boolean;
+    occupied?: boolean;
     user?: Creator.ICreator;
-    Seized?: boolean;
+    seized?: boolean;
 }
 export interface ICheckAndLockPluginEditDataArgs {
-    Occupied?: boolean;
+    occupied?: boolean;
     user?: Creator.ICreatorArgs;
-    Seized?: boolean;
+    seized?: boolean;
 }
 export const CheckAndLockPluginEditDataCodec: thrift.IStructCodec<ICheckAndLockPluginEditDataArgs, ICheckAndLockPluginEditData> = {
     encode(args: ICheckAndLockPluginEditDataArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Occupied: args.Occupied,
+            Occupied: args.occupied,
             user: args.user,
-            Seized: args.Seized
+            Seized: args.seized
         };
         output.writeStructBegin("CheckAndLockPluginEditData");
         if (obj.Occupied != null) {
@@ -89,31 +89,31 @@ export const CheckAndLockPluginEditDataCodec: thrift.IStructCodec<ICheckAndLockP
         }
         input.readStructEnd();
         return {
-            Occupied: _args.Occupied,
+            occupied: _args.Occupied,
             user: _args.user,
-            Seized: _args.Seized
+            seized: _args.Seized
         };
     }
 };
 export class CheckAndLockPluginEditData extends thrift.StructLike implements ICheckAndLockPluginEditData {
-    public Occupied?: boolean;
+    public occupied?: boolean;
     public user?: Creator.ICreator;
-    public Seized?: boolean;
+    public seized?: boolean;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICheckAndLockPluginEditDataArgs = {}) {
         super();
-        if (args.Occupied != null) {
-            const value_4: boolean = args.Occupied;
-            this.Occupied = value_4;
+        if (args.occupied != null) {
+            const value_4: boolean = args.occupied;
+            this.occupied = value_4;
         }
         if (args.user != null) {
             const value_5: Creator.ICreator = new Creator.Creator(args.user);
             this.user = value_5;
         }
-        if (args.Seized != null) {
-            const value_6: boolean = args.Seized;
-            this.Seized = value_6;
+        if (args.seized != null) {
+            const value_6: boolean = args.seized;
+            this.seized = value_6;
         }
     }
     public static read(input: thrift.TProtocol): CheckAndLockPluginEditData {

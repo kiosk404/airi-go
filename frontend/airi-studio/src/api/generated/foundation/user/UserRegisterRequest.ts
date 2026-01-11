@@ -10,13 +10,13 @@ export interface IUserRegisterRequest {
     account?: string;
     password?: string;
     locale?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IUserRegisterRequestArgs {
     account?: string;
     password?: string;
     locale?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const UserRegisterRequestCodec: thrift.IStructCodec<IUserRegisterRequestArgs, IUserRegisterRequest> = {
     encode(args: IUserRegisterRequestArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const UserRegisterRequestCodec: thrift.IStructCodec<IUserRegisterRequestA
             account: args.account,
             password: args.password,
             locale: args.locale,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UserRegisterRequest");
         if (obj.account != null) {
@@ -109,7 +109,7 @@ export const UserRegisterRequestCodec: thrift.IStructCodec<IUserRegisterRequestA
             account: _args.account,
             password: _args.password,
             locale: _args.locale,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -117,7 +117,7 @@ export class UserRegisterRequest extends thrift.StructLike implements IUserRegis
     public account?: string;
     public password?: string;
     public locale?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUserRegisterRequestArgs = {}) {
@@ -134,9 +134,9 @@ export class UserRegisterRequest extends thrift.StructLike implements IUserRegis
             const value_7: string = args.locale;
             this.locale = value_7;
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): UserRegisterRequest {

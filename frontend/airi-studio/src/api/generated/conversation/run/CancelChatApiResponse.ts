@@ -8,18 +8,18 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as ChatV3ChatDetail from "./ChatV3ChatDetail";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface ICancelChatApiResponse {
-    ChatV3ChatDetail?: ChatV3ChatDetail.IChatV3ChatDetail;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    chat_v3_chat_detail?: ChatV3ChatDetail.IChatV3ChatDetail;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface ICancelChatApiResponseArgs {
-    ChatV3ChatDetail?: ChatV3ChatDetail.IChatV3ChatDetailArgs;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    chat_v3_chat_detail?: ChatV3ChatDetail.IChatV3ChatDetailArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const CancelChatApiResponseCodec: thrift.IStructCodec<ICancelChatApiResponseArgs, ICancelChatApiResponse> = {
     encode(args: ICancelChatApiResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ChatV3ChatDetail: args.ChatV3ChatDetail,
-            BaseResp: args.BaseResp
+            ChatV3ChatDetail: args.chat_v3_chat_detail,
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("CancelChatApiResponse");
         if (obj.ChatV3ChatDetail != null) {
@@ -73,29 +73,29 @@ export const CancelChatApiResponseCodec: thrift.IStructCodec<ICancelChatApiRespo
         }
         input.readStructEnd();
         return {
-            ChatV3ChatDetail: _args.ChatV3ChatDetail,
-            BaseResp: _args.BaseResp
+            chat_v3_chat_detail: _args.ChatV3ChatDetail,
+            base_resp: _args.BaseResp
         };
     }
 };
 export class CancelChatApiResponse extends thrift.StructLike implements ICancelChatApiResponse {
-    public ChatV3ChatDetail?: ChatV3ChatDetail.IChatV3ChatDetail;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public chat_v3_chat_detail?: ChatV3ChatDetail.IChatV3ChatDetail;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ChatV3ChatDetail: {
+        chat_v3_chat_detail: {
             'agw.key': "data"
         }
     };
     constructor(args: ICancelChatApiResponseArgs = {}) {
         super();
-        if (args.ChatV3ChatDetail != null) {
-            const value_3: ChatV3ChatDetail.IChatV3ChatDetail = new ChatV3ChatDetail.ChatV3ChatDetail(args.ChatV3ChatDetail);
-            this.ChatV3ChatDetail = value_3;
+        if (args.chat_v3_chat_detail != null) {
+            const value_3: ChatV3ChatDetail.IChatV3ChatDetail = new ChatV3ChatDetail.ChatV3ChatDetail(args.chat_v3_chat_detail);
+            this.chat_v3_chat_detail = value_3;
         }
-        if (args.BaseResp != null) {
-            const value_4: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_4;
+        if (args.base_resp != null) {
+            const value_4: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_4;
         }
     }
     public static read(input: thrift.TProtocol): CancelChatApiResponse {

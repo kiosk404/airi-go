@@ -370,7 +370,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public CommonUpload(request: CommonUploadRequest.ICommonUploadRequestArgs, context?: Context): Promise<CommonUploadResponse.ICommonUploadResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("CommonUpload", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("CommonUpload", thrift.MessageType.CALL, this.increment_request_id());
         const args: ICommonUpload__ArgsArgs = { request };
         CommonUpload__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -408,7 +408,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ApplyUploadAction(request: ApplyUploadActionRequest.IApplyUploadActionRequestArgs, context?: Context): Promise<ApplyUploadActionResponse.IApplyUploadActionResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ApplyUploadAction", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ApplyUploadAction", thrift.MessageType.CALL, this.increment_request_id());
         const args: IApplyUploadAction__ArgsArgs = { request };
         ApplyUploadAction__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -470,11 +470,11 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_CommonUpload": {
-                    resolve(this.process_CommonUpload(requestId, input, output, context));
+                    resolve(this.process__common_upload(requestId, input, output, context));
                     break;
                 }
                 case "process_ApplyUploadAction": {
-                    resolve(this.process_ApplyUploadAction(requestId, input, output, context));
+                    resolve(this.process__apply_upload_action(requestId, input, output, context));
                     break;
                 }
                 default: {

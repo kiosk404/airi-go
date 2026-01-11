@@ -18,7 +18,7 @@ export interface IGetPlaygroundPluginListRequest {
     order_by?: number;
     is_get_offline?: boolean;
     referer?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetPlaygroundPluginListRequestArgs {
     page?: number;
@@ -32,7 +32,7 @@ export interface IGetPlaygroundPluginListRequestArgs {
     order_by?: number;
     is_get_offline?: boolean;
     referer?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetPlaygroundPluginListRequestCodec: thrift.IStructCodec<IGetPlaygroundPluginListRequestArgs, IGetPlaygroundPluginListRequest> = {
     encode(args: IGetPlaygroundPluginListRequestArgs, output: thrift.TProtocol): void {
@@ -48,7 +48,7 @@ export const GetPlaygroundPluginListRequestCodec: thrift.IStructCodec<IGetPlaygr
             order_by: args.order_by,
             is_get_offline: args.is_get_offline,
             referer: args.referer,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetPlaygroundPluginListRequest");
         if (obj.page != null) {
@@ -275,7 +275,7 @@ export const GetPlaygroundPluginListRequestCodec: thrift.IStructCodec<IGetPlaygr
             order_by: _args.order_by,
             is_get_offline: _args.is_get_offline,
             referer: _args.referer,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -291,7 +291,7 @@ export class GetPlaygroundPluginListRequest extends thrift.StructLike implements
     public order_by?: number;
     public is_get_offline?: boolean;
     public referer?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         page: {
@@ -383,9 +383,9 @@ export class GetPlaygroundPluginListRequest extends thrift.StructLike implements
             const value_27: string = args.referer;
             this.referer = value_27;
         }
-        if (args.Base != null) {
-            const value_28: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_28;
+        if (args.base != null) {
+            const value_28: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_28;
         }
     }
     public static read(input: thrift.TProtocol): GetPlaygroundPluginListRequest {

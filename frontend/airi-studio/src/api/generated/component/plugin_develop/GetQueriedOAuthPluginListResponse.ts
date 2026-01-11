@@ -11,13 +11,13 @@ export interface IGetQueriedOAuthPluginListResponse {
     oauth_plugin_list?: Array<OAuthPluginInfo.IOAuthPluginInfo>;
     code?: thrift.Int64;
     msg?: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IGetQueriedOAuthPluginListResponseArgs {
     oauth_plugin_list?: Array<OAuthPluginInfo.IOAuthPluginInfoArgs>;
     code?: number | string | thrift.Int64;
     msg?: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const GetQueriedOAuthPluginListResponseCodec: thrift.IStructCodec<IGetQueriedOAuthPluginListResponseArgs, IGetQueriedOAuthPluginListResponse> = {
     encode(args: IGetQueriedOAuthPluginListResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const GetQueriedOAuthPluginListResponseCodec: thrift.IStructCodec<IGetQue
             oauth_plugin_list: args.oauth_plugin_list,
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetQueriedOAuthPluginListResponse");
         if (obj.oauth_plugin_list != null) {
@@ -125,7 +125,7 @@ export const GetQueriedOAuthPluginListResponseCodec: thrift.IStructCodec<IGetQue
                 oauth_plugin_list: _args.oauth_plugin_list,
                 code: _args.code,
                 msg: _args.msg,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -137,7 +137,7 @@ export class GetQueriedOAuthPluginListResponse extends thrift.StructLike impleme
     public oauth_plugin_list?: Array<OAuthPluginInfo.IOAuthPluginInfo>;
     public code?: thrift.Int64;
     public msg?: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetQueriedOAuthPluginListResponseArgs) {
@@ -158,9 +158,9 @@ export class GetQueriedOAuthPluginListResponse extends thrift.StructLike impleme
             const value_9: string = args.msg;
             this.msg = value_9;
         }
-        if (args.BaseResp != null) {
-            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_10;
+        if (args.base_resp != null) {
+            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_10;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

@@ -22,7 +22,7 @@ export interface IUpdateAPIRequest {
     save_example?: boolean;
     debug_example?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDebugExample;
     function_name?: string;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IUpdateAPIRequestArgs {
     plugin_id: number | string | thrift.Int64;
@@ -39,7 +39,7 @@ export interface IUpdateAPIRequestArgs {
     save_example?: boolean;
     debug_example?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDebugExampleArgs;
     function_name?: string;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const UpdateAPIRequestCodec: thrift.IStructCodec<IUpdateAPIRequestArgs, IUpdateAPIRequest> = {
     encode(args: IUpdateAPIRequestArgs, output: thrift.TProtocol): void {
@@ -58,7 +58,7 @@ export const UpdateAPIRequestCodec: thrift.IStructCodec<IUpdateAPIRequestArgs, I
             save_example: args.save_example,
             debug_example: args.debug_example,
             function_name: args.function_name,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UpdateAPIRequest");
         if (obj.plugin_id != null) {
@@ -337,7 +337,7 @@ export const UpdateAPIRequestCodec: thrift.IStructCodec<IUpdateAPIRequestArgs, I
                 save_example: _args.save_example,
                 debug_example: _args.debug_example,
                 function_name: _args.function_name,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -360,7 +360,7 @@ export class UpdateAPIRequest extends thrift.StructLike implements IUpdateAPIReq
     public save_example?: boolean;
     public debug_example?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDebugExample;
     public function_name?: string;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -442,9 +442,9 @@ export class UpdateAPIRequest extends thrift.StructLike implements IUpdateAPIReq
             const value_33: string = args.function_name;
             this.function_name = value_33;
         }
-        if (args.Base != null) {
-            const value_34: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_34;
+        if (args.base != null) {
+            const value_34: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_34;
         }
     }
     public static read(input: thrift.TProtocol): UpdateAPIRequest {

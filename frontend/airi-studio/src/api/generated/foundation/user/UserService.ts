@@ -1542,7 +1542,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public WebAccountRegister(request: UserRegisterRequest.IUserRegisterRequestArgs, context?: Context): Promise<UserRegisterResponse.IUserRegisterResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("WebAccountRegister", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("WebAccountRegister", thrift.MessageType.CALL, this.increment_request_id());
         const args: IWebAccountRegister__ArgsArgs = { request };
         WebAccountRegister__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1580,7 +1580,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public WebAccountPasswordReset(request: ResetPasswordRequest.IResetPasswordRequestArgs, context?: Context): Promise<ResetPasswordResponse.IResetPasswordResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("WebAccountPasswordReset", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("WebAccountPasswordReset", thrift.MessageType.CALL, this.increment_request_id());
         const args: IWebAccountPasswordReset__ArgsArgs = { request };
         WebAccountPasswordReset__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1618,7 +1618,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public WebAccountLoginByPassword(request: LoginByPasswordRequest.ILoginByPasswordRequestArgs, context?: Context): Promise<LoginByPasswordResponse.ILoginByPasswordResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("WebAccountLoginByPassword", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("WebAccountLoginByPassword", thrift.MessageType.CALL, this.increment_request_id());
         const args: IWebAccountLoginByPassword__ArgsArgs = { request };
         WebAccountLoginByPassword__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1656,7 +1656,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public WebLogout(request: LogoutRequest.ILogoutRequestArgs, context?: Context): Promise<LogoutResponse.ILogoutResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("WebLogout", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("WebLogout", thrift.MessageType.CALL, this.increment_request_id());
         const args: IWebLogout__ArgsArgs = { request };
         WebLogout__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1694,7 +1694,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ModifyUserProfile(request: ModifyUserProfileRequest.IModifyUserProfileRequestArgs, context?: Context): Promise<ModifyUserProfileResponse.IModifyUserProfileResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ModifyUserProfile", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ModifyUserProfile", thrift.MessageType.CALL, this.increment_request_id());
         const args: IModifyUserProfile__ArgsArgs = { request };
         ModifyUserProfile__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1732,7 +1732,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UserUpdateAvatar(req: UserUpdateAvatarRequest.IUserUpdateAvatarRequestArgs, context?: Context): Promise<UserUpdateAvatarResponse.IUserUpdateAvatarResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UserUpdateAvatar", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UserUpdateAvatar", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUserUpdateAvatar__ArgsArgs = { req };
         UserUpdateAvatar__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1770,7 +1770,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetUserInfoByToken(request: GetUserInfoByTokenRequest.IGetUserInfoByTokenRequestArgs, context?: Context): Promise<GetUserInfoByTokenResponse.IGetUserInfoByTokenResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetUserInfoByToken", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetUserInfoByToken", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetUserInfoByToken__ArgsArgs = { request };
         GetUserInfoByToken__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1808,7 +1808,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetUserInfo(request: GetUserInfoRequest.IGetUserInfoRequestArgs, context?: Context): Promise<GetUserInfoResponse.IGetUserInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetUserInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetUserInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetUserInfo__ArgsArgs = { request };
         GetUserInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1846,7 +1846,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public MGetUserInfo(request: MGetUserInfoRequest.IMGetUserInfoRequestArgs, context?: Context): Promise<MGetUserInfoResponse.IMGetUserInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("MGetUserInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("MGetUserInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IMGetUserInfo__ArgsArgs = { request };
         MGetUserInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1915,39 +1915,39 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_WebAccountRegister": {
-                    resolve(this.process_WebAccountRegister(requestId, input, output, context));
+                    resolve(this.process__web_account_register(requestId, input, output, context));
                     break;
                 }
                 case "process_WebAccountPasswordReset": {
-                    resolve(this.process_WebAccountPasswordReset(requestId, input, output, context));
+                    resolve(this.process__web_account_password_reset(requestId, input, output, context));
                     break;
                 }
                 case "process_WebAccountLoginByPassword": {
-                    resolve(this.process_WebAccountLoginByPassword(requestId, input, output, context));
+                    resolve(this.process__web_account_login_by_password(requestId, input, output, context));
                     break;
                 }
                 case "process_WebLogout": {
-                    resolve(this.process_WebLogout(requestId, input, output, context));
+                    resolve(this.process__web_logout(requestId, input, output, context));
                     break;
                 }
                 case "process_ModifyUserProfile": {
-                    resolve(this.process_ModifyUserProfile(requestId, input, output, context));
+                    resolve(this.process__modify_user_profile(requestId, input, output, context));
                     break;
                 }
                 case "process_UserUpdateAvatar": {
-                    resolve(this.process_UserUpdateAvatar(requestId, input, output, context));
+                    resolve(this.process__user_update_avatar(requestId, input, output, context));
                     break;
                 }
                 case "process_GetUserInfoByToken": {
-                    resolve(this.process_GetUserInfoByToken(requestId, input, output, context));
+                    resolve(this.process__get_user_info_by_token(requestId, input, output, context));
                     break;
                 }
                 case "process_GetUserInfo": {
-                    resolve(this.process_GetUserInfo(requestId, input, output, context));
+                    resolve(this.process__get_user_info(requestId, input, output, context));
                     break;
                 }
                 case "process_MGetUserInfo": {
-                    resolve(this.process_MGetUserInfo(requestId, input, output, context));
+                    resolve(this.process__m_get_user_info(requestId, input, output, context));
                     break;
                 }
                 default: {

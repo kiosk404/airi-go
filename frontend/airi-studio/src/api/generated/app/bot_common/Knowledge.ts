@@ -11,42 +11,42 @@ import * as KnowledgeNoRecallReplyMode from "./KnowledgeNoRecallReplyMode";
 import * as KnowledgeShowSourceMode from "./KnowledgeShowSourceMode";
 import * as RecallStrategy from "./RecallStrategy";
 export interface IKnowledge {
-    KnowledgeInfo?: Array<KnowledgeInfo.IKnowledgeInfo>;
-    TopK?: thrift.Int64;
-    MinScore?: number;
-    Auto?: boolean;
-    SearchStrategy?: SearchStrategy.SearchStrategy;
-    ShowSource?: boolean;
-    NoRecallReplyMode?: KnowledgeNoRecallReplyMode.KnowledgeNoRecallReplyMode;
-    NoRecallReplyCustomizePrompt?: string;
-    ShowSourceMode?: KnowledgeShowSourceMode.KnowledgeShowSourceMode;
-    RecallStrategy?: RecallStrategy.IRecallStrategy;
+    knowledge_info?: Array<KnowledgeInfo.IKnowledgeInfo>;
+    top_k?: thrift.Int64;
+    min_score?: number;
+    auto?: boolean;
+    search_strategy?: SearchStrategy.SearchStrategy;
+    show_source?: boolean;
+    no_recall_reply_mode?: KnowledgeNoRecallReplyMode.KnowledgeNoRecallReplyMode;
+    no_recall_reply_customize_prompt?: string;
+    show_source_mode?: KnowledgeShowSourceMode.KnowledgeShowSourceMode;
+    recall_strategy?: RecallStrategy.IRecallStrategy;
 }
 export interface IKnowledgeArgs {
-    KnowledgeInfo?: Array<KnowledgeInfo.IKnowledgeInfoArgs>;
-    TopK?: number | string | thrift.Int64;
-    MinScore?: number;
-    Auto?: boolean;
-    SearchStrategy?: SearchStrategy.SearchStrategy;
-    ShowSource?: boolean;
-    NoRecallReplyMode?: KnowledgeNoRecallReplyMode.KnowledgeNoRecallReplyMode;
-    NoRecallReplyCustomizePrompt?: string;
-    ShowSourceMode?: KnowledgeShowSourceMode.KnowledgeShowSourceMode;
-    RecallStrategy?: RecallStrategy.IRecallStrategyArgs;
+    knowledge_info?: Array<KnowledgeInfo.IKnowledgeInfoArgs>;
+    top_k?: number | string | thrift.Int64;
+    min_score?: number;
+    auto?: boolean;
+    search_strategy?: SearchStrategy.SearchStrategy;
+    show_source?: boolean;
+    no_recall_reply_mode?: KnowledgeNoRecallReplyMode.KnowledgeNoRecallReplyMode;
+    no_recall_reply_customize_prompt?: string;
+    show_source_mode?: KnowledgeShowSourceMode.KnowledgeShowSourceMode;
+    recall_strategy?: RecallStrategy.IRecallStrategyArgs;
 }
 export const KnowledgeCodec: thrift.IStructCodec<IKnowledgeArgs, IKnowledge> = {
     encode(args: IKnowledgeArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            KnowledgeInfo: args.KnowledgeInfo,
-            TopK: (typeof args.TopK === "number" ? new thrift.Int64(args.TopK) : typeof args.TopK === "string" ? thrift.Int64.fromDecimalString(args.TopK) : args.TopK),
-            MinScore: args.MinScore,
-            Auto: args.Auto,
-            SearchStrategy: args.SearchStrategy,
-            ShowSource: args.ShowSource,
-            NoRecallReplyMode: args.NoRecallReplyMode,
-            NoRecallReplyCustomizePrompt: args.NoRecallReplyCustomizePrompt,
-            ShowSourceMode: args.ShowSourceMode,
-            RecallStrategy: args.RecallStrategy
+            KnowledgeInfo: args.knowledge_info,
+            TopK: (typeof args.top_k === "number" ? new thrift.Int64(args.top_k) : typeof args.top_k === "string" ? thrift.Int64.fromDecimalString(args.top_k) : args.top_k),
+            MinScore: args.min_score,
+            Auto: args.auto,
+            SearchStrategy: args.search_strategy,
+            ShowSource: args.show_source,
+            NoRecallReplyMode: args.no_recall_reply_mode,
+            NoRecallReplyCustomizePrompt: args.no_recall_reply_customize_prompt,
+            ShowSourceMode: args.show_source_mode,
+            RecallStrategy: args.recall_strategy
         };
         output.writeStructBegin("Knowledge");
         if (obj.KnowledgeInfo != null) {
@@ -223,108 +223,108 @@ export const KnowledgeCodec: thrift.IStructCodec<IKnowledgeArgs, IKnowledge> = {
         }
         input.readStructEnd();
         return {
-            KnowledgeInfo: _args.KnowledgeInfo,
-            TopK: _args.TopK,
-            MinScore: _args.MinScore,
-            Auto: _args.Auto,
-            SearchStrategy: _args.SearchStrategy,
-            ShowSource: _args.ShowSource,
-            NoRecallReplyMode: _args.NoRecallReplyMode,
-            NoRecallReplyCustomizePrompt: _args.NoRecallReplyCustomizePrompt,
-            ShowSourceMode: _args.ShowSourceMode,
-            RecallStrategy: _args.RecallStrategy
+            knowledge_info: _args.KnowledgeInfo,
+            top_k: _args.TopK,
+            min_score: _args.MinScore,
+            auto: _args.Auto,
+            search_strategy: _args.SearchStrategy,
+            show_source: _args.ShowSource,
+            no_recall_reply_mode: _args.NoRecallReplyMode,
+            no_recall_reply_customize_prompt: _args.NoRecallReplyCustomizePrompt,
+            show_source_mode: _args.ShowSourceMode,
+            recall_strategy: _args.RecallStrategy
         };
     }
 };
 export class Knowledge extends thrift.StructLike implements IKnowledge {
-    public KnowledgeInfo?: Array<KnowledgeInfo.IKnowledgeInfo>;
-    public TopK?: thrift.Int64;
-    public MinScore?: number;
-    public Auto?: boolean;
-    public SearchStrategy?: SearchStrategy.SearchStrategy;
-    public ShowSource?: boolean;
-    public NoRecallReplyMode?: KnowledgeNoRecallReplyMode.KnowledgeNoRecallReplyMode;
-    public NoRecallReplyCustomizePrompt?: string;
-    public ShowSourceMode?: KnowledgeShowSourceMode.KnowledgeShowSourceMode;
-    public RecallStrategy?: RecallStrategy.IRecallStrategy;
+    public knowledge_info?: Array<KnowledgeInfo.IKnowledgeInfo>;
+    public top_k?: thrift.Int64;
+    public min_score?: number;
+    public auto?: boolean;
+    public search_strategy?: SearchStrategy.SearchStrategy;
+    public show_source?: boolean;
+    public no_recall_reply_mode?: KnowledgeNoRecallReplyMode.KnowledgeNoRecallReplyMode;
+    public no_recall_reply_customize_prompt?: string;
+    public show_source_mode?: KnowledgeShowSourceMode.KnowledgeShowSourceMode;
+    public recall_strategy?: RecallStrategy.IRecallStrategy;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        KnowledgeInfo: {
+        knowledge_info: {
             'api.body': "knowledge_info"
         },
-        TopK: {
+        top_k: {
             'api.body': "top_k"
         },
-        MinScore: {
+        min_score: {
             'api.body': "min_score"
         },
-        Auto: {
+        auto: {
             'api.body': "auto"
         },
-        SearchStrategy: {
+        search_strategy: {
             'api.body': "search_strategy"
         },
-        ShowSource: {
+        show_source: {
             'api.body': "show_source"
         },
-        NoRecallReplyMode: {
+        no_recall_reply_mode: {
             'api.body': "no_recall_reply_mode"
         },
-        NoRecallReplyCustomizePrompt: {
+        no_recall_reply_customize_prompt: {
             'api.body': "no_recall_reply_customize_prompt"
         },
-        ShowSourceMode: {
+        show_source_mode: {
             'api.body': "show_source_mode"
         },
-        RecallStrategy: {
+        recall_strategy: {
             'api.body': "recall_strategy"
         }
     };
     constructor(args: IKnowledgeArgs = {}) {
         super();
-        if (args.KnowledgeInfo != null) {
+        if (args.knowledge_info != null) {
             const value_13: Array<KnowledgeInfo.IKnowledgeInfo> = new Array<KnowledgeInfo.IKnowledgeInfo>();
-            args.KnowledgeInfo.forEach((value_23: KnowledgeInfo.IKnowledgeInfoArgs): void => {
+            args.knowledge_info.forEach((value_23: KnowledgeInfo.IKnowledgeInfoArgs): void => {
                 const value_24: KnowledgeInfo.IKnowledgeInfo = new KnowledgeInfo.KnowledgeInfo(value_23);
                 value_13.push(value_24);
             });
-            this.KnowledgeInfo = value_13;
+            this.knowledge_info = value_13;
         }
-        if (args.TopK != null) {
-            const value_14: thrift.Int64 = (typeof args.TopK === "number" ? new thrift.Int64(args.TopK) : typeof args.TopK === "string" ? thrift.Int64.fromDecimalString(args.TopK) : args.TopK);
-            this.TopK = value_14;
+        if (args.top_k != null) {
+            const value_14: thrift.Int64 = (typeof args.top_k === "number" ? new thrift.Int64(args.top_k) : typeof args.top_k === "string" ? thrift.Int64.fromDecimalString(args.top_k) : args.top_k);
+            this.top_k = value_14;
         }
-        if (args.MinScore != null) {
-            const value_15: number = args.MinScore;
-            this.MinScore = value_15;
+        if (args.min_score != null) {
+            const value_15: number = args.min_score;
+            this.min_score = value_15;
         }
-        if (args.Auto != null) {
-            const value_16: boolean = args.Auto;
-            this.Auto = value_16;
+        if (args.auto != null) {
+            const value_16: boolean = args.auto;
+            this.auto = value_16;
         }
-        if (args.SearchStrategy != null) {
-            const value_17: SearchStrategy.SearchStrategy = args.SearchStrategy;
-            this.SearchStrategy = value_17;
+        if (args.search_strategy != null) {
+            const value_17: SearchStrategy.SearchStrategy = args.search_strategy;
+            this.search_strategy = value_17;
         }
-        if (args.ShowSource != null) {
-            const value_18: boolean = args.ShowSource;
-            this.ShowSource = value_18;
+        if (args.show_source != null) {
+            const value_18: boolean = args.show_source;
+            this.show_source = value_18;
         }
-        if (args.NoRecallReplyMode != null) {
-            const value_19: KnowledgeNoRecallReplyMode.KnowledgeNoRecallReplyMode = args.NoRecallReplyMode;
-            this.NoRecallReplyMode = value_19;
+        if (args.no_recall_reply_mode != null) {
+            const value_19: KnowledgeNoRecallReplyMode.KnowledgeNoRecallReplyMode = args.no_recall_reply_mode;
+            this.no_recall_reply_mode = value_19;
         }
-        if (args.NoRecallReplyCustomizePrompt != null) {
-            const value_20: string = args.NoRecallReplyCustomizePrompt;
-            this.NoRecallReplyCustomizePrompt = value_20;
+        if (args.no_recall_reply_customize_prompt != null) {
+            const value_20: string = args.no_recall_reply_customize_prompt;
+            this.no_recall_reply_customize_prompt = value_20;
         }
-        if (args.ShowSourceMode != null) {
-            const value_21: KnowledgeShowSourceMode.KnowledgeShowSourceMode = args.ShowSourceMode;
-            this.ShowSourceMode = value_21;
+        if (args.show_source_mode != null) {
+            const value_21: KnowledgeShowSourceMode.KnowledgeShowSourceMode = args.show_source_mode;
+            this.show_source_mode = value_21;
         }
-        if (args.RecallStrategy != null) {
-            const value_22: RecallStrategy.IRecallStrategy = new RecallStrategy.RecallStrategy(args.RecallStrategy);
-            this.RecallStrategy = value_22;
+        if (args.recall_strategy != null) {
+            const value_22: RecallStrategy.IRecallStrategy = new RecallStrategy.RecallStrategy(args.recall_strategy);
+            this.recall_strategy = value_22;
         }
     }
     public static read(input: thrift.TProtocol): Knowledge {

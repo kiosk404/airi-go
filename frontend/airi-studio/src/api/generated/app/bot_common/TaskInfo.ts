@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ITaskInfo {
-    UserTaskAllowed?: boolean;
-    EnablePresetTask?: thrift.Int64;
+    user_task_allowed?: boolean;
+    enable_preset_task?: thrift.Int64;
 }
 export interface ITaskInfoArgs {
-    UserTaskAllowed?: boolean;
-    EnablePresetTask?: number | string | thrift.Int64;
+    user_task_allowed?: boolean;
+    enable_preset_task?: number | string | thrift.Int64;
 }
 export const TaskInfoCodec: thrift.IStructCodec<ITaskInfoArgs, ITaskInfo> = {
     encode(args: ITaskInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            UserTaskAllowed: args.UserTaskAllowed,
-            EnablePresetTask: (typeof args.EnablePresetTask === "number" ? new thrift.Int64(args.EnablePresetTask) : typeof args.EnablePresetTask === "string" ? thrift.Int64.fromDecimalString(args.EnablePresetTask) : args.EnablePresetTask)
+            UserTaskAllowed: args.user_task_allowed,
+            EnablePresetTask: (typeof args.enable_preset_task === "number" ? new thrift.Int64(args.enable_preset_task) : typeof args.enable_preset_task === "string" ? thrift.Int64.fromDecimalString(args.enable_preset_task) : args.enable_preset_task)
         };
         output.writeStructBegin("TaskInfo");
         if (obj.UserTaskAllowed != null) {
@@ -71,32 +71,32 @@ export const TaskInfoCodec: thrift.IStructCodec<ITaskInfoArgs, ITaskInfo> = {
         }
         input.readStructEnd();
         return {
-            UserTaskAllowed: _args.UserTaskAllowed,
-            EnablePresetTask: _args.EnablePresetTask
+            user_task_allowed: _args.UserTaskAllowed,
+            enable_preset_task: _args.EnablePresetTask
         };
     }
 };
 export class TaskInfo extends thrift.StructLike implements ITaskInfo {
-    public UserTaskAllowed?: boolean;
-    public EnablePresetTask?: thrift.Int64;
+    public user_task_allowed?: boolean;
+    public enable_preset_task?: thrift.Int64;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        UserTaskAllowed: {
+        user_task_allowed: {
             'api.body': "user_task_allowed"
         },
-        EnablePresetTask: {
+        enable_preset_task: {
             'api.body': "enable_preset_task"
         }
     };
     constructor(args: ITaskInfoArgs = {}) {
         super();
-        if (args.UserTaskAllowed != null) {
-            const value_3: boolean = args.UserTaskAllowed;
-            this.UserTaskAllowed = value_3;
+        if (args.user_task_allowed != null) {
+            const value_3: boolean = args.user_task_allowed;
+            this.user_task_allowed = value_3;
         }
-        if (args.EnablePresetTask != null) {
-            const value_4: thrift.Int64 = (typeof args.EnablePresetTask === "number" ? new thrift.Int64(args.EnablePresetTask) : typeof args.EnablePresetTask === "string" ? thrift.Int64.fromDecimalString(args.EnablePresetTask) : args.EnablePresetTask);
-            this.EnablePresetTask = value_4;
+        if (args.enable_preset_task != null) {
+            const value_4: thrift.Int64 = (typeof args.enable_preset_task === "number" ? new thrift.Int64(args.enable_preset_task) : typeof args.enable_preset_task === "string" ? thrift.Int64.fromDecimalString(args.enable_preset_task) : args.enable_preset_task);
+            this.enable_preset_task = value_4;
         }
     }
     public static read(input: thrift.TProtocol): TaskInfo {

@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IMGetDisplayResourceInfoRequest {
-    ResIDs?: Array<thrift.Int64>;
-    CurrentUserID?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    res_i_ds?: Array<thrift.Int64>;
+    current_user_i_d?: thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IMGetDisplayResourceInfoRequestArgs {
-    ResIDs?: Array<number | string | thrift.Int64>;
-    CurrentUserID?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    res_i_ds?: Array<number | string | thrift.Int64>;
+    current_user_i_d?: number | string | thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const MGetDisplayResourceInfoRequestCodec: thrift.IStructCodec<IMGetDisplayResourceInfoRequestArgs, IMGetDisplayResourceInfoRequest> = {
     encode(args: IMGetDisplayResourceInfoRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ResIDs: args.ResIDs,
-            CurrentUserID: (typeof args.CurrentUserID === "number" ? new thrift.Int64(args.CurrentUserID) : typeof args.CurrentUserID === "string" ? thrift.Int64.fromDecimalString(args.CurrentUserID) : args.CurrentUserID),
-            Base: args.Base
+            ResIDs: args.res_i_ds,
+            CurrentUserID: (typeof args.current_user_i_d === "number" ? new thrift.Int64(args.current_user_i_d) : typeof args.current_user_i_d === "string" ? thrift.Int64.fromDecimalString(args.current_user_i_d) : args.current_user_i_d),
+            Base: args.base
         };
         output.writeStructBegin("MGetDisplayResourceInfoRequest");
         if (obj.ResIDs != null) {
@@ -100,35 +100,35 @@ export const MGetDisplayResourceInfoRequestCodec: thrift.IStructCodec<IMGetDispl
         }
         input.readStructEnd();
         return {
-            ResIDs: _args.ResIDs,
-            CurrentUserID: _args.CurrentUserID,
-            Base: _args.Base
+            res_i_ds: _args.ResIDs,
+            current_user_i_d: _args.CurrentUserID,
+            base: _args.Base
         };
     }
 };
 export class MGetDisplayResourceInfoRequest extends thrift.StructLike implements IMGetDisplayResourceInfoRequest {
-    public ResIDs?: Array<thrift.Int64>;
-    public CurrentUserID?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public res_i_ds?: Array<thrift.Int64>;
+    public current_user_i_d?: thrift.Int64;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IMGetDisplayResourceInfoRequestArgs = {}) {
         super();
-        if (args.ResIDs != null) {
+        if (args.res_i_ds != null) {
             const value_6: Array<thrift.Int64> = new Array<thrift.Int64>();
-            args.ResIDs.forEach((value_9: number | string | thrift.Int64): void => {
+            args.res_i_ds.forEach((value_9: number | string | thrift.Int64): void => {
                 const value_10: thrift.Int64 = (typeof value_9 === "number" ? new thrift.Int64(value_9) : typeof value_9 === "string" ? thrift.Int64.fromDecimalString(value_9) : value_9);
                 value_6.push(value_10);
             });
-            this.ResIDs = value_6;
+            this.res_i_ds = value_6;
         }
-        if (args.CurrentUserID != null) {
-            const value_7: thrift.Int64 = (typeof args.CurrentUserID === "number" ? new thrift.Int64(args.CurrentUserID) : typeof args.CurrentUserID === "string" ? thrift.Int64.fromDecimalString(args.CurrentUserID) : args.CurrentUserID);
-            this.CurrentUserID = value_7;
+        if (args.current_user_i_d != null) {
+            const value_7: thrift.Int64 = (typeof args.current_user_i_d === "number" ? new thrift.Int64(args.current_user_i_d) : typeof args.current_user_i_d === "string" ? thrift.Int64.fromDecimalString(args.current_user_i_d) : args.current_user_i_d);
+            this.current_user_i_d = value_7;
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): MGetDisplayResourceInfoRequest {

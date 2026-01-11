@@ -13,7 +13,7 @@ export interface IBatchCreateAPIResponse {
     paths_duplicated?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     paths_created?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     edit_version?: number;
-    BaseResp: BASE_NS.IBaseResp;
+    base_resp: BASE_NS.IBaseResp;
 }
 export interface IBatchCreateAPIResponseArgs {
     code?: number | string | thrift.Int64;
@@ -21,7 +21,7 @@ export interface IBatchCreateAPIResponseArgs {
     paths_duplicated?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs>;
     paths_created?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs>;
     edit_version?: number;
-    BaseResp: BASE_NS.IBaseRespArgs;
+    base_resp: BASE_NS.IBaseRespArgs;
 }
 export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIResponseArgs, IBatchCreateAPIResponse> = {
     encode(args: IBatchCreateAPIResponseArgs, output: thrift.TProtocol): void {
@@ -31,7 +31,7 @@ export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIRes
             paths_duplicated: args.paths_duplicated,
             paths_created: args.paths_created,
             edit_version: args.edit_version,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("BatchCreateAPIResponse");
         if (obj.code != null) {
@@ -172,7 +172,7 @@ export const BatchCreateAPIResponseCodec: thrift.IStructCodec<IBatchCreateAPIRes
                 paths_duplicated: _args.paths_duplicated,
                 paths_created: _args.paths_created,
                 edit_version: _args.edit_version,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -186,7 +186,7 @@ export class BatchCreateAPIResponse extends thrift.StructLike implements IBatchC
     public paths_duplicated?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     public paths_created?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     public edit_version?: number;
-    public BaseResp: BASE_NS.IBaseResp;
+    public base_resp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IBatchCreateAPIResponseArgs) {
@@ -219,9 +219,9 @@ export class BatchCreateAPIResponse extends thrift.StructLike implements IBatchC
             const value_15: number = args.edit_version;
             this.edit_version = value_15;
         }
-        if (args.BaseResp != null) {
-            const value_16: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_16;
+        if (args.base_resp != null) {
+            const value_16: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_16;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

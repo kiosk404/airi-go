@@ -8,17 +8,17 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IGetQueriedOAuthPluginListRequest {
     bot_id: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetQueriedOAuthPluginListRequestArgs {
     bot_id: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetQueriedOAuthPluginListRequestCodec: thrift.IStructCodec<IGetQueriedOAuthPluginListRequestArgs, IGetQueriedOAuthPluginListRequest> = {
     encode(args: IGetQueriedOAuthPluginListRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetQueriedOAuthPluginListRequest");
         if (obj.bot_id != null) {
@@ -77,7 +77,7 @@ export const GetQueriedOAuthPluginListRequestCodec: thrift.IStructCodec<IGetQuer
         if (_args.bot_id !== undefined) {
             return {
                 bot_id: _args.bot_id,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -87,7 +87,7 @@ export const GetQueriedOAuthPluginListRequestCodec: thrift.IStructCodec<IGetQuer
 };
 export class GetQueriedOAuthPluginListRequest extends thrift.StructLike implements IGetQueriedOAuthPluginListRequest {
     public bot_id: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
@@ -103,9 +103,9 @@ export class GetQueriedOAuthPluginListRequest extends thrift.StructLike implemen
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): GetQueriedOAuthPluginListRequest {

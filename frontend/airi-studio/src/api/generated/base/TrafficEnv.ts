@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ITrafficEnv {
-    Open?: boolean;
-    Env?: string;
+    open?: boolean;
+    env?: string;
 }
 export interface ITrafficEnvArgs {
-    Open?: boolean;
-    Env?: string;
+    open?: boolean;
+    env?: string;
 }
 export const TrafficEnvCodec: thrift.IStructCodec<ITrafficEnvArgs, ITrafficEnv> = {
     encode(args: ITrafficEnvArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Open: (args.Open != null ? args.Open : false),
-            Env: (args.Env != null ? args.Env : "")
+            Open: (args.open != null ? args.open : false),
+            Env: (args.env != null ? args.env : "")
         };
         output.writeStructBegin("TrafficEnv");
         if (obj.Open != null) {
@@ -71,25 +71,25 @@ export const TrafficEnvCodec: thrift.IStructCodec<ITrafficEnvArgs, ITrafficEnv> 
         }
         input.readStructEnd();
         return {
-            Open: (_args.Open != null ? _args.Open : false),
-            Env: (_args.Env != null ? _args.Env : "")
+            open: (_args.Open != null ? _args.Open : false),
+            env: (_args.Env != null ? _args.Env : "")
         };
     }
 };
 export class TrafficEnv extends thrift.StructLike implements ITrafficEnv {
-    public Open?: boolean = false;
-    public Env?: string = "";
+    public open?: boolean = false;
+    public env?: string = "";
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ITrafficEnvArgs = {}) {
         super();
-        if (args.Open != null) {
-            const value_3: boolean = args.Open;
-            this.Open = value_3;
+        if (args.open != null) {
+            const value_3: boolean = args.open;
+            this.open = value_3;
         }
-        if (args.Env != null) {
-            const value_4: string = args.Env;
-            this.Env = value_4;
+        if (args.env != null) {
+            const value_4: string = args.env;
+            this.env = value_4;
         }
     }
     public static read(input: thrift.TProtocol): TrafficEnv {

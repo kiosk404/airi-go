@@ -7,30 +7,30 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as TrafficEnv from "./TrafficEnv";
 export interface IBase {
-    LogID?: string;
-    Caller?: string;
-    Addr?: string;
-    Client?: string;
-    TrafficEnv?: TrafficEnv.ITrafficEnv;
-    Extra?: Map<string, string>;
+    log_i_d?: string;
+    caller?: string;
+    addr?: string;
+    client?: string;
+    traffic_env?: TrafficEnv.ITrafficEnv;
+    extra?: Map<string, string>;
 }
 export interface IBaseArgs {
-    LogID?: string;
-    Caller?: string;
-    Addr?: string;
-    Client?: string;
-    TrafficEnv?: TrafficEnv.ITrafficEnvArgs;
-    Extra?: Map<string, string>;
+    log_i_d?: string;
+    caller?: string;
+    addr?: string;
+    client?: string;
+    traffic_env?: TrafficEnv.ITrafficEnvArgs;
+    extra?: Map<string, string>;
 }
 export const BaseCodec: thrift.IStructCodec<IBaseArgs, IBase> = {
     encode(args: IBaseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            LogID: (args.LogID != null ? args.LogID : ""),
-            Caller: (args.Caller != null ? args.Caller : ""),
-            Addr: (args.Addr != null ? args.Addr : ""),
-            Client: (args.Client != null ? args.Client : ""),
-            TrafficEnv: args.TrafficEnv,
-            Extra: args.Extra
+            LogID: (args.log_i_d != null ? args.log_i_d : ""),
+            Caller: (args.caller != null ? args.caller : ""),
+            Addr: (args.addr != null ? args.addr : ""),
+            Client: (args.client != null ? args.client : ""),
+            TrafficEnv: args.traffic_env,
+            Extra: args.extra
         };
         output.writeStructBegin("Base");
         if (obj.LogID != null) {
@@ -153,54 +153,54 @@ export const BaseCodec: thrift.IStructCodec<IBaseArgs, IBase> = {
         }
         input.readStructEnd();
         return {
-            LogID: (_args.LogID != null ? _args.LogID : ""),
-            Caller: (_args.Caller != null ? _args.Caller : ""),
-            Addr: (_args.Addr != null ? _args.Addr : ""),
-            Client: (_args.Client != null ? _args.Client : ""),
-            TrafficEnv: _args.TrafficEnv,
-            Extra: _args.Extra
+            log_i_d: (_args.LogID != null ? _args.LogID : ""),
+            caller: (_args.Caller != null ? _args.Caller : ""),
+            addr: (_args.Addr != null ? _args.Addr : ""),
+            client: (_args.Client != null ? _args.Client : ""),
+            traffic_env: _args.TrafficEnv,
+            extra: _args.Extra
         };
     }
 };
 export class Base extends thrift.StructLike implements IBase {
-    public LogID?: string = "";
-    public Caller?: string = "";
-    public Addr?: string = "";
-    public Client?: string = "";
-    public TrafficEnv?: TrafficEnv.ITrafficEnv;
-    public Extra?: Map<string, string>;
+    public log_i_d?: string = "";
+    public caller?: string = "";
+    public addr?: string = "";
+    public client?: string = "";
+    public traffic_env?: TrafficEnv.ITrafficEnv;
+    public extra?: Map<string, string>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IBaseArgs = {}) {
         super();
-        if (args.LogID != null) {
-            const value_9: string = args.LogID;
-            this.LogID = value_9;
+        if (args.log_i_d != null) {
+            const value_9: string = args.log_i_d;
+            this.log_i_d = value_9;
         }
-        if (args.Caller != null) {
-            const value_10: string = args.Caller;
-            this.Caller = value_10;
+        if (args.caller != null) {
+            const value_10: string = args.caller;
+            this.caller = value_10;
         }
-        if (args.Addr != null) {
-            const value_11: string = args.Addr;
-            this.Addr = value_11;
+        if (args.addr != null) {
+            const value_11: string = args.addr;
+            this.addr = value_11;
         }
-        if (args.Client != null) {
-            const value_12: string = args.Client;
-            this.Client = value_12;
+        if (args.client != null) {
+            const value_12: string = args.client;
+            this.client = value_12;
         }
-        if (args.TrafficEnv != null) {
-            const value_13: TrafficEnv.ITrafficEnv = new TrafficEnv.TrafficEnv(args.TrafficEnv);
-            this.TrafficEnv = value_13;
+        if (args.traffic_env != null) {
+            const value_13: TrafficEnv.ITrafficEnv = new TrafficEnv.TrafficEnv(args.traffic_env);
+            this.traffic_env = value_13;
         }
-        if (args.Extra != null) {
+        if (args.extra != null) {
             const value_14: Map<string, string> = new Map<string, string>();
-            args.Extra.forEach((value_15: string, key_3: string): void => {
+            args.extra.forEach((value_15: string, key_3: string): void => {
                 const value_16: string = value_15;
                 const key_4: string = key_3;
                 value_14.set(key_4, value_16);
             });
-            this.Extra = value_14;
+            this.extra = value_14;
         }
     }
     public static read(input: thrift.TProtocol): Base {

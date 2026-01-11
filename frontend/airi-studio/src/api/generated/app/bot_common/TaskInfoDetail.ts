@@ -8,69 +8,69 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as TaskPluginInput from "./TaskPluginInput";
 import * as TaskWebhookOutput from "./TaskWebhookOutput";
 export interface ITaskInfoDetail {
-    TaskId?: string;
-    UserQuestion?: string;
-    CreateTime?: string;
-    NextTime?: string;
-    Status?: thrift.Int64;
-    PresetType?: number;
-    CronExpr?: string;
-    TaskContent?: string;
-    TimeZone?: string;
-    TaskName?: string;
-    TriggerType?: string;
-    Action?: string;
-    BotQuery?: string;
-    PluginName?: string;
-    PluginInput?: TaskPluginInput.ITaskPluginInput;
-    WebhookUrl?: string;
-    WebhookBearerToken?: string;
-    WebhookOutput?: TaskWebhookOutput.ITaskWebhookOutput;
-    OriginId?: string;
+    task_id?: string;
+    user_question?: string;
+    create_time?: string;
+    next_time?: string;
+    status?: thrift.Int64;
+    preset_type?: number;
+    cron_expr?: string;
+    task_content?: string;
+    time_zone?: string;
+    task_name?: string;
+    trigger_type?: string;
+    action?: string;
+    bot_query?: string;
+    plugin_name?: string;
+    plugin_input?: TaskPluginInput.ITaskPluginInput;
+    webhook_url?: string;
+    webhook_bearer_token?: string;
+    webhook_output?: TaskWebhookOutput.ITaskWebhookOutput;
+    origin_id?: string;
 }
 export interface ITaskInfoDetailArgs {
-    TaskId?: string;
-    UserQuestion?: string;
-    CreateTime?: string;
-    NextTime?: string;
-    Status?: number | string | thrift.Int64;
-    PresetType?: number;
-    CronExpr?: string;
-    TaskContent?: string;
-    TimeZone?: string;
-    TaskName?: string;
-    TriggerType?: string;
-    Action?: string;
-    BotQuery?: string;
-    PluginName?: string;
-    PluginInput?: TaskPluginInput.ITaskPluginInputArgs;
-    WebhookUrl?: string;
-    WebhookBearerToken?: string;
-    WebhookOutput?: TaskWebhookOutput.ITaskWebhookOutputArgs;
-    OriginId?: string;
+    task_id?: string;
+    user_question?: string;
+    create_time?: string;
+    next_time?: string;
+    status?: number | string | thrift.Int64;
+    preset_type?: number;
+    cron_expr?: string;
+    task_content?: string;
+    time_zone?: string;
+    task_name?: string;
+    trigger_type?: string;
+    action?: string;
+    bot_query?: string;
+    plugin_name?: string;
+    plugin_input?: TaskPluginInput.ITaskPluginInputArgs;
+    webhook_url?: string;
+    webhook_bearer_token?: string;
+    webhook_output?: TaskWebhookOutput.ITaskWebhookOutputArgs;
+    origin_id?: string;
 }
 export const TaskInfoDetailCodec: thrift.IStructCodec<ITaskInfoDetailArgs, ITaskInfoDetail> = {
     encode(args: ITaskInfoDetailArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            TaskId: args.TaskId,
-            UserQuestion: args.UserQuestion,
-            CreateTime: args.CreateTime,
-            NextTime: args.NextTime,
-            Status: (typeof args.Status === "number" ? new thrift.Int64(args.Status) : typeof args.Status === "string" ? thrift.Int64.fromDecimalString(args.Status) : args.Status),
-            PresetType: args.PresetType,
-            CronExpr: args.CronExpr,
-            TaskContent: args.TaskContent,
-            TimeZone: args.TimeZone,
-            TaskName: args.TaskName,
-            TriggerType: args.TriggerType,
-            Action: args.Action,
-            BotQuery: args.BotQuery,
-            PluginName: args.PluginName,
-            PluginInput: args.PluginInput,
-            WebhookUrl: args.WebhookUrl,
-            WebhookBearerToken: args.WebhookBearerToken,
-            WebhookOutput: args.WebhookOutput,
-            OriginId: args.OriginId
+            TaskId: args.task_id,
+            UserQuestion: args.user_question,
+            CreateTime: args.create_time,
+            NextTime: args.next_time,
+            Status: (typeof args.status === "number" ? new thrift.Int64(args.status) : typeof args.status === "string" ? thrift.Int64.fromDecimalString(args.status) : args.status),
+            PresetType: args.preset_type,
+            CronExpr: args.cron_expr,
+            TaskContent: args.task_content,
+            TimeZone: args.time_zone,
+            TaskName: args.task_name,
+            TriggerType: args.trigger_type,
+            Action: args.action,
+            BotQuery: args.bot_query,
+            PluginName: args.plugin_name,
+            PluginInput: args.plugin_input,
+            WebhookUrl: args.webhook_url,
+            WebhookBearerToken: args.webhook_bearer_token,
+            WebhookOutput: args.webhook_output,
+            OriginId: args.origin_id
         };
         output.writeStructBegin("TaskInfoDetail");
         if (obj.TaskId != null) {
@@ -362,127 +362,127 @@ export const TaskInfoDetailCodec: thrift.IStructCodec<ITaskInfoDetailArgs, ITask
         }
         input.readStructEnd();
         return {
-            TaskId: _args.TaskId,
-            UserQuestion: _args.UserQuestion,
-            CreateTime: _args.CreateTime,
-            NextTime: _args.NextTime,
-            Status: _args.Status,
-            PresetType: _args.PresetType,
-            CronExpr: _args.CronExpr,
-            TaskContent: _args.TaskContent,
-            TimeZone: _args.TimeZone,
-            TaskName: _args.TaskName,
-            TriggerType: _args.TriggerType,
-            Action: _args.Action,
-            BotQuery: _args.BotQuery,
-            PluginName: _args.PluginName,
-            PluginInput: _args.PluginInput,
-            WebhookUrl: _args.WebhookUrl,
-            WebhookBearerToken: _args.WebhookBearerToken,
-            WebhookOutput: _args.WebhookOutput,
-            OriginId: _args.OriginId
+            task_id: _args.TaskId,
+            user_question: _args.UserQuestion,
+            create_time: _args.CreateTime,
+            next_time: _args.NextTime,
+            status: _args.Status,
+            preset_type: _args.PresetType,
+            cron_expr: _args.CronExpr,
+            task_content: _args.TaskContent,
+            time_zone: _args.TimeZone,
+            task_name: _args.TaskName,
+            trigger_type: _args.TriggerType,
+            action: _args.Action,
+            bot_query: _args.BotQuery,
+            plugin_name: _args.PluginName,
+            plugin_input: _args.PluginInput,
+            webhook_url: _args.WebhookUrl,
+            webhook_bearer_token: _args.WebhookBearerToken,
+            webhook_output: _args.WebhookOutput,
+            origin_id: _args.OriginId
         };
     }
 };
 export class TaskInfoDetail extends thrift.StructLike implements ITaskInfoDetail {
-    public TaskId?: string;
-    public UserQuestion?: string;
-    public CreateTime?: string;
-    public NextTime?: string;
-    public Status?: thrift.Int64;
-    public PresetType?: number;
-    public CronExpr?: string;
-    public TaskContent?: string;
-    public TimeZone?: string;
-    public TaskName?: string;
-    public TriggerType?: string;
-    public Action?: string;
-    public BotQuery?: string;
-    public PluginName?: string;
-    public PluginInput?: TaskPluginInput.ITaskPluginInput;
-    public WebhookUrl?: string;
-    public WebhookBearerToken?: string;
-    public WebhookOutput?: TaskWebhookOutput.ITaskWebhookOutput;
-    public OriginId?: string;
+    public task_id?: string;
+    public user_question?: string;
+    public create_time?: string;
+    public next_time?: string;
+    public status?: thrift.Int64;
+    public preset_type?: number;
+    public cron_expr?: string;
+    public task_content?: string;
+    public time_zone?: string;
+    public task_name?: string;
+    public trigger_type?: string;
+    public action?: string;
+    public bot_query?: string;
+    public plugin_name?: string;
+    public plugin_input?: TaskPluginInput.ITaskPluginInput;
+    public webhook_url?: string;
+    public webhook_bearer_token?: string;
+    public webhook_output?: TaskWebhookOutput.ITaskWebhookOutput;
+    public origin_id?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ITaskInfoDetailArgs = {}) {
         super();
-        if (args.TaskId != null) {
-            const value_20: string = args.TaskId;
-            this.TaskId = value_20;
+        if (args.task_id != null) {
+            const value_20: string = args.task_id;
+            this.task_id = value_20;
         }
-        if (args.UserQuestion != null) {
-            const value_21: string = args.UserQuestion;
-            this.UserQuestion = value_21;
+        if (args.user_question != null) {
+            const value_21: string = args.user_question;
+            this.user_question = value_21;
         }
-        if (args.CreateTime != null) {
-            const value_22: string = args.CreateTime;
-            this.CreateTime = value_22;
+        if (args.create_time != null) {
+            const value_22: string = args.create_time;
+            this.create_time = value_22;
         }
-        if (args.NextTime != null) {
-            const value_23: string = args.NextTime;
-            this.NextTime = value_23;
+        if (args.next_time != null) {
+            const value_23: string = args.next_time;
+            this.next_time = value_23;
         }
-        if (args.Status != null) {
-            const value_24: thrift.Int64 = (typeof args.Status === "number" ? new thrift.Int64(args.Status) : typeof args.Status === "string" ? thrift.Int64.fromDecimalString(args.Status) : args.Status);
-            this.Status = value_24;
+        if (args.status != null) {
+            const value_24: thrift.Int64 = (typeof args.status === "number" ? new thrift.Int64(args.status) : typeof args.status === "string" ? thrift.Int64.fromDecimalString(args.status) : args.status);
+            this.status = value_24;
         }
-        if (args.PresetType != null) {
-            const value_25: number = args.PresetType;
-            this.PresetType = value_25;
+        if (args.preset_type != null) {
+            const value_25: number = args.preset_type;
+            this.preset_type = value_25;
         }
-        if (args.CronExpr != null) {
-            const value_26: string = args.CronExpr;
-            this.CronExpr = value_26;
+        if (args.cron_expr != null) {
+            const value_26: string = args.cron_expr;
+            this.cron_expr = value_26;
         }
-        if (args.TaskContent != null) {
-            const value_27: string = args.TaskContent;
-            this.TaskContent = value_27;
+        if (args.task_content != null) {
+            const value_27: string = args.task_content;
+            this.task_content = value_27;
         }
-        if (args.TimeZone != null) {
-            const value_28: string = args.TimeZone;
-            this.TimeZone = value_28;
+        if (args.time_zone != null) {
+            const value_28: string = args.time_zone;
+            this.time_zone = value_28;
         }
-        if (args.TaskName != null) {
-            const value_29: string = args.TaskName;
-            this.TaskName = value_29;
+        if (args.task_name != null) {
+            const value_29: string = args.task_name;
+            this.task_name = value_29;
         }
-        if (args.TriggerType != null) {
-            const value_30: string = args.TriggerType;
-            this.TriggerType = value_30;
+        if (args.trigger_type != null) {
+            const value_30: string = args.trigger_type;
+            this.trigger_type = value_30;
         }
-        if (args.Action != null) {
-            const value_31: string = args.Action;
-            this.Action = value_31;
+        if (args.action != null) {
+            const value_31: string = args.action;
+            this.action = value_31;
         }
-        if (args.BotQuery != null) {
-            const value_32: string = args.BotQuery;
-            this.BotQuery = value_32;
+        if (args.bot_query != null) {
+            const value_32: string = args.bot_query;
+            this.bot_query = value_32;
         }
-        if (args.PluginName != null) {
-            const value_33: string = args.PluginName;
-            this.PluginName = value_33;
+        if (args.plugin_name != null) {
+            const value_33: string = args.plugin_name;
+            this.plugin_name = value_33;
         }
-        if (args.PluginInput != null) {
-            const value_34: TaskPluginInput.ITaskPluginInput = new TaskPluginInput.TaskPluginInput(args.PluginInput);
-            this.PluginInput = value_34;
+        if (args.plugin_input != null) {
+            const value_34: TaskPluginInput.ITaskPluginInput = new TaskPluginInput.TaskPluginInput(args.plugin_input);
+            this.plugin_input = value_34;
         }
-        if (args.WebhookUrl != null) {
-            const value_35: string = args.WebhookUrl;
-            this.WebhookUrl = value_35;
+        if (args.webhook_url != null) {
+            const value_35: string = args.webhook_url;
+            this.webhook_url = value_35;
         }
-        if (args.WebhookBearerToken != null) {
-            const value_36: string = args.WebhookBearerToken;
-            this.WebhookBearerToken = value_36;
+        if (args.webhook_bearer_token != null) {
+            const value_36: string = args.webhook_bearer_token;
+            this.webhook_bearer_token = value_36;
         }
-        if (args.WebhookOutput != null) {
-            const value_37: TaskWebhookOutput.ITaskWebhookOutput = new TaskWebhookOutput.TaskWebhookOutput(args.WebhookOutput);
-            this.WebhookOutput = value_37;
+        if (args.webhook_output != null) {
+            const value_37: TaskWebhookOutput.ITaskWebhookOutput = new TaskWebhookOutput.TaskWebhookOutput(args.webhook_output);
+            this.webhook_output = value_37;
         }
-        if (args.OriginId != null) {
-            const value_38: string = args.OriginId;
-            this.OriginId = value_38;
+        if (args.origin_id != null) {
+            const value_38: string = args.origin_id;
+            this.origin_id = value_38;
         }
     }
     public static read(input: thrift.TProtocol): TaskInfoDetail {

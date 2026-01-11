@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as Base from "./Base";
 export interface IEmptyRpcReq {
-    Base?: Base.IBase;
+    base?: Base.IBase;
 }
 export interface IEmptyRpcReqArgs {
-    Base?: Base.IBaseArgs;
+    base?: Base.IBaseArgs;
 }
 export const EmptyRpcReqCodec: thrift.IStructCodec<IEmptyRpcReqArgs, IEmptyRpcReq> = {
     encode(args: IEmptyRpcReqArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("EmptyRpcReq");
         if (obj.Base != null) {
@@ -55,19 +55,19 @@ export const EmptyRpcReqCodec: thrift.IStructCodec<IEmptyRpcReqArgs, IEmptyRpcRe
         }
         input.readStructEnd();
         return {
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class EmptyRpcReq extends thrift.StructLike implements IEmptyRpcReq {
-    public Base?: Base.IBase;
+    public base?: Base.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IEmptyRpcReqArgs = {}) {
         super();
-        if (args.Base != null) {
-            const value_2: Base.IBase = new Base.Base(args.Base);
-            this.Base = value_2;
+        if (args.base != null) {
+            const value_2: Base.IBase = new Base.Base(args.base);
+            this.base = value_2;
         }
     }
     public static read(input: thrift.TProtocol): EmptyRpcReq {

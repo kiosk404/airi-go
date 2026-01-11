@@ -7,33 +7,33 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as AnswerActions from "./AnswerActions";
 export interface IBotExtInfo {
-    AnswerActions?: AnswerActions.IAnswerActions;
-    CardIds?: Array<number>;
-    PromptId?: number;
-    BotTemplateName?: string;
-    UseUGCVoice?: boolean;
-    AppId?: number;
-    BindingMp?: boolean;
+    answer_actions?: AnswerActions.IAnswerActions;
+    card_ids?: Array<number>;
+    prompt_id?: number;
+    bot_template_name?: string;
+    use_u_g_c_voice?: boolean;
+    app_id?: number;
+    binding_mp?: boolean;
 }
 export interface IBotExtInfoArgs {
-    AnswerActions?: AnswerActions.IAnswerActionsArgs;
-    CardIds?: Array<number>;
-    PromptId?: number;
-    BotTemplateName?: string;
-    UseUGCVoice?: boolean;
-    AppId?: number;
-    BindingMp?: boolean;
+    answer_actions?: AnswerActions.IAnswerActionsArgs;
+    card_ids?: Array<number>;
+    prompt_id?: number;
+    bot_template_name?: string;
+    use_u_g_c_voice?: boolean;
+    app_id?: number;
+    binding_mp?: boolean;
 }
 export const BotExtInfoCodec: thrift.IStructCodec<IBotExtInfoArgs, IBotExtInfo> = {
     encode(args: IBotExtInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            AnswerActions: args.AnswerActions,
-            CardIds: args.CardIds,
-            PromptId: args.PromptId,
-            BotTemplateName: args.BotTemplateName,
-            UseUGCVoice: args.UseUGCVoice,
-            AppId: args.AppId,
-            BindingMp: args.BindingMp
+            AnswerActions: args.answer_actions,
+            CardIds: args.card_ids,
+            PromptId: args.prompt_id,
+            BotTemplateName: args.bot_template_name,
+            UseUGCVoice: args.use_u_g_c_voice,
+            AppId: args.app_id,
+            BindingMp: args.binding_mp
         };
         output.writeStructBegin("BotExtInfo");
         if (obj.AnswerActions != null) {
@@ -168,81 +168,81 @@ export const BotExtInfoCodec: thrift.IStructCodec<IBotExtInfoArgs, IBotExtInfo> 
         }
         input.readStructEnd();
         return {
-            AnswerActions: _args.AnswerActions,
-            CardIds: _args.CardIds,
-            PromptId: _args.PromptId,
-            BotTemplateName: _args.BotTemplateName,
-            UseUGCVoice: _args.UseUGCVoice,
-            AppId: _args.AppId,
-            BindingMp: _args.BindingMp
+            answer_actions: _args.AnswerActions,
+            card_ids: _args.CardIds,
+            prompt_id: _args.PromptId,
+            bot_template_name: _args.BotTemplateName,
+            use_u_g_c_voice: _args.UseUGCVoice,
+            app_id: _args.AppId,
+            binding_mp: _args.BindingMp
         };
     }
 };
 export class BotExtInfo extends thrift.StructLike implements IBotExtInfo {
-    public AnswerActions?: AnswerActions.IAnswerActions;
-    public CardIds?: Array<number>;
-    public PromptId?: number;
-    public BotTemplateName?: string;
-    public UseUGCVoice?: boolean;
-    public AppId?: number;
-    public BindingMp?: boolean;
+    public answer_actions?: AnswerActions.IAnswerActions;
+    public card_ids?: Array<number>;
+    public prompt_id?: number;
+    public bot_template_name?: string;
+    public use_u_g_c_voice?: boolean;
+    public app_id?: number;
+    public binding_mp?: boolean;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        AnswerActions: {
+        answer_actions: {
             'api.body': "answer_actions"
         },
-        CardIds: {
+        card_ids: {
             'api.body': "card_ids"
         },
-        PromptId: {
+        prompt_id: {
             'api.body': "prompt_id"
         },
-        BotTemplateName: {
+        bot_template_name: {
             'api.body': "bot_template_name"
         },
-        UseUGCVoice: {
+        use_u_g_c_voice: {
             'api.body': "use_ugc_voice"
         },
-        AppId: {
+        app_id: {
             'api.body': "app_id"
         },
-        BindingMp: {
+        binding_mp: {
             'api.body': "binding_mp"
         }
     };
     constructor(args: IBotExtInfoArgs = {}) {
         super();
-        if (args.AnswerActions != null) {
-            const value_10: AnswerActions.IAnswerActions = new AnswerActions.AnswerActions(args.AnswerActions);
-            this.AnswerActions = value_10;
+        if (args.answer_actions != null) {
+            const value_10: AnswerActions.IAnswerActions = new AnswerActions.AnswerActions(args.answer_actions);
+            this.answer_actions = value_10;
         }
-        if (args.CardIds != null) {
+        if (args.card_ids != null) {
             const value_11: Array<number> = new Array<number>();
-            args.CardIds.forEach((value_17: number): void => {
+            args.card_ids.forEach((value_17: number): void => {
                 const value_18: number = value_17;
                 value_11.push(value_18);
             });
-            this.CardIds = value_11;
+            this.card_ids = value_11;
         }
-        if (args.PromptId != null) {
-            const value_12: number = args.PromptId;
-            this.PromptId = value_12;
+        if (args.prompt_id != null) {
+            const value_12: number = args.prompt_id;
+            this.prompt_id = value_12;
         }
-        if (args.BotTemplateName != null) {
-            const value_13: string = args.BotTemplateName;
-            this.BotTemplateName = value_13;
+        if (args.bot_template_name != null) {
+            const value_13: string = args.bot_template_name;
+            this.bot_template_name = value_13;
         }
-        if (args.UseUGCVoice != null) {
-            const value_14: boolean = args.UseUGCVoice;
-            this.UseUGCVoice = value_14;
+        if (args.use_u_g_c_voice != null) {
+            const value_14: boolean = args.use_u_g_c_voice;
+            this.use_u_g_c_voice = value_14;
         }
-        if (args.AppId != null) {
-            const value_15: number = args.AppId;
-            this.AppId = value_15;
+        if (args.app_id != null) {
+            const value_15: number = args.app_id;
+            this.app_id = value_15;
         }
-        if (args.BindingMp != null) {
-            const value_16: boolean = args.BindingMp;
-            this.BindingMp = value_16;
+        if (args.binding_mp != null) {
+            const value_16: boolean = args.binding_mp;
+            this.binding_mp = value_16;
         }
     }
     public static read(input: thrift.TProtocol): BotExtInfo {

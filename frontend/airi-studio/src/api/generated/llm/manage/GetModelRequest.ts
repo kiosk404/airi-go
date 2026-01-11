@@ -8,17 +8,17 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IGetModelRequest {
     model_id?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetModelRequestArgs {
     model_id?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetModelRequestCodec: thrift.IStructCodec<IGetModelRequestArgs, IGetModelRequest> = {
     encode(args: IGetModelRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             model_id: (typeof args.model_id === "number" ? new thrift.Int64(args.model_id) : typeof args.model_id === "string" ? thrift.Int64.fromDecimalString(args.model_id) : args.model_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetModelRequest");
         if (obj.model_id != null) {
@@ -73,13 +73,13 @@ export const GetModelRequestCodec: thrift.IStructCodec<IGetModelRequestArgs, IGe
         input.readStructEnd();
         return {
             model_id: _args.model_id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class GetModelRequest extends thrift.StructLike implements IGetModelRequest {
     public model_id?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         model_id: {
@@ -94,9 +94,9 @@ export class GetModelRequest extends thrift.StructLike implements IGetModelReque
             const value_3: thrift.Int64 = (typeof args.model_id === "number" ? new thrift.Int64(args.model_id) : typeof args.model_id === "string" ? thrift.Int64.fromDecimalString(args.model_id) : args.model_id);
             this.model_id = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): GetModelRequest {

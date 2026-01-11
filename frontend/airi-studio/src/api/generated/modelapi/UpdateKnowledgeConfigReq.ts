@@ -9,17 +9,17 @@ import * as KnowledgeConfig from "./KnowledgeConfig";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IUpdateKnowledgeConfigReq {
     knowledge_config?: KnowledgeConfig.IKnowledgeConfig;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IUpdateKnowledgeConfigReqArgs {
     knowledge_config?: KnowledgeConfig.IKnowledgeConfigArgs;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const UpdateKnowledgeConfigReqCodec: thrift.IStructCodec<IUpdateKnowledgeConfigReqArgs, IUpdateKnowledgeConfigReq> = {
     encode(args: IUpdateKnowledgeConfigReqArgs, output: thrift.TProtocol): void {
         const obj: any = {
             knowledge_config: args.knowledge_config,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UpdateKnowledgeConfigReq");
         if (obj.knowledge_config != null) {
@@ -74,13 +74,13 @@ export const UpdateKnowledgeConfigReqCodec: thrift.IStructCodec<IUpdateKnowledge
         input.readStructEnd();
         return {
             knowledge_config: _args.knowledge_config,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class UpdateKnowledgeConfigReq extends thrift.StructLike implements IUpdateKnowledgeConfigReq {
     public knowledge_config?: KnowledgeConfig.IKnowledgeConfig;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUpdateKnowledgeConfigReqArgs = {}) {
@@ -89,9 +89,9 @@ export class UpdateKnowledgeConfigReq extends thrift.StructLike implements IUpda
             const value_3: KnowledgeConfig.IKnowledgeConfig = new KnowledgeConfig.KnowledgeConfig(args.knowledge_config);
             this.knowledge_config = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): UpdateKnowledgeConfigReq {

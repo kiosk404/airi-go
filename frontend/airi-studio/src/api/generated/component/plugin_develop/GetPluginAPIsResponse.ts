@@ -13,7 +13,7 @@ export interface IGetPluginAPIsResponse {
     api_info?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     total?: number;
     edit_version?: number;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IGetPluginAPIsResponseArgs {
     code?: number | string | thrift.Int64;
@@ -21,7 +21,7 @@ export interface IGetPluginAPIsResponseArgs {
     api_info?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs>;
     total?: number;
     edit_version?: number;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const GetPluginAPIsResponseCodec: thrift.IStructCodec<IGetPluginAPIsResponseArgs, IGetPluginAPIsResponse> = {
     encode(args: IGetPluginAPIsResponseArgs, output: thrift.TProtocol): void {
@@ -31,7 +31,7 @@ export const GetPluginAPIsResponseCodec: thrift.IStructCodec<IGetPluginAPIsRespo
             api_info: args.api_info,
             total: args.total,
             edit_version: args.edit_version,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetPluginAPIsResponse");
         if (obj.code != null) {
@@ -157,7 +157,7 @@ export const GetPluginAPIsResponseCodec: thrift.IStructCodec<IGetPluginAPIsRespo
             api_info: _args.api_info,
             total: _args.total,
             edit_version: _args.edit_version,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -167,7 +167,7 @@ export class GetPluginAPIsResponse extends thrift.StructLike implements IGetPlug
     public api_info?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     public total?: number;
     public edit_version?: number;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetPluginAPIsResponseArgs = {}) {
@@ -196,9 +196,9 @@ export class GetPluginAPIsResponse extends thrift.StructLike implements IGetPlug
             const value_13: number = args.edit_version;
             this.edit_version = value_13;
         }
-        if (args.BaseResp != null) {
-            const value_14: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_14;
+        if (args.base_resp != null) {
+            const value_14: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_14;
         }
     }
     public static read(input: thrift.TProtocol): GetPluginAPIsResponse {

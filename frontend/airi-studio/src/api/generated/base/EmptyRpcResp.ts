@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as BaseResp from "./BaseResp";
 export interface IEmptyRpcResp {
-    BaseResp?: BaseResp.IBaseResp;
+    base_resp?: BaseResp.IBaseResp;
 }
 export interface IEmptyRpcRespArgs {
-    BaseResp?: BaseResp.IBaseRespArgs;
+    base_resp?: BaseResp.IBaseRespArgs;
 }
 export const EmptyRpcRespCodec: thrift.IStructCodec<IEmptyRpcRespArgs, IEmptyRpcResp> = {
     encode(args: IEmptyRpcRespArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("EmptyRpcResp");
         if (obj.BaseResp != null) {
@@ -55,19 +55,19 @@ export const EmptyRpcRespCodec: thrift.IStructCodec<IEmptyRpcRespArgs, IEmptyRpc
         }
         input.readStructEnd();
         return {
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
 export class EmptyRpcResp extends thrift.StructLike implements IEmptyRpcResp {
-    public BaseResp?: BaseResp.IBaseResp;
+    public base_resp?: BaseResp.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IEmptyRpcRespArgs = {}) {
         super();
-        if (args.BaseResp != null) {
-            const value_2: BaseResp.IBaseResp = new BaseResp.BaseResp(args.BaseResp);
-            this.BaseResp = value_2;
+        if (args.base_resp != null) {
+            const value_2: BaseResp.IBaseResp = new BaseResp.BaseResp(args.base_resp);
+            this.base_resp = value_2;
         }
     }
     public static read(input: thrift.TProtocol): EmptyRpcResp {

@@ -9,19 +9,19 @@ import * as ConversationData from "./ConversationData";
 export interface ICreateConversationResponse {
     code?: thrift.Int64;
     msg?: string;
-    ConversationData?: ConversationData.IConversationData;
+    conversation_data?: ConversationData.IConversationData;
 }
 export interface ICreateConversationResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    ConversationData?: ConversationData.IConversationDataArgs;
+    conversation_data?: ConversationData.IConversationDataArgs;
 }
 export const CreateConversationResponseCodec: thrift.IStructCodec<ICreateConversationResponseArgs, ICreateConversationResponse> = {
     encode(args: ICreateConversationResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            ConversationData: args.ConversationData
+            ConversationData: args.conversation_data
         };
         output.writeStructBegin("CreateConversationResponse");
         if (obj.code != null) {
@@ -91,17 +91,17 @@ export const CreateConversationResponseCodec: thrift.IStructCodec<ICreateConvers
         return {
             code: _args.code,
             msg: _args.msg,
-            ConversationData: _args.ConversationData
+            conversation_data: _args.ConversationData
         };
     }
 };
 export class CreateConversationResponse extends thrift.StructLike implements ICreateConversationResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public ConversationData?: ConversationData.IConversationData;
+    public conversation_data?: ConversationData.IConversationData;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ConversationData: {
+        conversation_data: {
             'api.body': "data"
         }
     };
@@ -115,9 +115,9 @@ export class CreateConversationResponse extends thrift.StructLike implements ICr
             const value_5: string = args.msg;
             this.msg = value_5;
         }
-        if (args.ConversationData != null) {
-            const value_6: ConversationData.IConversationData = new ConversationData.ConversationData(args.ConversationData);
-            this.ConversationData = value_6;
+        if (args.conversation_data != null) {
+            const value_6: ConversationData.IConversationData = new ConversationData.ConversationData(args.conversation_data);
+            this.conversation_data = value_6;
         }
     }
     public static read(input: thrift.TProtocol): CreateConversationResponse {

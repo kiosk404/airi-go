@@ -7,18 +7,18 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ContextMode from "./ContextMode";
 export interface IShortMemoryPolicy {
-    ContextMode?: ContextMode.ContextMode;
-    HistoryRound?: number;
+    context_mode?: ContextMode.ContextMode;
+    history_round?: number;
 }
 export interface IShortMemoryPolicyArgs {
-    ContextMode?: ContextMode.ContextMode;
-    HistoryRound?: number;
+    context_mode?: ContextMode.ContextMode;
+    history_round?: number;
 }
 export const ShortMemoryPolicyCodec: thrift.IStructCodec<IShortMemoryPolicyArgs, IShortMemoryPolicy> = {
     encode(args: IShortMemoryPolicyArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ContextMode: args.ContextMode,
-            HistoryRound: args.HistoryRound
+            ContextMode: args.context_mode,
+            HistoryRound: args.history_round
         };
         output.writeStructBegin("ShortMemoryPolicy");
         if (obj.ContextMode != null) {
@@ -72,32 +72,32 @@ export const ShortMemoryPolicyCodec: thrift.IStructCodec<IShortMemoryPolicyArgs,
         }
         input.readStructEnd();
         return {
-            ContextMode: _args.ContextMode,
-            HistoryRound: _args.HistoryRound
+            context_mode: _args.ContextMode,
+            history_round: _args.HistoryRound
         };
     }
 };
 export class ShortMemoryPolicy extends thrift.StructLike implements IShortMemoryPolicy {
-    public ContextMode?: ContextMode.ContextMode;
-    public HistoryRound?: number;
+    public context_mode?: ContextMode.ContextMode;
+    public history_round?: number;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ContextMode: {
+        context_mode: {
             'api.body': "context_mode"
         },
-        HistoryRound: {
+        history_round: {
             'api.body': "history_round"
         }
     };
     constructor(args: IShortMemoryPolicyArgs = {}) {
         super();
-        if (args.ContextMode != null) {
-            const value_3: ContextMode.ContextMode = args.ContextMode;
-            this.ContextMode = value_3;
+        if (args.context_mode != null) {
+            const value_3: ContextMode.ContextMode = args.context_mode;
+            this.context_mode = value_3;
         }
-        if (args.HistoryRound != null) {
-            const value_4: number = args.HistoryRound;
-            this.HistoryRound = value_4;
+        if (args.history_round != null) {
+            const value_4: number = args.history_round;
+            this.history_round = value_4;
         }
     }
     public static read(input: thrift.TProtocol): ShortMemoryPolicy {

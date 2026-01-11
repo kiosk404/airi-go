@@ -10,13 +10,13 @@ export interface IPublishPluginResponse {
     code?: thrift.Int64;
     msg?: string;
     version_ts?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IPublishPluginResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     version_ts?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const PublishPluginResponseCodec: thrift.IStructCodec<IPublishPluginResponseArgs, IPublishPluginResponse> = {
     encode(args: IPublishPluginResponseArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const PublishPluginResponseCodec: thrift.IStructCodec<IPublishPluginRespo
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             version_ts: args.version_ts,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("PublishPluginResponse");
         if (obj.code != null) {
@@ -109,7 +109,7 @@ export const PublishPluginResponseCodec: thrift.IStructCodec<IPublishPluginRespo
             code: _args.code,
             msg: _args.msg,
             version_ts: _args.version_ts,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -117,7 +117,7 @@ export class PublishPluginResponse extends thrift.StructLike implements IPublish
     public code?: thrift.Int64;
     public msg?: string;
     public version_ts?: string;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IPublishPluginResponseArgs = {}) {
@@ -134,9 +134,9 @@ export class PublishPluginResponse extends thrift.StructLike implements IPublish
             const value_7: string = args.version_ts;
             this.version_ts = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): PublishPluginResponse {

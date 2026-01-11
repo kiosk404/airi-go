@@ -6,21 +6,21 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IBaseResp {
-    StatusMessage?: string;
-    StatusCode?: number;
-    Extra?: Map<string, string>;
+    status_message?: string;
+    status_code?: number;
+    extra?: Map<string, string>;
 }
 export interface IBaseRespArgs {
-    StatusMessage?: string;
-    StatusCode?: number;
-    Extra?: Map<string, string>;
+    status_message?: string;
+    status_code?: number;
+    extra?: Map<string, string>;
 }
 export const BaseRespCodec: thrift.IStructCodec<IBaseRespArgs, IBaseResp> = {
     encode(args: IBaseRespArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            StatusMessage: (args.StatusMessage != null ? args.StatusMessage : ""),
-            StatusCode: (args.StatusCode != null ? args.StatusCode : 0),
-            Extra: args.Extra
+            StatusMessage: (args.status_message != null ? args.status_message : ""),
+            StatusCode: (args.status_code != null ? args.status_code : 0),
+            Extra: args.extra
         };
         output.writeStructBegin("BaseResp");
         if (obj.StatusMessage != null) {
@@ -101,36 +101,36 @@ export const BaseRespCodec: thrift.IStructCodec<IBaseRespArgs, IBaseResp> = {
         }
         input.readStructEnd();
         return {
-            StatusMessage: (_args.StatusMessage != null ? _args.StatusMessage : ""),
-            StatusCode: (_args.StatusCode != null ? _args.StatusCode : 0),
-            Extra: _args.Extra
+            status_message: (_args.StatusMessage != null ? _args.StatusMessage : ""),
+            status_code: (_args.StatusCode != null ? _args.StatusCode : 0),
+            extra: _args.Extra
         };
     }
 };
 export class BaseResp extends thrift.StructLike implements IBaseResp {
-    public StatusMessage?: string = "";
-    public StatusCode?: number = 0;
-    public Extra?: Map<string, string>;
+    public status_message?: string = "";
+    public status_code?: number = 0;
+    public extra?: Map<string, string>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IBaseRespArgs = {}) {
         super();
-        if (args.StatusMessage != null) {
-            const value_6: string = args.StatusMessage;
-            this.StatusMessage = value_6;
+        if (args.status_message != null) {
+            const value_6: string = args.status_message;
+            this.status_message = value_6;
         }
-        if (args.StatusCode != null) {
-            const value_7: number = args.StatusCode;
-            this.StatusCode = value_7;
+        if (args.status_code != null) {
+            const value_7: number = args.status_code;
+            this.status_code = value_7;
         }
-        if (args.Extra != null) {
+        if (args.extra != null) {
             const value_8: Map<string, string> = new Map<string, string>();
-            args.Extra.forEach((value_9: string, key_3: string): void => {
+            args.extra.forEach((value_9: string, key_3: string): void => {
                 const value_10: string = value_9;
                 const key_4: string = key_3;
                 value_8.set(key_4, value_10);
             });
-            this.Extra = value_8;
+            this.extra = value_8;
         }
     }
     public static read(input: thrift.TProtocol): BaseResp {

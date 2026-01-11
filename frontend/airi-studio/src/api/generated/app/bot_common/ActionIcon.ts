@@ -6,27 +6,27 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IActionIcon {
-    Type?: string;
-    DefaultUrl?: string;
-    ActiveUrl?: string;
-    DefaultUri?: string;
-    ActiveUri?: string;
+    type?: string;
+    default_url?: string;
+    active_url?: string;
+    default_uri?: string;
+    active_uri?: string;
 }
 export interface IActionIconArgs {
-    Type?: string;
-    DefaultUrl?: string;
-    ActiveUrl?: string;
-    DefaultUri?: string;
-    ActiveUri?: string;
+    type?: string;
+    default_url?: string;
+    active_url?: string;
+    default_uri?: string;
+    active_uri?: string;
 }
 export const ActionIconCodec: thrift.IStructCodec<IActionIconArgs, IActionIcon> = {
     encode(args: IActionIconArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Type: args.Type,
-            DefaultUrl: args.DefaultUrl,
-            ActiveUrl: args.ActiveUrl,
-            DefaultUri: args.DefaultUri,
-            ActiveUri: args.ActiveUri
+            Type: args.type,
+            DefaultUrl: args.default_url,
+            ActiveUrl: args.active_url,
+            DefaultUri: args.default_uri,
+            ActiveUri: args.active_uri
         };
         output.writeStructBegin("ActionIcon");
         if (obj.Type != null) {
@@ -122,59 +122,59 @@ export const ActionIconCodec: thrift.IStructCodec<IActionIconArgs, IActionIcon> 
         }
         input.readStructEnd();
         return {
-            Type: _args.Type,
-            DefaultUrl: _args.DefaultUrl,
-            ActiveUrl: _args.ActiveUrl,
-            DefaultUri: _args.DefaultUri,
-            ActiveUri: _args.ActiveUri
+            type: _args.Type,
+            default_url: _args.DefaultUrl,
+            active_url: _args.ActiveUrl,
+            default_uri: _args.DefaultUri,
+            active_uri: _args.ActiveUri
         };
     }
 };
 export class ActionIcon extends thrift.StructLike implements IActionIcon {
-    public Type?: string;
-    public DefaultUrl?: string;
-    public ActiveUrl?: string;
-    public DefaultUri?: string;
-    public ActiveUri?: string;
+    public type?: string;
+    public default_url?: string;
+    public active_url?: string;
+    public default_uri?: string;
+    public active_uri?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Type: {
+        type: {
             'api.body': "type"
         },
-        DefaultUrl: {
+        default_url: {
             'api.body': "default_url"
         },
-        ActiveUrl: {
+        active_url: {
             'api.body': "active_url"
         },
-        DefaultUri: {
+        default_uri: {
             'api.body': "default_uri"
         },
-        ActiveUri: {
+        active_uri: {
             'api.body': "active_uri"
         }
     };
     constructor(args: IActionIconArgs = {}) {
         super();
-        if (args.Type != null) {
-            const value_6: string = args.Type;
-            this.Type = value_6;
+        if (args.type != null) {
+            const value_6: string = args.type;
+            this.type = value_6;
         }
-        if (args.DefaultUrl != null) {
-            const value_7: string = args.DefaultUrl;
-            this.DefaultUrl = value_7;
+        if (args.default_url != null) {
+            const value_7: string = args.default_url;
+            this.default_url = value_7;
         }
-        if (args.ActiveUrl != null) {
-            const value_8: string = args.ActiveUrl;
-            this.ActiveUrl = value_8;
+        if (args.active_url != null) {
+            const value_8: string = args.active_url;
+            this.active_url = value_8;
         }
-        if (args.DefaultUri != null) {
-            const value_9: string = args.DefaultUri;
-            this.DefaultUri = value_9;
+        if (args.default_uri != null) {
+            const value_9: string = args.default_uri;
+            this.default_uri = value_9;
         }
-        if (args.ActiveUri != null) {
-            const value_10: string = args.ActiveUri;
-            this.ActiveUri = value_10;
+        if (args.active_uri != null) {
+            const value_10: string = args.active_uri;
+            this.active_uri = value_10;
         }
     }
     public static read(input: thrift.TProtocol): ActionIcon {

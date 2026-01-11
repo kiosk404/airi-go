@@ -8,17 +8,17 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IGetUserInfoRequest {
     user_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetUserInfoRequestArgs {
     user_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetUserInfoRequestCodec: thrift.IStructCodec<IGetUserInfoRequestArgs, IGetUserInfoRequest> = {
     encode(args: IGetUserInfoRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             user_id: args.user_id,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetUserInfoRequest");
         if (obj.user_id != null) {
@@ -73,13 +73,13 @@ export const GetUserInfoRequestCodec: thrift.IStructCodec<IGetUserInfoRequestArg
         input.readStructEnd();
         return {
             user_id: _args.user_id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class GetUserInfoRequest extends thrift.StructLike implements IGetUserInfoRequest {
     public user_id?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetUserInfoRequestArgs = {}) {
@@ -88,9 +88,9 @@ export class GetUserInfoRequest extends thrift.StructLike implements IGetUserInf
             const value_3: string = args.user_id;
             this.user_id = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): GetUserInfoRequest {

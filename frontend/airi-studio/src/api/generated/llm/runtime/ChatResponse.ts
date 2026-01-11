@@ -9,17 +9,17 @@ import * as LLM_DOMAIN_RUNTIME_NS from "../domain/runtime";
 import * as BASE_NS from "../../base";
 export interface IChatResponse {
     message?: LLM_DOMAIN_RUNTIME_NS.IMessage;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IChatResponseArgs {
     message?: LLM_DOMAIN_RUNTIME_NS.IMessageArgs;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const ChatResponseCodec: thrift.IStructCodec<IChatResponseArgs, IChatResponse> = {
     encode(args: IChatResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
             message: args.message,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("ChatResponse");
         if (obj.message != null) {
@@ -74,13 +74,13 @@ export const ChatResponseCodec: thrift.IStructCodec<IChatResponseArgs, IChatResp
         input.readStructEnd();
         return {
             message: _args.message,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
 export class ChatResponse extends thrift.StructLike implements IChatResponse {
     public message?: LLM_DOMAIN_RUNTIME_NS.IMessage;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IChatResponseArgs = {}) {
@@ -89,9 +89,9 @@ export class ChatResponse extends thrift.StructLike implements IChatResponse {
             const value_3: LLM_DOMAIN_RUNTIME_NS.IMessage = new LLM_DOMAIN_RUNTIME_NS.Message(args.message);
             this.message = value_3;
         }
-        if (args.BaseResp != null) {
-            const value_4: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_4;
+        if (args.base_resp != null) {
+            const value_4: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_4;
         }
     }
     public static read(input: thrift.TProtocol): ChatResponse {

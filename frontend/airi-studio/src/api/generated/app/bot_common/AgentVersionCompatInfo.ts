@@ -7,17 +7,17 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as AgentVersionCompat from "./AgentVersionCompat";
 export interface IAgentVersionCompatInfo {
-    VersionCompat?: AgentVersionCompat.AgentVersionCompat;
+    version_compat?: AgentVersionCompat.AgentVersionCompat;
     version?: string;
 }
 export interface IAgentVersionCompatInfoArgs {
-    VersionCompat?: AgentVersionCompat.AgentVersionCompat;
+    version_compat?: AgentVersionCompat.AgentVersionCompat;
     version?: string;
 }
 export const AgentVersionCompatInfoCodec: thrift.IStructCodec<IAgentVersionCompatInfoArgs, IAgentVersionCompatInfo> = {
     encode(args: IAgentVersionCompatInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            VersionCompat: args.VersionCompat,
+            VersionCompat: args.version_compat,
             version: args.version
         };
         output.writeStructBegin("AgentVersionCompatInfo");
@@ -72,25 +72,25 @@ export const AgentVersionCompatInfoCodec: thrift.IStructCodec<IAgentVersionCompa
         }
         input.readStructEnd();
         return {
-            VersionCompat: _args.VersionCompat,
+            version_compat: _args.VersionCompat,
             version: _args.version
         };
     }
 };
 export class AgentVersionCompatInfo extends thrift.StructLike implements IAgentVersionCompatInfo {
-    public VersionCompat?: AgentVersionCompat.AgentVersionCompat;
+    public version_compat?: AgentVersionCompat.AgentVersionCompat;
     public version?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        VersionCompat: {
+        version_compat: {
             'api.body': "version_compat"
         }
     };
     constructor(args: IAgentVersionCompatInfoArgs = {}) {
         super();
-        if (args.VersionCompat != null) {
-            const value_3: AgentVersionCompat.AgentVersionCompat = args.VersionCompat;
-            this.VersionCompat = value_3;
+        if (args.version_compat != null) {
+            const value_3: AgentVersionCompat.AgentVersionCompat = args.version_compat;
+            this.version_compat = value_3;
         }
         if (args.version != null) {
             const value_4: string = args.version;

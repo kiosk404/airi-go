@@ -11,13 +11,13 @@ export interface IGetBasicConfigurationResp {
     configuration?: BasicConfiguration.IBasicConfiguration;
     code: thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IGetBasicConfigurationRespArgs {
     configuration?: BasicConfiguration.IBasicConfigurationArgs;
     code: number | string | thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const GetBasicConfigurationRespCodec: thrift.IStructCodec<IGetBasicConfigurationRespArgs, IGetBasicConfigurationResp> = {
     encode(args: IGetBasicConfigurationRespArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const GetBasicConfigurationRespCodec: thrift.IStructCodec<IGetBasicConfig
             configuration: args.configuration,
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetBasicConfigurationResp");
         if (obj.configuration != null) {
@@ -120,7 +120,7 @@ export const GetBasicConfigurationRespCodec: thrift.IStructCodec<IGetBasicConfig
                 configuration: _args.configuration,
                 code: _args.code,
                 msg: _args.msg,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -132,10 +132,10 @@ export class GetBasicConfigurationResp extends thrift.StructLike implements IGet
     public configuration?: BasicConfiguration.IBasicConfiguration;
     public code: thrift.Int64;
     public msg: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        BaseResp: {
+        base_resp: {
             'api.none': "true"
         }
     };
@@ -159,9 +159,9 @@ export class GetBasicConfigurationResp extends thrift.StructLike implements IGet
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[msg] is unset!");
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

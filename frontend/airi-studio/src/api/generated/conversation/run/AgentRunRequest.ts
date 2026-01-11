@@ -24,7 +24,7 @@ export interface IAgentRunRequest {
     insert_history_message_list?: Array<string>;
     device_id?: string;
     mention_list?: Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfo>;
-    toolList?: Array<Tool.ITool>;
+    tool_list?: Array<Tool.ITool>;
     commit_version?: string;
     sub_scene?: string;
     diff_mode_identifier?: DiffModeIdentifier.DiffModeIdentifier;
@@ -45,7 +45,7 @@ export interface IAgentRunRequestArgs {
     insert_history_message_list?: Array<string>;
     device_id?: string;
     mention_list?: Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfoArgs>;
-    toolList?: Array<Tool.IToolArgs>;
+    tool_list?: Array<Tool.IToolArgs>;
     commit_version?: string;
     sub_scene?: string;
     diff_mode_identifier?: DiffModeIdentifier.DiffModeIdentifier;
@@ -68,7 +68,7 @@ export const AgentRunRequestCodec: thrift.IStructCodec<IAgentRunRequestArgs, IAg
             insert_history_message_list: args.insert_history_message_list,
             device_id: args.device_id,
             mention_list: args.mention_list,
-            toolList: args.toolList,
+            toolList: args.tool_list,
             commit_version: args.commit_version,
             sub_scene: args.sub_scene,
             diff_mode_identifier: args.diff_mode_identifier,
@@ -444,7 +444,7 @@ export const AgentRunRequestCodec: thrift.IStructCodec<IAgentRunRequestArgs, IAg
                 insert_history_message_list: _args.insert_history_message_list,
                 device_id: _args.device_id,
                 mention_list: _args.mention_list,
-                toolList: _args.toolList,
+                tool_list: _args.toolList,
                 commit_version: _args.commit_version,
                 sub_scene: _args.sub_scene,
                 diff_mode_identifier: _args.diff_mode_identifier,
@@ -471,7 +471,7 @@ export class AgentRunRequest extends thrift.StructLike implements IAgentRunReque
     public insert_history_message_list?: Array<string>;
     public device_id?: string;
     public mention_list?: Array<CONVERSATION_MESSAGE_NS.IMsgParticipantInfo>;
-    public toolList?: Array<Tool.ITool>;
+    public tool_list?: Array<Tool.ITool>;
     public commit_version?: string;
     public sub_scene?: string;
     public diff_mode_identifier?: DiffModeIdentifier.DiffModeIdentifier;
@@ -575,13 +575,13 @@ export class AgentRunRequest extends thrift.StructLike implements IAgentRunReque
             });
             this.mention_list = value_43;
         }
-        if (args.toolList != null) {
+        if (args.tool_list != null) {
             const value_44: Array<Tool.ITool> = new Array<Tool.ITool>();
-            args.toolList.forEach((value_57: Tool.IToolArgs): void => {
+            args.tool_list.forEach((value_57: Tool.IToolArgs): void => {
                 const value_58: Tool.ITool = new Tool.Tool(value_57);
                 value_44.push(value_58);
             });
-            this.toolList = value_44;
+            this.tool_list = value_44;
         }
         if (args.commit_version != null) {
             const value_45: string = args.commit_version;

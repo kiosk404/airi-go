@@ -11,13 +11,13 @@ export interface IProjectResourceListResponse {
     code?: thrift.Int64;
     msg?: string;
     resource_groups?: Array<RESOURCE_COMMON_NS.IProjectResourceGroup>;
-    BaseResp: BASE_NS.IBaseResp;
+    base_resp: BASE_NS.IBaseResp;
 }
 export interface IProjectResourceListResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     resource_groups?: Array<RESOURCE_COMMON_NS.IProjectResourceGroupArgs>;
-    BaseResp: BASE_NS.IBaseRespArgs;
+    base_resp: BASE_NS.IBaseRespArgs;
 }
 export const ProjectResourceListResponseCodec: thrift.IStructCodec<IProjectResourceListResponseArgs, IProjectResourceListResponse> = {
     encode(args: IProjectResourceListResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const ProjectResourceListResponseCodec: thrift.IStructCodec<IProjectResou
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             resource_groups: args.resource_groups,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("ProjectResourceListResponse");
         if (obj.code != null) {
@@ -125,7 +125,7 @@ export const ProjectResourceListResponseCodec: thrift.IStructCodec<IProjectResou
                 code: _args.code,
                 msg: _args.msg,
                 resource_groups: _args.resource_groups,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -137,7 +137,7 @@ export class ProjectResourceListResponse extends thrift.StructLike implements IP
     public code?: thrift.Int64;
     public msg?: string;
     public resource_groups?: Array<RESOURCE_COMMON_NS.IProjectResourceGroup>;
-    public BaseResp: BASE_NS.IBaseResp;
+    public base_resp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IProjectResourceListResponseArgs) {
@@ -158,9 +158,9 @@ export class ProjectResourceListResponse extends thrift.StructLike implements IP
             });
             this.resource_groups = value_9;
         }
-        if (args.BaseResp != null) {
-            const value_10: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_10;
+        if (args.base_resp != null) {
+            const value_10: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_10;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

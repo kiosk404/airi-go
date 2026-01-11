@@ -9,19 +9,19 @@ import * as __ROOT_NAMESPACE__ from "../../base";
 export interface ILoginByPasswordRequest {
     account?: string;
     password?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface ILoginByPasswordRequestArgs {
     account?: string;
     password?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const LoginByPasswordRequestCodec: thrift.IStructCodec<ILoginByPasswordRequestArgs, ILoginByPasswordRequest> = {
     encode(args: ILoginByPasswordRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             account: args.account,
             password: args.password,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("LoginByPasswordRequest");
         if (obj.account != null) {
@@ -91,14 +91,14 @@ export const LoginByPasswordRequestCodec: thrift.IStructCodec<ILoginByPasswordRe
         return {
             account: _args.account,
             password: _args.password,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class LoginByPasswordRequest extends thrift.StructLike implements ILoginByPasswordRequest {
     public account?: string;
     public password?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ILoginByPasswordRequestArgs = {}) {
@@ -111,9 +111,9 @@ export class LoginByPasswordRequest extends thrift.StructLike implements ILoginB
             const value_5: string = args.password;
             this.password = value_5;
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): LoginByPasswordRequest {

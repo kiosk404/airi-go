@@ -8,18 +8,18 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as MultiAgentSessionType from "./MultiAgentSessionType";
 import * as AgentVersionCompatInfo from "./AgentVersionCompatInfo";
 export interface IMultiAgentInfo {
-    SessionType?: MultiAgentSessionType.MultiAgentSessionType;
-    VersionCompatInfo?: AgentVersionCompatInfo.IAgentVersionCompatInfo;
+    session_type?: MultiAgentSessionType.MultiAgentSessionType;
+    version_compat_info?: AgentVersionCompatInfo.IAgentVersionCompatInfo;
 }
 export interface IMultiAgentInfoArgs {
-    SessionType?: MultiAgentSessionType.MultiAgentSessionType;
-    VersionCompatInfo?: AgentVersionCompatInfo.IAgentVersionCompatInfoArgs;
+    session_type?: MultiAgentSessionType.MultiAgentSessionType;
+    version_compat_info?: AgentVersionCompatInfo.IAgentVersionCompatInfoArgs;
 }
 export const MultiAgentInfoCodec: thrift.IStructCodec<IMultiAgentInfoArgs, IMultiAgentInfo> = {
     encode(args: IMultiAgentInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            SessionType: args.SessionType,
-            VersionCompatInfo: args.VersionCompatInfo
+            SessionType: args.session_type,
+            VersionCompatInfo: args.version_compat_info
         };
         output.writeStructBegin("MultiAgentInfo");
         if (obj.SessionType != null) {
@@ -73,32 +73,32 @@ export const MultiAgentInfoCodec: thrift.IStructCodec<IMultiAgentInfoArgs, IMult
         }
         input.readStructEnd();
         return {
-            SessionType: _args.SessionType,
-            VersionCompatInfo: _args.VersionCompatInfo
+            session_type: _args.SessionType,
+            version_compat_info: _args.VersionCompatInfo
         };
     }
 };
 export class MultiAgentInfo extends thrift.StructLike implements IMultiAgentInfo {
-    public SessionType?: MultiAgentSessionType.MultiAgentSessionType;
-    public VersionCompatInfo?: AgentVersionCompatInfo.IAgentVersionCompatInfo;
+    public session_type?: MultiAgentSessionType.MultiAgentSessionType;
+    public version_compat_info?: AgentVersionCompatInfo.IAgentVersionCompatInfo;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        SessionType: {
+        session_type: {
             'api.body': "session_type"
         },
-        VersionCompatInfo: {
+        version_compat_info: {
             'api.body': "version_compat_info"
         }
     };
     constructor(args: IMultiAgentInfoArgs = {}) {
         super();
-        if (args.SessionType != null) {
-            const value_3: MultiAgentSessionType.MultiAgentSessionType = args.SessionType;
-            this.SessionType = value_3;
+        if (args.session_type != null) {
+            const value_3: MultiAgentSessionType.MultiAgentSessionType = args.session_type;
+            this.session_type = value_3;
         }
-        if (args.VersionCompatInfo != null) {
-            const value_4: AgentVersionCompatInfo.IAgentVersionCompatInfo = new AgentVersionCompatInfo.AgentVersionCompatInfo(args.VersionCompatInfo);
-            this.VersionCompatInfo = value_4;
+        if (args.version_compat_info != null) {
+            const value_4: AgentVersionCompatInfo.IAgentVersionCompatInfo = new AgentVersionCompatInfo.AgentVersionCompatInfo(args.version_compat_info);
+            this.version_compat_info = value_4;
         }
     }
     public static read(input: thrift.TProtocol): MultiAgentInfo {

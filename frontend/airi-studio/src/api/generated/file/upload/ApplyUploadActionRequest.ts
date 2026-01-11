@@ -6,33 +6,33 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IApplyUploadActionRequest {
-    Action?: string;
-    Version?: string;
-    ServiceId?: string;
-    FileExtension?: string;
-    FileSize?: string;
+    action?: string;
+    version?: string;
+    service_id?: string;
+    file_extension?: string;
+    file_size?: string;
     s?: string;
-    ByteData?: Buffer;
+    byte_data?: Buffer;
 }
 export interface IApplyUploadActionRequestArgs {
-    Action?: string;
-    Version?: string;
-    ServiceId?: string;
-    FileExtension?: string;
-    FileSize?: string;
+    action?: string;
+    version?: string;
+    service_id?: string;
+    file_extension?: string;
+    file_size?: string;
     s?: string;
-    ByteData?: string | Buffer;
+    byte_data?: string | Buffer;
 }
 export const ApplyUploadActionRequestCodec: thrift.IStructCodec<IApplyUploadActionRequestArgs, IApplyUploadActionRequest> = {
     encode(args: IApplyUploadActionRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Action: args.Action,
-            Version: args.Version,
-            ServiceId: args.ServiceId,
-            FileExtension: args.FileExtension,
-            FileSize: args.FileSize,
+            Action: args.action,
+            Version: args.version,
+            ServiceId: args.service_id,
+            FileExtension: args.file_extension,
+            FileSize: args.file_size,
             s: args.s,
-            ByteData: (typeof args.ByteData === "string" ? Buffer.from(args.ByteData) : args.ByteData)
+            ByteData: (typeof args.byte_data === "string" ? Buffer.from(args.byte_data) : args.byte_data)
         };
         output.writeStructBegin("ApplyUploadActionRequest");
         if (obj.Action != null) {
@@ -156,77 +156,77 @@ export const ApplyUploadActionRequestCodec: thrift.IStructCodec<IApplyUploadActi
         }
         input.readStructEnd();
         return {
-            Action: _args.Action,
-            Version: _args.Version,
-            ServiceId: _args.ServiceId,
-            FileExtension: _args.FileExtension,
-            FileSize: _args.FileSize,
+            action: _args.Action,
+            version: _args.Version,
+            service_id: _args.ServiceId,
+            file_extension: _args.FileExtension,
+            file_size: _args.FileSize,
             s: _args.s,
-            ByteData: _args.ByteData
+            byte_data: _args.ByteData
         };
     }
 };
 export class ApplyUploadActionRequest extends thrift.StructLike implements IApplyUploadActionRequest {
-    public Action?: string;
-    public Version?: string;
-    public ServiceId?: string;
-    public FileExtension?: string;
-    public FileSize?: string;
+    public action?: string;
+    public version?: string;
+    public service_id?: string;
+    public file_extension?: string;
+    public file_size?: string;
     public s?: string;
-    public ByteData?: Buffer;
+    public byte_data?: Buffer;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Action: {
+        action: {
             'api.query': "Action"
         },
-        Version: {
+        version: {
             'api.query': "Version"
         },
-        ServiceId: {
+        service_id: {
             'api.query': "ServiceId"
         },
-        FileExtension: {
+        file_extension: {
             'api.query': "FileExtension"
         },
-        FileSize: {
+        file_size: {
             'api.query': "FileSize"
         },
         s: {
             'api.query': "s"
         },
-        ByteData: {
+        byte_data: {
             'api.raw_body': ""
         }
     };
     constructor(args: IApplyUploadActionRequestArgs = {}) {
         super();
-        if (args.Action != null) {
-            const value_8: string = args.Action;
-            this.Action = value_8;
+        if (args.action != null) {
+            const value_8: string = args.action;
+            this.action = value_8;
         }
-        if (args.Version != null) {
-            const value_9: string = args.Version;
-            this.Version = value_9;
+        if (args.version != null) {
+            const value_9: string = args.version;
+            this.version = value_9;
         }
-        if (args.ServiceId != null) {
-            const value_10: string = args.ServiceId;
-            this.ServiceId = value_10;
+        if (args.service_id != null) {
+            const value_10: string = args.service_id;
+            this.service_id = value_10;
         }
-        if (args.FileExtension != null) {
-            const value_11: string = args.FileExtension;
-            this.FileExtension = value_11;
+        if (args.file_extension != null) {
+            const value_11: string = args.file_extension;
+            this.file_extension = value_11;
         }
-        if (args.FileSize != null) {
-            const value_12: string = args.FileSize;
-            this.FileSize = value_12;
+        if (args.file_size != null) {
+            const value_12: string = args.file_size;
+            this.file_size = value_12;
         }
         if (args.s != null) {
             const value_13: string = args.s;
             this.s = value_13;
         }
-        if (args.ByteData != null) {
-            const value_14: Buffer = (typeof args.ByteData === "string" ? Buffer.from(args.ByteData) : args.ByteData);
-            this.ByteData = value_14;
+        if (args.byte_data != null) {
+            const value_14: Buffer = (typeof args.byte_data === "string" ? Buffer.from(args.byte_data) : args.byte_data);
+            this.byte_data = value_14;
         }
     }
     public static read(input: thrift.TProtocol): ApplyUploadActionRequest {

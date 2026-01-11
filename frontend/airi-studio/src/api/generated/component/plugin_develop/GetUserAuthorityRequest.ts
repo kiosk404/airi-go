@@ -11,13 +11,13 @@ export interface IGetUserAuthorityRequest {
     plugin_id: thrift.Int64;
     creation_method: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     project_id?: thrift.Int64;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IGetUserAuthorityRequestArgs {
     plugin_id: number | string | thrift.Int64;
     creation_method: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     project_id?: number | string | thrift.Int64;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const GetUserAuthorityRequestCodec: thrift.IStructCodec<IGetUserAuthorityRequestArgs, IGetUserAuthorityRequest> = {
     encode(args: IGetUserAuthorityRequestArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const GetUserAuthorityRequestCodec: thrift.IStructCodec<IGetUserAuthority
             plugin_id: (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id),
             creation_method: args.creation_method,
             project_id: (typeof args.project_id === "number" ? new thrift.Int64(args.project_id) : typeof args.project_id === "string" ? thrift.Int64.fromDecimalString(args.project_id) : args.project_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetUserAuthorityRequest");
         if (obj.plugin_id != null) {
@@ -117,7 +117,7 @@ export const GetUserAuthorityRequestCodec: thrift.IStructCodec<IGetUserAuthority
                 plugin_id: _args.plugin_id,
                 creation_method: _args.creation_method,
                 project_id: _args.project_id,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -129,7 +129,7 @@ export class GetUserAuthorityRequest extends thrift.StructLike implements IGetUs
     public plugin_id: thrift.Int64;
     public creation_method: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.CreationMethod;
     public project_id?: thrift.Int64;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -164,9 +164,9 @@ export class GetUserAuthorityRequest extends thrift.StructLike implements IGetUs
             const value_7: thrift.Int64 = (typeof args.project_id === "number" ? new thrift.Int64(args.project_id) : typeof args.project_id === "string" ? thrift.Int64.fromDecimalString(args.project_id) : args.project_id);
             this.project_id = value_7;
         }
-        if (args.Base != null) {
-            const value_8: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): GetUserAuthorityRequest {

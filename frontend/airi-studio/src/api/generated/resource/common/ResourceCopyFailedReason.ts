@@ -7,30 +7,30 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ResType from "./ResType";
 export interface IResourceCopyFailedReason {
-    ResID?: thrift.Int64;
-    ResType?: ResType.ResType;
-    ResName?: string;
-    Reason?: string;
-    PublishVersion?: thrift.Int64;
-    PublishVersionStr?: string;
+    res_i_d?: thrift.Int64;
+    res_type?: ResType.ResType;
+    res_name?: string;
+    reason?: string;
+    publish_version?: thrift.Int64;
+    publish_version_str?: string;
 }
 export interface IResourceCopyFailedReasonArgs {
-    ResID?: number | string | thrift.Int64;
-    ResType?: ResType.ResType;
-    ResName?: string;
-    Reason?: string;
-    PublishVersion?: number | string | thrift.Int64;
-    PublishVersionStr?: string;
+    res_i_d?: number | string | thrift.Int64;
+    res_type?: ResType.ResType;
+    res_name?: string;
+    reason?: string;
+    publish_version?: number | string | thrift.Int64;
+    publish_version_str?: string;
 }
 export const ResourceCopyFailedReasonCodec: thrift.IStructCodec<IResourceCopyFailedReasonArgs, IResourceCopyFailedReason> = {
     encode(args: IResourceCopyFailedReasonArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ResID: (typeof args.ResID === "number" ? new thrift.Int64(args.ResID) : typeof args.ResID === "string" ? thrift.Int64.fromDecimalString(args.ResID) : args.ResID),
-            ResType: args.ResType,
-            ResName: args.ResName,
-            Reason: args.Reason,
-            PublishVersion: (typeof args.PublishVersion === "number" ? new thrift.Int64(args.PublishVersion) : typeof args.PublishVersion === "string" ? thrift.Int64.fromDecimalString(args.PublishVersion) : args.PublishVersion),
-            PublishVersionStr: args.PublishVersionStr
+            ResID: (typeof args.res_i_d === "number" ? new thrift.Int64(args.res_i_d) : typeof args.res_i_d === "string" ? thrift.Int64.fromDecimalString(args.res_i_d) : args.res_i_d),
+            ResType: args.res_type,
+            ResName: args.res_name,
+            Reason: args.reason,
+            PublishVersion: (typeof args.publish_version === "number" ? new thrift.Int64(args.publish_version) : typeof args.publish_version === "string" ? thrift.Int64.fromDecimalString(args.publish_version) : args.publish_version),
+            PublishVersionStr: args.publish_version_str
         };
         output.writeStructBegin("ResourceCopyFailedReason");
         if (obj.ResID != null) {
@@ -140,76 +140,76 @@ export const ResourceCopyFailedReasonCodec: thrift.IStructCodec<IResourceCopyFai
         }
         input.readStructEnd();
         return {
-            ResID: _args.ResID,
-            ResType: _args.ResType,
-            ResName: _args.ResName,
-            Reason: _args.Reason,
-            PublishVersion: _args.PublishVersion,
-            PublishVersionStr: _args.PublishVersionStr
+            res_i_d: _args.ResID,
+            res_type: _args.ResType,
+            res_name: _args.ResName,
+            reason: _args.Reason,
+            publish_version: _args.PublishVersion,
+            publish_version_str: _args.PublishVersionStr
         };
     }
 };
 export class ResourceCopyFailedReason extends thrift.StructLike implements IResourceCopyFailedReason {
-    public ResID?: thrift.Int64;
-    public ResType?: ResType.ResType;
-    public ResName?: string;
-    public Reason?: string;
-    public PublishVersion?: thrift.Int64;
-    public PublishVersionStr?: string;
+    public res_i_d?: thrift.Int64;
+    public res_type?: ResType.ResType;
+    public res_name?: string;
+    public reason?: string;
+    public publish_version?: thrift.Int64;
+    public publish_version_str?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ResID: {
+        res_i_d: {
             'agw.js_conv': "str",
             'agw.key': "res_id",
             'api.js_conv': "true",
             'api.body': "res_id"
         },
-        ResType: {
+        res_type: {
             'go.tag': "json:\"res_type\"",
             'agw.key': "res_type"
         },
-        ResName: {
+        res_name: {
             'go.tag': "json:\"res_name\"",
             'agw.key': "res_name"
         },
-        Reason: {
+        reason: {
             'go.tag': "json:\"reason\"",
             'agw.key': "reason"
         },
-        PublishVersion: {
+        publish_version: {
             'go.tag': "json:\"publish_version\"",
             'agw.key': "publish_version"
         },
-        PublishVersionStr: {
+        publish_version_str: {
             'go.tag': "json:\"publish_version_str\"",
             'agw.key': "publish_version_str"
         }
     };
     constructor(args: IResourceCopyFailedReasonArgs = {}) {
         super();
-        if (args.ResID != null) {
-            const value_7: thrift.Int64 = (typeof args.ResID === "number" ? new thrift.Int64(args.ResID) : typeof args.ResID === "string" ? thrift.Int64.fromDecimalString(args.ResID) : args.ResID);
-            this.ResID = value_7;
+        if (args.res_i_d != null) {
+            const value_7: thrift.Int64 = (typeof args.res_i_d === "number" ? new thrift.Int64(args.res_i_d) : typeof args.res_i_d === "string" ? thrift.Int64.fromDecimalString(args.res_i_d) : args.res_i_d);
+            this.res_i_d = value_7;
         }
-        if (args.ResType != null) {
-            const value_8: ResType.ResType = args.ResType;
-            this.ResType = value_8;
+        if (args.res_type != null) {
+            const value_8: ResType.ResType = args.res_type;
+            this.res_type = value_8;
         }
-        if (args.ResName != null) {
-            const value_9: string = args.ResName;
-            this.ResName = value_9;
+        if (args.res_name != null) {
+            const value_9: string = args.res_name;
+            this.res_name = value_9;
         }
-        if (args.Reason != null) {
-            const value_10: string = args.Reason;
-            this.Reason = value_10;
+        if (args.reason != null) {
+            const value_10: string = args.reason;
+            this.reason = value_10;
         }
-        if (args.PublishVersion != null) {
-            const value_11: thrift.Int64 = (typeof args.PublishVersion === "number" ? new thrift.Int64(args.PublishVersion) : typeof args.PublishVersion === "string" ? thrift.Int64.fromDecimalString(args.PublishVersion) : args.PublishVersion);
-            this.PublishVersion = value_11;
+        if (args.publish_version != null) {
+            const value_11: thrift.Int64 = (typeof args.publish_version === "number" ? new thrift.Int64(args.publish_version) : typeof args.publish_version === "string" ? thrift.Int64.fromDecimalString(args.publish_version) : args.publish_version);
+            this.publish_version = value_11;
         }
-        if (args.PublishVersionStr != null) {
-            const value_12: string = args.PublishVersionStr;
-            this.PublishVersionStr = value_12;
+        if (args.publish_version_str != null) {
+            const value_12: string = args.publish_version_str;
+            this.publish_version_str = value_12;
         }
     }
     public static read(input: thrift.TProtocol): ResourceCopyFailedReason {

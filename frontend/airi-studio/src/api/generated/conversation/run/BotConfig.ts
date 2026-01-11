@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IBotConfig {
-    CharacterName?: string;
-    Prompt?: string;
+    character_name?: string;
+    prompt?: string;
 }
 export interface IBotConfigArgs {
-    CharacterName?: string;
-    Prompt?: string;
+    character_name?: string;
+    prompt?: string;
 }
 export const BotConfigCodec: thrift.IStructCodec<IBotConfigArgs, IBotConfig> = {
     encode(args: IBotConfigArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            CharacterName: args.CharacterName,
-            Prompt: args.Prompt
+            CharacterName: args.character_name,
+            Prompt: args.prompt
         };
         output.writeStructBegin("BotConfig");
         if (obj.CharacterName != null) {
@@ -71,32 +71,32 @@ export const BotConfigCodec: thrift.IStructCodec<IBotConfigArgs, IBotConfig> = {
         }
         input.readStructEnd();
         return {
-            CharacterName: _args.CharacterName,
-            Prompt: _args.Prompt
+            character_name: _args.CharacterName,
+            prompt: _args.Prompt
         };
     }
 };
 export class BotConfig extends thrift.StructLike implements IBotConfig {
-    public CharacterName?: string;
-    public Prompt?: string;
+    public character_name?: string;
+    public prompt?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        CharacterName: {
+        character_name: {
             'api.body': "character_name"
         },
-        Prompt: {
+        prompt: {
             'api.body': "propmt"
         }
     };
     constructor(args: IBotConfigArgs = {}) {
         super();
-        if (args.CharacterName != null) {
-            const value_3: string = args.CharacterName;
-            this.CharacterName = value_3;
+        if (args.character_name != null) {
+            const value_3: string = args.character_name;
+            this.character_name = value_3;
         }
-        if (args.Prompt != null) {
-            const value_4: string = args.Prompt;
-            this.Prompt = value_4;
+        if (args.prompt != null) {
+            const value_4: string = args.prompt;
+            this.prompt = value_4;
         }
     }
     public static read(input: thrift.TProtocol): BotConfig {

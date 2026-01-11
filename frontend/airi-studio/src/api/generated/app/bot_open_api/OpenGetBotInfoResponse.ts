@@ -11,13 +11,13 @@ export interface IOpenGetBotInfoResponse {
     data?: APP_BOT_COMMON_NS.IOpenAPIBotInfo;
     code?: thrift.Int64;
     msg?: string;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IOpenGetBotInfoResponseArgs {
     data?: APP_BOT_COMMON_NS.IOpenAPIBotInfoArgs;
     code?: number | string | thrift.Int64;
     msg?: string;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const OpenGetBotInfoResponseCodec: thrift.IStructCodec<IOpenGetBotInfoResponseArgs, IOpenGetBotInfoResponse> = {
     encode(args: IOpenGetBotInfoResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const OpenGetBotInfoResponseCodec: thrift.IStructCodec<IOpenGetBotInfoRes
             data: args.data,
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("OpenGetBotInfoResponse");
         if (obj.data != null) {
@@ -110,7 +110,7 @@ export const OpenGetBotInfoResponseCodec: thrift.IStructCodec<IOpenGetBotInfoRes
             data: _args.data,
             code: _args.code,
             msg: _args.msg,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -118,7 +118,7 @@ export class OpenGetBotInfoResponse extends thrift.StructLike implements IOpenGe
     public data?: APP_BOT_COMMON_NS.IOpenAPIBotInfo;
     public code?: thrift.Int64;
     public msg?: string;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IOpenGetBotInfoResponseArgs = {}) {
@@ -135,9 +135,9 @@ export class OpenGetBotInfoResponse extends thrift.StructLike implements IOpenGe
             const value_7: string = args.msg;
             this.msg = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): OpenGetBotInfoResponse {

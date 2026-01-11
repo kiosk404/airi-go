@@ -19,7 +19,7 @@ export interface ICreateAPIRequest {
     disabled?: boolean;
     edit_version?: number;
     function_name?: string;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface ICreateAPIRequestArgs {
     plugin_id: number | string | thrift.Int64;
@@ -33,7 +33,7 @@ export interface ICreateAPIRequestArgs {
     disabled?: boolean;
     edit_version?: number;
     function_name?: string;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, ICreateAPIRequest> = {
     encode(args: ICreateAPIRequestArgs, output: thrift.TProtocol): void {
@@ -49,7 +49,7 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
             disabled: args.disabled,
             edit_version: args.edit_version,
             function_name: args.function_name,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("CreateAPIRequest");
         if (obj.plugin_id != null) {
@@ -286,7 +286,7 @@ export const CreateAPIRequestCodec: thrift.IStructCodec<ICreateAPIRequestArgs, I
                 disabled: _args.disabled,
                 edit_version: _args.edit_version,
                 function_name: _args.function_name,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -306,7 +306,7 @@ export class CreateAPIRequest extends thrift.StructLike implements ICreateAPIReq
     public disabled?: boolean;
     public edit_version?: number;
     public function_name?: string;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -376,9 +376,9 @@ export class CreateAPIRequest extends thrift.StructLike implements ICreateAPIReq
             const value_27: string = args.function_name;
             this.function_name = value_27;
         }
-        if (args.Base != null) {
-            const value_28: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_28;
+        if (args.base != null) {
+            const value_28: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_28;
         }
     }
     public static read(input: thrift.TProtocol): CreateAPIRequest {

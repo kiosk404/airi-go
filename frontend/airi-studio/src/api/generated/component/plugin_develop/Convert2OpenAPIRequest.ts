@@ -13,7 +13,7 @@ export interface IConvert2OpenAPIRequest {
     merge_same_paths?: boolean;
     space_id?: thrift.Int64;
     plugin_description?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IConvert2OpenAPIRequestArgs {
     plugin_name?: string;
@@ -22,7 +22,7 @@ export interface IConvert2OpenAPIRequestArgs {
     merge_same_paths?: boolean;
     space_id?: number | string | thrift.Int64;
     plugin_description?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const Convert2OpenAPIRequestCodec: thrift.IStructCodec<IConvert2OpenAPIRequestArgs, IConvert2OpenAPIRequest> = {
     encode(args: IConvert2OpenAPIRequestArgs, output: thrift.TProtocol): void {
@@ -33,7 +33,7 @@ export const Convert2OpenAPIRequestCodec: thrift.IStructCodec<IConvert2OpenAPIRe
             merge_same_paths: args.merge_same_paths,
             space_id: (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id),
             plugin_description: args.plugin_description,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("Convert2OpenAPIRequest");
         if (obj.plugin_name != null) {
@@ -167,7 +167,7 @@ export const Convert2OpenAPIRequestCodec: thrift.IStructCodec<IConvert2OpenAPIRe
                 merge_same_paths: _args.merge_same_paths,
                 space_id: _args.space_id,
                 plugin_description: _args.plugin_description,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -182,7 +182,7 @@ export class Convert2OpenAPIRequest extends thrift.StructLike implements IConver
     public merge_same_paths?: boolean;
     public space_id?: thrift.Int64;
     public plugin_description?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_name: {
@@ -234,9 +234,9 @@ export class Convert2OpenAPIRequest extends thrift.StructLike implements IConver
             const value_13: string = args.plugin_description;
             this.plugin_description = value_13;
         }
-        if (args.Base != null) {
-            const value_14: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_14;
+        if (args.base != null) {
+            const value_14: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_14;
         }
     }
     public static read(input: thrift.TProtocol): Convert2OpenAPIRequest {

@@ -8,17 +8,17 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IMGetUserInfoRequest {
     user_ids?: Array<string>;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IMGetUserInfoRequestArgs {
     user_ids?: Array<string>;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const MGetUserInfoRequestCodec: thrift.IStructCodec<IMGetUserInfoRequestArgs, IMGetUserInfoRequest> = {
     encode(args: IMGetUserInfoRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             user_ids: args.user_ids,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("MGetUserInfoRequest");
         if (obj.user_ids != null) {
@@ -84,13 +84,13 @@ export const MGetUserInfoRequestCodec: thrift.IStructCodec<IMGetUserInfoRequestA
         input.readStructEnd();
         return {
             user_ids: _args.user_ids,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class MGetUserInfoRequest extends thrift.StructLike implements IMGetUserInfoRequest {
     public user_ids?: Array<string>;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IMGetUserInfoRequestArgs = {}) {
@@ -103,9 +103,9 @@ export class MGetUserInfoRequest extends thrift.StructLike implements IMGetUserI
             });
             this.user_ids = value_5;
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): MGetUserInfoRequest {

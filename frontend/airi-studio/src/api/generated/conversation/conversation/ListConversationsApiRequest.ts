@@ -12,7 +12,7 @@ export interface IListConversationsApiRequest {
     sort_order?: string;
     sort_field?: string;
     bot_id: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IListConversationsApiRequestArgs {
     page_num?: number | string | thrift.Int64;
@@ -20,7 +20,7 @@ export interface IListConversationsApiRequestArgs {
     sort_order?: string;
     sort_field?: string;
     bot_id: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const ListConversationsApiRequestCodec: thrift.IStructCodec<IListConversationsApiRequestArgs, IListConversationsApiRequest> = {
     encode(args: IListConversationsApiRequestArgs, output: thrift.TProtocol): void {
@@ -30,7 +30,7 @@ export const ListConversationsApiRequestCodec: thrift.IStructCodec<IListConversa
             sort_order: args.sort_order,
             sort_field: args.sort_field,
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ListConversationsApiRequest");
         if (obj.page_num != null) {
@@ -149,7 +149,7 @@ export const ListConversationsApiRequestCodec: thrift.IStructCodec<IListConversa
                 sort_order: _args.sort_order,
                 sort_field: _args.sort_field,
                 bot_id: _args.bot_id,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -163,7 +163,7 @@ export class ListConversationsApiRequest extends thrift.StructLike implements IL
     public sort_order?: string;
     public sort_field?: string;
     public bot_id: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         page_num: {
@@ -213,9 +213,9 @@ export class ListConversationsApiRequest extends thrift.StructLike implements IL
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
-        if (args.Base != null) {
-            const value_12: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_12;
+        if (args.base != null) {
+            const value_12: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_12;
         }
     }
     public static read(input: thrift.TProtocol): ListConversationsApiRequest {

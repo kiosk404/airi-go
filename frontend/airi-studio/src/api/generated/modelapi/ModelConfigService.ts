@@ -1381,7 +1381,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetBasicConfiguration(req: GetBasicConfigurationReq.IGetBasicConfigurationReqArgs, context?: Context): Promise<GetBasicConfigurationResp.IGetBasicConfigurationResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetBasicConfiguration", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetBasicConfiguration", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetBasicConfiguration__ArgsArgs = { req };
         GetBasicConfiguration__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1419,7 +1419,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public SaveBasicConfiguration(req: SaveBasicConfigurationReq.ISaveBasicConfigurationReqArgs, context?: Context): Promise<SaveBasicConfigurationResp.ISaveBasicConfigurationResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("SaveBasicConfiguration", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("SaveBasicConfiguration", thrift.MessageType.CALL, this.increment_request_id());
         const args: ISaveBasicConfiguration__ArgsArgs = { req };
         SaveBasicConfiguration__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1457,7 +1457,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetKnowledgeConfig(req: GetKnowledgeConfigReq.IGetKnowledgeConfigReqArgs, context?: Context): Promise<GetKnowledgeConfigResp.IGetKnowledgeConfigResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetKnowledgeConfig", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetKnowledgeConfig", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetKnowledgeConfig__ArgsArgs = { req };
         GetKnowledgeConfig__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1495,7 +1495,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdateKnowledgeConfig(req: UpdateKnowledgeConfigReq.IUpdateKnowledgeConfigReqArgs, context?: Context): Promise<UpdateKnowledgeConfigResp.IUpdateKnowledgeConfigResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdateKnowledgeConfig", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdateKnowledgeConfig", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdateKnowledgeConfig__ArgsArgs = { req };
         UpdateKnowledgeConfig__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1533,7 +1533,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetModelList(req: GetModelListReq.IGetModelListReqArgs, context?: Context): Promise<GetModelListResp.IGetModelListResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetModelList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetModelList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetModelList__ArgsArgs = { req };
         GetModelList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1571,7 +1571,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public CreateModel(req: CreateModelReq.ICreateModelReqArgs, context?: Context): Promise<CreateModelResp.ICreateModelResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("CreateModel", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("CreateModel", thrift.MessageType.CALL, this.increment_request_id());
         const args: ICreateModel__ArgsArgs = { req };
         CreateModel__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1609,7 +1609,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdateModel(req: UpdateModelReq.IUpdateModelReqArgs, context?: Context): Promise<UpdateModelResp.IUpdateModelResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdateModel", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdateModel", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdateModel__ArgsArgs = { req };
         UpdateModel__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1647,7 +1647,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DeleteModel(req: DeleteModelReq.IDeleteModelReqArgs, context?: Context): Promise<DeleteModelResp.IDeleteModelResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DeleteModel", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DeleteModel", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDeleteModel__ArgsArgs = { req };
         DeleteModel__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1715,35 +1715,35 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_GetBasicConfiguration": {
-                    resolve(this.process_GetBasicConfiguration(requestId, input, output, context));
+                    resolve(this.process__get_basic_configuration(requestId, input, output, context));
                     break;
                 }
                 case "process_SaveBasicConfiguration": {
-                    resolve(this.process_SaveBasicConfiguration(requestId, input, output, context));
+                    resolve(this.process__save_basic_configuration(requestId, input, output, context));
                     break;
                 }
                 case "process_GetKnowledgeConfig": {
-                    resolve(this.process_GetKnowledgeConfig(requestId, input, output, context));
+                    resolve(this.process__get_knowledge_config(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdateKnowledgeConfig": {
-                    resolve(this.process_UpdateKnowledgeConfig(requestId, input, output, context));
+                    resolve(this.process__update_knowledge_config(requestId, input, output, context));
                     break;
                 }
                 case "process_GetModelList": {
-                    resolve(this.process_GetModelList(requestId, input, output, context));
+                    resolve(this.process__get_model_list(requestId, input, output, context));
                     break;
                 }
                 case "process_CreateModel": {
-                    resolve(this.process_CreateModel(requestId, input, output, context));
+                    resolve(this.process__create_model(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdateModel": {
-                    resolve(this.process_UpdateModel(requestId, input, output, context));
+                    resolve(this.process__update_model(requestId, input, output, context));
                     break;
                 }
                 case "process_DeleteModel": {
-                    resolve(this.process_DeleteModel(requestId, input, output, context));
+                    resolve(this.process__delete_model(requestId, input, output, context));
                     break;
                 }
                 default: {

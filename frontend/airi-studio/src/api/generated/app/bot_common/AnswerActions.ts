@@ -8,18 +8,18 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as AnswerActionsMode from "./AnswerActionsMode";
 import * as AnswerActionConfig from "./AnswerActionConfig";
 export interface IAnswerActions {
-    AnswerActionsMode?: AnswerActionsMode.AnswerActionsMode;
-    AnswerActionConfigs?: Array<AnswerActionConfig.IAnswerActionConfig>;
+    answer_actions_mode?: AnswerActionsMode.AnswerActionsMode;
+    answer_action_configs?: Array<AnswerActionConfig.IAnswerActionConfig>;
 }
 export interface IAnswerActionsArgs {
-    AnswerActionsMode?: AnswerActionsMode.AnswerActionsMode;
-    AnswerActionConfigs?: Array<AnswerActionConfig.IAnswerActionConfigArgs>;
+    answer_actions_mode?: AnswerActionsMode.AnswerActionsMode;
+    answer_action_configs?: Array<AnswerActionConfig.IAnswerActionConfigArgs>;
 }
 export const AnswerActionsCodec: thrift.IStructCodec<IAnswerActionsArgs, IAnswerActions> = {
     encode(args: IAnswerActionsArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            AnswerActionsMode: args.AnswerActionsMode,
-            AnswerActionConfigs: args.AnswerActionConfigs
+            AnswerActionsMode: args.answer_actions_mode,
+            AnswerActionConfigs: args.answer_action_configs
         };
         output.writeStructBegin("AnswerActions");
         if (obj.AnswerActionsMode != null) {
@@ -84,36 +84,36 @@ export const AnswerActionsCodec: thrift.IStructCodec<IAnswerActionsArgs, IAnswer
         }
         input.readStructEnd();
         return {
-            AnswerActionsMode: _args.AnswerActionsMode,
-            AnswerActionConfigs: _args.AnswerActionConfigs
+            answer_actions_mode: _args.AnswerActionsMode,
+            answer_action_configs: _args.AnswerActionConfigs
         };
     }
 };
 export class AnswerActions extends thrift.StructLike implements IAnswerActions {
-    public AnswerActionsMode?: AnswerActionsMode.AnswerActionsMode;
-    public AnswerActionConfigs?: Array<AnswerActionConfig.IAnswerActionConfig>;
+    public answer_actions_mode?: AnswerActionsMode.AnswerActionsMode;
+    public answer_action_configs?: Array<AnswerActionConfig.IAnswerActionConfig>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        AnswerActionsMode: {
+        answer_actions_mode: {
             'api.body': "answer_actions_mode"
         },
-        AnswerActionConfigs: {
+        answer_action_configs: {
             'api.body': "answer_action_configs"
         }
     };
     constructor(args: IAnswerActionsArgs = {}) {
         super();
-        if (args.AnswerActionsMode != null) {
-            const value_5: AnswerActionsMode.AnswerActionsMode = args.AnswerActionsMode;
-            this.AnswerActionsMode = value_5;
+        if (args.answer_actions_mode != null) {
+            const value_5: AnswerActionsMode.AnswerActionsMode = args.answer_actions_mode;
+            this.answer_actions_mode = value_5;
         }
-        if (args.AnswerActionConfigs != null) {
+        if (args.answer_action_configs != null) {
             const value_6: Array<AnswerActionConfig.IAnswerActionConfig> = new Array<AnswerActionConfig.IAnswerActionConfig>();
-            args.AnswerActionConfigs.forEach((value_7: AnswerActionConfig.IAnswerActionConfigArgs): void => {
+            args.answer_action_configs.forEach((value_7: AnswerActionConfig.IAnswerActionConfigArgs): void => {
                 const value_8: AnswerActionConfig.IAnswerActionConfig = new AnswerActionConfig.AnswerActionConfig(value_7);
                 value_6.push(value_8);
             });
-            this.AnswerActionConfigs = value_6;
+            this.answer_action_configs = value_6;
         }
     }
     public static read(input: thrift.TProtocol): AnswerActions {

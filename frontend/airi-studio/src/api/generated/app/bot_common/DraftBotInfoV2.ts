@@ -9,30 +9,30 @@ import * as BotInfo from "./BotInfo";
 import * as TableDetail from "./TableDetail";
 import * as TaskInfoDetail from "./TaskInfoDetail";
 export interface IDraftBotInfoV2 {
-    BotInfo?: BotInfo.IBotInfo;
-    CanvasData?: string;
-    BaseCommitVersion?: thrift.Int64;
-    CommitVersion?: thrift.Int64;
-    TableInfo?: Map<string, TableDetail.ITableDetail>;
-    TaskInfo?: Map<string, TaskInfoDetail.ITaskInfoDetail>;
+    bot_info?: BotInfo.IBotInfo;
+    canvas_data?: string;
+    base_commit_version?: thrift.Int64;
+    commit_version?: thrift.Int64;
+    table_info?: Map<string, TableDetail.ITableDetail>;
+    task_info?: Map<string, TaskInfoDetail.ITaskInfoDetail>;
 }
 export interface IDraftBotInfoV2Args {
-    BotInfo?: BotInfo.IBotInfoArgs;
-    CanvasData?: string;
-    BaseCommitVersion?: number | string | thrift.Int64;
-    CommitVersion?: number | string | thrift.Int64;
-    TableInfo?: Map<string, TableDetail.ITableDetailArgs>;
-    TaskInfo?: Map<string, TaskInfoDetail.ITaskInfoDetailArgs>;
+    bot_info?: BotInfo.IBotInfoArgs;
+    canvas_data?: string;
+    base_commit_version?: number | string | thrift.Int64;
+    commit_version?: number | string | thrift.Int64;
+    table_info?: Map<string, TableDetail.ITableDetailArgs>;
+    task_info?: Map<string, TaskInfoDetail.ITaskInfoDetailArgs>;
 }
 export const DraftBotInfoV2Codec: thrift.IStructCodec<IDraftBotInfoV2Args, IDraftBotInfoV2> = {
     encode(args: IDraftBotInfoV2Args, output: thrift.TProtocol): void {
         const obj: any = {
-            BotInfo: args.BotInfo,
-            CanvasData: args.CanvasData,
-            BaseCommitVersion: (typeof args.BaseCommitVersion === "number" ? new thrift.Int64(args.BaseCommitVersion) : typeof args.BaseCommitVersion === "string" ? thrift.Int64.fromDecimalString(args.BaseCommitVersion) : args.BaseCommitVersion),
-            CommitVersion: (typeof args.CommitVersion === "number" ? new thrift.Int64(args.CommitVersion) : typeof args.CommitVersion === "string" ? thrift.Int64.fromDecimalString(args.CommitVersion) : args.CommitVersion),
-            TableInfo: args.TableInfo,
-            TaskInfo: args.TaskInfo
+            BotInfo: args.bot_info,
+            CanvasData: args.canvas_data,
+            BaseCommitVersion: (typeof args.base_commit_version === "number" ? new thrift.Int64(args.base_commit_version) : typeof args.base_commit_version === "string" ? thrift.Int64.fromDecimalString(args.base_commit_version) : args.base_commit_version),
+            CommitVersion: (typeof args.commit_version === "number" ? new thrift.Int64(args.commit_version) : typeof args.commit_version === "string" ? thrift.Int64.fromDecimalString(args.commit_version) : args.commit_version),
+            TableInfo: args.table_info,
+            TaskInfo: args.task_info
         };
         output.writeStructBegin("DraftBotInfoV2");
         if (obj.BotInfo != null) {
@@ -168,59 +168,59 @@ export const DraftBotInfoV2Codec: thrift.IStructCodec<IDraftBotInfoV2Args, IDraf
         }
         input.readStructEnd();
         return {
-            BotInfo: _args.BotInfo,
-            CanvasData: _args.CanvasData,
-            BaseCommitVersion: _args.BaseCommitVersion,
-            CommitVersion: _args.CommitVersion,
-            TableInfo: _args.TableInfo,
-            TaskInfo: _args.TaskInfo
+            bot_info: _args.BotInfo,
+            canvas_data: _args.CanvasData,
+            base_commit_version: _args.BaseCommitVersion,
+            commit_version: _args.CommitVersion,
+            table_info: _args.TableInfo,
+            task_info: _args.TaskInfo
         };
     }
 };
 export class DraftBotInfoV2 extends thrift.StructLike implements IDraftBotInfoV2 {
-    public BotInfo?: BotInfo.IBotInfo;
-    public CanvasData?: string;
-    public BaseCommitVersion?: thrift.Int64;
-    public CommitVersion?: thrift.Int64;
-    public TableInfo?: Map<string, TableDetail.ITableDetail>;
-    public TaskInfo?: Map<string, TaskInfoDetail.ITaskInfoDetail>;
+    public bot_info?: BotInfo.IBotInfo;
+    public canvas_data?: string;
+    public base_commit_version?: thrift.Int64;
+    public commit_version?: thrift.Int64;
+    public table_info?: Map<string, TableDetail.ITableDetail>;
+    public task_info?: Map<string, TaskInfoDetail.ITaskInfoDetail>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IDraftBotInfoV2Args = {}) {
         super();
-        if (args.BotInfo != null) {
-            const value_11: BotInfo.IBotInfo = new BotInfo.BotInfo(args.BotInfo);
-            this.BotInfo = value_11;
+        if (args.bot_info != null) {
+            const value_11: BotInfo.IBotInfo = new BotInfo.BotInfo(args.bot_info);
+            this.bot_info = value_11;
         }
-        if (args.CanvasData != null) {
-            const value_12: string = args.CanvasData;
-            this.CanvasData = value_12;
+        if (args.canvas_data != null) {
+            const value_12: string = args.canvas_data;
+            this.canvas_data = value_12;
         }
-        if (args.BaseCommitVersion != null) {
-            const value_13: thrift.Int64 = (typeof args.BaseCommitVersion === "number" ? new thrift.Int64(args.BaseCommitVersion) : typeof args.BaseCommitVersion === "string" ? thrift.Int64.fromDecimalString(args.BaseCommitVersion) : args.BaseCommitVersion);
-            this.BaseCommitVersion = value_13;
+        if (args.base_commit_version != null) {
+            const value_13: thrift.Int64 = (typeof args.base_commit_version === "number" ? new thrift.Int64(args.base_commit_version) : typeof args.base_commit_version === "string" ? thrift.Int64.fromDecimalString(args.base_commit_version) : args.base_commit_version);
+            this.base_commit_version = value_13;
         }
-        if (args.CommitVersion != null) {
-            const value_14: thrift.Int64 = (typeof args.CommitVersion === "number" ? new thrift.Int64(args.CommitVersion) : typeof args.CommitVersion === "string" ? thrift.Int64.fromDecimalString(args.CommitVersion) : args.CommitVersion);
-            this.CommitVersion = value_14;
+        if (args.commit_version != null) {
+            const value_14: thrift.Int64 = (typeof args.commit_version === "number" ? new thrift.Int64(args.commit_version) : typeof args.commit_version === "string" ? thrift.Int64.fromDecimalString(args.commit_version) : args.commit_version);
+            this.commit_version = value_14;
         }
-        if (args.TableInfo != null) {
+        if (args.table_info != null) {
             const value_15: Map<string, TableDetail.ITableDetail> = new Map<string, TableDetail.ITableDetail>();
-            args.TableInfo.forEach((value_17: TableDetail.ITableDetailArgs, key_5: string): void => {
+            args.table_info.forEach((value_17: TableDetail.ITableDetailArgs, key_5: string): void => {
                 const value_18: TableDetail.ITableDetail = new TableDetail.TableDetail(value_17);
                 const key_6: string = key_5;
                 value_15.set(key_6, value_18);
             });
-            this.TableInfo = value_15;
+            this.table_info = value_15;
         }
-        if (args.TaskInfo != null) {
+        if (args.task_info != null) {
             const value_16: Map<string, TaskInfoDetail.ITaskInfoDetail> = new Map<string, TaskInfoDetail.ITaskInfoDetail>();
-            args.TaskInfo.forEach((value_19: TaskInfoDetail.ITaskInfoDetailArgs, key_7: string): void => {
+            args.task_info.forEach((value_19: TaskInfoDetail.ITaskInfoDetailArgs, key_7: string): void => {
                 const value_20: TaskInfoDetail.ITaskInfoDetail = new TaskInfoDetail.TaskInfoDetail(value_19);
                 const key_8: string = key_7;
                 value_16.set(key_8, value_20);
             });
-            this.TaskInfo = value_16;
+            this.task_info = value_16;
         }
     }
     public static read(input: thrift.TProtocol): DraftBotInfoV2 {

@@ -10,13 +10,13 @@ export interface IGetDraftBotInfoAgwRequest {
     bot_id: thrift.Int64;
     version?: string;
     commit_version?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetDraftBotInfoAgwRequestArgs {
     bot_id: number | string | thrift.Int64;
     version?: string;
     commit_version?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IGetDraftBotInfoAgwRequestArgs, IGetDraftBotInfoAgwRequest> = {
     encode(args: IGetDraftBotInfoAgwRequestArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const GetDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IGetDraftBotInf
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
             version: args.version,
             commit_version: args.commit_version,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetDraftBotInfoAgwRequest");
         if (obj.bot_id != null) {
@@ -113,7 +113,7 @@ export const GetDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IGetDraftBotInf
                 bot_id: _args.bot_id,
                 version: _args.version,
                 commit_version: _args.commit_version,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -125,7 +125,7 @@ export class GetDraftBotInfoAgwRequest extends thrift.StructLike implements IGet
     public bot_id: thrift.Int64;
     public version?: string;
     public commit_version?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
@@ -133,7 +133,7 @@ export class GetDraftBotInfoAgwRequest extends thrift.StructLike implements IGet
             'agw.js_conv': "str",
             'go.tag': "json:\"bot_id,string\""
         },
-        Base: {
+        base: {
             'api.none': "true"
         }
     };
@@ -154,9 +154,9 @@ export class GetDraftBotInfoAgwRequest extends thrift.StructLike implements IGet
             const value_7: string = args.commit_version;
             this.commit_version = value_7;
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): GetDraftBotInfoAgwRequest {

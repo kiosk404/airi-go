@@ -11,13 +11,13 @@ export interface ILoginByPasswordResponse {
     user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail;
     token?: string;
     expire_time?: thrift.Int64;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface ILoginByPasswordResponseArgs {
     user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetailArgs;
     token?: string;
     expire_time?: number | string | thrift.Int64;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const LoginByPasswordResponseCodec: thrift.IStructCodec<ILoginByPasswordResponseArgs, ILoginByPasswordResponse> = {
     encode(args: ILoginByPasswordResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const LoginByPasswordResponseCodec: thrift.IStructCodec<ILoginByPasswordR
             user_info: args.user_info,
             token: args.token,
             expire_time: (typeof args.expire_time === "number" ? new thrift.Int64(args.expire_time) : typeof args.expire_time === "string" ? thrift.Int64.fromDecimalString(args.expire_time) : args.expire_time),
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("LoginByPasswordResponse");
         if (obj.user_info != null) {
@@ -110,7 +110,7 @@ export const LoginByPasswordResponseCodec: thrift.IStructCodec<ILoginByPasswordR
             user_info: _args.user_info,
             token: _args.token,
             expire_time: _args.expire_time,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -118,7 +118,7 @@ export class LoginByPasswordResponse extends thrift.StructLike implements ILogin
     public user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail;
     public token?: string;
     public expire_time?: thrift.Int64;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         token: {
@@ -142,9 +142,9 @@ export class LoginByPasswordResponse extends thrift.StructLike implements ILogin
             const value_7: thrift.Int64 = (typeof args.expire_time === "number" ? new thrift.Int64(args.expire_time) : typeof args.expire_time === "string" ? thrift.Int64.fromDecimalString(args.expire_time) : args.expire_time);
             this.expire_time = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): LoginByPasswordResponse {

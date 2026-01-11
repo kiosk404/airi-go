@@ -9,48 +9,48 @@ import * as LastError from "./LastError";
 import * as Usage from "./Usage";
 import * as RequiredAction from "./RequiredAction";
 export interface IChatV3ChatDetail {
-    ID: thrift.Int64;
-    ConversationID: thrift.Int64;
-    BotID: thrift.Int64;
-    CreatedAt?: number;
-    CompletedAt?: number;
-    FailedAt?: number;
-    MetaData?: Map<string, string>;
-    LastError?: LastError.ILastError;
-    Status: string;
-    Usage?: Usage.IUsage;
-    RequiredAction?: RequiredAction.IRequiredAction;
-    SectionID?: thrift.Int64;
+    i_d: thrift.Int64;
+    conversation_i_d: thrift.Int64;
+    bot_i_d: thrift.Int64;
+    created_at?: number;
+    completed_at?: number;
+    failed_at?: number;
+    meta_data?: Map<string, string>;
+    last_error?: LastError.ILastError;
+    status: string;
+    usage?: Usage.IUsage;
+    required_action?: RequiredAction.IRequiredAction;
+    section_i_d?: thrift.Int64;
 }
 export interface IChatV3ChatDetailArgs {
-    ID: number | string | thrift.Int64;
-    ConversationID: number | string | thrift.Int64;
-    BotID: number | string | thrift.Int64;
-    CreatedAt?: number;
-    CompletedAt?: number;
-    FailedAt?: number;
-    MetaData?: Map<string, string>;
-    LastError?: LastError.ILastErrorArgs;
-    Status: string;
-    Usage?: Usage.IUsageArgs;
-    RequiredAction?: RequiredAction.IRequiredActionArgs;
-    SectionID?: number | string | thrift.Int64;
+    i_d: number | string | thrift.Int64;
+    conversation_i_d: number | string | thrift.Int64;
+    bot_i_d: number | string | thrift.Int64;
+    created_at?: number;
+    completed_at?: number;
+    failed_at?: number;
+    meta_data?: Map<string, string>;
+    last_error?: LastError.ILastErrorArgs;
+    status: string;
+    usage?: Usage.IUsageArgs;
+    required_action?: RequiredAction.IRequiredActionArgs;
+    section_i_d?: number | string | thrift.Int64;
 }
 export const ChatV3ChatDetailCodec: thrift.IStructCodec<IChatV3ChatDetailArgs, IChatV3ChatDetail> = {
     encode(args: IChatV3ChatDetailArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ID: (typeof args.ID === "number" ? new thrift.Int64(args.ID) : typeof args.ID === "string" ? thrift.Int64.fromDecimalString(args.ID) : args.ID),
-            ConversationID: (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID),
-            BotID: (typeof args.BotID === "number" ? new thrift.Int64(args.BotID) : typeof args.BotID === "string" ? thrift.Int64.fromDecimalString(args.BotID) : args.BotID),
-            CreatedAt: args.CreatedAt,
-            CompletedAt: args.CompletedAt,
-            FailedAt: args.FailedAt,
-            MetaData: args.MetaData,
-            LastError: args.LastError,
-            Status: args.Status,
-            Usage: args.Usage,
-            RequiredAction: args.RequiredAction,
-            SectionID: (typeof args.SectionID === "number" ? new thrift.Int64(args.SectionID) : typeof args.SectionID === "string" ? thrift.Int64.fromDecimalString(args.SectionID) : args.SectionID)
+            ID: (typeof args.i_d === "number" ? new thrift.Int64(args.i_d) : typeof args.i_d === "string" ? thrift.Int64.fromDecimalString(args.i_d) : args.i_d),
+            ConversationID: (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d),
+            BotID: (typeof args.bot_i_d === "number" ? new thrift.Int64(args.bot_i_d) : typeof args.bot_i_d === "string" ? thrift.Int64.fromDecimalString(args.bot_i_d) : args.bot_i_d),
+            CreatedAt: args.created_at,
+            CompletedAt: args.completed_at,
+            FailedAt: args.failed_at,
+            MetaData: args.meta_data,
+            LastError: args.last_error,
+            Status: args.status,
+            Usage: args.usage,
+            RequiredAction: args.required_action,
+            SectionID: (typeof args.section_i_d === "number" ? new thrift.Int64(args.section_i_d) : typeof args.section_i_d === "string" ? thrift.Int64.fromDecimalString(args.section_i_d) : args.section_i_d)
         };
         output.writeStructBegin("ChatV3ChatDetail");
         if (obj.ID != null) {
@@ -270,18 +270,18 @@ export const ChatV3ChatDetailCodec: thrift.IStructCodec<IChatV3ChatDetailArgs, I
         input.readStructEnd();
         if (_args.ID !== undefined && _args.ConversationID !== undefined && _args.BotID !== undefined && _args.Status !== undefined) {
             return {
-                ID: _args.ID,
-                ConversationID: _args.ConversationID,
-                BotID: _args.BotID,
-                CreatedAt: _args.CreatedAt,
-                CompletedAt: _args.CompletedAt,
-                FailedAt: _args.FailedAt,
-                MetaData: _args.MetaData,
-                LastError: _args.LastError,
-                Status: _args.Status,
-                Usage: _args.Usage,
-                RequiredAction: _args.RequiredAction,
-                SectionID: _args.SectionID
+                i_d: _args.ID,
+                conversation_i_d: _args.ConversationID,
+                bot_i_d: _args.BotID,
+                created_at: _args.CreatedAt,
+                completed_at: _args.CompletedAt,
+                failed_at: _args.FailedAt,
+                meta_data: _args.MetaData,
+                last_error: _args.LastError,
+                status: _args.Status,
+                usage: _args.Usage,
+                required_action: _args.RequiredAction,
+                section_i_d: _args.SectionID
             };
         }
         else {
@@ -290,127 +290,127 @@ export const ChatV3ChatDetailCodec: thrift.IStructCodec<IChatV3ChatDetailArgs, I
     }
 };
 export class ChatV3ChatDetail extends thrift.StructLike implements IChatV3ChatDetail {
-    public ID: thrift.Int64;
-    public ConversationID: thrift.Int64;
-    public BotID: thrift.Int64;
-    public CreatedAt?: number;
-    public CompletedAt?: number;
-    public FailedAt?: number;
-    public MetaData?: Map<string, string>;
-    public LastError?: LastError.ILastError;
-    public Status: string;
-    public Usage?: Usage.IUsage;
-    public RequiredAction?: RequiredAction.IRequiredAction;
-    public SectionID?: thrift.Int64;
+    public i_d: thrift.Int64;
+    public conversation_i_d: thrift.Int64;
+    public bot_i_d: thrift.Int64;
+    public created_at?: number;
+    public completed_at?: number;
+    public failed_at?: number;
+    public meta_data?: Map<string, string>;
+    public last_error?: LastError.ILastError;
+    public status: string;
+    public usage?: Usage.IUsage;
+    public required_action?: RequiredAction.IRequiredAction;
+    public section_i_d?: thrift.Int64;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ID: {
+        i_d: {
             'api.body': "id",
             'api.js_conv': "true"
         },
-        ConversationID: {
+        conversation_i_d: {
             'api.body': "conversation_id",
             'api.js_conv': "true"
         },
-        BotID: {
+        bot_i_d: {
             'api.body': "bot_id",
             'api.js_conv': "true"
         },
-        CreatedAt: {
+        created_at: {
             'api.body': "created_at"
         },
-        CompletedAt: {
+        completed_at: {
             'api.body': "completed_at"
         },
-        FailedAt: {
+        failed_at: {
             'api.body': "failed_at"
         },
-        MetaData: {
+        meta_data: {
             'api.body': "meta_data"
         },
-        LastError: {
+        last_error: {
             'api.body': "last_error"
         },
-        Status: {
+        status: {
             'api.body': "status"
         },
-        Usage: {
+        usage: {
             'api.body': "usage"
         },
-        RequiredAction: {
+        required_action: {
             'api.body': "required_action"
         },
-        SectionID: {
+        section_i_d: {
             'api.body': "section_id",
             'api.js_conv': "true"
         }
     };
     constructor(args: IChatV3ChatDetailArgs) {
         super();
-        if (args.ID != null) {
-            const value_15: thrift.Int64 = (typeof args.ID === "number" ? new thrift.Int64(args.ID) : typeof args.ID === "string" ? thrift.Int64.fromDecimalString(args.ID) : args.ID);
-            this.ID = value_15;
+        if (args.i_d != null) {
+            const value_15: thrift.Int64 = (typeof args.i_d === "number" ? new thrift.Int64(args.i_d) : typeof args.i_d === "string" ? thrift.Int64.fromDecimalString(args.i_d) : args.i_d);
+            this.i_d = value_15;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ID] is unset!");
         }
-        if (args.ConversationID != null) {
-            const value_16: thrift.Int64 = (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID);
-            this.ConversationID = value_16;
+        if (args.conversation_i_d != null) {
+            const value_16: thrift.Int64 = (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d);
+            this.conversation_i_d = value_16;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ConversationID] is unset!");
         }
-        if (args.BotID != null) {
-            const value_17: thrift.Int64 = (typeof args.BotID === "number" ? new thrift.Int64(args.BotID) : typeof args.BotID === "string" ? thrift.Int64.fromDecimalString(args.BotID) : args.BotID);
-            this.BotID = value_17;
+        if (args.bot_i_d != null) {
+            const value_17: thrift.Int64 = (typeof args.bot_i_d === "number" ? new thrift.Int64(args.bot_i_d) : typeof args.bot_i_d === "string" ? thrift.Int64.fromDecimalString(args.bot_i_d) : args.bot_i_d);
+            this.bot_i_d = value_17;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BotID] is unset!");
         }
-        if (args.CreatedAt != null) {
-            const value_18: number = args.CreatedAt;
-            this.CreatedAt = value_18;
+        if (args.created_at != null) {
+            const value_18: number = args.created_at;
+            this.created_at = value_18;
         }
-        if (args.CompletedAt != null) {
-            const value_19: number = args.CompletedAt;
-            this.CompletedAt = value_19;
+        if (args.completed_at != null) {
+            const value_19: number = args.completed_at;
+            this.completed_at = value_19;
         }
-        if (args.FailedAt != null) {
-            const value_20: number = args.FailedAt;
-            this.FailedAt = value_20;
+        if (args.failed_at != null) {
+            const value_20: number = args.failed_at;
+            this.failed_at = value_20;
         }
-        if (args.MetaData != null) {
+        if (args.meta_data != null) {
             const value_21: Map<string, string> = new Map<string, string>();
-            args.MetaData.forEach((value_27: string, key_3: string): void => {
+            args.meta_data.forEach((value_27: string, key_3: string): void => {
                 const value_28: string = value_27;
                 const key_4: string = key_3;
                 value_21.set(key_4, value_28);
             });
-            this.MetaData = value_21;
+            this.meta_data = value_21;
         }
-        if (args.LastError != null) {
-            const value_22: LastError.ILastError = new LastError.LastError(args.LastError);
-            this.LastError = value_22;
+        if (args.last_error != null) {
+            const value_22: LastError.ILastError = new LastError.LastError(args.last_error);
+            this.last_error = value_22;
         }
-        if (args.Status != null) {
-            const value_23: string = args.Status;
-            this.Status = value_23;
+        if (args.status != null) {
+            const value_23: string = args.status;
+            this.status = value_23;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Status] is unset!");
         }
-        if (args.Usage != null) {
-            const value_24: Usage.IUsage = new Usage.Usage(args.Usage);
-            this.Usage = value_24;
+        if (args.usage != null) {
+            const value_24: Usage.IUsage = new Usage.Usage(args.usage);
+            this.usage = value_24;
         }
-        if (args.RequiredAction != null) {
-            const value_25: RequiredAction.IRequiredAction = new RequiredAction.RequiredAction(args.RequiredAction);
-            this.RequiredAction = value_25;
+        if (args.required_action != null) {
+            const value_25: RequiredAction.IRequiredAction = new RequiredAction.RequiredAction(args.required_action);
+            this.required_action = value_25;
         }
-        if (args.SectionID != null) {
-            const value_26: thrift.Int64 = (typeof args.SectionID === "number" ? new thrift.Int64(args.SectionID) : typeof args.SectionID === "string" ? thrift.Int64.fromDecimalString(args.SectionID) : args.SectionID);
-            this.SectionID = value_26;
+        if (args.section_i_d != null) {
+            const value_26: thrift.Int64 = (typeof args.section_i_d === "number" ? new thrift.Int64(args.section_i_d) : typeof args.section_i_d === "string" ? thrift.Int64.fromDecimalString(args.section_i_d) : args.section_i_d);
+            this.section_i_d = value_26;
         }
     }
     public static read(input: thrift.TProtocol): ChatV3ChatDetail {

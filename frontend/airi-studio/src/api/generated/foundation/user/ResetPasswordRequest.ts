@@ -10,13 +10,13 @@ export interface IResetPasswordRequest {
     account?: string;
     password?: string;
     code?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IResetPasswordRequestArgs {
     account?: string;
     password?: string;
     code?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const ResetPasswordRequestCodec: thrift.IStructCodec<IResetPasswordRequestArgs, IResetPasswordRequest> = {
     encode(args: IResetPasswordRequestArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const ResetPasswordRequestCodec: thrift.IStructCodec<IResetPasswordReques
             account: args.account,
             password: args.password,
             code: args.code,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ResetPasswordRequest");
         if (obj.account != null) {
@@ -109,7 +109,7 @@ export const ResetPasswordRequestCodec: thrift.IStructCodec<IResetPasswordReques
             account: _args.account,
             password: _args.password,
             code: _args.code,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -117,7 +117,7 @@ export class ResetPasswordRequest extends thrift.StructLike implements IResetPas
     public account?: string;
     public password?: string;
     public code?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IResetPasswordRequestArgs = {}) {
@@ -134,9 +134,9 @@ export class ResetPasswordRequest extends thrift.StructLike implements IResetPas
             const value_7: string = args.code;
             this.code = value_7;
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): ResetPasswordRequest {

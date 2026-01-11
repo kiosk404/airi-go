@@ -6,21 +6,21 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IRecallStrategy {
-    UseRerank?: boolean;
-    UseRewrite?: boolean;
-    UseNl2sql?: boolean;
+    use_rerank?: boolean;
+    use_rewrite?: boolean;
+    use_nl2sql?: boolean;
 }
 export interface IRecallStrategyArgs {
-    UseRerank?: boolean;
-    UseRewrite?: boolean;
-    UseNl2sql?: boolean;
+    use_rerank?: boolean;
+    use_rewrite?: boolean;
+    use_nl2sql?: boolean;
 }
 export const RecallStrategyCodec: thrift.IStructCodec<IRecallStrategyArgs, IRecallStrategy> = {
     encode(args: IRecallStrategyArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            UseRerank: args.UseRerank,
-            UseRewrite: args.UseRewrite,
-            UseNl2sql: args.UseNl2sql
+            UseRerank: args.use_rerank,
+            UseRewrite: args.use_rewrite,
+            UseNl2sql: args.use_nl2sql
         };
         output.writeStructBegin("RecallStrategy");
         if (obj.UseRerank != null) {
@@ -88,41 +88,41 @@ export const RecallStrategyCodec: thrift.IStructCodec<IRecallStrategyArgs, IReca
         }
         input.readStructEnd();
         return {
-            UseRerank: _args.UseRerank,
-            UseRewrite: _args.UseRewrite,
-            UseNl2sql: _args.UseNl2sql
+            use_rerank: _args.UseRerank,
+            use_rewrite: _args.UseRewrite,
+            use_nl2sql: _args.UseNl2sql
         };
     }
 };
 export class RecallStrategy extends thrift.StructLike implements IRecallStrategy {
-    public UseRerank?: boolean;
-    public UseRewrite?: boolean;
-    public UseNl2sql?: boolean;
+    public use_rerank?: boolean;
+    public use_rewrite?: boolean;
+    public use_nl2sql?: boolean;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        UseRerank: {
+        use_rerank: {
             'api.body': "use_rerank"
         },
-        UseRewrite: {
+        use_rewrite: {
             'api.body': "use_rewrite"
         },
-        UseNl2sql: {
+        use_nl2sql: {
             'api.body': "use_nl2sql"
         }
     };
     constructor(args: IRecallStrategyArgs = {}) {
         super();
-        if (args.UseRerank != null) {
-            const value_4: boolean = args.UseRerank;
-            this.UseRerank = value_4;
+        if (args.use_rerank != null) {
+            const value_4: boolean = args.use_rerank;
+            this.use_rerank = value_4;
         }
-        if (args.UseRewrite != null) {
-            const value_5: boolean = args.UseRewrite;
-            this.UseRewrite = value_5;
+        if (args.use_rewrite != null) {
+            const value_5: boolean = args.use_rewrite;
+            this.use_rewrite = value_5;
         }
-        if (args.UseNl2sql != null) {
-            const value_6: boolean = args.UseNl2sql;
-            this.UseNl2sql = value_6;
+        if (args.use_nl2sql != null) {
+            const value_6: boolean = args.use_nl2sql;
+            this.use_nl2sql = value_6;
         }
     }
     public static read(input: thrift.TProtocol): RecallStrategy {

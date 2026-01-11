@@ -26,7 +26,7 @@ export interface IRegisterPluginMetaRequest {
     sub_auth_type?: number;
     auth_payload?: string;
     fixed_export_ip?: boolean;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IRegisterPluginMetaRequestArgs {
     name: string;
@@ -47,7 +47,7 @@ export interface IRegisterPluginMetaRequestArgs {
     sub_auth_type?: number;
     auth_payload?: string;
     fixed_export_ip?: boolean;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPluginMetaRequestArgs, IRegisterPluginMetaRequest> = {
     encode(args: IRegisterPluginMetaRequestArgs, output: thrift.TProtocol): void {
@@ -70,7 +70,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
             sub_auth_type: args.sub_auth_type,
             auth_payload: args.auth_payload,
             fixed_export_ip: args.fixed_export_ip,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("RegisterPluginMetaRequest");
         if (obj.name != null) {
@@ -417,7 +417,7 @@ export const RegisterPluginMetaRequestCodec: thrift.IStructCodec<IRegisterPlugin
                 sub_auth_type: _args.sub_auth_type,
                 auth_payload: _args.auth_payload,
                 fixed_export_ip: _args.fixed_export_ip,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -444,7 +444,7 @@ export class RegisterPluginMetaRequest extends thrift.StructLike implements IReg
     public sub_auth_type?: number;
     public auth_payload?: string;
     public fixed_export_ip?: boolean;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         space_id: {
@@ -549,9 +549,9 @@ export class RegisterPluginMetaRequest extends thrift.StructLike implements IReg
             const value_41: boolean = args.fixed_export_ip;
             this.fixed_export_ip = value_41;
         }
-        if (args.Base != null) {
-            const value_42: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_42;
+        if (args.base != null) {
+            const value_42: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_42;
         }
     }
     public static read(input: thrift.TProtocol): RegisterPluginMetaRequest {

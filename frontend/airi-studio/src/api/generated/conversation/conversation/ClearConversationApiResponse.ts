@@ -11,13 +11,13 @@ export interface IClearConversationApiResponse {
     code?: thrift.Int64;
     msg?: string;
     data?: Section.ISection;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IClearConversationApiResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     data?: Section.ISectionArgs;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const ClearConversationApiResponseCodec: thrift.IStructCodec<IClearConversationApiResponseArgs, IClearConversationApiResponse> = {
     encode(args: IClearConversationApiResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const ClearConversationApiResponseCodec: thrift.IStructCodec<IClearConver
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             data: args.data,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("ClearConversationApiResponse");
         if (obj.code != null) {
@@ -110,7 +110,7 @@ export const ClearConversationApiResponseCodec: thrift.IStructCodec<IClearConver
             code: _args.code,
             msg: _args.msg,
             data: _args.data,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -118,7 +118,7 @@ export class ClearConversationApiResponse extends thrift.StructLike implements I
     public code?: thrift.Int64;
     public msg?: string;
     public data?: Section.ISection;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         code: {
@@ -148,9 +148,9 @@ export class ClearConversationApiResponse extends thrift.StructLike implements I
             const value_7: Section.ISection = new Section.Section(args.data);
             this.data = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): ClearConversationApiResponse {

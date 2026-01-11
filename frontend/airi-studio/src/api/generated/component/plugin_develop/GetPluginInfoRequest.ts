@@ -9,19 +9,19 @@ import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IGetPluginInfoRequest {
     plugin_id: thrift.Int64;
     preview_version_tsx?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetPluginInfoRequestArgs {
     plugin_id: number | string | thrift.Int64;
     preview_version_tsx?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetPluginInfoRequestCodec: thrift.IStructCodec<IGetPluginInfoRequestArgs, IGetPluginInfoRequest> = {
     encode(args: IGetPluginInfoRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             plugin_id: (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id),
             preview_version_tsx: args.preview_version_tsx,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetPluginInfoRequest");
         if (obj.plugin_id != null) {
@@ -95,7 +95,7 @@ export const GetPluginInfoRequestCodec: thrift.IStructCodec<IGetPluginInfoReques
             return {
                 plugin_id: _args.plugin_id,
                 preview_version_tsx: _args.preview_version_tsx,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -106,7 +106,7 @@ export const GetPluginInfoRequestCodec: thrift.IStructCodec<IGetPluginInfoReques
 export class GetPluginInfoRequest extends thrift.StructLike implements IGetPluginInfoRequest {
     public plugin_id: thrift.Int64;
     public preview_version_tsx?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -126,9 +126,9 @@ export class GetPluginInfoRequest extends thrift.StructLike implements IGetPlugi
             const value_5: string = args.preview_version_tsx;
             this.preview_version_tsx = value_5;
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): GetPluginInfoRequest {

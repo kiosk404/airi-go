@@ -14,7 +14,7 @@ export interface IConvert2OpenAPIResponse {
     ai_plugin?: string;
     plugin_data_format?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginDataFormat;
     duplicate_api_infos?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo>;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IConvert2OpenAPIResponseArgs {
     code?: number | string | thrift.Int64;
@@ -23,7 +23,7 @@ export interface IConvert2OpenAPIResponseArgs {
     ai_plugin?: string;
     plugin_data_format?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginDataFormat;
     duplicate_api_infos?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfoArgs>;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const Convert2OpenAPIResponseCodec: thrift.IStructCodec<IConvert2OpenAPIResponseArgs, IConvert2OpenAPIResponse> = {
     encode(args: IConvert2OpenAPIResponseArgs, output: thrift.TProtocol): void {
@@ -34,7 +34,7 @@ export const Convert2OpenAPIResponseCodec: thrift.IStructCodec<IConvert2OpenAPIR
             ai_plugin: args.ai_plugin,
             plugin_data_format: args.plugin_data_format,
             duplicate_api_infos: args.duplicate_api_infos,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("Convert2OpenAPIResponse");
         if (obj.code != null) {
@@ -175,7 +175,7 @@ export const Convert2OpenAPIResponseCodec: thrift.IStructCodec<IConvert2OpenAPIR
             ai_plugin: _args.ai_plugin,
             plugin_data_format: _args.plugin_data_format,
             duplicate_api_infos: _args.duplicate_api_infos,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -186,7 +186,7 @@ export class Convert2OpenAPIResponse extends thrift.StructLike implements IConve
     public ai_plugin?: string;
     public plugin_data_format?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginDataFormat;
     public duplicate_api_infos?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IDuplicateAPIInfo>;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IConvert2OpenAPIResponseArgs = {}) {
@@ -219,9 +219,9 @@ export class Convert2OpenAPIResponse extends thrift.StructLike implements IConve
             });
             this.duplicate_api_infos = value_15;
         }
-        if (args.BaseResp != null) {
-            const value_16: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_16;
+        if (args.base_resp != null) {
+            const value_16: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_16;
         }
     }
     public static read(input: thrift.TProtocol): Convert2OpenAPIResponse {

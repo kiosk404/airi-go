@@ -8,33 +8,33 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as GradientPosition from "./GradientPosition";
 import * as CanvasPosition from "./CanvasPosition";
 export interface IBackgroundImageDetail {
-    OriginImageUri?: string;
-    OriginImageUrl?: string;
-    ImageUri?: string;
-    ImageUrl?: string;
-    ThemeColor?: string;
-    GradientPosition?: GradientPosition.IGradientPosition;
-    CanvasPosition?: CanvasPosition.ICanvasPosition;
+    origin_image_uri?: string;
+    origin_image_url?: string;
+    image_uri?: string;
+    image_url?: string;
+    theme_color?: string;
+    gradient_position?: GradientPosition.IGradientPosition;
+    canvas_position?: CanvasPosition.ICanvasPosition;
 }
 export interface IBackgroundImageDetailArgs {
-    OriginImageUri?: string;
-    OriginImageUrl?: string;
-    ImageUri?: string;
-    ImageUrl?: string;
-    ThemeColor?: string;
-    GradientPosition?: GradientPosition.IGradientPositionArgs;
-    CanvasPosition?: CanvasPosition.ICanvasPositionArgs;
+    origin_image_uri?: string;
+    origin_image_url?: string;
+    image_uri?: string;
+    image_url?: string;
+    theme_color?: string;
+    gradient_position?: GradientPosition.IGradientPositionArgs;
+    canvas_position?: CanvasPosition.ICanvasPositionArgs;
 }
 export const BackgroundImageDetailCodec: thrift.IStructCodec<IBackgroundImageDetailArgs, IBackgroundImageDetail> = {
     encode(args: IBackgroundImageDetailArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            OriginImageUri: args.OriginImageUri,
-            OriginImageUrl: args.OriginImageUrl,
-            ImageUri: args.ImageUri,
-            ImageUrl: args.ImageUrl,
-            ThemeColor: args.ThemeColor,
-            GradientPosition: args.GradientPosition,
-            CanvasPosition: args.CanvasPosition
+            OriginImageUri: args.origin_image_uri,
+            OriginImageUrl: args.origin_image_url,
+            ImageUri: args.image_uri,
+            ImageUrl: args.image_url,
+            ThemeColor: args.theme_color,
+            GradientPosition: args.gradient_position,
+            CanvasPosition: args.canvas_position
         };
         output.writeStructBegin("BackgroundImageDetail");
         if (obj.OriginImageUri != null) {
@@ -158,77 +158,77 @@ export const BackgroundImageDetailCodec: thrift.IStructCodec<IBackgroundImageDet
         }
         input.readStructEnd();
         return {
-            OriginImageUri: _args.OriginImageUri,
-            OriginImageUrl: _args.OriginImageUrl,
-            ImageUri: _args.ImageUri,
-            ImageUrl: _args.ImageUrl,
-            ThemeColor: _args.ThemeColor,
-            GradientPosition: _args.GradientPosition,
-            CanvasPosition: _args.CanvasPosition
+            origin_image_uri: _args.OriginImageUri,
+            origin_image_url: _args.OriginImageUrl,
+            image_uri: _args.ImageUri,
+            image_url: _args.ImageUrl,
+            theme_color: _args.ThemeColor,
+            gradient_position: _args.GradientPosition,
+            canvas_position: _args.CanvasPosition
         };
     }
 };
 export class BackgroundImageDetail extends thrift.StructLike implements IBackgroundImageDetail {
-    public OriginImageUri?: string;
-    public OriginImageUrl?: string;
-    public ImageUri?: string;
-    public ImageUrl?: string;
-    public ThemeColor?: string;
-    public GradientPosition?: GradientPosition.IGradientPosition;
-    public CanvasPosition?: CanvasPosition.ICanvasPosition;
+    public origin_image_uri?: string;
+    public origin_image_url?: string;
+    public image_uri?: string;
+    public image_url?: string;
+    public theme_color?: string;
+    public gradient_position?: GradientPosition.IGradientPosition;
+    public canvas_position?: CanvasPosition.ICanvasPosition;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        OriginImageUri: {
+        origin_image_uri: {
             'api.body': "origin_image_uri"
         },
-        OriginImageUrl: {
+        origin_image_url: {
             'api.body': "origin_image_url"
         },
-        ImageUri: {
+        image_uri: {
             'api.body': "image_uri"
         },
-        ImageUrl: {
+        image_url: {
             'api.body': "image_url"
         },
-        ThemeColor: {
+        theme_color: {
             'api.body': "theme_color"
         },
-        GradientPosition: {
+        gradient_position: {
             'api.body': "gradient_position"
         },
-        CanvasPosition: {
+        canvas_position: {
             'api.body': "canvas_position"
         }
     };
     constructor(args: IBackgroundImageDetailArgs = {}) {
         super();
-        if (args.OriginImageUri != null) {
-            const value_8: string = args.OriginImageUri;
-            this.OriginImageUri = value_8;
+        if (args.origin_image_uri != null) {
+            const value_8: string = args.origin_image_uri;
+            this.origin_image_uri = value_8;
         }
-        if (args.OriginImageUrl != null) {
-            const value_9: string = args.OriginImageUrl;
-            this.OriginImageUrl = value_9;
+        if (args.origin_image_url != null) {
+            const value_9: string = args.origin_image_url;
+            this.origin_image_url = value_9;
         }
-        if (args.ImageUri != null) {
-            const value_10: string = args.ImageUri;
-            this.ImageUri = value_10;
+        if (args.image_uri != null) {
+            const value_10: string = args.image_uri;
+            this.image_uri = value_10;
         }
-        if (args.ImageUrl != null) {
-            const value_11: string = args.ImageUrl;
-            this.ImageUrl = value_11;
+        if (args.image_url != null) {
+            const value_11: string = args.image_url;
+            this.image_url = value_11;
         }
-        if (args.ThemeColor != null) {
-            const value_12: string = args.ThemeColor;
-            this.ThemeColor = value_12;
+        if (args.theme_color != null) {
+            const value_12: string = args.theme_color;
+            this.theme_color = value_12;
         }
-        if (args.GradientPosition != null) {
-            const value_13: GradientPosition.IGradientPosition = new GradientPosition.GradientPosition(args.GradientPosition);
-            this.GradientPosition = value_13;
+        if (args.gradient_position != null) {
+            const value_13: GradientPosition.IGradientPosition = new GradientPosition.GradientPosition(args.gradient_position);
+            this.gradient_position = value_13;
         }
-        if (args.CanvasPosition != null) {
-            const value_14: CanvasPosition.ICanvasPosition = new CanvasPosition.CanvasPosition(args.CanvasPosition);
-            this.CanvasPosition = value_14;
+        if (args.canvas_position != null) {
+            const value_14: CanvasPosition.ICanvasPosition = new CanvasPosition.CanvasPosition(args.canvas_position);
+            this.canvas_position = value_14;
         }
     }
     public static read(input: thrift.TProtocol): BackgroundImageDetail {

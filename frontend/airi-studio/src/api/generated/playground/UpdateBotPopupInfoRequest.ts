@@ -10,19 +10,19 @@ import * as __ROOT_NAMESPACE__ from "../base";
 export interface IUpdateBotPopupInfoRequest {
     bot_popup_type: BotPopupType.BotPopupType;
     bot_id: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IUpdateBotPopupInfoRequestArgs {
     bot_popup_type: BotPopupType.BotPopupType;
     bot_id: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const UpdateBotPopupInfoRequestCodec: thrift.IStructCodec<IUpdateBotPopupInfoRequestArgs, IUpdateBotPopupInfoRequest> = {
     encode(args: IUpdateBotPopupInfoRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             bot_popup_type: args.bot_popup_type,
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UpdateBotPopupInfoRequest");
         if (obj.bot_popup_type != null) {
@@ -99,7 +99,7 @@ export const UpdateBotPopupInfoRequestCodec: thrift.IStructCodec<IUpdateBotPopup
             return {
                 bot_popup_type: _args.bot_popup_type,
                 bot_id: _args.bot_id,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -110,7 +110,7 @@ export const UpdateBotPopupInfoRequestCodec: thrift.IStructCodec<IUpdateBotPopup
 export class UpdateBotPopupInfoRequest extends thrift.StructLike implements IUpdateBotPopupInfoRequest {
     public bot_popup_type: BotPopupType.BotPopupType;
     public bot_id: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
@@ -118,7 +118,7 @@ export class UpdateBotPopupInfoRequest extends thrift.StructLike implements IUpd
             'go.tag': "json:\"bot_id,string\"",
             'api.js_conv': "true"
         },
-        Base: {
+        base: {
             'api.none': "true"
         }
     };
@@ -138,9 +138,9 @@ export class UpdateBotPopupInfoRequest extends thrift.StructLike implements IUpd
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): UpdateBotPopupInfoRequest {

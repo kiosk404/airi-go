@@ -8,17 +8,17 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IUserUpdateAvatarResponse {
     web_uri: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IUserUpdateAvatarResponseArgs {
     web_uri: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const UserUpdateAvatarResponseCodec: thrift.IStructCodec<IUserUpdateAvatarResponseArgs, IUserUpdateAvatarResponse> = {
     encode(args: IUserUpdateAvatarResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
             web_uri: args.web_uri,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UserUpdateAvatarResponse");
         if (obj.web_uri != null) {
@@ -77,7 +77,7 @@ export const UserUpdateAvatarResponseCodec: thrift.IStructCodec<IUserUpdateAvata
         if (_args.web_uri !== undefined) {
             return {
                 web_uri: _args.web_uri,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -87,7 +87,7 @@ export const UserUpdateAvatarResponseCodec: thrift.IStructCodec<IUserUpdateAvata
 };
 export class UserUpdateAvatarResponse extends thrift.StructLike implements IUserUpdateAvatarResponse {
     public web_uri: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUserUpdateAvatarResponseArgs) {
@@ -99,9 +99,9 @@ export class UserUpdateAvatarResponse extends thrift.StructLike implements IUser
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[web_uri] is unset!");
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): UserUpdateAvatarResponse {

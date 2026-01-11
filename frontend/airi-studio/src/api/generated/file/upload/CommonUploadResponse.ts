@@ -8,13 +8,13 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as Error from "./Error";
 import * as Payload from "./Payload";
 export interface ICommonUploadResponse {
-    Version?: string;
+    version?: string;
     success?: number;
     error?: Error.IError;
     payload?: Payload.IPayload;
 }
 export interface ICommonUploadResponseArgs {
-    Version?: string;
+    version?: string;
     success?: number;
     error?: Error.IErrorArgs;
     payload?: Payload.IPayloadArgs;
@@ -22,7 +22,7 @@ export interface ICommonUploadResponseArgs {
 export const CommonUploadResponseCodec: thrift.IStructCodec<ICommonUploadResponseArgs, ICommonUploadResponse> = {
     encode(args: ICommonUploadResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Version: args.Version,
+            Version: args.version,
             success: args.success,
             error: args.error,
             payload: args.payload
@@ -107,7 +107,7 @@ export const CommonUploadResponseCodec: thrift.IStructCodec<ICommonUploadRespons
         }
         input.readStructEnd();
         return {
-            Version: _args.Version,
+            version: _args.Version,
             success: _args.success,
             error: _args.error,
             payload: _args.payload
@@ -115,7 +115,7 @@ export const CommonUploadResponseCodec: thrift.IStructCodec<ICommonUploadRespons
     }
 };
 export class CommonUploadResponse extends thrift.StructLike implements ICommonUploadResponse {
-    public Version?: string;
+    public version?: string;
     public success?: number;
     public error?: Error.IError;
     public payload?: Payload.IPayload;
@@ -123,9 +123,9 @@ export class CommonUploadResponse extends thrift.StructLike implements ICommonUp
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICommonUploadResponseArgs = {}) {
         super();
-        if (args.Version != null) {
-            const value_5: string = args.Version;
-            this.Version = value_5;
+        if (args.version != null) {
+            const value_5: string = args.version;
+            this.version = value_5;
         }
         if (args.success != null) {
             const value_6: number = args.success;

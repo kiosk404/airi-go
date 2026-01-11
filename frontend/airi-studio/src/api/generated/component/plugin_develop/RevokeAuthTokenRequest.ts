@@ -10,13 +10,13 @@ export interface IRevokeAuthTokenRequest {
     plugin_id: thrift.Int64;
     bot_id?: thrift.Int64;
     context_type?: number;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IRevokeAuthTokenRequestArgs {
     plugin_id: number | string | thrift.Int64;
     bot_id?: number | string | thrift.Int64;
     context_type?: number;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const RevokeAuthTokenRequestCodec: thrift.IStructCodec<IRevokeAuthTokenRequestArgs, IRevokeAuthTokenRequest> = {
     encode(args: IRevokeAuthTokenRequestArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const RevokeAuthTokenRequestCodec: thrift.IStructCodec<IRevokeAuthTokenRe
             plugin_id: (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id),
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
             context_type: args.context_type,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("RevokeAuthTokenRequest");
         if (obj.plugin_id != null) {
@@ -113,7 +113,7 @@ export const RevokeAuthTokenRequestCodec: thrift.IStructCodec<IRevokeAuthTokenRe
                 plugin_id: _args.plugin_id,
                 bot_id: _args.bot_id,
                 context_type: _args.context_type,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -125,7 +125,7 @@ export class RevokeAuthTokenRequest extends thrift.StructLike implements IRevoke
     public plugin_id: thrift.Int64;
     public bot_id?: thrift.Int64;
     public context_type?: number;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -157,9 +157,9 @@ export class RevokeAuthTokenRequest extends thrift.StructLike implements IRevoke
             const value_7: number = args.context_type;
             this.context_type = value_7;
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): RevokeAuthTokenRequest {

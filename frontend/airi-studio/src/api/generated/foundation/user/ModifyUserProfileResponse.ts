@@ -9,17 +9,17 @@ import * as FOUNDATION_DOMAIN_USER_NS from "../domain/user";
 import * as BASE_NS from "../../base";
 export interface IModifyUserProfileResponse {
     user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IModifyUserProfileResponseArgs {
     user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetailArgs;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const ModifyUserProfileResponseCodec: thrift.IStructCodec<IModifyUserProfileResponseArgs, IModifyUserProfileResponse> = {
     encode(args: IModifyUserProfileResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
             user_info: args.user_info,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("ModifyUserProfileResponse");
         if (obj.user_info != null) {
@@ -74,13 +74,13 @@ export const ModifyUserProfileResponseCodec: thrift.IStructCodec<IModifyUserProf
         input.readStructEnd();
         return {
             user_info: _args.user_info,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
 export class ModifyUserProfileResponse extends thrift.StructLike implements IModifyUserProfileResponse {
     public user_info?: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IModifyUserProfileResponseArgs = {}) {
@@ -89,9 +89,9 @@ export class ModifyUserProfileResponse extends thrift.StructLike implements IMod
             const value_3: FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail = new FOUNDATION_DOMAIN_USER_NS.UserInfoDetail(args.user_info);
             this.user_info = value_3;
         }
-        if (args.BaseResp != null) {
-            const value_4: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_4;
+        if (args.base_resp != null) {
+            const value_4: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_4;
         }
     }
     public static read(input: thrift.TProtocol): ModifyUserProfileResponse {

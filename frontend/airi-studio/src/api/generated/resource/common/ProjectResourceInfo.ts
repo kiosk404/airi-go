@@ -8,36 +8,36 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as ProjectResourceAction from "./ProjectResourceAction";
 import * as ResType from "./ResType";
 export interface IProjectResourceInfo {
-    ResID?: thrift.Int64;
-    Name?: string;
-    Actions?: Array<ProjectResourceAction.IProjectResourceAction>;
-    ResType?: ResType.ResType;
-    ResSubType?: number;
-    BizExtend?: Map<string, string>;
-    BizResStatus?: number;
-    VersionStr?: string;
+    res_i_d?: thrift.Int64;
+    name?: string;
+    actions?: Array<ProjectResourceAction.IProjectResourceAction>;
+    res_type?: ResType.ResType;
+    res_sub_type?: number;
+    biz_extend?: Map<string, string>;
+    biz_res_status?: number;
+    version_str?: string;
 }
 export interface IProjectResourceInfoArgs {
-    ResID?: number | string | thrift.Int64;
-    Name?: string;
-    Actions?: Array<ProjectResourceAction.IProjectResourceActionArgs>;
-    ResType?: ResType.ResType;
-    ResSubType?: number;
-    BizExtend?: Map<string, string>;
-    BizResStatus?: number;
-    VersionStr?: string;
+    res_i_d?: number | string | thrift.Int64;
+    name?: string;
+    actions?: Array<ProjectResourceAction.IProjectResourceActionArgs>;
+    res_type?: ResType.ResType;
+    res_sub_type?: number;
+    biz_extend?: Map<string, string>;
+    biz_res_status?: number;
+    version_str?: string;
 }
 export const ProjectResourceInfoCodec: thrift.IStructCodec<IProjectResourceInfoArgs, IProjectResourceInfo> = {
     encode(args: IProjectResourceInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ResID: (typeof args.ResID === "number" ? new thrift.Int64(args.ResID) : typeof args.ResID === "string" ? thrift.Int64.fromDecimalString(args.ResID) : args.ResID),
-            Name: args.Name,
-            Actions: args.Actions,
-            ResType: args.ResType,
-            ResSubType: args.ResSubType,
-            BizExtend: args.BizExtend,
-            BizResStatus: args.BizResStatus,
-            VersionStr: args.VersionStr
+            ResID: (typeof args.res_i_d === "number" ? new thrift.Int64(args.res_i_d) : typeof args.res_i_d === "string" ? thrift.Int64.fromDecimalString(args.res_i_d) : args.res_i_d),
+            Name: args.name,
+            Actions: args.actions,
+            ResType: args.res_type,
+            ResSubType: args.res_sub_type,
+            BizExtend: args.biz_extend,
+            BizResStatus: args.biz_res_status,
+            VersionStr: args.version_str
         };
         output.writeStructBegin("ProjectResourceInfo");
         if (obj.ResID != null) {
@@ -199,105 +199,105 @@ export const ProjectResourceInfoCodec: thrift.IStructCodec<IProjectResourceInfoA
         }
         input.readStructEnd();
         return {
-            ResID: _args.ResID,
-            Name: _args.Name,
-            Actions: _args.Actions,
-            ResType: _args.ResType,
-            ResSubType: _args.ResSubType,
-            BizExtend: _args.BizExtend,
-            BizResStatus: _args.BizResStatus,
-            VersionStr: _args.VersionStr
+            res_i_d: _args.ResID,
+            name: _args.Name,
+            actions: _args.Actions,
+            res_type: _args.ResType,
+            res_sub_type: _args.ResSubType,
+            biz_extend: _args.BizExtend,
+            biz_res_status: _args.BizResStatus,
+            version_str: _args.VersionStr
         };
     }
 };
 export class ProjectResourceInfo extends thrift.StructLike implements IProjectResourceInfo {
-    public ResID?: thrift.Int64;
-    public Name?: string;
-    public Actions?: Array<ProjectResourceAction.IProjectResourceAction>;
-    public ResType?: ResType.ResType;
-    public ResSubType?: number;
-    public BizExtend?: Map<string, string>;
-    public BizResStatus?: number;
-    public VersionStr?: string;
+    public res_i_d?: thrift.Int64;
+    public name?: string;
+    public actions?: Array<ProjectResourceAction.IProjectResourceAction>;
+    public res_type?: ResType.ResType;
+    public res_sub_type?: number;
+    public biz_extend?: Map<string, string>;
+    public biz_res_status?: number;
+    public version_str?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ResID: {
+        res_i_d: {
             'api.js_conv': "true",
             'api.body': "res_id",
             'agw.js_conv': "str",
             'agw.key': "res_id"
         },
-        Name: {
+        name: {
             'go.tag': "json:\"name\"",
             'agw.key': "name"
         },
-        Actions: {
+        actions: {
             'go.tag': "json:\"actions\"",
             'agw.key': "actions"
         },
-        ResType: {
+        res_type: {
             'go.tag': "json:\"res_type\"",
             'agw.key': "res_type"
         },
-        ResSubType: {
+        res_sub_type: {
             'go.tag': "json:\"res_sub_type\"",
             'agw.key': "res_sub_type"
         },
-        BizExtend: {
+        biz_extend: {
             'go.tag': "json:\"biz_extend\"",
             'agw.key': "biz_extend"
         },
-        BizResStatus: {
+        biz_res_status: {
             'go.tag': "json:\"biz_res_status\"",
             'agw.key': "biz_res_status"
         },
-        VersionStr: {
+        version_str: {
             'go.tag': "json:\"version_str\"",
             'agw.key': "version_str"
         }
     };
     constructor(args: IProjectResourceInfoArgs = {}) {
         super();
-        if (args.ResID != null) {
-            const value_13: thrift.Int64 = (typeof args.ResID === "number" ? new thrift.Int64(args.ResID) : typeof args.ResID === "string" ? thrift.Int64.fromDecimalString(args.ResID) : args.ResID);
-            this.ResID = value_13;
+        if (args.res_i_d != null) {
+            const value_13: thrift.Int64 = (typeof args.res_i_d === "number" ? new thrift.Int64(args.res_i_d) : typeof args.res_i_d === "string" ? thrift.Int64.fromDecimalString(args.res_i_d) : args.res_i_d);
+            this.res_i_d = value_13;
         }
-        if (args.Name != null) {
-            const value_14: string = args.Name;
-            this.Name = value_14;
+        if (args.name != null) {
+            const value_14: string = args.name;
+            this.name = value_14;
         }
-        if (args.Actions != null) {
+        if (args.actions != null) {
             const value_15: Array<ProjectResourceAction.IProjectResourceAction> = new Array<ProjectResourceAction.IProjectResourceAction>();
-            args.Actions.forEach((value_21: ProjectResourceAction.IProjectResourceActionArgs): void => {
+            args.actions.forEach((value_21: ProjectResourceAction.IProjectResourceActionArgs): void => {
                 const value_22: ProjectResourceAction.IProjectResourceAction = new ProjectResourceAction.ProjectResourceAction(value_21);
                 value_15.push(value_22);
             });
-            this.Actions = value_15;
+            this.actions = value_15;
         }
-        if (args.ResType != null) {
-            const value_16: ResType.ResType = args.ResType;
-            this.ResType = value_16;
+        if (args.res_type != null) {
+            const value_16: ResType.ResType = args.res_type;
+            this.res_type = value_16;
         }
-        if (args.ResSubType != null) {
-            const value_17: number = args.ResSubType;
-            this.ResSubType = value_17;
+        if (args.res_sub_type != null) {
+            const value_17: number = args.res_sub_type;
+            this.res_sub_type = value_17;
         }
-        if (args.BizExtend != null) {
+        if (args.biz_extend != null) {
             const value_18: Map<string, string> = new Map<string, string>();
-            args.BizExtend.forEach((value_23: string, key_3: string): void => {
+            args.biz_extend.forEach((value_23: string, key_3: string): void => {
                 const value_24: string = value_23;
                 const key_4: string = key_3;
                 value_18.set(key_4, value_24);
             });
-            this.BizExtend = value_18;
+            this.biz_extend = value_18;
         }
-        if (args.BizResStatus != null) {
-            const value_19: number = args.BizResStatus;
-            this.BizResStatus = value_19;
+        if (args.biz_res_status != null) {
+            const value_19: number = args.biz_res_status;
+            this.biz_res_status = value_19;
         }
-        if (args.VersionStr != null) {
-            const value_20: string = args.VersionStr;
-            this.VersionStr = value_20;
+        if (args.version_str != null) {
+            const value_20: string = args.version_str;
+            this.version_str = value_20;
         }
     }
     public static read(input: thrift.TProtocol): ProjectResourceInfo {

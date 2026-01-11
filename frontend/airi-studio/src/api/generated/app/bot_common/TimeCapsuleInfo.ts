@@ -8,18 +8,18 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as TimeCapsuleMode from "./TimeCapsuleMode";
 import * as DisablePromptCalling from "./DisablePromptCalling";
 export interface ITimeCapsuleInfo {
-    TimeCapsuleMode?: TimeCapsuleMode.TimeCapsuleMode;
-    DisablePromptCalling?: DisablePromptCalling.DisablePromptCalling;
+    time_capsule_mode?: TimeCapsuleMode.TimeCapsuleMode;
+    disable_prompt_calling?: DisablePromptCalling.DisablePromptCalling;
 }
 export interface ITimeCapsuleInfoArgs {
-    TimeCapsuleMode?: TimeCapsuleMode.TimeCapsuleMode;
-    DisablePromptCalling?: DisablePromptCalling.DisablePromptCalling;
+    time_capsule_mode?: TimeCapsuleMode.TimeCapsuleMode;
+    disable_prompt_calling?: DisablePromptCalling.DisablePromptCalling;
 }
 export const TimeCapsuleInfoCodec: thrift.IStructCodec<ITimeCapsuleInfoArgs, ITimeCapsuleInfo> = {
     encode(args: ITimeCapsuleInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            TimeCapsuleMode: args.TimeCapsuleMode,
-            DisablePromptCalling: args.DisablePromptCalling
+            TimeCapsuleMode: args.time_capsule_mode,
+            DisablePromptCalling: args.disable_prompt_calling
         };
         output.writeStructBegin("TimeCapsuleInfo");
         if (obj.TimeCapsuleMode != null) {
@@ -73,32 +73,32 @@ export const TimeCapsuleInfoCodec: thrift.IStructCodec<ITimeCapsuleInfoArgs, ITi
         }
         input.readStructEnd();
         return {
-            TimeCapsuleMode: _args.TimeCapsuleMode,
-            DisablePromptCalling: _args.DisablePromptCalling
+            time_capsule_mode: _args.TimeCapsuleMode,
+            disable_prompt_calling: _args.DisablePromptCalling
         };
     }
 };
 export class TimeCapsuleInfo extends thrift.StructLike implements ITimeCapsuleInfo {
-    public TimeCapsuleMode?: TimeCapsuleMode.TimeCapsuleMode;
-    public DisablePromptCalling?: DisablePromptCalling.DisablePromptCalling;
+    public time_capsule_mode?: TimeCapsuleMode.TimeCapsuleMode;
+    public disable_prompt_calling?: DisablePromptCalling.DisablePromptCalling;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        TimeCapsuleMode: {
+        time_capsule_mode: {
             'api.body': "time_capsule_mode"
         },
-        DisablePromptCalling: {
+        disable_prompt_calling: {
             'api.body': "disable_prompt_calling"
         }
     };
     constructor(args: ITimeCapsuleInfoArgs = {}) {
         super();
-        if (args.TimeCapsuleMode != null) {
-            const value_3: TimeCapsuleMode.TimeCapsuleMode = args.TimeCapsuleMode;
-            this.TimeCapsuleMode = value_3;
+        if (args.time_capsule_mode != null) {
+            const value_3: TimeCapsuleMode.TimeCapsuleMode = args.time_capsule_mode;
+            this.time_capsule_mode = value_3;
         }
-        if (args.DisablePromptCalling != null) {
-            const value_4: DisablePromptCalling.DisablePromptCalling = args.DisablePromptCalling;
-            this.DisablePromptCalling = value_4;
+        if (args.disable_prompt_calling != null) {
+            const value_4: DisablePromptCalling.DisablePromptCalling = args.disable_prompt_calling;
+            this.disable_prompt_calling = value_4;
         }
     }
     public static read(input: thrift.TProtocol): TimeCapsuleInfo {

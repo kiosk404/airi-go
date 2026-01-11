@@ -11,13 +11,13 @@ export interface IGetUserRecentlyEditIntelligenceRequest {
     size?: number;
     types?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>;
     organization_id?: string;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IGetUserRecentlyEditIntelligenceRequestArgs {
     size?: number;
     types?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>;
     organization_id?: string;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const GetUserRecentlyEditIntelligenceRequestCodec: thrift.IStructCodec<IGetUserRecentlyEditIntelligenceRequestArgs, IGetUserRecentlyEditIntelligenceRequest> = {
     encode(args: IGetUserRecentlyEditIntelligenceRequestArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const GetUserRecentlyEditIntelligenceRequestCodec: thrift.IStructCodec<IG
             size: args.size,
             types: args.types,
             organization_id: args.organization_id,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetUserRecentlyEditIntelligenceRequest");
         if (obj.size != null) {
@@ -121,7 +121,7 @@ export const GetUserRecentlyEditIntelligenceRequestCodec: thrift.IStructCodec<IG
             size: _args.size,
             types: _args.types,
             organization_id: _args.organization_id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -129,7 +129,7 @@ export class GetUserRecentlyEditIntelligenceRequest extends thrift.StructLike im
     public size?: number;
     public types?: Array<APP_INTELLIGENCE_COMMON_NS.IntelligenceType>;
     public organization_id?: string;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetUserRecentlyEditIntelligenceRequestArgs = {}) {
@@ -150,9 +150,9 @@ export class GetUserRecentlyEditIntelligenceRequest extends thrift.StructLike im
             const value_9: string = args.organization_id;
             this.organization_id = value_9;
         }
-        if (args.Base != null) {
-            const value_10: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_10;
+        if (args.base != null) {
+            const value_10: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_10;
         }
     }
     public static read(input: thrift.TProtocol): GetUserRecentlyEditIntelligenceRequest {

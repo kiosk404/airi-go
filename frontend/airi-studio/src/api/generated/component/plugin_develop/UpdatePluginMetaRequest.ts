@@ -25,7 +25,7 @@ export interface IUpdatePluginMetaRequest {
     sub_auth_type?: number;
     auth_payload?: string;
     fixed_export_ip?: boolean;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IUpdatePluginMetaRequestArgs {
     plugin_id: number | string | thrift.Int64;
@@ -45,7 +45,7 @@ export interface IUpdatePluginMetaRequestArgs {
     sub_auth_type?: number;
     auth_payload?: string;
     fixed_export_ip?: boolean;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const UpdatePluginMetaRequestCodec: thrift.IStructCodec<IUpdatePluginMetaRequestArgs, IUpdatePluginMetaRequest> = {
     encode(args: IUpdatePluginMetaRequestArgs, output: thrift.TProtocol): void {
@@ -67,7 +67,7 @@ export const UpdatePluginMetaRequestCodec: thrift.IStructCodec<IUpdatePluginMeta
             sub_auth_type: args.sub_auth_type,
             auth_payload: args.auth_payload,
             fixed_export_ip: args.fixed_export_ip,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UpdatePluginMetaRequest");
         if (obj.plugin_id != null) {
@@ -390,7 +390,7 @@ export const UpdatePluginMetaRequestCodec: thrift.IStructCodec<IUpdatePluginMeta
                 sub_auth_type: _args.sub_auth_type,
                 auth_payload: _args.auth_payload,
                 fixed_export_ip: _args.fixed_export_ip,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -416,7 +416,7 @@ export class UpdatePluginMetaRequest extends thrift.StructLike implements IUpdat
     public sub_auth_type?: number;
     public auth_payload?: string;
     public fixed_export_ip?: boolean;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -505,9 +505,9 @@ export class UpdatePluginMetaRequest extends thrift.StructLike implements IUpdat
             const value_39: boolean = args.fixed_export_ip;
             this.fixed_export_ip = value_39;
         }
-        if (args.Base != null) {
-            const value_40: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_40;
+        if (args.base != null) {
+            const value_40: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_40;
         }
     }
     public static read(input: thrift.TProtocol): UpdatePluginMetaRequest {

@@ -8,27 +8,27 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as OnboardingMode from "./OnboardingMode";
 import * as SuggestedQuestionsShowMode from "./SuggestedQuestionsShowMode";
 export interface IOnboardingInfo {
-    Prologue?: string;
-    SuggestedQuestions?: Array<string>;
-    OnboardingMode?: OnboardingMode.OnboardingMode;
-    CustomizedOnboardingPrompt?: string;
-    SuggestedQuestionsShowMode?: SuggestedQuestionsShowMode.SuggestedQuestionsShowMode;
+    prologue?: string;
+    suggested_questions?: Array<string>;
+    onboarding_mode?: OnboardingMode.OnboardingMode;
+    customized_onboarding_prompt?: string;
+    suggested_questions_show_mode?: SuggestedQuestionsShowMode.SuggestedQuestionsShowMode;
 }
 export interface IOnboardingInfoArgs {
-    Prologue?: string;
-    SuggestedQuestions?: Array<string>;
-    OnboardingMode?: OnboardingMode.OnboardingMode;
-    CustomizedOnboardingPrompt?: string;
-    SuggestedQuestionsShowMode?: SuggestedQuestionsShowMode.SuggestedQuestionsShowMode;
+    prologue?: string;
+    suggested_questions?: Array<string>;
+    onboarding_mode?: OnboardingMode.OnboardingMode;
+    customized_onboarding_prompt?: string;
+    suggested_questions_show_mode?: SuggestedQuestionsShowMode.SuggestedQuestionsShowMode;
 }
 export const OnboardingInfoCodec: thrift.IStructCodec<IOnboardingInfoArgs, IOnboardingInfo> = {
     encode(args: IOnboardingInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Prologue: args.Prologue,
-            SuggestedQuestions: args.SuggestedQuestions,
-            OnboardingMode: args.OnboardingMode,
-            CustomizedOnboardingPrompt: args.CustomizedOnboardingPrompt,
-            SuggestedQuestionsShowMode: args.SuggestedQuestionsShowMode
+            Prologue: args.prologue,
+            SuggestedQuestions: args.suggested_questions,
+            OnboardingMode: args.onboarding_mode,
+            CustomizedOnboardingPrompt: args.customized_onboarding_prompt,
+            SuggestedQuestionsShowMode: args.suggested_questions_show_mode
         };
         output.writeStructBegin("OnboardingInfo");
         if (obj.Prologue != null) {
@@ -135,63 +135,63 @@ export const OnboardingInfoCodec: thrift.IStructCodec<IOnboardingInfoArgs, IOnbo
         }
         input.readStructEnd();
         return {
-            Prologue: _args.Prologue,
-            SuggestedQuestions: _args.SuggestedQuestions,
-            OnboardingMode: _args.OnboardingMode,
-            CustomizedOnboardingPrompt: _args.CustomizedOnboardingPrompt,
-            SuggestedQuestionsShowMode: _args.SuggestedQuestionsShowMode
+            prologue: _args.Prologue,
+            suggested_questions: _args.SuggestedQuestions,
+            onboarding_mode: _args.OnboardingMode,
+            customized_onboarding_prompt: _args.CustomizedOnboardingPrompt,
+            suggested_questions_show_mode: _args.SuggestedQuestionsShowMode
         };
     }
 };
 export class OnboardingInfo extends thrift.StructLike implements IOnboardingInfo {
-    public Prologue?: string;
-    public SuggestedQuestions?: Array<string>;
-    public OnboardingMode?: OnboardingMode.OnboardingMode;
-    public CustomizedOnboardingPrompt?: string;
-    public SuggestedQuestionsShowMode?: SuggestedQuestionsShowMode.SuggestedQuestionsShowMode;
+    public prologue?: string;
+    public suggested_questions?: Array<string>;
+    public onboarding_mode?: OnboardingMode.OnboardingMode;
+    public customized_onboarding_prompt?: string;
+    public suggested_questions_show_mode?: SuggestedQuestionsShowMode.SuggestedQuestionsShowMode;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Prologue: {
+        prologue: {
             'api.body': "prologue"
         },
-        SuggestedQuestions: {
+        suggested_questions: {
             'api.body': "suggested_questions"
         },
-        OnboardingMode: {
+        onboarding_mode: {
             'api.body': "onboarding_mode"
         },
-        CustomizedOnboardingPrompt: {
+        customized_onboarding_prompt: {
             'api.body': "customized_onboarding_prompt"
         },
-        SuggestedQuestionsShowMode: {
+        suggested_questions_show_mode: {
             'api.body': "suggested_questions_show_mode"
         }
     };
     constructor(args: IOnboardingInfoArgs = {}) {
         super();
-        if (args.Prologue != null) {
-            const value_8: string = args.Prologue;
-            this.Prologue = value_8;
+        if (args.prologue != null) {
+            const value_8: string = args.prologue;
+            this.prologue = value_8;
         }
-        if (args.SuggestedQuestions != null) {
+        if (args.suggested_questions != null) {
             const value_9: Array<string> = new Array<string>();
-            args.SuggestedQuestions.forEach((value_13: string): void => {
+            args.suggested_questions.forEach((value_13: string): void => {
                 const value_14: string = value_13;
                 value_9.push(value_14);
             });
-            this.SuggestedQuestions = value_9;
+            this.suggested_questions = value_9;
         }
-        if (args.OnboardingMode != null) {
-            const value_10: OnboardingMode.OnboardingMode = args.OnboardingMode;
-            this.OnboardingMode = value_10;
+        if (args.onboarding_mode != null) {
+            const value_10: OnboardingMode.OnboardingMode = args.onboarding_mode;
+            this.onboarding_mode = value_10;
         }
-        if (args.CustomizedOnboardingPrompt != null) {
-            const value_11: string = args.CustomizedOnboardingPrompt;
-            this.CustomizedOnboardingPrompt = value_11;
+        if (args.customized_onboarding_prompt != null) {
+            const value_11: string = args.customized_onboarding_prompt;
+            this.customized_onboarding_prompt = value_11;
         }
-        if (args.SuggestedQuestionsShowMode != null) {
-            const value_12: SuggestedQuestionsShowMode.SuggestedQuestionsShowMode = args.SuggestedQuestionsShowMode;
-            this.SuggestedQuestionsShowMode = value_12;
+        if (args.suggested_questions_show_mode != null) {
+            const value_12: SuggestedQuestionsShowMode.SuggestedQuestionsShowMode = args.suggested_questions_show_mode;
+            this.suggested_questions_show_mode = value_12;
         }
     }
     public static read(input: thrift.TProtocol): OnboardingInfo {

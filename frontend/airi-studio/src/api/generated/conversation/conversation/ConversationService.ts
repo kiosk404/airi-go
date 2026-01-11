@@ -1210,7 +1210,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ClearConversationCtx(request: __ROOT_NAMESPACE__.IClearConversationCtxRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IClearConversationCtxResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ClearConversationCtx", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ClearConversationCtx", thrift.MessageType.CALL, this.increment_request_id());
         const args: IClearConversationCtx__ArgsArgs = { request };
         ClearConversationCtx__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1248,7 +1248,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ClearConversationHistory(request: __ROOT_NAMESPACE__.IClearConversationHistoryRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IClearConversationHistoryResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ClearConversationHistory", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ClearConversationHistory", thrift.MessageType.CALL, this.increment_request_id());
         const args: IClearConversationHistory__ArgsArgs = { request };
         ClearConversationHistory__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1286,7 +1286,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public CreateConversation(request: __ROOT_NAMESPACE__.ICreateConversationRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.ICreateConversationResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("CreateConversation", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("CreateConversation", thrift.MessageType.CALL, this.increment_request_id());
         const args: ICreateConversation__ArgsArgs = { request };
         CreateConversation__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1324,7 +1324,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ClearConversationApi(req: __ROOT_NAMESPACE__.IClearConversationApiRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IClearConversationApiResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ClearConversationApi", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ClearConversationApi", thrift.MessageType.CALL, this.increment_request_id());
         const args: IClearConversationApi__ArgsArgs = { req };
         ClearConversationApi__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1362,7 +1362,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ListConversationsApi(request: __ROOT_NAMESPACE__.IListConversationsApiRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IListConversationsApiResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ListConversationsApi", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ListConversationsApi", thrift.MessageType.CALL, this.increment_request_id());
         const args: IListConversationsApi__ArgsArgs = { request };
         ListConversationsApi__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1400,7 +1400,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdateConversationApi(request: __ROOT_NAMESPACE__.IUpdateConversationApiRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IUpdateConversationApiResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdateConversationApi", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdateConversationApi", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdateConversationApi__ArgsArgs = { request };
         UpdateConversationApi__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1438,7 +1438,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DeleteConversationApi(req: __ROOT_NAMESPACE__.IDeleteConversationApiRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IDeleteConversationApiResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DeleteConversationApi", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DeleteConversationApi", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDeleteConversationApi__ArgsArgs = { req };
         DeleteConversationApi__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1505,31 +1505,31 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_ClearConversationCtx": {
-                    resolve(this.process_ClearConversationCtx(requestId, input, output, context));
+                    resolve(this.process__clear_conversation_ctx(requestId, input, output, context));
                     break;
                 }
                 case "process_ClearConversationHistory": {
-                    resolve(this.process_ClearConversationHistory(requestId, input, output, context));
+                    resolve(this.process__clear_conversation_history(requestId, input, output, context));
                     break;
                 }
                 case "process_CreateConversation": {
-                    resolve(this.process_CreateConversation(requestId, input, output, context));
+                    resolve(this.process__create_conversation(requestId, input, output, context));
                     break;
                 }
                 case "process_ClearConversationApi": {
-                    resolve(this.process_ClearConversationApi(requestId, input, output, context));
+                    resolve(this.process__clear_conversation_api(requestId, input, output, context));
                     break;
                 }
                 case "process_ListConversationsApi": {
-                    resolve(this.process_ListConversationsApi(requestId, input, output, context));
+                    resolve(this.process__list_conversations_api(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdateConversationApi": {
-                    resolve(this.process_UpdateConversationApi(requestId, input, output, context));
+                    resolve(this.process__update_conversation_api(requestId, input, output, context));
                     break;
                 }
                 case "process_DeleteConversationApi": {
-                    resolve(this.process_DeleteConversationApi(requestId, input, output, context));
+                    resolve(this.process__delete_conversation_api(requestId, input, output, context));
                     break;
                 }
                 default: {

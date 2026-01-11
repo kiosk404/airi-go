@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ChatV3ChatDetail from "./ChatV3ChatDetail";
 export interface IChatV3Response {
-    ChatDetail?: ChatV3ChatDetail.IChatV3ChatDetail;
-    Code: number;
-    Msg: string;
+    chat_detail?: ChatV3ChatDetail.IChatV3ChatDetail;
+    code: number;
+    msg: string;
 }
 export interface IChatV3ResponseArgs {
-    ChatDetail?: ChatV3ChatDetail.IChatV3ChatDetailArgs;
-    Code: number;
-    Msg: string;
+    chat_detail?: ChatV3ChatDetail.IChatV3ChatDetailArgs;
+    code: number;
+    msg: string;
 }
 export const ChatV3ResponseCodec: thrift.IStructCodec<IChatV3ResponseArgs, IChatV3Response> = {
     encode(args: IChatV3ResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ChatDetail: args.ChatDetail,
-            Code: args.Code,
-            Msg: args.Msg
+            ChatDetail: args.chat_detail,
+            Code: args.code,
+            Msg: args.msg
         };
         output.writeStructBegin("ChatV3Response");
         if (obj.ChatDetail != null) {
@@ -96,9 +96,9 @@ export const ChatV3ResponseCodec: thrift.IStructCodec<IChatV3ResponseArgs, IChat
         input.readStructEnd();
         if (_args.Code !== undefined && _args.Msg !== undefined) {
             return {
-                ChatDetail: _args.ChatDetail,
-                Code: _args.Code,
-                Msg: _args.Msg
+                chat_detail: _args.ChatDetail,
+                code: _args.Code,
+                msg: _args.Msg
             };
         }
         else {
@@ -107,37 +107,37 @@ export const ChatV3ResponseCodec: thrift.IStructCodec<IChatV3ResponseArgs, IChat
     }
 };
 export class ChatV3Response extends thrift.StructLike implements IChatV3Response {
-    public ChatDetail?: ChatV3ChatDetail.IChatV3ChatDetail;
-    public Code: number;
-    public Msg: string;
+    public chat_detail?: ChatV3ChatDetail.IChatV3ChatDetail;
+    public code: number;
+    public msg: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ChatDetail: {
+        chat_detail: {
             'api.body': "data"
         },
-        Code: {
+        code: {
             'api.body': "code"
         },
-        Msg: {
+        msg: {
             'api.body': "msg"
         }
     };
     constructor(args: IChatV3ResponseArgs) {
         super();
-        if (args.ChatDetail != null) {
-            const value_4: ChatV3ChatDetail.IChatV3ChatDetail = new ChatV3ChatDetail.ChatV3ChatDetail(args.ChatDetail);
-            this.ChatDetail = value_4;
+        if (args.chat_detail != null) {
+            const value_4: ChatV3ChatDetail.IChatV3ChatDetail = new ChatV3ChatDetail.ChatV3ChatDetail(args.chat_detail);
+            this.chat_detail = value_4;
         }
-        if (args.Code != null) {
-            const value_5: number = args.Code;
-            this.Code = value_5;
+        if (args.code != null) {
+            const value_5: number = args.code;
+            this.code = value_5;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Code] is unset!");
         }
-        if (args.Msg != null) {
-            const value_6: string = args.Msg;
-            this.Msg = value_6;
+        if (args.msg != null) {
+            const value_6: string = args.msg;
+            this.msg = value_6;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Msg] is unset!");

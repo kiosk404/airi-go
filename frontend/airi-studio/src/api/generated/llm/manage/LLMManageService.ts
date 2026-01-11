@@ -365,7 +365,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ListModels(req: ListModelsRequest.IListModelsRequestArgs, context?: Context): Promise<ListModelsResponse.IListModelsResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ListModels", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ListModels", thrift.MessageType.CALL, this.increment_request_id());
         const args: IListModels__ArgsArgs = { req };
         ListModels__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -403,7 +403,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetModel(req: GetModelRequest.IGetModelRequestArgs, context?: Context): Promise<GetModelResponse.IGetModelResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetModel", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetModel", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetModel__ArgsArgs = { req };
         GetModel__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -465,11 +465,11 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_ListModels": {
-                    resolve(this.process_ListModels(requestId, input, output, context));
+                    resolve(this.process__list_models(requestId, input, output, context));
                     break;
                 }
                 case "process_GetModel": {
-                    resolve(this.process_GetModel(requestId, input, output, context));
+                    resolve(this.process__get_model(requestId, input, output, context));
                     break;
                 }
                 default: {

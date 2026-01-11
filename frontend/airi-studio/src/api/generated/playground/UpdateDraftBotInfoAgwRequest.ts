@@ -10,19 +10,19 @@ import * as BASE_NS from "../base";
 export interface IUpdateDraftBotInfoAgwRequest {
     bot_info?: APP_BOT_COMMON_NS.IBotInfoForUpdate;
     base_commit_version?: thrift.Int64;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IUpdateDraftBotInfoAgwRequestArgs {
     bot_info?: APP_BOT_COMMON_NS.IBotInfoForUpdateArgs;
     base_commit_version?: number | string | thrift.Int64;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const UpdateDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IUpdateDraftBotInfoAgwRequestArgs, IUpdateDraftBotInfoAgwRequest> = {
     encode(args: IUpdateDraftBotInfoAgwRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             bot_info: args.bot_info,
             base_commit_version: (typeof args.base_commit_version === "number" ? new thrift.Int64(args.base_commit_version) : typeof args.base_commit_version === "string" ? thrift.Int64.fromDecimalString(args.base_commit_version) : args.base_commit_version),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UpdateDraftBotInfoAgwRequest");
         if (obj.bot_info != null) {
@@ -92,21 +92,21 @@ export const UpdateDraftBotInfoAgwRequestCodec: thrift.IStructCodec<IUpdateDraft
         return {
             bot_info: _args.bot_info,
             base_commit_version: _args.base_commit_version,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class UpdateDraftBotInfoAgwRequest extends thrift.StructLike implements IUpdateDraftBotInfoAgwRequest {
     public bot_info?: APP_BOT_COMMON_NS.IBotInfoForUpdate;
     public base_commit_version?: thrift.Int64;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         base_commit_version: {
             'api.js_conv': "true",
             'agw.js_conv': "str"
         },
-        Base: {
+        base: {
             'api.none': "true"
         }
     };
@@ -120,9 +120,9 @@ export class UpdateDraftBotInfoAgwRequest extends thrift.StructLike implements I
             const value_5: thrift.Int64 = (typeof args.base_commit_version === "number" ? new thrift.Int64(args.base_commit_version) : typeof args.base_commit_version === "string" ? thrift.Int64.fromDecimalString(args.base_commit_version) : args.base_commit_version);
             this.base_commit_version = value_5;
         }
-        if (args.Base != null) {
-            const value_6: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): UpdateDraftBotInfoAgwRequest {

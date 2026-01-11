@@ -15,7 +15,7 @@ export interface IUpdatePluginRequest {
     service_token?: string;
     source_code?: string;
     edit_version?: number;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IUpdatePluginRequestArgs {
     plugin_id?: number | string | thrift.Int64;
@@ -26,7 +26,7 @@ export interface IUpdatePluginRequestArgs {
     service_token?: string;
     source_code?: string;
     edit_version?: number;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const UpdatePluginRequestCodec: thrift.IStructCodec<IUpdatePluginRequestArgs, IUpdatePluginRequest> = {
     encode(args: IUpdatePluginRequestArgs, output: thrift.TProtocol): void {
@@ -39,7 +39,7 @@ export const UpdatePluginRequestCodec: thrift.IStructCodec<IUpdatePluginRequestA
             service_token: args.service_token,
             source_code: args.source_code,
             edit_version: args.edit_version,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UpdatePluginRequest");
         if (obj.plugin_id != null) {
@@ -199,7 +199,7 @@ export const UpdatePluginRequestCodec: thrift.IStructCodec<IUpdatePluginRequestA
             service_token: _args.service_token,
             source_code: _args.source_code,
             edit_version: _args.edit_version,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -212,7 +212,7 @@ export class UpdatePluginRequest extends thrift.StructLike implements IUpdatePlu
     public service_token?: string;
     public source_code?: string;
     public edit_version?: number;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -253,9 +253,9 @@ export class UpdatePluginRequest extends thrift.StructLike implements IUpdatePlu
             const value_17: number = args.edit_version;
             this.edit_version = value_17;
         }
-        if (args.Base != null) {
-            const value_18: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_18;
+        if (args.base != null) {
+            const value_18: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_18;
         }
     }
     public static read(input: thrift.TProtocol): UpdatePluginRequest {

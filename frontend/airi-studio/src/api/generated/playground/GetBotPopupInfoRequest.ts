@@ -10,19 +10,19 @@ import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetBotPopupInfoRequest {
     bot_popup_types: Array<BotPopupType.BotPopupType>;
     bot_id: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetBotPopupInfoRequestArgs {
     bot_popup_types: Array<BotPopupType.BotPopupType>;
     bot_id: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetBotPopupInfoRequestCodec: thrift.IStructCodec<IGetBotPopupInfoRequestArgs, IGetBotPopupInfoRequest> = {
     encode(args: IGetBotPopupInfoRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             bot_popup_types: args.bot_popup_types,
             bot_id: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetBotPopupInfoRequest");
         if (obj.bot_popup_types != null) {
@@ -110,7 +110,7 @@ export const GetBotPopupInfoRequestCodec: thrift.IStructCodec<IGetBotPopupInfoRe
             return {
                 bot_popup_types: _args.bot_popup_types,
                 bot_id: _args.bot_id,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -121,7 +121,7 @@ export const GetBotPopupInfoRequestCodec: thrift.IStructCodec<IGetBotPopupInfoRe
 export class GetBotPopupInfoRequest extends thrift.StructLike implements IGetBotPopupInfoRequest {
     public bot_popup_types: Array<BotPopupType.BotPopupType>;
     public bot_id: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
@@ -129,7 +129,7 @@ export class GetBotPopupInfoRequest extends thrift.StructLike implements IGetBot
             'go.tag': "json:\"bot_id,string\"",
             'api.js_conv': "true"
         },
-        Base: {
+        base: {
             'api.none': "true"
         }
     };
@@ -153,9 +153,9 @@ export class GetBotPopupInfoRequest extends thrift.StructLike implements IGetBot
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[bot_id] is unset!");
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): GetBotPopupInfoRequest {

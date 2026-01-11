@@ -10,13 +10,13 @@ export interface IListModelsRequest {
     scenario?: string;
     page_size?: number;
     page_token?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IListModelsRequestArgs {
     scenario?: string;
     page_size?: number;
     page_token?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const ListModelsRequestCodec: thrift.IStructCodec<IListModelsRequestArgs, IListModelsRequest> = {
     encode(args: IListModelsRequestArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const ListModelsRequestCodec: thrift.IStructCodec<IListModelsRequestArgs,
             scenario: args.scenario,
             page_size: args.page_size,
             page_token: args.page_token,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ListModelsRequest");
         if (obj.scenario != null) {
@@ -109,7 +109,7 @@ export const ListModelsRequestCodec: thrift.IStructCodec<IListModelsRequestArgs,
             scenario: _args.scenario,
             page_size: _args.page_size,
             page_token: _args.page_token,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -117,7 +117,7 @@ export class ListModelsRequest extends thrift.StructLike implements IListModelsR
     public scenario?: string;
     public page_size?: number;
     public page_token?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IListModelsRequestArgs = {}) {
@@ -134,9 +134,9 @@ export class ListModelsRequest extends thrift.StructLike implements IListModelsR
             const value_7: string = args.page_token;
             this.page_token = value_7;
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): ListModelsRequest {

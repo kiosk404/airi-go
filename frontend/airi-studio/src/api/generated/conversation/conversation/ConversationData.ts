@@ -6,33 +6,33 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IConversationData {
-    Id?: thrift.Int64;
-    CreatedAt?: thrift.Int64;
-    MetaData?: Map<string, string>;
-    CreatorID?: thrift.Int64;
-    LastSectionID?: thrift.Int64;
-    AccountID?: thrift.Int64;
-    Name?: string;
+    id?: thrift.Int64;
+    created_at?: thrift.Int64;
+    meta_data?: Map<string, string>;
+    creator_i_d?: thrift.Int64;
+    last_section_i_d?: thrift.Int64;
+    account_i_d?: thrift.Int64;
+    name?: string;
 }
 export interface IConversationDataArgs {
-    Id?: number | string | thrift.Int64;
-    CreatedAt?: number | string | thrift.Int64;
-    MetaData?: Map<string, string>;
-    CreatorID?: number | string | thrift.Int64;
-    LastSectionID?: number | string | thrift.Int64;
-    AccountID?: number | string | thrift.Int64;
-    Name?: string;
+    id?: number | string | thrift.Int64;
+    created_at?: number | string | thrift.Int64;
+    meta_data?: Map<string, string>;
+    creator_i_d?: number | string | thrift.Int64;
+    last_section_i_d?: number | string | thrift.Int64;
+    account_i_d?: number | string | thrift.Int64;
+    name?: string;
 }
 export const ConversationDataCodec: thrift.IStructCodec<IConversationDataArgs, IConversationData> = {
     encode(args: IConversationDataArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Id: (typeof args.Id === "number" ? new thrift.Int64(args.Id) : typeof args.Id === "string" ? thrift.Int64.fromDecimalString(args.Id) : args.Id),
-            CreatedAt: (typeof args.CreatedAt === "number" ? new thrift.Int64(args.CreatedAt) : typeof args.CreatedAt === "string" ? thrift.Int64.fromDecimalString(args.CreatedAt) : args.CreatedAt),
-            MetaData: args.MetaData,
-            CreatorID: (typeof args.CreatorID === "number" ? new thrift.Int64(args.CreatorID) : typeof args.CreatorID === "string" ? thrift.Int64.fromDecimalString(args.CreatorID) : args.CreatorID),
-            LastSectionID: (typeof args.LastSectionID === "number" ? new thrift.Int64(args.LastSectionID) : typeof args.LastSectionID === "string" ? thrift.Int64.fromDecimalString(args.LastSectionID) : args.LastSectionID),
-            AccountID: (typeof args.AccountID === "number" ? new thrift.Int64(args.AccountID) : typeof args.AccountID === "string" ? thrift.Int64.fromDecimalString(args.AccountID) : args.AccountID),
-            Name: args.Name
+            Id: (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id),
+            CreatedAt: (typeof args.created_at === "number" ? new thrift.Int64(args.created_at) : typeof args.created_at === "string" ? thrift.Int64.fromDecimalString(args.created_at) : args.created_at),
+            MetaData: args.meta_data,
+            CreatorID: (typeof args.creator_i_d === "number" ? new thrift.Int64(args.creator_i_d) : typeof args.creator_i_d === "string" ? thrift.Int64.fromDecimalString(args.creator_i_d) : args.creator_i_d),
+            LastSectionID: (typeof args.last_section_i_d === "number" ? new thrift.Int64(args.last_section_i_d) : typeof args.last_section_i_d === "string" ? thrift.Int64.fromDecimalString(args.last_section_i_d) : args.last_section_i_d),
+            AccountID: (typeof args.account_i_d === "number" ? new thrift.Int64(args.account_i_d) : typeof args.account_i_d === "string" ? thrift.Int64.fromDecimalString(args.account_i_d) : args.account_i_d),
+            Name: args.name
         };
         output.writeStructBegin("ConversationData");
         if (obj.Id != null) {
@@ -169,89 +169,89 @@ export const ConversationDataCodec: thrift.IStructCodec<IConversationDataArgs, I
         }
         input.readStructEnd();
         return {
-            Id: _args.Id,
-            CreatedAt: _args.CreatedAt,
-            MetaData: _args.MetaData,
-            CreatorID: _args.CreatorID,
-            LastSectionID: _args.LastSectionID,
-            AccountID: _args.AccountID,
-            Name: _args.Name
+            id: _args.Id,
+            created_at: _args.CreatedAt,
+            meta_data: _args.MetaData,
+            creator_i_d: _args.CreatorID,
+            last_section_i_d: _args.LastSectionID,
+            account_i_d: _args.AccountID,
+            name: _args.Name
         };
     }
 };
 export class ConversationData extends thrift.StructLike implements IConversationData {
-    public Id?: thrift.Int64;
-    public CreatedAt?: thrift.Int64;
-    public MetaData?: Map<string, string>;
-    public CreatorID?: thrift.Int64;
-    public LastSectionID?: thrift.Int64;
-    public AccountID?: thrift.Int64;
-    public Name?: string;
+    public id?: thrift.Int64;
+    public created_at?: thrift.Int64;
+    public meta_data?: Map<string, string>;
+    public creator_i_d?: thrift.Int64;
+    public last_section_i_d?: thrift.Int64;
+    public account_i_d?: thrift.Int64;
+    public name?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Id: {
+        id: {
             'api.body': "id",
             'agw.key': "id",
             'api.js_conv': "true"
         },
-        CreatedAt: {
+        created_at: {
             'api.body': "created_at",
             'agw.key': "created_at"
         },
-        MetaData: {
+        meta_data: {
             'api.body': "meta_data",
             'agw.key': "meta_data"
         },
-        CreatorID: {
+        creator_i_d: {
             'api.body': "creator_d",
             'agw.key': "creator_d",
             'api.js_conv': "true"
         },
-        LastSectionID: {
+        last_section_i_d: {
             'api.body': "last_section_id",
             'api.js_conv': "true"
         },
-        AccountID: {
+        account_i_d: {
             'api.body': "account_id"
         },
-        Name: {
+        name: {
             'api.body': "name"
         }
     };
     constructor(args: IConversationDataArgs = {}) {
         super();
-        if (args.Id != null) {
-            const value_10: thrift.Int64 = (typeof args.Id === "number" ? new thrift.Int64(args.Id) : typeof args.Id === "string" ? thrift.Int64.fromDecimalString(args.Id) : args.Id);
-            this.Id = value_10;
+        if (args.id != null) {
+            const value_10: thrift.Int64 = (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id);
+            this.id = value_10;
         }
-        if (args.CreatedAt != null) {
-            const value_11: thrift.Int64 = (typeof args.CreatedAt === "number" ? new thrift.Int64(args.CreatedAt) : typeof args.CreatedAt === "string" ? thrift.Int64.fromDecimalString(args.CreatedAt) : args.CreatedAt);
-            this.CreatedAt = value_11;
+        if (args.created_at != null) {
+            const value_11: thrift.Int64 = (typeof args.created_at === "number" ? new thrift.Int64(args.created_at) : typeof args.created_at === "string" ? thrift.Int64.fromDecimalString(args.created_at) : args.created_at);
+            this.created_at = value_11;
         }
-        if (args.MetaData != null) {
+        if (args.meta_data != null) {
             const value_12: Map<string, string> = new Map<string, string>();
-            args.MetaData.forEach((value_17: string, key_3: string): void => {
+            args.meta_data.forEach((value_17: string, key_3: string): void => {
                 const value_18: string = value_17;
                 const key_4: string = key_3;
                 value_12.set(key_4, value_18);
             });
-            this.MetaData = value_12;
+            this.meta_data = value_12;
         }
-        if (args.CreatorID != null) {
-            const value_13: thrift.Int64 = (typeof args.CreatorID === "number" ? new thrift.Int64(args.CreatorID) : typeof args.CreatorID === "string" ? thrift.Int64.fromDecimalString(args.CreatorID) : args.CreatorID);
-            this.CreatorID = value_13;
+        if (args.creator_i_d != null) {
+            const value_13: thrift.Int64 = (typeof args.creator_i_d === "number" ? new thrift.Int64(args.creator_i_d) : typeof args.creator_i_d === "string" ? thrift.Int64.fromDecimalString(args.creator_i_d) : args.creator_i_d);
+            this.creator_i_d = value_13;
         }
-        if (args.LastSectionID != null) {
-            const value_14: thrift.Int64 = (typeof args.LastSectionID === "number" ? new thrift.Int64(args.LastSectionID) : typeof args.LastSectionID === "string" ? thrift.Int64.fromDecimalString(args.LastSectionID) : args.LastSectionID);
-            this.LastSectionID = value_14;
+        if (args.last_section_i_d != null) {
+            const value_14: thrift.Int64 = (typeof args.last_section_i_d === "number" ? new thrift.Int64(args.last_section_i_d) : typeof args.last_section_i_d === "string" ? thrift.Int64.fromDecimalString(args.last_section_i_d) : args.last_section_i_d);
+            this.last_section_i_d = value_14;
         }
-        if (args.AccountID != null) {
-            const value_15: thrift.Int64 = (typeof args.AccountID === "number" ? new thrift.Int64(args.AccountID) : typeof args.AccountID === "string" ? thrift.Int64.fromDecimalString(args.AccountID) : args.AccountID);
-            this.AccountID = value_15;
+        if (args.account_i_d != null) {
+            const value_15: thrift.Int64 = (typeof args.account_i_d === "number" ? new thrift.Int64(args.account_i_d) : typeof args.account_i_d === "string" ? thrift.Int64.fromDecimalString(args.account_i_d) : args.account_i_d);
+            this.account_i_d = value_15;
         }
-        if (args.Name != null) {
-            const value_16: string = args.Name;
-            this.Name = value_16;
+        if (args.name != null) {
+            const value_16: string = args.name;
+            this.name = value_16;
         }
     }
     public static read(input: thrift.TProtocol): ConversationData {

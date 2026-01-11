@@ -8,24 +8,24 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as ConversationData from "./ConversationData";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IUpdateConversationApiResponse {
-    ConversationData?: ConversationData.IConversationData;
-    Code?: number;
-    Msg?: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    conversation_data?: ConversationData.IConversationData;
+    code?: number;
+    msg?: string;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IUpdateConversationApiResponseArgs {
-    ConversationData?: ConversationData.IConversationDataArgs;
-    Code?: number;
-    Msg?: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    conversation_data?: ConversationData.IConversationDataArgs;
+    code?: number;
+    msg?: string;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const UpdateConversationApiResponseCodec: thrift.IStructCodec<IUpdateConversationApiResponseArgs, IUpdateConversationApiResponse> = {
     encode(args: IUpdateConversationApiResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ConversationData: args.ConversationData,
-            Code: args.Code,
-            Msg: args.Msg,
-            BaseResp: args.BaseResp
+            ConversationData: args.conversation_data,
+            Code: args.code,
+            Msg: args.msg,
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("UpdateConversationApiResponse");
         if (obj.ConversationData != null) {
@@ -111,10 +111,10 @@ export const UpdateConversationApiResponseCodec: thrift.IStructCodec<IUpdateConv
         input.readStructEnd();
         if (_args.BaseResp !== undefined) {
             return {
-                ConversationData: _args.ConversationData,
-                Code: _args.Code,
-                Msg: _args.Msg,
-                BaseResp: _args.BaseResp
+                conversation_data: _args.ConversationData,
+                code: _args.Code,
+                msg: _args.Msg,
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -123,40 +123,40 @@ export const UpdateConversationApiResponseCodec: thrift.IStructCodec<IUpdateConv
     }
 };
 export class UpdateConversationApiResponse extends thrift.StructLike implements IUpdateConversationApiResponse {
-    public ConversationData?: ConversationData.IConversationData;
-    public Code?: number;
-    public Msg?: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public conversation_data?: ConversationData.IConversationData;
+    public code?: number;
+    public msg?: string;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ConversationData: {
+        conversation_data: {
             'api.body': "data",
             'agw.key': "data"
         },
-        Code: {
+        code: {
             'api.body': "code"
         },
-        Msg: {
+        msg: {
             'api.body': "msg"
         }
     };
     constructor(args: IUpdateConversationApiResponseArgs) {
         super();
-        if (args.ConversationData != null) {
-            const value_5: ConversationData.IConversationData = new ConversationData.ConversationData(args.ConversationData);
-            this.ConversationData = value_5;
+        if (args.conversation_data != null) {
+            const value_5: ConversationData.IConversationData = new ConversationData.ConversationData(args.conversation_data);
+            this.conversation_data = value_5;
         }
-        if (args.Code != null) {
-            const value_6: number = args.Code;
-            this.Code = value_6;
+        if (args.code != null) {
+            const value_6: number = args.code;
+            this.code = value_6;
         }
-        if (args.Msg != null) {
-            const value_7: string = args.Msg;
-            this.Msg = value_7;
+        if (args.msg != null) {
+            const value_7: string = args.msg;
+            this.msg = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

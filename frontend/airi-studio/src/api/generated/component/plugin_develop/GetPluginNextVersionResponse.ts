@@ -10,13 +10,13 @@ export interface IGetPluginNextVersionResponse {
     code?: thrift.Int64;
     msg?: string;
     next_version_name?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IGetPluginNextVersionResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     next_version_name?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const GetPluginNextVersionResponseCodec: thrift.IStructCodec<IGetPluginNextVersionResponseArgs, IGetPluginNextVersionResponse> = {
     encode(args: IGetPluginNextVersionResponseArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const GetPluginNextVersionResponseCodec: thrift.IStructCodec<IGetPluginNe
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             next_version_name: args.next_version_name,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetPluginNextVersionResponse");
         if (obj.code != null) {
@@ -109,7 +109,7 @@ export const GetPluginNextVersionResponseCodec: thrift.IStructCodec<IGetPluginNe
             code: _args.code,
             msg: _args.msg,
             next_version_name: _args.next_version_name,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -117,7 +117,7 @@ export class GetPluginNextVersionResponse extends thrift.StructLike implements I
     public code?: thrift.Int64;
     public msg?: string;
     public next_version_name?: string;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetPluginNextVersionResponseArgs = {}) {
@@ -134,9 +134,9 @@ export class GetPluginNextVersionResponse extends thrift.StructLike implements I
             const value_7: string = args.next_version_name;
             this.next_version_name = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): GetPluginNextVersionResponse {

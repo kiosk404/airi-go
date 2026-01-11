@@ -9,19 +9,19 @@ import * as __ROOT_NAMESPACE__ from "../base";
 export interface IResourceCopyCancelResponse {
     code?: thrift.Int64;
     msg?: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IResourceCopyCancelResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const ResourceCopyCancelResponseCodec: thrift.IStructCodec<IResourceCopyCancelResponseArgs, IResourceCopyCancelResponse> = {
     encode(args: IResourceCopyCancelResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("ResourceCopyCancelResponse");
         if (obj.code != null) {
@@ -95,7 +95,7 @@ export const ResourceCopyCancelResponseCodec: thrift.IStructCodec<IResourceCopyC
             return {
                 code: _args.code,
                 msg: _args.msg,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -106,7 +106,7 @@ export const ResourceCopyCancelResponseCodec: thrift.IStructCodec<IResourceCopyC
 export class ResourceCopyCancelResponse extends thrift.StructLike implements IResourceCopyCancelResponse {
     public code?: thrift.Int64;
     public msg?: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IResourceCopyCancelResponseArgs) {
@@ -119,9 +119,9 @@ export class ResourceCopyCancelResponse extends thrift.StructLike implements IRe
             const value_5: string = args.msg;
             this.msg = value_5;
         }
-        if (args.BaseResp != null) {
-            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_6;
+        if (args.base_resp != null) {
+            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_6;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

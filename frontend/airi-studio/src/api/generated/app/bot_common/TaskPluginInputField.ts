@@ -6,21 +6,21 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ITaskPluginInputField {
-    Name?: string;
-    Type?: string;
-    Value?: string;
+    name?: string;
+    type?: string;
+    value?: string;
 }
 export interface ITaskPluginInputFieldArgs {
-    Name?: string;
-    Type?: string;
-    Value?: string;
+    name?: string;
+    type?: string;
+    value?: string;
 }
 export const TaskPluginInputFieldCodec: thrift.IStructCodec<ITaskPluginInputFieldArgs, ITaskPluginInputField> = {
     encode(args: ITaskPluginInputFieldArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Name: args.Name,
-            Type: args.Type,
-            Value: args.Value
+            Name: args.name,
+            Type: args.type,
+            Value: args.value
         };
         output.writeStructBegin("TaskPluginInputField");
         if (obj.Name != null) {
@@ -88,31 +88,31 @@ export const TaskPluginInputFieldCodec: thrift.IStructCodec<ITaskPluginInputFiel
         }
         input.readStructEnd();
         return {
-            Name: _args.Name,
-            Type: _args.Type,
-            Value: _args.Value
+            name: _args.Name,
+            type: _args.Type,
+            value: _args.Value
         };
     }
 };
 export class TaskPluginInputField extends thrift.StructLike implements ITaskPluginInputField {
-    public Name?: string;
-    public Type?: string;
-    public Value?: string;
+    public name?: string;
+    public type?: string;
+    public value?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ITaskPluginInputFieldArgs = {}) {
         super();
-        if (args.Name != null) {
-            const value_4: string = args.Name;
-            this.Name = value_4;
+        if (args.name != null) {
+            const value_4: string = args.name;
+            this.name = value_4;
         }
-        if (args.Type != null) {
-            const value_5: string = args.Type;
-            this.Type = value_5;
+        if (args.type != null) {
+            const value_5: string = args.type;
+            this.type = value_5;
         }
-        if (args.Value != null) {
-            const value_6: string = args.Value;
-            this.Value = value_6;
+        if (args.value != null) {
+            const value_6: string = args.value;
+            this.value = value_6;
         }
     }
     public static read(input: thrift.TProtocol): TaskPluginInputField {

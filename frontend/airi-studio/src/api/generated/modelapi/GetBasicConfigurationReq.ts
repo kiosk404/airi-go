@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetBasicConfigurationReq {
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetBasicConfigurationReqArgs {
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetBasicConfigurationReqCodec: thrift.IStructCodec<IGetBasicConfigurationReqArgs, IGetBasicConfigurationReq> = {
     encode(args: IGetBasicConfigurationReqArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetBasicConfigurationReq");
         if (obj.Base != null) {
@@ -55,19 +55,19 @@ export const GetBasicConfigurationReqCodec: thrift.IStructCodec<IGetBasicConfigu
         }
         input.readStructEnd();
         return {
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class GetBasicConfigurationReq extends thrift.StructLike implements IGetBasicConfigurationReq {
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetBasicConfigurationReqArgs = {}) {
         super();
-        if (args.Base != null) {
-            const value_2: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_2;
+        if (args.base != null) {
+            const value_2: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_2;
         }
     }
     public static read(input: thrift.TProtocol): GetBasicConfigurationReq {

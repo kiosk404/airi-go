@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IDeleteConversationApiResponse {
-    Code?: number;
-    Msg?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    code?: number;
+    msg?: string;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IDeleteConversationApiResponseArgs {
-    Code?: number;
-    Msg?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    code?: number;
+    msg?: string;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const DeleteConversationApiResponseCodec: thrift.IStructCodec<IDeleteConversationApiResponseArgs, IDeleteConversationApiResponse> = {
     encode(args: IDeleteConversationApiResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Code: args.Code,
-            Msg: args.Msg,
-            BaseResp: args.BaseResp
+            Code: args.code,
+            Msg: args.msg,
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("DeleteConversationApiResponse");
         if (obj.Code != null) {
@@ -89,38 +89,38 @@ export const DeleteConversationApiResponseCodec: thrift.IStructCodec<IDeleteConv
         }
         input.readStructEnd();
         return {
-            Code: _args.Code,
-            Msg: _args.Msg,
-            BaseResp: _args.BaseResp
+            code: _args.Code,
+            msg: _args.Msg,
+            base_resp: _args.BaseResp
         };
     }
 };
 export class DeleteConversationApiResponse extends thrift.StructLike implements IDeleteConversationApiResponse {
-    public Code?: number;
-    public Msg?: string;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public code?: number;
+    public msg?: string;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Code: {
+        code: {
             'api.body': "code"
         },
-        Msg: {
+        msg: {
             'api.body': "msg"
         }
     };
     constructor(args: IDeleteConversationApiResponseArgs = {}) {
         super();
-        if (args.Code != null) {
-            const value_4: number = args.Code;
-            this.Code = value_4;
+        if (args.code != null) {
+            const value_4: number = args.code;
+            this.code = value_4;
         }
-        if (args.Msg != null) {
-            const value_5: string = args.Msg;
-            this.Msg = value_5;
+        if (args.msg != null) {
+            const value_5: string = args.msg;
+            this.msg = value_5;
         }
-        if (args.BaseResp != null) {
-            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_6;
+        if (args.base_resp != null) {
+            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_6;
         }
     }
     public static read(input: thrift.TProtocol): DeleteConversationApiResponse {

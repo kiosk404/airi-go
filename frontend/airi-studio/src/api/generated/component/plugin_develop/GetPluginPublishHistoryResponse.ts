@@ -12,14 +12,14 @@ export interface IGetPluginPublishHistoryResponse {
     msg?: string;
     plugin_publish_info_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo>;
     total?: number;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IGetPluginPublishHistoryResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     plugin_publish_info_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfoArgs>;
     total?: number;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const GetPluginPublishHistoryResponseCodec: thrift.IStructCodec<IGetPluginPublishHistoryResponseArgs, IGetPluginPublishHistoryResponse> = {
     encode(args: IGetPluginPublishHistoryResponseArgs, output: thrift.TProtocol): void {
@@ -28,7 +28,7 @@ export const GetPluginPublishHistoryResponseCodec: thrift.IStructCodec<IGetPlugi
             msg: args.msg,
             plugin_publish_info_list: args.plugin_publish_info_list,
             total: args.total,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetPluginPublishHistoryResponse");
         if (obj.code != null) {
@@ -139,7 +139,7 @@ export const GetPluginPublishHistoryResponseCodec: thrift.IStructCodec<IGetPlugi
             msg: _args.msg,
             plugin_publish_info_list: _args.plugin_publish_info_list,
             total: _args.total,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -148,7 +148,7 @@ export class GetPluginPublishHistoryResponse extends thrift.StructLike implement
     public msg?: string;
     public plugin_publish_info_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginPublishInfo>;
     public total?: number;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetPluginPublishHistoryResponseArgs = {}) {
@@ -173,9 +173,9 @@ export class GetPluginPublishHistoryResponse extends thrift.StructLike implement
             const value_11: number = args.total;
             this.total = value_11;
         }
-        if (args.BaseResp != null) {
-            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_12;
+        if (args.base_resp != null) {
+            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_12;
         }
     }
     public static read(input: thrift.TProtocol): GetPluginPublishHistoryResponse {

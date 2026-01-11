@@ -8,17 +8,17 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IGetOAuthStatusRequest {
     plugin_id: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetOAuthStatusRequestArgs {
     plugin_id: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetOAuthStatusRequestCodec: thrift.IStructCodec<IGetOAuthStatusRequestArgs, IGetOAuthStatusRequest> = {
     encode(args: IGetOAuthStatusRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             plugin_id: (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetOAuthStatusRequest");
         if (obj.plugin_id != null) {
@@ -77,7 +77,7 @@ export const GetOAuthStatusRequestCodec: thrift.IStructCodec<IGetOAuthStatusRequ
         if (_args.plugin_id !== undefined) {
             return {
                 plugin_id: _args.plugin_id,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -87,7 +87,7 @@ export const GetOAuthStatusRequestCodec: thrift.IStructCodec<IGetOAuthStatusRequ
 };
 export class GetOAuthStatusRequest extends thrift.StructLike implements IGetOAuthStatusRequest {
     public plugin_id: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -103,9 +103,9 @@ export class GetOAuthStatusRequest extends thrift.StructLike implements IGetOAut
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[plugin_id] is unset!");
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): GetOAuthStatusRequest {

@@ -9,19 +9,19 @@ import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IGetPluginNextVersionRequest {
     plugin_id: thrift.Int64;
     space_id: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetPluginNextVersionRequestArgs {
     plugin_id: number | string | thrift.Int64;
     space_id: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetPluginNextVersionRequestCodec: thrift.IStructCodec<IGetPluginNextVersionRequestArgs, IGetPluginNextVersionRequest> = {
     encode(args: IGetPluginNextVersionRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             plugin_id: (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id),
             space_id: (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetPluginNextVersionRequest");
         if (obj.plugin_id != null) {
@@ -98,7 +98,7 @@ export const GetPluginNextVersionRequestCodec: thrift.IStructCodec<IGetPluginNex
             return {
                 plugin_id: _args.plugin_id,
                 space_id: _args.space_id,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -109,7 +109,7 @@ export const GetPluginNextVersionRequestCodec: thrift.IStructCodec<IGetPluginNex
 export class GetPluginNextVersionRequest extends thrift.StructLike implements IGetPluginNextVersionRequest {
     public plugin_id: thrift.Int64;
     public space_id: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -135,9 +135,9 @@ export class GetPluginNextVersionRequest extends thrift.StructLike implements IG
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[space_id] is unset!");
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): GetPluginNextVersionRequest {

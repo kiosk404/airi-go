@@ -18,7 +18,7 @@ export interface IGetBotDefaultParamsRequest {
     plugin_is_debug?: boolean;
     workflow_id?: string;
     plugin_publish_version_ts?: string;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IGetBotDefaultParamsRequestArgs {
     space_id?: number | string | thrift.Int64;
@@ -31,7 +31,7 @@ export interface IGetBotDefaultParamsRequestArgs {
     plugin_is_debug?: boolean;
     workflow_id?: string;
     plugin_publish_version_ts?: string;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const GetBotDefaultParamsRequestCodec: thrift.IStructCodec<IGetBotDefaultParamsRequestArgs, IGetBotDefaultParamsRequest> = {
     encode(args: IGetBotDefaultParamsRequestArgs, output: thrift.TProtocol): void {
@@ -46,7 +46,7 @@ export const GetBotDefaultParamsRequestCodec: thrift.IStructCodec<IGetBotDefault
             plugin_is_debug: args.plugin_is_debug,
             workflow_id: args.workflow_id,
             plugin_publish_version_ts: args.plugin_publish_version_ts,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetBotDefaultParamsRequest");
         if (obj.space_id != null) {
@@ -236,7 +236,7 @@ export const GetBotDefaultParamsRequestCodec: thrift.IStructCodec<IGetBotDefault
             plugin_is_debug: _args.plugin_is_debug,
             workflow_id: _args.workflow_id,
             plugin_publish_version_ts: _args.plugin_publish_version_ts,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -251,7 +251,7 @@ export class GetBotDefaultParamsRequest extends thrift.StructLike implements IGe
     public plugin_is_debug?: boolean;
     public workflow_id?: string;
     public plugin_publish_version_ts?: string;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         space_id: {
@@ -306,9 +306,9 @@ export class GetBotDefaultParamsRequest extends thrift.StructLike implements IGe
             const value_21: string = args.plugin_publish_version_ts;
             this.plugin_publish_version_ts = value_21;
         }
-        if (args.Base != null) {
-            const value_22: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_22;
+        if (args.base != null) {
+            const value_22: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_22;
         }
     }
     public static read(input: thrift.TProtocol): GetBotDefaultParamsRequest {

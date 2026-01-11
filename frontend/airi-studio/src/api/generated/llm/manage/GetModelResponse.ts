@@ -9,17 +9,17 @@ import * as LLM_DOMAIN_MANAGE_NS from "../domain/manage";
 import * as BASE_NS from "../../base";
 export interface IGetModelResponse {
     model?: LLM_DOMAIN_MANAGE_NS.IModel;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IGetModelResponseArgs {
     model?: LLM_DOMAIN_MANAGE_NS.IModelArgs;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, IGetModelResponse> = {
     encode(args: IGetModelResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
             model: args.model,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetModelResponse");
         if (obj.model != null) {
@@ -74,13 +74,13 @@ export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, I
         input.readStructEnd();
         return {
             model: _args.model,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
 export class GetModelResponse extends thrift.StructLike implements IGetModelResponse {
     public model?: LLM_DOMAIN_MANAGE_NS.IModel;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetModelResponseArgs = {}) {
@@ -89,9 +89,9 @@ export class GetModelResponse extends thrift.StructLike implements IGetModelResp
             const value_3: LLM_DOMAIN_MANAGE_NS.IModel = new LLM_DOMAIN_MANAGE_NS.Model(args.model);
             this.model = value_3;
         }
-        if (args.BaseResp != null) {
-            const value_4: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_4;
+        if (args.base_resp != null) {
+            const value_4: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_4;
         }
     }
     public static read(input: thrift.TProtocol): GetModelResponse {

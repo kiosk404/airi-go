@@ -16,7 +16,7 @@ export interface IDebugAPIResponse {
     reason?: string;
     raw_resp?: string;
     raw_req?: string;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IDebugAPIResponseArgs {
     code?: number | string | thrift.Int64;
@@ -27,7 +27,7 @@ export interface IDebugAPIResponseArgs {
     reason?: string;
     raw_resp?: string;
     raw_req?: string;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const DebugAPIResponseCodec: thrift.IStructCodec<IDebugAPIResponseArgs, IDebugAPIResponse> = {
     encode(args: IDebugAPIResponseArgs, output: thrift.TProtocol): void {
@@ -40,7 +40,7 @@ export const DebugAPIResponseCodec: thrift.IStructCodec<IDebugAPIResponseArgs, I
             reason: args.reason,
             raw_resp: args.raw_resp,
             raw_req: args.raw_req,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("DebugAPIResponse");
         if (obj.code != null) {
@@ -211,7 +211,7 @@ export const DebugAPIResponseCodec: thrift.IStructCodec<IDebugAPIResponseArgs, I
             reason: _args.reason,
             raw_resp: _args.raw_resp,
             raw_req: _args.raw_req,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -224,7 +224,7 @@ export class DebugAPIResponse extends thrift.StructLike implements IDebugAPIResp
     public reason?: string;
     public raw_resp?: string;
     public raw_req?: string;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IDebugAPIResponseArgs = {}) {
@@ -265,9 +265,9 @@ export class DebugAPIResponse extends thrift.StructLike implements IDebugAPIResp
             const value_19: string = args.raw_req;
             this.raw_req = value_19;
         }
-        if (args.BaseResp != null) {
-            const value_20: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_20;
+        if (args.base_resp != null) {
+            const value_20: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_20;
         }
     }
     public static read(input: thrift.TProtocol): DebugAPIResponse {

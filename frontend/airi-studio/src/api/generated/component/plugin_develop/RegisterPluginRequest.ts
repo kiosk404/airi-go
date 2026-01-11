@@ -17,7 +17,7 @@ export interface IRegisterPluginRequest {
     space_id?: thrift.Int64;
     import_from_file?: boolean;
     project_id?: thrift.Int64;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IRegisterPluginRequestArgs {
     ai_plugin?: string;
@@ -29,7 +29,7 @@ export interface IRegisterPluginRequestArgs {
     space_id?: number | string | thrift.Int64;
     import_from_file?: boolean;
     project_id?: number | string | thrift.Int64;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const RegisterPluginRequestCodec: thrift.IStructCodec<IRegisterPluginRequestArgs, IRegisterPluginRequest> = {
     encode(args: IRegisterPluginRequestArgs, output: thrift.TProtocol): void {
@@ -43,7 +43,7 @@ export const RegisterPluginRequestCodec: thrift.IStructCodec<IRegisterPluginRequ
             space_id: (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id),
             import_from_file: args.import_from_file,
             project_id: (typeof args.project_id === "number" ? new thrift.Int64(args.project_id) : typeof args.project_id === "string" ? thrift.Int64.fromDecimalString(args.project_id) : args.project_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("RegisterPluginRequest");
         if (obj.ai_plugin != null) {
@@ -218,7 +218,7 @@ export const RegisterPluginRequestCodec: thrift.IStructCodec<IRegisterPluginRequ
             space_id: _args.space_id,
             import_from_file: _args.import_from_file,
             project_id: _args.project_id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -232,7 +232,7 @@ export class RegisterPluginRequest extends thrift.StructLike implements IRegiste
     public space_id?: thrift.Int64;
     public import_from_file?: boolean;
     public project_id?: thrift.Int64;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         space_id: {
@@ -280,9 +280,9 @@ export class RegisterPluginRequest extends thrift.StructLike implements IRegiste
             const value_19: thrift.Int64 = (typeof args.project_id === "number" ? new thrift.Int64(args.project_id) : typeof args.project_id === "string" ? thrift.Int64.fromDecimalString(args.project_id) : args.project_id);
             this.project_id = value_19;
         }
-        if (args.Base != null) {
-            const value_20: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_20;
+        if (args.base != null) {
+            const value_20: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_20;
         }
     }
     public static read(input: thrift.TProtocol): RegisterPluginRequest {

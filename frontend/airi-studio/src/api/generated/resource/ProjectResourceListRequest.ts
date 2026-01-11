@@ -9,19 +9,19 @@ import * as __ROOT_NAMESPACE__ from "../base";
 export interface IProjectResourceListRequest {
     project_id: thrift.Int64;
     project_version?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IProjectResourceListRequestArgs {
     project_id: number | string | thrift.Int64;
     project_version?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const ProjectResourceListRequestCodec: thrift.IStructCodec<IProjectResourceListRequestArgs, IProjectResourceListRequest> = {
     encode(args: IProjectResourceListRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             project_id: (typeof args.project_id === "number" ? new thrift.Int64(args.project_id) : typeof args.project_id === "string" ? thrift.Int64.fromDecimalString(args.project_id) : args.project_id),
             project_version: args.project_version,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ProjectResourceListRequest");
         if (obj.project_id != null) {
@@ -95,7 +95,7 @@ export const ProjectResourceListRequestCodec: thrift.IStructCodec<IProjectResour
             return {
                 project_id: _args.project_id,
                 project_version: _args.project_version,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -106,7 +106,7 @@ export const ProjectResourceListRequestCodec: thrift.IStructCodec<IProjectResour
 export class ProjectResourceListRequest extends thrift.StructLike implements IProjectResourceListRequest {
     public project_id: thrift.Int64;
     public project_version?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         project_id: {
@@ -127,9 +127,9 @@ export class ProjectResourceListRequest extends thrift.StructLike implements IPr
             const value_5: string = args.project_version;
             this.project_version = value_5;
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): ProjectResourceListRequest {

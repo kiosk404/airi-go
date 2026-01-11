@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as AnswerActionTriggerType from "./AnswerActionTriggerType";
 export interface IAnswerActionTriggerRule {
-    Type?: AnswerActionTriggerType.AnswerActionTriggerType;
-    NeedPreloading?: boolean;
-    TriggerData?: Map<string, string>;
+    type?: AnswerActionTriggerType.AnswerActionTriggerType;
+    need_preloading?: boolean;
+    trigger_data?: Map<string, string>;
 }
 export interface IAnswerActionTriggerRuleArgs {
-    Type?: AnswerActionTriggerType.AnswerActionTriggerType;
-    NeedPreloading?: boolean;
-    TriggerData?: Map<string, string>;
+    type?: AnswerActionTriggerType.AnswerActionTriggerType;
+    need_preloading?: boolean;
+    trigger_data?: Map<string, string>;
 }
 export const AnswerActionTriggerRuleCodec: thrift.IStructCodec<IAnswerActionTriggerRuleArgs, IAnswerActionTriggerRule> = {
     encode(args: IAnswerActionTriggerRuleArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Type: args.Type,
-            NeedPreloading: args.NeedPreloading,
-            TriggerData: args.TriggerData
+            Type: args.type,
+            NeedPreloading: args.need_preloading,
+            TriggerData: args.trigger_data
         };
         output.writeStructBegin("AnswerActionTriggerRule");
         if (obj.Type != null) {
@@ -102,46 +102,46 @@ export const AnswerActionTriggerRuleCodec: thrift.IStructCodec<IAnswerActionTrig
         }
         input.readStructEnd();
         return {
-            Type: _args.Type,
-            NeedPreloading: _args.NeedPreloading,
-            TriggerData: _args.TriggerData
+            type: _args.Type,
+            need_preloading: _args.NeedPreloading,
+            trigger_data: _args.TriggerData
         };
     }
 };
 export class AnswerActionTriggerRule extends thrift.StructLike implements IAnswerActionTriggerRule {
-    public Type?: AnswerActionTriggerType.AnswerActionTriggerType;
-    public NeedPreloading?: boolean;
-    public TriggerData?: Map<string, string>;
+    public type?: AnswerActionTriggerType.AnswerActionTriggerType;
+    public need_preloading?: boolean;
+    public trigger_data?: Map<string, string>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Type: {
+        type: {
             'api.body': "type"
         },
-        NeedPreloading: {
+        need_preloading: {
             'api.body': "need_preloading"
         },
-        TriggerData: {
+        trigger_data: {
             'api.body': "trigger_data"
         }
     };
     constructor(args: IAnswerActionTriggerRuleArgs = {}) {
         super();
-        if (args.Type != null) {
-            const value_6: AnswerActionTriggerType.AnswerActionTriggerType = args.Type;
-            this.Type = value_6;
+        if (args.type != null) {
+            const value_6: AnswerActionTriggerType.AnswerActionTriggerType = args.type;
+            this.type = value_6;
         }
-        if (args.NeedPreloading != null) {
-            const value_7: boolean = args.NeedPreloading;
-            this.NeedPreloading = value_7;
+        if (args.need_preloading != null) {
+            const value_7: boolean = args.need_preloading;
+            this.need_preloading = value_7;
         }
-        if (args.TriggerData != null) {
+        if (args.trigger_data != null) {
             const value_8: Map<string, string> = new Map<string, string>();
-            args.TriggerData.forEach((value_9: string, key_3: string): void => {
+            args.trigger_data.forEach((value_9: string, key_3: string): void => {
                 const value_10: string = value_9;
                 const key_4: string = key_3;
                 value_8.set(key_4, value_10);
             });
-            this.TriggerData = value_8;
+            this.trigger_data = value_8;
         }
     }
     public static read(input: thrift.TProtocol): AnswerActionTriggerRule {

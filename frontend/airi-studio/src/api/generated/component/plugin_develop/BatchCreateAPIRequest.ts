@@ -16,7 +16,7 @@ export interface IBatchCreateAPIRequest {
     replace_same_paths?: boolean;
     paths_to_replace?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     edit_version?: number;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IBatchCreateAPIRequestArgs {
     plugin_id?: number | string | thrift.Int64;
@@ -27,7 +27,7 @@ export interface IBatchCreateAPIRequestArgs {
     replace_same_paths?: boolean;
     paths_to_replace?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfoArgs>;
     edit_version?: number;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const BatchCreateAPIRequestCodec: thrift.IStructCodec<IBatchCreateAPIRequestArgs, IBatchCreateAPIRequest> = {
     encode(args: IBatchCreateAPIRequestArgs, output: thrift.TProtocol): void {
@@ -40,7 +40,7 @@ export const BatchCreateAPIRequestCodec: thrift.IStructCodec<IBatchCreateAPIRequ
             replace_same_paths: args.replace_same_paths,
             paths_to_replace: args.paths_to_replace,
             edit_version: args.edit_version,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("BatchCreateAPIRequest");
         if (obj.plugin_id != null) {
@@ -211,7 +211,7 @@ export const BatchCreateAPIRequestCodec: thrift.IStructCodec<IBatchCreateAPIRequ
             replace_same_paths: _args.replace_same_paths,
             paths_to_replace: _args.paths_to_replace,
             edit_version: _args.edit_version,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -224,7 +224,7 @@ export class BatchCreateAPIRequest extends thrift.StructLike implements IBatchCr
     public replace_same_paths?: boolean;
     public paths_to_replace?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginAPIInfo>;
     public edit_version?: number;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -293,9 +293,9 @@ export class BatchCreateAPIRequest extends thrift.StructLike implements IBatchCr
             const value_19: number = args.edit_version;
             this.edit_version = value_19;
         }
-        if (args.Base != null) {
-            const value_20: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_20;
+        if (args.base != null) {
+            const value_20: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_20;
         }
     }
     public static read(input: thrift.TProtocol): BatchCreateAPIRequest {

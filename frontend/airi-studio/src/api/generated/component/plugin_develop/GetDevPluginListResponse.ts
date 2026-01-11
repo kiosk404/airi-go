@@ -12,14 +12,14 @@ export interface IGetDevPluginListResponse {
     msg?: string;
     plugin_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground>;
     total?: thrift.Int64;
-    baseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IGetDevPluginListResponseArgs {
     code?: number;
     msg?: string;
     plugin_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlaygroundArgs>;
     total?: number | string | thrift.Int64;
-    baseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const GetDevPluginListResponseCodec: thrift.IStructCodec<IGetDevPluginListResponseArgs, IGetDevPluginListResponse> = {
     encode(args: IGetDevPluginListResponseArgs, output: thrift.TProtocol): void {
@@ -28,7 +28,7 @@ export const GetDevPluginListResponseCodec: thrift.IStructCodec<IGetDevPluginLis
             msg: args.msg,
             plugin_list: args.plugin_list,
             total: (typeof args.total === "number" ? new thrift.Int64(args.total) : typeof args.total === "string" ? thrift.Int64.fromDecimalString(args.total) : args.total),
-            baseResp: args.baseResp
+            baseResp: args.base_resp
         };
         output.writeStructBegin("GetDevPluginListResponse");
         if (obj.code != null) {
@@ -139,7 +139,7 @@ export const GetDevPluginListResponseCodec: thrift.IStructCodec<IGetDevPluginLis
             msg: _args.msg,
             plugin_list: _args.plugin_list,
             total: _args.total,
-            baseResp: _args.baseResp
+            base_resp: _args.baseResp
         };
     }
 };
@@ -148,7 +148,7 @@ export class GetDevPluginListResponse extends thrift.StructLike implements IGetD
     public msg?: string;
     public plugin_list?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IPluginInfoForPlayground>;
     public total?: thrift.Int64;
-    public baseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         total: {
@@ -181,9 +181,9 @@ export class GetDevPluginListResponse extends thrift.StructLike implements IGetD
             const value_11: thrift.Int64 = (typeof args.total === "number" ? new thrift.Int64(args.total) : typeof args.total === "string" ? thrift.Int64.fromDecimalString(args.total) : args.total);
             this.total = value_11;
         }
-        if (args.baseResp != null) {
-            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.baseResp);
-            this.baseResp = value_12;
+        if (args.base_resp != null) {
+            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_12;
         }
     }
     public static read(input: thrift.TProtocol): GetDevPluginListResponse {

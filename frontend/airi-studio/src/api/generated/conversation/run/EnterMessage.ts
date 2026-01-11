@@ -6,30 +6,30 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IEnterMessage {
-    Role?: string;
-    Content?: string;
-    MetaData?: Map<string, string>;
-    ContentType?: string;
-    Type?: string;
-    Name?: string;
+    role?: string;
+    content?: string;
+    meta_data?: Map<string, string>;
+    content_type?: string;
+    type?: string;
+    name?: string;
 }
 export interface IEnterMessageArgs {
-    Role?: string;
-    Content?: string;
-    MetaData?: Map<string, string>;
-    ContentType?: string;
-    Type?: string;
-    Name?: string;
+    role?: string;
+    content?: string;
+    meta_data?: Map<string, string>;
+    content_type?: string;
+    type?: string;
+    name?: string;
 }
 export const EnterMessageCodec: thrift.IStructCodec<IEnterMessageArgs, IEnterMessage> = {
     encode(args: IEnterMessageArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Role: args.Role,
-            Content: args.Content,
-            MetaData: args.MetaData,
-            ContentType: args.ContentType,
-            Type: args.Type,
-            Name: args.Name
+            Role: args.role,
+            Content: args.content,
+            MetaData: args.meta_data,
+            ContentType: args.content_type,
+            Type: args.type,
+            Name: args.name
         };
         output.writeStructBegin("EnterMessage");
         if (obj.Role != null) {
@@ -152,73 +152,73 @@ export const EnterMessageCodec: thrift.IStructCodec<IEnterMessageArgs, IEnterMes
         }
         input.readStructEnd();
         return {
-            Role: _args.Role,
-            Content: _args.Content,
-            MetaData: _args.MetaData,
-            ContentType: _args.ContentType,
-            Type: _args.Type,
-            Name: _args.Name
+            role: _args.Role,
+            content: _args.Content,
+            meta_data: _args.MetaData,
+            content_type: _args.ContentType,
+            type: _args.Type,
+            name: _args.Name
         };
     }
 };
 export class EnterMessage extends thrift.StructLike implements IEnterMessage {
-    public Role?: string;
-    public Content?: string;
-    public MetaData?: Map<string, string>;
-    public ContentType?: string;
-    public Type?: string;
-    public Name?: string;
+    public role?: string;
+    public content?: string;
+    public meta_data?: Map<string, string>;
+    public content_type?: string;
+    public type?: string;
+    public name?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Role: {
+        role: {
             'api.body': "role"
         },
-        Content: {
+        content: {
             'api.body': "content"
         },
-        MetaData: {
+        meta_data: {
             'api.body': "meta_data"
         },
-        ContentType: {
+        content_type: {
             'api.body': "content_type"
         },
-        Type: {
+        type: {
             'api.body': "type"
         },
-        Name: {
+        name: {
             'api.body': "name"
         }
     };
     constructor(args: IEnterMessageArgs = {}) {
         super();
-        if (args.Role != null) {
-            const value_9: string = args.Role;
-            this.Role = value_9;
+        if (args.role != null) {
+            const value_9: string = args.role;
+            this.role = value_9;
         }
-        if (args.Content != null) {
-            const value_10: string = args.Content;
-            this.Content = value_10;
+        if (args.content != null) {
+            const value_10: string = args.content;
+            this.content = value_10;
         }
-        if (args.MetaData != null) {
+        if (args.meta_data != null) {
             const value_11: Map<string, string> = new Map<string, string>();
-            args.MetaData.forEach((value_15: string, key_3: string): void => {
+            args.meta_data.forEach((value_15: string, key_3: string): void => {
                 const value_16: string = value_15;
                 const key_4: string = key_3;
                 value_11.set(key_4, value_16);
             });
-            this.MetaData = value_11;
+            this.meta_data = value_11;
         }
-        if (args.ContentType != null) {
-            const value_12: string = args.ContentType;
-            this.ContentType = value_12;
+        if (args.content_type != null) {
+            const value_12: string = args.content_type;
+            this.content_type = value_12;
         }
-        if (args.Type != null) {
-            const value_13: string = args.Type;
-            this.Type = value_13;
+        if (args.type != null) {
+            const value_13: string = args.type;
+            this.type = value_13;
         }
-        if (args.Name != null) {
-            const value_14: string = args.Name;
-            this.Name = value_14;
+        if (args.name != null) {
+            const value_14: string = args.name;
+            this.name = value_14;
         }
     }
     public static read(input: thrift.TProtocol): EnterMessage {

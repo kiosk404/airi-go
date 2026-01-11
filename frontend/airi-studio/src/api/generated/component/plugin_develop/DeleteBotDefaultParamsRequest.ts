@@ -18,7 +18,7 @@ export interface IDeleteBotDefaultParamsRequest {
     plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     workflow_id?: string;
     api_id?: thrift.Int64;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IDeleteBotDefaultParamsRequestArgs {
     bot_id?: number | string | thrift.Int64;
@@ -31,7 +31,7 @@ export interface IDeleteBotDefaultParamsRequestArgs {
     plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     workflow_id?: string;
     api_id?: number | string | thrift.Int64;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const DeleteBotDefaultParamsRequestCodec: thrift.IStructCodec<IDeleteBotDefaultParamsRequestArgs, IDeleteBotDefaultParamsRequest> = {
     encode(args: IDeleteBotDefaultParamsRequestArgs, output: thrift.TProtocol): void {
@@ -46,7 +46,7 @@ export const DeleteBotDefaultParamsRequestCodec: thrift.IStructCodec<IDeleteBotD
             plugin_referrer_scene: args.plugin_referrer_scene,
             workflow_id: args.workflow_id,
             api_id: (typeof args.api_id === "number" ? new thrift.Int64(args.api_id) : typeof args.api_id === "string" ? thrift.Int64.fromDecimalString(args.api_id) : args.api_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("DeleteBotDefaultParamsRequest");
         if (obj.bot_id != null) {
@@ -236,7 +236,7 @@ export const DeleteBotDefaultParamsRequestCodec: thrift.IStructCodec<IDeleteBotD
             plugin_referrer_scene: _args.plugin_referrer_scene,
             workflow_id: _args.workflow_id,
             api_id: _args.api_id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -251,7 +251,7 @@ export class DeleteBotDefaultParamsRequest extends thrift.StructLike implements 
     public plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     public workflow_id?: string;
     public api_id?: thrift.Int64;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         bot_id: {
@@ -309,9 +309,9 @@ export class DeleteBotDefaultParamsRequest extends thrift.StructLike implements 
             const value_21: thrift.Int64 = (typeof args.api_id === "number" ? new thrift.Int64(args.api_id) : typeof args.api_id === "string" ? thrift.Int64.fromDecimalString(args.api_id) : args.api_id);
             this.api_id = value_21;
         }
-        if (args.Base != null) {
-            const value_22: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_22;
+        if (args.base != null) {
+            const value_22: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_22;
         }
     }
     public static read(input: thrift.TProtocol): DeleteBotDefaultParamsRequest {

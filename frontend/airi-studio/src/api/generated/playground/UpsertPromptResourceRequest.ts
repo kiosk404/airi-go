@@ -8,18 +8,18 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as PromptResource from "./PromptResource";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IUpsertPromptResourceRequest {
-    Prompt: PromptResource.IPromptResource;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    prompt: PromptResource.IPromptResource;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IUpsertPromptResourceRequestArgs {
-    Prompt: PromptResource.IPromptResourceArgs;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    prompt: PromptResource.IPromptResourceArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const UpsertPromptResourceRequestCodec: thrift.IStructCodec<IUpsertPromptResourceRequestArgs, IUpsertPromptResourceRequest> = {
     encode(args: IUpsertPromptResourceRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Prompt: args.Prompt,
-            Base: args.Base
+            Prompt: args.prompt,
+            Base: args.base
         };
         output.writeStructBegin("UpsertPromptResourceRequest");
         if (obj.Prompt != null) {
@@ -77,8 +77,8 @@ export const UpsertPromptResourceRequestCodec: thrift.IStructCodec<IUpsertPrompt
         input.readStructEnd();
         if (_args.Prompt !== undefined) {
             return {
-                Prompt: _args.Prompt,
-                Base: _args.Base
+                prompt: _args.Prompt,
+                base: _args.Base
             };
         }
         else {
@@ -87,29 +87,29 @@ export const UpsertPromptResourceRequestCodec: thrift.IStructCodec<IUpsertPrompt
     }
 };
 export class UpsertPromptResourceRequest extends thrift.StructLike implements IUpsertPromptResourceRequest {
-    public Prompt: PromptResource.IPromptResource;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public prompt: PromptResource.IPromptResource;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Prompt: {
+        prompt: {
             'api.body': "prompt"
         },
-        Base: {
+        base: {
             'api.none': "true"
         }
     };
     constructor(args: IUpsertPromptResourceRequestArgs) {
         super();
-        if (args.Prompt != null) {
-            const value_3: PromptResource.IPromptResource = new PromptResource.PromptResource(args.Prompt);
-            this.Prompt = value_3;
+        if (args.prompt != null) {
+            const value_3: PromptResource.IPromptResource = new PromptResource.PromptResource(args.prompt);
+            this.prompt = value_3;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Prompt] is unset!");
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): UpsertPromptResourceRequest {

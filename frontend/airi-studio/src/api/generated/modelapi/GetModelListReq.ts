@@ -9,17 +9,17 @@ import * as ModelType from "./ModelType";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetModelListReq {
     model_type?: ModelType.ModelType;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetModelListReqArgs {
     model_type?: ModelType.ModelType;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetModelListReqCodec: thrift.IStructCodec<IGetModelListReqArgs, IGetModelListReq> = {
     encode(args: IGetModelListReqArgs, output: thrift.TProtocol): void {
         const obj: any = {
             model_type: args.model_type,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetModelListReq");
         if (obj.model_type != null) {
@@ -74,13 +74,13 @@ export const GetModelListReqCodec: thrift.IStructCodec<IGetModelListReqArgs, IGe
         input.readStructEnd();
         return {
             model_type: _args.model_type,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class GetModelListReq extends thrift.StructLike implements IGetModelListReq {
     public model_type?: ModelType.ModelType;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetModelListReqArgs = {}) {
@@ -89,9 +89,9 @@ export class GetModelListReq extends thrift.StructLike implements IGetModelListR
             const value_3: ModelType.ModelType = args.model_type;
             this.model_type = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): GetModelListReq {

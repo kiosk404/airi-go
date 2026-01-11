@@ -7,33 +7,33 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as FieldItemType from "./FieldItemType";
 export interface IFieldItem {
-    Name?: string;
-    Desc?: string;
-    Type?: FieldItemType.FieldItemType;
-    MustRequired?: boolean;
-    Id?: thrift.Int64;
-    TypeStr?: string;
-    AlterId?: thrift.Int64;
+    name?: string;
+    desc?: string;
+    type?: FieldItemType.FieldItemType;
+    must_required?: boolean;
+    id?: thrift.Int64;
+    type_str?: string;
+    alter_id?: thrift.Int64;
 }
 export interface IFieldItemArgs {
-    Name?: string;
-    Desc?: string;
-    Type?: FieldItemType.FieldItemType;
-    MustRequired?: boolean;
-    Id?: number | string | thrift.Int64;
-    TypeStr?: string;
-    AlterId?: number | string | thrift.Int64;
+    name?: string;
+    desc?: string;
+    type?: FieldItemType.FieldItemType;
+    must_required?: boolean;
+    id?: number | string | thrift.Int64;
+    type_str?: string;
+    alter_id?: number | string | thrift.Int64;
 }
 export const FieldItemCodec: thrift.IStructCodec<IFieldItemArgs, IFieldItem> = {
     encode(args: IFieldItemArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Name: args.Name,
-            Desc: args.Desc,
-            Type: args.Type,
-            MustRequired: args.MustRequired,
-            Id: (typeof args.Id === "number" ? new thrift.Int64(args.Id) : typeof args.Id === "string" ? thrift.Int64.fromDecimalString(args.Id) : args.Id),
-            TypeStr: args.TypeStr,
-            AlterId: (typeof args.AlterId === "number" ? new thrift.Int64(args.AlterId) : typeof args.AlterId === "string" ? thrift.Int64.fromDecimalString(args.AlterId) : args.AlterId)
+            Name: args.name,
+            Desc: args.desc,
+            Type: args.type,
+            MustRequired: args.must_required,
+            Id: (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id),
+            TypeStr: args.type_str,
+            AlterId: (typeof args.alter_id === "number" ? new thrift.Int64(args.alter_id) : typeof args.alter_id === "string" ? thrift.Int64.fromDecimalString(args.alter_id) : args.alter_id)
         };
         output.writeStructBegin("FieldItem");
         if (obj.Name != null) {
@@ -157,79 +157,79 @@ export const FieldItemCodec: thrift.IStructCodec<IFieldItemArgs, IFieldItem> = {
         }
         input.readStructEnd();
         return {
-            Name: _args.Name,
-            Desc: _args.Desc,
-            Type: _args.Type,
-            MustRequired: _args.MustRequired,
-            Id: _args.Id,
-            TypeStr: _args.TypeStr,
-            AlterId: _args.AlterId
+            name: _args.Name,
+            desc: _args.Desc,
+            type: _args.Type,
+            must_required: _args.MustRequired,
+            id: _args.Id,
+            type_str: _args.TypeStr,
+            alter_id: _args.AlterId
         };
     }
 };
 export class FieldItem extends thrift.StructLike implements IFieldItem {
-    public Name?: string;
-    public Desc?: string;
-    public Type?: FieldItemType.FieldItemType;
-    public MustRequired?: boolean;
-    public Id?: thrift.Int64;
-    public TypeStr?: string;
-    public AlterId?: thrift.Int64;
+    public name?: string;
+    public desc?: string;
+    public type?: FieldItemType.FieldItemType;
+    public must_required?: boolean;
+    public id?: thrift.Int64;
+    public type_str?: string;
+    public alter_id?: thrift.Int64;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Name: {
+        name: {
             'api.body': "name"
         },
-        Desc: {
+        desc: {
             'api.body': "desc"
         },
-        Type: {
+        type: {
             'api.body': "type"
         },
-        MustRequired: {
+        must_required: {
             'api.body': "must_required"
         },
-        Id: {
+        id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "id"
         },
-        TypeStr: {
+        type_str: {
             'api.body': "type_str"
         },
-        AlterId: {
+        alter_id: {
             'api.body': "alterId"
         }
     };
     constructor(args: IFieldItemArgs = {}) {
         super();
-        if (args.Name != null) {
-            const value_8: string = args.Name;
-            this.Name = value_8;
+        if (args.name != null) {
+            const value_8: string = args.name;
+            this.name = value_8;
         }
-        if (args.Desc != null) {
-            const value_9: string = args.Desc;
-            this.Desc = value_9;
+        if (args.desc != null) {
+            const value_9: string = args.desc;
+            this.desc = value_9;
         }
-        if (args.Type != null) {
-            const value_10: FieldItemType.FieldItemType = args.Type;
-            this.Type = value_10;
+        if (args.type != null) {
+            const value_10: FieldItemType.FieldItemType = args.type;
+            this.type = value_10;
         }
-        if (args.MustRequired != null) {
-            const value_11: boolean = args.MustRequired;
-            this.MustRequired = value_11;
+        if (args.must_required != null) {
+            const value_11: boolean = args.must_required;
+            this.must_required = value_11;
         }
-        if (args.Id != null) {
-            const value_12: thrift.Int64 = (typeof args.Id === "number" ? new thrift.Int64(args.Id) : typeof args.Id === "string" ? thrift.Int64.fromDecimalString(args.Id) : args.Id);
-            this.Id = value_12;
+        if (args.id != null) {
+            const value_12: thrift.Int64 = (typeof args.id === "number" ? new thrift.Int64(args.id) : typeof args.id === "string" ? thrift.Int64.fromDecimalString(args.id) : args.id);
+            this.id = value_12;
         }
-        if (args.TypeStr != null) {
-            const value_13: string = args.TypeStr;
-            this.TypeStr = value_13;
+        if (args.type_str != null) {
+            const value_13: string = args.type_str;
+            this.type_str = value_13;
         }
-        if (args.AlterId != null) {
-            const value_14: thrift.Int64 = (typeof args.AlterId === "number" ? new thrift.Int64(args.AlterId) : typeof args.AlterId === "string" ? thrift.Int64.fromDecimalString(args.AlterId) : args.AlterId);
-            this.AlterId = value_14;
+        if (args.alter_id != null) {
+            const value_14: thrift.Int64 = (typeof args.alter_id === "number" ? new thrift.Int64(args.alter_id) : typeof args.alter_id === "string" ? thrift.Int64.fromDecimalString(args.alter_id) : args.alter_id);
+            this.alter_id = value_14;
         }
     }
     public static read(input: thrift.TProtocol): FieldItem {

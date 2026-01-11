@@ -8,30 +8,30 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as ActionIcon from "./ActionIcon";
 import * as AnswerActionTriggerRule from "./AnswerActionTriggerRule";
 export interface IAnswerActionConfig {
-    Key?: string;
-    Name?: string;
-    Icon?: ActionIcon.IActionIcon;
-    NameI18n?: Map<string, string>;
-    TriggerRule?: AnswerActionTriggerRule.IAnswerActionTriggerRule;
-    Position?: number;
+    key?: string;
+    name?: string;
+    icon?: ActionIcon.IActionIcon;
+    name_i18n?: Map<string, string>;
+    trigger_rule?: AnswerActionTriggerRule.IAnswerActionTriggerRule;
+    position?: number;
 }
 export interface IAnswerActionConfigArgs {
-    Key?: string;
-    Name?: string;
-    Icon?: ActionIcon.IActionIconArgs;
-    NameI18n?: Map<string, string>;
-    TriggerRule?: AnswerActionTriggerRule.IAnswerActionTriggerRuleArgs;
-    Position?: number;
+    key?: string;
+    name?: string;
+    icon?: ActionIcon.IActionIconArgs;
+    name_i18n?: Map<string, string>;
+    trigger_rule?: AnswerActionTriggerRule.IAnswerActionTriggerRuleArgs;
+    position?: number;
 }
 export const AnswerActionConfigCodec: thrift.IStructCodec<IAnswerActionConfigArgs, IAnswerActionConfig> = {
     encode(args: IAnswerActionConfigArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Key: args.Key,
-            Name: args.Name,
-            Icon: args.Icon,
-            NameI18n: args.NameI18n,
-            TriggerRule: args.TriggerRule,
-            Position: args.Position
+            Key: args.key,
+            Name: args.name,
+            Icon: args.icon,
+            NameI18n: args.name_i18n,
+            TriggerRule: args.trigger_rule,
+            Position: args.position
         };
         output.writeStructBegin("AnswerActionConfig");
         if (obj.Key != null) {
@@ -154,73 +154,73 @@ export const AnswerActionConfigCodec: thrift.IStructCodec<IAnswerActionConfigArg
         }
         input.readStructEnd();
         return {
-            Key: _args.Key,
-            Name: _args.Name,
-            Icon: _args.Icon,
-            NameI18n: _args.NameI18n,
-            TriggerRule: _args.TriggerRule,
-            Position: _args.Position
+            key: _args.Key,
+            name: _args.Name,
+            icon: _args.Icon,
+            name_i18n: _args.NameI18n,
+            trigger_rule: _args.TriggerRule,
+            position: _args.Position
         };
     }
 };
 export class AnswerActionConfig extends thrift.StructLike implements IAnswerActionConfig {
-    public Key?: string;
-    public Name?: string;
-    public Icon?: ActionIcon.IActionIcon;
-    public NameI18n?: Map<string, string>;
-    public TriggerRule?: AnswerActionTriggerRule.IAnswerActionTriggerRule;
-    public Position?: number;
+    public key?: string;
+    public name?: string;
+    public icon?: ActionIcon.IActionIcon;
+    public name_i18n?: Map<string, string>;
+    public trigger_rule?: AnswerActionTriggerRule.IAnswerActionTriggerRule;
+    public position?: number;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Key: {
+        key: {
             'api.body': "key"
         },
-        Name: {
+        name: {
             'api.body': "name"
         },
-        Icon: {
+        icon: {
             'api.body': "icon"
         },
-        NameI18n: {
+        name_i18n: {
             'api.body': "name_i18n"
         },
-        TriggerRule: {
+        trigger_rule: {
             'api.body': "trigger_rule"
         },
-        Position: {
+        position: {
             'api.body': "position"
         }
     };
     constructor(args: IAnswerActionConfigArgs = {}) {
         super();
-        if (args.Key != null) {
-            const value_9: string = args.Key;
-            this.Key = value_9;
+        if (args.key != null) {
+            const value_9: string = args.key;
+            this.key = value_9;
         }
-        if (args.Name != null) {
-            const value_10: string = args.Name;
-            this.Name = value_10;
+        if (args.name != null) {
+            const value_10: string = args.name;
+            this.name = value_10;
         }
-        if (args.Icon != null) {
-            const value_11: ActionIcon.IActionIcon = new ActionIcon.ActionIcon(args.Icon);
-            this.Icon = value_11;
+        if (args.icon != null) {
+            const value_11: ActionIcon.IActionIcon = new ActionIcon.ActionIcon(args.icon);
+            this.icon = value_11;
         }
-        if (args.NameI18n != null) {
+        if (args.name_i18n != null) {
             const value_12: Map<string, string> = new Map<string, string>();
-            args.NameI18n.forEach((value_15: string, key_3: string): void => {
+            args.name_i18n.forEach((value_15: string, key_3: string): void => {
                 const value_16: string = value_15;
                 const key_4: string = key_3;
                 value_12.set(key_4, value_16);
             });
-            this.NameI18n = value_12;
+            this.name_i18n = value_12;
         }
-        if (args.TriggerRule != null) {
-            const value_13: AnswerActionTriggerRule.IAnswerActionTriggerRule = new AnswerActionTriggerRule.AnswerActionTriggerRule(args.TriggerRule);
-            this.TriggerRule = value_13;
+        if (args.trigger_rule != null) {
+            const value_13: AnswerActionTriggerRule.IAnswerActionTriggerRule = new AnswerActionTriggerRule.AnswerActionTriggerRule(args.trigger_rule);
+            this.trigger_rule = value_13;
         }
-        if (args.Position != null) {
-            const value_14: number = args.Position;
-            this.Position = value_14;
+        if (args.position != null) {
+            const value_14: number = args.position;
+            this.position = value_14;
         }
     }
     public static read(input: thrift.TProtocol): AnswerActionConfig {

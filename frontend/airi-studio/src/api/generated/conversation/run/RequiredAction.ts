@@ -7,18 +7,18 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as SubmitToolOutputs from "./SubmitToolOutputs";
 export interface IRequiredAction {
-    Type?: string;
-    SubmitToolOutputs?: SubmitToolOutputs.ISubmitToolOutputs;
+    type?: string;
+    submit_tool_outputs?: SubmitToolOutputs.ISubmitToolOutputs;
 }
 export interface IRequiredActionArgs {
-    Type?: string;
-    SubmitToolOutputs?: SubmitToolOutputs.ISubmitToolOutputsArgs;
+    type?: string;
+    submit_tool_outputs?: SubmitToolOutputs.ISubmitToolOutputsArgs;
 }
 export const RequiredActionCodec: thrift.IStructCodec<IRequiredActionArgs, IRequiredAction> = {
     encode(args: IRequiredActionArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Type: args.Type,
-            SubmitToolOutputs: args.SubmitToolOutputs
+            Type: args.type,
+            SubmitToolOutputs: args.submit_tool_outputs
         };
         output.writeStructBegin("RequiredAction");
         if (obj.Type != null) {
@@ -72,32 +72,32 @@ export const RequiredActionCodec: thrift.IStructCodec<IRequiredActionArgs, IRequ
         }
         input.readStructEnd();
         return {
-            Type: _args.Type,
-            SubmitToolOutputs: _args.SubmitToolOutputs
+            type: _args.Type,
+            submit_tool_outputs: _args.SubmitToolOutputs
         };
     }
 };
 export class RequiredAction extends thrift.StructLike implements IRequiredAction {
-    public Type?: string;
-    public SubmitToolOutputs?: SubmitToolOutputs.ISubmitToolOutputs;
+    public type?: string;
+    public submit_tool_outputs?: SubmitToolOutputs.ISubmitToolOutputs;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Type: {
+        type: {
             'api.body': "type"
         },
-        SubmitToolOutputs: {
+        submit_tool_outputs: {
             'api.body': "submit_tool_outputs"
         }
     };
     constructor(args: IRequiredActionArgs = {}) {
         super();
-        if (args.Type != null) {
-            const value_3: string = args.Type;
-            this.Type = value_3;
+        if (args.type != null) {
+            const value_3: string = args.type;
+            this.type = value_3;
         }
-        if (args.SubmitToolOutputs != null) {
-            const value_4: SubmitToolOutputs.ISubmitToolOutputs = new SubmitToolOutputs.SubmitToolOutputs(args.SubmitToolOutputs);
-            this.SubmitToolOutputs = value_4;
+        if (args.submit_tool_outputs != null) {
+            const value_4: SubmitToolOutputs.ISubmitToolOutputs = new SubmitToolOutputs.SubmitToolOutputs(args.submit_tool_outputs);
+            this.submit_tool_outputs = value_4;
         }
     }
     public static read(input: thrift.TProtocol): RequiredAction {

@@ -7,18 +7,18 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IDeletePromptResourceRequest {
-    PromptResourceID: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    prompt_resource_i_d: thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IDeletePromptResourceRequestArgs {
-    PromptResourceID: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    prompt_resource_i_d: number | string | thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const DeletePromptResourceRequestCodec: thrift.IStructCodec<IDeletePromptResourceRequestArgs, IDeletePromptResourceRequest> = {
     encode(args: IDeletePromptResourceRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            PromptResourceID: (typeof args.PromptResourceID === "number" ? new thrift.Int64(args.PromptResourceID) : typeof args.PromptResourceID === "string" ? thrift.Int64.fromDecimalString(args.PromptResourceID) : args.PromptResourceID),
-            Base: args.Base
+            PromptResourceID: (typeof args.prompt_resource_i_d === "number" ? new thrift.Int64(args.prompt_resource_i_d) : typeof args.prompt_resource_i_d === "string" ? thrift.Int64.fromDecimalString(args.prompt_resource_i_d) : args.prompt_resource_i_d),
+            Base: args.base
         };
         output.writeStructBegin("DeletePromptResourceRequest");
         if (obj.PromptResourceID != null) {
@@ -76,8 +76,8 @@ export const DeletePromptResourceRequestCodec: thrift.IStructCodec<IDeletePrompt
         input.readStructEnd();
         if (_args.PromptResourceID !== undefined) {
             return {
-                PromptResourceID: _args.PromptResourceID,
-                Base: _args.Base
+                prompt_resource_i_d: _args.PromptResourceID,
+                base: _args.Base
             };
         }
         else {
@@ -86,31 +86,31 @@ export const DeletePromptResourceRequestCodec: thrift.IStructCodec<IDeletePrompt
     }
 };
 export class DeletePromptResourceRequest extends thrift.StructLike implements IDeletePromptResourceRequest {
-    public PromptResourceID: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public prompt_resource_i_d: thrift.Int64;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        PromptResourceID: {
+        prompt_resource_i_d: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "prompt_resource_id"
         },
-        Base: {
+        base: {
             'api.none': "true"
         }
     };
     constructor(args: IDeletePromptResourceRequestArgs) {
         super();
-        if (args.PromptResourceID != null) {
-            const value_3: thrift.Int64 = (typeof args.PromptResourceID === "number" ? new thrift.Int64(args.PromptResourceID) : typeof args.PromptResourceID === "string" ? thrift.Int64.fromDecimalString(args.PromptResourceID) : args.PromptResourceID);
-            this.PromptResourceID = value_3;
+        if (args.prompt_resource_i_d != null) {
+            const value_3: thrift.Int64 = (typeof args.prompt_resource_i_d === "number" ? new thrift.Int64(args.prompt_resource_i_d) : typeof args.prompt_resource_i_d === "string" ? thrift.Int64.fromDecimalString(args.prompt_resource_i_d) : args.prompt_resource_i_d);
+            this.prompt_resource_i_d = value_3;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[PromptResourceID] is unset!");
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): DeletePromptResourceRequest {

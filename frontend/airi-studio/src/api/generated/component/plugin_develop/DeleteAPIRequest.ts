@@ -10,13 +10,13 @@ export interface IDeleteAPIRequest {
     plugin_id: thrift.Int64;
     api_id: thrift.Int64;
     edit_version?: number;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IDeleteAPIRequestArgs {
     plugin_id: number | string | thrift.Int64;
     api_id: number | string | thrift.Int64;
     edit_version?: number;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const DeleteAPIRequestCodec: thrift.IStructCodec<IDeleteAPIRequestArgs, IDeleteAPIRequest> = {
     encode(args: IDeleteAPIRequestArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const DeleteAPIRequestCodec: thrift.IStructCodec<IDeleteAPIRequestArgs, I
             plugin_id: (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id),
             api_id: (typeof args.api_id === "number" ? new thrift.Int64(args.api_id) : typeof args.api_id === "string" ? thrift.Int64.fromDecimalString(args.api_id) : args.api_id),
             edit_version: args.edit_version,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("DeleteAPIRequest");
         if (obj.plugin_id != null) {
@@ -116,7 +116,7 @@ export const DeleteAPIRequestCodec: thrift.IStructCodec<IDeleteAPIRequestArgs, I
                 plugin_id: _args.plugin_id,
                 api_id: _args.api_id,
                 edit_version: _args.edit_version,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -128,7 +128,7 @@ export class DeleteAPIRequest extends thrift.StructLike implements IDeleteAPIReq
     public plugin_id: thrift.Int64;
     public api_id: thrift.Int64;
     public edit_version?: number;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -158,9 +158,9 @@ export class DeleteAPIRequest extends thrift.StructLike implements IDeleteAPIReq
             const value_7: number = args.edit_version;
             this.edit_version = value_7;
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): DeleteAPIRequest {

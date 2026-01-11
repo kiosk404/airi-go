@@ -9,27 +9,27 @@ import * as ResourceType from "./ResourceType";
 import * as BehaviorType from "./BehaviorType";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IReportUserBehaviorRequest {
-    ResourceID: thrift.Int64;
-    ResourceType: ResourceType.ResourceType;
-    BehaviorType: BehaviorType.BehaviorType;
-    SpaceID?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    resource_i_d: thrift.Int64;
+    resource_type: ResourceType.ResourceType;
+    behavior_type: BehaviorType.BehaviorType;
+    space_i_d?: thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IReportUserBehaviorRequestArgs {
-    ResourceID: number | string | thrift.Int64;
-    ResourceType: ResourceType.ResourceType;
-    BehaviorType: BehaviorType.BehaviorType;
-    SpaceID?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    resource_i_d: number | string | thrift.Int64;
+    resource_type: ResourceType.ResourceType;
+    behavior_type: BehaviorType.BehaviorType;
+    space_i_d?: number | string | thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const ReportUserBehaviorRequestCodec: thrift.IStructCodec<IReportUserBehaviorRequestArgs, IReportUserBehaviorRequest> = {
     encode(args: IReportUserBehaviorRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ResourceID: (typeof args.ResourceID === "number" ? new thrift.Int64(args.ResourceID) : typeof args.ResourceID === "string" ? thrift.Int64.fromDecimalString(args.ResourceID) : args.ResourceID),
-            ResourceType: args.ResourceType,
-            BehaviorType: args.BehaviorType,
-            SpaceID: (typeof args.SpaceID === "number" ? new thrift.Int64(args.SpaceID) : typeof args.SpaceID === "string" ? thrift.Int64.fromDecimalString(args.SpaceID) : args.SpaceID),
-            Base: args.Base
+            ResourceID: (typeof args.resource_i_d === "number" ? new thrift.Int64(args.resource_i_d) : typeof args.resource_i_d === "string" ? thrift.Int64.fromDecimalString(args.resource_i_d) : args.resource_i_d),
+            ResourceType: args.resource_type,
+            BehaviorType: args.behavior_type,
+            SpaceID: (typeof args.space_i_d === "number" ? new thrift.Int64(args.space_i_d) : typeof args.space_i_d === "string" ? thrift.Int64.fromDecimalString(args.space_i_d) : args.space_i_d),
+            Base: args.base
         };
         output.writeStructBegin("ReportUserBehaviorRequest");
         if (obj.ResourceID != null) {
@@ -135,11 +135,11 @@ export const ReportUserBehaviorRequestCodec: thrift.IStructCodec<IReportUserBeha
         input.readStructEnd();
         if (_args.ResourceID !== undefined && _args.ResourceType !== undefined && _args.BehaviorType !== undefined) {
             return {
-                ResourceID: _args.ResourceID,
-                ResourceType: _args.ResourceType,
-                BehaviorType: _args.BehaviorType,
-                SpaceID: _args.SpaceID,
-                Base: _args.Base
+                resource_i_d: _args.ResourceID,
+                resource_type: _args.ResourceType,
+                behavior_type: _args.BehaviorType,
+                space_i_d: _args.SpaceID,
+                base: _args.Base
             };
         }
         else {
@@ -148,63 +148,63 @@ export const ReportUserBehaviorRequestCodec: thrift.IStructCodec<IReportUserBeha
     }
 };
 export class ReportUserBehaviorRequest extends thrift.StructLike implements IReportUserBehaviorRequest {
-    public ResourceID: thrift.Int64;
-    public ResourceType: ResourceType.ResourceType;
-    public BehaviorType: BehaviorType.BehaviorType;
-    public SpaceID?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public resource_i_d: thrift.Int64;
+    public resource_type: ResourceType.ResourceType;
+    public behavior_type: BehaviorType.BehaviorType;
+    public space_i_d?: thrift.Int64;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ResourceID: {
+        resource_i_d: {
             'api.body': "resource_id",
             'api.js_conv': "true"
         },
-        ResourceType: {
+        resource_type: {
             'api.body': "resource_type"
         },
-        BehaviorType: {
+        behavior_type: {
             'api.body': "behavior_type"
         },
-        SpaceID: {
+        space_i_d: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "space_id",
             'agw.key': "space_id"
         },
-        Base: {
+        base: {
             'api.none': "true"
         }
     };
     constructor(args: IReportUserBehaviorRequestArgs) {
         super();
-        if (args.ResourceID != null) {
-            const value_6: thrift.Int64 = (typeof args.ResourceID === "number" ? new thrift.Int64(args.ResourceID) : typeof args.ResourceID === "string" ? thrift.Int64.fromDecimalString(args.ResourceID) : args.ResourceID);
-            this.ResourceID = value_6;
+        if (args.resource_i_d != null) {
+            const value_6: thrift.Int64 = (typeof args.resource_i_d === "number" ? new thrift.Int64(args.resource_i_d) : typeof args.resource_i_d === "string" ? thrift.Int64.fromDecimalString(args.resource_i_d) : args.resource_i_d);
+            this.resource_i_d = value_6;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ResourceID] is unset!");
         }
-        if (args.ResourceType != null) {
-            const value_7: ResourceType.ResourceType = args.ResourceType;
-            this.ResourceType = value_7;
+        if (args.resource_type != null) {
+            const value_7: ResourceType.ResourceType = args.resource_type;
+            this.resource_type = value_7;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ResourceType] is unset!");
         }
-        if (args.BehaviorType != null) {
-            const value_8: BehaviorType.BehaviorType = args.BehaviorType;
-            this.BehaviorType = value_8;
+        if (args.behavior_type != null) {
+            const value_8: BehaviorType.BehaviorType = args.behavior_type;
+            this.behavior_type = value_8;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BehaviorType] is unset!");
         }
-        if (args.SpaceID != null) {
-            const value_9: thrift.Int64 = (typeof args.SpaceID === "number" ? new thrift.Int64(args.SpaceID) : typeof args.SpaceID === "string" ? thrift.Int64.fromDecimalString(args.SpaceID) : args.SpaceID);
-            this.SpaceID = value_9;
+        if (args.space_i_d != null) {
+            const value_9: thrift.Int64 = (typeof args.space_i_d === "number" ? new thrift.Int64(args.space_i_d) : typeof args.space_i_d === "string" ? thrift.Int64.fromDecimalString(args.space_i_d) : args.space_i_d);
+            this.space_i_d = value_9;
         }
-        if (args.Base != null) {
-            const value_10: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_10;
+        if (args.base != null) {
+            const value_10: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_10;
         }
     }
     public static read(input: thrift.TProtocol): ReportUserBehaviorRequest {

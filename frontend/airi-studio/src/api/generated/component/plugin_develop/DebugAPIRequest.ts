@@ -13,7 +13,7 @@ export interface IDebugAPIRequest {
     parameters: string;
     operation: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DebugOperation;
     edit_version?: number;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IDebugAPIRequestArgs {
     plugin_id: number | string | thrift.Int64;
@@ -21,7 +21,7 @@ export interface IDebugAPIRequestArgs {
     parameters: string;
     operation: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DebugOperation;
     edit_version?: number;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const DebugAPIRequestCodec: thrift.IStructCodec<IDebugAPIRequestArgs, IDebugAPIRequest> = {
     encode(args: IDebugAPIRequestArgs, output: thrift.TProtocol): void {
@@ -31,7 +31,7 @@ export const DebugAPIRequestCodec: thrift.IStructCodec<IDebugAPIRequestArgs, IDe
             parameters: args.parameters,
             operation: args.operation,
             edit_version: args.edit_version,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("DebugAPIRequest");
         if (obj.plugin_id != null) {
@@ -159,7 +159,7 @@ export const DebugAPIRequestCodec: thrift.IStructCodec<IDebugAPIRequestArgs, IDe
                 parameters: _args.parameters,
                 operation: _args.operation,
                 edit_version: _args.edit_version,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -173,7 +173,7 @@ export class DebugAPIRequest extends thrift.StructLike implements IDebugAPIReque
     public parameters: string;
     public operation: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.DebugOperation;
     public edit_version?: number;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -217,9 +217,9 @@ export class DebugAPIRequest extends thrift.StructLike implements IDebugAPIReque
             const value_11: number = args.edit_version;
             this.edit_version = value_11;
         }
-        if (args.Base != null) {
-            const value_12: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_12;
+        if (args.base != null) {
+            const value_12: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_12;
         }
     }
     public static read(input: thrift.TProtocol): DebugAPIRequest {

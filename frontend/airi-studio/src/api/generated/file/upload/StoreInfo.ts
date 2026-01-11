@@ -6,21 +6,21 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IStoreInfo {
-    StoreUri: string;
-    Auth: string;
-    UploadID: string;
+    store_uri: string;
+    auth: string;
+    upload_i_d: string;
 }
 export interface IStoreInfoArgs {
-    StoreUri: string;
-    Auth: string;
-    UploadID: string;
+    store_uri: string;
+    auth: string;
+    upload_i_d: string;
 }
 export const StoreInfoCodec: thrift.IStructCodec<IStoreInfoArgs, IStoreInfo> = {
     encode(args: IStoreInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            StoreUri: args.StoreUri,
-            Auth: args.Auth,
-            UploadID: args.UploadID
+            StoreUri: args.store_uri,
+            Auth: args.auth,
+            UploadID: args.upload_i_d
         };
         output.writeStructBegin("StoreInfo");
         if (obj.StoreUri != null) {
@@ -98,9 +98,9 @@ export const StoreInfoCodec: thrift.IStructCodec<IStoreInfoArgs, IStoreInfo> = {
         input.readStructEnd();
         if (_args.StoreUri !== undefined && _args.Auth !== undefined && _args.UploadID !== undefined) {
             return {
-                StoreUri: _args.StoreUri,
-                Auth: _args.Auth,
-                UploadID: _args.UploadID
+                store_uri: _args.StoreUri,
+                auth: _args.Auth,
+                upload_i_d: _args.UploadID
             };
         }
         else {
@@ -109,30 +109,30 @@ export const StoreInfoCodec: thrift.IStructCodec<IStoreInfoArgs, IStoreInfo> = {
     }
 };
 export class StoreInfo extends thrift.StructLike implements IStoreInfo {
-    public StoreUri: string;
-    public Auth: string;
-    public UploadID: string;
+    public store_uri: string;
+    public auth: string;
+    public upload_i_d: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IStoreInfoArgs) {
         super();
-        if (args.StoreUri != null) {
-            const value_4: string = args.StoreUri;
-            this.StoreUri = value_4;
+        if (args.store_uri != null) {
+            const value_4: string = args.store_uri;
+            this.store_uri = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[StoreUri] is unset!");
         }
-        if (args.Auth != null) {
-            const value_5: string = args.Auth;
-            this.Auth = value_5;
+        if (args.auth != null) {
+            const value_5: string = args.auth;
+            this.auth = value_5;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Auth] is unset!");
         }
-        if (args.UploadID != null) {
-            const value_6: string = args.UploadID;
-            this.UploadID = value_6;
+        if (args.upload_i_d != null) {
+            const value_6: string = args.upload_i_d;
+            this.upload_i_d = value_6;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[UploadID] is unset!");

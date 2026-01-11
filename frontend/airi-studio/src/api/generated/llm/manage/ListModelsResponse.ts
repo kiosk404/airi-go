@@ -12,14 +12,14 @@ export interface IListModelsResponse {
     has_more?: boolean;
     next_page_token?: string;
     total?: number;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IListModelsResponseArgs {
     models?: Array<LLM_DOMAIN_MANAGE_NS.IModelArgs>;
     has_more?: boolean;
     next_page_token?: string;
     total?: number;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const ListModelsResponseCodec: thrift.IStructCodec<IListModelsResponseArgs, IListModelsResponse> = {
     encode(args: IListModelsResponseArgs, output: thrift.TProtocol): void {
@@ -28,7 +28,7 @@ export const ListModelsResponseCodec: thrift.IStructCodec<IListModelsResponseArg
             has_more: args.has_more,
             next_page_token: args.next_page_token,
             total: args.total,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("ListModelsResponse");
         if (obj.models != null) {
@@ -139,7 +139,7 @@ export const ListModelsResponseCodec: thrift.IStructCodec<IListModelsResponseArg
             has_more: _args.has_more,
             next_page_token: _args.next_page_token,
             total: _args.total,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -148,7 +148,7 @@ export class ListModelsResponse extends thrift.StructLike implements IListModels
     public has_more?: boolean;
     public next_page_token?: string;
     public total?: number;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IListModelsResponseArgs = {}) {
@@ -173,9 +173,9 @@ export class ListModelsResponse extends thrift.StructLike implements IListModels
             const value_11: number = args.total;
             this.total = value_11;
         }
-        if (args.BaseResp != null) {
-            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_12;
+        if (args.base_resp != null) {
+            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_12;
         }
     }
     public static read(input: thrift.TProtocol): ListModelsResponse {

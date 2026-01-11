@@ -534,7 +534,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetDraftIntelligenceList(req: __ROOT_NAMESPACE__.IGetDraftIntelligenceListRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IGetDraftIntelligenceListResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetDraftIntelligenceList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetDraftIntelligenceList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetDraftIntelligenceList__ArgsArgs = { req };
         GetDraftIntelligenceList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -572,7 +572,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetDraftIntelligenceInfo(req: __ROOT_NAMESPACE__.IGetDraftIntelligenceInfoRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IGetDraftIntelligenceInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetDraftIntelligenceInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetDraftIntelligenceInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetDraftIntelligenceInfo__ArgsArgs = { req };
         GetDraftIntelligenceInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -610,7 +610,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetUserRecentlyEditIntelligence(req: __ROOT_NAMESPACE__.IGetUserRecentlyEditIntelligenceRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IGetUserRecentlyEditIntelligenceResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetUserRecentlyEditIntelligence", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetUserRecentlyEditIntelligence", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetUserRecentlyEditIntelligence__ArgsArgs = { req };
         GetUserRecentlyEditIntelligence__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -673,15 +673,15 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_GetDraftIntelligenceList": {
-                    resolve(this.process_GetDraftIntelligenceList(requestId, input, output, context));
+                    resolve(this.process__get_draft_intelligence_list(requestId, input, output, context));
                     break;
                 }
                 case "process_GetDraftIntelligenceInfo": {
-                    resolve(this.process_GetDraftIntelligenceInfo(requestId, input, output, context));
+                    resolve(this.process__get_draft_intelligence_info(requestId, input, output, context));
                     break;
                 }
                 case "process_GetUserRecentlyEditIntelligence": {
-                    resolve(this.process_GetUserRecentlyEditIntelligence(requestId, input, output, context));
+                    resolve(this.process__get_user_recently_edit_intelligence(requestId, input, output, context));
                     break;
                 }
                 default: {

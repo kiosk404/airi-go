@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as TaskPluginInputField from "./TaskPluginInputField";
 export interface ITaskPluginInput {
-    Params?: Array<TaskPluginInputField.ITaskPluginInputField>;
+    params?: Array<TaskPluginInputField.ITaskPluginInputField>;
 }
 export interface ITaskPluginInputArgs {
-    Params?: Array<TaskPluginInputField.ITaskPluginInputFieldArgs>;
+    params?: Array<TaskPluginInputField.ITaskPluginInputFieldArgs>;
 }
 export const TaskPluginInputCodec: thrift.IStructCodec<ITaskPluginInputArgs, ITaskPluginInput> = {
     encode(args: ITaskPluginInputArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Params: args.Params
+            Params: args.params
         };
         output.writeStructBegin("TaskPluginInput");
         if (obj.Params != null) {
@@ -66,23 +66,23 @@ export const TaskPluginInputCodec: thrift.IStructCodec<ITaskPluginInputArgs, ITa
         }
         input.readStructEnd();
         return {
-            Params: _args.Params
+            params: _args.Params
         };
     }
 };
 export class TaskPluginInput extends thrift.StructLike implements ITaskPluginInput {
-    public Params?: Array<TaskPluginInputField.ITaskPluginInputField>;
+    public params?: Array<TaskPluginInputField.ITaskPluginInputField>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ITaskPluginInputArgs = {}) {
         super();
-        if (args.Params != null) {
+        if (args.params != null) {
             const value_4: Array<TaskPluginInputField.ITaskPluginInputField> = new Array<TaskPluginInputField.ITaskPluginInputField>();
-            args.Params.forEach((value_5: TaskPluginInputField.ITaskPluginInputFieldArgs): void => {
+            args.params.forEach((value_5: TaskPluginInputField.ITaskPluginInputFieldArgs): void => {
                 const value_6: TaskPluginInputField.ITaskPluginInputField = new TaskPluginInputField.TaskPluginInputField(value_5);
                 value_4.push(value_6);
             });
-            this.Params = value_4;
+            this.params = value_4;
         }
     }
     public static read(input: thrift.TProtocol): TaskPluginInput {

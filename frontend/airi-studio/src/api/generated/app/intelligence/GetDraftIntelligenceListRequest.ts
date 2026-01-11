@@ -22,7 +22,7 @@ export interface IGetDraftIntelligenceListRequest {
     order_by?: OrderBy.OrderBy;
     cursor_id?: string;
     size?: number;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IGetDraftIntelligenceListRequestArgs {
     name?: string;
@@ -36,7 +36,7 @@ export interface IGetDraftIntelligenceListRequestArgs {
     order_by?: OrderBy.OrderBy;
     cursor_id?: string;
     size?: number;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraftIntelligenceListRequestArgs, IGetDraftIntelligenceListRequest> = {
     encode(args: IGetDraftIntelligenceListRequestArgs, output: thrift.TProtocol): void {
@@ -52,7 +52,7 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
             order_by: args.order_by,
             cursor_id: args.cursor_id,
             size: args.size,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetDraftIntelligenceListRequest");
         if (obj.name != null) {
@@ -279,7 +279,7 @@ export const GetDraftIntelligenceListRequestCodec: thrift.IStructCodec<IGetDraft
             order_by: _args.order_by,
             cursor_id: _args.cursor_id,
             size: _args.size,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -295,7 +295,7 @@ export class GetDraftIntelligenceListRequest extends thrift.StructLike implement
     public order_by?: OrderBy.OrderBy;
     public cursor_id?: string;
     public size?: number;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetDraftIntelligenceListRequestArgs = {}) {
@@ -352,9 +352,9 @@ export class GetDraftIntelligenceListRequest extends thrift.StructLike implement
             const value_27: number = args.size;
             this.size = value_27;
         }
-        if (args.Base != null) {
-            const value_28: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_28;
+        if (args.base != null) {
+            const value_28: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_28;
         }
     }
     public static read(input: thrift.TProtocol): GetDraftIntelligenceListRequest {

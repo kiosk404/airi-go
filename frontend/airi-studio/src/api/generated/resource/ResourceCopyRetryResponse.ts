@@ -11,13 +11,13 @@ export interface IResourceCopyRetryResponse {
     code?: thrift.Int64;
     msg?: string;
     failed_reasons?: Array<RESOURCE_COMMON_NS.IResourceCopyFailedReason>;
-    BaseResp: BASE_NS.IBaseResp;
+    base_resp: BASE_NS.IBaseResp;
 }
 export interface IResourceCopyRetryResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     failed_reasons?: Array<RESOURCE_COMMON_NS.IResourceCopyFailedReasonArgs>;
-    BaseResp: BASE_NS.IBaseRespArgs;
+    base_resp: BASE_NS.IBaseRespArgs;
 }
 export const ResourceCopyRetryResponseCodec: thrift.IStructCodec<IResourceCopyRetryResponseArgs, IResourceCopyRetryResponse> = {
     encode(args: IResourceCopyRetryResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const ResourceCopyRetryResponseCodec: thrift.IStructCodec<IResourceCopyRe
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             failed_reasons: args.failed_reasons,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("ResourceCopyRetryResponse");
         if (obj.code != null) {
@@ -125,7 +125,7 @@ export const ResourceCopyRetryResponseCodec: thrift.IStructCodec<IResourceCopyRe
                 code: _args.code,
                 msg: _args.msg,
                 failed_reasons: _args.failed_reasons,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -137,7 +137,7 @@ export class ResourceCopyRetryResponse extends thrift.StructLike implements IRes
     public code?: thrift.Int64;
     public msg?: string;
     public failed_reasons?: Array<RESOURCE_COMMON_NS.IResourceCopyFailedReason>;
-    public BaseResp: BASE_NS.IBaseResp;
+    public base_resp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IResourceCopyRetryResponseArgs) {
@@ -158,9 +158,9 @@ export class ResourceCopyRetryResponse extends thrift.StructLike implements IRes
             });
             this.failed_reasons = value_9;
         }
-        if (args.BaseResp != null) {
-            const value_10: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_10;
+        if (args.base_resp != null) {
+            const value_10: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_10;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

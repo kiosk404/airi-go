@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as SuggestReplyMode from "./SuggestReplyMode";
 export interface ISuggestReplyInfo {
-    SuggestReplyMode?: SuggestReplyMode.SuggestReplyMode;
-    CustomizedSuggestPrompt?: string;
-    ChainTaskName?: string;
+    suggest_reply_mode?: SuggestReplyMode.SuggestReplyMode;
+    customized_suggest_prompt?: string;
+    chain_task_name?: string;
 }
 export interface ISuggestReplyInfoArgs {
-    SuggestReplyMode?: SuggestReplyMode.SuggestReplyMode;
-    CustomizedSuggestPrompt?: string;
-    ChainTaskName?: string;
+    suggest_reply_mode?: SuggestReplyMode.SuggestReplyMode;
+    customized_suggest_prompt?: string;
+    chain_task_name?: string;
 }
 export const SuggestReplyInfoCodec: thrift.IStructCodec<ISuggestReplyInfoArgs, ISuggestReplyInfo> = {
     encode(args: ISuggestReplyInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            SuggestReplyMode: args.SuggestReplyMode,
-            CustomizedSuggestPrompt: args.CustomizedSuggestPrompt,
-            ChainTaskName: args.ChainTaskName
+            SuggestReplyMode: args.suggest_reply_mode,
+            CustomizedSuggestPrompt: args.customized_suggest_prompt,
+            ChainTaskName: args.chain_task_name
         };
         output.writeStructBegin("SuggestReplyInfo");
         if (obj.SuggestReplyMode != null) {
@@ -89,41 +89,41 @@ export const SuggestReplyInfoCodec: thrift.IStructCodec<ISuggestReplyInfoArgs, I
         }
         input.readStructEnd();
         return {
-            SuggestReplyMode: _args.SuggestReplyMode,
-            CustomizedSuggestPrompt: _args.CustomizedSuggestPrompt,
-            ChainTaskName: _args.ChainTaskName
+            suggest_reply_mode: _args.SuggestReplyMode,
+            customized_suggest_prompt: _args.CustomizedSuggestPrompt,
+            chain_task_name: _args.ChainTaskName
         };
     }
 };
 export class SuggestReplyInfo extends thrift.StructLike implements ISuggestReplyInfo {
-    public SuggestReplyMode?: SuggestReplyMode.SuggestReplyMode;
-    public CustomizedSuggestPrompt?: string;
-    public ChainTaskName?: string;
+    public suggest_reply_mode?: SuggestReplyMode.SuggestReplyMode;
+    public customized_suggest_prompt?: string;
+    public chain_task_name?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        SuggestReplyMode: {
+        suggest_reply_mode: {
             'api.body': "suggest_reply_mode"
         },
-        CustomizedSuggestPrompt: {
+        customized_suggest_prompt: {
             'api.body': "customized_suggest_prompt"
         },
-        ChainTaskName: {
+        chain_task_name: {
             'api.body': "chain_task_name"
         }
     };
     constructor(args: ISuggestReplyInfoArgs = {}) {
         super();
-        if (args.SuggestReplyMode != null) {
-            const value_4: SuggestReplyMode.SuggestReplyMode = args.SuggestReplyMode;
-            this.SuggestReplyMode = value_4;
+        if (args.suggest_reply_mode != null) {
+            const value_4: SuggestReplyMode.SuggestReplyMode = args.suggest_reply_mode;
+            this.suggest_reply_mode = value_4;
         }
-        if (args.CustomizedSuggestPrompt != null) {
-            const value_5: string = args.CustomizedSuggestPrompt;
-            this.CustomizedSuggestPrompt = value_5;
+        if (args.customized_suggest_prompt != null) {
+            const value_5: string = args.customized_suggest_prompt;
+            this.customized_suggest_prompt = value_5;
         }
-        if (args.ChainTaskName != null) {
-            const value_6: string = args.ChainTaskName;
-            this.ChainTaskName = value_6;
+        if (args.chain_task_name != null) {
+            const value_6: string = args.chain_task_name;
+            this.chain_task_name = value_6;
         }
     }
     public static read(input: thrift.TProtocol): SuggestReplyInfo {

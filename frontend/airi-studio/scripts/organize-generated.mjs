@@ -94,6 +94,109 @@ function buildTypeMapping() {
 /**
  * Update imports in a TypeScript file after moving
  */
+/**
+ * Convert camelCase/PascalCase field names to snake_case.
+ * NOTE: This is a simple converter and intentionally keeps consecutive capitals as "_i_d" etc.
+ */
+function convertToSnakeCase(str) {
+    return str.replace(/[A-Z]/g, (match) => '_' + match.toLowerCase()).replace(/^_/, '');
+}
+
+/**
+ * Transform interface field declarations to snake_case.
+ * Examples:
+ * - "SyncAll?:" -> "sync_all?:"
+ * - "BaseResp:" -> "base_resp:"
+ */
+function transformInterfaceFieldNamesToSnakeCase(content) {
+    // Only transform within "export interface ... { ... }" blocks.
+    // This avoids breaking codec object literals like "LogID:" / "BaseResp:".
+    const interfaceBlockRegex = /export interface\s+\w+(?:\s+extends[^\{]+)?\s*\{[\s\S]*?\n\}/g;
+
+    return content.replace(interfaceBlockRegex, (block) => {
+        return block.replace(/^\s+(\w+)(\??):\s/gm, (match, fieldName) => {
+            if (fieldName === fieldName.toLowerCase()) {
+                return match;
+            }
+            return match.replace(fieldName, convertToSnakeCase(fieldName));
+        });
+    });
+}
+
+/**
+ * Transform args.<FieldName> accesses to args.<field_name> so they match the transformed Args interfaces.
+ * Example: args.SyncAll -> args.sync_all
+ */
+function transformArgsPropertyAccessToSnakeCase(content) {
+    return content.replace(/\bargs\.(\w+)\b/g, (match, fieldName) => {
+        if (fieldName === fieldName.toLowerCase()) {
+            return match;
+        }
+        return `args.${convertToSnakeCase(fieldName)}`;
+    });
+}
+
+/**
+ * Transform keys inside "return { ... }" object literals to snake_case.
+ * This is safe because the returned object isn't accessed by PascalCase later in the same function.
+ */
+function transformReturnObjectKeysToSnakeCase(content) {
+    return content.replace(/return\s+\{([\s\S]*?)\};/g, (fullMatch, body) => {
+        const newBody = body.replace(/^\s+(\w+):\s/gm, (match, key) => {
+            if (key === key.toLowerCase()) {
+                return match;
+            }
+            return match.replace(key, convertToSnakeCase(key));
+        });
+        return `return {${newBody}};`;
+    });
+}
+
+function transformClassPropertyDeclarationsToSnakeCase(content) {
+    // Transform class fields: "public FieldName?:" -> "public field_name?:"
+    return content.replace(/^\s+public\s+(\w+)\??:\s/gm, (match, fieldName) => {
+        if (fieldName === fieldName.toLowerCase()) {
+            return match;
+        }
+        return match.replace(fieldName, convertToSnakeCase(fieldName));
+    });
+}
+
+function transformThisPropertyAccessToSnakeCase(content) {
+    // Transform "this.FieldName" -> "this.field_name"
+    return content.replace(/\bthis\.(\w+)\b/g, (match, fieldName) => {
+        if (fieldName === fieldName.toLowerCase()) {
+            return match;
+        }
+        return `this.${convertToSnakeCase(fieldName)}`;
+    });
+}
+
+function transformFieldAnnotationsKeysToSnakeCase(content) {
+    // Transform keys inside _fieldAnnotations blocks only.
+    return content.replace(/(\b_fieldAnnotations\b[\s\S]*?=\s*\{)([\s\S]*?)(\};)/g, (fullMatch, start, body, end) => {
+        const newBody = body.replace(/^\s+(\w+):\s*\{/gm, (match, key) => {
+            if (key === key.toLowerCase()) {
+                return match;
+            }
+            return match.replace(key, convertToSnakeCase(key));
+        });
+        return `${start}${newBody}${end}`;
+    });
+}
+
+function transformFieldNamesToSnakeCase(content) {
+    // Keep the original function name for compatibility with existing call sites.
+    // Order matters: declare properties first, then update "this." accesses.
+    content = transformInterfaceFieldNamesToSnakeCase(content);
+    content = transformArgsPropertyAccessToSnakeCase(content);
+    content = transformClassPropertyDeclarationsToSnakeCase(content);
+    content = transformThisPropertyAccessToSnakeCase(content);
+    content = transformFieldAnnotationsKeysToSnakeCase(content);
+    content = transformReturnObjectKeysToSnakeCase(content);
+    return content;
+}
+
 function updateImports(filePath, movedFiles) {
     let content = fs.readFileSync(filePath, 'utf-8');
     let modified = false;
@@ -277,7 +380,8 @@ function organizeFiles() {
         }
     }
 
-    // Second pass: move files
+    // Second pass: move files and transform to snake_case
+    console.log('\nTransforming field names to snake_case...');
     for (const [dirPath, fileList] of dirFiles) {
         const targetDir = path.join(GENERATED_DIR, dirPath);
         fs.mkdirSync(targetDir, { recursive: true });
@@ -285,9 +389,24 @@ function organizeFiles() {
         for (const file of fileList) {
             const srcPath = path.join(GENERATED_DIR, file);
             const destPath = path.join(targetDir, file);
-            fs.renameSync(srcPath, destPath);
+
+            // Transform content before moving
+            let content = fs.readFileSync(srcPath, 'utf-8');
+            content = transformFieldNamesToSnakeCase(content);
+            fs.writeFileSync(destPath, content);
+            fs.unlinkSync(srcPath);
+
             console.log(`  ${file} -> ${dirPath}/`);
         }
+    }
+
+    // Also transform root files
+    console.log('Transforming root files...');
+    for (const file of rootFiles) {
+        const filePath = path.join(GENERATED_DIR, file);
+        let content = fs.readFileSync(filePath, 'utf-8');
+        content = transformFieldNamesToSnakeCase(content);
+        fs.writeFileSync(filePath, content);
     }
 
     // Third pass: update imports in moved files

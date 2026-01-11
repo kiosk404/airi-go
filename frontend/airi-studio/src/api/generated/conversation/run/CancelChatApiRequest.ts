@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface ICancelChatApiRequest {
-    ChatID: thrift.Int64;
-    ConversationID: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    chat_i_d: thrift.Int64;
+    conversation_i_d: thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface ICancelChatApiRequestArgs {
-    ChatID: number | string | thrift.Int64;
-    ConversationID: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    chat_i_d: number | string | thrift.Int64;
+    conversation_i_d: number | string | thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const CancelChatApiRequestCodec: thrift.IStructCodec<ICancelChatApiRequestArgs, ICancelChatApiRequest> = {
     encode(args: ICancelChatApiRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ChatID: (typeof args.ChatID === "number" ? new thrift.Int64(args.ChatID) : typeof args.ChatID === "string" ? thrift.Int64.fromDecimalString(args.ChatID) : args.ChatID),
-            ConversationID: (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID),
-            Base: args.Base
+            ChatID: (typeof args.chat_i_d === "number" ? new thrift.Int64(args.chat_i_d) : typeof args.chat_i_d === "string" ? thrift.Int64.fromDecimalString(args.chat_i_d) : args.chat_i_d),
+            ConversationID: (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d),
+            Base: args.base
         };
         output.writeStructBegin("CancelChatApiRequest");
         if (obj.ChatID != null) {
@@ -96,9 +96,9 @@ export const CancelChatApiRequestCodec: thrift.IStructCodec<ICancelChatApiReques
         input.readStructEnd();
         if (_args.ChatID !== undefined && _args.ConversationID !== undefined) {
             return {
-                ChatID: _args.ChatID,
-                ConversationID: _args.ConversationID,
-                Base: _args.Base
+                chat_i_d: _args.ChatID,
+                conversation_i_d: _args.ConversationID,
+                base: _args.Base
             };
         }
         else {
@@ -107,17 +107,17 @@ export const CancelChatApiRequestCodec: thrift.IStructCodec<ICancelChatApiReques
     }
 };
 export class CancelChatApiRequest extends thrift.StructLike implements ICancelChatApiRequest {
-    public ChatID: thrift.Int64;
-    public ConversationID: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public chat_i_d: thrift.Int64;
+    public conversation_i_d: thrift.Int64;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ChatID: {
+        chat_i_d: {
             'api.body': "chat_id",
             'agw.key': "chat_id",
             'api.js_conv': "true"
         },
-        ConversationID: {
+        conversation_i_d: {
             'api.body': "conversation_id",
             'agw.key': "conversation_id",
             'api.js_conv': "true"
@@ -125,23 +125,23 @@ export class CancelChatApiRequest extends thrift.StructLike implements ICancelCh
     };
     constructor(args: ICancelChatApiRequestArgs) {
         super();
-        if (args.ChatID != null) {
-            const value_4: thrift.Int64 = (typeof args.ChatID === "number" ? new thrift.Int64(args.ChatID) : typeof args.ChatID === "string" ? thrift.Int64.fromDecimalString(args.ChatID) : args.ChatID);
-            this.ChatID = value_4;
+        if (args.chat_i_d != null) {
+            const value_4: thrift.Int64 = (typeof args.chat_i_d === "number" ? new thrift.Int64(args.chat_i_d) : typeof args.chat_i_d === "string" ? thrift.Int64.fromDecimalString(args.chat_i_d) : args.chat_i_d);
+            this.chat_i_d = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ChatID] is unset!");
         }
-        if (args.ConversationID != null) {
-            const value_5: thrift.Int64 = (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID);
-            this.ConversationID = value_5;
+        if (args.conversation_i_d != null) {
+            const value_5: thrift.Int64 = (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d);
+            this.conversation_i_d = value_5;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ConversationID] is unset!");
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): CancelChatApiRequest {

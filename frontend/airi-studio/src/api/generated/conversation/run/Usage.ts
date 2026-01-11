@@ -6,21 +6,21 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IUsage {
-    TokenCount?: number;
-    OutputTokens?: number;
-    InputTokens?: number;
+    token_count?: number;
+    output_tokens?: number;
+    input_tokens?: number;
 }
 export interface IUsageArgs {
-    TokenCount?: number;
-    OutputTokens?: number;
-    InputTokens?: number;
+    token_count?: number;
+    output_tokens?: number;
+    input_tokens?: number;
 }
 export const UsageCodec: thrift.IStructCodec<IUsageArgs, IUsage> = {
     encode(args: IUsageArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            TokenCount: args.TokenCount,
-            OutputTokens: args.OutputTokens,
-            InputTokens: args.InputTokens
+            TokenCount: args.token_count,
+            OutputTokens: args.output_tokens,
+            InputTokens: args.input_tokens
         };
         output.writeStructBegin("Usage");
         if (obj.TokenCount != null) {
@@ -88,41 +88,41 @@ export const UsageCodec: thrift.IStructCodec<IUsageArgs, IUsage> = {
         }
         input.readStructEnd();
         return {
-            TokenCount: _args.TokenCount,
-            OutputTokens: _args.OutputTokens,
-            InputTokens: _args.InputTokens
+            token_count: _args.TokenCount,
+            output_tokens: _args.OutputTokens,
+            input_tokens: _args.InputTokens
         };
     }
 };
 export class Usage extends thrift.StructLike implements IUsage {
-    public TokenCount?: number;
-    public OutputTokens?: number;
-    public InputTokens?: number;
+    public token_count?: number;
+    public output_tokens?: number;
+    public input_tokens?: number;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        TokenCount: {
+        token_count: {
             'api.body': "token_count"
         },
-        OutputTokens: {
+        output_tokens: {
             'api.body': "output_count"
         },
-        InputTokens: {
+        input_tokens: {
             'api.body': "input_count"
         }
     };
     constructor(args: IUsageArgs = {}) {
         super();
-        if (args.TokenCount != null) {
-            const value_4: number = args.TokenCount;
-            this.TokenCount = value_4;
+        if (args.token_count != null) {
+            const value_4: number = args.token_count;
+            this.token_count = value_4;
         }
-        if (args.OutputTokens != null) {
-            const value_5: number = args.OutputTokens;
-            this.OutputTokens = value_5;
+        if (args.output_tokens != null) {
+            const value_5: number = args.output_tokens;
+            this.output_tokens = value_5;
         }
-        if (args.InputTokens != null) {
-            const value_6: number = args.InputTokens;
-            this.InputTokens = value_6;
+        if (args.input_tokens != null) {
+            const value_6: number = args.input_tokens;
+            this.input_tokens = value_6;
         }
     }
     public static read(input: thrift.TProtocol): Usage {

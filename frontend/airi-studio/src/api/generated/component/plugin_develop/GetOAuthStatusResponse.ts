@@ -13,7 +13,7 @@ export interface IGetOAuthStatusResponse {
     content?: string;
     code?: thrift.Int64;
     msg?: string;
-    BaseResp: BASE_NS.IBaseResp;
+    base_resp: BASE_NS.IBaseResp;
 }
 export interface IGetOAuthStatusResponseArgs {
     is_oauth?: boolean;
@@ -21,7 +21,7 @@ export interface IGetOAuthStatusResponseArgs {
     content?: string;
     code?: number | string | thrift.Int64;
     msg?: string;
-    BaseResp: BASE_NS.IBaseRespArgs;
+    base_resp: BASE_NS.IBaseRespArgs;
 }
 export const GetOAuthStatusResponseCodec: thrift.IStructCodec<IGetOAuthStatusResponseArgs, IGetOAuthStatusResponse> = {
     encode(args: IGetOAuthStatusResponseArgs, output: thrift.TProtocol): void {
@@ -31,7 +31,7 @@ export const GetOAuthStatusResponseCodec: thrift.IStructCodec<IGetOAuthStatusRes
             content: args.content,
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetOAuthStatusResponse");
         if (obj.is_oauth != null) {
@@ -150,7 +150,7 @@ export const GetOAuthStatusResponseCodec: thrift.IStructCodec<IGetOAuthStatusRes
                 content: _args.content,
                 code: _args.code,
                 msg: _args.msg,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -164,7 +164,7 @@ export class GetOAuthStatusResponse extends thrift.StructLike implements IGetOAu
     public content?: string;
     public code?: thrift.Int64;
     public msg?: string;
-    public BaseResp: BASE_NS.IBaseResp;
+    public base_resp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetOAuthStatusResponseArgs) {
@@ -189,9 +189,9 @@ export class GetOAuthStatusResponse extends thrift.StructLike implements IGetOAu
             const value_11: string = args.msg;
             this.msg = value_11;
         }
-        if (args.BaseResp != null) {
-            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_12;
+        if (args.base_resp != null) {
+            const value_12: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_12;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

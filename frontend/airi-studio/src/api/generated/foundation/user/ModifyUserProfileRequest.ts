@@ -13,7 +13,7 @@ export interface IModifyUserProfileRequest {
     description?: string;
     avatar_uri?: string;
     locale?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IModifyUserProfileRequestArgs {
     user_id: string;
@@ -22,7 +22,7 @@ export interface IModifyUserProfileRequestArgs {
     description?: string;
     avatar_uri?: string;
     locale?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const ModifyUserProfileRequestCodec: thrift.IStructCodec<IModifyUserProfileRequestArgs, IModifyUserProfileRequest> = {
     encode(args: IModifyUserProfileRequestArgs, output: thrift.TProtocol): void {
@@ -33,7 +33,7 @@ export const ModifyUserProfileRequestCodec: thrift.IStructCodec<IModifyUserProfi
             description: args.description,
             avatar_uri: args.avatar_uri,
             locale: args.locale,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ModifyUserProfileRequest");
         if (obj.user_id != null) {
@@ -167,7 +167,7 @@ export const ModifyUserProfileRequestCodec: thrift.IStructCodec<IModifyUserProfi
                 description: _args.description,
                 avatar_uri: _args.avatar_uri,
                 locale: _args.locale,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -182,7 +182,7 @@ export class ModifyUserProfileRequest extends thrift.StructLike implements IModi
     public description?: string;
     public avatar_uri?: string;
     public locale?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         user_id: {
@@ -218,9 +218,9 @@ export class ModifyUserProfileRequest extends thrift.StructLike implements IModi
             const value_13: string = args.locale;
             this.locale = value_13;
         }
-        if (args.Base != null) {
-            const value_14: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_14;
+        if (args.base != null) {
+            const value_14: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_14;
         }
     }
     public static read(input: thrift.TProtocol): ModifyUserProfileRequest {

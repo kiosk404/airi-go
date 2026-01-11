@@ -8,30 +8,30 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as FieldItem from "./FieldItem";
 import * as BotTableRWMode from "./BotTableRWMode";
 export interface IDatabase {
-    TableId?: string;
-    TableName?: string;
-    TableDesc?: string;
-    FieldList?: Array<FieldItem.IFieldItem>;
-    PromptDisabled?: boolean;
-    RWMode?: BotTableRWMode.BotTableRWMode;
+    table_id?: string;
+    table_name?: string;
+    table_desc?: string;
+    field_list?: Array<FieldItem.IFieldItem>;
+    prompt_disabled?: boolean;
+    r_w_mode?: BotTableRWMode.BotTableRWMode;
 }
 export interface IDatabaseArgs {
-    TableId?: string;
-    TableName?: string;
-    TableDesc?: string;
-    FieldList?: Array<FieldItem.IFieldItemArgs>;
-    PromptDisabled?: boolean;
-    RWMode?: BotTableRWMode.BotTableRWMode;
+    table_id?: string;
+    table_name?: string;
+    table_desc?: string;
+    field_list?: Array<FieldItem.IFieldItemArgs>;
+    prompt_disabled?: boolean;
+    r_w_mode?: BotTableRWMode.BotTableRWMode;
 }
 export const DatabaseCodec: thrift.IStructCodec<IDatabaseArgs, IDatabase> = {
     encode(args: IDatabaseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            TableId: args.TableId,
-            TableName: args.TableName,
-            TableDesc: args.TableDesc,
-            FieldList: args.FieldList,
-            PromptDisabled: args.PromptDisabled,
-            RWMode: args.RWMode
+            TableId: args.table_id,
+            TableName: args.table_name,
+            TableDesc: args.table_desc,
+            FieldList: args.field_list,
+            PromptDisabled: args.prompt_disabled,
+            RWMode: args.r_w_mode
         };
         output.writeStructBegin("Database");
         if (obj.TableId != null) {
@@ -152,72 +152,72 @@ export const DatabaseCodec: thrift.IStructCodec<IDatabaseArgs, IDatabase> = {
         }
         input.readStructEnd();
         return {
-            TableId: _args.TableId,
-            TableName: _args.TableName,
-            TableDesc: _args.TableDesc,
-            FieldList: _args.FieldList,
-            PromptDisabled: _args.PromptDisabled,
-            RWMode: _args.RWMode
+            table_id: _args.TableId,
+            table_name: _args.TableName,
+            table_desc: _args.TableDesc,
+            field_list: _args.FieldList,
+            prompt_disabled: _args.PromptDisabled,
+            r_w_mode: _args.RWMode
         };
     }
 };
 export class Database extends thrift.StructLike implements IDatabase {
-    public TableId?: string;
-    public TableName?: string;
-    public TableDesc?: string;
-    public FieldList?: Array<FieldItem.IFieldItem>;
-    public PromptDisabled?: boolean;
-    public RWMode?: BotTableRWMode.BotTableRWMode;
+    public table_id?: string;
+    public table_name?: string;
+    public table_desc?: string;
+    public field_list?: Array<FieldItem.IFieldItem>;
+    public prompt_disabled?: boolean;
+    public r_w_mode?: BotTableRWMode.BotTableRWMode;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        TableId: {
+        table_id: {
             'api.body': "table_id"
         },
-        TableName: {
+        table_name: {
             'api.body': "table_name"
         },
-        TableDesc: {
+        table_desc: {
             'api.body': "table_desc"
         },
-        FieldList: {
+        field_list: {
             'api.body': "field_list"
         },
-        PromptDisabled: {
+        prompt_disabled: {
             'api.body': "prompt_disabled"
         },
-        RWMode: {
+        r_w_mode: {
             'api.body': "rw_mode"
         }
     };
     constructor(args: IDatabaseArgs = {}) {
         super();
-        if (args.TableId != null) {
-            const value_9: string = args.TableId;
-            this.TableId = value_9;
+        if (args.table_id != null) {
+            const value_9: string = args.table_id;
+            this.table_id = value_9;
         }
-        if (args.TableName != null) {
-            const value_10: string = args.TableName;
-            this.TableName = value_10;
+        if (args.table_name != null) {
+            const value_10: string = args.table_name;
+            this.table_name = value_10;
         }
-        if (args.TableDesc != null) {
-            const value_11: string = args.TableDesc;
-            this.TableDesc = value_11;
+        if (args.table_desc != null) {
+            const value_11: string = args.table_desc;
+            this.table_desc = value_11;
         }
-        if (args.FieldList != null) {
+        if (args.field_list != null) {
             const value_12: Array<FieldItem.IFieldItem> = new Array<FieldItem.IFieldItem>();
-            args.FieldList.forEach((value_15: FieldItem.IFieldItemArgs): void => {
+            args.field_list.forEach((value_15: FieldItem.IFieldItemArgs): void => {
                 const value_16: FieldItem.IFieldItem = new FieldItem.FieldItem(value_15);
                 value_12.push(value_16);
             });
-            this.FieldList = value_12;
+            this.field_list = value_12;
         }
-        if (args.PromptDisabled != null) {
-            const value_13: boolean = args.PromptDisabled;
-            this.PromptDisabled = value_13;
+        if (args.prompt_disabled != null) {
+            const value_13: boolean = args.prompt_disabled;
+            this.prompt_disabled = value_13;
         }
-        if (args.RWMode != null) {
-            const value_14: BotTableRWMode.BotTableRWMode = args.RWMode;
-            this.RWMode = value_14;
+        if (args.r_w_mode != null) {
+            const value_14: BotTableRWMode.BotTableRWMode = args.r_w_mode;
+            this.r_w_mode = value_14;
         }
     }
     public static read(input: thrift.TProtocol): Database {

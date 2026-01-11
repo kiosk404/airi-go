@@ -6,51 +6,51 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IChatV3MessageDetail {
-    ID: string;
-    ConversationID: string;
-    BotID: string;
-    Role: string;
-    Type: string;
-    Content: string;
-    ContentType: string;
-    MetaData?: Map<string, string>;
-    ChatID: string;
-    SectionID?: string;
-    CreatedAt?: thrift.Int64;
-    UpdatedAt?: thrift.Int64;
-    ReasoningContent?: string;
+    i_d: string;
+    conversation_i_d: string;
+    bot_i_d: string;
+    role: string;
+    type: string;
+    content: string;
+    content_type: string;
+    meta_data?: Map<string, string>;
+    chat_i_d: string;
+    section_i_d?: string;
+    created_at?: thrift.Int64;
+    updated_at?: thrift.Int64;
+    reasoning_content?: string;
 }
 export interface IChatV3MessageDetailArgs {
-    ID: string;
-    ConversationID: string;
-    BotID: string;
-    Role: string;
-    Type: string;
-    Content: string;
-    ContentType: string;
-    MetaData?: Map<string, string>;
-    ChatID: string;
-    SectionID?: string;
-    CreatedAt?: number | string | thrift.Int64;
-    UpdatedAt?: number | string | thrift.Int64;
-    ReasoningContent?: string;
+    i_d: string;
+    conversation_i_d: string;
+    bot_i_d: string;
+    role: string;
+    type: string;
+    content: string;
+    content_type: string;
+    meta_data?: Map<string, string>;
+    chat_i_d: string;
+    section_i_d?: string;
+    created_at?: number | string | thrift.Int64;
+    updated_at?: number | string | thrift.Int64;
+    reasoning_content?: string;
 }
 export const ChatV3MessageDetailCodec: thrift.IStructCodec<IChatV3MessageDetailArgs, IChatV3MessageDetail> = {
     encode(args: IChatV3MessageDetailArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ID: args.ID,
-            ConversationID: args.ConversationID,
-            BotID: args.BotID,
-            Role: args.Role,
-            Type: args.Type,
-            Content: args.Content,
-            ContentType: args.ContentType,
-            MetaData: args.MetaData,
-            ChatID: args.ChatID,
-            SectionID: args.SectionID,
-            CreatedAt: (typeof args.CreatedAt === "number" ? new thrift.Int64(args.CreatedAt) : typeof args.CreatedAt === "string" ? thrift.Int64.fromDecimalString(args.CreatedAt) : args.CreatedAt),
-            UpdatedAt: (typeof args.UpdatedAt === "number" ? new thrift.Int64(args.UpdatedAt) : typeof args.UpdatedAt === "string" ? thrift.Int64.fromDecimalString(args.UpdatedAt) : args.UpdatedAt),
-            ReasoningContent: args.ReasoningContent
+            ID: args.i_d,
+            ConversationID: args.conversation_i_d,
+            BotID: args.bot_i_d,
+            Role: args.role,
+            Type: args.type,
+            Content: args.content,
+            ContentType: args.content_type,
+            MetaData: args.meta_data,
+            ChatID: args.chat_i_d,
+            SectionID: args.section_i_d,
+            CreatedAt: (typeof args.created_at === "number" ? new thrift.Int64(args.created_at) : typeof args.created_at === "string" ? thrift.Int64.fromDecimalString(args.created_at) : args.created_at),
+            UpdatedAt: (typeof args.updated_at === "number" ? new thrift.Int64(args.updated_at) : typeof args.updated_at === "string" ? thrift.Int64.fromDecimalString(args.updated_at) : args.updated_at),
+            ReasoningContent: args.reasoning_content
         };
         output.writeStructBegin("ChatV3MessageDetail");
         if (obj.ID != null) {
@@ -296,19 +296,19 @@ export const ChatV3MessageDetailCodec: thrift.IStructCodec<IChatV3MessageDetailA
         input.readStructEnd();
         if (_args.ID !== undefined && _args.ConversationID !== undefined && _args.BotID !== undefined && _args.Role !== undefined && _args.Type !== undefined && _args.Content !== undefined && _args.ContentType !== undefined && _args.ChatID !== undefined) {
             return {
-                ID: _args.ID,
-                ConversationID: _args.ConversationID,
-                BotID: _args.BotID,
-                Role: _args.Role,
-                Type: _args.Type,
-                Content: _args.Content,
-                ContentType: _args.ContentType,
-                MetaData: _args.MetaData,
-                ChatID: _args.ChatID,
-                SectionID: _args.SectionID,
-                CreatedAt: _args.CreatedAt,
-                UpdatedAt: _args.UpdatedAt,
-                ReasoningContent: _args.ReasoningContent
+                i_d: _args.ID,
+                conversation_i_d: _args.ConversationID,
+                bot_i_d: _args.BotID,
+                role: _args.Role,
+                type: _args.Type,
+                content: _args.Content,
+                content_type: _args.ContentType,
+                meta_data: _args.MetaData,
+                chat_i_d: _args.ChatID,
+                section_i_d: _args.SectionID,
+                created_at: _args.CreatedAt,
+                updated_at: _args.UpdatedAt,
+                reasoning_content: _args.ReasoningContent
             };
         }
         else {
@@ -317,143 +317,143 @@ export const ChatV3MessageDetailCodec: thrift.IStructCodec<IChatV3MessageDetailA
     }
 };
 export class ChatV3MessageDetail extends thrift.StructLike implements IChatV3MessageDetail {
-    public ID: string;
-    public ConversationID: string;
-    public BotID: string;
-    public Role: string;
-    public Type: string;
-    public Content: string;
-    public ContentType: string;
-    public MetaData?: Map<string, string>;
-    public ChatID: string;
-    public SectionID?: string;
-    public CreatedAt?: thrift.Int64;
-    public UpdatedAt?: thrift.Int64;
-    public ReasoningContent?: string;
+    public i_d: string;
+    public conversation_i_d: string;
+    public bot_i_d: string;
+    public role: string;
+    public type: string;
+    public content: string;
+    public content_type: string;
+    public meta_data?: Map<string, string>;
+    public chat_i_d: string;
+    public section_i_d?: string;
+    public created_at?: thrift.Int64;
+    public updated_at?: thrift.Int64;
+    public reasoning_content?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ID: {
+        i_d: {
             'api.body': "id"
         },
-        ConversationID: {
+        conversation_i_d: {
             'api.body': "conversation_id"
         },
-        BotID: {
+        bot_i_d: {
             'api.body': "bot_id"
         },
-        Role: {
+        role: {
             'api.body': "role"
         },
-        Type: {
+        type: {
             'api.body': "type"
         },
-        Content: {
+        content: {
             'api.body': "content"
         },
-        ContentType: {
+        content_type: {
             'api.body': "content_type"
         },
-        MetaData: {
+        meta_data: {
             'api.body': "meta_data"
         },
-        ChatID: {
+        chat_i_d: {
             'api.body': "chat_id"
         },
-        SectionID: {
+        section_i_d: {
             'api.body': "section_id"
         },
-        CreatedAt: {
+        created_at: {
             'api.body': "created_at"
         },
-        UpdatedAt: {
+        updated_at: {
             'api.body': "updated_at"
         },
-        ReasoningContent: {
+        reasoning_content: {
             'api.body': "reasoning_content"
         }
     };
     constructor(args: IChatV3MessageDetailArgs) {
         super();
-        if (args.ID != null) {
-            const value_16: string = args.ID;
-            this.ID = value_16;
+        if (args.i_d != null) {
+            const value_16: string = args.i_d;
+            this.i_d = value_16;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ID] is unset!");
         }
-        if (args.ConversationID != null) {
-            const value_17: string = args.ConversationID;
-            this.ConversationID = value_17;
+        if (args.conversation_i_d != null) {
+            const value_17: string = args.conversation_i_d;
+            this.conversation_i_d = value_17;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ConversationID] is unset!");
         }
-        if (args.BotID != null) {
-            const value_18: string = args.BotID;
-            this.BotID = value_18;
+        if (args.bot_i_d != null) {
+            const value_18: string = args.bot_i_d;
+            this.bot_i_d = value_18;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BotID] is unset!");
         }
-        if (args.Role != null) {
-            const value_19: string = args.Role;
-            this.Role = value_19;
+        if (args.role != null) {
+            const value_19: string = args.role;
+            this.role = value_19;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Role] is unset!");
         }
-        if (args.Type != null) {
-            const value_20: string = args.Type;
-            this.Type = value_20;
+        if (args.type != null) {
+            const value_20: string = args.type;
+            this.type = value_20;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Type] is unset!");
         }
-        if (args.Content != null) {
-            const value_21: string = args.Content;
-            this.Content = value_21;
+        if (args.content != null) {
+            const value_21: string = args.content;
+            this.content = value_21;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Content] is unset!");
         }
-        if (args.ContentType != null) {
-            const value_22: string = args.ContentType;
-            this.ContentType = value_22;
+        if (args.content_type != null) {
+            const value_22: string = args.content_type;
+            this.content_type = value_22;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ContentType] is unset!");
         }
-        if (args.MetaData != null) {
+        if (args.meta_data != null) {
             const value_23: Map<string, string> = new Map<string, string>();
-            args.MetaData.forEach((value_29: string, key_3: string): void => {
+            args.meta_data.forEach((value_29: string, key_3: string): void => {
                 const value_30: string = value_29;
                 const key_4: string = key_3;
                 value_23.set(key_4, value_30);
             });
-            this.MetaData = value_23;
+            this.meta_data = value_23;
         }
-        if (args.ChatID != null) {
-            const value_24: string = args.ChatID;
-            this.ChatID = value_24;
+        if (args.chat_i_d != null) {
+            const value_24: string = args.chat_i_d;
+            this.chat_i_d = value_24;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ChatID] is unset!");
         }
-        if (args.SectionID != null) {
-            const value_25: string = args.SectionID;
-            this.SectionID = value_25;
+        if (args.section_i_d != null) {
+            const value_25: string = args.section_i_d;
+            this.section_i_d = value_25;
         }
-        if (args.CreatedAt != null) {
-            const value_26: thrift.Int64 = (typeof args.CreatedAt === "number" ? new thrift.Int64(args.CreatedAt) : typeof args.CreatedAt === "string" ? thrift.Int64.fromDecimalString(args.CreatedAt) : args.CreatedAt);
-            this.CreatedAt = value_26;
+        if (args.created_at != null) {
+            const value_26: thrift.Int64 = (typeof args.created_at === "number" ? new thrift.Int64(args.created_at) : typeof args.created_at === "string" ? thrift.Int64.fromDecimalString(args.created_at) : args.created_at);
+            this.created_at = value_26;
         }
-        if (args.UpdatedAt != null) {
-            const value_27: thrift.Int64 = (typeof args.UpdatedAt === "number" ? new thrift.Int64(args.UpdatedAt) : typeof args.UpdatedAt === "string" ? thrift.Int64.fromDecimalString(args.UpdatedAt) : args.UpdatedAt);
-            this.UpdatedAt = value_27;
+        if (args.updated_at != null) {
+            const value_27: thrift.Int64 = (typeof args.updated_at === "number" ? new thrift.Int64(args.updated_at) : typeof args.updated_at === "string" ? thrift.Int64.fromDecimalString(args.updated_at) : args.updated_at);
+            this.updated_at = value_27;
         }
-        if (args.ReasoningContent != null) {
-            const value_28: string = args.ReasoningContent;
-            this.ReasoningContent = value_28;
+        if (args.reasoning_content != null) {
+            const value_28: string = args.reasoning_content;
+            this.reasoning_content = value_28;
         }
     }
     public static read(input: thrift.TProtocol): ChatV3MessageDetail {

@@ -8,17 +8,17 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IResourceCopyCancelRequest {
     task_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IResourceCopyCancelRequestArgs {
     task_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const ResourceCopyCancelRequestCodec: thrift.IStructCodec<IResourceCopyCancelRequestArgs, IResourceCopyCancelRequest> = {
     encode(args: IResourceCopyCancelRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             task_id: args.task_id,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ResourceCopyCancelRequest");
         if (obj.task_id != null) {
@@ -73,13 +73,13 @@ export const ResourceCopyCancelRequestCodec: thrift.IStructCodec<IResourceCopyCa
         input.readStructEnd();
         return {
             task_id: _args.task_id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class ResourceCopyCancelRequest extends thrift.StructLike implements IResourceCopyCancelRequest {
     public task_id?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IResourceCopyCancelRequestArgs = {}) {
@@ -88,9 +88,9 @@ export class ResourceCopyCancelRequest extends thrift.StructLike implements IRes
             const value_3: string = args.task_id;
             this.task_id = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): ResourceCopyCancelRequest {

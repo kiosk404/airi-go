@@ -6,39 +6,39 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IPluginResult {
-    FileName: string;
-    SourceUri: string;
-    ImageUri: string;
-    ImageWidth: number;
-    ImageHeight: number;
-    ImageMd5: string;
-    ImageFormat: string;
-    ImageSize: number;
-    FrameCnt: number;
+    file_name: string;
+    source_uri: string;
+    image_uri: string;
+    image_width: number;
+    image_height: number;
+    image_md5: string;
+    image_format: string;
+    image_size: number;
+    frame_cnt: number;
 }
 export interface IPluginResultArgs {
-    FileName: string;
-    SourceUri: string;
-    ImageUri: string;
-    ImageWidth: number;
-    ImageHeight: number;
-    ImageMd5: string;
-    ImageFormat: string;
-    ImageSize: number;
-    FrameCnt: number;
+    file_name: string;
+    source_uri: string;
+    image_uri: string;
+    image_width: number;
+    image_height: number;
+    image_md5: string;
+    image_format: string;
+    image_size: number;
+    frame_cnt: number;
 }
 export const PluginResultCodec: thrift.IStructCodec<IPluginResultArgs, IPluginResult> = {
     encode(args: IPluginResultArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            FileName: args.FileName,
-            SourceUri: args.SourceUri,
-            ImageUri: args.ImageUri,
-            ImageWidth: args.ImageWidth,
-            ImageHeight: args.ImageHeight,
-            ImageMd5: args.ImageMd5,
-            ImageFormat: args.ImageFormat,
-            ImageSize: args.ImageSize,
-            FrameCnt: args.FrameCnt
+            FileName: args.file_name,
+            SourceUri: args.source_uri,
+            ImageUri: args.image_uri,
+            ImageWidth: args.image_width,
+            ImageHeight: args.image_height,
+            ImageMd5: args.image_md5,
+            ImageFormat: args.image_format,
+            ImageSize: args.image_size,
+            FrameCnt: args.frame_cnt
         };
         output.writeStructBegin("PluginResult");
         if (obj.FileName != null) {
@@ -218,15 +218,15 @@ export const PluginResultCodec: thrift.IStructCodec<IPluginResultArgs, IPluginRe
         input.readStructEnd();
         if (_args.FileName !== undefined && _args.SourceUri !== undefined && _args.ImageUri !== undefined && _args.ImageWidth !== undefined && _args.ImageHeight !== undefined && _args.ImageMd5 !== undefined && _args.ImageFormat !== undefined && _args.ImageSize !== undefined && _args.FrameCnt !== undefined) {
             return {
-                FileName: _args.FileName,
-                SourceUri: _args.SourceUri,
-                ImageUri: _args.ImageUri,
-                ImageWidth: _args.ImageWidth,
-                ImageHeight: _args.ImageHeight,
-                ImageMd5: _args.ImageMd5,
-                ImageFormat: _args.ImageFormat,
-                ImageSize: _args.ImageSize,
-                FrameCnt: _args.FrameCnt
+                file_name: _args.FileName,
+                source_uri: _args.SourceUri,
+                image_uri: _args.ImageUri,
+                image_width: _args.ImageWidth,
+                image_height: _args.ImageHeight,
+                image_md5: _args.ImageMd5,
+                image_format: _args.ImageFormat,
+                image_size: _args.ImageSize,
+                frame_cnt: _args.FrameCnt
             };
         }
         else {
@@ -235,78 +235,78 @@ export const PluginResultCodec: thrift.IStructCodec<IPluginResultArgs, IPluginRe
     }
 };
 export class PluginResult extends thrift.StructLike implements IPluginResult {
-    public FileName: string;
-    public SourceUri: string;
-    public ImageUri: string;
-    public ImageWidth: number;
-    public ImageHeight: number;
-    public ImageMd5: string;
-    public ImageFormat: string;
-    public ImageSize: number;
-    public FrameCnt: number;
+    public file_name: string;
+    public source_uri: string;
+    public image_uri: string;
+    public image_width: number;
+    public image_height: number;
+    public image_md5: string;
+    public image_format: string;
+    public image_size: number;
+    public frame_cnt: number;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IPluginResultArgs) {
         super();
-        if (args.FileName != null) {
-            const value_10: string = args.FileName;
-            this.FileName = value_10;
+        if (args.file_name != null) {
+            const value_10: string = args.file_name;
+            this.file_name = value_10;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[FileName] is unset!");
         }
-        if (args.SourceUri != null) {
-            const value_11: string = args.SourceUri;
-            this.SourceUri = value_11;
+        if (args.source_uri != null) {
+            const value_11: string = args.source_uri;
+            this.source_uri = value_11;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[SourceUri] is unset!");
         }
-        if (args.ImageUri != null) {
-            const value_12: string = args.ImageUri;
-            this.ImageUri = value_12;
+        if (args.image_uri != null) {
+            const value_12: string = args.image_uri;
+            this.image_uri = value_12;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ImageUri] is unset!");
         }
-        if (args.ImageWidth != null) {
-            const value_13: number = args.ImageWidth;
-            this.ImageWidth = value_13;
+        if (args.image_width != null) {
+            const value_13: number = args.image_width;
+            this.image_width = value_13;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ImageWidth] is unset!");
         }
-        if (args.ImageHeight != null) {
-            const value_14: number = args.ImageHeight;
-            this.ImageHeight = value_14;
+        if (args.image_height != null) {
+            const value_14: number = args.image_height;
+            this.image_height = value_14;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ImageHeight] is unset!");
         }
-        if (args.ImageMd5 != null) {
-            const value_15: string = args.ImageMd5;
-            this.ImageMd5 = value_15;
+        if (args.image_md5 != null) {
+            const value_15: string = args.image_md5;
+            this.image_md5 = value_15;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ImageMd5] is unset!");
         }
-        if (args.ImageFormat != null) {
-            const value_16: string = args.ImageFormat;
-            this.ImageFormat = value_16;
+        if (args.image_format != null) {
+            const value_16: string = args.image_format;
+            this.image_format = value_16;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ImageFormat] is unset!");
         }
-        if (args.ImageSize != null) {
-            const value_17: number = args.ImageSize;
-            this.ImageSize = value_17;
+        if (args.image_size != null) {
+            const value_17: number = args.image_size;
+            this.image_size = value_17;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ImageSize] is unset!");
         }
-        if (args.FrameCnt != null) {
-            const value_18: number = args.FrameCnt;
-            this.FrameCnt = value_18;
+        if (args.frame_cnt != null) {
+            const value_18: number = args.frame_cnt;
+            this.frame_cnt = value_18;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[FrameCnt] is unset!");

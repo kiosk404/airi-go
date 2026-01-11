@@ -6,27 +6,27 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IResponseMetadata {
-    RequestId: string;
-    Action: string;
-    Version: string;
-    Service: string;
-    Region: string;
+    request_id: string;
+    action: string;
+    version: string;
+    service: string;
+    region: string;
 }
 export interface IResponseMetadataArgs {
-    RequestId: string;
-    Action: string;
-    Version: string;
-    Service: string;
-    Region: string;
+    request_id: string;
+    action: string;
+    version: string;
+    service: string;
+    region: string;
 }
 export const ResponseMetadataCodec: thrift.IStructCodec<IResponseMetadataArgs, IResponseMetadata> = {
     encode(args: IResponseMetadataArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            RequestId: args.RequestId,
-            Action: args.Action,
-            Version: args.Version,
-            Service: args.Service,
-            Region: args.Region
+            RequestId: args.request_id,
+            Action: args.action,
+            Version: args.version,
+            Service: args.service,
+            Region: args.region
         };
         output.writeStructBegin("ResponseMetadata");
         if (obj.RequestId != null) {
@@ -138,11 +138,11 @@ export const ResponseMetadataCodec: thrift.IStructCodec<IResponseMetadataArgs, I
         input.readStructEnd();
         if (_args.RequestId !== undefined && _args.Action !== undefined && _args.Version !== undefined && _args.Service !== undefined && _args.Region !== undefined) {
             return {
-                RequestId: _args.RequestId,
-                Action: _args.Action,
-                Version: _args.Version,
-                Service: _args.Service,
-                Region: _args.Region
+                request_id: _args.RequestId,
+                action: _args.Action,
+                version: _args.Version,
+                service: _args.Service,
+                region: _args.Region
             };
         }
         else {
@@ -151,46 +151,46 @@ export const ResponseMetadataCodec: thrift.IStructCodec<IResponseMetadataArgs, I
     }
 };
 export class ResponseMetadata extends thrift.StructLike implements IResponseMetadata {
-    public RequestId: string;
-    public Action: string;
-    public Version: string;
-    public Service: string;
-    public Region: string;
+    public request_id: string;
+    public action: string;
+    public version: string;
+    public service: string;
+    public region: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IResponseMetadataArgs) {
         super();
-        if (args.RequestId != null) {
-            const value_6: string = args.RequestId;
-            this.RequestId = value_6;
+        if (args.request_id != null) {
+            const value_6: string = args.request_id;
+            this.request_id = value_6;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[RequestId] is unset!");
         }
-        if (args.Action != null) {
-            const value_7: string = args.Action;
-            this.Action = value_7;
+        if (args.action != null) {
+            const value_7: string = args.action;
+            this.action = value_7;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Action] is unset!");
         }
-        if (args.Version != null) {
-            const value_8: string = args.Version;
-            this.Version = value_8;
+        if (args.version != null) {
+            const value_8: string = args.version;
+            this.version = value_8;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Version] is unset!");
         }
-        if (args.Service != null) {
-            const value_9: string = args.Service;
-            this.Service = value_9;
+        if (args.service != null) {
+            const value_9: string = args.service;
+            this.service = value_9;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Service] is unset!");
         }
-        if (args.Region != null) {
-            const value_10: string = args.Region;
-            this.Region = value_10;
+        if (args.region != null) {
+            const value_10: string = args.region;
+            this.region = value_10;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Region] is unset!");

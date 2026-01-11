@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ICreateConversationRequest {
-    MetaData?: Map<string, string>;
-    BotId?: thrift.Int64;
+    meta_data?: Map<string, string>;
+    bot_id?: thrift.Int64;
 }
 export interface ICreateConversationRequestArgs {
-    MetaData?: Map<string, string>;
-    BotId?: number | string | thrift.Int64;
+    meta_data?: Map<string, string>;
+    bot_id?: number | string | thrift.Int64;
 }
 export const CreateConversationRequestCodec: thrift.IStructCodec<ICreateConversationRequestArgs, ICreateConversationRequest> = {
     encode(args: ICreateConversationRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            MetaData: args.MetaData,
-            BotId: (typeof args.BotId === "number" ? new thrift.Int64(args.BotId) : typeof args.BotId === "string" ? thrift.Int64.fromDecimalString(args.BotId) : args.BotId)
+            MetaData: args.meta_data,
+            BotId: (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id)
         };
         output.writeStructBegin("CreateConversationRequest");
         if (obj.MetaData != null) {
@@ -84,38 +84,38 @@ export const CreateConversationRequestCodec: thrift.IStructCodec<ICreateConversa
         }
         input.readStructEnd();
         return {
-            MetaData: _args.MetaData,
-            BotId: _args.BotId
+            meta_data: _args.MetaData,
+            bot_id: _args.BotId
         };
     }
 };
 export class CreateConversationRequest extends thrift.StructLike implements ICreateConversationRequest {
-    public MetaData?: Map<string, string>;
-    public BotId?: thrift.Int64;
+    public meta_data?: Map<string, string>;
+    public bot_id?: thrift.Int64;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        MetaData: {
+        meta_data: {
             'api.body': "meta_data"
         },
-        BotId: {
+        bot_id: {
             'api.body': "bot_id",
             'api.js_conv': "true"
         }
     };
     constructor(args: ICreateConversationRequestArgs = {}) {
         super();
-        if (args.MetaData != null) {
+        if (args.meta_data != null) {
             const value_5: Map<string, string> = new Map<string, string>();
-            args.MetaData.forEach((value_7: string, key_3: string): void => {
+            args.meta_data.forEach((value_7: string, key_3: string): void => {
                 const value_8: string = value_7;
                 const key_4: string = key_3;
                 value_5.set(key_4, value_8);
             });
-            this.MetaData = value_5;
+            this.meta_data = value_5;
         }
-        if (args.BotId != null) {
-            const value_6: thrift.Int64 = (typeof args.BotId === "number" ? new thrift.Int64(args.BotId) : typeof args.BotId === "string" ? thrift.Int64.fromDecimalString(args.BotId) : args.BotId);
-            this.BotId = value_6;
+        if (args.bot_id != null) {
+            const value_6: thrift.Int64 = (typeof args.bot_id === "number" ? new thrift.Int64(args.bot_id) : typeof args.bot_id === "string" ? thrift.Int64.fromDecimalString(args.bot_id) : args.bot_id);
+            this.bot_id = value_6;
         }
     }
     public static read(input: thrift.TProtocol): CreateConversationRequest {

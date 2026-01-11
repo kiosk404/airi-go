@@ -1055,7 +1055,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public LibraryResourceList(request: LibraryResourceListRequest.ILibraryResourceListRequestArgs, context?: Context): Promise<LibraryResourceListResponse.ILibraryResourceListResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("LibraryResourceList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("LibraryResourceList", thrift.MessageType.CALL, this.increment_request_id());
         const args: ILibraryResourceList__ArgsArgs = { request };
         LibraryResourceList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1093,7 +1093,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ProjectResourceList(request: ProjectResourceListRequest.IProjectResourceListRequestArgs, context?: Context): Promise<ProjectResourceListResponse.IProjectResourceListResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ProjectResourceList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ProjectResourceList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IProjectResourceList__ArgsArgs = { request };
         ProjectResourceList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1131,7 +1131,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ResourceCopyDispatch(req: ResourceCopyDispatchRequest.IResourceCopyDispatchRequestArgs, context?: Context): Promise<ResourceCopyDispatchResponse.IResourceCopyDispatchResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ResourceCopyDispatch", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ResourceCopyDispatch", thrift.MessageType.CALL, this.increment_request_id());
         const args: IResourceCopyDispatch__ArgsArgs = { req };
         ResourceCopyDispatch__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1169,7 +1169,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ResourceCopyDetail(req: ResourceCopyDetailRequest.IResourceCopyDetailRequestArgs, context?: Context): Promise<ResourceCopyDetailResponse.IResourceCopyDetailResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ResourceCopyDetail", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ResourceCopyDetail", thrift.MessageType.CALL, this.increment_request_id());
         const args: IResourceCopyDetail__ArgsArgs = { req };
         ResourceCopyDetail__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1207,7 +1207,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ResourceCopyRetry(req: ResourceCopyRetryRequest.IResourceCopyRetryRequestArgs, context?: Context): Promise<ResourceCopyRetryResponse.IResourceCopyRetryResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ResourceCopyRetry", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ResourceCopyRetry", thrift.MessageType.CALL, this.increment_request_id());
         const args: IResourceCopyRetry__ArgsArgs = { req };
         ResourceCopyRetry__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1245,7 +1245,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ResourceCopyCancel(req: ResourceCopyCancelRequest.IResourceCopyCancelRequestArgs, context?: Context): Promise<ResourceCopyCancelResponse.IResourceCopyCancelResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ResourceCopyCancel", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ResourceCopyCancel", thrift.MessageType.CALL, this.increment_request_id());
         const args: IResourceCopyCancel__ArgsArgs = { req };
         ResourceCopyCancel__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1311,27 +1311,27 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_LibraryResourceList": {
-                    resolve(this.process_LibraryResourceList(requestId, input, output, context));
+                    resolve(this.process__library_resource_list(requestId, input, output, context));
                     break;
                 }
                 case "process_ProjectResourceList": {
-                    resolve(this.process_ProjectResourceList(requestId, input, output, context));
+                    resolve(this.process__project_resource_list(requestId, input, output, context));
                     break;
                 }
                 case "process_ResourceCopyDispatch": {
-                    resolve(this.process_ResourceCopyDispatch(requestId, input, output, context));
+                    resolve(this.process__resource_copy_dispatch(requestId, input, output, context));
                     break;
                 }
                 case "process_ResourceCopyDetail": {
-                    resolve(this.process_ResourceCopyDetail(requestId, input, output, context));
+                    resolve(this.process__resource_copy_detail(requestId, input, output, context));
                     break;
                 }
                 case "process_ResourceCopyRetry": {
-                    resolve(this.process_ResourceCopyRetry(requestId, input, output, context));
+                    resolve(this.process__resource_copy_retry(requestId, input, output, context));
                     break;
                 }
                 case "process_ResourceCopyCancel": {
-                    resolve(this.process_ResourceCopyCancel(requestId, input, output, context));
+                    resolve(this.process__resource_copy_cancel(requestId, input, output, context));
                     break;
                 }
                 default: {

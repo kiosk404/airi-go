@@ -13,7 +13,7 @@ export interface IListMessageApiRequest {
     chat_id?: thrift.Int64;
     before_id?: thrift.Int64;
     after_id?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IListMessageApiRequestArgs {
     conversation_id: number | string | thrift.Int64;
@@ -22,7 +22,7 @@ export interface IListMessageApiRequestArgs {
     chat_id?: number | string | thrift.Int64;
     before_id?: number | string | thrift.Int64;
     after_id?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const ListMessageApiRequestCodec: thrift.IStructCodec<IListMessageApiRequestArgs, IListMessageApiRequest> = {
     encode(args: IListMessageApiRequestArgs, output: thrift.TProtocol): void {
@@ -33,7 +33,7 @@ export const ListMessageApiRequestCodec: thrift.IStructCodec<IListMessageApiRequ
             chat_id: (typeof args.chat_id === "number" ? new thrift.Int64(args.chat_id) : typeof args.chat_id === "string" ? thrift.Int64.fromDecimalString(args.chat_id) : args.chat_id),
             before_id: (typeof args.before_id === "number" ? new thrift.Int64(args.before_id) : typeof args.before_id === "string" ? thrift.Int64.fromDecimalString(args.before_id) : args.before_id),
             after_id: (typeof args.after_id === "number" ? new thrift.Int64(args.after_id) : typeof args.after_id === "string" ? thrift.Int64.fromDecimalString(args.after_id) : args.after_id),
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ListMessageApiRequest");
         if (obj.conversation_id != null) {
@@ -167,7 +167,7 @@ export const ListMessageApiRequestCodec: thrift.IStructCodec<IListMessageApiRequ
                 chat_id: _args.chat_id,
                 before_id: _args.before_id,
                 after_id: _args.after_id,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -182,7 +182,7 @@ export class ListMessageApiRequest extends thrift.StructLike implements IListMes
     public chat_id?: thrift.Int64;
     public before_id?: thrift.Int64;
     public after_id?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         conversation_id: {
@@ -237,9 +237,9 @@ export class ListMessageApiRequest extends thrift.StructLike implements IListMes
             const value_13: thrift.Int64 = (typeof args.after_id === "number" ? new thrift.Int64(args.after_id) : typeof args.after_id === "string" ? thrift.Int64.fromDecimalString(args.after_id) : args.after_id);
             this.after_id = value_13;
         }
-        if (args.Base != null) {
-            const value_14: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_14;
+        if (args.base != null) {
+            const value_14: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_14;
         }
     }
     public static read(input: thrift.TProtocol): ListMessageApiRequest {

@@ -10,13 +10,13 @@ export interface IUpdatePluginMetaResponse {
     code?: thrift.Int64;
     msg?: string;
     edit_version?: number;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IUpdatePluginMetaResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     edit_version?: number;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const UpdatePluginMetaResponseCodec: thrift.IStructCodec<IUpdatePluginMetaResponseArgs, IUpdatePluginMetaResponse> = {
     encode(args: IUpdatePluginMetaResponseArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const UpdatePluginMetaResponseCodec: thrift.IStructCodec<IUpdatePluginMet
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             edit_version: args.edit_version,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("UpdatePluginMetaResponse");
         if (obj.code != null) {
@@ -109,7 +109,7 @@ export const UpdatePluginMetaResponseCodec: thrift.IStructCodec<IUpdatePluginMet
             code: _args.code,
             msg: _args.msg,
             edit_version: _args.edit_version,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -117,7 +117,7 @@ export class UpdatePluginMetaResponse extends thrift.StructLike implements IUpda
     public code?: thrift.Int64;
     public msg?: string;
     public edit_version?: number;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUpdatePluginMetaResponseArgs = {}) {
@@ -134,9 +134,9 @@ export class UpdatePluginMetaResponse extends thrift.StructLike implements IUpda
             const value_7: number = args.edit_version;
             this.edit_version = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): UpdatePluginMetaResponse {

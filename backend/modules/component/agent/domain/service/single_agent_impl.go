@@ -63,9 +63,9 @@ func (s singleAgentImpl) UpdateSingleAgentDraft(ctx context.Context, agentInfo *
 		//	return item.GetApiId()
 		//})
 		//err = crossplugin.DefaultSVC().BindAgentTools(ctx, agentInfo.AgentID, toolIDs)
-		if err != nil {
-			return fmt.Errorf("bind agent tools failed, err=%v", err)
-		}
+		//if err != nil {
+		//	return fmt.Errorf("bind agent tools failed, err=%v", err)
+		//}
 	}
 
 	return s.AgentDraftRepo.Save(ctx, agentInfo)

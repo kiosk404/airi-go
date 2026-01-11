@@ -13,7 +13,7 @@ export interface ILibraryResourceListResponse {
     resource_list?: Array<RESOURCE_COMMON_NS.IResourceInfo>;
     cursor?: string;
     has_more?: boolean;
-    BaseResp: BASE_NS.IBaseResp;
+    base_resp: BASE_NS.IBaseResp;
 }
 export interface ILibraryResourceListResponseArgs {
     code?: number | string | thrift.Int64;
@@ -21,7 +21,7 @@ export interface ILibraryResourceListResponseArgs {
     resource_list?: Array<RESOURCE_COMMON_NS.IResourceInfoArgs>;
     cursor?: string;
     has_more?: boolean;
-    BaseResp: BASE_NS.IBaseRespArgs;
+    base_resp: BASE_NS.IBaseRespArgs;
 }
 export const LibraryResourceListResponseCodec: thrift.IStructCodec<ILibraryResourceListResponseArgs, ILibraryResourceListResponse> = {
     encode(args: ILibraryResourceListResponseArgs, output: thrift.TProtocol): void {
@@ -31,7 +31,7 @@ export const LibraryResourceListResponseCodec: thrift.IStructCodec<ILibraryResou
             resource_list: args.resource_list,
             cursor: args.cursor,
             has_more: args.has_more,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("LibraryResourceListResponse");
         if (obj.code != null) {
@@ -161,7 +161,7 @@ export const LibraryResourceListResponseCodec: thrift.IStructCodec<ILibraryResou
                 resource_list: _args.resource_list,
                 cursor: _args.cursor,
                 has_more: _args.has_more,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -175,7 +175,7 @@ export class LibraryResourceListResponse extends thrift.StructLike implements IL
     public resource_list?: Array<RESOURCE_COMMON_NS.IResourceInfo>;
     public cursor?: string;
     public has_more?: boolean;
-    public BaseResp: BASE_NS.IBaseResp;
+    public base_resp: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ILibraryResourceListResponseArgs) {
@@ -204,9 +204,9 @@ export class LibraryResourceListResponse extends thrift.StructLike implements IL
             const value_13: boolean = args.has_more;
             this.has_more = value_13;
         }
-        if (args.BaseResp != null) {
-            const value_14: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_14;
+        if (args.base_resp != null) {
+            const value_14: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_14;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

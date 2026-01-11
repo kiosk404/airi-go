@@ -10,13 +10,13 @@ export interface IUnlockPluginEditResponse {
     code: number;
     msg: string;
     released: boolean;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IUnlockPluginEditResponseArgs {
     code: number;
     msg: string;
     released: boolean;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const UnlockPluginEditResponseCodec: thrift.IStructCodec<IUnlockPluginEditResponseArgs, IUnlockPluginEditResponse> = {
     encode(args: IUnlockPluginEditResponseArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const UnlockPluginEditResponseCodec: thrift.IStructCodec<IUnlockPluginEdi
             code: args.code,
             msg: args.msg,
             released: args.released,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("UnlockPluginEditResponse");
         if (obj.code != null) {
@@ -119,7 +119,7 @@ export const UnlockPluginEditResponseCodec: thrift.IStructCodec<IUnlockPluginEdi
                 code: _args.code,
                 msg: _args.msg,
                 released: _args.released,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -131,7 +131,7 @@ export class UnlockPluginEditResponse extends thrift.StructLike implements IUnlo
     public code: number;
     public msg: string;
     public released: boolean;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUnlockPluginEditResponseArgs) {
@@ -157,9 +157,9 @@ export class UnlockPluginEditResponse extends thrift.StructLike implements IUnlo
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[released] is unset!");
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): UnlockPluginEditResponse {

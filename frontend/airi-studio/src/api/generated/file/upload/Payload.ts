@@ -8,19 +8,19 @@ import * as thrift from "@creditkarma/thrift-server-core";
 export interface IPayload {
     hash?: string;
     key?: string;
-    uploadID?: string;
+    upload_i_d?: string;
 }
 export interface IPayloadArgs {
     hash?: string;
     key?: string;
-    uploadID?: string;
+    upload_i_d?: string;
 }
 export const PayloadCodec: thrift.IStructCodec<IPayloadArgs, IPayload> = {
     encode(args: IPayloadArgs, output: thrift.TProtocol): void {
         const obj: any = {
             hash: args.hash,
             key: args.key,
-            uploadID: args.uploadID
+            uploadID: args.upload_i_d
         };
         output.writeStructBegin("Payload");
         if (obj.hash != null) {
@@ -90,14 +90,14 @@ export const PayloadCodec: thrift.IStructCodec<IPayloadArgs, IPayload> = {
         return {
             hash: _args.hash,
             key: _args.key,
-            uploadID: _args.uploadID
+            upload_i_d: _args.uploadID
         };
     }
 };
 export class Payload extends thrift.StructLike implements IPayload {
     public hash?: string;
     public key?: string;
-    public uploadID?: string;
+    public upload_i_d?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IPayloadArgs = {}) {
@@ -110,9 +110,9 @@ export class Payload extends thrift.StructLike implements IPayload {
             const value_5: string = args.key;
             this.key = value_5;
         }
-        if (args.uploadID != null) {
-            const value_6: string = args.uploadID;
-            this.uploadID = value_6;
+        if (args.upload_i_d != null) {
+            const value_6: string = args.upload_i_d;
+            this.upload_i_d = value_6;
         }
     }
     public static read(input: thrift.TProtocol): Payload {

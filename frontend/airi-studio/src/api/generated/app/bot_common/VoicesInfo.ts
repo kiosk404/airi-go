@@ -7,33 +7,33 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as DefaultUserInputType from "./DefaultUserInputType";
 export interface IVoicesInfo {
-    Muted?: boolean;
-    I18nLangVoice?: Map<string, thrift.Int64>;
-    I18nLangVoiceStr?: Map<string, string>;
-    Autoplay?: boolean;
-    AutoplayVoice?: Map<string, thrift.Int64>;
-    CloseVoiceCall?: boolean;
-    DefaultUserInputType?: DefaultUserInputType.DefaultUserInputType;
+    muted?: boolean;
+    i18n_lang_voice?: Map<string, thrift.Int64>;
+    i18n_lang_voice_str?: Map<string, string>;
+    autoplay?: boolean;
+    autoplay_voice?: Map<string, thrift.Int64>;
+    close_voice_call?: boolean;
+    default_user_input_type?: DefaultUserInputType.DefaultUserInputType;
 }
 export interface IVoicesInfoArgs {
-    Muted?: boolean;
-    I18nLangVoice?: Map<string, number | string | thrift.Int64>;
-    I18nLangVoiceStr?: Map<string, string>;
-    Autoplay?: boolean;
-    AutoplayVoice?: Map<string, number | string | thrift.Int64>;
-    CloseVoiceCall?: boolean;
-    DefaultUserInputType?: DefaultUserInputType.DefaultUserInputType;
+    muted?: boolean;
+    i18n_lang_voice?: Map<string, number | string | thrift.Int64>;
+    i18n_lang_voice_str?: Map<string, string>;
+    autoplay?: boolean;
+    autoplay_voice?: Map<string, number | string | thrift.Int64>;
+    close_voice_call?: boolean;
+    default_user_input_type?: DefaultUserInputType.DefaultUserInputType;
 }
 export const VoicesInfoCodec: thrift.IStructCodec<IVoicesInfoArgs, IVoicesInfo> = {
     encode(args: IVoicesInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Muted: args.Muted,
-            I18nLangVoice: args.I18nLangVoice,
-            I18nLangVoiceStr: args.I18nLangVoiceStr,
-            Autoplay: args.Autoplay,
-            AutoplayVoice: args.AutoplayVoice,
-            CloseVoiceCall: args.CloseVoiceCall,
-            DefaultUserInputType: args.DefaultUserInputType
+            Muted: args.muted,
+            I18nLangVoice: args.i18n_lang_voice,
+            I18nLangVoiceStr: args.i18n_lang_voice_str,
+            Autoplay: args.autoplay,
+            AutoplayVoice: args.autoplay_voice,
+            CloseVoiceCall: args.close_voice_call,
+            DefaultUserInputType: args.default_user_input_type
         };
         output.writeStructBegin("VoicesInfo");
         if (obj.Muted != null) {
@@ -196,92 +196,92 @@ export const VoicesInfoCodec: thrift.IStructCodec<IVoicesInfoArgs, IVoicesInfo> 
         }
         input.readStructEnd();
         return {
-            Muted: _args.Muted,
-            I18nLangVoice: _args.I18nLangVoice,
-            I18nLangVoiceStr: _args.I18nLangVoiceStr,
-            Autoplay: _args.Autoplay,
-            AutoplayVoice: _args.AutoplayVoice,
-            CloseVoiceCall: _args.CloseVoiceCall,
-            DefaultUserInputType: _args.DefaultUserInputType
+            muted: _args.Muted,
+            i18n_lang_voice: _args.I18nLangVoice,
+            i18n_lang_voice_str: _args.I18nLangVoiceStr,
+            autoplay: _args.Autoplay,
+            autoplay_voice: _args.AutoplayVoice,
+            close_voice_call: _args.CloseVoiceCall,
+            default_user_input_type: _args.DefaultUserInputType
         };
     }
 };
 export class VoicesInfo extends thrift.StructLike implements IVoicesInfo {
-    public Muted?: boolean;
-    public I18nLangVoice?: Map<string, thrift.Int64>;
-    public I18nLangVoiceStr?: Map<string, string>;
-    public Autoplay?: boolean;
-    public AutoplayVoice?: Map<string, thrift.Int64>;
-    public CloseVoiceCall?: boolean;
-    public DefaultUserInputType?: DefaultUserInputType.DefaultUserInputType;
+    public muted?: boolean;
+    public i18n_lang_voice?: Map<string, thrift.Int64>;
+    public i18n_lang_voice_str?: Map<string, string>;
+    public autoplay?: boolean;
+    public autoplay_voice?: Map<string, thrift.Int64>;
+    public close_voice_call?: boolean;
+    public default_user_input_type?: DefaultUserInputType.DefaultUserInputType;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Muted: {
+        muted: {
             'api.body': "muted"
         },
-        I18nLangVoice: {
+        i18n_lang_voice: {
             'api.body': "i18n_lang_voice"
         },
-        I18nLangVoiceStr: {
+        i18n_lang_voice_str: {
             'api.body': "i18n_lang_voice_str"
         },
-        Autoplay: {
+        autoplay: {
             'api.body': "autoplay"
         },
-        AutoplayVoice: {
+        autoplay_voice: {
             'api.body': "autoplay_voice"
         },
-        CloseVoiceCall: {
+        close_voice_call: {
             'api.body': "voice_call"
         },
-        DefaultUserInputType: {
+        default_user_input_type: {
             'api.body': "default_user_input_type"
         }
     };
     constructor(args: IVoicesInfoArgs = {}) {
         super();
-        if (args.Muted != null) {
-            const value_14: boolean = args.Muted;
-            this.Muted = value_14;
+        if (args.muted != null) {
+            const value_14: boolean = args.muted;
+            this.muted = value_14;
         }
-        if (args.I18nLangVoice != null) {
+        if (args.i18n_lang_voice != null) {
             const value_15: Map<string, thrift.Int64> = new Map<string, thrift.Int64>();
-            args.I18nLangVoice.forEach((value_21: number | string | thrift.Int64, key_7: string): void => {
+            args.i18n_lang_voice.forEach((value_21: number | string | thrift.Int64, key_7: string): void => {
                 const value_22: thrift.Int64 = (typeof value_21 === "number" ? new thrift.Int64(value_21) : typeof value_21 === "string" ? thrift.Int64.fromDecimalString(value_21) : value_21);
                 const key_8: string = key_7;
                 value_15.set(key_8, value_22);
             });
-            this.I18nLangVoice = value_15;
+            this.i18n_lang_voice = value_15;
         }
-        if (args.I18nLangVoiceStr != null) {
+        if (args.i18n_lang_voice_str != null) {
             const value_16: Map<string, string> = new Map<string, string>();
-            args.I18nLangVoiceStr.forEach((value_23: string, key_9: string): void => {
+            args.i18n_lang_voice_str.forEach((value_23: string, key_9: string): void => {
                 const value_24: string = value_23;
                 const key_10: string = key_9;
                 value_16.set(key_10, value_24);
             });
-            this.I18nLangVoiceStr = value_16;
+            this.i18n_lang_voice_str = value_16;
         }
-        if (args.Autoplay != null) {
-            const value_17: boolean = args.Autoplay;
-            this.Autoplay = value_17;
+        if (args.autoplay != null) {
+            const value_17: boolean = args.autoplay;
+            this.autoplay = value_17;
         }
-        if (args.AutoplayVoice != null) {
+        if (args.autoplay_voice != null) {
             const value_18: Map<string, thrift.Int64> = new Map<string, thrift.Int64>();
-            args.AutoplayVoice.forEach((value_25: number | string | thrift.Int64, key_11: string): void => {
+            args.autoplay_voice.forEach((value_25: number | string | thrift.Int64, key_11: string): void => {
                 const value_26: thrift.Int64 = (typeof value_25 === "number" ? new thrift.Int64(value_25) : typeof value_25 === "string" ? thrift.Int64.fromDecimalString(value_25) : value_25);
                 const key_12: string = key_11;
                 value_18.set(key_12, value_26);
             });
-            this.AutoplayVoice = value_18;
+            this.autoplay_voice = value_18;
         }
-        if (args.CloseVoiceCall != null) {
-            const value_19: boolean = args.CloseVoiceCall;
-            this.CloseVoiceCall = value_19;
+        if (args.close_voice_call != null) {
+            const value_19: boolean = args.close_voice_call;
+            this.close_voice_call = value_19;
         }
-        if (args.DefaultUserInputType != null) {
-            const value_20: DefaultUserInputType.DefaultUserInputType = args.DefaultUserInputType;
-            this.DefaultUserInputType = value_20;
+        if (args.default_user_input_type != null) {
+            const value_20: DefaultUserInputType.DefaultUserInputType = args.default_user_input_type;
+            this.default_user_input_type = value_20;
         }
     }
     public static read(input: thrift.TProtocol): VoicesInfo {

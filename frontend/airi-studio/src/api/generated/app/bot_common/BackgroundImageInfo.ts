@@ -7,18 +7,18 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as BackgroundImageDetail from "./BackgroundImageDetail";
 export interface IBackgroundImageInfo {
-    WebBackgroundImage?: BackgroundImageDetail.IBackgroundImageDetail;
-    MobileBackgroundImage?: BackgroundImageDetail.IBackgroundImageDetail;
+    web_background_image?: BackgroundImageDetail.IBackgroundImageDetail;
+    mobile_background_image?: BackgroundImageDetail.IBackgroundImageDetail;
 }
 export interface IBackgroundImageInfoArgs {
-    WebBackgroundImage?: BackgroundImageDetail.IBackgroundImageDetailArgs;
-    MobileBackgroundImage?: BackgroundImageDetail.IBackgroundImageDetailArgs;
+    web_background_image?: BackgroundImageDetail.IBackgroundImageDetailArgs;
+    mobile_background_image?: BackgroundImageDetail.IBackgroundImageDetailArgs;
 }
 export const BackgroundImageInfoCodec: thrift.IStructCodec<IBackgroundImageInfoArgs, IBackgroundImageInfo> = {
     encode(args: IBackgroundImageInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            WebBackgroundImage: args.WebBackgroundImage,
-            MobileBackgroundImage: args.MobileBackgroundImage
+            WebBackgroundImage: args.web_background_image,
+            MobileBackgroundImage: args.mobile_background_image
         };
         output.writeStructBegin("BackgroundImageInfo");
         if (obj.WebBackgroundImage != null) {
@@ -72,32 +72,32 @@ export const BackgroundImageInfoCodec: thrift.IStructCodec<IBackgroundImageInfoA
         }
         input.readStructEnd();
         return {
-            WebBackgroundImage: _args.WebBackgroundImage,
-            MobileBackgroundImage: _args.MobileBackgroundImage
+            web_background_image: _args.WebBackgroundImage,
+            mobile_background_image: _args.MobileBackgroundImage
         };
     }
 };
 export class BackgroundImageInfo extends thrift.StructLike implements IBackgroundImageInfo {
-    public WebBackgroundImage?: BackgroundImageDetail.IBackgroundImageDetail;
-    public MobileBackgroundImage?: BackgroundImageDetail.IBackgroundImageDetail;
+    public web_background_image?: BackgroundImageDetail.IBackgroundImageDetail;
+    public mobile_background_image?: BackgroundImageDetail.IBackgroundImageDetail;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        WebBackgroundImage: {
+        web_background_image: {
             'api.body': "web_background_image"
         },
-        MobileBackgroundImage: {
+        mobile_background_image: {
             'api.body': "mobile_background_image"
         }
     };
     constructor(args: IBackgroundImageInfoArgs = {}) {
         super();
-        if (args.WebBackgroundImage != null) {
-            const value_3: BackgroundImageDetail.IBackgroundImageDetail = new BackgroundImageDetail.BackgroundImageDetail(args.WebBackgroundImage);
-            this.WebBackgroundImage = value_3;
+        if (args.web_background_image != null) {
+            const value_3: BackgroundImageDetail.IBackgroundImageDetail = new BackgroundImageDetail.BackgroundImageDetail(args.web_background_image);
+            this.web_background_image = value_3;
         }
-        if (args.MobileBackgroundImage != null) {
-            const value_4: BackgroundImageDetail.IBackgroundImageDetail = new BackgroundImageDetail.BackgroundImageDetail(args.MobileBackgroundImage);
-            this.MobileBackgroundImage = value_4;
+        if (args.mobile_background_image != null) {
+            const value_4: BackgroundImageDetail.IBackgroundImageDetail = new BackgroundImageDetail.BackgroundImageDetail(args.mobile_background_image);
+            this.mobile_background_image = value_4;
         }
     }
     public static read(input: thrift.TProtocol): BackgroundImageInfo {

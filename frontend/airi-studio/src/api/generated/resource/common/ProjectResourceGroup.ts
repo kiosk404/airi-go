@@ -8,18 +8,18 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as ProjectResourceGroupType from "./ProjectResourceGroupType";
 import * as ProjectResourceInfo from "./ProjectResourceInfo";
 export interface IProjectResourceGroup {
-    GroupType?: ProjectResourceGroupType.ProjectResourceGroupType;
-    ResourceList?: Array<ProjectResourceInfo.IProjectResourceInfo>;
+    group_type?: ProjectResourceGroupType.ProjectResourceGroupType;
+    resource_list?: Array<ProjectResourceInfo.IProjectResourceInfo>;
 }
 export interface IProjectResourceGroupArgs {
-    GroupType?: ProjectResourceGroupType.ProjectResourceGroupType;
-    ResourceList?: Array<ProjectResourceInfo.IProjectResourceInfoArgs>;
+    group_type?: ProjectResourceGroupType.ProjectResourceGroupType;
+    resource_list?: Array<ProjectResourceInfo.IProjectResourceInfoArgs>;
 }
 export const ProjectResourceGroupCodec: thrift.IStructCodec<IProjectResourceGroupArgs, IProjectResourceGroup> = {
     encode(args: IProjectResourceGroupArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            GroupType: args.GroupType,
-            ResourceList: args.ResourceList
+            GroupType: args.group_type,
+            ResourceList: args.resource_list
         };
         output.writeStructBegin("ProjectResourceGroup");
         if (obj.GroupType != null) {
@@ -84,38 +84,38 @@ export const ProjectResourceGroupCodec: thrift.IStructCodec<IProjectResourceGrou
         }
         input.readStructEnd();
         return {
-            GroupType: _args.GroupType,
-            ResourceList: _args.ResourceList
+            group_type: _args.GroupType,
+            resource_list: _args.ResourceList
         };
     }
 };
 export class ProjectResourceGroup extends thrift.StructLike implements IProjectResourceGroup {
-    public GroupType?: ProjectResourceGroupType.ProjectResourceGroupType;
-    public ResourceList?: Array<ProjectResourceInfo.IProjectResourceInfo>;
+    public group_type?: ProjectResourceGroupType.ProjectResourceGroupType;
+    public resource_list?: Array<ProjectResourceInfo.IProjectResourceInfo>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        GroupType: {
+        group_type: {
             'go.tag': "json:\"group_type\"",
             'agw.key': "group_type"
         },
-        ResourceList: {
+        resource_list: {
             'go.tag': "json:\"resource_list\"",
             'agw.key': "resource_list"
         }
     };
     constructor(args: IProjectResourceGroupArgs = {}) {
         super();
-        if (args.GroupType != null) {
-            const value_5: ProjectResourceGroupType.ProjectResourceGroupType = args.GroupType;
-            this.GroupType = value_5;
+        if (args.group_type != null) {
+            const value_5: ProjectResourceGroupType.ProjectResourceGroupType = args.group_type;
+            this.group_type = value_5;
         }
-        if (args.ResourceList != null) {
+        if (args.resource_list != null) {
             const value_6: Array<ProjectResourceInfo.IProjectResourceInfo> = new Array<ProjectResourceInfo.IProjectResourceInfo>();
-            args.ResourceList.forEach((value_7: ProjectResourceInfo.IProjectResourceInfoArgs): void => {
+            args.resource_list.forEach((value_7: ProjectResourceInfo.IProjectResourceInfoArgs): void => {
                 const value_8: ProjectResourceInfo.IProjectResourceInfo = new ProjectResourceInfo.ProjectResourceInfo(value_7);
                 value_6.push(value_8);
             });
-            this.ResourceList = value_6;
+            this.resource_list = value_6;
         }
     }
     public static read(input: thrift.TProtocol): ProjectResourceGroup {

@@ -11,13 +11,13 @@ export interface IRegisterPluginResponse {
     code?: thrift.Int64;
     msg?: string;
     data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IRegisterPluginData;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IRegisterPluginResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IRegisterPluginDataArgs;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const RegisterPluginResponseCodec: thrift.IStructCodec<IRegisterPluginResponseArgs, IRegisterPluginResponse> = {
     encode(args: IRegisterPluginResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const RegisterPluginResponseCodec: thrift.IStructCodec<IRegisterPluginRes
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             data: args.data,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("RegisterPluginResponse");
         if (obj.code != null) {
@@ -110,7 +110,7 @@ export const RegisterPluginResponseCodec: thrift.IStructCodec<IRegisterPluginRes
             code: _args.code,
             msg: _args.msg,
             data: _args.data,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -118,7 +118,7 @@ export class RegisterPluginResponse extends thrift.StructLike implements IRegist
     public code?: thrift.Int64;
     public msg?: string;
     public data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IRegisterPluginData;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IRegisterPluginResponseArgs = {}) {
@@ -135,9 +135,9 @@ export class RegisterPluginResponse extends thrift.StructLike implements IRegist
             const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IRegisterPluginData = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.RegisterPluginData(args.data);
             this.data = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): RegisterPluginResponse {

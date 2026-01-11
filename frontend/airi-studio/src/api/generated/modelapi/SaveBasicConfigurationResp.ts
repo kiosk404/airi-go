@@ -9,19 +9,19 @@ import * as __ROOT_NAMESPACE__ from "../base";
 export interface ISaveBasicConfigurationResp {
     code: thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface ISaveBasicConfigurationRespArgs {
     code: number | string | thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const SaveBasicConfigurationRespCodec: thrift.IStructCodec<ISaveBasicConfigurationRespArgs, ISaveBasicConfigurationResp> = {
     encode(args: ISaveBasicConfigurationRespArgs, output: thrift.TProtocol): void {
         const obj: any = {
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("SaveBasicConfigurationResp");
         if (obj.code != null) {
@@ -101,7 +101,7 @@ export const SaveBasicConfigurationRespCodec: thrift.IStructCodec<ISaveBasicConf
             return {
                 code: _args.code,
                 msg: _args.msg,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -112,10 +112,10 @@ export const SaveBasicConfigurationRespCodec: thrift.IStructCodec<ISaveBasicConf
 export class SaveBasicConfigurationResp extends thrift.StructLike implements ISaveBasicConfigurationResp {
     public code: thrift.Int64;
     public msg: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        BaseResp: {
+        base_resp: {
             'api.none': "true"
         }
     };
@@ -135,9 +135,9 @@ export class SaveBasicConfigurationResp extends thrift.StructLike implements ISa
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[msg] is unset!");
         }
-        if (args.BaseResp != null) {
-            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_6;
+        if (args.base_resp != null) {
+            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_6;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

@@ -7,18 +7,18 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as SocietyVisibility from "./SocietyVisibility";
 export interface ISocietyVisibiltyConfig {
-    VisibilityType?: SocietyVisibility.SocietyVisibility;
-    VisibilityRoles?: Array<string>;
+    visibility_type?: SocietyVisibility.SocietyVisibility;
+    visibility_roles?: Array<string>;
 }
 export interface ISocietyVisibiltyConfigArgs {
-    VisibilityType?: SocietyVisibility.SocietyVisibility;
-    VisibilityRoles?: Array<string>;
+    visibility_type?: SocietyVisibility.SocietyVisibility;
+    visibility_roles?: Array<string>;
 }
 export const SocietyVisibiltyConfigCodec: thrift.IStructCodec<ISocietyVisibiltyConfigArgs, ISocietyVisibiltyConfig> = {
     encode(args: ISocietyVisibiltyConfigArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            VisibilityType: args.VisibilityType,
-            VisibilityRoles: args.VisibilityRoles
+            VisibilityType: args.visibility_type,
+            VisibilityRoles: args.visibility_roles
         };
         output.writeStructBegin("SocietyVisibiltyConfig");
         if (obj.VisibilityType != null) {
@@ -83,38 +83,38 @@ export const SocietyVisibiltyConfigCodec: thrift.IStructCodec<ISocietyVisibiltyC
         }
         input.readStructEnd();
         return {
-            VisibilityType: _args.VisibilityType,
-            VisibilityRoles: _args.VisibilityRoles
+            visibility_type: _args.VisibilityType,
+            visibility_roles: _args.VisibilityRoles
         };
     }
 };
 export class SocietyVisibiltyConfig extends thrift.StructLike implements ISocietyVisibiltyConfig {
-    public VisibilityType?: SocietyVisibility.SocietyVisibility;
-    public VisibilityRoles?: Array<string>;
+    public visibility_type?: SocietyVisibility.SocietyVisibility;
+    public visibility_roles?: Array<string>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        VisibilityType: {
+        visibility_type: {
             'api.body': "visibility_type",
             'go.tag': "json:\"visibility_type,omitempty\""
         },
-        VisibilityRoles: {
+        visibility_roles: {
             'api.body': "visibility_roles",
             'go.tag': "json:\"visibility_roles,omitempty\""
         }
     };
     constructor(args: ISocietyVisibiltyConfigArgs = {}) {
         super();
-        if (args.VisibilityType != null) {
-            const value_5: SocietyVisibility.SocietyVisibility = args.VisibilityType;
-            this.VisibilityType = value_5;
+        if (args.visibility_type != null) {
+            const value_5: SocietyVisibility.SocietyVisibility = args.visibility_type;
+            this.visibility_type = value_5;
         }
-        if (args.VisibilityRoles != null) {
+        if (args.visibility_roles != null) {
             const value_6: Array<string> = new Array<string>();
-            args.VisibilityRoles.forEach((value_7: string): void => {
+            args.visibility_roles.forEach((value_7: string): void => {
                 const value_8: string = value_7;
                 value_6.push(value_8);
             });
-            this.VisibilityRoles = value_6;
+            this.visibility_roles = value_6;
         }
     }
     public static read(input: thrift.TProtocol): SocietyVisibiltyConfig {

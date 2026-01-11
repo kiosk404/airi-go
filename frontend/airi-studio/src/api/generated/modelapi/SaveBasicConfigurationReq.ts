@@ -9,17 +9,17 @@ import * as BasicConfiguration from "./BasicConfiguration";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface ISaveBasicConfigurationReq {
     configuration?: BasicConfiguration.IBasicConfiguration;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface ISaveBasicConfigurationReqArgs {
     configuration?: BasicConfiguration.IBasicConfigurationArgs;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const SaveBasicConfigurationReqCodec: thrift.IStructCodec<ISaveBasicConfigurationReqArgs, ISaveBasicConfigurationReq> = {
     encode(args: ISaveBasicConfigurationReqArgs, output: thrift.TProtocol): void {
         const obj: any = {
             configuration: args.configuration,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("SaveBasicConfigurationReq");
         if (obj.configuration != null) {
@@ -74,13 +74,13 @@ export const SaveBasicConfigurationReqCodec: thrift.IStructCodec<ISaveBasicConfi
         input.readStructEnd();
         return {
             configuration: _args.configuration,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class SaveBasicConfigurationReq extends thrift.StructLike implements ISaveBasicConfigurationReq {
     public configuration?: BasicConfiguration.IBasicConfiguration;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ISaveBasicConfigurationReqArgs = {}) {
@@ -89,9 +89,9 @@ export class SaveBasicConfigurationReq extends thrift.StructLike implements ISav
             const value_3: BasicConfiguration.IBasicConfiguration = new BasicConfiguration.BasicConfiguration(args.configuration);
             this.configuration = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): SaveBasicConfigurationReq {

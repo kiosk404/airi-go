@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ILayoutInfo {
-    WorkflowId?: string;
-    PluginId?: string;
+    workflow_id?: string;
+    plugin_id?: string;
 }
 export interface ILayoutInfoArgs {
-    WorkflowId?: string;
-    PluginId?: string;
+    workflow_id?: string;
+    plugin_id?: string;
 }
 export const LayoutInfoCodec: thrift.IStructCodec<ILayoutInfoArgs, ILayoutInfo> = {
     encode(args: ILayoutInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            WorkflowId: args.WorkflowId,
-            PluginId: args.PluginId
+            WorkflowId: args.workflow_id,
+            PluginId: args.plugin_id
         };
         output.writeStructBegin("LayoutInfo");
         if (obj.WorkflowId != null) {
@@ -71,32 +71,32 @@ export const LayoutInfoCodec: thrift.IStructCodec<ILayoutInfoArgs, ILayoutInfo> 
         }
         input.readStructEnd();
         return {
-            WorkflowId: _args.WorkflowId,
-            PluginId: _args.PluginId
+            workflow_id: _args.WorkflowId,
+            plugin_id: _args.PluginId
         };
     }
 };
 export class LayoutInfo extends thrift.StructLike implements ILayoutInfo {
-    public WorkflowId?: string;
-    public PluginId?: string;
+    public workflow_id?: string;
+    public plugin_id?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        WorkflowId: {
+        workflow_id: {
             'api.body': "workflow_id"
         },
-        PluginId: {
+        plugin_id: {
             'api.body': "plugin_id"
         }
     };
     constructor(args: ILayoutInfoArgs = {}) {
         super();
-        if (args.WorkflowId != null) {
-            const value_3: string = args.WorkflowId;
-            this.WorkflowId = value_3;
+        if (args.workflow_id != null) {
+            const value_3: string = args.workflow_id;
+            this.workflow_id = value_3;
         }
-        if (args.PluginId != null) {
-            const value_4: string = args.PluginId;
-            this.PluginId = value_4;
+        if (args.plugin_id != null) {
+            const value_4: string = args.plugin_id;
+            this.plugin_id = value_4;
         }
     }
     public static read(input: thrift.TProtocol): LayoutInfo {

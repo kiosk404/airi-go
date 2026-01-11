@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ILastError {
-    Code: number;
-    Msg: string;
+    code: number;
+    msg: string;
 }
 export interface ILastErrorArgs {
-    Code: number;
-    Msg: string;
+    code: number;
+    msg: string;
 }
 export const LastErrorCodec: thrift.IStructCodec<ILastErrorArgs, ILastError> = {
     encode(args: ILastErrorArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Code: args.Code,
-            Msg: args.Msg
+            Code: args.code,
+            Msg: args.msg
         };
         output.writeStructBegin("LastError");
         if (obj.Code != null) {
@@ -78,8 +78,8 @@ export const LastErrorCodec: thrift.IStructCodec<ILastErrorArgs, ILastError> = {
         input.readStructEnd();
         if (_args.Code !== undefined && _args.Msg !== undefined) {
             return {
-                Code: _args.Code,
-                Msg: _args.Msg
+                code: _args.Code,
+                msg: _args.Msg
             };
         }
         else {
@@ -88,29 +88,29 @@ export const LastErrorCodec: thrift.IStructCodec<ILastErrorArgs, ILastError> = {
     }
 };
 export class LastError extends thrift.StructLike implements ILastError {
-    public Code: number;
-    public Msg: string;
+    public code: number;
+    public msg: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Code: {
+        code: {
             'api.body': "code"
         },
-        Msg: {
+        msg: {
             'api.body': "msg"
         }
     };
     constructor(args: ILastErrorArgs) {
         super();
-        if (args.Code != null) {
-            const value_3: number = args.Code;
-            this.Code = value_3;
+        if (args.code != null) {
+            const value_3: number = args.code;
+            this.code = value_3;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Code] is unset!");
         }
-        if (args.Msg != null) {
-            const value_4: string = args.Msg;
-            this.Msg = value_4;
+        if (args.msg != null) {
+            const value_4: string = args.msg;
+            this.msg = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Msg] is unset!");

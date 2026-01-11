@@ -8,24 +8,24 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as PromptResource from "./PromptResource";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetPromptResourceInfoResponse {
-    Data?: PromptResource.IPromptResource;
+    data?: PromptResource.IPromptResource;
     code: thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IGetPromptResourceInfoResponseArgs {
-    Data?: PromptResource.IPromptResourceArgs;
+    data?: PromptResource.IPromptResourceArgs;
     code: number | string | thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const GetPromptResourceInfoResponseCodec: thrift.IStructCodec<IGetPromptResourceInfoResponseArgs, IGetPromptResourceInfoResponse> = {
     encode(args: IGetPromptResourceInfoResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Data: args.Data,
+            Data: args.data,
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetPromptResourceInfoResponse");
         if (obj.Data != null) {
@@ -117,10 +117,10 @@ export const GetPromptResourceInfoResponseCodec: thrift.IStructCodec<IGetPromptR
         input.readStructEnd();
         if (_args.code !== undefined && _args.msg !== undefined && _args.BaseResp !== undefined) {
             return {
-                Data: _args.Data,
+                data: _args.Data,
                 code: _args.code,
                 msg: _args.msg,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -129,21 +129,21 @@ export const GetPromptResourceInfoResponseCodec: thrift.IStructCodec<IGetPromptR
     }
 };
 export class GetPromptResourceInfoResponse extends thrift.StructLike implements IGetPromptResourceInfoResponse {
-    public Data?: PromptResource.IPromptResource;
+    public data?: PromptResource.IPromptResource;
     public code: thrift.Int64;
     public msg: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Data: {
+        data: {
             'api.body': "data"
         }
     };
     constructor(args: IGetPromptResourceInfoResponseArgs) {
         super();
-        if (args.Data != null) {
-            const value_5: PromptResource.IPromptResource = new PromptResource.PromptResource(args.Data);
-            this.Data = value_5;
+        if (args.data != null) {
+            const value_5: PromptResource.IPromptResource = new PromptResource.PromptResource(args.data);
+            this.data = value_5;
         }
         if (args.code != null) {
             const value_6: thrift.Int64 = (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code);
@@ -159,9 +159,9 @@ export class GetPromptResourceInfoResponse extends thrift.StructLike implements 
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[msg] is unset!");
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

@@ -6,24 +6,24 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ICanvasPosition {
-    Width?: number;
-    Height?: number;
-    Left?: number;
-    Top?: number;
+    width?: number;
+    height?: number;
+    left?: number;
+    top?: number;
 }
 export interface ICanvasPositionArgs {
-    Width?: number;
-    Height?: number;
-    Left?: number;
-    Top?: number;
+    width?: number;
+    height?: number;
+    left?: number;
+    top?: number;
 }
 export const CanvasPositionCodec: thrift.IStructCodec<ICanvasPositionArgs, ICanvasPosition> = {
     encode(args: ICanvasPositionArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Width: args.Width,
-            Height: args.Height,
-            Left: args.Left,
-            Top: args.Top
+            Width: args.width,
+            Height: args.height,
+            Left: args.left,
+            Top: args.top
         };
         output.writeStructBegin("CanvasPosition");
         if (obj.Width != null) {
@@ -105,50 +105,50 @@ export const CanvasPositionCodec: thrift.IStructCodec<ICanvasPositionArgs, ICanv
         }
         input.readStructEnd();
         return {
-            Width: _args.Width,
-            Height: _args.Height,
-            Left: _args.Left,
-            Top: _args.Top
+            width: _args.Width,
+            height: _args.Height,
+            left: _args.Left,
+            top: _args.Top
         };
     }
 };
 export class CanvasPosition extends thrift.StructLike implements ICanvasPosition {
-    public Width?: number;
-    public Height?: number;
-    public Left?: number;
-    public Top?: number;
+    public width?: number;
+    public height?: number;
+    public left?: number;
+    public top?: number;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Width: {
+        width: {
             'api.body': "width"
         },
-        Height: {
+        height: {
             'api.body': "height"
         },
-        Left: {
+        left: {
             'api.body': "left"
         },
-        Top: {
+        top: {
             'api.body': "top"
         }
     };
     constructor(args: ICanvasPositionArgs = {}) {
         super();
-        if (args.Width != null) {
-            const value_5: number = args.Width;
-            this.Width = value_5;
+        if (args.width != null) {
+            const value_5: number = args.width;
+            this.width = value_5;
         }
-        if (args.Height != null) {
-            const value_6: number = args.Height;
-            this.Height = value_6;
+        if (args.height != null) {
+            const value_6: number = args.height;
+            this.height = value_6;
         }
-        if (args.Left != null) {
-            const value_7: number = args.Left;
-            this.Left = value_7;
+        if (args.left != null) {
+            const value_7: number = args.left;
+            this.left = value_7;
         }
-        if (args.Top != null) {
-            const value_8: number = args.Top;
-            this.Top = value_8;
+        if (args.top != null) {
+            const value_8: number = args.top;
+            this.top = value_8;
         }
     }
     public static read(input: thrift.TProtocol): CanvasPosition {

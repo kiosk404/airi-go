@@ -702,7 +702,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetMessageList(request: __ROOT_NAMESPACE__.IGetMessageListRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IGetMessageListResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetMessageList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetMessageList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetMessageList__ArgsArgs = { request };
         GetMessageList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -740,7 +740,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DeleteMessage(request: __ROOT_NAMESPACE__.IDeleteMessageRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IDeleteMessageResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DeleteMessage", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DeleteMessage", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDeleteMessage__ArgsArgs = { request };
         DeleteMessage__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -778,7 +778,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public BreakMessage(request: __ROOT_NAMESPACE__.IBreakMessageRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IBreakMessageResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("BreakMessage", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("BreakMessage", thrift.MessageType.CALL, this.increment_request_id());
         const args: IBreakMessage__ArgsArgs = { request };
         BreakMessage__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -816,7 +816,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetApiMessageList(request: __ROOT_NAMESPACE__.IListMessageApiRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IListMessageApiResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetApiMessageList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetApiMessageList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetApiMessageList__ArgsArgs = { request };
         GetApiMessageList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -880,19 +880,19 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_GetMessageList": {
-                    resolve(this.process_GetMessageList(requestId, input, output, context));
+                    resolve(this.process__get_message_list(requestId, input, output, context));
                     break;
                 }
                 case "process_DeleteMessage": {
-                    resolve(this.process_DeleteMessage(requestId, input, output, context));
+                    resolve(this.process__delete_message(requestId, input, output, context));
                     break;
                 }
                 case "process_BreakMessage": {
-                    resolve(this.process_BreakMessage(requestId, input, output, context));
+                    resolve(this.process__break_message(requestId, input, output, context));
                     break;
                 }
                 case "process_GetApiMessageList": {
-                    resolve(this.process_GetApiMessageList(requestId, input, output, context));
+                    resolve(this.process__get_api_message_list(requestId, input, output, context));
                     break;
                 }
                 default: {

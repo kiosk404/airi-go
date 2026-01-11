@@ -6,15 +6,15 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IPromptInfo {
-    Prompt?: string;
+    prompt?: string;
 }
 export interface IPromptInfoArgs {
-    Prompt?: string;
+    prompt?: string;
 }
 export const PromptInfoCodec: thrift.IStructCodec<IPromptInfoArgs, IPromptInfo> = {
     encode(args: IPromptInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Prompt: args.Prompt
+            Prompt: args.prompt
         };
         output.writeStructBegin("PromptInfo");
         if (obj.Prompt != null) {
@@ -54,23 +54,24 @@ export const PromptInfoCodec: thrift.IStructCodec<IPromptInfoArgs, IPromptInfo> 
         }
         input.readStructEnd();
         return {
-            Prompt: _args.Prompt
+            prompt: _args.Prompt
         };
     }
 };
 export class PromptInfo extends thrift.StructLike implements IPromptInfo {
-    public Prompt?: string;
+    public prompt?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Prompt: {
-            'api.body': "prompt"
+        prompt: {
+            'api.body': "prompt",
+            'go.tag': "json:\"prompt\""
         }
     };
     constructor(args: IPromptInfoArgs = {}) {
         super();
-        if (args.Prompt != null) {
-            const value_2: string = args.Prompt;
-            this.Prompt = value_2;
+        if (args.prompt != null) {
+            const value_2: string = args.prompt;
+            this.prompt = value_2;
         }
     }
     public static read(input: thrift.TProtocol): PromptInfo {

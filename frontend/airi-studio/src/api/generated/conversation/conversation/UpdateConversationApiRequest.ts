@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IUpdateConversationApiRequest {
-    ConversationID?: thrift.Int64;
-    Name?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    conversation_i_d?: thrift.Int64;
+    name?: string;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IUpdateConversationApiRequestArgs {
-    ConversationID?: number | string | thrift.Int64;
-    Name?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    conversation_i_d?: number | string | thrift.Int64;
+    name?: string;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const UpdateConversationApiRequestCodec: thrift.IStructCodec<IUpdateConversationApiRequestArgs, IUpdateConversationApiRequest> = {
     encode(args: IUpdateConversationApiRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ConversationID: (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID),
-            Name: args.Name,
-            Base: args.Base
+            ConversationID: (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d),
+            Name: args.name,
+            Base: args.base
         };
         output.writeStructBegin("UpdateConversationApiRequest");
         if (obj.ConversationID != null) {
@@ -89,40 +89,40 @@ export const UpdateConversationApiRequestCodec: thrift.IStructCodec<IUpdateConve
         }
         input.readStructEnd();
         return {
-            ConversationID: _args.ConversationID,
-            Name: _args.Name,
-            Base: _args.Base
+            conversation_i_d: _args.ConversationID,
+            name: _args.Name,
+            base: _args.Base
         };
     }
 };
 export class UpdateConversationApiRequest extends thrift.StructLike implements IUpdateConversationApiRequest {
-    public ConversationID?: thrift.Int64;
-    public Name?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public conversation_i_d?: thrift.Int64;
+    public name?: string;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ConversationID: {
+        conversation_i_d: {
             'api.path': "conversation_id",
             'agw.js_conv': "str",
             'api.js_conv': "true"
         },
-        Name: {
+        name: {
             'api.body': "name"
         }
     };
     constructor(args: IUpdateConversationApiRequestArgs = {}) {
         super();
-        if (args.ConversationID != null) {
-            const value_4: thrift.Int64 = (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID);
-            this.ConversationID = value_4;
+        if (args.conversation_i_d != null) {
+            const value_4: thrift.Int64 = (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d);
+            this.conversation_i_d = value_4;
         }
-        if (args.Name != null) {
-            const value_5: string = args.Name;
-            this.Name = value_5;
+        if (args.name != null) {
+            const value_5: string = args.name;
+            this.name = value_5;
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): UpdateConversationApiRequest {

@@ -11,13 +11,13 @@ export interface ICreateUpdateShortcutCommandRequest {
     object_id: thrift.Int64;
     space_id: thrift.Int64;
     shortcuts: ShortcutCommand.IShortcutCommand;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface ICreateUpdateShortcutCommandRequestArgs {
     object_id: number | string | thrift.Int64;
     space_id: number | string | thrift.Int64;
     shortcuts: ShortcutCommand.IShortcutCommandArgs;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const CreateUpdateShortcutCommandRequestCodec: thrift.IStructCodec<ICreateUpdateShortcutCommandRequestArgs, ICreateUpdateShortcutCommandRequest> = {
     encode(args: ICreateUpdateShortcutCommandRequestArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const CreateUpdateShortcutCommandRequestCodec: thrift.IStructCodec<ICreat
             object_id: (typeof args.object_id === "number" ? new thrift.Int64(args.object_id) : typeof args.object_id === "string" ? thrift.Int64.fromDecimalString(args.object_id) : args.object_id),
             space_id: (typeof args.space_id === "number" ? new thrift.Int64(args.space_id) : typeof args.space_id === "string" ? thrift.Int64.fromDecimalString(args.space_id) : args.space_id),
             shortcuts: args.shortcuts,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("CreateUpdateShortcutCommandRequest");
         if (obj.object_id != null) {
@@ -120,7 +120,7 @@ export const CreateUpdateShortcutCommandRequestCodec: thrift.IStructCodec<ICreat
                 object_id: _args.object_id,
                 space_id: _args.space_id,
                 shortcuts: _args.shortcuts,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -132,7 +132,7 @@ export class CreateUpdateShortcutCommandRequest extends thrift.StructLike implem
     public object_id: thrift.Int64;
     public space_id: thrift.Int64;
     public shortcuts: ShortcutCommand.IShortcutCommand;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         object_id: {
@@ -165,9 +165,9 @@ export class CreateUpdateShortcutCommandRequest extends thrift.StructLike implem
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[shortcuts] is unset!");
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): CreateUpdateShortcutCommandRequest {

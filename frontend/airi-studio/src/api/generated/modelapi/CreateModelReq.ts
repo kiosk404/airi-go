@@ -15,7 +15,7 @@ export interface ICreateModelReq {
     connection?: Connection.IConnection;
     enable_base64_url?: boolean;
     type?: ModelType.ModelType;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface ICreateModelReqArgs {
     model_class?: APP_DEVELOPER_API_NS.ModelClass;
@@ -23,7 +23,7 @@ export interface ICreateModelReqArgs {
     connection?: Connection.IConnectionArgs;
     enable_base64_url?: boolean;
     type?: ModelType.ModelType;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICreateModelReq> = {
     encode(args: ICreateModelReqArgs, output: thrift.TProtocol): void {
@@ -33,7 +33,7 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
             connection: args.connection,
             enable_base64_url: args.enable_base64_url,
             type: args.type,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("CreateModelReq");
         if (obj.model_class != null) {
@@ -148,7 +148,7 @@ export const CreateModelReqCodec: thrift.IStructCodec<ICreateModelReqArgs, ICrea
             connection: _args.connection,
             enable_base64_url: _args.enable_base64_url,
             type: _args.type,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -158,7 +158,7 @@ export class CreateModelReq extends thrift.StructLike implements ICreateModelReq
     public connection?: Connection.IConnection;
     public enable_base64_url?: boolean;
     public type?: ModelType.ModelType;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICreateModelReqArgs = {}) {
@@ -183,9 +183,9 @@ export class CreateModelReq extends thrift.StructLike implements ICreateModelReq
             const value_11: ModelType.ModelType = args.type;
             this.type = value_11;
         }
-        if (args.Base != null) {
-            const value_12: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_12;
+        if (args.base != null) {
+            const value_12: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_12;
         }
     }
     public static read(input: thrift.TProtocol): CreateModelReq {

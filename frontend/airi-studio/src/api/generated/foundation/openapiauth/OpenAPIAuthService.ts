@@ -860,7 +860,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetPersonalAccessTokenAndPermission(req: __ROOT_NAMESPACE__.IGetPersonalAccessTokenAndPermissionRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IGetPersonalAccessTokenAndPermissionResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetPersonalAccessTokenAndPermission", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetPersonalAccessTokenAndPermission", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetPersonalAccessTokenAndPermission__ArgsArgs = { req };
         GetPersonalAccessTokenAndPermission__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -898,7 +898,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DeletePersonalAccessTokenAndPermission(req: __ROOT_NAMESPACE__.IDeletePersonalAccessTokenAndPermissionRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IDeletePersonalAccessTokenAndPermissionResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DeletePersonalAccessTokenAndPermission", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DeletePersonalAccessTokenAndPermission", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDeletePersonalAccessTokenAndPermission__ArgsArgs = { req };
         DeletePersonalAccessTokenAndPermission__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -936,7 +936,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ListPersonalAccessTokens(req: __ROOT_NAMESPACE__.IListPersonalAccessTokensRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IListPersonalAccessTokensResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ListPersonalAccessTokens", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ListPersonalAccessTokens", thrift.MessageType.CALL, this.increment_request_id());
         const args: IListPersonalAccessTokens__ArgsArgs = { req };
         ListPersonalAccessTokens__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -974,7 +974,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public CreatePersonalAccessTokenAndPermission(req: __ROOT_NAMESPACE__.ICreatePersonalAccessTokenAndPermissionRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.ICreatePersonalAccessTokenAndPermissionResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("CreatePersonalAccessTokenAndPermission", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("CreatePersonalAccessTokenAndPermission", thrift.MessageType.CALL, this.increment_request_id());
         const args: ICreatePersonalAccessTokenAndPermission__ArgsArgs = { req };
         CreatePersonalAccessTokenAndPermission__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1012,7 +1012,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdatePersonalAccessTokenAndPermission(req: __ROOT_NAMESPACE__.IUpdatePersonalAccessTokenAndPermissionRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IUpdatePersonalAccessTokenAndPermissionResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdatePersonalAccessTokenAndPermission", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdatePersonalAccessTokenAndPermission", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdatePersonalAccessTokenAndPermission__ArgsArgs = { req };
         UpdatePersonalAccessTokenAndPermission__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1077,23 +1077,23 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_GetPersonalAccessTokenAndPermission": {
-                    resolve(this.process_GetPersonalAccessTokenAndPermission(requestId, input, output, context));
+                    resolve(this.process__get_personal_access_token_and_permission(requestId, input, output, context));
                     break;
                 }
                 case "process_DeletePersonalAccessTokenAndPermission": {
-                    resolve(this.process_DeletePersonalAccessTokenAndPermission(requestId, input, output, context));
+                    resolve(this.process__delete_personal_access_token_and_permission(requestId, input, output, context));
                     break;
                 }
                 case "process_ListPersonalAccessTokens": {
-                    resolve(this.process_ListPersonalAccessTokens(requestId, input, output, context));
+                    resolve(this.process__list_personal_access_tokens(requestId, input, output, context));
                     break;
                 }
                 case "process_CreatePersonalAccessTokenAndPermission": {
-                    resolve(this.process_CreatePersonalAccessTokenAndPermission(requestId, input, output, context));
+                    resolve(this.process__create_personal_access_token_and_permission(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdatePersonalAccessTokenAndPermission": {
-                    resolve(this.process_UpdatePersonalAccessTokenAndPermission(requestId, input, output, context));
+                    resolve(this.process__update_personal_access_token_and_permission(requestId, input, output, context));
                     break;
                 }
                 default: {

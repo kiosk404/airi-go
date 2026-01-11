@@ -8,18 +8,18 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as ModelConfig from "../../llm/domain/runtime/ModelConfig";
 import * as BotConfig from "./BotConfig";
 export interface ICustomConfig {
-    ModelConfig?: ModelConfig.IModelConfig;
-    BotConfig?: BotConfig.IBotConfig;
+    model_config?: ModelConfig.IModelConfig;
+    bot_config?: BotConfig.IBotConfig;
 }
 export interface ICustomConfigArgs {
-    ModelConfig?: ModelConfig.IModelConfigArgs;
-    BotConfig?: BotConfig.IBotConfigArgs;
+    model_config?: ModelConfig.IModelConfigArgs;
+    bot_config?: BotConfig.IBotConfigArgs;
 }
 export const CustomConfigCodec: thrift.IStructCodec<ICustomConfigArgs, ICustomConfig> = {
     encode(args: ICustomConfigArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ModelConfig: args.ModelConfig,
-            BotConfig: args.BotConfig
+            ModelConfig: args.model_config,
+            BotConfig: args.bot_config
         };
         output.writeStructBegin("CustomConfig");
         if (obj.ModelConfig != null) {
@@ -73,32 +73,32 @@ export const CustomConfigCodec: thrift.IStructCodec<ICustomConfigArgs, ICustomCo
         }
         input.readStructEnd();
         return {
-            ModelConfig: _args.ModelConfig,
-            BotConfig: _args.BotConfig
+            model_config: _args.ModelConfig,
+            bot_config: _args.BotConfig
         };
     }
 };
 export class CustomConfig extends thrift.StructLike implements ICustomConfig {
-    public ModelConfig?: ModelConfig.IModelConfig;
-    public BotConfig?: BotConfig.IBotConfig;
+    public model_config?: ModelConfig.IModelConfig;
+    public bot_config?: BotConfig.IBotConfig;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ModelConfig: {
+        model_config: {
             'api.body': "model_config"
         },
-        BotConfig: {
+        bot_config: {
             'api.body': "bot_config"
         }
     };
     constructor(args: ICustomConfigArgs = {}) {
         super();
-        if (args.ModelConfig != null) {
-            const value_3: ModelConfig.IModelConfig = new ModelConfig.ModelConfig(args.ModelConfig);
-            this.ModelConfig = value_3;
+        if (args.model_config != null) {
+            const value_3: ModelConfig.IModelConfig = new ModelConfig.ModelConfig(args.model_config);
+            this.model_config = value_3;
         }
-        if (args.BotConfig != null) {
-            const value_4: BotConfig.IBotConfig = new BotConfig.BotConfig(args.BotConfig);
-            this.BotConfig = value_4;
+        if (args.bot_config != null) {
+            const value_4: BotConfig.IBotConfig = new BotConfig.BotConfig(args.bot_config);
+            this.bot_config = value_4;
         }
     }
     public static read(input: thrift.TProtocol): CustomConfig {

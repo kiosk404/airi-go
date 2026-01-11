@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IGradientPosition {
-    Left?: number;
-    Right?: number;
+    left?: number;
+    right?: number;
 }
 export interface IGradientPositionArgs {
-    Left?: number;
-    Right?: number;
+    left?: number;
+    right?: number;
 }
 export const GradientPositionCodec: thrift.IStructCodec<IGradientPositionArgs, IGradientPosition> = {
     encode(args: IGradientPositionArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Left: args.Left,
-            Right: args.Right
+            Left: args.left,
+            Right: args.right
         };
         output.writeStructBegin("GradientPosition");
         if (obj.Left != null) {
@@ -71,32 +71,32 @@ export const GradientPositionCodec: thrift.IStructCodec<IGradientPositionArgs, I
         }
         input.readStructEnd();
         return {
-            Left: _args.Left,
-            Right: _args.Right
+            left: _args.Left,
+            right: _args.Right
         };
     }
 };
 export class GradientPosition extends thrift.StructLike implements IGradientPosition {
-    public Left?: number;
-    public Right?: number;
+    public left?: number;
+    public right?: number;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Left: {
+        left: {
             'api.body': "left"
         },
-        Right: {
+        right: {
             'api.body': "right"
         }
     };
     constructor(args: IGradientPositionArgs = {}) {
         super();
-        if (args.Left != null) {
-            const value_3: number = args.Left;
-            this.Left = value_3;
+        if (args.left != null) {
+            const value_3: number = args.left;
+            this.left = value_3;
         }
-        if (args.Right != null) {
-            const value_4: number = args.Right;
-            this.Right = value_4;
+        if (args.right != null) {
+            const value_4: number = args.right;
+            this.right = value_4;
         }
     }
     public static read(input: thrift.TProtocol): GradientPosition {

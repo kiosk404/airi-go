@@ -11,14 +11,14 @@ export interface ICreateAPIResponse {
     msg?: string;
     api_id?: string;
     edit_version?: number;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface ICreateAPIResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     api_id?: string;
     edit_version?: number;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const CreateAPIResponseCodec: thrift.IStructCodec<ICreateAPIResponseArgs, ICreateAPIResponse> = {
     encode(args: ICreateAPIResponseArgs, output: thrift.TProtocol): void {
@@ -27,7 +27,7 @@ export const CreateAPIResponseCodec: thrift.IStructCodec<ICreateAPIResponseArgs,
             msg: args.msg,
             api_id: args.api_id,
             edit_version: args.edit_version,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("CreateAPIResponse");
         if (obj.code != null) {
@@ -127,7 +127,7 @@ export const CreateAPIResponseCodec: thrift.IStructCodec<ICreateAPIResponseArgs,
             msg: _args.msg,
             api_id: _args.api_id,
             edit_version: _args.edit_version,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -136,7 +136,7 @@ export class CreateAPIResponse extends thrift.StructLike implements ICreateAPIRe
     public msg?: string;
     public api_id?: string;
     public edit_version?: number;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICreateAPIResponseArgs = {}) {
@@ -157,9 +157,9 @@ export class CreateAPIResponse extends thrift.StructLike implements ICreateAPIRe
             const value_9: number = args.edit_version;
             this.edit_version = value_9;
         }
-        if (args.BaseResp != null) {
-            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_10;
+        if (args.base_resp != null) {
+            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_10;
         }
     }
     public static read(input: thrift.TProtocol): CreateAPIResponse {

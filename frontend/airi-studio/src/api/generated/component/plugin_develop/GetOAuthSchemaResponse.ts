@@ -11,14 +11,14 @@ export interface IGetOAuthSchemaResponse {
     msg?: string;
     oauth_schema?: string;
     ide_conf?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IGetOAuthSchemaResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     oauth_schema?: string;
     ide_conf?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const GetOAuthSchemaResponseCodec: thrift.IStructCodec<IGetOAuthSchemaResponseArgs, IGetOAuthSchemaResponse> = {
     encode(args: IGetOAuthSchemaResponseArgs, output: thrift.TProtocol): void {
@@ -27,7 +27,7 @@ export const GetOAuthSchemaResponseCodec: thrift.IStructCodec<IGetOAuthSchemaRes
             msg: args.msg,
             oauth_schema: args.oauth_schema,
             ide_conf: args.ide_conf,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetOAuthSchemaResponse");
         if (obj.code != null) {
@@ -127,7 +127,7 @@ export const GetOAuthSchemaResponseCodec: thrift.IStructCodec<IGetOAuthSchemaRes
             msg: _args.msg,
             oauth_schema: _args.oauth_schema,
             ide_conf: _args.ide_conf,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -136,7 +136,7 @@ export class GetOAuthSchemaResponse extends thrift.StructLike implements IGetOAu
     public msg?: string;
     public oauth_schema?: string;
     public ide_conf?: string;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetOAuthSchemaResponseArgs = {}) {
@@ -157,9 +157,9 @@ export class GetOAuthSchemaResponse extends thrift.StructLike implements IGetOAu
             const value_9: string = args.ide_conf;
             this.ide_conf = value_9;
         }
-        if (args.BaseResp != null) {
-            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_10;
+        if (args.base_resp != null) {
+            const value_10: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_10;
         }
     }
     public static read(input: thrift.TProtocol): GetOAuthSchemaResponse {

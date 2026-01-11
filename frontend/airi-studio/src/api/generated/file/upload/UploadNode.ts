@@ -7,24 +7,24 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as StoreInfo from "./StoreInfo";
 export interface IUploadNode {
-    StoreInfos: Array<StoreInfo.IStoreInfo>;
-    UploadHost: string;
-    UploadHeader?: Map<string, string>;
-    SessionKey: string;
+    store_infos: Array<StoreInfo.IStoreInfo>;
+    upload_host: string;
+    upload_header?: Map<string, string>;
+    session_key: string;
 }
 export interface IUploadNodeArgs {
-    StoreInfos: Array<StoreInfo.IStoreInfoArgs>;
-    UploadHost: string;
-    UploadHeader?: Map<string, string>;
-    SessionKey: string;
+    store_infos: Array<StoreInfo.IStoreInfoArgs>;
+    upload_host: string;
+    upload_header?: Map<string, string>;
+    session_key: string;
 }
 export const UploadNodeCodec: thrift.IStructCodec<IUploadNodeArgs, IUploadNode> = {
     encode(args: IUploadNodeArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            StoreInfos: args.StoreInfos,
-            UploadHost: args.UploadHost,
-            UploadHeader: args.UploadHeader,
-            SessionKey: args.SessionKey
+            StoreInfos: args.store_infos,
+            UploadHost: args.upload_host,
+            UploadHeader: args.upload_header,
+            SessionKey: args.session_key
         };
         output.writeStructBegin("UploadNode");
         if (obj.StoreInfos != null) {
@@ -140,10 +140,10 @@ export const UploadNodeCodec: thrift.IStructCodec<IUploadNodeArgs, IUploadNode> 
         input.readStructEnd();
         if (_args.StoreInfos !== undefined && _args.UploadHost !== undefined && _args.SessionKey !== undefined) {
             return {
-                StoreInfos: _args.StoreInfos,
-                UploadHost: _args.UploadHost,
-                UploadHeader: _args.UploadHeader,
-                SessionKey: _args.SessionKey
+                store_infos: _args.StoreInfos,
+                upload_host: _args.UploadHost,
+                upload_header: _args.UploadHeader,
+                session_key: _args.SessionKey
             };
         }
         else {
@@ -152,44 +152,44 @@ export const UploadNodeCodec: thrift.IStructCodec<IUploadNodeArgs, IUploadNode> 
     }
 };
 export class UploadNode extends thrift.StructLike implements IUploadNode {
-    public StoreInfos: Array<StoreInfo.IStoreInfo>;
-    public UploadHost: string;
-    public UploadHeader?: Map<string, string>;
-    public SessionKey: string;
+    public store_infos: Array<StoreInfo.IStoreInfo>;
+    public upload_host: string;
+    public upload_header?: Map<string, string>;
+    public session_key: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUploadNodeArgs) {
         super();
-        if (args.StoreInfos != null) {
+        if (args.store_infos != null) {
             const value_9: Array<StoreInfo.IStoreInfo> = new Array<StoreInfo.IStoreInfo>();
-            args.StoreInfos.forEach((value_13: StoreInfo.IStoreInfoArgs): void => {
+            args.store_infos.forEach((value_13: StoreInfo.IStoreInfoArgs): void => {
                 const value_14: StoreInfo.IStoreInfo = new StoreInfo.StoreInfo(value_13);
                 value_9.push(value_14);
             });
-            this.StoreInfos = value_9;
+            this.store_infos = value_9;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[StoreInfos] is unset!");
         }
-        if (args.UploadHost != null) {
-            const value_10: string = args.UploadHost;
-            this.UploadHost = value_10;
+        if (args.upload_host != null) {
+            const value_10: string = args.upload_host;
+            this.upload_host = value_10;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[UploadHost] is unset!");
         }
-        if (args.UploadHeader != null) {
+        if (args.upload_header != null) {
             const value_11: Map<string, string> = new Map<string, string>();
-            args.UploadHeader.forEach((value_15: string, key_3: string): void => {
+            args.upload_header.forEach((value_15: string, key_3: string): void => {
                 const value_16: string = value_15;
                 const key_4: string = key_3;
                 value_11.set(key_4, value_16);
             });
-            this.UploadHeader = value_11;
+            this.upload_header = value_11;
         }
-        if (args.SessionKey != null) {
-            const value_12: string = args.SessionKey;
-            this.SessionKey = value_12;
+        if (args.session_key != null) {
+            const value_12: string = args.session_key;
+            this.session_key = value_12;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[SessionKey] is unset!");

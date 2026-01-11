@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IUploadFileOpenRequest {
-    ContentType: string;
-    Data: Buffer;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    content_type: string;
+    data: Buffer;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IUploadFileOpenRequestArgs {
-    ContentType: string;
-    Data: string | Buffer;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    content_type: string;
+    data: string | Buffer;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const UploadFileOpenRequestCodec: thrift.IStructCodec<IUploadFileOpenRequestArgs, IUploadFileOpenRequest> = {
     encode(args: IUploadFileOpenRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ContentType: args.ContentType,
-            Data: (typeof args.Data === "string" ? Buffer.from(args.Data) : args.Data),
-            Base: args.Base
+            ContentType: args.content_type,
+            Data: (typeof args.data === "string" ? Buffer.from(args.data) : args.data),
+            Base: args.base
         };
         output.writeStructBegin("UploadFileOpenRequest");
         if (obj.ContentType != null) {
@@ -96,9 +96,9 @@ export const UploadFileOpenRequestCodec: thrift.IStructCodec<IUploadFileOpenRequ
         input.readStructEnd();
         if (_args.ContentType !== undefined && _args.Data !== undefined) {
             return {
-                ContentType: _args.ContentType,
-                Data: _args.Data,
-                Base: _args.Base
+                content_type: _args.ContentType,
+                data: _args.Data,
+                base: _args.Base
             };
         }
         else {
@@ -107,39 +107,39 @@ export const UploadFileOpenRequestCodec: thrift.IStructCodec<IUploadFileOpenRequ
     }
 };
 export class UploadFileOpenRequest extends thrift.StructLike implements IUploadFileOpenRequest {
-    public ContentType: string;
-    public Data: Buffer;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public content_type: string;
+    public data: Buffer;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ContentType: {
+        content_type: {
             'api.header': "Content-Type",
             'agw.source': "header",
             'agw.key': "Content-Type"
         },
-        Data: {
+        data: {
             'api.raw_body': ""
         }
     };
     constructor(args: IUploadFileOpenRequestArgs) {
         super();
-        if (args.ContentType != null) {
-            const value_4: string = args.ContentType;
-            this.ContentType = value_4;
+        if (args.content_type != null) {
+            const value_4: string = args.content_type;
+            this.content_type = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ContentType] is unset!");
         }
-        if (args.Data != null) {
-            const value_5: Buffer = (typeof args.Data === "string" ? Buffer.from(args.Data) : args.Data);
-            this.Data = value_5;
+        if (args.data != null) {
+            const value_5: Buffer = (typeof args.data === "string" ? Buffer.from(args.data) : args.data);
+            this.data = value_5;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Data] is unset!");
         }
-        if (args.Base != null) {
-            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_6;
+        if (args.base != null) {
+            const value_6: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_6;
         }
     }
     public static read(input: thrift.TProtocol): UploadFileOpenRequest {

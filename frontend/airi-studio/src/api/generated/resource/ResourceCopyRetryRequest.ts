@@ -8,17 +8,17 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IResourceCopyRetryRequest {
     task_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IResourceCopyRetryRequestArgs {
     task_id?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const ResourceCopyRetryRequestCodec: thrift.IStructCodec<IResourceCopyRetryRequestArgs, IResourceCopyRetryRequest> = {
     encode(args: IResourceCopyRetryRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
             task_id: args.task_id,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ResourceCopyRetryRequest");
         if (obj.task_id != null) {
@@ -73,13 +73,13 @@ export const ResourceCopyRetryRequestCodec: thrift.IStructCodec<IResourceCopyRet
         input.readStructEnd();
         return {
             task_id: _args.task_id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class ResourceCopyRetryRequest extends thrift.StructLike implements IResourceCopyRetryRequest {
     public task_id?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IResourceCopyRetryRequestArgs = {}) {
@@ -88,9 +88,9 @@ export class ResourceCopyRetryRequest extends thrift.StructLike implements IReso
             const value_3: string = args.task_id;
             this.task_id = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): ResourceCopyRetryRequest {

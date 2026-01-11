@@ -6,24 +6,24 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ITaskWebhookField {
-    Name?: string;
-    Type?: string;
-    Description?: string;
-    Children?: Array<ITaskWebhookField>;
+    name?: string;
+    type?: string;
+    description?: string;
+    children?: Array<ITaskWebhookField>;
 }
 export interface ITaskWebhookFieldArgs {
-    Name?: string;
-    Type?: string;
-    Description?: string;
-    Children?: Array<ITaskWebhookFieldArgs>;
+    name?: string;
+    type?: string;
+    description?: string;
+    children?: Array<ITaskWebhookFieldArgs>;
 }
 export const TaskWebhookFieldCodec: thrift.IStructCodec<ITaskWebhookFieldArgs, ITaskWebhookField> = {
     encode(args: ITaskWebhookFieldArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Name: args.Name,
-            Type: args.Type,
-            Description: args.Description,
-            Children: args.Children
+            Name: args.name,
+            Type: args.type,
+            Description: args.description,
+            Children: args.children
         };
         output.writeStructBegin("TaskWebhookField");
         if (obj.Name != null) {
@@ -116,41 +116,41 @@ export const TaskWebhookFieldCodec: thrift.IStructCodec<ITaskWebhookFieldArgs, I
         }
         input.readStructEnd();
         return {
-            Name: _args.Name,
-            Type: _args.Type,
-            Description: _args.Description,
-            Children: _args.Children
+            name: _args.Name,
+            type: _args.Type,
+            description: _args.Description,
+            children: _args.Children
         };
     }
 };
 export class TaskWebhookField extends thrift.StructLike implements ITaskWebhookField {
-    public Name?: string;
-    public Type?: string;
-    public Description?: string;
-    public Children?: Array<ITaskWebhookField>;
+    public name?: string;
+    public type?: string;
+    public description?: string;
+    public children?: Array<ITaskWebhookField>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ITaskWebhookFieldArgs = {}) {
         super();
-        if (args.Name != null) {
-            const value_7: string = args.Name;
-            this.Name = value_7;
+        if (args.name != null) {
+            const value_7: string = args.name;
+            this.name = value_7;
         }
-        if (args.Type != null) {
-            const value_8: string = args.Type;
-            this.Type = value_8;
+        if (args.type != null) {
+            const value_8: string = args.type;
+            this.type = value_8;
         }
-        if (args.Description != null) {
-            const value_9: string = args.Description;
-            this.Description = value_9;
+        if (args.description != null) {
+            const value_9: string = args.description;
+            this.description = value_9;
         }
-        if (args.Children != null) {
+        if (args.children != null) {
             const value_10: Array<ITaskWebhookField> = new Array<ITaskWebhookField>();
-            args.Children.forEach((value_11: ITaskWebhookFieldArgs): void => {
+            args.children.forEach((value_11: ITaskWebhookFieldArgs): void => {
                 const value_12: ITaskWebhookField = new TaskWebhookField(value_11);
                 value_10.push(value_12);
             });
-            this.Children = value_10;
+            this.children = value_10;
         }
     }
     public static read(input: thrift.TProtocol): TaskWebhookField {

@@ -9,17 +9,17 @@ import * as ShortcutCommand from "./ShortcutCommand";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface ICreateShortcutCommandResponse {
     shortcuts?: ShortcutCommand.IShortcutCommand;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface ICreateShortcutCommandResponseArgs {
     shortcuts?: ShortcutCommand.IShortcutCommandArgs;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const CreateShortcutCommandResponseCodec: thrift.IStructCodec<ICreateShortcutCommandResponseArgs, ICreateShortcutCommandResponse> = {
     encode(args: ICreateShortcutCommandResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
             shortcuts: args.shortcuts,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("CreateShortcutCommandResponse");
         if (obj.shortcuts != null) {
@@ -78,7 +78,7 @@ export const CreateShortcutCommandResponseCodec: thrift.IStructCodec<ICreateShor
         if (_args.BaseResp !== undefined) {
             return {
                 shortcuts: _args.shortcuts,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -88,7 +88,7 @@ export const CreateShortcutCommandResponseCodec: thrift.IStructCodec<ICreateShor
 };
 export class CreateShortcutCommandResponse extends thrift.StructLike implements ICreateShortcutCommandResponse {
     public shortcuts?: ShortcutCommand.IShortcutCommand;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ICreateShortcutCommandResponseArgs) {
@@ -97,9 +97,9 @@ export class CreateShortcutCommandResponse extends thrift.StructLike implements 
             const value_3: ShortcutCommand.IShortcutCommand = new ShortcutCommand.ShortcutCommand(args.shortcuts);
             this.shortcuts = value_3;
         }
-        if (args.BaseResp != null) {
-            const value_4: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_4;
+        if (args.base_resp != null) {
+            const value_4: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

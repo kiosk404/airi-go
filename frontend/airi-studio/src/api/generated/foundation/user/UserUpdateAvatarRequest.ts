@@ -6,17 +6,17 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IUserUpdateAvatarRequest {
-    mimeType: string;
+    mime_type: string;
     avatar: Buffer;
 }
 export interface IUserUpdateAvatarRequestArgs {
-    mimeType: string;
+    mime_type: string;
     avatar: string | Buffer;
 }
 export const UserUpdateAvatarRequestCodec: thrift.IStructCodec<IUserUpdateAvatarRequestArgs, IUserUpdateAvatarRequest> = {
     encode(args: IUserUpdateAvatarRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            mimeType: args.mimeType,
+            mimeType: args.mime_type,
             avatar: (typeof args.avatar === "string" ? Buffer.from(args.avatar) : args.avatar)
         };
         output.writeStructBegin("UserUpdateAvatarRequest");
@@ -78,7 +78,7 @@ export const UserUpdateAvatarRequestCodec: thrift.IStructCodec<IUserUpdateAvatar
         input.readStructEnd();
         if (_args.mimeType !== undefined && _args.avatar !== undefined) {
             return {
-                mimeType: _args.mimeType,
+                mime_type: _args.mimeType,
                 avatar: _args.avatar
             };
         }
@@ -88,7 +88,7 @@ export const UserUpdateAvatarRequestCodec: thrift.IStructCodec<IUserUpdateAvatar
     }
 };
 export class UserUpdateAvatarRequest extends thrift.StructLike implements IUserUpdateAvatarRequest {
-    public mimeType: string;
+    public mime_type: string;
     public avatar: Buffer;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
@@ -98,9 +98,9 @@ export class UserUpdateAvatarRequest extends thrift.StructLike implements IUserU
     };
     constructor(args: IUserUpdateAvatarRequestArgs) {
         super();
-        if (args.mimeType != null) {
-            const value_3: string = args.mimeType;
-            this.mimeType = value_3;
+        if (args.mime_type != null) {
+            const value_3: string = args.mime_type;
+            this.mime_type = value_3;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[mimeType] is unset!");

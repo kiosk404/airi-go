@@ -7,18 +7,18 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ActionKey from "./ActionKey";
 export interface IResourceAction {
-    Key: ActionKey.ActionKey;
-    Enable: boolean;
+    key: ActionKey.ActionKey;
+    enable: boolean;
 }
 export interface IResourceActionArgs {
-    Key: ActionKey.ActionKey;
-    Enable: boolean;
+    key: ActionKey.ActionKey;
+    enable: boolean;
 }
 export const ResourceActionCodec: thrift.IStructCodec<IResourceActionArgs, IResourceAction> = {
     encode(args: IResourceActionArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Key: args.Key,
-            Enable: args.Enable
+            Key: args.key,
+            Enable: args.enable
         };
         output.writeStructBegin("ResourceAction");
         if (obj.Key != null) {
@@ -79,8 +79,8 @@ export const ResourceActionCodec: thrift.IStructCodec<IResourceActionArgs, IReso
         input.readStructEnd();
         if (_args.Key !== undefined && _args.Enable !== undefined) {
             return {
-                Key: _args.Key,
-                Enable: _args.Enable
+                key: _args.Key,
+                enable: _args.Enable
             };
         }
         else {
@@ -89,31 +89,31 @@ export const ResourceActionCodec: thrift.IStructCodec<IResourceActionArgs, IReso
     }
 };
 export class ResourceAction extends thrift.StructLike implements IResourceAction {
-    public Key: ActionKey.ActionKey;
-    public Enable: boolean;
+    public key: ActionKey.ActionKey;
+    public enable: boolean;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Key: {
+        key: {
             'go.tag': "json:\"key\"",
             'agw.key': "key"
         },
-        Enable: {
+        enable: {
             'go.tag': "json:\"enable\"",
             'agw.key': "enable"
         }
     };
     constructor(args: IResourceActionArgs) {
         super();
-        if (args.Key != null) {
-            const value_3: ActionKey.ActionKey = args.Key;
-            this.Key = value_3;
+        if (args.key != null) {
+            const value_3: ActionKey.ActionKey = args.key;
+            this.key = value_3;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Key] is unset!");
         }
-        if (args.Enable != null) {
-            const value_4: boolean = args.Enable;
-            this.Enable = value_4;
+        if (args.enable != null) {
+            const value_4: boolean = args.enable;
+            this.enable = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Enable] is unset!");

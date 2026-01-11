@@ -9,69 +9,69 @@ import * as ResType from "./ResType";
 import * as PublishStatus from "./PublishStatus";
 import * as ResourceAction from "./ResourceAction";
 export interface IResourceInfo {
-    ResID?: thrift.Int64;
-    ResType?: ResType.ResType;
-    ResSubType?: number;
-    Name?: string;
-    Desc?: string;
-    Icon?: string;
-    CreatorID?: thrift.Int64;
-    CreatorAvatar?: string;
-    CreatorName?: string;
-    UserName?: string;
-    PublishStatus?: PublishStatus.PublishStatus;
-    BizResStatus?: number;
-    CollaborationEnable?: boolean;
-    EditTime?: thrift.Int64;
-    SpaceID?: thrift.Int64;
-    BizExtend?: Map<string, string>;
-    Actions?: Array<ResourceAction.IResourceAction>;
-    DetailDisable?: boolean;
-    DelFlag?: boolean;
+    res_i_d?: thrift.Int64;
+    res_type?: ResType.ResType;
+    res_sub_type?: number;
+    name?: string;
+    desc?: string;
+    icon?: string;
+    creator_i_d?: thrift.Int64;
+    creator_avatar?: string;
+    creator_name?: string;
+    user_name?: string;
+    publish_status?: PublishStatus.PublishStatus;
+    biz_res_status?: number;
+    collaboration_enable?: boolean;
+    edit_time?: thrift.Int64;
+    space_i_d?: thrift.Int64;
+    biz_extend?: Map<string, string>;
+    actions?: Array<ResourceAction.IResourceAction>;
+    detail_disable?: boolean;
+    del_flag?: boolean;
 }
 export interface IResourceInfoArgs {
-    ResID?: number | string | thrift.Int64;
-    ResType?: ResType.ResType;
-    ResSubType?: number;
-    Name?: string;
-    Desc?: string;
-    Icon?: string;
-    CreatorID?: number | string | thrift.Int64;
-    CreatorAvatar?: string;
-    CreatorName?: string;
-    UserName?: string;
-    PublishStatus?: PublishStatus.PublishStatus;
-    BizResStatus?: number;
-    CollaborationEnable?: boolean;
-    EditTime?: number | string | thrift.Int64;
-    SpaceID?: number | string | thrift.Int64;
-    BizExtend?: Map<string, string>;
-    Actions?: Array<ResourceAction.IResourceActionArgs>;
-    DetailDisable?: boolean;
-    DelFlag?: boolean;
+    res_i_d?: number | string | thrift.Int64;
+    res_type?: ResType.ResType;
+    res_sub_type?: number;
+    name?: string;
+    desc?: string;
+    icon?: string;
+    creator_i_d?: number | string | thrift.Int64;
+    creator_avatar?: string;
+    creator_name?: string;
+    user_name?: string;
+    publish_status?: PublishStatus.PublishStatus;
+    biz_res_status?: number;
+    collaboration_enable?: boolean;
+    edit_time?: number | string | thrift.Int64;
+    space_i_d?: number | string | thrift.Int64;
+    biz_extend?: Map<string, string>;
+    actions?: Array<ResourceAction.IResourceActionArgs>;
+    detail_disable?: boolean;
+    del_flag?: boolean;
 }
 export const ResourceInfoCodec: thrift.IStructCodec<IResourceInfoArgs, IResourceInfo> = {
     encode(args: IResourceInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ResID: (typeof args.ResID === "number" ? new thrift.Int64(args.ResID) : typeof args.ResID === "string" ? thrift.Int64.fromDecimalString(args.ResID) : args.ResID),
-            ResType: args.ResType,
-            ResSubType: args.ResSubType,
-            Name: args.Name,
-            Desc: args.Desc,
-            Icon: args.Icon,
-            CreatorID: (typeof args.CreatorID === "number" ? new thrift.Int64(args.CreatorID) : typeof args.CreatorID === "string" ? thrift.Int64.fromDecimalString(args.CreatorID) : args.CreatorID),
-            CreatorAvatar: args.CreatorAvatar,
-            CreatorName: args.CreatorName,
-            UserName: args.UserName,
-            PublishStatus: args.PublishStatus,
-            BizResStatus: args.BizResStatus,
-            CollaborationEnable: args.CollaborationEnable,
-            EditTime: (typeof args.EditTime === "number" ? new thrift.Int64(args.EditTime) : typeof args.EditTime === "string" ? thrift.Int64.fromDecimalString(args.EditTime) : args.EditTime),
-            SpaceID: (typeof args.SpaceID === "number" ? new thrift.Int64(args.SpaceID) : typeof args.SpaceID === "string" ? thrift.Int64.fromDecimalString(args.SpaceID) : args.SpaceID),
-            BizExtend: args.BizExtend,
-            Actions: args.Actions,
-            DetailDisable: args.DetailDisable,
-            DelFlag: args.DelFlag
+            ResID: (typeof args.res_i_d === "number" ? new thrift.Int64(args.res_i_d) : typeof args.res_i_d === "string" ? thrift.Int64.fromDecimalString(args.res_i_d) : args.res_i_d),
+            ResType: args.res_type,
+            ResSubType: args.res_sub_type,
+            Name: args.name,
+            Desc: args.desc,
+            Icon: args.icon,
+            CreatorID: (typeof args.creator_i_d === "number" ? new thrift.Int64(args.creator_i_d) : typeof args.creator_i_d === "string" ? thrift.Int64.fromDecimalString(args.creator_i_d) : args.creator_i_d),
+            CreatorAvatar: args.creator_avatar,
+            CreatorName: args.creator_name,
+            UserName: args.user_name,
+            PublishStatus: args.publish_status,
+            BizResStatus: args.biz_res_status,
+            CollaborationEnable: args.collaboration_enable,
+            EditTime: (typeof args.edit_time === "number" ? new thrift.Int64(args.edit_time) : typeof args.edit_time === "string" ? thrift.Int64.fromDecimalString(args.edit_time) : args.edit_time),
+            SpaceID: (typeof args.space_i_d === "number" ? new thrift.Int64(args.space_i_d) : typeof args.space_i_d === "string" ? thrift.Int64.fromDecimalString(args.space_i_d) : args.space_i_d),
+            BizExtend: args.biz_extend,
+            Actions: args.actions,
+            DetailDisable: args.detail_disable,
+            DelFlag: args.del_flag
         };
         output.writeStructBegin("ResourceInfo");
         if (obj.ResID != null) {
@@ -387,220 +387,220 @@ export const ResourceInfoCodec: thrift.IStructCodec<IResourceInfoArgs, IResource
         }
         input.readStructEnd();
         return {
-            ResID: _args.ResID,
-            ResType: _args.ResType,
-            ResSubType: _args.ResSubType,
-            Name: _args.Name,
-            Desc: _args.Desc,
-            Icon: _args.Icon,
-            CreatorID: _args.CreatorID,
-            CreatorAvatar: _args.CreatorAvatar,
-            CreatorName: _args.CreatorName,
-            UserName: _args.UserName,
-            PublishStatus: _args.PublishStatus,
-            BizResStatus: _args.BizResStatus,
-            CollaborationEnable: _args.CollaborationEnable,
-            EditTime: _args.EditTime,
-            SpaceID: _args.SpaceID,
-            BizExtend: _args.BizExtend,
-            Actions: _args.Actions,
-            DetailDisable: _args.DetailDisable,
-            DelFlag: _args.DelFlag
+            res_i_d: _args.ResID,
+            res_type: _args.ResType,
+            res_sub_type: _args.ResSubType,
+            name: _args.Name,
+            desc: _args.Desc,
+            icon: _args.Icon,
+            creator_i_d: _args.CreatorID,
+            creator_avatar: _args.CreatorAvatar,
+            creator_name: _args.CreatorName,
+            user_name: _args.UserName,
+            publish_status: _args.PublishStatus,
+            biz_res_status: _args.BizResStatus,
+            collaboration_enable: _args.CollaborationEnable,
+            edit_time: _args.EditTime,
+            space_i_d: _args.SpaceID,
+            biz_extend: _args.BizExtend,
+            actions: _args.Actions,
+            detail_disable: _args.DetailDisable,
+            del_flag: _args.DelFlag
         };
     }
 };
 export class ResourceInfo extends thrift.StructLike implements IResourceInfo {
-    public ResID?: thrift.Int64;
-    public ResType?: ResType.ResType;
-    public ResSubType?: number;
-    public Name?: string;
-    public Desc?: string;
-    public Icon?: string;
-    public CreatorID?: thrift.Int64;
-    public CreatorAvatar?: string;
-    public CreatorName?: string;
-    public UserName?: string;
-    public PublishStatus?: PublishStatus.PublishStatus;
-    public BizResStatus?: number;
-    public CollaborationEnable?: boolean;
-    public EditTime?: thrift.Int64;
-    public SpaceID?: thrift.Int64;
-    public BizExtend?: Map<string, string>;
-    public Actions?: Array<ResourceAction.IResourceAction>;
-    public DetailDisable?: boolean;
-    public DelFlag?: boolean;
+    public res_i_d?: thrift.Int64;
+    public res_type?: ResType.ResType;
+    public res_sub_type?: number;
+    public name?: string;
+    public desc?: string;
+    public icon?: string;
+    public creator_i_d?: thrift.Int64;
+    public creator_avatar?: string;
+    public creator_name?: string;
+    public user_name?: string;
+    public publish_status?: PublishStatus.PublishStatus;
+    public biz_res_status?: number;
+    public collaboration_enable?: boolean;
+    public edit_time?: thrift.Int64;
+    public space_i_d?: thrift.Int64;
+    public biz_extend?: Map<string, string>;
+    public actions?: Array<ResourceAction.IResourceAction>;
+    public detail_disable?: boolean;
+    public del_flag?: boolean;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ResID: {
+        res_i_d: {
             'agw.js_conv': "str",
             'agw.key': "res_id",
             'api.js_conv': "true",
             'api.body': "res_id"
         },
-        ResType: {
+        res_type: {
             'go.tag': "json:\"res_type\"",
             'agw.key': "res_type"
         },
-        ResSubType: {
+        res_sub_type: {
             'go.tag': "json:\"res_sub_type\"",
             'agw.key': "res_sub_type"
         },
-        Name: {
+        name: {
             'go.tag': "json:\"name\"",
             'agw.key': "name"
         },
-        Desc: {
+        desc: {
             'go.tag': "json:\"desc\"",
             'agw.key': "desc"
         },
-        Icon: {
+        icon: {
             'go.tag': "json:\"icon\"",
             'agw.key': "icon"
         },
-        CreatorID: {
+        creator_i_d: {
             'agw.js_conv': "str",
             'agw.key': "creator_id",
             'api.js_conv': "true",
             'api.body': "creator_id"
         },
-        CreatorAvatar: {
+        creator_avatar: {
             'go.tag': "json:\"creator_avatar\"",
             'agw.key': "creator_avatar"
         },
-        CreatorName: {
+        creator_name: {
             'go.tag': "json:\"creator_name\"",
             'agw.key': "creator_name"
         },
-        UserName: {
+        user_name: {
             'go.tag': "json:\"user_name\"",
             'agw.key': "user_name"
         },
-        PublishStatus: {
+        publish_status: {
             'go.tag': "json:\"publish_status\"",
             'agw.key': "publish_status"
         },
-        BizResStatus: {
+        biz_res_status: {
             'go.tag': "json:\"biz_res_status\"",
             'agw.key': "biz_res_status"
         },
-        CollaborationEnable: {
+        collaboration_enable: {
             'go.tag': "json:\"collaboration_enable\"",
             'agw.key': "collaboration_enable"
         },
-        EditTime: {
+        edit_time: {
             'agw.key': "edit_time",
             'api.js_conv': "true",
             'api.body': "edit_time"
         },
-        SpaceID: {
+        space_i_d: {
             'agw.js_conv': "str",
             'agw.key': "space_id",
             'api.js_conv': "true",
             'api.body': "space_id"
         },
-        BizExtend: {
+        biz_extend: {
             'go.tag': "json:\"biz_extend\"",
             'agw.key': "biz_extend"
         },
-        Actions: {
+        actions: {
             'go.tag': "json:\"actions\"",
             'agw.key': "actions"
         },
-        DetailDisable: {
+        detail_disable: {
             'go.tag': "json:\"detail_disable\"",
             'agw.key': "detail_disable"
         },
-        DelFlag: {
+        del_flag: {
             'go.tag': "json:\"del_flag\"",
             'agw.key': "del_flag"
         }
     };
     constructor(args: IResourceInfoArgs = {}) {
         super();
-        if (args.ResID != null) {
-            const value_24: thrift.Int64 = (typeof args.ResID === "number" ? new thrift.Int64(args.ResID) : typeof args.ResID === "string" ? thrift.Int64.fromDecimalString(args.ResID) : args.ResID);
-            this.ResID = value_24;
+        if (args.res_i_d != null) {
+            const value_24: thrift.Int64 = (typeof args.res_i_d === "number" ? new thrift.Int64(args.res_i_d) : typeof args.res_i_d === "string" ? thrift.Int64.fromDecimalString(args.res_i_d) : args.res_i_d);
+            this.res_i_d = value_24;
         }
-        if (args.ResType != null) {
-            const value_25: ResType.ResType = args.ResType;
-            this.ResType = value_25;
+        if (args.res_type != null) {
+            const value_25: ResType.ResType = args.res_type;
+            this.res_type = value_25;
         }
-        if (args.ResSubType != null) {
-            const value_26: number = args.ResSubType;
-            this.ResSubType = value_26;
+        if (args.res_sub_type != null) {
+            const value_26: number = args.res_sub_type;
+            this.res_sub_type = value_26;
         }
-        if (args.Name != null) {
-            const value_27: string = args.Name;
-            this.Name = value_27;
+        if (args.name != null) {
+            const value_27: string = args.name;
+            this.name = value_27;
         }
-        if (args.Desc != null) {
-            const value_28: string = args.Desc;
-            this.Desc = value_28;
+        if (args.desc != null) {
+            const value_28: string = args.desc;
+            this.desc = value_28;
         }
-        if (args.Icon != null) {
-            const value_29: string = args.Icon;
-            this.Icon = value_29;
+        if (args.icon != null) {
+            const value_29: string = args.icon;
+            this.icon = value_29;
         }
-        if (args.CreatorID != null) {
-            const value_30: thrift.Int64 = (typeof args.CreatorID === "number" ? new thrift.Int64(args.CreatorID) : typeof args.CreatorID === "string" ? thrift.Int64.fromDecimalString(args.CreatorID) : args.CreatorID);
-            this.CreatorID = value_30;
+        if (args.creator_i_d != null) {
+            const value_30: thrift.Int64 = (typeof args.creator_i_d === "number" ? new thrift.Int64(args.creator_i_d) : typeof args.creator_i_d === "string" ? thrift.Int64.fromDecimalString(args.creator_i_d) : args.creator_i_d);
+            this.creator_i_d = value_30;
         }
-        if (args.CreatorAvatar != null) {
-            const value_31: string = args.CreatorAvatar;
-            this.CreatorAvatar = value_31;
+        if (args.creator_avatar != null) {
+            const value_31: string = args.creator_avatar;
+            this.creator_avatar = value_31;
         }
-        if (args.CreatorName != null) {
-            const value_32: string = args.CreatorName;
-            this.CreatorName = value_32;
+        if (args.creator_name != null) {
+            const value_32: string = args.creator_name;
+            this.creator_name = value_32;
         }
-        if (args.UserName != null) {
-            const value_33: string = args.UserName;
-            this.UserName = value_33;
+        if (args.user_name != null) {
+            const value_33: string = args.user_name;
+            this.user_name = value_33;
         }
-        if (args.PublishStatus != null) {
-            const value_34: PublishStatus.PublishStatus = args.PublishStatus;
-            this.PublishStatus = value_34;
+        if (args.publish_status != null) {
+            const value_34: PublishStatus.PublishStatus = args.publish_status;
+            this.publish_status = value_34;
         }
-        if (args.BizResStatus != null) {
-            const value_35: number = args.BizResStatus;
-            this.BizResStatus = value_35;
+        if (args.biz_res_status != null) {
+            const value_35: number = args.biz_res_status;
+            this.biz_res_status = value_35;
         }
-        if (args.CollaborationEnable != null) {
-            const value_36: boolean = args.CollaborationEnable;
-            this.CollaborationEnable = value_36;
+        if (args.collaboration_enable != null) {
+            const value_36: boolean = args.collaboration_enable;
+            this.collaboration_enable = value_36;
         }
-        if (args.EditTime != null) {
-            const value_37: thrift.Int64 = (typeof args.EditTime === "number" ? new thrift.Int64(args.EditTime) : typeof args.EditTime === "string" ? thrift.Int64.fromDecimalString(args.EditTime) : args.EditTime);
-            this.EditTime = value_37;
+        if (args.edit_time != null) {
+            const value_37: thrift.Int64 = (typeof args.edit_time === "number" ? new thrift.Int64(args.edit_time) : typeof args.edit_time === "string" ? thrift.Int64.fromDecimalString(args.edit_time) : args.edit_time);
+            this.edit_time = value_37;
         }
-        if (args.SpaceID != null) {
-            const value_38: thrift.Int64 = (typeof args.SpaceID === "number" ? new thrift.Int64(args.SpaceID) : typeof args.SpaceID === "string" ? thrift.Int64.fromDecimalString(args.SpaceID) : args.SpaceID);
-            this.SpaceID = value_38;
+        if (args.space_i_d != null) {
+            const value_38: thrift.Int64 = (typeof args.space_i_d === "number" ? new thrift.Int64(args.space_i_d) : typeof args.space_i_d === "string" ? thrift.Int64.fromDecimalString(args.space_i_d) : args.space_i_d);
+            this.space_i_d = value_38;
         }
-        if (args.BizExtend != null) {
+        if (args.biz_extend != null) {
             const value_39: Map<string, string> = new Map<string, string>();
-            args.BizExtend.forEach((value_43: string, key_3: string): void => {
+            args.biz_extend.forEach((value_43: string, key_3: string): void => {
                 const value_44: string = value_43;
                 const key_4: string = key_3;
                 value_39.set(key_4, value_44);
             });
-            this.BizExtend = value_39;
+            this.biz_extend = value_39;
         }
-        if (args.Actions != null) {
+        if (args.actions != null) {
             const value_40: Array<ResourceAction.IResourceAction> = new Array<ResourceAction.IResourceAction>();
-            args.Actions.forEach((value_45: ResourceAction.IResourceActionArgs): void => {
+            args.actions.forEach((value_45: ResourceAction.IResourceActionArgs): void => {
                 const value_46: ResourceAction.IResourceAction = new ResourceAction.ResourceAction(value_45);
                 value_40.push(value_46);
             });
-            this.Actions = value_40;
+            this.actions = value_40;
         }
-        if (args.DetailDisable != null) {
-            const value_41: boolean = args.DetailDisable;
-            this.DetailDisable = value_41;
+        if (args.detail_disable != null) {
+            const value_41: boolean = args.detail_disable;
+            this.detail_disable = value_41;
         }
-        if (args.DelFlag != null) {
-            const value_42: boolean = args.DelFlag;
-            this.DelFlag = value_42;
+        if (args.del_flag != null) {
+            const value_42: boolean = args.del_flag;
+            this.del_flag = value_42;
         }
     }
     public static read(input: thrift.TProtocol): ResourceInfo {

@@ -2409,7 +2409,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetUploadAuthToken(request: GetUploadAuthTokenRequest.IGetUploadAuthTokenRequestArgs, context?: Context): Promise<GetUploadAuthTokenResponse.IGetUploadAuthTokenResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetUploadAuthToken", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetUploadAuthToken", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetUploadAuthToken__ArgsArgs = { request };
         GetUploadAuthToken__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2447,7 +2447,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DeleteDraftBot(request: DeleteDraftBotRequest.IDeleteDraftBotRequestArgs, context?: Context): Promise<DeleteDraftBotResponse.IDeleteDraftBotResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DeleteDraftBot", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DeleteDraftBot", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDeleteDraftBot__ArgsArgs = { request };
         DeleteDraftBot__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2485,7 +2485,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DuplicateDraftBot(request: DuplicateDraftBotRequest.IDuplicateDraftBotRequestArgs, context?: Context): Promise<DuplicateDraftBotResponse.IDuplicateDraftBotResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DuplicateDraftBot", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DuplicateDraftBot", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDuplicateDraftBot__ArgsArgs = { request };
         DuplicateDraftBot__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2523,7 +2523,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public CheckDraftBotCommit(request: CheckDraftBotCommitRequest.ICheckDraftBotCommitRequestArgs, context?: Context): Promise<CheckDraftBotCommitResponse.ICheckDraftBotCommitResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("CheckDraftBotCommit", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("CheckDraftBotCommit", thrift.MessageType.CALL, this.increment_request_id());
         const args: ICheckDraftBotCommit__ArgsArgs = { request };
         CheckDraftBotCommit__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2561,7 +2561,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetOnboarding(request: GetOnboardingRequest.IGetOnboardingRequestArgs, context?: Context): Promise<GetOnboardingResponse.IGetOnboardingResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetOnboarding", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetOnboarding", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetOnboarding__ArgsArgs = { request };
         GetOnboarding__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2599,7 +2599,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DraftBotCreate(request: DraftBotCreateRequest.IDraftBotCreateRequestArgs, context?: Context): Promise<DraftBotCreateResponse.IDraftBotCreateResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DraftBotCreate", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DraftBotCreate", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDraftBotCreate__ArgsArgs = { request };
         DraftBotCreate__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2637,7 +2637,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdateDraftBotDisplayInfo(request: UpdateDraftBotDisplayInfoRequest.IUpdateDraftBotDisplayInfoRequestArgs, context?: Context): Promise<UpdateDraftBotDisplayInfoResponse.IUpdateDraftBotDisplayInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdateDraftBotDisplayInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdateDraftBotDisplayInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdateDraftBotDisplayInfo__ArgsArgs = { request };
         UpdateDraftBotDisplayInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2675,7 +2675,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetDraftBotDisplayInfo(request: GetDraftBotDisplayInfoRequest.IGetDraftBotDisplayInfoRequestArgs, context?: Context): Promise<GetDraftBotDisplayInfoResponse.IGetDraftBotDisplayInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetDraftBotDisplayInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetDraftBotDisplayInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetDraftBotDisplayInfo__ArgsArgs = { request };
         GetDraftBotDisplayInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2713,7 +2713,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public PublishDraftBot(request: PublishDraftBotRequest.IPublishDraftBotRequestArgs, context?: Context): Promise<PublishDraftBotResponse.IPublishDraftBotResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("PublishDraftBot", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("PublishDraftBot", thrift.MessageType.CALL, this.increment_request_id());
         const args: IPublishDraftBot__ArgsArgs = { request };
         PublishDraftBot__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2751,7 +2751,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ListDraftBotHistory(request: ListDraftBotHistoryRequest.IListDraftBotHistoryRequestArgs, context?: Context): Promise<ListDraftBotHistoryResponse.IListDraftBotHistoryResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ListDraftBotHistory", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ListDraftBotHistory", thrift.MessageType.CALL, this.increment_request_id());
         const args: IListDraftBotHistory__ArgsArgs = { request };
         ListDraftBotHistory__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2789,7 +2789,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UploadFile(request: UploadFileRequest.IUploadFileRequestArgs, context?: Context): Promise<UploadFileResponse.IUploadFileResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UploadFile", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UploadFile", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUploadFile__ArgsArgs = { request };
         UploadFile__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2827,7 +2827,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetTypeList(request: GetTypeListRequest.IGetTypeListRequestArgs, context?: Context): Promise<GetTypeListResponse.IGetTypeListResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetTypeList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetTypeList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetTypeList__ArgsArgs = { request };
         GetTypeList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2865,7 +2865,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetIcon(request: GetIconRequest.IGetIconRequestArgs, context?: Context): Promise<GetIconResponse.IGetIconResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetIcon", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetIcon", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetIcon__ArgsArgs = { request };
         GetIcon__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2903,7 +2903,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdateUserProfileCheck(request: UpdateUserProfileCheckRequest.IUpdateUserProfileCheckRequestArgs, context?: Context): Promise<UpdateUserProfileCheckResponse.IUpdateUserProfileCheckResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdateUserProfileCheck", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdateUserProfileCheck", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdateUserProfileCheck__ArgsArgs = { request };
         UpdateUserProfileCheck__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -2977,59 +2977,59 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_GetUploadAuthToken": {
-                    resolve(this.process_GetUploadAuthToken(requestId, input, output, context));
+                    resolve(this.process__get_upload_auth_token(requestId, input, output, context));
                     break;
                 }
                 case "process_DeleteDraftBot": {
-                    resolve(this.process_DeleteDraftBot(requestId, input, output, context));
+                    resolve(this.process__delete_draft_bot(requestId, input, output, context));
                     break;
                 }
                 case "process_DuplicateDraftBot": {
-                    resolve(this.process_DuplicateDraftBot(requestId, input, output, context));
+                    resolve(this.process__duplicate_draft_bot(requestId, input, output, context));
                     break;
                 }
                 case "process_CheckDraftBotCommit": {
-                    resolve(this.process_CheckDraftBotCommit(requestId, input, output, context));
+                    resolve(this.process__check_draft_bot_commit(requestId, input, output, context));
                     break;
                 }
                 case "process_GetOnboarding": {
-                    resolve(this.process_GetOnboarding(requestId, input, output, context));
+                    resolve(this.process__get_onboarding(requestId, input, output, context));
                     break;
                 }
                 case "process_DraftBotCreate": {
-                    resolve(this.process_DraftBotCreate(requestId, input, output, context));
+                    resolve(this.process__draft_bot_create(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdateDraftBotDisplayInfo": {
-                    resolve(this.process_UpdateDraftBotDisplayInfo(requestId, input, output, context));
+                    resolve(this.process__update_draft_bot_display_info(requestId, input, output, context));
                     break;
                 }
                 case "process_GetDraftBotDisplayInfo": {
-                    resolve(this.process_GetDraftBotDisplayInfo(requestId, input, output, context));
+                    resolve(this.process__get_draft_bot_display_info(requestId, input, output, context));
                     break;
                 }
                 case "process_PublishDraftBot": {
-                    resolve(this.process_PublishDraftBot(requestId, input, output, context));
+                    resolve(this.process__publish_draft_bot(requestId, input, output, context));
                     break;
                 }
                 case "process_ListDraftBotHistory": {
-                    resolve(this.process_ListDraftBotHistory(requestId, input, output, context));
+                    resolve(this.process__list_draft_bot_history(requestId, input, output, context));
                     break;
                 }
                 case "process_UploadFile": {
-                    resolve(this.process_UploadFile(requestId, input, output, context));
+                    resolve(this.process__upload_file(requestId, input, output, context));
                     break;
                 }
                 case "process_GetTypeList": {
-                    resolve(this.process_GetTypeList(requestId, input, output, context));
+                    resolve(this.process__get_type_list(requestId, input, output, context));
                     break;
                 }
                 case "process_GetIcon": {
-                    resolve(this.process_GetIcon(requestId, input, output, context));
+                    resolve(this.process__get_icon(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdateUserProfileCheck": {
-                    resolve(this.process_UpdateUserProfileCheck(requestId, input, output, context));
+                    resolve(this.process__update_user_profile_check(requestId, input, output, context));
                     break;
                 }
                 default: {

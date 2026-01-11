@@ -4783,7 +4783,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetOAuthSchema(request: GetOAuthSchemaRequest.IGetOAuthSchemaRequestArgs, context?: Context): Promise<GetOAuthSchemaResponse.IGetOAuthSchemaResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetOAuthSchema", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetOAuthSchema", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetOAuthSchema__ArgsArgs = { request };
         GetOAuthSchema__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -4821,7 +4821,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetOAuthSchemaAPI(request: GetOAuthSchemaRequest.IGetOAuthSchemaRequestArgs, context?: Context): Promise<GetOAuthSchemaResponse.IGetOAuthSchemaResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetOAuthSchemaAPI", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetOAuthSchemaAPI", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetOAuthSchemaAPI__ArgsArgs = { request };
         GetOAuthSchemaAPI__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -4859,7 +4859,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetPlaygroundPluginList(request: GetPlaygroundPluginListRequest.IGetPlaygroundPluginListRequestArgs, context?: Context): Promise<GetPlaygroundPluginListResponse.IGetPlaygroundPluginListResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetPlaygroundPluginList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetPlaygroundPluginList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetPlaygroundPluginList__ArgsArgs = { request };
         GetPlaygroundPluginList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -4897,7 +4897,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public RegisterPlugin(request: RegisterPluginRequest.IRegisterPluginRequestArgs, context?: Context): Promise<RegisterPluginResponse.IRegisterPluginResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("RegisterPlugin", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("RegisterPlugin", thrift.MessageType.CALL, this.increment_request_id());
         const args: IRegisterPlugin__ArgsArgs = { request };
         RegisterPlugin__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -4935,7 +4935,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public RegisterPluginMeta(request: RegisterPluginMetaRequest.IRegisterPluginMetaRequestArgs, context?: Context): Promise<RegisterPluginMetaResponse.IRegisterPluginMetaResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("RegisterPluginMeta", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("RegisterPluginMeta", thrift.MessageType.CALL, this.increment_request_id());
         const args: IRegisterPluginMeta__ArgsArgs = { request };
         RegisterPluginMeta__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -4973,7 +4973,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetPluginAPIs(request: GetPluginAPIsRequest.IGetPluginAPIsRequestArgs, context?: Context): Promise<GetPluginAPIsResponse.IGetPluginAPIsResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetPluginAPIs", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetPluginAPIs", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetPluginAPIs__ArgsArgs = { request };
         GetPluginAPIs__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5011,7 +5011,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetPluginInfo(request: GetPluginInfoRequest.IGetPluginInfoRequestArgs, context?: Context): Promise<GetPluginInfoResponse.IGetPluginInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetPluginInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetPluginInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetPluginInfo__ArgsArgs = { request };
         GetPluginInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5049,7 +5049,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetUpdatedAPIs(request: GetUpdatedAPIsRequest.IGetUpdatedAPIsRequestArgs, context?: Context): Promise<GetUpdatedAPIsResponse.IGetUpdatedAPIsResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetUpdatedAPIs", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetUpdatedAPIs", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetUpdatedAPIs__ArgsArgs = { request };
         GetUpdatedAPIs__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5087,7 +5087,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetOAuthStatus(request: GetOAuthStatusRequest.IGetOAuthStatusRequestArgs, context?: Context): Promise<GetOAuthStatusResponse.IGetOAuthStatusResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetOAuthStatus", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetOAuthStatus", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetOAuthStatus__ArgsArgs = { request };
         GetOAuthStatus__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5125,7 +5125,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public CheckAndLockPluginEdit(request: CheckAndLockPluginEditRequest.ICheckAndLockPluginEditRequestArgs, context?: Context): Promise<CheckAndLockPluginEditResponse.ICheckAndLockPluginEditResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("CheckAndLockPluginEdit", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("CheckAndLockPluginEdit", thrift.MessageType.CALL, this.increment_request_id());
         const args: ICheckAndLockPluginEdit__ArgsArgs = { request };
         CheckAndLockPluginEdit__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5163,7 +5163,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UnlockPluginEdit(request: UnlockPluginEditRequest.IUnlockPluginEditRequestArgs, context?: Context): Promise<UnlockPluginEditResponse.IUnlockPluginEditResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UnlockPluginEdit", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UnlockPluginEdit", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUnlockPluginEdit__ArgsArgs = { request };
         UnlockPluginEdit__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5201,7 +5201,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdatePlugin(request: UpdatePluginRequest.IUpdatePluginRequestArgs, context?: Context): Promise<UpdatePluginResponse.IUpdatePluginResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdatePlugin", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdatePlugin", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdatePlugin__ArgsArgs = { request };
         UpdatePlugin__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5239,7 +5239,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DeleteAPI(request: DeleteAPIRequest.IDeleteAPIRequestArgs, context?: Context): Promise<DeleteAPIResponse.IDeleteAPIResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DeleteAPI", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DeleteAPI", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDeleteAPI__ArgsArgs = { request };
         DeleteAPI__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5277,7 +5277,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DelPlugin(request: DelPluginRequest.IDelPluginRequestArgs, context?: Context): Promise<DelPluginResponse.IDelPluginResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DelPlugin", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DelPlugin", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDelPlugin__ArgsArgs = { request };
         DelPlugin__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5315,7 +5315,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public PublishPlugin(request: PublishPluginRequest.IPublishPluginRequestArgs, context?: Context): Promise<PublishPluginResponse.IPublishPluginResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("PublishPlugin", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("PublishPlugin", thrift.MessageType.CALL, this.increment_request_id());
         const args: IPublishPlugin__ArgsArgs = { request };
         PublishPlugin__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5353,7 +5353,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdatePluginMeta(request: UpdatePluginMetaRequest.IUpdatePluginMetaRequestArgs, context?: Context): Promise<UpdatePluginMetaResponse.IUpdatePluginMetaResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdatePluginMeta", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdatePluginMeta", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdatePluginMeta__ArgsArgs = { request };
         UpdatePluginMeta__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5391,7 +5391,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetBotDefaultParams(request: GetBotDefaultParamsRequest.IGetBotDefaultParamsRequestArgs, context?: Context): Promise<GetBotDefaultParamsResponse.IGetBotDefaultParamsResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetBotDefaultParams", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetBotDefaultParams", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetBotDefaultParams__ArgsArgs = { request };
         GetBotDefaultParams__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5429,7 +5429,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdateBotDefaultParams(request: UpdateBotDefaultParamsRequest.IUpdateBotDefaultParamsRequestArgs, context?: Context): Promise<UpdateBotDefaultParamsResponse.IUpdateBotDefaultParamsResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdateBotDefaultParams", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdateBotDefaultParams", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdateBotDefaultParams__ArgsArgs = { request };
         UpdateBotDefaultParams__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5467,7 +5467,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public CreateAPI(request: CreateAPIRequest.ICreateAPIRequestArgs, context?: Context): Promise<CreateAPIResponse.ICreateAPIResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("CreateAPI", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("CreateAPI", thrift.MessageType.CALL, this.increment_request_id());
         const args: ICreateAPI__ArgsArgs = { request };
         CreateAPI__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5505,7 +5505,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdateAPI(request: UpdateAPIRequest.IUpdateAPIRequestArgs, context?: Context): Promise<UpdateAPIResponse.IUpdateAPIResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdateAPI", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdateAPI", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdateAPI__ArgsArgs = { request };
         UpdateAPI__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5543,7 +5543,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetUserAuthority(request: GetUserAuthorityRequest.IGetUserAuthorityRequestArgs, context?: Context): Promise<GetUserAuthorityResponse.IGetUserAuthorityResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetUserAuthority", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetUserAuthority", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetUserAuthority__ArgsArgs = { request };
         GetUserAuthority__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5581,7 +5581,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DebugAPI(request: DebugAPIRequest.IDebugAPIRequestArgs, context?: Context): Promise<DebugAPIResponse.IDebugAPIResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DebugAPI", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DebugAPI", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDebugAPI__ArgsArgs = { request };
         DebugAPI__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5619,7 +5619,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetPluginNextVersion(request: GetPluginNextVersionRequest.IGetPluginNextVersionRequestArgs, context?: Context): Promise<GetPluginNextVersionResponse.IGetPluginNextVersionResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetPluginNextVersion", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetPluginNextVersion", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetPluginNextVersion__ArgsArgs = { request };
         GetPluginNextVersion__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5657,7 +5657,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetDevPluginList(request: GetDevPluginListRequest.IGetDevPluginListRequestArgs, context?: Context): Promise<GetDevPluginListResponse.IGetDevPluginListResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetDevPluginList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetDevPluginList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetDevPluginList__ArgsArgs = { request };
         GetDevPluginList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5695,7 +5695,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public Convert2OpenAPI(request: Convert2OpenAPIRequest.IConvert2OpenAPIRequestArgs, context?: Context): Promise<Convert2OpenAPIResponse.IConvert2OpenAPIResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("Convert2OpenAPI", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("Convert2OpenAPI", thrift.MessageType.CALL, this.increment_request_id());
         const args: IConvert2OpenAPI__ArgsArgs = { request };
         Convert2OpenAPI__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5733,7 +5733,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public BatchCreateAPI(request: BatchCreateAPIRequest.IBatchCreateAPIRequestArgs, context?: Context): Promise<BatchCreateAPIResponse.IBatchCreateAPIResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("BatchCreateAPI", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("BatchCreateAPI", thrift.MessageType.CALL, this.increment_request_id());
         const args: IBatchCreateAPI__ArgsArgs = { request };
         BatchCreateAPI__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5771,7 +5771,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public RevokeAuthToken(request: RevokeAuthTokenRequest.IRevokeAuthTokenRequestArgs, context?: Context): Promise<RevokeAuthTokenResponse.IRevokeAuthTokenResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("RevokeAuthToken", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("RevokeAuthToken", thrift.MessageType.CALL, this.increment_request_id());
         const args: IRevokeAuthToken__ArgsArgs = { request };
         RevokeAuthToken__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5809,7 +5809,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetQueriedOAuthPluginList(request: GetQueriedOAuthPluginListRequest.IGetQueriedOAuthPluginListRequestArgs, context?: Context): Promise<GetQueriedOAuthPluginListResponse.IGetQueriedOAuthPluginListResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetQueriedOAuthPluginList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetQueriedOAuthPluginList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetQueriedOAuthPluginList__ArgsArgs = { request };
         GetQueriedOAuthPluginList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -5897,115 +5897,115 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_GetOAuthSchema": {
-                    resolve(this.process_GetOAuthSchema(requestId, input, output, context));
+                    resolve(this.process__get_o_auth_schema(requestId, input, output, context));
                     break;
                 }
                 case "process_GetOAuthSchemaAPI": {
-                    resolve(this.process_GetOAuthSchemaAPI(requestId, input, output, context));
+                    resolve(this.process__get_o_auth_schema_a_p_i(requestId, input, output, context));
                     break;
                 }
                 case "process_GetPlaygroundPluginList": {
-                    resolve(this.process_GetPlaygroundPluginList(requestId, input, output, context));
+                    resolve(this.process__get_playground_plugin_list(requestId, input, output, context));
                     break;
                 }
                 case "process_RegisterPlugin": {
-                    resolve(this.process_RegisterPlugin(requestId, input, output, context));
+                    resolve(this.process__register_plugin(requestId, input, output, context));
                     break;
                 }
                 case "process_RegisterPluginMeta": {
-                    resolve(this.process_RegisterPluginMeta(requestId, input, output, context));
+                    resolve(this.process__register_plugin_meta(requestId, input, output, context));
                     break;
                 }
                 case "process_GetPluginAPIs": {
-                    resolve(this.process_GetPluginAPIs(requestId, input, output, context));
+                    resolve(this.process__get_plugin_a_p_is(requestId, input, output, context));
                     break;
                 }
                 case "process_GetPluginInfo": {
-                    resolve(this.process_GetPluginInfo(requestId, input, output, context));
+                    resolve(this.process__get_plugin_info(requestId, input, output, context));
                     break;
                 }
                 case "process_GetUpdatedAPIs": {
-                    resolve(this.process_GetUpdatedAPIs(requestId, input, output, context));
+                    resolve(this.process__get_updated_a_p_is(requestId, input, output, context));
                     break;
                 }
                 case "process_GetOAuthStatus": {
-                    resolve(this.process_GetOAuthStatus(requestId, input, output, context));
+                    resolve(this.process__get_o_auth_status(requestId, input, output, context));
                     break;
                 }
                 case "process_CheckAndLockPluginEdit": {
-                    resolve(this.process_CheckAndLockPluginEdit(requestId, input, output, context));
+                    resolve(this.process__check_and_lock_plugin_edit(requestId, input, output, context));
                     break;
                 }
                 case "process_UnlockPluginEdit": {
-                    resolve(this.process_UnlockPluginEdit(requestId, input, output, context));
+                    resolve(this.process__unlock_plugin_edit(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdatePlugin": {
-                    resolve(this.process_UpdatePlugin(requestId, input, output, context));
+                    resolve(this.process__update_plugin(requestId, input, output, context));
                     break;
                 }
                 case "process_DeleteAPI": {
-                    resolve(this.process_DeleteAPI(requestId, input, output, context));
+                    resolve(this.process__delete_a_p_i(requestId, input, output, context));
                     break;
                 }
                 case "process_DelPlugin": {
-                    resolve(this.process_DelPlugin(requestId, input, output, context));
+                    resolve(this.process__del_plugin(requestId, input, output, context));
                     break;
                 }
                 case "process_PublishPlugin": {
-                    resolve(this.process_PublishPlugin(requestId, input, output, context));
+                    resolve(this.process__publish_plugin(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdatePluginMeta": {
-                    resolve(this.process_UpdatePluginMeta(requestId, input, output, context));
+                    resolve(this.process__update_plugin_meta(requestId, input, output, context));
                     break;
                 }
                 case "process_GetBotDefaultParams": {
-                    resolve(this.process_GetBotDefaultParams(requestId, input, output, context));
+                    resolve(this.process__get_bot_default_params(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdateBotDefaultParams": {
-                    resolve(this.process_UpdateBotDefaultParams(requestId, input, output, context));
+                    resolve(this.process__update_bot_default_params(requestId, input, output, context));
                     break;
                 }
                 case "process_CreateAPI": {
-                    resolve(this.process_CreateAPI(requestId, input, output, context));
+                    resolve(this.process__create_a_p_i(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdateAPI": {
-                    resolve(this.process_UpdateAPI(requestId, input, output, context));
+                    resolve(this.process__update_a_p_i(requestId, input, output, context));
                     break;
                 }
                 case "process_GetUserAuthority": {
-                    resolve(this.process_GetUserAuthority(requestId, input, output, context));
+                    resolve(this.process__get_user_authority(requestId, input, output, context));
                     break;
                 }
                 case "process_DebugAPI": {
-                    resolve(this.process_DebugAPI(requestId, input, output, context));
+                    resolve(this.process__debug_a_p_i(requestId, input, output, context));
                     break;
                 }
                 case "process_GetPluginNextVersion": {
-                    resolve(this.process_GetPluginNextVersion(requestId, input, output, context));
+                    resolve(this.process__get_plugin_next_version(requestId, input, output, context));
                     break;
                 }
                 case "process_GetDevPluginList": {
-                    resolve(this.process_GetDevPluginList(requestId, input, output, context));
+                    resolve(this.process__get_dev_plugin_list(requestId, input, output, context));
                     break;
                 }
                 case "process_Convert2OpenAPI": {
-                    resolve(this.process_Convert2OpenAPI(requestId, input, output, context));
+                    resolve(this.process__convert2_open_a_p_i(requestId, input, output, context));
                     break;
                 }
                 case "process_BatchCreateAPI": {
-                    resolve(this.process_BatchCreateAPI(requestId, input, output, context));
+                    resolve(this.process__batch_create_a_p_i(requestId, input, output, context));
                     break;
                 }
                 case "process_RevokeAuthToken": {
-                    resolve(this.process_RevokeAuthToken(requestId, input, output, context));
+                    resolve(this.process__revoke_auth_token(requestId, input, output, context));
                     break;
                 }
                 case "process_GetQueriedOAuthPluginList": {
-                    resolve(this.process_GetQueriedOAuthPluginList(requestId, input, output, context));
+                    resolve(this.process__get_queried_o_auth_plugin_list(requestId, input, output, context));
                     break;
                 }
                 default: {

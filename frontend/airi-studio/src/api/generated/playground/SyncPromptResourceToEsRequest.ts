@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface ISyncPromptResourceToEsRequest {
-    SyncAll?: boolean;
-    PromptResourceIDList?: Array<thrift.Int64>;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    sync_all?: boolean;
+    prompt_resource_i_d_list?: Array<thrift.Int64>;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface ISyncPromptResourceToEsRequestArgs {
-    SyncAll?: boolean;
-    PromptResourceIDList?: Array<number | string | thrift.Int64>;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    sync_all?: boolean;
+    prompt_resource_i_d_list?: Array<number | string | thrift.Int64>;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const SyncPromptResourceToEsRequestCodec: thrift.IStructCodec<ISyncPromptResourceToEsRequestArgs, ISyncPromptResourceToEsRequest> = {
     encode(args: ISyncPromptResourceToEsRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            SyncAll: args.SyncAll,
-            PromptResourceIDList: args.PromptResourceIDList,
-            Base: args.Base
+            SyncAll: args.sync_all,
+            PromptResourceIDList: args.prompt_resource_i_d_list,
+            Base: args.base
         };
         output.writeStructBegin("SyncPromptResourceToEsRequest");
         if (obj.SyncAll != null) {
@@ -100,35 +100,35 @@ export const SyncPromptResourceToEsRequestCodec: thrift.IStructCodec<ISyncPrompt
         }
         input.readStructEnd();
         return {
-            SyncAll: _args.SyncAll,
-            PromptResourceIDList: _args.PromptResourceIDList,
-            Base: _args.Base
+            sync_all: _args.SyncAll,
+            prompt_resource_i_d_list: _args.PromptResourceIDList,
+            base: _args.Base
         };
     }
 };
 export class SyncPromptResourceToEsRequest extends thrift.StructLike implements ISyncPromptResourceToEsRequest {
-    public SyncAll?: boolean;
-    public PromptResourceIDList?: Array<thrift.Int64>;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public sync_all?: boolean;
+    public prompt_resource_i_d_list?: Array<thrift.Int64>;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ISyncPromptResourceToEsRequestArgs = {}) {
         super();
-        if (args.SyncAll != null) {
-            const value_6: boolean = args.SyncAll;
-            this.SyncAll = value_6;
+        if (args.sync_all != null) {
+            const value_6: boolean = args.sync_all;
+            this.sync_all = value_6;
         }
-        if (args.PromptResourceIDList != null) {
+        if (args.prompt_resource_i_d_list != null) {
             const value_7: Array<thrift.Int64> = new Array<thrift.Int64>();
-            args.PromptResourceIDList.forEach((value_9: number | string | thrift.Int64): void => {
+            args.prompt_resource_i_d_list.forEach((value_9: number | string | thrift.Int64): void => {
                 const value_10: thrift.Int64 = (typeof value_9 === "number" ? new thrift.Int64(value_9) : typeof value_9 === "string" ? thrift.Int64.fromDecimalString(value_9) : value_9);
                 value_7.push(value_10);
             });
-            this.PromptResourceIDList = value_7;
+            this.prompt_resource_i_d_list = value_7;
         }
-        if (args.Base != null) {
-            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_8;
+        if (args.base != null) {
+            const value_8: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_8;
         }
     }
     public static read(input: thrift.TProtocol): SyncPromptResourceToEsRequest {

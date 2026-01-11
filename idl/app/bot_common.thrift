@@ -13,20 +13,20 @@ struct AuthToken {
 }
 
 struct PromptInfo {
-    1: optional string Prompt (api.body="prompt"), // Text prompt
+    1: optional string Prompt (api.body="prompt", go.tag='json:"prompt"'), // Text prompt
 }
 
 struct ModelInfo {
-    1: optional i64                 ModelId           (agw.js_conv="str", api.js_conv="true", api.body="model_id"), // Model ID
-    2: optional double              Temperature       (api.body="temperature")                                    , // Temperature, model output randomness, the larger the value, the more random, the smaller the more conservative (0-1]
-    3: optional i32                 MaxTokens         (api.body="max_tokens")                                     , // Maximum Token Reply
-    4: optional double              TopP              (api.body="top_p")                                          , // Another model's output randomness, the larger the value, the more random [0, 1]
-    5: optional double              FrequencyPenalty  (api.body="frequency_penalty")                              , // Frequency penalty, adjust the frequency of words in the generated content, the fewer positive words are [-1.0, 1.0]
-    6: optional double              PresencePenalty   (api.body="presence_penalty")                               , // There is a penalty, adjust the frequency of new words in the generated content, avoid repeating words with positive values, and use new words [-1.0, 1.0]
-    7: optional ShortMemoryPolicy   ShortMemoryPolicy (api.body="short_memory_policy")                            , // contextual policy
-    8: optional i32                 TopK              (api.body="top_k")                                          , // When generating, sample the size of the candidate set
-    9: optional ModelResponseFormat ResponseFormat    (api.body="response_format")                                , // model reply content format
-    10: optional ModelStyle         ModelStyle        (api.body="model_style")                                    , // User-selected model style
+    1: optional i64                 ModelId           (agw.js_conv="str", api.js_conv="true", api.body="model_id", go.tag='json:"model_id"'), // Model ID
+    2: optional double              Temperature       (api.body="temperature", go.tag='json:"temperature"')                                 , // Temperature, model output randomness, the larger the value, the more random, the smaller the more conservative (0-1]
+    3: optional i32                 MaxTokens         (api.body="max_tokens", go.tag='json:"max_tokens"')                                   , // Maximum Token Reply
+    4: optional double              TopP              (api.body="top_p", go.tag='json:"top_p"')                                             , // Another model's output randomness, the larger the value, the more random [0, 1]
+    5: optional double              FrequencyPenalty  (api.body="frequency_penalty", go.tag='json:"frequency_penalty"')                     , // Frequency penalty, adjust the frequency of words in the generated content, the fewer positive words are [-1.0, 1.0]
+    6: optional double              PresencePenalty   (api.body="presence_penalty", go.tag='json:"presence_penalty"')                       , // There is a penalty, adjust the frequency of new words in the generated content, avoid repeating words with positive values, and use new words [-1.0, 1.0]
+    7: optional ShortMemoryPolicy   ShortMemoryPolicy (api.body="short_memory_policy", go.tag='json:"short_memory_policy"')                 , // contextual policy
+    8: optional i32                 TopK              (api.body="top_k", go.tag='json:"top_k"')                                             , // When generating, sample the size of the candidate set
+    9: optional ModelResponseFormat ResponseFormat    (api.body="response_format", go.tag='json:"response_format"')                         , // model reply content format
+    10: optional ModelStyle         ModelStyle        (api.body="model_style", go.tag='json:"model_style"')                                 , // User-selected model style
 }
 
 enum ModelStyle {
@@ -342,29 +342,29 @@ enum AgentVersionCompat{
 }
 
 struct Agent {
-    1 : i64                AgentId          (agw.js_conv="str", api.js_conv="true", api.body="agent_id")    ,
-    2 : string             AgentName        (api.body="agent_name")                                         ,
-    3 : PromptInfo         PromptInfo       (api.body="prompt_info")                                        , // Prompt message
-    4 : list<PluginInfo>   PluginInfoList   (api.body="plugin_info_list")                                   , // List of plugins
-    5 : Knowledge          Knowledge        (api.body="knowledge")                                          , // dataset
-    6 : list<WorkflowInfo> WorkflowInfoList (api.body="workflow_info_list")                                 , // Workflow List
-    7 : ModelInfo          ModelInfo        (api.body="model_info")                                         , // model configuration
-    8 : list<Intent>       Intents          (api.body="intents")                                            , // intent information
-    9 : AgentType          AgentType        (api.body="agent_type")                                         ,
-    10: bool               RootAgent        (api.body="root_agent")                                         , // Is it a rootagent?
-    11: i64                ReferenceId      (agw.js_conv="str", api.js_conv="true", api.body="reference_id"),
-    12: string             FirstVersion     (api.body="first_version")                                      ,
-    13: string             LastVersion      (api.body="last_version")                                       ,
-    14: AgentPosition      AgentPosition    (api.body="agent_position")                                     ,
-    15: string             IconUri          (api.body="icon_uri")                                           ,
-    16: JumpConfig         JumpConfig       (api.body="jump_config")                                        ,
-    17: SuggestReplyInfo   SuggestReplyInfo (api.body="suggest_reply_info")                                 ,
-    18: string             Description      (api.body="description")                                        ,
-    19: AgentVersionCompat VersionCompat    (api.body="version_compat")                                     , // multi_agent version compatibility field
-    20: optional HookInfo  HookInfo         (api.body="hook_info")                                          ,
-    21: optional string                 CurrentVersion                  (api.body="current_version")        ,   //The current version of the subbot
-    22: optional ReferenceInfoStatus    ReferenceInfoStatus             (api.body="reference_info_status")  ,   // 1: Available update 2: Removed
-    23: optional ReferenceUpdateType    UpdateType                      (api.body="update_type")            ,   //Subbot update type
+    1 : i64                AgentId          (agw.js_conv="str", api.js_conv="true", api.body="agent_id", go.tag='json:"agent_id,omitempty"')    ,
+    2 : string             AgentName        (api.body="agent_name", go.tag='json:"agent_name"')                                         ,
+    3 : PromptInfo         PromptInfo       (api.body="prompt_info", go.tag='json:"prompt_info"')                                        , // Prompt message
+    4 : list<PluginInfo>   PluginInfoList   (api.body="plugin_info_list", go.tag='json:"plugin_info_list"')                                   , // List of plugins
+    5 : Knowledge          Knowledge        (api.body="knowledge", go.tag='json:"knowledge"')                                          , // dataset
+    6 : list<WorkflowInfo> WorkflowInfoList (api.body="workflow_info_list", go.tag='json:"workflow_info_list"')                                 , // Workflow List
+    7 : ModelInfo          ModelInfo        (api.body="model_info", go.tag='json:"model_info"')                                         , // model configuration
+    8 : list<Intent>       Intents          (api.body="intents", go.tag='json:"intents"')                                            , // intent information
+    9 : AgentType          AgentType        (api.body="agent_type", go.tag='json:"agent_type"')                                         ,
+    10: bool               RootAgent        (api.body="root_agent", go.tag='json:"root_agent"')                                         , // Is it a rootagent?
+    11: i64                ReferenceId      (agw.js_conv="str", api.js_conv="true", api.body="reference_id", go.tag='json:"reference_id,omitempty"'),
+    12: string             FirstVersion     (api.body="first_version", go.tag='json:"first_version,omitempty"')                                      ,
+    13: string             LastVersion      (api.body="last_version", go.tag='json:"last_version,omitempty"')                                       ,
+    14: AgentPosition      AgentPosition    (api.body="agent_position", go.tag='json:"agent_position,omitempty"')                                     ,
+    15: string             IconUri          (api.body="icon_uri", go.tag='json:"icon_uri,omitempty"')                                           ,
+    16: JumpConfig         JumpConfig       (api.body="jump_config", go.tag='json:"jump_config,omitempty"')                                        ,
+    17: SuggestReplyInfo   SuggestReplyInfo (api.body="suggest_reply_info", go.tag='json:"suggest_reply_info,omitempty"')                                 ,
+    18: string             Description      (api.body="description", go.tag='json:"description"')                                        ,
+    19: AgentVersionCompat VersionCompat    (api.body="version_compat", go.tag='json:"version_compat,omitempty"')                                     , // multi_agent version compatibility field
+    20: optional HookInfo  HookInfo         (api.body="hook_info", go.tag='json:"hook_info,omitempty"')                                          ,
+    21: optional string                 CurrentVersion                  (api.body="current_version", go.tag='json:"current_version,omitempty"')        ,   //The current version of the subbot
+    22: optional ReferenceInfoStatus    ReferenceInfoStatus             (api.body="reference_info_status", go.tag='json:"reference_info_status,omitempty"')  ,   // 1: Available update 2: Removed
+    23: optional ReferenceUpdateType    UpdateType                      (api.body="update_type", go.tag='json:"update_type,omitempty"')            ,   //Subbot update type
 }
 
 struct AgentPosition{
@@ -436,40 +436,40 @@ enum BusinessType {
 // bot information
 struct BotInfo {
     1 : i64                BotId            (agw.js_conv="str", go.tag='json:"bot_id,string"', api.js_conv="true", api.body="bot_id")      , // bot id
-    2 : string             Name             (api.body="name")                                               , // bot name
-    3 : string             Description      (api.body="description")                                        , // Bot description
-    4 : string             IconUri          (api.body="icon_uri")                                           , // Bot icon uri
-    5 : string             IconUrl          (api.body="icon_url")                                           , // Bot icon url
-    6 : i64                CreatorId        (agw.js_conv="str", api.js_conv="true", api.body="creator_id")  , // creator id
-    7 : i64                CreateTime       (agw.js_conv="str", api.js_conv="true", api.body="create_time") , // create_time
-    8 : i64                UpdateTime       (agw.js_conv="str", api.js_conv="true", api.body="update_time") , // update time
-    9 : i64                ConnectorId      (agw.js_conv="str", api.js_conv="true", api.body="connector_id"), // line of business
-    10: string             Version          (api.body="version")                                            , // Version, ms
-    11: ModelInfo          ModelInfo        (api.body="model_info")                                         , // model configuration
-    12: PromptInfo         PromptInfo       (api.body="prompt_info")                                        , // Prompt message
-    13: list<PluginInfo>   PluginInfoList   (api.body="plugin_info_list")                                   , // List of plugins
-    14: list<WorkflowInfo> WorkflowInfoList (api.body="workflow_info_list")                                 , // Workflow List
-    15: OnboardingInfo     OnboardingInfo   (api.body="onboarding_info")                                    , // opening statement
-    16: Knowledge          Knowledge        (api.body="knowledge")                                          , // dataset
-    17: list<Variable>     VariableList     (api.body="variable_list")                                      , // KV storage
-    18: TaskInfo           TaskInfo         (api.body="task_info")                                          , // Task management/preset tasks
-    19: list<Database>     DatabaseList     (api.body="database_list")                                      , // data table
-    20: SuggestReplyInfo   SuggestReplyInfo (api.body="suggest_reply_info")                                 , // referral question
-    21: VoicesInfo         VoicesInfo       (api.body="voices_info")                                        , // Timbre Configuration
-    22: BotExtInfo         BotExtInfo       (api.body="bot_ext_info")                                       , // Additional information, extended fields
-    23: BotMode            BotMode          (api.body="bot_mode")                                           , // Bot type, single agent or multi agent
-    24: list<Agent>        Agents           (api.body="agents")                                             , // Multi agent mode agent information
-    25: BotSpecies         BotSpecies       (api.body="bot_species")                                        , // Bot type
-    26: BotTagInfo         BotTagInfo       (api.body="bot_tag_info")                                       , // Bot tag information, user new field
-    27: FileboxInfo        FileboxInfo      (api.body="filebox_info")                                       , // FileBox Information
-    28: MultiAgentInfo     MultiAgentInfo   (api.body="multi_agent_info")                                   , // multi_agent structure
-    29: list<BackgroundImageInfo> BackgroundImageInfoList   (api.body="background_image_info_list")         , // Background cover list structure
-    30: list<string>       ShortcutSort     (api.body="shortcut_sort")                                      ,
-    31: BotStatus          Status           (api.body="status")                                             , // bot state
-    32: optional HookInfo  HookInfo         (api.body="hook_info")                                          , // Hook information
-    33: UserQueryCollectConf UserQueryCollectConf (api.body="user_query_collect_conf") , // User query collection configuration
-    34: LayoutInfo         LayoutInfo       (api.body="layout_info")                                        , // Orchestration information for workflow patterns
-    35: BusinessType       BusinessType     (api.body="business_type")
+    2 : string             Name             (go.tag='json:"name"', api.body="name")                                               , // bot name
+    3 : string             Description      (go.tag='json:"description"', api.body="description")                                        , // Bot description
+    4 : string             IconUri          (go.tag='json:"icon_uri"', api.body="icon_uri")                                           , // Bot icon uri
+    5 : string             IconUrl          (go.tag='json:"icon_url"', api.body="icon_url")                                           , // Bot icon url
+    6 : i64                CreatorId        (agw.js_conv="str", go.tag='json:"creator_id,string"', api.js_conv="true", api.body="creator_id")  , // creator id
+    7 : i64                CreateTime       (agw.js_conv="str", go.tag='json:"create_time,string"', api.js_conv="true", api.body="create_time") , // create_time
+    8 : i64                UpdateTime       (agw.js_conv="str", go.tag='json:"update_time,string"', api.js_conv="true", api.body="update_time") , // update time
+    9 : i64                ConnectorId      (agw.js_conv="str", go.tag='json:"connector_id,string"', api.js_conv="true", api.body="connector_id"), // line of business
+    10: string             Version          (go.tag='json:"version"', api.body="version")                                            , // Version, ms
+    11: ModelInfo          ModelInfo        (go.tag='json:"model_info"', api.body="model_info")                                         , // model configuration
+    12: PromptInfo         PromptInfo       (go.tag='json:"prompt_info"', api.body="prompt_info")                                        , // Prompt message
+    13: list<PluginInfo>   PluginInfoList   (go.tag='json:"plugin_info_list"', api.body="plugin_info_list")                                   , // List of plugins
+    14: list<WorkflowInfo> WorkflowInfoList (go.tag='json:"workflow_info_list"', api.body="workflow_info_list")                                 , // Workflow List
+    15: OnboardingInfo     OnboardingInfo   (go.tag='json:"onboarding_info"', api.body="onboarding_info")                                    , // opening statement
+    16: Knowledge          Knowledge        (go.tag='json:"knowledge"', api.body="knowledge")                                          , // dataset
+    17: list<Variable>     VariableList     (go.tag='json:"variable_list"', api.body="variable_list")                                      , // KV storage
+    18: TaskInfo           TaskInfo         (go.tag='json:"task_info"', api.body="task_info")                                          , // Task management/preset tasks
+    19: list<Database>     DatabaseList     (go.tag='json:"database_list"', api.body="database_list")                                      , // data table
+    20: SuggestReplyInfo   SuggestReplyInfo (go.tag='json:"suggest_reply_info"', api.body="suggest_reply_info")                                 , // referral question
+    21: VoicesInfo         VoicesInfo       (go.tag='json:"voices_info"', api.body="voices_info")                                        , // Timbre Configuration
+    22: BotExtInfo         BotExtInfo       (go.tag='json:"bot_ext_info"', api.body="bot_ext_info")                                       , // Additional information, extended fields
+    23: BotMode            BotMode          (go.tag='json:"bot_mode"', api.body="bot_mode")                                           , // Bot type, single agent or multi agent
+    24: list<Agent>        Agents           (go.tag='json:"agents"', api.body="agents")                                             , // Multi agent mode agent information
+    25: BotSpecies         BotSpecies       (go.tag='json:"bot_species"', api.body="bot_species")                                        , // Bot type
+    26: BotTagInfo         BotTagInfo       (go.tag='json:"bot_tag_info"', api.body="bot_tag_info")                                       , // Bot tag information, user new field
+    27: FileboxInfo        FileboxInfo      (go.tag='json:"filebox_info"', api.body="filebox_info")                                       , // FileBox Information
+    28: MultiAgentInfo     MultiAgentInfo   (go.tag='json:"multi_agent_info"', api.body="multi_agent_info")                                   , // multi_agent structure
+    29: list<BackgroundImageInfo> BackgroundImageInfoList   (go.tag='json:"background_image_info_list"', api.body="background_image_info_list")         , // Background cover list structure
+    30: list<string>       ShortcutSort     (go.tag='json:"shortcut_sort"', api.body="shortcut_sort")                                      ,
+    31: BotStatus          Status           (go.tag='json:"status"', api.body="status")                                             , // bot state
+    32: optional HookInfo  HookInfo         (go.tag='json:"hook_info,omitempty"', api.body="hook_info")                                          , // Hook information
+    33: UserQueryCollectConf UserQueryCollectConf (go.tag='json:"user_query_collect_conf"', api.body="user_query_collect_conf") , // User query collection configuration
+    34: LayoutInfo         LayoutInfo       (go.tag='json:"layout_info"', api.body="layout_info")                                        , // Orchestration information for workflow patterns
+    35: BusinessType       BusinessType     (go.tag='json:"business_type"', api.body="business_type")
 }
 
 

@@ -7,21 +7,21 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ProjectResourceActionKey from "./ProjectResourceActionKey";
 export interface IProjectResourceAction {
-    Key: ProjectResourceActionKey.ProjectResourceActionKey;
-    Enable: boolean;
-    Hint?: string;
+    key: ProjectResourceActionKey.ProjectResourceActionKey;
+    enable: boolean;
+    hint?: string;
 }
 export interface IProjectResourceActionArgs {
-    Key: ProjectResourceActionKey.ProjectResourceActionKey;
-    Enable: boolean;
-    Hint?: string;
+    key: ProjectResourceActionKey.ProjectResourceActionKey;
+    enable: boolean;
+    hint?: string;
 }
 export const ProjectResourceActionCodec: thrift.IStructCodec<IProjectResourceActionArgs, IProjectResourceAction> = {
     encode(args: IProjectResourceActionArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Key: args.Key,
-            Enable: args.Enable,
-            Hint: args.Hint
+            Key: args.key,
+            Enable: args.enable,
+            Hint: args.hint
         };
         output.writeStructBegin("ProjectResourceAction");
         if (obj.Key != null) {
@@ -96,9 +96,9 @@ export const ProjectResourceActionCodec: thrift.IStructCodec<IProjectResourceAct
         input.readStructEnd();
         if (_args.Key !== undefined && _args.Enable !== undefined) {
             return {
-                Key: _args.Key,
-                Enable: _args.Enable,
-                Hint: _args.Hint
+                key: _args.Key,
+                enable: _args.Enable,
+                hint: _args.Hint
             };
         }
         else {
@@ -107,43 +107,43 @@ export const ProjectResourceActionCodec: thrift.IStructCodec<IProjectResourceAct
     }
 };
 export class ProjectResourceAction extends thrift.StructLike implements IProjectResourceAction {
-    public Key: ProjectResourceActionKey.ProjectResourceActionKey;
-    public Enable: boolean;
-    public Hint?: string;
+    public key: ProjectResourceActionKey.ProjectResourceActionKey;
+    public enable: boolean;
+    public hint?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Key: {
+        key: {
             'go.tag': "json:\"key\"",
             'agw.key': "key"
         },
-        Enable: {
+        enable: {
             'go.tag': "json:\"enable\"",
             'agw.key': "enable"
         },
-        Hint: {
+        hint: {
             'go.tag': "json:\"hint\"",
             'agw.key': "hint"
         }
     };
     constructor(args: IProjectResourceActionArgs) {
         super();
-        if (args.Key != null) {
-            const value_4: ProjectResourceActionKey.ProjectResourceActionKey = args.Key;
-            this.Key = value_4;
+        if (args.key != null) {
+            const value_4: ProjectResourceActionKey.ProjectResourceActionKey = args.key;
+            this.key = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Key] is unset!");
         }
-        if (args.Enable != null) {
-            const value_5: boolean = args.Enable;
-            this.Enable = value_5;
+        if (args.enable != null) {
+            const value_5: boolean = args.enable;
+            this.enable = value_5;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Enable] is unset!");
         }
-        if (args.Hint != null) {
-            const value_6: string = args.Hint;
-            this.Hint = value_6;
+        if (args.hint != null) {
+            const value_6: string = args.hint;
+            this.hint = value_6;
         }
     }
     public static read(input: thrift.TProtocol): ProjectResourceAction {

@@ -11,13 +11,13 @@ export interface IGetUserAuthorityResponse {
     code: number;
     msg: string;
     data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IGetUserAuthorityData;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IGetUserAuthorityResponseArgs {
     code: number;
     msg: string;
     data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IGetUserAuthorityDataArgs;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const GetUserAuthorityResponseCodec: thrift.IStructCodec<IGetUserAuthorityResponseArgs, IGetUserAuthorityResponse> = {
     encode(args: IGetUserAuthorityResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const GetUserAuthorityResponseCodec: thrift.IStructCodec<IGetUserAuthorit
             code: args.code,
             msg: args.msg,
             data: args.data,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetUserAuthorityResponse");
         if (obj.code != null) {
@@ -117,7 +117,7 @@ export const GetUserAuthorityResponseCodec: thrift.IStructCodec<IGetUserAuthorit
                 code: _args.code,
                 msg: _args.msg,
                 data: _args.data,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -129,7 +129,7 @@ export class GetUserAuthorityResponse extends thrift.StructLike implements IGetU
     public code: number;
     public msg: string;
     public data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IGetUserAuthorityData;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         data: {
@@ -156,9 +156,9 @@ export class GetUserAuthorityResponse extends thrift.StructLike implements IGetU
             const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IGetUserAuthorityData = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.GetUserAuthorityData(args.data);
             this.data = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): GetUserAuthorityResponse {

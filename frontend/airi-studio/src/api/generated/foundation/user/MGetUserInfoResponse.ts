@@ -9,17 +9,17 @@ import * as FOUNDATION_DOMAIN_USER_NS from "../domain/user";
 import * as BASE_NS from "../../base";
 export interface IMGetUserInfoResponse {
     user_infos?: Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail>;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IMGetUserInfoResponseArgs {
     user_infos?: Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetailArgs>;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const MGetUserInfoResponseCodec: thrift.IStructCodec<IMGetUserInfoResponseArgs, IMGetUserInfoResponse> = {
     encode(args: IMGetUserInfoResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
             user_infos: args.user_infos,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("MGetUserInfoResponse");
         if (obj.user_infos != null) {
@@ -85,13 +85,13 @@ export const MGetUserInfoResponseCodec: thrift.IStructCodec<IMGetUserInfoRespons
         input.readStructEnd();
         return {
             user_infos: _args.user_infos,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
 export class MGetUserInfoResponse extends thrift.StructLike implements IMGetUserInfoResponse {
     public user_infos?: Array<FOUNDATION_DOMAIN_USER_NS.IUserInfoDetail>;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IMGetUserInfoResponseArgs = {}) {
@@ -104,9 +104,9 @@ export class MGetUserInfoResponse extends thrift.StructLike implements IMGetUser
             });
             this.user_infos = value_5;
         }
-        if (args.BaseResp != null) {
-            const value_6: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_6;
+        if (args.base_resp != null) {
+            const value_6: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_6;
         }
     }
     public static read(input: thrift.TProtocol): MGetUserInfoResponse {

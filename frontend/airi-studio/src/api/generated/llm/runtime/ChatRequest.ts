@@ -12,14 +12,14 @@ export interface IChatRequest {
     messages?: Array<LLM_DOMAIN_RUNTIME_NS.IMessage>;
     tools?: Array<LLM_DOMAIN_RUNTIME_NS.ITool>;
     biz_param?: LLM_DOMAIN_RUNTIME_NS.IBizParam;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IChatRequestArgs {
     model_config?: LLM_DOMAIN_RUNTIME_NS.IModelConfigArgs;
     messages?: Array<LLM_DOMAIN_RUNTIME_NS.IMessageArgs>;
     tools?: Array<LLM_DOMAIN_RUNTIME_NS.IToolArgs>;
     biz_param?: LLM_DOMAIN_RUNTIME_NS.IBizParamArgs;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatRequest> = {
     encode(args: IChatRequestArgs, output: thrift.TProtocol): void {
@@ -28,7 +28,7 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
             messages: args.messages,
             tools: args.tools,
             biz_param: args.biz_param,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ChatRequest");
         if (obj.model_config != null) {
@@ -150,7 +150,7 @@ export const ChatRequestCodec: thrift.IStructCodec<IChatRequestArgs, IChatReques
             messages: _args.messages,
             tools: _args.tools,
             biz_param: _args.biz_param,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -159,7 +159,7 @@ export class ChatRequest extends thrift.StructLike implements IChatRequest {
     public messages?: Array<LLM_DOMAIN_RUNTIME_NS.IMessage>;
     public tools?: Array<LLM_DOMAIN_RUNTIME_NS.ITool>;
     public biz_param?: LLM_DOMAIN_RUNTIME_NS.IBizParam;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IChatRequestArgs = {}) {
@@ -188,9 +188,9 @@ export class ChatRequest extends thrift.StructLike implements IChatRequest {
             const value_13: LLM_DOMAIN_RUNTIME_NS.IBizParam = new LLM_DOMAIN_RUNTIME_NS.BizParam(args.biz_param);
             this.biz_param = value_13;
         }
-        if (args.Base != null) {
-            const value_14: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_14;
+        if (args.base != null) {
+            const value_14: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_14;
         }
     }
     public static read(input: thrift.TProtocol): ChatRequest {

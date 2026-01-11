@@ -14,7 +14,7 @@ export interface IGetPluginAPIsRequest {
     size?: number;
     order?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIListOrder;
     preview_version_ts?: string;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IGetPluginAPIsRequestArgs {
     plugin_id: number | string | thrift.Int64;
@@ -23,7 +23,7 @@ export interface IGetPluginAPIsRequestArgs {
     size?: number;
     order?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIListOrderArgs;
     preview_version_ts?: string;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const GetPluginAPIsRequestCodec: thrift.IStructCodec<IGetPluginAPIsRequestArgs, IGetPluginAPIsRequest> = {
     encode(args: IGetPluginAPIsRequestArgs, output: thrift.TProtocol): void {
@@ -34,7 +34,7 @@ export const GetPluginAPIsRequestCodec: thrift.IStructCodec<IGetPluginAPIsReques
             size: args.size,
             order: args.order,
             preview_version_ts: args.preview_version_ts,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("GetPluginAPIsRequest");
         if (obj.plugin_id != null) {
@@ -179,7 +179,7 @@ export const GetPluginAPIsRequestCodec: thrift.IStructCodec<IGetPluginAPIsReques
                 size: _args.size,
                 order: _args.order,
                 preview_version_ts: _args.preview_version_ts,
-                Base: _args.Base
+                base: _args.Base
             };
         }
         else {
@@ -194,7 +194,7 @@ export class GetPluginAPIsRequest extends thrift.StructLike implements IGetPlugi
     public size?: number;
     public order?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIListOrder;
     public preview_version_ts?: string;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         plugin_id: {
@@ -234,9 +234,9 @@ export class GetPluginAPIsRequest extends thrift.StructLike implements IGetPlugi
             const value_15: string = args.preview_version_ts;
             this.preview_version_ts = value_15;
         }
-        if (args.Base != null) {
-            const value_16: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_16;
+        if (args.base != null) {
+            const value_16: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_16;
         }
     }
     public static read(input: thrift.TProtocol): GetPluginAPIsRequest {

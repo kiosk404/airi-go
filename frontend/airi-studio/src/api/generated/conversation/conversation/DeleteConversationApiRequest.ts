@@ -7,18 +7,18 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IDeleteConversationApiRequest {
-    ConversationID?: thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    conversation_i_d?: thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IDeleteConversationApiRequestArgs {
-    ConversationID?: number | string | thrift.Int64;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    conversation_i_d?: number | string | thrift.Int64;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const DeleteConversationApiRequestCodec: thrift.IStructCodec<IDeleteConversationApiRequestArgs, IDeleteConversationApiRequest> = {
     encode(args: IDeleteConversationApiRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ConversationID: (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID),
-            Base: args.Base
+            ConversationID: (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d),
+            Base: args.base
         };
         output.writeStructBegin("DeleteConversationApiRequest");
         if (obj.ConversationID != null) {
@@ -72,30 +72,30 @@ export const DeleteConversationApiRequestCodec: thrift.IStructCodec<IDeleteConve
         }
         input.readStructEnd();
         return {
-            ConversationID: _args.ConversationID,
-            Base: _args.Base
+            conversation_i_d: _args.ConversationID,
+            base: _args.Base
         };
     }
 };
 export class DeleteConversationApiRequest extends thrift.StructLike implements IDeleteConversationApiRequest {
-    public ConversationID?: thrift.Int64;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public conversation_i_d?: thrift.Int64;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ConversationID: {
+        conversation_i_d: {
             'api.path': "conversation_id",
             'agw.js_conv': "true"
         }
     };
     constructor(args: IDeleteConversationApiRequestArgs = {}) {
         super();
-        if (args.ConversationID != null) {
-            const value_3: thrift.Int64 = (typeof args.ConversationID === "number" ? new thrift.Int64(args.ConversationID) : typeof args.ConversationID === "string" ? thrift.Int64.fromDecimalString(args.ConversationID) : args.ConversationID);
-            this.ConversationID = value_3;
+        if (args.conversation_i_d != null) {
+            const value_3: thrift.Int64 = (typeof args.conversation_i_d === "number" ? new thrift.Int64(args.conversation_i_d) : typeof args.conversation_i_d === "string" ? thrift.Int64.fromDecimalString(args.conversation_i_d) : args.conversation_i_d);
+            this.conversation_i_d = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): DeleteConversationApiRequest {

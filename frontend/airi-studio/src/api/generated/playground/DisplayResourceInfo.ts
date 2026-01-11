@@ -8,45 +8,45 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as ResourceAction from "../resource/common/ResourceAction";
 import * as ResourcePublishStatus from "./ResourcePublishStatus";
 export interface IDisplayResourceInfo {
-    ResID?: thrift.Int64;
-    Desc?: string;
-    Icon?: string;
-    BizResStatus?: number;
-    CollaborationEnable?: boolean;
-    BizExtend?: Map<string, string>;
-    Actions?: Array<ResourceAction.IResourceAction>;
-    DetailDisable?: boolean;
-    Name?: string;
-    PublishStatus?: ResourcePublishStatus.ResourcePublishStatus;
-    EditTime?: thrift.Int64;
+    res_i_d?: thrift.Int64;
+    desc?: string;
+    icon?: string;
+    biz_res_status?: number;
+    collaboration_enable?: boolean;
+    biz_extend?: Map<string, string>;
+    actions?: Array<ResourceAction.IResourceAction>;
+    detail_disable?: boolean;
+    name?: string;
+    publish_status?: ResourcePublishStatus.ResourcePublishStatus;
+    edit_time?: thrift.Int64;
 }
 export interface IDisplayResourceInfoArgs {
-    ResID?: number | string | thrift.Int64;
-    Desc?: string;
-    Icon?: string;
-    BizResStatus?: number;
-    CollaborationEnable?: boolean;
-    BizExtend?: Map<string, string>;
-    Actions?: Array<ResourceAction.IResourceActionArgs>;
-    DetailDisable?: boolean;
-    Name?: string;
-    PublishStatus?: ResourcePublishStatus.ResourcePublishStatus;
-    EditTime?: number | string | thrift.Int64;
+    res_i_d?: number | string | thrift.Int64;
+    desc?: string;
+    icon?: string;
+    biz_res_status?: number;
+    collaboration_enable?: boolean;
+    biz_extend?: Map<string, string>;
+    actions?: Array<ResourceAction.IResourceActionArgs>;
+    detail_disable?: boolean;
+    name?: string;
+    publish_status?: ResourcePublishStatus.ResourcePublishStatus;
+    edit_time?: number | string | thrift.Int64;
 }
 export const DisplayResourceInfoCodec: thrift.IStructCodec<IDisplayResourceInfoArgs, IDisplayResourceInfo> = {
     encode(args: IDisplayResourceInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ResID: (typeof args.ResID === "number" ? new thrift.Int64(args.ResID) : typeof args.ResID === "string" ? thrift.Int64.fromDecimalString(args.ResID) : args.ResID),
-            Desc: args.Desc,
-            Icon: args.Icon,
-            BizResStatus: args.BizResStatus,
-            CollaborationEnable: args.CollaborationEnable,
-            BizExtend: args.BizExtend,
-            Actions: args.Actions,
-            DetailDisable: args.DetailDisable,
-            Name: args.Name,
-            PublishStatus: args.PublishStatus,
-            EditTime: (typeof args.EditTime === "number" ? new thrift.Int64(args.EditTime) : typeof args.EditTime === "string" ? thrift.Int64.fromDecimalString(args.EditTime) : args.EditTime)
+            ResID: (typeof args.res_i_d === "number" ? new thrift.Int64(args.res_i_d) : typeof args.res_i_d === "string" ? thrift.Int64.fromDecimalString(args.res_i_d) : args.res_i_d),
+            Desc: args.desc,
+            Icon: args.icon,
+            BizResStatus: args.biz_res_status,
+            CollaborationEnable: args.collaboration_enable,
+            BizExtend: args.biz_extend,
+            Actions: args.actions,
+            DetailDisable: args.detail_disable,
+            Name: args.name,
+            PublishStatus: args.publish_status,
+            EditTime: (typeof args.edit_time === "number" ? new thrift.Int64(args.edit_time) : typeof args.edit_time === "string" ? thrift.Int64.fromDecimalString(args.edit_time) : args.edit_time)
         };
         output.writeStructBegin("DisplayResourceInfo");
         if (obj.ResID != null) {
@@ -250,88 +250,88 @@ export const DisplayResourceInfoCodec: thrift.IStructCodec<IDisplayResourceInfoA
         }
         input.readStructEnd();
         return {
-            ResID: _args.ResID,
-            Desc: _args.Desc,
-            Icon: _args.Icon,
-            BizResStatus: _args.BizResStatus,
-            CollaborationEnable: _args.CollaborationEnable,
-            BizExtend: _args.BizExtend,
-            Actions: _args.Actions,
-            DetailDisable: _args.DetailDisable,
-            Name: _args.Name,
-            PublishStatus: _args.PublishStatus,
-            EditTime: _args.EditTime
+            res_i_d: _args.ResID,
+            desc: _args.Desc,
+            icon: _args.Icon,
+            biz_res_status: _args.BizResStatus,
+            collaboration_enable: _args.CollaborationEnable,
+            biz_extend: _args.BizExtend,
+            actions: _args.Actions,
+            detail_disable: _args.DetailDisable,
+            name: _args.Name,
+            publish_status: _args.PublishStatus,
+            edit_time: _args.EditTime
         };
     }
 };
 export class DisplayResourceInfo extends thrift.StructLike implements IDisplayResourceInfo {
-    public ResID?: thrift.Int64;
-    public Desc?: string;
-    public Icon?: string;
-    public BizResStatus?: number;
-    public CollaborationEnable?: boolean;
-    public BizExtend?: Map<string, string>;
-    public Actions?: Array<ResourceAction.IResourceAction>;
-    public DetailDisable?: boolean;
-    public Name?: string;
-    public PublishStatus?: ResourcePublishStatus.ResourcePublishStatus;
-    public EditTime?: thrift.Int64;
+    public res_i_d?: thrift.Int64;
+    public desc?: string;
+    public icon?: string;
+    public biz_res_status?: number;
+    public collaboration_enable?: boolean;
+    public biz_extend?: Map<string, string>;
+    public actions?: Array<ResourceAction.IResourceAction>;
+    public detail_disable?: boolean;
+    public name?: string;
+    public publish_status?: ResourcePublishStatus.ResourcePublishStatus;
+    public edit_time?: thrift.Int64;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IDisplayResourceInfoArgs = {}) {
         super();
-        if (args.ResID != null) {
-            const value_16: thrift.Int64 = (typeof args.ResID === "number" ? new thrift.Int64(args.ResID) : typeof args.ResID === "string" ? thrift.Int64.fromDecimalString(args.ResID) : args.ResID);
-            this.ResID = value_16;
+        if (args.res_i_d != null) {
+            const value_16: thrift.Int64 = (typeof args.res_i_d === "number" ? new thrift.Int64(args.res_i_d) : typeof args.res_i_d === "string" ? thrift.Int64.fromDecimalString(args.res_i_d) : args.res_i_d);
+            this.res_i_d = value_16;
         }
-        if (args.Desc != null) {
-            const value_17: string = args.Desc;
-            this.Desc = value_17;
+        if (args.desc != null) {
+            const value_17: string = args.desc;
+            this.desc = value_17;
         }
-        if (args.Icon != null) {
-            const value_18: string = args.Icon;
-            this.Icon = value_18;
+        if (args.icon != null) {
+            const value_18: string = args.icon;
+            this.icon = value_18;
         }
-        if (args.BizResStatus != null) {
-            const value_19: number = args.BizResStatus;
-            this.BizResStatus = value_19;
+        if (args.biz_res_status != null) {
+            const value_19: number = args.biz_res_status;
+            this.biz_res_status = value_19;
         }
-        if (args.CollaborationEnable != null) {
-            const value_20: boolean = args.CollaborationEnable;
-            this.CollaborationEnable = value_20;
+        if (args.collaboration_enable != null) {
+            const value_20: boolean = args.collaboration_enable;
+            this.collaboration_enable = value_20;
         }
-        if (args.BizExtend != null) {
+        if (args.biz_extend != null) {
             const value_21: Map<string, string> = new Map<string, string>();
-            args.BizExtend.forEach((value_27: string, key_3: string): void => {
+            args.biz_extend.forEach((value_27: string, key_3: string): void => {
                 const value_28: string = value_27;
                 const key_4: string = key_3;
                 value_21.set(key_4, value_28);
             });
-            this.BizExtend = value_21;
+            this.biz_extend = value_21;
         }
-        if (args.Actions != null) {
+        if (args.actions != null) {
             const value_22: Array<ResourceAction.IResourceAction> = new Array<ResourceAction.IResourceAction>();
-            args.Actions.forEach((value_29: ResourceAction.IResourceActionArgs): void => {
+            args.actions.forEach((value_29: ResourceAction.IResourceActionArgs): void => {
                 const value_30: ResourceAction.IResourceAction = new ResourceAction.ResourceAction(value_29);
                 value_22.push(value_30);
             });
-            this.Actions = value_22;
+            this.actions = value_22;
         }
-        if (args.DetailDisable != null) {
-            const value_23: boolean = args.DetailDisable;
-            this.DetailDisable = value_23;
+        if (args.detail_disable != null) {
+            const value_23: boolean = args.detail_disable;
+            this.detail_disable = value_23;
         }
-        if (args.Name != null) {
-            const value_24: string = args.Name;
-            this.Name = value_24;
+        if (args.name != null) {
+            const value_24: string = args.name;
+            this.name = value_24;
         }
-        if (args.PublishStatus != null) {
-            const value_25: ResourcePublishStatus.ResourcePublishStatus = args.PublishStatus;
-            this.PublishStatus = value_25;
+        if (args.publish_status != null) {
+            const value_25: ResourcePublishStatus.ResourcePublishStatus = args.publish_status;
+            this.publish_status = value_25;
         }
-        if (args.EditTime != null) {
-            const value_26: thrift.Int64 = (typeof args.EditTime === "number" ? new thrift.Int64(args.EditTime) : typeof args.EditTime === "string" ? thrift.Int64.fromDecimalString(args.EditTime) : args.EditTime);
-            this.EditTime = value_26;
+        if (args.edit_time != null) {
+            const value_26: thrift.Int64 = (typeof args.edit_time === "number" ? new thrift.Int64(args.edit_time) : typeof args.edit_time === "string" ? thrift.Int64.fromDecimalString(args.edit_time) : args.edit_time);
+            this.edit_time = value_26;
         }
     }
     public static read(input: thrift.TProtocol): DisplayResourceInfo {

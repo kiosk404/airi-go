@@ -8,17 +8,17 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IDeleteModelReq {
     id?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IDeleteModelReqArgs {
     id?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const DeleteModelReqCodec: thrift.IStructCodec<IDeleteModelReqArgs, IDeleteModelReq> = {
     encode(args: IDeleteModelReqArgs, output: thrift.TProtocol): void {
         const obj: any = {
             id: args.id,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("DeleteModelReq");
         if (obj.id != null) {
@@ -73,13 +73,13 @@ export const DeleteModelReqCodec: thrift.IStructCodec<IDeleteModelReqArgs, IDele
         input.readStructEnd();
         return {
             id: _args.id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class DeleteModelReq extends thrift.StructLike implements IDeleteModelReq {
     public id?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         id: {
@@ -93,9 +93,9 @@ export class DeleteModelReq extends thrift.StructLike implements IDeleteModelReq
             const value_3: string = args.id;
             this.id = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): DeleteModelReq {

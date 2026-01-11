@@ -9,17 +9,17 @@ import * as Model from "../llm/domain/manage/Model";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IUpdateModelReq {
     model?: Model.IModel;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IUpdateModelReqArgs {
     model?: Model.IModelArgs;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const UpdateModelReqCodec: thrift.IStructCodec<IUpdateModelReqArgs, IUpdateModelReq> = {
     encode(args: IUpdateModelReqArgs, output: thrift.TProtocol): void {
         const obj: any = {
             model: args.model,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UpdateModelReq");
         if (obj.model != null) {
@@ -74,13 +74,13 @@ export const UpdateModelReqCodec: thrift.IStructCodec<IUpdateModelReqArgs, IUpda
         input.readStructEnd();
         return {
             model: _args.model,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
 export class UpdateModelReq extends thrift.StructLike implements IUpdateModelReq {
     public model?: Model.IModel;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUpdateModelReqArgs = {}) {
@@ -89,9 +89,9 @@ export class UpdateModelReq extends thrift.StructLike implements IUpdateModelReq
             const value_3: Model.IModel = new Model.Model(args.model);
             this.model = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): UpdateModelReq {

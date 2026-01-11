@@ -16,7 +16,7 @@ export interface ILibraryResourceListRequest {
     cursor?: string;
     search_keys?: Array<string>;
     is_get_imageflow?: boolean;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface ILibraryResourceListRequestArgs {
     user_filter?: number;
@@ -27,7 +27,7 @@ export interface ILibraryResourceListRequestArgs {
     cursor?: string;
     search_keys?: Array<string>;
     is_get_imageflow?: boolean;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResourceListRequestArgs, ILibraryResourceListRequest> = {
     encode(args: ILibraryResourceListRequestArgs, output: thrift.TProtocol): void {
@@ -40,7 +40,7 @@ export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResour
             cursor: args.cursor,
             search_keys: args.search_keys,
             is_get_imageflow: args.is_get_imageflow,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("LibraryResourceListRequest");
         if (obj.user_filter != null) {
@@ -222,7 +222,7 @@ export const LibraryResourceListRequestCodec: thrift.IStructCodec<ILibraryResour
             cursor: _args.cursor,
             search_keys: _args.search_keys,
             is_get_imageflow: _args.is_get_imageflow,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -235,7 +235,7 @@ export class LibraryResourceListRequest extends thrift.StructLike implements ILi
     public cursor?: string;
     public search_keys?: Array<string>;
     public is_get_imageflow?: boolean;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ILibraryResourceListRequestArgs = {}) {
@@ -280,9 +280,9 @@ export class LibraryResourceListRequest extends thrift.StructLike implements ILi
             const value_21: boolean = args.is_get_imageflow;
             this.is_get_imageflow = value_21;
         }
-        if (args.Base != null) {
-            const value_22: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_22;
+        if (args.base != null) {
+            const value_22: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_22;
         }
     }
     public static read(input: thrift.TProtocol): LibraryResourceListRequest {

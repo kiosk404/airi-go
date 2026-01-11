@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../../base";
 export interface IOauthAuthorizationCodeResp {
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IOauthAuthorizationCodeRespArgs {
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const OauthAuthorizationCodeRespCodec: thrift.IStructCodec<IOauthAuthorizationCodeRespArgs, IOauthAuthorizationCodeResp> = {
     encode(args: IOauthAuthorizationCodeRespArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("OauthAuthorizationCodeResp");
         if (obj.BaseResp != null) {
@@ -59,7 +59,7 @@ export const OauthAuthorizationCodeRespCodec: thrift.IStructCodec<IOauthAuthoriz
         input.readStructEnd();
         if (_args.BaseResp !== undefined) {
             return {
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -68,14 +68,14 @@ export const OauthAuthorizationCodeRespCodec: thrift.IStructCodec<IOauthAuthoriz
     }
 };
 export class OauthAuthorizationCodeResp extends thrift.StructLike implements IOauthAuthorizationCodeResp {
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IOauthAuthorizationCodeRespArgs) {
         super();
-        if (args.BaseResp != null) {
-            const value_2: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_2;
+        if (args.base_resp != null) {
+            const value_2: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_2;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

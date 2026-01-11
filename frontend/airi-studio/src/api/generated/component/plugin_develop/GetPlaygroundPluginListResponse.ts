@@ -11,13 +11,13 @@ export interface IGetPlaygroundPluginListResponse {
     code: number;
     msg: string;
     data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IGetPlaygroundPluginListData;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IGetPlaygroundPluginListResponseArgs {
     code: number;
     msg: string;
     data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IGetPlaygroundPluginListDataArgs;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const GetPlaygroundPluginListResponseCodec: thrift.IStructCodec<IGetPlaygroundPluginListResponseArgs, IGetPlaygroundPluginListResponse> = {
     encode(args: IGetPlaygroundPluginListResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const GetPlaygroundPluginListResponseCodec: thrift.IStructCodec<IGetPlayg
             code: args.code,
             msg: args.msg,
             data: args.data,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetPlaygroundPluginListResponse");
         if (obj.code != null) {
@@ -117,7 +117,7 @@ export const GetPlaygroundPluginListResponseCodec: thrift.IStructCodec<IGetPlayg
                 code: _args.code,
                 msg: _args.msg,
                 data: _args.data,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -129,7 +129,7 @@ export class GetPlaygroundPluginListResponse extends thrift.StructLike implement
     public code: number;
     public msg: string;
     public data?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IGetPlaygroundPluginListData;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetPlaygroundPluginListResponseArgs) {
@@ -152,9 +152,9 @@ export class GetPlaygroundPluginListResponse extends thrift.StructLike implement
             const value_7: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IGetPlaygroundPluginListData = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.GetPlaygroundPluginListData(args.data);
             this.data = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): GetPlaygroundPluginListResponse {

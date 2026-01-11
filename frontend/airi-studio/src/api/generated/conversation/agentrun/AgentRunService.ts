@@ -536,7 +536,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public AgentRun(request: __ROOT_NAMESPACE__.IAgentRunRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IAgentRunResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("AgentRun", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("AgentRun", thrift.MessageType.CALL, this.increment_request_id());
         const args: IAgentRun__ArgsArgs = { request };
         AgentRun__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -574,7 +574,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ChatV3(request: __ROOT_NAMESPACE__.IChatV3RequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IChatV3Response> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ChatV3", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ChatV3", thrift.MessageType.CALL, this.increment_request_id());
         const args: IChatV3__ArgsArgs = { request };
         ChatV3__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -612,7 +612,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public CancelChatApi(request: __ROOT_NAMESPACE__.ICancelChatApiRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.ICancelChatApiResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("CancelChatApi", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("CancelChatApi", thrift.MessageType.CALL, this.increment_request_id());
         const args: ICancelChatApi__ArgsArgs = { request };
         CancelChatApi__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -675,15 +675,15 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_AgentRun": {
-                    resolve(this.process_AgentRun(requestId, input, output, context));
+                    resolve(this.process__agent_run(requestId, input, output, context));
                     break;
                 }
                 case "process_ChatV3": {
-                    resolve(this.process_ChatV3(requestId, input, output, context));
+                    resolve(this.process__chat_v3(requestId, input, output, context));
                     break;
                 }
                 case "process_CancelChatApi": {
-                    resolve(this.process_CancelChatApi(requestId, input, output, context));
+                    resolve(this.process__cancel_chat_api(requestId, input, output, context));
                     break;
                 }
                 default: {

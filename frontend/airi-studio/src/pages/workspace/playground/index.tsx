@@ -52,9 +52,7 @@ const PlaygroundHeader: React.FC<PlaygroundHeaderProps> = ({ botName }) => {
             </Space>
         </Header>
     )
-
 }
-
 
 const PlaygroundPage: React.FC = () => {
     const params = useParams<{ id: string }>();
@@ -118,7 +116,7 @@ const PlaygroundPage: React.FC = () => {
             height: '100vh',
             width: '100vw',
         }}>
-            <PlaygroundHeader botName={botInfo?.Name} />
+            <PlaygroundHeader botName={botInfo?.name} />
             <div style={{ display: 'flex', flex: 1, overflow: 'auto' }}>
                 <div style={{ flex: 1, overflow: 'auto' }}>
                     <EditorPanel botInfo={botInfo} />

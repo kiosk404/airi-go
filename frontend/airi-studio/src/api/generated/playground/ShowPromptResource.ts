@@ -6,15 +6,15 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IShowPromptResource {
-    ID?: thrift.Int64;
+    i_d?: thrift.Int64;
 }
 export interface IShowPromptResourceArgs {
-    ID?: number | string | thrift.Int64;
+    i_d?: number | string | thrift.Int64;
 }
 export const ShowPromptResourceCodec: thrift.IStructCodec<IShowPromptResourceArgs, IShowPromptResource> = {
     encode(args: IShowPromptResourceArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ID: (typeof args.ID === "number" ? new thrift.Int64(args.ID) : typeof args.ID === "string" ? thrift.Int64.fromDecimalString(args.ID) : args.ID)
+            ID: (typeof args.i_d === "number" ? new thrift.Int64(args.i_d) : typeof args.i_d === "string" ? thrift.Int64.fromDecimalString(args.i_d) : args.i_d)
         };
         output.writeStructBegin("ShowPromptResource");
         if (obj.ID != null) {
@@ -54,15 +54,15 @@ export const ShowPromptResourceCodec: thrift.IStructCodec<IShowPromptResourceArg
         }
         input.readStructEnd();
         return {
-            ID: _args.ID
+            i_d: _args.ID
         };
     }
 };
 export class ShowPromptResource extends thrift.StructLike implements IShowPromptResource {
-    public ID?: thrift.Int64;
+    public i_d?: thrift.Int64;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ID: {
+        i_d: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "id"
@@ -70,9 +70,9 @@ export class ShowPromptResource extends thrift.StructLike implements IShowPrompt
     };
     constructor(args: IShowPromptResourceArgs = {}) {
         super();
-        if (args.ID != null) {
-            const value_2: thrift.Int64 = (typeof args.ID === "number" ? new thrift.Int64(args.ID) : typeof args.ID === "string" ? thrift.Int64.fromDecimalString(args.ID) : args.ID);
-            this.ID = value_2;
+        if (args.i_d != null) {
+            const value_2: thrift.Int64 = (typeof args.i_d === "number" ? new thrift.Int64(args.i_d) : typeof args.i_d === "string" ? thrift.Int64.fromDecimalString(args.i_d) : args.i_d);
+            this.i_d = value_2;
         }
     }
     public static read(input: thrift.TProtocol): ShowPromptResource {

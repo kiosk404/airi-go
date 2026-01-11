@@ -58,7 +58,7 @@ const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo, botOptionData }) => {
     }, [botOptionData?.model_detail_map]);
 
     // 根据 botInfo 中的 ModelInfo 选择默认模型
-    const defaultModelValue = botInfo?.ModelInfo?.ModelId ? String(modelList[0]?.value) : (modelList[0]?.value || '');
+    const defaultModelValue = botInfo?.model_info?.model_id ? String(modelList[0]?.value) : (modelList[0]?.value || '');
     const [selectedValue, setSelectedValue] = useState(defaultModelValue);
     const selectedModel = modelList.find((model) => model.value === selectedValue) || modelList[0];
 
@@ -68,10 +68,10 @@ const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo, botOptionData }) => {
     const [suggestionEnabled, setSuggestionEnabled] = useState('enabled');
 
     // 从 botInfo 中获取数据
-    const plugins = botInfo?.PluginInfoList || [];
-    const variables = botInfo?.VariableList || [];
-    const workflows = botInfo?.WorkflowInfoList || [];
-    const databases = botInfo?.DatabaseList || [];
+    const plugins = botInfo?.plugin_info_list || [];
+    const variables = botInfo?.variable_list || [];
+    const workflows = botInfo?.workflow_info_list || [];
+    const databases = botInfo?.database_list || [];
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#fff' }}>
@@ -114,13 +114,28 @@ const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo, botOptionData }) => {
                 {/* 技能分组 */}
                 <SectionTitle title="技能" />
                 <Collapse expandIconPlacement="left" borderless>
-                    <Collapse.Panel header={<PanelHeader title="插件" />} value="plugin">
+                    <Collapse.Panel header={<PanelHeader title="MCP" />} value="mcp">
                         {plugins.length > 0 ? (
                             plugins.map((plugin, idx) => (
                                 <div key={idx} style={{ display: 'flex', alignItems: 'center', marginBottom: idx < plugins.length - 1 ? 12 : 0 }}>
-                                    <img src={"https://g1.itc.cn/msfe-pch-prod/300000000000/assets/images/a5df49ba69.png"} alt={plugin.ApiName} style={{ width: 32, height: 32, marginRight: 12, borderRadius: 4 }} />
+                                    <img src={"https://g1.itc.cn/msfe-pch-prod/300000000000/assets/images/a5df49ba69.png"} alt={plugin.api_name} style={{ width: 32, height: 32, marginRight: 12, borderRadius: 4 }} />
                                     <div>
-                                        <Title level="h6" style={{margin: 0}}>{plugin.ApiName || '未命名插件'}</Title>
+                                        <Title level="h6" style={{margin: 0}}>{plugin.api_name || '未命名插件'}</Title>
+                                        <Paragraph style={{ margin: 0, color: '#888', fontSize: 12 }}>{'暂无描述'}</Paragraph>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <Paragraph style={{ margin: 0, color: '#888'}}>暂无插件，点击 + 添加插件</Paragraph>
+                        )}
+                    </Collapse.Panel>
+                    <Collapse.Panel header={<PanelHeader title="Skills" />} value="skills">
+                        {plugins.length > 0 ? (
+                            plugins.map((plugin, idx) => (
+                                <div key={idx} style={{ display: 'flex', alignItems: 'center', marginBottom: idx < plugins.length - 1 ? 12 : 0 }}>
+                                    <img src={"https://g1.itc.cn/msfe-pch-prod/300000000000/assets/images/a5df49ba69.png"} alt={plugin.api_name} style={{ width: 32, height: 32, marginRight: 12, borderRadius: 4 }} />
+                                    <div>
+                                        <Title level="h6" style={{margin: 0}}>{plugin.api_name || '未命名插件'}</Title>
                                         <Paragraph style={{ margin: 0, color: '#888', fontSize: 12 }}>{'暂无描述'}</Paragraph>
                                     </div>
                                 </div>
@@ -133,7 +148,7 @@ const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo, botOptionData }) => {
                         {workflows.length > 0 ? (
                             workflows.map((wf, idx) => (
                                 <div key={idx} style={{ marginBottom: idx < workflows.length - 1 ? 8 : 0 }}>
-                                    <Tag>{wf.WorkflowName || `工作流 ${wf.WorkflowId}`}</Tag>
+                                    <Tag>{wf.workflow_name || `工作流 ${wf.workflow_id}`}</Tag>
                                 </div>
                             ))
                         ) : (
@@ -167,7 +182,7 @@ const SkillPanel: React.FC<SkillPanelProps> = ({ botInfo, botOptionData }) => {
                         {databases.length > 0 ? (
                             databases.map((db, idx) => (
                                 <div key={idx} style={{ marginBottom: idx < databases.length - 1 ? 8 : 0 }}>
-                                    <Tag>{db.TableName || `数据库 ${db.TableId}`}</Tag>
+                                    <Tag>{db.table_name || `数据库 ${db.table_id}`}</Tag>
                                 </div>
                             ))
                         ) : (

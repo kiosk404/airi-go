@@ -880,7 +880,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public OauthAuthorizationCode(request: OauthAuthorizationCodeReq.IOauthAuthorizationCodeReqArgs, context?: Context): Promise<OauthAuthorizationCodeResp.IOauthAuthorizationCodeResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("OauthAuthorizationCode", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("OauthAuthorizationCode", thrift.MessageType.CALL, this.increment_request_id());
         const args: IOauthAuthorizationCode__ArgsArgs = { request };
         OauthAuthorizationCode__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -918,7 +918,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetBotOnlineInfo(request: GetBotOnlineInfoReq.IGetBotOnlineInfoReqArgs, context?: Context): Promise<GetBotOnlineInfoResp.IGetBotOnlineInfoResp> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetBotOnlineInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetBotOnlineInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetBotOnlineInfo__ArgsArgs = { request };
         GetBotOnlineInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -956,7 +956,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public OpenGetBotInfo(request: OpenGetBotInfoRequest.IOpenGetBotInfoRequestArgs, context?: Context): Promise<OpenGetBotInfoResponse.IOpenGetBotInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("OpenGetBotInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("OpenGetBotInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IOpenGetBotInfo__ArgsArgs = { request };
         OpenGetBotInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -994,7 +994,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ImpersonateAiriUser(request: ImpersonateAiriUserRequest.IImpersonateAiriUserRequestArgs, context?: Context): Promise<ImpersonateAiriUserResponse.IImpersonateAiriUserResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ImpersonateAiriUser", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ImpersonateAiriUser", thrift.MessageType.CALL, this.increment_request_id());
         const args: IImpersonateAiriUser__ArgsArgs = { request };
         ImpersonateAiriUser__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1032,7 +1032,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UploadFileOpen(request: UploadFileOpenRequest.IUploadFileOpenRequestArgs, context?: Context): Promise<UploadFileOpenResponse.IUploadFileOpenResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UploadFileOpen", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UploadFileOpen", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUploadFileOpen__ArgsArgs = { request };
         UploadFileOpen__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1097,23 +1097,23 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_OauthAuthorizationCode": {
-                    resolve(this.process_OauthAuthorizationCode(requestId, input, output, context));
+                    resolve(this.process__oauth_authorization_code(requestId, input, output, context));
                     break;
                 }
                 case "process_GetBotOnlineInfo": {
-                    resolve(this.process_GetBotOnlineInfo(requestId, input, output, context));
+                    resolve(this.process__get_bot_online_info(requestId, input, output, context));
                     break;
                 }
                 case "process_OpenGetBotInfo": {
-                    resolve(this.process_OpenGetBotInfo(requestId, input, output, context));
+                    resolve(this.process__open_get_bot_info(requestId, input, output, context));
                     break;
                 }
                 case "process_ImpersonateAiriUser": {
-                    resolve(this.process_ImpersonateAiriUser(requestId, input, output, context));
+                    resolve(this.process__impersonate_airi_user(requestId, input, output, context));
                     break;
                 }
                 case "process_UploadFileOpen": {
-                    resolve(this.process_UploadFileOpen(requestId, input, output, context));
+                    resolve(this.process__upload_file_open(requestId, input, output, context));
                     break;
                 }
                 default: {

@@ -11,13 +11,13 @@ export interface IUpdatePluginResponse {
     code?: thrift.Int64;
     msg?: string;
     data: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IUpdatePluginData;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IUpdatePluginResponseArgs {
     code?: number | string | thrift.Int64;
     msg?: string;
     data: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IUpdatePluginDataArgs;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const UpdatePluginResponseCodec: thrift.IStructCodec<IUpdatePluginResponseArgs, IUpdatePluginResponse> = {
     encode(args: IUpdatePluginResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const UpdatePluginResponseCodec: thrift.IStructCodec<IUpdatePluginRespons
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
             data: args.data,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("UpdatePluginResponse");
         if (obj.code != null) {
@@ -114,7 +114,7 @@ export const UpdatePluginResponseCodec: thrift.IStructCodec<IUpdatePluginRespons
                 code: _args.code,
                 msg: _args.msg,
                 data: _args.data,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -126,7 +126,7 @@ export class UpdatePluginResponse extends thrift.StructLike implements IUpdatePl
     public code?: thrift.Int64;
     public msg?: string;
     public data: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IUpdatePluginData;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUpdatePluginResponseArgs) {
@@ -146,9 +146,9 @@ export class UpdatePluginResponse extends thrift.StructLike implements IUpdatePl
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[data] is unset!");
         }
-        if (args.BaseResp != null) {
-            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): UpdatePluginResponse {

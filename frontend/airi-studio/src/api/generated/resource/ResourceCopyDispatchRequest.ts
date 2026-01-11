@@ -13,7 +13,7 @@ export interface IResourceCopyDispatchRequest {
     res_type?: RESOURCE_COMMON_NS.ResType;
     project_id?: thrift.Int64;
     res_name?: string;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IResourceCopyDispatchRequestArgs {
     scene?: RESOURCE_COMMON_NS.ResourceCopyScene;
@@ -21,7 +21,7 @@ export interface IResourceCopyDispatchRequestArgs {
     res_type?: RESOURCE_COMMON_NS.ResType;
     project_id?: number | string | thrift.Int64;
     res_name?: string;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const ResourceCopyDispatchRequestCodec: thrift.IStructCodec<IResourceCopyDispatchRequestArgs, IResourceCopyDispatchRequest> = {
     encode(args: IResourceCopyDispatchRequestArgs, output: thrift.TProtocol): void {
@@ -31,7 +31,7 @@ export const ResourceCopyDispatchRequestCodec: thrift.IStructCodec<IResourceCopy
             res_type: args.res_type,
             project_id: (typeof args.project_id === "number" ? new thrift.Int64(args.project_id) : typeof args.project_id === "string" ? thrift.Int64.fromDecimalString(args.project_id) : args.project_id),
             res_name: args.res_name,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("ResourceCopyDispatchRequest");
         if (obj.scene != null) {
@@ -146,7 +146,7 @@ export const ResourceCopyDispatchRequestCodec: thrift.IStructCodec<IResourceCopy
             res_type: _args.res_type,
             project_id: _args.project_id,
             res_name: _args.res_name,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -156,7 +156,7 @@ export class ResourceCopyDispatchRequest extends thrift.StructLike implements IR
     public res_type?: RESOURCE_COMMON_NS.ResType;
     public project_id?: thrift.Int64;
     public res_name?: string;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         res_id: {
@@ -190,9 +190,9 @@ export class ResourceCopyDispatchRequest extends thrift.StructLike implements IR
             const value_11: string = args.res_name;
             this.res_name = value_11;
         }
-        if (args.Base != null) {
-            const value_12: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_12;
+        if (args.base != null) {
+            const value_12: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_12;
         }
     }
     public static read(input: thrift.TProtocol): ResourceCopyDispatchRequest {

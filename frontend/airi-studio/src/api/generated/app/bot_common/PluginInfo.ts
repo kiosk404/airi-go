@@ -7,27 +7,27 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as PluginFrom from "./PluginFrom";
 export interface IPluginInfo {
-    PluginId?: thrift.Int64;
-    ApiId?: thrift.Int64;
-    ApiName?: string;
-    PluginFrom?: PluginFrom.PluginFrom;
-    ApiVersionMs?: thrift.Int64;
+    plugin_id?: thrift.Int64;
+    api_id?: thrift.Int64;
+    api_name?: string;
+    plugin_from?: PluginFrom.PluginFrom;
+    api_version_ms?: thrift.Int64;
 }
 export interface IPluginInfoArgs {
-    PluginId?: number | string | thrift.Int64;
-    ApiId?: number | string | thrift.Int64;
-    ApiName?: string;
-    PluginFrom?: PluginFrom.PluginFrom;
-    ApiVersionMs?: number | string | thrift.Int64;
+    plugin_id?: number | string | thrift.Int64;
+    api_id?: number | string | thrift.Int64;
+    api_name?: string;
+    plugin_from?: PluginFrom.PluginFrom;
+    api_version_ms?: number | string | thrift.Int64;
 }
 export const PluginInfoCodec: thrift.IStructCodec<IPluginInfoArgs, IPluginInfo> = {
     encode(args: IPluginInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            PluginId: (typeof args.PluginId === "number" ? new thrift.Int64(args.PluginId) : typeof args.PluginId === "string" ? thrift.Int64.fromDecimalString(args.PluginId) : args.PluginId),
-            ApiId: (typeof args.ApiId === "number" ? new thrift.Int64(args.ApiId) : typeof args.ApiId === "string" ? thrift.Int64.fromDecimalString(args.ApiId) : args.ApiId),
-            ApiName: args.ApiName,
-            PluginFrom: args.PluginFrom,
-            ApiVersionMs: (typeof args.ApiVersionMs === "number" ? new thrift.Int64(args.ApiVersionMs) : typeof args.ApiVersionMs === "string" ? thrift.Int64.fromDecimalString(args.ApiVersionMs) : args.ApiVersionMs)
+            PluginId: (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id),
+            ApiId: (typeof args.api_id === "number" ? new thrift.Int64(args.api_id) : typeof args.api_id === "string" ? thrift.Int64.fromDecimalString(args.api_id) : args.api_id),
+            ApiName: args.api_name,
+            PluginFrom: args.plugin_from,
+            ApiVersionMs: (typeof args.api_version_ms === "number" ? new thrift.Int64(args.api_version_ms) : typeof args.api_version_ms === "string" ? thrift.Int64.fromDecimalString(args.api_version_ms) : args.api_version_ms)
         };
         output.writeStructBegin("PluginInfo");
         if (obj.PluginId != null) {
@@ -123,39 +123,39 @@ export const PluginInfoCodec: thrift.IStructCodec<IPluginInfoArgs, IPluginInfo> 
         }
         input.readStructEnd();
         return {
-            PluginId: _args.PluginId,
-            ApiId: _args.ApiId,
-            ApiName: _args.ApiName,
-            PluginFrom: _args.PluginFrom,
-            ApiVersionMs: _args.ApiVersionMs
+            plugin_id: _args.PluginId,
+            api_id: _args.ApiId,
+            api_name: _args.ApiName,
+            plugin_from: _args.PluginFrom,
+            api_version_ms: _args.ApiVersionMs
         };
     }
 };
 export class PluginInfo extends thrift.StructLike implements IPluginInfo {
-    public PluginId?: thrift.Int64;
-    public ApiId?: thrift.Int64;
-    public ApiName?: string;
-    public PluginFrom?: PluginFrom.PluginFrom;
-    public ApiVersionMs?: thrift.Int64;
+    public plugin_id?: thrift.Int64;
+    public api_id?: thrift.Int64;
+    public api_name?: string;
+    public plugin_from?: PluginFrom.PluginFrom;
+    public api_version_ms?: thrift.Int64;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        PluginId: {
+        plugin_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "plugin_id"
         },
-        ApiId: {
+        api_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "api_id"
         },
-        ApiName: {
+        api_name: {
             'api.body': "api_name"
         },
-        PluginFrom: {
+        plugin_from: {
             'api.body': "plugin_from"
         },
-        ApiVersionMs: {
+        api_version_ms: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
             'api.body': "api_version_ms"
@@ -163,25 +163,25 @@ export class PluginInfo extends thrift.StructLike implements IPluginInfo {
     };
     constructor(args: IPluginInfoArgs = {}) {
         super();
-        if (args.PluginId != null) {
-            const value_6: thrift.Int64 = (typeof args.PluginId === "number" ? new thrift.Int64(args.PluginId) : typeof args.PluginId === "string" ? thrift.Int64.fromDecimalString(args.PluginId) : args.PluginId);
-            this.PluginId = value_6;
+        if (args.plugin_id != null) {
+            const value_6: thrift.Int64 = (typeof args.plugin_id === "number" ? new thrift.Int64(args.plugin_id) : typeof args.plugin_id === "string" ? thrift.Int64.fromDecimalString(args.plugin_id) : args.plugin_id);
+            this.plugin_id = value_6;
         }
-        if (args.ApiId != null) {
-            const value_7: thrift.Int64 = (typeof args.ApiId === "number" ? new thrift.Int64(args.ApiId) : typeof args.ApiId === "string" ? thrift.Int64.fromDecimalString(args.ApiId) : args.ApiId);
-            this.ApiId = value_7;
+        if (args.api_id != null) {
+            const value_7: thrift.Int64 = (typeof args.api_id === "number" ? new thrift.Int64(args.api_id) : typeof args.api_id === "string" ? thrift.Int64.fromDecimalString(args.api_id) : args.api_id);
+            this.api_id = value_7;
         }
-        if (args.ApiName != null) {
-            const value_8: string = args.ApiName;
-            this.ApiName = value_8;
+        if (args.api_name != null) {
+            const value_8: string = args.api_name;
+            this.api_name = value_8;
         }
-        if (args.PluginFrom != null) {
-            const value_9: PluginFrom.PluginFrom = args.PluginFrom;
-            this.PluginFrom = value_9;
+        if (args.plugin_from != null) {
+            const value_9: PluginFrom.PluginFrom = args.plugin_from;
+            this.plugin_from = value_9;
         }
-        if (args.ApiVersionMs != null) {
-            const value_10: thrift.Int64 = (typeof args.ApiVersionMs === "number" ? new thrift.Int64(args.ApiVersionMs) : typeof args.ApiVersionMs === "string" ? thrift.Int64.fromDecimalString(args.ApiVersionMs) : args.ApiVersionMs);
-            this.ApiVersionMs = value_10;
+        if (args.api_version_ms != null) {
+            const value_10: thrift.Int64 = (typeof args.api_version_ms === "number" ? new thrift.Int64(args.api_version_ms) : typeof args.api_version_ms === "string" ? thrift.Int64.fromDecimalString(args.api_version_ms) : args.api_version_ms);
+            this.api_version_ms = value_10;
         }
     }
     public static read(input: thrift.TProtocol): PluginInfo {

@@ -10,33 +10,33 @@ import * as InnerUploadAddress from "./InnerUploadAddress";
 import * as UploadResult from "./UploadResult";
 import * as PluginResult from "./PluginResult";
 export interface IApplyUploadActionResult {
-    UploadAddress?: UploadAddress.IUploadAddress;
-    FallbackUploadAddress?: UploadAddress.IUploadAddress;
-    InnerUploadAddress?: InnerUploadAddress.IInnerUploadAddress;
-    RequestId?: string;
-    SDKParam?: string;
-    Results?: Array<UploadResult.IUploadResult>;
-    PluginResult?: Array<PluginResult.IPluginResult>;
+    upload_address?: UploadAddress.IUploadAddress;
+    fallback_upload_address?: UploadAddress.IUploadAddress;
+    inner_upload_address?: InnerUploadAddress.IInnerUploadAddress;
+    request_id?: string;
+    s_d_k_param?: string;
+    results?: Array<UploadResult.IUploadResult>;
+    plugin_result?: Array<PluginResult.IPluginResult>;
 }
 export interface IApplyUploadActionResultArgs {
-    UploadAddress?: UploadAddress.IUploadAddressArgs;
-    FallbackUploadAddress?: UploadAddress.IUploadAddressArgs;
-    InnerUploadAddress?: InnerUploadAddress.IInnerUploadAddressArgs;
-    RequestId?: string;
-    SDKParam?: string;
-    Results?: Array<UploadResult.IUploadResultArgs>;
-    PluginResult?: Array<PluginResult.IPluginResultArgs>;
+    upload_address?: UploadAddress.IUploadAddressArgs;
+    fallback_upload_address?: UploadAddress.IUploadAddressArgs;
+    inner_upload_address?: InnerUploadAddress.IInnerUploadAddressArgs;
+    request_id?: string;
+    s_d_k_param?: string;
+    results?: Array<UploadResult.IUploadResultArgs>;
+    plugin_result?: Array<PluginResult.IPluginResultArgs>;
 }
 export const ApplyUploadActionResultCodec: thrift.IStructCodec<IApplyUploadActionResultArgs, IApplyUploadActionResult> = {
     encode(args: IApplyUploadActionResultArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            UploadAddress: args.UploadAddress,
-            FallbackUploadAddress: args.FallbackUploadAddress,
-            InnerUploadAddress: args.InnerUploadAddress,
-            RequestId: args.RequestId,
-            SDKParam: args.SDKParam,
-            Results: args.Results,
-            PluginResult: args.PluginResult
+            UploadAddress: args.upload_address,
+            FallbackUploadAddress: args.fallback_upload_address,
+            InnerUploadAddress: args.inner_upload_address,
+            RequestId: args.request_id,
+            SDKParam: args.s_d_k_param,
+            Results: args.results,
+            PluginResult: args.plugin_result
         };
         output.writeStructBegin("ApplyUploadActionResult");
         if (obj.UploadAddress != null) {
@@ -182,63 +182,63 @@ export const ApplyUploadActionResultCodec: thrift.IStructCodec<IApplyUploadActio
         }
         input.readStructEnd();
         return {
-            UploadAddress: _args.UploadAddress,
-            FallbackUploadAddress: _args.FallbackUploadAddress,
-            InnerUploadAddress: _args.InnerUploadAddress,
-            RequestId: _args.RequestId,
-            SDKParam: _args.SDKParam,
-            Results: _args.Results,
-            PluginResult: _args.PluginResult
+            upload_address: _args.UploadAddress,
+            fallback_upload_address: _args.FallbackUploadAddress,
+            inner_upload_address: _args.InnerUploadAddress,
+            request_id: _args.RequestId,
+            s_d_k_param: _args.SDKParam,
+            results: _args.Results,
+            plugin_result: _args.PluginResult
         };
     }
 };
 export class ApplyUploadActionResult extends thrift.StructLike implements IApplyUploadActionResult {
-    public UploadAddress?: UploadAddress.IUploadAddress;
-    public FallbackUploadAddress?: UploadAddress.IUploadAddress;
-    public InnerUploadAddress?: InnerUploadAddress.IInnerUploadAddress;
-    public RequestId?: string;
-    public SDKParam?: string;
-    public Results?: Array<UploadResult.IUploadResult>;
-    public PluginResult?: Array<PluginResult.IPluginResult>;
+    public upload_address?: UploadAddress.IUploadAddress;
+    public fallback_upload_address?: UploadAddress.IUploadAddress;
+    public inner_upload_address?: InnerUploadAddress.IInnerUploadAddress;
+    public request_id?: string;
+    public s_d_k_param?: string;
+    public results?: Array<UploadResult.IUploadResult>;
+    public plugin_result?: Array<PluginResult.IPluginResult>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IApplyUploadActionResultArgs = {}) {
         super();
-        if (args.UploadAddress != null) {
-            const value_12: UploadAddress.IUploadAddress = new UploadAddress.UploadAddress(args.UploadAddress);
-            this.UploadAddress = value_12;
+        if (args.upload_address != null) {
+            const value_12: UploadAddress.IUploadAddress = new UploadAddress.UploadAddress(args.upload_address);
+            this.upload_address = value_12;
         }
-        if (args.FallbackUploadAddress != null) {
-            const value_13: UploadAddress.IUploadAddress = new UploadAddress.UploadAddress(args.FallbackUploadAddress);
-            this.FallbackUploadAddress = value_13;
+        if (args.fallback_upload_address != null) {
+            const value_13: UploadAddress.IUploadAddress = new UploadAddress.UploadAddress(args.fallback_upload_address);
+            this.fallback_upload_address = value_13;
         }
-        if (args.InnerUploadAddress != null) {
-            const value_14: InnerUploadAddress.IInnerUploadAddress = new InnerUploadAddress.InnerUploadAddress(args.InnerUploadAddress);
-            this.InnerUploadAddress = value_14;
+        if (args.inner_upload_address != null) {
+            const value_14: InnerUploadAddress.IInnerUploadAddress = new InnerUploadAddress.InnerUploadAddress(args.inner_upload_address);
+            this.inner_upload_address = value_14;
         }
-        if (args.RequestId != null) {
-            const value_15: string = args.RequestId;
-            this.RequestId = value_15;
+        if (args.request_id != null) {
+            const value_15: string = args.request_id;
+            this.request_id = value_15;
         }
-        if (args.SDKParam != null) {
-            const value_16: string = args.SDKParam;
-            this.SDKParam = value_16;
+        if (args.s_d_k_param != null) {
+            const value_16: string = args.s_d_k_param;
+            this.s_d_k_param = value_16;
         }
-        if (args.Results != null) {
+        if (args.results != null) {
             const value_17: Array<UploadResult.IUploadResult> = new Array<UploadResult.IUploadResult>();
-            args.Results.forEach((value_19: UploadResult.IUploadResultArgs): void => {
+            args.results.forEach((value_19: UploadResult.IUploadResultArgs): void => {
                 const value_20: UploadResult.IUploadResult = new UploadResult.UploadResult(value_19);
                 value_17.push(value_20);
             });
-            this.Results = value_17;
+            this.results = value_17;
         }
-        if (args.PluginResult != null) {
+        if (args.plugin_result != null) {
             const value_18: Array<PluginResult.IPluginResult> = new Array<PluginResult.IPluginResult>();
-            args.PluginResult.forEach((value_21: PluginResult.IPluginResultArgs): void => {
+            args.plugin_result.forEach((value_21: PluginResult.IPluginResultArgs): void => {
                 const value_22: PluginResult.IPluginResult = new PluginResult.PluginResult(value_21);
                 value_18.push(value_22);
             });
-            this.PluginResult = value_18;
+            this.plugin_result = value_18;
         }
     }
     public static read(input: thrift.TProtocol): ApplyUploadActionResult {

@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as UploadNode from "./UploadNode";
 export interface IInnerUploadAddress {
-    UploadNodes: Array<UploadNode.IUploadNode>;
+    upload_nodes: Array<UploadNode.IUploadNode>;
 }
 export interface IInnerUploadAddressArgs {
-    UploadNodes: Array<UploadNode.IUploadNodeArgs>;
+    upload_nodes: Array<UploadNode.IUploadNodeArgs>;
 }
 export const InnerUploadAddressCodec: thrift.IStructCodec<IInnerUploadAddressArgs, IInnerUploadAddress> = {
     encode(args: IInnerUploadAddressArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            UploadNodes: args.UploadNodes
+            UploadNodes: args.upload_nodes
         };
         output.writeStructBegin("InnerUploadAddress");
         if (obj.UploadNodes != null) {
@@ -70,7 +70,7 @@ export const InnerUploadAddressCodec: thrift.IStructCodec<IInnerUploadAddressArg
         input.readStructEnd();
         if (_args.UploadNodes !== undefined) {
             return {
-                UploadNodes: _args.UploadNodes
+                upload_nodes: _args.UploadNodes
             };
         }
         else {
@@ -79,18 +79,18 @@ export const InnerUploadAddressCodec: thrift.IStructCodec<IInnerUploadAddressArg
     }
 };
 export class InnerUploadAddress extends thrift.StructLike implements IInnerUploadAddress {
-    public UploadNodes: Array<UploadNode.IUploadNode>;
+    public upload_nodes: Array<UploadNode.IUploadNode>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IInnerUploadAddressArgs) {
         super();
-        if (args.UploadNodes != null) {
+        if (args.upload_nodes != null) {
             const value_4: Array<UploadNode.IUploadNode> = new Array<UploadNode.IUploadNode>();
-            args.UploadNodes.forEach((value_5: UploadNode.IUploadNodeArgs): void => {
+            args.upload_nodes.forEach((value_5: UploadNode.IUploadNodeArgs): void => {
                 const value_6: UploadNode.IUploadNode = new UploadNode.UploadNode(value_5);
                 value_4.push(value_6);
             });
-            this.UploadNodes = value_4;
+            this.upload_nodes = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[UploadNodes] is unset!");

@@ -8,18 +8,18 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as DisplayResourceInfo from "./DisplayResourceInfo";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IMGetDisplayResourceInfoResponse {
-    ResourceList?: Array<DisplayResourceInfo.IDisplayResourceInfo>;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    resource_list?: Array<DisplayResourceInfo.IDisplayResourceInfo>;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IMGetDisplayResourceInfoResponseArgs {
-    ResourceList?: Array<DisplayResourceInfo.IDisplayResourceInfoArgs>;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    resource_list?: Array<DisplayResourceInfo.IDisplayResourceInfoArgs>;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const MGetDisplayResourceInfoResponseCodec: thrift.IStructCodec<IMGetDisplayResourceInfoResponseArgs, IMGetDisplayResourceInfoResponse> = {
     encode(args: IMGetDisplayResourceInfoResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ResourceList: args.ResourceList,
-            BaseResp: args.BaseResp
+            ResourceList: args.resource_list,
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("MGetDisplayResourceInfoResponse");
         if (obj.ResourceList != null) {
@@ -88,8 +88,8 @@ export const MGetDisplayResourceInfoResponseCodec: thrift.IStructCodec<IMGetDisp
         input.readStructEnd();
         if (_args.BaseResp !== undefined) {
             return {
-                ResourceList: _args.ResourceList,
-                BaseResp: _args.BaseResp
+                resource_list: _args.ResourceList,
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -98,23 +98,23 @@ export const MGetDisplayResourceInfoResponseCodec: thrift.IStructCodec<IMGetDisp
     }
 };
 export class MGetDisplayResourceInfoResponse extends thrift.StructLike implements IMGetDisplayResourceInfoResponse {
-    public ResourceList?: Array<DisplayResourceInfo.IDisplayResourceInfo>;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public resource_list?: Array<DisplayResourceInfo.IDisplayResourceInfo>;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IMGetDisplayResourceInfoResponseArgs) {
         super();
-        if (args.ResourceList != null) {
+        if (args.resource_list != null) {
             const value_5: Array<DisplayResourceInfo.IDisplayResourceInfo> = new Array<DisplayResourceInfo.IDisplayResourceInfo>();
-            args.ResourceList.forEach((value_7: DisplayResourceInfo.IDisplayResourceInfoArgs): void => {
+            args.resource_list.forEach((value_7: DisplayResourceInfo.IDisplayResourceInfoArgs): void => {
                 const value_8: DisplayResourceInfo.IDisplayResourceInfo = new DisplayResourceInfo.DisplayResourceInfo(value_7);
                 value_5.push(value_8);
             });
-            this.ResourceList = value_5;
+            this.resource_list = value_5;
         }
-        if (args.BaseResp != null) {
-            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_6;
+        if (args.base_resp != null) {
+            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_6;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

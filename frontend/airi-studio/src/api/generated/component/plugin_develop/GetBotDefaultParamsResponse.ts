@@ -13,7 +13,7 @@ export interface IGetBotDefaultParamsResponse {
     request_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     response_style?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyle;
-    BaseResp?: BASE_NS.IBaseResp;
+    base_resp?: BASE_NS.IBaseResp;
 }
 export interface IGetBotDefaultParamsResponseArgs {
     code?: number | string | thrift.Int64;
@@ -21,7 +21,7 @@ export interface IGetBotDefaultParamsResponseArgs {
     request_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs>;
     response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameterArgs>;
     response_style?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyleArgs;
-    BaseResp?: BASE_NS.IBaseRespArgs;
+    base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const GetBotDefaultParamsResponseCodec: thrift.IStructCodec<IGetBotDefaultParamsResponseArgs, IGetBotDefaultParamsResponse> = {
     encode(args: IGetBotDefaultParamsResponseArgs, output: thrift.TProtocol): void {
@@ -31,7 +31,7 @@ export const GetBotDefaultParamsResponseCodec: thrift.IStructCodec<IGetBotDefaul
             request_params: args.request_params,
             response_params: args.response_params,
             response_style: args.response_style,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetBotDefaultParamsResponse");
         if (obj.code != null) {
@@ -168,7 +168,7 @@ export const GetBotDefaultParamsResponseCodec: thrift.IStructCodec<IGetBotDefaul
             request_params: _args.request_params,
             response_params: _args.response_params,
             response_style: _args.response_style,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -178,7 +178,7 @@ export class GetBotDefaultParamsResponse extends thrift.StructLike implements IG
     public request_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     public response_params?: Array<COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IAPIParameter>;
     public response_style?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyle;
-    public BaseResp?: BASE_NS.IBaseResp;
+    public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetBotDefaultParamsResponseArgs = {}) {
@@ -211,9 +211,9 @@ export class GetBotDefaultParamsResponse extends thrift.StructLike implements IG
             const value_15: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyle = new COMPONENT_PLUGIN_DEVELOP_COMMON_NS.ResponseStyle(args.response_style);
             this.response_style = value_15;
         }
-        if (args.BaseResp != null) {
-            const value_16: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.BaseResp);
-            this.BaseResp = value_16;
+        if (args.base_resp != null) {
+            const value_16: BASE_NS.IBaseResp = new BASE_NS.BaseResp(args.base_resp);
+            this.base_resp = value_16;
         }
     }
     public static read(input: thrift.TProtocol): GetBotDefaultParamsResponse {

@@ -19,7 +19,7 @@ export interface IUpdateBotDefaultParamsRequest {
     plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     response_style?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyle;
     workflow_id?: string;
-    Base?: BASE_NS.IBase;
+    base?: BASE_NS.IBase;
 }
 export interface IUpdateBotDefaultParamsRequestArgs {
     space_id?: number | string | thrift.Int64;
@@ -33,7 +33,7 @@ export interface IUpdateBotDefaultParamsRequestArgs {
     plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     response_style?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyleArgs;
     workflow_id?: string;
-    Base?: BASE_NS.IBaseArgs;
+    base?: BASE_NS.IBaseArgs;
 }
 export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotDefaultParamsRequestArgs, IUpdateBotDefaultParamsRequest> = {
     encode(args: IUpdateBotDefaultParamsRequestArgs, output: thrift.TProtocol): void {
@@ -49,7 +49,7 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
             plugin_referrer_scene: args.plugin_referrer_scene,
             response_style: args.response_style,
             workflow_id: args.workflow_id,
-            Base: args.Base
+            Base: args.base
         };
         output.writeStructBegin("UpdateBotDefaultParamsRequest");
         if (obj.space_id != null) {
@@ -276,7 +276,7 @@ export const UpdateBotDefaultParamsRequestCodec: thrift.IStructCodec<IUpdateBotD
             plugin_referrer_scene: _args.plugin_referrer_scene,
             response_style: _args.response_style,
             workflow_id: _args.workflow_id,
-            Base: _args.Base
+            base: _args.Base
         };
     }
 };
@@ -292,7 +292,7 @@ export class UpdateBotDefaultParamsRequest extends thrift.StructLike implements 
     public plugin_referrer_scene?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.PluginReferrerScene;
     public response_style?: COMPONENT_PLUGIN_DEVELOP_COMMON_NS.IResponseStyle;
     public workflow_id?: string;
-    public Base?: BASE_NS.IBase;
+    public base?: BASE_NS.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         space_id: {
@@ -359,9 +359,9 @@ export class UpdateBotDefaultParamsRequest extends thrift.StructLike implements 
             const value_27: string = args.workflow_id;
             this.workflow_id = value_27;
         }
-        if (args.Base != null) {
-            const value_28: BASE_NS.IBase = new BASE_NS.Base(args.Base);
-            this.Base = value_28;
+        if (args.base != null) {
+            const value_28: BASE_NS.IBase = new BASE_NS.Base(args.base);
+            this.base = value_28;
         }
     }
     public static read(input: thrift.TProtocol): UpdateBotDefaultParamsRequest {

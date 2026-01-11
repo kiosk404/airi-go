@@ -10,13 +10,13 @@ export interface ICreateModelResp {
     id?: string;
     code: thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface ICreateModelRespArgs {
     id?: string;
     code: number | string | thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const CreateModelRespCodec: thrift.IStructCodec<ICreateModelRespArgs, ICreateModelResp> = {
     encode(args: ICreateModelRespArgs, output: thrift.TProtocol): void {
@@ -24,7 +24,7 @@ export const CreateModelRespCodec: thrift.IStructCodec<ICreateModelRespArgs, ICr
             id: args.id,
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("CreateModelResp");
         if (obj.id != null) {
@@ -119,7 +119,7 @@ export const CreateModelRespCodec: thrift.IStructCodec<ICreateModelRespArgs, ICr
                 id: _args.id,
                 code: _args.code,
                 msg: _args.msg,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -131,14 +131,14 @@ export class CreateModelResp extends thrift.StructLike implements ICreateModelRe
     public id?: string;
     public code: thrift.Int64;
     public msg: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         id: {
             'agw.js_conv': "str",
             'api.js_conv': "true"
         },
-        BaseResp: {
+        base_resp: {
             'api.none': "true"
         }
     };
@@ -162,9 +162,9 @@ export class CreateModelResp extends thrift.StructLike implements ICreateModelRe
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[msg] is unset!");
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

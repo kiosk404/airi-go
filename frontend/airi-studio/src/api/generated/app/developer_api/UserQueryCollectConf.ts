@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IUserQueryCollectConf {
-    IsCollected?: boolean;
-    PrivatePolicy?: string;
+    is_collected?: boolean;
+    private_policy?: string;
 }
 export interface IUserQueryCollectConfArgs {
-    IsCollected?: boolean;
-    PrivatePolicy?: string;
+    is_collected?: boolean;
+    private_policy?: string;
 }
 export const UserQueryCollectConfCodec: thrift.IStructCodec<IUserQueryCollectConfArgs, IUserQueryCollectConf> = {
     encode(args: IUserQueryCollectConfArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            IsCollected: args.IsCollected,
-            PrivatePolicy: args.PrivatePolicy
+            IsCollected: args.is_collected,
+            PrivatePolicy: args.private_policy
         };
         output.writeStructBegin("UserQueryCollectConf");
         if (obj.IsCollected != null) {
@@ -71,32 +71,32 @@ export const UserQueryCollectConfCodec: thrift.IStructCodec<IUserQueryCollectCon
         }
         input.readStructEnd();
         return {
-            IsCollected: _args.IsCollected,
-            PrivatePolicy: _args.PrivatePolicy
+            is_collected: _args.IsCollected,
+            private_policy: _args.PrivatePolicy
         };
     }
 };
 export class UserQueryCollectConf extends thrift.StructLike implements IUserQueryCollectConf {
-    public IsCollected?: boolean;
-    public PrivatePolicy?: string;
+    public is_collected?: boolean;
+    public private_policy?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        IsCollected: {
+        is_collected: {
             'api.body': "is_collected"
         },
-        PrivatePolicy: {
+        private_policy: {
             'api.body': "private_policy"
         }
     };
     constructor(args: IUserQueryCollectConfArgs = {}) {
         super();
-        if (args.IsCollected != null) {
-            const value_3: boolean = args.IsCollected;
-            this.IsCollected = value_3;
+        if (args.is_collected != null) {
+            const value_3: boolean = args.is_collected;
+            this.is_collected = value_3;
         }
-        if (args.PrivatePolicy != null) {
-            const value_4: string = args.PrivatePolicy;
-            this.PrivatePolicy = value_4;
+        if (args.private_policy != null) {
+            const value_4: string = args.private_policy;
+            this.private_policy = value_4;
         }
     }
     public static read(input: thrift.TProtocol): UserQueryCollectConf {

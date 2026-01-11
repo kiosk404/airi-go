@@ -6,21 +6,21 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface ICommonUploadRequest {
-    ByteData?: Buffer;
-    uploadID?: string;
-    partNumber?: string;
+    byte_data?: Buffer;
+    upload_i_d?: string;
+    part_number?: string;
 }
 export interface ICommonUploadRequestArgs {
-    ByteData?: string | Buffer;
-    uploadID?: string;
-    partNumber?: string;
+    byte_data?: string | Buffer;
+    upload_i_d?: string;
+    part_number?: string;
 }
 export const CommonUploadRequestCodec: thrift.IStructCodec<ICommonUploadRequestArgs, ICommonUploadRequest> = {
     encode(args: ICommonUploadRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ByteData: (typeof args.ByteData === "string" ? Buffer.from(args.ByteData) : args.ByteData),
-            uploadID: args.uploadID,
-            partNumber: args.partNumber
+            ByteData: (typeof args.byte_data === "string" ? Buffer.from(args.byte_data) : args.byte_data),
+            uploadID: args.upload_i_d,
+            partNumber: args.part_number
         };
         output.writeStructBegin("CommonUploadRequest");
         if (obj.ByteData != null) {
@@ -88,41 +88,41 @@ export const CommonUploadRequestCodec: thrift.IStructCodec<ICommonUploadRequestA
         }
         input.readStructEnd();
         return {
-            ByteData: _args.ByteData,
-            uploadID: _args.uploadID,
-            partNumber: _args.partNumber
+            byte_data: _args.ByteData,
+            upload_i_d: _args.uploadID,
+            part_number: _args.partNumber
         };
     }
 };
 export class CommonUploadRequest extends thrift.StructLike implements ICommonUploadRequest {
-    public ByteData?: Buffer;
-    public uploadID?: string;
-    public partNumber?: string;
+    public byte_data?: Buffer;
+    public upload_i_d?: string;
+    public part_number?: string;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        ByteData: {
+        byte_data: {
             'api.raw_body': ""
         },
-        uploadID: {
+        upload_i_d: {
             'api.query': "uploadID"
         },
-        partNumber: {
+        part_number: {
             'api.query': "partNumber"
         }
     };
     constructor(args: ICommonUploadRequestArgs = {}) {
         super();
-        if (args.ByteData != null) {
-            const value_4: Buffer = (typeof args.ByteData === "string" ? Buffer.from(args.ByteData) : args.ByteData);
-            this.ByteData = value_4;
+        if (args.byte_data != null) {
+            const value_4: Buffer = (typeof args.byte_data === "string" ? Buffer.from(args.byte_data) : args.byte_data);
+            this.byte_data = value_4;
         }
-        if (args.uploadID != null) {
-            const value_5: string = args.uploadID;
-            this.uploadID = value_5;
+        if (args.upload_i_d != null) {
+            const value_5: string = args.upload_i_d;
+            this.upload_i_d = value_5;
         }
-        if (args.partNumber != null) {
-            const value_6: string = args.partNumber;
-            this.partNumber = value_6;
+        if (args.part_number != null) {
+            const value_6: string = args.part_number;
+            this.part_number = value_6;
         }
     }
     public static read(input: thrift.TProtocol): CommonUploadRequest {

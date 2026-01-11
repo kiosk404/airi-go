@@ -6,18 +6,18 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 export interface IUploadResult {
-    Uri: string;
-    UriStatus: number;
+    uri: string;
+    uri_status: number;
 }
 export interface IUploadResultArgs {
-    Uri: string;
-    UriStatus: number;
+    uri: string;
+    uri_status: number;
 }
 export const UploadResultCodec: thrift.IStructCodec<IUploadResultArgs, IUploadResult> = {
     encode(args: IUploadResultArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Uri: args.Uri,
-            UriStatus: args.UriStatus
+            Uri: args.uri,
+            UriStatus: args.uri_status
         };
         output.writeStructBegin("UploadResult");
         if (obj.Uri != null) {
@@ -78,8 +78,8 @@ export const UploadResultCodec: thrift.IStructCodec<IUploadResultArgs, IUploadRe
         input.readStructEnd();
         if (_args.Uri !== undefined && _args.UriStatus !== undefined) {
             return {
-                Uri: _args.Uri,
-                UriStatus: _args.UriStatus
+                uri: _args.Uri,
+                uri_status: _args.UriStatus
             };
         }
         else {
@@ -88,22 +88,22 @@ export const UploadResultCodec: thrift.IStructCodec<IUploadResultArgs, IUploadRe
     }
 };
 export class UploadResult extends thrift.StructLike implements IUploadResult {
-    public Uri: string;
-    public UriStatus: number;
+    public uri: string;
+    public uri_status: number;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IUploadResultArgs) {
         super();
-        if (args.Uri != null) {
-            const value_3: string = args.Uri;
-            this.Uri = value_3;
+        if (args.uri != null) {
+            const value_3: string = args.uri;
+            this.uri = value_3;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Uri] is unset!");
         }
-        if (args.UriStatus != null) {
-            const value_4: number = args.UriStatus;
-            this.UriStatus = value_4;
+        if (args.uri_status != null) {
+            const value_4: number = args.uri_status;
+            this.uri_status = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[UriStatus] is unset!");

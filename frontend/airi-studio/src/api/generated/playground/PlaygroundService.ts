@@ -1552,7 +1552,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdateDraftBotInfoAgw(request: UpdateDraftBotInfoAgwRequest.IUpdateDraftBotInfoAgwRequestArgs, context?: Context): Promise<UpdateDraftBotInfoAgwResponse.IUpdateDraftBotInfoAgwResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdateDraftBotInfoAgw", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdateDraftBotInfoAgw", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdateDraftBotInfoAgw__ArgsArgs = { request };
         UpdateDraftBotInfoAgw__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1590,7 +1590,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetDraftBotInfoAgw(request: GetDraftBotInfoAgwRequest.IGetDraftBotInfoAgwRequestArgs, context?: Context): Promise<GetDraftBotInfoAgwResponse.IGetDraftBotInfoAgwResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetDraftBotInfoAgw", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetDraftBotInfoAgw", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetDraftBotInfoAgw__ArgsArgs = { request };
         GetDraftBotInfoAgw__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1628,7 +1628,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetBotPopupInfo(request: GetBotPopupInfoRequest.IGetBotPopupInfoRequestArgs, context?: Context): Promise<GetBotPopupInfoResponse.IGetBotPopupInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetBotPopupInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetBotPopupInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetBotPopupInfo__ArgsArgs = { request };
         GetBotPopupInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1666,7 +1666,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpdateBotPopupInfo(request: UpdateBotPopupInfoRequest.IUpdateBotPopupInfoRequestArgs, context?: Context): Promise<UpdateBotPopupInfoResponse.IUpdateBotPopupInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpdateBotPopupInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpdateBotPopupInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpdateBotPopupInfo__ArgsArgs = { request };
         UpdateBotPopupInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1704,7 +1704,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public ReportUserBehavior(request: ReportUserBehaviorRequest.IReportUserBehaviorRequestArgs, context?: Context): Promise<ReportUserBehaviorResponse.IReportUserBehaviorResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("ReportUserBehavior", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("ReportUserBehavior", thrift.MessageType.CALL, this.increment_request_id());
         const args: IReportUserBehavior__ArgsArgs = { request };
         ReportUserBehavior__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1742,7 +1742,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetOfficialPromptResourceList(request: __ROOT_NAMESPACE__.IGetOfficialPromptResourceListRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IGetOfficialPromptResourceListResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetOfficialPromptResourceList", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetOfficialPromptResourceList", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetOfficialPromptResourceList__ArgsArgs = { request };
         GetOfficialPromptResourceList__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1780,7 +1780,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public GetPromptResourceInfo(request: __ROOT_NAMESPACE__.IGetPromptResourceInfoRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IGetPromptResourceInfoResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("GetPromptResourceInfo", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("GetPromptResourceInfo", thrift.MessageType.CALL, this.increment_request_id());
         const args: IGetPromptResourceInfo__ArgsArgs = { request };
         GetPromptResourceInfo__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1818,7 +1818,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public UpsertPromptResource(request: __ROOT_NAMESPACE__.IUpsertPromptResourceRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IUpsertPromptResourceResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("UpsertPromptResource", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("UpsertPromptResource", thrift.MessageType.CALL, this.increment_request_id());
         const args: IUpsertPromptResource__ArgsArgs = { request };
         UpsertPromptResource__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1856,7 +1856,7 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
     public DeletePromptResource(request: __ROOT_NAMESPACE__.IDeletePromptResourceRequestArgs, context?: Context): Promise<__ROOT_NAMESPACE__.IDeletePromptResourceResponse> {
         const writer: thrift.TTransport = new this.transport();
         const output: thrift.TProtocol = new this.protocol(writer);
-        output.writeMessageBegin("DeletePromptResource", thrift.MessageType.CALL, this.incrementRequestId());
+        output.writeMessageBegin("DeletePromptResource", thrift.MessageType.CALL, this.increment_request_id());
         const args: IDeletePromptResource__ArgsArgs = { request };
         DeletePromptResource__ArgsCodec.encode(args, output);
         output.writeMessageEnd();
@@ -1925,39 +1925,39 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
             const methodName: string = "process_" + fieldName;
             switch (methodName) {
                 case "process_UpdateDraftBotInfoAgw": {
-                    resolve(this.process_UpdateDraftBotInfoAgw(requestId, input, output, context));
+                    resolve(this.process__update_draft_bot_info_agw(requestId, input, output, context));
                     break;
                 }
                 case "process_GetDraftBotInfoAgw": {
-                    resolve(this.process_GetDraftBotInfoAgw(requestId, input, output, context));
+                    resolve(this.process__get_draft_bot_info_agw(requestId, input, output, context));
                     break;
                 }
                 case "process_GetBotPopupInfo": {
-                    resolve(this.process_GetBotPopupInfo(requestId, input, output, context));
+                    resolve(this.process__get_bot_popup_info(requestId, input, output, context));
                     break;
                 }
                 case "process_UpdateBotPopupInfo": {
-                    resolve(this.process_UpdateBotPopupInfo(requestId, input, output, context));
+                    resolve(this.process__update_bot_popup_info(requestId, input, output, context));
                     break;
                 }
                 case "process_ReportUserBehavior": {
-                    resolve(this.process_ReportUserBehavior(requestId, input, output, context));
+                    resolve(this.process__report_user_behavior(requestId, input, output, context));
                     break;
                 }
                 case "process_GetOfficialPromptResourceList": {
-                    resolve(this.process_GetOfficialPromptResourceList(requestId, input, output, context));
+                    resolve(this.process__get_official_prompt_resource_list(requestId, input, output, context));
                     break;
                 }
                 case "process_GetPromptResourceInfo": {
-                    resolve(this.process_GetPromptResourceInfo(requestId, input, output, context));
+                    resolve(this.process__get_prompt_resource_info(requestId, input, output, context));
                     break;
                 }
                 case "process_UpsertPromptResource": {
-                    resolve(this.process_UpsertPromptResource(requestId, input, output, context));
+                    resolve(this.process__upsert_prompt_resource(requestId, input, output, context));
                     break;
                 }
                 case "process_DeletePromptResource": {
-                    resolve(this.process_DeletePromptResource(requestId, input, output, context));
+                    resolve(this.process__delete_prompt_resource(requestId, input, output, context));
                     break;
                 }
                 default: {

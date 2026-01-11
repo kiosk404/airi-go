@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as TaskWebhookField from "./TaskWebhookField";
 export interface ITaskWebhookOutput {
-    Params?: Array<TaskWebhookField.ITaskWebhookField>;
+    params?: Array<TaskWebhookField.ITaskWebhookField>;
 }
 export interface ITaskWebhookOutputArgs {
-    Params?: Array<TaskWebhookField.ITaskWebhookFieldArgs>;
+    params?: Array<TaskWebhookField.ITaskWebhookFieldArgs>;
 }
 export const TaskWebhookOutputCodec: thrift.IStructCodec<ITaskWebhookOutputArgs, ITaskWebhookOutput> = {
     encode(args: ITaskWebhookOutputArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Params: args.Params
+            Params: args.params
         };
         output.writeStructBegin("TaskWebhookOutput");
         if (obj.Params != null) {
@@ -66,23 +66,23 @@ export const TaskWebhookOutputCodec: thrift.IStructCodec<ITaskWebhookOutputArgs,
         }
         input.readStructEnd();
         return {
-            Params: _args.Params
+            params: _args.Params
         };
     }
 };
 export class TaskWebhookOutput extends thrift.StructLike implements ITaskWebhookOutput {
-    public Params?: Array<TaskWebhookField.ITaskWebhookField>;
+    public params?: Array<TaskWebhookField.ITaskWebhookField>;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: ITaskWebhookOutputArgs = {}) {
         super();
-        if (args.Params != null) {
+        if (args.params != null) {
             const value_4: Array<TaskWebhookField.ITaskWebhookField> = new Array<TaskWebhookField.ITaskWebhookField>();
-            args.Params.forEach((value_5: TaskWebhookField.ITaskWebhookFieldArgs): void => {
+            args.params.forEach((value_5: TaskWebhookField.ITaskWebhookFieldArgs): void => {
                 const value_6: TaskWebhookField.ITaskWebhookField = new TaskWebhookField.TaskWebhookField(value_5);
                 value_4.push(value_6);
             });
-            this.Params = value_4;
+            this.params = value_4;
         }
     }
     public static read(input: thrift.TProtocol): TaskWebhookOutput {

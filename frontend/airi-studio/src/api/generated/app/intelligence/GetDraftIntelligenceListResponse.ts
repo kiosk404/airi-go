@@ -11,13 +11,13 @@ export interface IGetDraftIntelligenceListResponse {
     data?: DraftIntelligenceListData.IDraftIntelligenceListData;
     code?: number;
     msg?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp?: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IGetDraftIntelligenceListResponseArgs {
     data?: DraftIntelligenceListData.IDraftIntelligenceListDataArgs;
     code?: number;
     msg?: string;
-    BaseResp?: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp?: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const GetDraftIntelligenceListResponseCodec: thrift.IStructCodec<IGetDraftIntelligenceListResponseArgs, IGetDraftIntelligenceListResponse> = {
     encode(args: IGetDraftIntelligenceListResponseArgs, output: thrift.TProtocol): void {
@@ -25,7 +25,7 @@ export const GetDraftIntelligenceListResponseCodec: thrift.IStructCodec<IGetDraf
             data: args.data,
             code: args.code,
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("GetDraftIntelligenceListResponse");
         if (obj.data != null) {
@@ -110,7 +110,7 @@ export const GetDraftIntelligenceListResponseCodec: thrift.IStructCodec<IGetDraf
             data: _args.data,
             code: _args.code,
             msg: _args.msg,
-            BaseResp: _args.BaseResp
+            base_resp: _args.BaseResp
         };
     }
 };
@@ -118,10 +118,10 @@ export class GetDraftIntelligenceListResponse extends thrift.StructLike implemen
     public data?: DraftIntelligenceListData.IDraftIntelligenceListData;
     public code?: number;
     public msg?: string;
-    public BaseResp?: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp?: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        BaseResp: {
+        base_resp: {
             'api.none': "true"
         }
     };
@@ -139,9 +139,9 @@ export class GetDraftIntelligenceListResponse extends thrift.StructLike implemen
             const value_7: string = args.msg;
             this.msg = value_7;
         }
-        if (args.BaseResp != null) {
-            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_8;
+        if (args.base_resp != null) {
+            const value_8: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_8;
         }
     }
     public static read(input: thrift.TProtocol): GetDraftIntelligenceListResponse {

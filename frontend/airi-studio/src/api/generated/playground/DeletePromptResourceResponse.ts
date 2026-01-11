@@ -9,19 +9,19 @@ import * as __ROOT_NAMESPACE__ from "../base";
 export interface IDeletePromptResourceResponse {
     code: thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    base_resp: __ROOT_NAMESPACE__.IBaseResp;
 }
 export interface IDeletePromptResourceResponseArgs {
     code: number | string | thrift.Int64;
     msg: string;
-    BaseResp: __ROOT_NAMESPACE__.IBaseRespArgs;
+    base_resp: __ROOT_NAMESPACE__.IBaseRespArgs;
 }
 export const DeletePromptResourceResponseCodec: thrift.IStructCodec<IDeletePromptResourceResponseArgs, IDeletePromptResourceResponse> = {
     encode(args: IDeletePromptResourceResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
             code: (typeof args.code === "number" ? new thrift.Int64(args.code) : typeof args.code === "string" ? thrift.Int64.fromDecimalString(args.code) : args.code),
             msg: args.msg,
-            BaseResp: args.BaseResp
+            BaseResp: args.base_resp
         };
         output.writeStructBegin("DeletePromptResourceResponse");
         if (obj.code != null) {
@@ -101,7 +101,7 @@ export const DeletePromptResourceResponseCodec: thrift.IStructCodec<IDeletePromp
             return {
                 code: _args.code,
                 msg: _args.msg,
-                BaseResp: _args.BaseResp
+                base_resp: _args.BaseResp
             };
         }
         else {
@@ -112,7 +112,7 @@ export const DeletePromptResourceResponseCodec: thrift.IStructCodec<IDeletePromp
 export class DeletePromptResourceResponse extends thrift.StructLike implements IDeletePromptResourceResponse {
     public code: thrift.Int64;
     public msg: string;
-    public BaseResp: __ROOT_NAMESPACE__.IBaseResp;
+    public base_resp: __ROOT_NAMESPACE__.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IDeletePromptResourceResponseArgs) {
@@ -131,9 +131,9 @@ export class DeletePromptResourceResponse extends thrift.StructLike implements I
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[msg] is unset!");
         }
-        if (args.BaseResp != null) {
-            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.BaseResp);
-            this.BaseResp = value_6;
+        if (args.base_resp != null) {
+            const value_6: __ROOT_NAMESPACE__.IBaseResp = new __ROOT_NAMESPACE__.BaseResp(args.base_resp);
+            this.base_resp = value_6;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[BaseResp] is unset!");

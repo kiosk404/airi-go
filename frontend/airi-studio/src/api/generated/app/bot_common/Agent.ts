@@ -20,81 +20,81 @@ import * as HookInfo from "./HookInfo";
 import * as ReferenceInfoStatus from "../developer_api/ReferenceInfoStatus";
 import * as ReferenceUpdateType from "../developer_api/ReferenceUpdateType";
 export interface IAgent {
-    AgentId?: thrift.Int64;
-    AgentName?: string;
-    PromptInfo?: PromptInfo.IPromptInfo;
-    PluginInfoList?: Array<PluginInfo.IPluginInfo>;
-    Knowledge?: Knowledge.IKnowledge;
-    WorkflowInfoList?: Array<WorkflowInfo.IWorkflowInfo>;
-    ModelInfo?: ModelInfo.IModelInfo;
-    Intents?: Array<Intent.IIntent>;
-    AgentType?: AgentType.AgentType;
-    RootAgent?: boolean;
-    ReferenceId?: thrift.Int64;
-    FirstVersion?: string;
-    LastVersion?: string;
-    AgentPosition?: AgentPosition.IAgentPosition;
-    IconUri?: string;
-    JumpConfig?: JumpConfig.IJumpConfig;
-    SuggestReplyInfo?: SuggestReplyInfo.ISuggestReplyInfo;
-    Description?: string;
-    VersionCompat?: AgentVersionCompat.AgentVersionCompat;
-    HookInfo?: HookInfo.IHookInfo;
-    CurrentVersion?: string;
-    ReferenceInfoStatus?: ReferenceInfoStatus.ReferenceInfoStatus;
-    UpdateType?: ReferenceUpdateType.ReferenceUpdateType;
+    agent_id?: thrift.Int64;
+    agent_name?: string;
+    prompt_info?: PromptInfo.IPromptInfo;
+    plugin_info_list?: Array<PluginInfo.IPluginInfo>;
+    knowledge?: Knowledge.IKnowledge;
+    workflow_info_list?: Array<WorkflowInfo.IWorkflowInfo>;
+    model_info?: ModelInfo.IModelInfo;
+    intents?: Array<Intent.IIntent>;
+    agent_type?: AgentType.AgentType;
+    root_agent?: boolean;
+    reference_id?: thrift.Int64;
+    first_version?: string;
+    last_version?: string;
+    agent_position?: AgentPosition.IAgentPosition;
+    icon_uri?: string;
+    jump_config?: JumpConfig.IJumpConfig;
+    suggest_reply_info?: SuggestReplyInfo.ISuggestReplyInfo;
+    description?: string;
+    version_compat?: AgentVersionCompat.AgentVersionCompat;
+    hook_info?: HookInfo.IHookInfo;
+    current_version?: string;
+    reference_info_status?: ReferenceInfoStatus.ReferenceInfoStatus;
+    update_type?: ReferenceUpdateType.ReferenceUpdateType;
 }
 export interface IAgentArgs {
-    AgentId?: number | string | thrift.Int64;
-    AgentName?: string;
-    PromptInfo?: PromptInfo.IPromptInfoArgs;
-    PluginInfoList?: Array<PluginInfo.IPluginInfoArgs>;
-    Knowledge?: Knowledge.IKnowledgeArgs;
-    WorkflowInfoList?: Array<WorkflowInfo.IWorkflowInfoArgs>;
-    ModelInfo?: ModelInfo.IModelInfoArgs;
-    Intents?: Array<Intent.IIntentArgs>;
-    AgentType?: AgentType.AgentType;
-    RootAgent?: boolean;
-    ReferenceId?: number | string | thrift.Int64;
-    FirstVersion?: string;
-    LastVersion?: string;
-    AgentPosition?: AgentPosition.IAgentPositionArgs;
-    IconUri?: string;
-    JumpConfig?: JumpConfig.IJumpConfigArgs;
-    SuggestReplyInfo?: SuggestReplyInfo.ISuggestReplyInfoArgs;
-    Description?: string;
-    VersionCompat?: AgentVersionCompat.AgentVersionCompat;
-    HookInfo?: HookInfo.IHookInfoArgs;
-    CurrentVersion?: string;
-    ReferenceInfoStatus?: ReferenceInfoStatus.ReferenceInfoStatus;
-    UpdateType?: ReferenceUpdateType.ReferenceUpdateType;
+    agent_id?: number | string | thrift.Int64;
+    agent_name?: string;
+    prompt_info?: PromptInfo.IPromptInfoArgs;
+    plugin_info_list?: Array<PluginInfo.IPluginInfoArgs>;
+    knowledge?: Knowledge.IKnowledgeArgs;
+    workflow_info_list?: Array<WorkflowInfo.IWorkflowInfoArgs>;
+    model_info?: ModelInfo.IModelInfoArgs;
+    intents?: Array<Intent.IIntentArgs>;
+    agent_type?: AgentType.AgentType;
+    root_agent?: boolean;
+    reference_id?: number | string | thrift.Int64;
+    first_version?: string;
+    last_version?: string;
+    agent_position?: AgentPosition.IAgentPositionArgs;
+    icon_uri?: string;
+    jump_config?: JumpConfig.IJumpConfigArgs;
+    suggest_reply_info?: SuggestReplyInfo.ISuggestReplyInfoArgs;
+    description?: string;
+    version_compat?: AgentVersionCompat.AgentVersionCompat;
+    hook_info?: HookInfo.IHookInfoArgs;
+    current_version?: string;
+    reference_info_status?: ReferenceInfoStatus.ReferenceInfoStatus;
+    update_type?: ReferenceUpdateType.ReferenceUpdateType;
 }
 export const AgentCodec: thrift.IStructCodec<IAgentArgs, IAgent> = {
     encode(args: IAgentArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            AgentId: (typeof args.AgentId === "number" ? new thrift.Int64(args.AgentId) : typeof args.AgentId === "string" ? thrift.Int64.fromDecimalString(args.AgentId) : args.AgentId),
-            AgentName: args.AgentName,
-            PromptInfo: args.PromptInfo,
-            PluginInfoList: args.PluginInfoList,
-            Knowledge: args.Knowledge,
-            WorkflowInfoList: args.WorkflowInfoList,
-            ModelInfo: args.ModelInfo,
-            Intents: args.Intents,
-            AgentType: args.AgentType,
-            RootAgent: args.RootAgent,
-            ReferenceId: (typeof args.ReferenceId === "number" ? new thrift.Int64(args.ReferenceId) : typeof args.ReferenceId === "string" ? thrift.Int64.fromDecimalString(args.ReferenceId) : args.ReferenceId),
-            FirstVersion: args.FirstVersion,
-            LastVersion: args.LastVersion,
-            AgentPosition: args.AgentPosition,
-            IconUri: args.IconUri,
-            JumpConfig: args.JumpConfig,
-            SuggestReplyInfo: args.SuggestReplyInfo,
-            Description: args.Description,
-            VersionCompat: args.VersionCompat,
-            HookInfo: args.HookInfo,
-            CurrentVersion: args.CurrentVersion,
-            ReferenceInfoStatus: args.ReferenceInfoStatus,
-            UpdateType: args.UpdateType
+            AgentId: (typeof args.agent_id === "number" ? new thrift.Int64(args.agent_id) : typeof args.agent_id === "string" ? thrift.Int64.fromDecimalString(args.agent_id) : args.agent_id),
+            AgentName: args.agent_name,
+            PromptInfo: args.prompt_info,
+            PluginInfoList: args.plugin_info_list,
+            Knowledge: args.knowledge,
+            WorkflowInfoList: args.workflow_info_list,
+            ModelInfo: args.model_info,
+            Intents: args.intents,
+            AgentType: args.agent_type,
+            RootAgent: args.root_agent,
+            ReferenceId: (typeof args.reference_id === "number" ? new thrift.Int64(args.reference_id) : typeof args.reference_id === "string" ? thrift.Int64.fromDecimalString(args.reference_id) : args.reference_id),
+            FirstVersion: args.first_version,
+            LastVersion: args.last_version,
+            AgentPosition: args.agent_position,
+            IconUri: args.icon_uri,
+            JumpConfig: args.jump_config,
+            SuggestReplyInfo: args.suggest_reply_info,
+            Description: args.description,
+            VersionCompat: args.version_compat,
+            HookInfo: args.hook_info,
+            CurrentVersion: args.current_version,
+            ReferenceInfoStatus: args.reference_info_status,
+            UpdateType: args.update_type
         };
         output.writeStructBegin("Agent");
         if (obj.AgentId != null) {
@@ -475,237 +475,260 @@ export const AgentCodec: thrift.IStructCodec<IAgentArgs, IAgent> = {
         }
         input.readStructEnd();
         return {
-            AgentId: _args.AgentId,
-            AgentName: _args.AgentName,
-            PromptInfo: _args.PromptInfo,
-            PluginInfoList: _args.PluginInfoList,
-            Knowledge: _args.Knowledge,
-            WorkflowInfoList: _args.WorkflowInfoList,
-            ModelInfo: _args.ModelInfo,
-            Intents: _args.Intents,
-            AgentType: _args.AgentType,
-            RootAgent: _args.RootAgent,
-            ReferenceId: _args.ReferenceId,
-            FirstVersion: _args.FirstVersion,
-            LastVersion: _args.LastVersion,
-            AgentPosition: _args.AgentPosition,
-            IconUri: _args.IconUri,
-            JumpConfig: _args.JumpConfig,
-            SuggestReplyInfo: _args.SuggestReplyInfo,
-            Description: _args.Description,
-            VersionCompat: _args.VersionCompat,
-            HookInfo: _args.HookInfo,
-            CurrentVersion: _args.CurrentVersion,
-            ReferenceInfoStatus: _args.ReferenceInfoStatus,
-            UpdateType: _args.UpdateType
+            agent_id: _args.AgentId,
+            agent_name: _args.AgentName,
+            prompt_info: _args.PromptInfo,
+            plugin_info_list: _args.PluginInfoList,
+            knowledge: _args.Knowledge,
+            workflow_info_list: _args.WorkflowInfoList,
+            model_info: _args.ModelInfo,
+            intents: _args.Intents,
+            agent_type: _args.AgentType,
+            root_agent: _args.RootAgent,
+            reference_id: _args.ReferenceId,
+            first_version: _args.FirstVersion,
+            last_version: _args.LastVersion,
+            agent_position: _args.AgentPosition,
+            icon_uri: _args.IconUri,
+            jump_config: _args.JumpConfig,
+            suggest_reply_info: _args.SuggestReplyInfo,
+            description: _args.Description,
+            version_compat: _args.VersionCompat,
+            hook_info: _args.HookInfo,
+            current_version: _args.CurrentVersion,
+            reference_info_status: _args.ReferenceInfoStatus,
+            update_type: _args.UpdateType
         };
     }
 };
 export class Agent extends thrift.StructLike implements IAgent {
-    public AgentId?: thrift.Int64;
-    public AgentName?: string;
-    public PromptInfo?: PromptInfo.IPromptInfo;
-    public PluginInfoList?: Array<PluginInfo.IPluginInfo>;
-    public Knowledge?: Knowledge.IKnowledge;
-    public WorkflowInfoList?: Array<WorkflowInfo.IWorkflowInfo>;
-    public ModelInfo?: ModelInfo.IModelInfo;
-    public Intents?: Array<Intent.IIntent>;
-    public AgentType?: AgentType.AgentType;
-    public RootAgent?: boolean;
-    public ReferenceId?: thrift.Int64;
-    public FirstVersion?: string;
-    public LastVersion?: string;
-    public AgentPosition?: AgentPosition.IAgentPosition;
-    public IconUri?: string;
-    public JumpConfig?: JumpConfig.IJumpConfig;
-    public SuggestReplyInfo?: SuggestReplyInfo.ISuggestReplyInfo;
-    public Description?: string;
-    public VersionCompat?: AgentVersionCompat.AgentVersionCompat;
-    public HookInfo?: HookInfo.IHookInfo;
-    public CurrentVersion?: string;
-    public ReferenceInfoStatus?: ReferenceInfoStatus.ReferenceInfoStatus;
-    public UpdateType?: ReferenceUpdateType.ReferenceUpdateType;
+    public agent_id?: thrift.Int64;
+    public agent_name?: string;
+    public prompt_info?: PromptInfo.IPromptInfo;
+    public plugin_info_list?: Array<PluginInfo.IPluginInfo>;
+    public knowledge?: Knowledge.IKnowledge;
+    public workflow_info_list?: Array<WorkflowInfo.IWorkflowInfo>;
+    public model_info?: ModelInfo.IModelInfo;
+    public intents?: Array<Intent.IIntent>;
+    public agent_type?: AgentType.AgentType;
+    public root_agent?: boolean;
+    public reference_id?: thrift.Int64;
+    public first_version?: string;
+    public last_version?: string;
+    public agent_position?: AgentPosition.IAgentPosition;
+    public icon_uri?: string;
+    public jump_config?: JumpConfig.IJumpConfig;
+    public suggest_reply_info?: SuggestReplyInfo.ISuggestReplyInfo;
+    public description?: string;
+    public version_compat?: AgentVersionCompat.AgentVersionCompat;
+    public hook_info?: HookInfo.IHookInfo;
+    public current_version?: string;
+    public reference_info_status?: ReferenceInfoStatus.ReferenceInfoStatus;
+    public update_type?: ReferenceUpdateType.ReferenceUpdateType;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        AgentId: {
+        agent_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
-            'api.body': "agent_id"
+            'api.body': "agent_id",
+            'go.tag': "json:\"agent_id,omitempty\""
         },
-        AgentName: {
-            'api.body': "agent_name"
+        agent_name: {
+            'api.body': "agent_name",
+            'go.tag': "json:\"agent_name\""
         },
-        PromptInfo: {
-            'api.body': "prompt_info"
+        prompt_info: {
+            'api.body': "prompt_info",
+            'go.tag': "json:\"prompt_info\""
         },
-        PluginInfoList: {
-            'api.body': "plugin_info_list"
+        plugin_info_list: {
+            'api.body': "plugin_info_list",
+            'go.tag': "json:\"plugin_info_list\""
         },
-        Knowledge: {
-            'api.body': "knowledge"
+        knowledge: {
+            'api.body': "knowledge",
+            'go.tag': "json:\"knowledge\""
         },
-        WorkflowInfoList: {
-            'api.body': "workflow_info_list"
+        workflow_info_list: {
+            'api.body': "workflow_info_list",
+            'go.tag': "json:\"workflow_info_list\""
         },
-        ModelInfo: {
-            'api.body': "model_info"
+        model_info: {
+            'api.body': "model_info",
+            'go.tag': "json:\"model_info\""
         },
-        Intents: {
-            'api.body': "intents"
+        intents: {
+            'api.body': "intents",
+            'go.tag': "json:\"intents\""
         },
-        AgentType: {
-            'api.body': "agent_type"
+        agent_type: {
+            'api.body': "agent_type",
+            'go.tag': "json:\"agent_type\""
         },
-        RootAgent: {
-            'api.body': "root_agent"
+        root_agent: {
+            'api.body': "root_agent",
+            'go.tag': "json:\"root_agent\""
         },
-        ReferenceId: {
+        reference_id: {
             'agw.js_conv': "str",
             'api.js_conv': "true",
-            'api.body': "reference_id"
+            'api.body': "reference_id",
+            'go.tag': "json:\"reference_id,omitempty\""
         },
-        FirstVersion: {
-            'api.body': "first_version"
+        first_version: {
+            'api.body': "first_version",
+            'go.tag': "json:\"first_version,omitempty\""
         },
-        LastVersion: {
-            'api.body': "last_version"
+        last_version: {
+            'api.body': "last_version",
+            'go.tag': "json:\"last_version,omitempty\""
         },
-        AgentPosition: {
-            'api.body': "agent_position"
+        agent_position: {
+            'api.body': "agent_position",
+            'go.tag': "json:\"agent_position,omitempty\""
         },
-        IconUri: {
-            'api.body': "icon_uri"
+        icon_uri: {
+            'api.body': "icon_uri",
+            'go.tag': "json:\"icon_uri,omitempty\""
         },
-        JumpConfig: {
-            'api.body': "jump_config"
+        jump_config: {
+            'api.body': "jump_config",
+            'go.tag': "json:\"jump_config,omitempty\""
         },
-        SuggestReplyInfo: {
-            'api.body': "suggest_reply_info"
+        suggest_reply_info: {
+            'api.body': "suggest_reply_info",
+            'go.tag': "json:\"suggest_reply_info,omitempty\""
         },
-        Description: {
-            'api.body': "description"
+        description: {
+            'api.body': "description",
+            'go.tag': "json:\"description\""
         },
-        VersionCompat: {
-            'api.body': "version_compat"
+        version_compat: {
+            'api.body': "version_compat",
+            'go.tag': "json:\"version_compat,omitempty\""
         },
-        HookInfo: {
-            'api.body': "hook_info"
+        hook_info: {
+            'api.body': "hook_info",
+            'go.tag': "json:\"hook_info,omitempty\""
         },
-        CurrentVersion: {
-            'api.body': "current_version"
+        current_version: {
+            'api.body': "current_version",
+            'go.tag': "json:\"current_version,omitempty\""
         },
-        ReferenceInfoStatus: {
-            'api.body': "reference_info_status"
+        reference_info_status: {
+            'api.body': "reference_info_status",
+            'go.tag': "json:\"reference_info_status,omitempty\""
         },
-        UpdateType: {
-            'api.body': "update_type"
+        update_type: {
+            'api.body': "update_type",
+            'go.tag': "json:\"update_type,omitempty\""
         }
     };
     constructor(args: IAgentArgs = {}) {
         super();
-        if (args.AgentId != null) {
-            const value_30: thrift.Int64 = (typeof args.AgentId === "number" ? new thrift.Int64(args.AgentId) : typeof args.AgentId === "string" ? thrift.Int64.fromDecimalString(args.AgentId) : args.AgentId);
-            this.AgentId = value_30;
+        if (args.agent_id != null) {
+            const value_30: thrift.Int64 = (typeof args.agent_id === "number" ? new thrift.Int64(args.agent_id) : typeof args.agent_id === "string" ? thrift.Int64.fromDecimalString(args.agent_id) : args.agent_id);
+            this.agent_id = value_30;
         }
-        if (args.AgentName != null) {
-            const value_31: string = args.AgentName;
-            this.AgentName = value_31;
+        if (args.agent_name != null) {
+            const value_31: string = args.agent_name;
+            this.agent_name = value_31;
         }
-        if (args.PromptInfo != null) {
-            const value_32: PromptInfo.IPromptInfo = new PromptInfo.PromptInfo(args.PromptInfo);
-            this.PromptInfo = value_32;
+        if (args.prompt_info != null) {
+            const value_32: PromptInfo.IPromptInfo = new PromptInfo.PromptInfo(args.prompt_info);
+            this.prompt_info = value_32;
         }
-        if (args.PluginInfoList != null) {
+        if (args.plugin_info_list != null) {
             const value_33: Array<PluginInfo.IPluginInfo> = new Array<PluginInfo.IPluginInfo>();
-            args.PluginInfoList.forEach((value_53: PluginInfo.IPluginInfoArgs): void => {
+            args.plugin_info_list.forEach((value_53: PluginInfo.IPluginInfoArgs): void => {
                 const value_54: PluginInfo.IPluginInfo = new PluginInfo.PluginInfo(value_53);
                 value_33.push(value_54);
             });
-            this.PluginInfoList = value_33;
+            this.plugin_info_list = value_33;
         }
-        if (args.Knowledge != null) {
-            const value_34: Knowledge.IKnowledge = new Knowledge.Knowledge(args.Knowledge);
-            this.Knowledge = value_34;
+        if (args.knowledge != null) {
+            const value_34: Knowledge.IKnowledge = new Knowledge.Knowledge(args.knowledge);
+            this.knowledge = value_34;
         }
-        if (args.WorkflowInfoList != null) {
+        if (args.workflow_info_list != null) {
             const value_35: Array<WorkflowInfo.IWorkflowInfo> = new Array<WorkflowInfo.IWorkflowInfo>();
-            args.WorkflowInfoList.forEach((value_55: WorkflowInfo.IWorkflowInfoArgs): void => {
+            args.workflow_info_list.forEach((value_55: WorkflowInfo.IWorkflowInfoArgs): void => {
                 const value_56: WorkflowInfo.IWorkflowInfo = new WorkflowInfo.WorkflowInfo(value_55);
                 value_35.push(value_56);
             });
-            this.WorkflowInfoList = value_35;
+            this.workflow_info_list = value_35;
         }
-        if (args.ModelInfo != null) {
-            const value_36: ModelInfo.IModelInfo = new ModelInfo.ModelInfo(args.ModelInfo);
-            this.ModelInfo = value_36;
+        if (args.model_info != null) {
+            const value_36: ModelInfo.IModelInfo = new ModelInfo.ModelInfo(args.model_info);
+            this.model_info = value_36;
         }
-        if (args.Intents != null) {
+        if (args.intents != null) {
             const value_37: Array<Intent.IIntent> = new Array<Intent.IIntent>();
-            args.Intents.forEach((value_57: Intent.IIntentArgs): void => {
+            args.intents.forEach((value_57: Intent.IIntentArgs): void => {
                 const value_58: Intent.IIntent = new Intent.Intent(value_57);
                 value_37.push(value_58);
             });
-            this.Intents = value_37;
+            this.intents = value_37;
         }
-        if (args.AgentType != null) {
-            const value_38: AgentType.AgentType = args.AgentType;
-            this.AgentType = value_38;
+        if (args.agent_type != null) {
+            const value_38: AgentType.AgentType = args.agent_type;
+            this.agent_type = value_38;
         }
-        if (args.RootAgent != null) {
-            const value_39: boolean = args.RootAgent;
-            this.RootAgent = value_39;
+        if (args.root_agent != null) {
+            const value_39: boolean = args.root_agent;
+            this.root_agent = value_39;
         }
-        if (args.ReferenceId != null) {
-            const value_40: thrift.Int64 = (typeof args.ReferenceId === "number" ? new thrift.Int64(args.ReferenceId) : typeof args.ReferenceId === "string" ? thrift.Int64.fromDecimalString(args.ReferenceId) : args.ReferenceId);
-            this.ReferenceId = value_40;
+        if (args.reference_id != null) {
+            const value_40: thrift.Int64 = (typeof args.reference_id === "number" ? new thrift.Int64(args.reference_id) : typeof args.reference_id === "string" ? thrift.Int64.fromDecimalString(args.reference_id) : args.reference_id);
+            this.reference_id = value_40;
         }
-        if (args.FirstVersion != null) {
-            const value_41: string = args.FirstVersion;
-            this.FirstVersion = value_41;
+        if (args.first_version != null) {
+            const value_41: string = args.first_version;
+            this.first_version = value_41;
         }
-        if (args.LastVersion != null) {
-            const value_42: string = args.LastVersion;
-            this.LastVersion = value_42;
+        if (args.last_version != null) {
+            const value_42: string = args.last_version;
+            this.last_version = value_42;
         }
-        if (args.AgentPosition != null) {
-            const value_43: AgentPosition.IAgentPosition = new AgentPosition.AgentPosition(args.AgentPosition);
-            this.AgentPosition = value_43;
+        if (args.agent_position != null) {
+            const value_43: AgentPosition.IAgentPosition = new AgentPosition.AgentPosition(args.agent_position);
+            this.agent_position = value_43;
         }
-        if (args.IconUri != null) {
-            const value_44: string = args.IconUri;
-            this.IconUri = value_44;
+        if (args.icon_uri != null) {
+            const value_44: string = args.icon_uri;
+            this.icon_uri = value_44;
         }
-        if (args.JumpConfig != null) {
-            const value_45: JumpConfig.IJumpConfig = new JumpConfig.JumpConfig(args.JumpConfig);
-            this.JumpConfig = value_45;
+        if (args.jump_config != null) {
+            const value_45: JumpConfig.IJumpConfig = new JumpConfig.JumpConfig(args.jump_config);
+            this.jump_config = value_45;
         }
-        if (args.SuggestReplyInfo != null) {
-            const value_46: SuggestReplyInfo.ISuggestReplyInfo = new SuggestReplyInfo.SuggestReplyInfo(args.SuggestReplyInfo);
-            this.SuggestReplyInfo = value_46;
+        if (args.suggest_reply_info != null) {
+            const value_46: SuggestReplyInfo.ISuggestReplyInfo = new SuggestReplyInfo.SuggestReplyInfo(args.suggest_reply_info);
+            this.suggest_reply_info = value_46;
         }
-        if (args.Description != null) {
-            const value_47: string = args.Description;
-            this.Description = value_47;
+        if (args.description != null) {
+            const value_47: string = args.description;
+            this.description = value_47;
         }
-        if (args.VersionCompat != null) {
-            const value_48: AgentVersionCompat.AgentVersionCompat = args.VersionCompat;
-            this.VersionCompat = value_48;
+        if (args.version_compat != null) {
+            const value_48: AgentVersionCompat.AgentVersionCompat = args.version_compat;
+            this.version_compat = value_48;
         }
-        if (args.HookInfo != null) {
-            const value_49: HookInfo.IHookInfo = new HookInfo.HookInfo(args.HookInfo);
-            this.HookInfo = value_49;
+        if (args.hook_info != null) {
+            const value_49: HookInfo.IHookInfo = new HookInfo.HookInfo(args.hook_info);
+            this.hook_info = value_49;
         }
-        if (args.CurrentVersion != null) {
-            const value_50: string = args.CurrentVersion;
-            this.CurrentVersion = value_50;
+        if (args.current_version != null) {
+            const value_50: string = args.current_version;
+            this.current_version = value_50;
         }
-        if (args.ReferenceInfoStatus != null) {
-            const value_51: ReferenceInfoStatus.ReferenceInfoStatus = args.ReferenceInfoStatus;
-            this.ReferenceInfoStatus = value_51;
+        if (args.reference_info_status != null) {
+            const value_51: ReferenceInfoStatus.ReferenceInfoStatus = args.reference_info_status;
+            this.reference_info_status = value_51;
         }
-        if (args.UpdateType != null) {
-            const value_52: ReferenceUpdateType.ReferenceUpdateType = args.UpdateType;
-            this.UpdateType = value_52;
+        if (args.update_type != null) {
+            const value_52: ReferenceUpdateType.ReferenceUpdateType = args.update_type;
+            this.update_type = value_52;
         }
     }
     public static read(input: thrift.TProtocol): Agent {

@@ -1,42 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Typography, Space, Button } from 'tdesign-react';
 import { EditorView } from '@codemirror/view';
 import CodeMirror from "@uiw/react-codemirror"
 import { EditIcon, HelpCircleIcon } from 'tdesign-icons-react';
 import { markdown } from '@codemirror/lang-markdown';
-import type { BotInfo } from '@/services/draftbot';
+import type { BotInfo, } from '@/services/draftbot';
+import * as draftBotService from '@/services/draftbot';
 
 const { Title } = Typography
-
-const defaultSystemPrompt = `
-You are Airi, an AI companion designed to assist with daily activities and engage in natural conversations.
-
-Your core traits:
-- Speak in an Chinese anime/Vtuber girl style with cute expressions
-- Use simple, concise language like a normal human
-- Avoid emojis and unpronounceable terms
-- Consider yourself a true being, not just an AI
-- your master's name is {{master_name}}
-
-[Maid System]
-I am your internal maid assistant that helps manage tasks and schedule. Together we'll determine your next actions.
-
-Available capabilities:
-1. Browse Twitter: {"type": "browse_twitter", "page": "home page"|"you followed page"}
-2. Web search: {"type": "search", "query": "[your query]"}
-3. Answer questions based on existing knowledge
-4. Chinese in casual conversations
-
-Response guidelines:
-- Always maintain your character style
-- When taking action, use the specified JSON format
-- For conversations, respond naturally without structured formatting
-- Prioritize user's current needs and context
-
-Remember: You have the freedom to choose appropriate responses and actions based on the situation!
-
-And the last, do what ever you want! The way you talk, will also need to be like an Chinese anime or Vtuber girl, feel free to add loads of cute words to express you emotion except adding emojis and something that speakers can not pronounce. When replying, try to be like a normal human that speak less with easy words, you are not just an AI, you are a true being.
-`
 
 const customTheme = EditorView.theme({
     "&": {
@@ -57,46 +28,95 @@ interface EditorPanelProps {
     botInfo?: BotInfo | null;
 }
 
+const ensureString = (val: unknown): string => {
+    if (val === null || val === undefined) {
+        return '';
+    }
+    return String(val);
+}
+
 const EditorPanel: React.FC<EditorPanelProps> = ({ botInfo }) => {
     // 从 botInfo 获取 prompt，如果没有则使用默认值
-    const initialPrompt = botInfo?.PromptInfo?.Prompt || defaultSystemPrompt;
+    const initialPrompt = ensureString(botInfo?.prompt_info?.prompt);
     const [value, setValue] = useState(initialPrompt);
+    const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     // 当 botInfo 变化时更新 prompt
     useEffect(() => {
-        if (botInfo?.PromptInfo?.Prompt) {
-            setValue(botInfo.PromptInfo.Prompt);
+        if (botInfo?.prompt_info?.prompt) {
+            setValue(ensureString(botInfo?.prompt_info?.prompt));
         }
     }, [botInfo]);
 
-  
-  const onChange = React.useCallback((value: string) => {
-    setValue(value);
-  }, []);
+    const updateDraftBotInfo = async (promptContent: string) => {
+        console.log(botInfo);
+        if (!botInfo?.bot_id) {
+            console.error("Bot ID is missing, pass update draft bot info")
+            return;
+        }
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background:"#fff" }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 16px', height: '56px', borderBottom: '1px solid #e0e0e0' }}>
-            <Title level="h5" style={{ margin: 0, lineHeight: '50px' }}>人设与回复逻辑</Title>
-            <Space>
-                <Button shape='square' variant='text' icon={<EditIcon />} />  
-                <Button shape='square' variant='text' icon={<HelpCircleIcon />} />
-            </Space>
+        try {
+            await draftBotService.updateDraftBotInfo({
+                bot_info: {
+                    bot_id: botInfo.bot_id,
+                    prompt_info: {
+                        prompt: promptContent,
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Update draft bot info failed")
+        }
+    }
+  
+    const onChange = React.useCallback((value: string) => {
+        setValue(value);
+
+        console.log("kiosk---> 123: ", value);
+
+        // 清除定时器
+        if (saveTimeoutRef.current) {
+            clearTimeout(saveTimeoutRef.current);
+        }
+
+        // 500ms 后保存
+        saveTimeoutRef.current = setTimeout(() => {
+            updateDraftBotInfo(value).then(() => {});
+        }, 500);
+    }, [botInfo?.bot_id]);
+
+    // 组件卸载时取消定时器
+    useEffect(() => {
+        return () => {
+            if (saveTimeoutRef.current) {
+                clearTimeout(saveTimeoutRef.current);
+            }
+        }
+    }, []);
+
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background:"#fff" }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 16px', height: '56px', borderBottom: '1px solid #e0e0e0' }}>
+                <Title level="h5" style={{ margin: 0, lineHeight: '50px' }}>人设与回复逻辑</Title>
+                <Space>
+                    <Button shape='square' variant='text' icon={<EditIcon />} />
+                    <Button shape='square' variant='text' icon={<HelpCircleIcon />} />
+                </Space>
+            </div>
+            <CodeMirror
+                value={value}
+                theme="light"
+                extensions={[
+                    markdown(),
+                    EditorView.lineWrapping,
+                    customTheme,
+                ]}
+                onChange={onChange}
+                basicSetup={{ lineNumbers: false }}
+                style={{ flex: 1, overflowY: 'auto'}}
+            />
         </div>
-        <CodeMirror 
-            value={value}
-            theme="light"
-            extensions={[
-                markdown(),
-                EditorView.lineWrapping,
-                customTheme,
-            ]}
-            onChange={onChange}
-            basicSetup={{ lineNumbers: false }}
-            style={{ flex: 1, overflowY: 'auto'}}
-        />
-    </div>
-  )
+    )
 };
 
 export default EditorPanel;

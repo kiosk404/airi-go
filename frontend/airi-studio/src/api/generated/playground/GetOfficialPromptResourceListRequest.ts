@@ -7,18 +7,18 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as __ROOT_NAMESPACE__ from "../base";
 export interface IGetOfficialPromptResourceListRequest {
-    Keyword?: string;
-    Base?: __ROOT_NAMESPACE__.IBase;
+    keyword?: string;
+    base?: __ROOT_NAMESPACE__.IBase;
 }
 export interface IGetOfficialPromptResourceListRequestArgs {
-    Keyword?: string;
-    Base?: __ROOT_NAMESPACE__.IBaseArgs;
+    keyword?: string;
+    base?: __ROOT_NAMESPACE__.IBaseArgs;
 }
 export const GetOfficialPromptResourceListRequestCodec: thrift.IStructCodec<IGetOfficialPromptResourceListRequestArgs, IGetOfficialPromptResourceListRequest> = {
     encode(args: IGetOfficialPromptResourceListRequestArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Keyword: args.Keyword,
-            Base: args.Base
+            Keyword: args.keyword,
+            Base: args.base
         };
         output.writeStructBegin("GetOfficialPromptResourceListRequest");
         if (obj.Keyword != null) {
@@ -72,32 +72,32 @@ export const GetOfficialPromptResourceListRequestCodec: thrift.IStructCodec<IGet
         }
         input.readStructEnd();
         return {
-            Keyword: _args.Keyword,
-            Base: _args.Base
+            keyword: _args.Keyword,
+            base: _args.Base
         };
     }
 };
 export class GetOfficialPromptResourceListRequest extends thrift.StructLike implements IGetOfficialPromptResourceListRequest {
-    public Keyword?: string;
-    public Base?: __ROOT_NAMESPACE__.IBase;
+    public keyword?: string;
+    public base?: __ROOT_NAMESPACE__.IBase;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
-        Keyword: {
+        keyword: {
             'api.body': "keyword"
         },
-        Base: {
+        base: {
             'api.none': "true"
         }
     };
     constructor(args: IGetOfficialPromptResourceListRequestArgs = {}) {
         super();
-        if (args.Keyword != null) {
-            const value_3: string = args.Keyword;
-            this.Keyword = value_3;
+        if (args.keyword != null) {
+            const value_3: string = args.keyword;
+            this.keyword = value_3;
         }
-        if (args.Base != null) {
-            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.Base);
-            this.Base = value_4;
+        if (args.base != null) {
+            const value_4: __ROOT_NAMESPACE__.IBase = new __ROOT_NAMESPACE__.Base(args.base);
+            this.base = value_4;
         }
     }
     public static read(input: thrift.TProtocol): GetOfficialPromptResourceListRequest {

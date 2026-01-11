@@ -7,15 +7,15 @@
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as FileboxInfoMode from "./FileboxInfoMode";
 export interface IFileboxInfo {
-    Mode?: FileboxInfoMode.FileboxInfoMode;
+    mode?: FileboxInfoMode.FileboxInfoMode;
 }
 export interface IFileboxInfoArgs {
-    Mode?: FileboxInfoMode.FileboxInfoMode;
+    mode?: FileboxInfoMode.FileboxInfoMode;
 }
 export const FileboxInfoCodec: thrift.IStructCodec<IFileboxInfoArgs, IFileboxInfo> = {
     encode(args: IFileboxInfoArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            Mode: args.Mode
+            Mode: args.mode
         };
         output.writeStructBegin("FileboxInfo");
         if (obj.Mode != null) {
@@ -55,19 +55,19 @@ export const FileboxInfoCodec: thrift.IStructCodec<IFileboxInfoArgs, IFileboxInf
         }
         input.readStructEnd();
         return {
-            Mode: _args.Mode
+            mode: _args.Mode
         };
     }
 };
 export class FileboxInfo extends thrift.StructLike implements IFileboxInfo {
-    public Mode?: FileboxInfoMode.FileboxInfoMode;
+    public mode?: FileboxInfoMode.FileboxInfoMode;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IFileboxInfoArgs = {}) {
         super();
-        if (args.Mode != null) {
-            const value_2: FileboxInfoMode.FileboxInfoMode = args.Mode;
-            this.Mode = value_2;
+        if (args.mode != null) {
+            const value_2: FileboxInfoMode.FileboxInfoMode = args.mode;
+            this.mode = value_2;
         }
     }
     public static read(input: thrift.TProtocol): FileboxInfo {

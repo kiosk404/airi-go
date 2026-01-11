@@ -8,18 +8,18 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as ResponseMetadata from "./ResponseMetadata";
 import * as ApplyUploadActionResult from "./ApplyUploadActionResult";
 export interface IApplyUploadActionResponse {
-    ResponseMetadata: ResponseMetadata.IResponseMetadata;
-    Result: ApplyUploadActionResult.IApplyUploadActionResult;
+    response_metadata: ResponseMetadata.IResponseMetadata;
+    result: ApplyUploadActionResult.IApplyUploadActionResult;
 }
 export interface IApplyUploadActionResponseArgs {
-    ResponseMetadata: ResponseMetadata.IResponseMetadataArgs;
-    Result: ApplyUploadActionResult.IApplyUploadActionResultArgs;
+    response_metadata: ResponseMetadata.IResponseMetadataArgs;
+    result: ApplyUploadActionResult.IApplyUploadActionResultArgs;
 }
 export const ApplyUploadActionResponseCodec: thrift.IStructCodec<IApplyUploadActionResponseArgs, IApplyUploadActionResponse> = {
     encode(args: IApplyUploadActionResponseArgs, output: thrift.TProtocol): void {
         const obj: any = {
-            ResponseMetadata: args.ResponseMetadata,
-            Result: args.Result
+            ResponseMetadata: args.response_metadata,
+            Result: args.result
         };
         output.writeStructBegin("ApplyUploadActionResponse");
         if (obj.ResponseMetadata != null) {
@@ -80,8 +80,8 @@ export const ApplyUploadActionResponseCodec: thrift.IStructCodec<IApplyUploadAct
         input.readStructEnd();
         if (_args.ResponseMetadata !== undefined && _args.Result !== undefined) {
             return {
-                ResponseMetadata: _args.ResponseMetadata,
-                Result: _args.Result
+                response_metadata: _args.ResponseMetadata,
+                result: _args.Result
             };
         }
         else {
@@ -90,22 +90,22 @@ export const ApplyUploadActionResponseCodec: thrift.IStructCodec<IApplyUploadAct
     }
 };
 export class ApplyUploadActionResponse extends thrift.StructLike implements IApplyUploadActionResponse {
-    public ResponseMetadata: ResponseMetadata.IResponseMetadata;
-    public Result: ApplyUploadActionResult.IApplyUploadActionResult;
+    public response_metadata: ResponseMetadata.IResponseMetadata;
+    public result: ApplyUploadActionResult.IApplyUploadActionResult;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IApplyUploadActionResponseArgs) {
         super();
-        if (args.ResponseMetadata != null) {
-            const value_3: ResponseMetadata.IResponseMetadata = new ResponseMetadata.ResponseMetadata(args.ResponseMetadata);
-            this.ResponseMetadata = value_3;
+        if (args.response_metadata != null) {
+            const value_3: ResponseMetadata.IResponseMetadata = new ResponseMetadata.ResponseMetadata(args.response_metadata);
+            this.response_metadata = value_3;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[ResponseMetadata] is unset!");
         }
-        if (args.Result != null) {
-            const value_4: ApplyUploadActionResult.IApplyUploadActionResult = new ApplyUploadActionResult.ApplyUploadActionResult(args.Result);
-            this.Result = value_4;
+        if (args.result != null) {
+            const value_4: ApplyUploadActionResult.IApplyUploadActionResult = new ApplyUploadActionResult.ApplyUploadActionResult(args.result);
+            this.result = value_4;
         }
         else {
             throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[Result] is unset!");
