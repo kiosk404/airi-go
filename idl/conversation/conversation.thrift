@@ -4,7 +4,7 @@ include "common.thrift"
 namespace go conversation.conversation
 
 struct ClearConversationHistoryRequest  {
-    1: required i64 conversation_id  ( api.js_conv="true")
+    1: required i64 conversation_id  ( api.js_conv="true", go.tag='json:"conversation_id,string"')
     2: optional common.Scene  scene
     3: optional i64 bot_id  ( api.js_conv="true")
 }
@@ -16,7 +16,7 @@ struct ClearConversationHistoryResponse {
 }
 
 struct ClearConversationCtxRequest  {
-   1: required i64 conversation_id ( api.js_conv="true")
+   1: required i64 conversation_id ( api.js_conv="true", go.tag='json:"conversation_id,string"')
     2: optional common.Scene  scene
     3: optional list<string>  insert_history_message_list, // There is a situation that needs to be inserted into the chat.
 }

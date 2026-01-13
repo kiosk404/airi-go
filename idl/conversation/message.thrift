@@ -113,7 +113,7 @@ struct ChatMessage {
     11: optional string    sender_id,
     12: optional list<MsgParticipantInfo>  mention_list,
     13:          i64       content_time,
-    14:          i64       message_index (api.js_conv='true' go.tag="json:\"message_index,string\""),
+    14:          i64       message_index (api.js_conv='true' go.tag="json:'message_index,string'"),
     15:          i32       source      , // Sources, 0 normal chat messages, 1 scheduled task, 2 notifications, 3 asynchronous results
     16: optional ChatMessage reply_message, // Corresponding to the replied query, the backend cannot be found, and a backend is added.
     17: optional RequiredAction    required_action // interrupt message
@@ -135,7 +135,7 @@ struct GetMessageListRequest  {
     9: optional  list<string>  insert_history_message_list // There are situations where you need to insert a chat before creating a chat history
     10: optional LoadDirection load_direction
     11: optional bool          must_append                // Whether to force an appended message in an existing conversation
-    12: optional i64           share_id  (api.js_conv='true' go.tag="json:\"share_id,string\"")              // Share ID
+    12: optional i64           share_id  (api.js_conv='true' go.tag="json:'share_id,string'")              // Share ID
 }
 
 struct GetMessageListResponse  {
@@ -149,7 +149,7 @@ struct GetMessageListResponse  {
     8: optional map<string, MsgParticipantInfo> participant_info_map
     9:          string           next_cursor           // The position when the next swipe exists (page down),
     10:         bool             next_has_more         // Does the next swipe exist (page down)
-    11:         i64              read_message_index (api.js_conv='true' go.tag="json:\"read_message_index,string\"")
+    11:         i64              read_message_index (api.js_conv='true' go.tag="json:'read_message_index,string'")
     12:         string           connector_conversation_id //ID for botconnector
 }
 
@@ -180,7 +180,7 @@ struct BreakMessageResponse  {
 
 //batch query
 struct ListMessageApiRequest {
-    1:   required  i64    conversation_id (api.query = "conversation_id",api.js_conv='true') //session id
+    1:   required  i64    conversation_id (api.query = "conversation_id",api.js_conv='true', go.tag='json:"conversation_id,string"') //session id
     2:   optional  i64    limit (api.body = "limit")  // limit number of entries
     3:   optional  string order (api.body = "order")  // Sort by desc/asc
     4:   optional  i64    chat_id (api.body = "chat_id",api.js_conv='true') //ID of a conversation

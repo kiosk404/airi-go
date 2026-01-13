@@ -113,6 +113,41 @@ func (i impl) GetOnlineModelList(ctx context.Context) ([]*model.Model, error) {
 }
 
 func (i impl) GetAllModelList(ctx context.Context) ([]*model.Model, error) {
-	//TODO implement me
-	panic("implement me")
+	modelList, err := i.DomainSVC.ListAllModelList(ctx)
+	if err != nil {
+		return nil, err
+	}
+	models := make([]*model.Model, 0, len(modelList))
+	slices.ForEach(modelList, func(instance *entity.ModelInstance, i int) {
+		models = append(models, &model.Model{
+			ID:              instance.ID,
+			IsSelected:      instance.IsSelected,
+			Provider:        ptr.Of(instance.Provider),
+			DisplayInfo:     ptr.Of(instance.DisplayInfo),
+			Capability:      ptr.Of(instance.Capability),
+			Connection:      ptr.Of(instance.Connection.Model()),
+			Type:            instance.Type.Model(),
+			Parameters:      instance.Parameters,
+			EnableBase64URL: instance.Extra.EnableBase64URL,
+		})
+	})
+
+	return models, nil
+}
+
+func (i impl) GetOnlineDefaultModel(ctx context.Context) (*model.Model, error) {
+	instance, err := i.DomainSVC.GetDefaultModel(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return &model.Model{
+		ID:              instance.ID,
+		Provider:        ptr.Of(instance.Provider),
+		DisplayInfo:     ptr.Of(instance.DisplayInfo),
+		Capability:      ptr.Of(instance.Capability),
+		Connection:      ptr.Of(instance.Connection.Model()),
+		Type:            instance.Type.Model(),
+		Parameters:      instance.Parameters,
+		EnableBase64URL: instance.Extra.EnableBase64URL,
+	}, nil
 }

@@ -297,7 +297,7 @@ export class GetMessageListRequest extends thrift.StructLike implements IGetMess
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         share_id: {
             'api.js_conv': "true",
-            'go.tag': "json:\"share_id,string\""
+            'go.tag': "json:'share_id,string'"
         }
     };
     constructor(args: IGetMessageListRequestArgs) {

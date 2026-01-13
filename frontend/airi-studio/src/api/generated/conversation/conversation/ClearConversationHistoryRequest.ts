@@ -110,7 +110,8 @@ export class ClearConversationHistoryRequest extends thrift.StructLike implement
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         conversation_id: {
-            'api.js_conv': "true"
+            'api.js_conv': "true",
+            'go.tag': "json:\"conversation_id,string\""
         },
         bot_id: {
             'api.js_conv': "true"

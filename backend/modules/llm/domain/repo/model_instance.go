@@ -16,6 +16,7 @@ func NewModelMgrRepo(db rdb.Provider, idGen idgen.IDGenerator) ModelMgrRepositor
 type ModelMgrRepository interface {
 	CreateModel(ctx context.Context, instance *entity.ModelInstance) (id int64, err error)
 	GetModel(ctx context.Context, id int64) (do *entity.ModelInstance, err error)
+	GetDefaultModel(ctx context.Context) (do *entity.ModelInstance, err error)
 	DeleteModel(ctx context.Context, id int64) (err error)
 	ListModels(ctx context.Context) (do []*entity.ModelInstance, err error)
 	ListModelByType(ctx context.Context, modelClass entity.ModelType, limit int) (do []*entity.ModelInstance, err error)

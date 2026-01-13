@@ -316,7 +316,7 @@ export class GetMessageListResponse extends thrift.StructLike implements IGetMes
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         read_message_index: {
             'api.js_conv': "true",
-            'go.tag': "json:\"read_message_index,string\""
+            'go.tag': "json:'read_message_index,string'"
         }
     };
     constructor(args: IGetMessageListResponseArgs) {

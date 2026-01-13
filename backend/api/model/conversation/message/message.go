@@ -612,7 +612,7 @@ type ChatMessage struct {
 	SenderID         *string                `thrift:"sender_id,11,optional" json:"sender_id,omitempty"`
 	MentionList      []*MsgParticipantInfo  `thrift:"mention_list,12,optional,list<MsgParticipantInfo>" json:"mention_list,omitempty"`
 	ContentTime      int64                  `thrift:"content_time,13" json:"content_time"`
-	MessageIndex     int64                  `thrift:"message_index,14" json:"message_index,string"`
+	MessageIndex     int64                  `thrift:"message_index,14" json:'message_index,string'`
 	Source           int32                  `thrift:"source,15" json:"source"`
 	ReplyMessage     *ChatMessage           `thrift:"reply_message,16,optional" json:"reply_message,omitempty"`
 	RequiredAction   *RequiredAction        `thrift:"required_action,17,optional" json:"required_action,omitempty"`
@@ -868,7 +868,7 @@ type GetMessageListRequest struct {
 	InsertHistoryMessageList []string       `thrift:"insert_history_message_list,9,optional,list<string>" json:"insert_history_message_list,omitempty"`
 	LoadDirection            *LoadDirection `thrift:"load_direction,10,optional,LoadDirection" json:"load_direction,omitempty"`
 	MustAppend               *bool          `thrift:"must_append,11,optional" json:"must_append,omitempty"`
-	ShareID                  *int64         `thrift:"share_id,12,optional" json:"share_id,string"`
+	ShareID                  *int64         `thrift:"share_id,12,optional" json:'share_id,string'`
 }
 
 func NewGetMessageListRequest() *GetMessageListRequest {
@@ -1052,7 +1052,7 @@ type GetMessageListResponse struct {
 	ParticipantInfoMap      map[string]*MsgParticipantInfo `thrift:"participant_info_map,8,optional" json:"participant_info_map,omitempty"`
 	NextCursor              string                         `thrift:"next_cursor,9" json:"next_cursor"`
 	NextHasMore             bool                           `thrift:"next_has_more,10" json:"next_has_more"`
-	ReadMessageIndex        int64                          `thrift:"read_message_index,11" json:"read_message_index,string"`
+	ReadMessageIndex        int64                          `thrift:"read_message_index,11" json:'read_message_index,string'`
 	ConnectorConversationID string                         `thrift:"connector_conversation_id,12" json:"connector_conversation_id"`
 }
 
@@ -1390,7 +1390,7 @@ func (p *BreakMessageResponse) String() string {
 }
 
 type ListMessageApiRequest struct {
-	ConversationID int64      `thrift:"conversation_id,1,required" json:"conversation_id"`
+	ConversationID int64      `thrift:"conversation_id,1,required" json:"conversation_id,string"`
 	Limit          *int64     `thrift:"limit,2,optional" json:"limit,omitempty"`
 	Order          *string    `thrift:"order,3,optional" json:"order,omitempty"`
 	ChatID         *int64     `thrift:"chat_id,4,optional" json:"chat_id,omitempty"`

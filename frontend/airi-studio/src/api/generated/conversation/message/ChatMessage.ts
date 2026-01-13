@@ -464,7 +464,7 @@ export class ChatMessage extends thrift.StructLike implements IChatMessage {
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         message_index: {
             'api.js_conv': "true",
-            'go.tag': "json:\"message_index,string\""
+            'go.tag': "json:'message_index,string'"
         }
     };
     constructor(args: IChatMessageArgs = {}) {

@@ -164,10 +164,10 @@ export async function createConversation(req: CreateConversationRequest): Promis
 
 /**
  * 清除会话历史
- * POST /api/conversation/clear
+ * POST /api/conversation/clear_message
  */
 export async function clearConversation(req: ClearConversationRequest): Promise<ClearConversationResponse> {
-    return httpClient.post<ClearConversationResponse>(`${API_BASE}/clear`, req);
+    return httpClient.post<ClearConversationResponse>(`${API_BASE}/clear_message`, req);
 }
 
 /**

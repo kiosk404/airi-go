@@ -18,7 +18,6 @@ import (
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:                 db,
-		ModelEntity:        newModelEntity(db, opts...),
 		ModelInstance:      newModelInstance(db, opts...),
 		ModelMetum:         newModelMetum(db, opts...),
 		ModelRequestRecord: newModelRequestRecord(db, opts...),
@@ -28,7 +27,6 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 type Query struct {
 	db *gorm.DB
 
-	ModelEntity        modelEntity
 	ModelInstance      modelInstance
 	ModelMetum         modelMetum
 	ModelRequestRecord modelRequestRecord
@@ -39,7 +37,6 @@ func (q *Query) Available() bool { return q.db != nil }
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:                 db,
-		ModelEntity:        q.ModelEntity.clone(db),
 		ModelInstance:      q.ModelInstance.clone(db),
 		ModelMetum:         q.ModelMetum.clone(db),
 		ModelRequestRecord: q.ModelRequestRecord.clone(db),
@@ -57,7 +54,6 @@ func (q *Query) WriteDB() *Query {
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:                 db,
-		ModelEntity:        q.ModelEntity.replaceDB(db),
 		ModelInstance:      q.ModelInstance.replaceDB(db),
 		ModelMetum:         q.ModelMetum.replaceDB(db),
 		ModelRequestRecord: q.ModelRequestRecord.replaceDB(db),
@@ -65,7 +61,6 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 }
 
 type queryCtx struct {
-	ModelEntity        *modelEntityDo
 	ModelInstance      *modelInstanceDo
 	ModelMetum         *modelMetumDo
 	ModelRequestRecord *modelRequestRecordDo
@@ -73,7 +68,6 @@ type queryCtx struct {
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		ModelEntity:        q.ModelEntity.WithContext(ctx),
 		ModelInstance:      q.ModelInstance.WithContext(ctx),
 		ModelMetum:         q.ModelMetum.WithContext(ctx),
 		ModelRequestRecord: q.ModelRequestRecord.WithContext(ctx),

@@ -9,7 +9,7 @@ import (
 )
 
 type ClearConversationHistoryRequest struct {
-	ConversationID int64         `thrift:"conversation_id,1,required" json:"conversation_id"`
+	ConversationID int64         `thrift:"conversation_id,1,required" json:"conversation_id,string"`
 	Scene          *common.Scene `thrift:"scene,2,optional,Scene" json:"scene,omitempty"`
 	BotID          *int64        `thrift:"bot_id,3,optional" json:"bot_id,omitempty"`
 }
@@ -109,7 +109,7 @@ func (p *ClearConversationHistoryResponse) String() string {
 }
 
 type ClearConversationCtxRequest struct {
-	ConversationID           int64         `thrift:"conversation_id,1,required" json:"conversation_id"`
+	ConversationID           int64         `thrift:"conversation_id,1,required" json:"conversation_id,string"`
 	Scene                    *common.Scene `thrift:"scene,2,optional,Scene" json:"scene,omitempty"`
 	InsertHistoryMessageList []string      `thrift:"insert_history_message_list,3,optional,list<string>" json:"insert_history_message_list,omitempty"`
 }

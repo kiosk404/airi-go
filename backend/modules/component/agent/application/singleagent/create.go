@@ -20,11 +20,11 @@ import (
 )
 
 func (s *SingleAgentApplicationService) CreateSingleAgentDraft(ctx context.Context, req *developer_api.DraftBotCreateRequest) (*developer_api.DraftBotCreateResponse, error) {
-	modelList, err := modelmgr.DefaultSVC().GetOnlineModelListWithLimit(ctx, 1)
+	model, err := modelmgr.DefaultSVC().GetOnlineDefaultModel(ctx)
 	if err != nil {
 		return nil, err
 	}
-	if len(modelList) == 0 {
+	if model == nil {
 		return nil, errorx.New(errno.ErrAgentNoModelInUseCode)
 	}
 	do, err := s.draftBotCreateRequestToSingleAgent(ctx, req)
@@ -36,7 +36,6 @@ func (s *SingleAgentApplicationService) CreateSingleAgentDraft(ctx context.Conte
 	if err != nil {
 		return nil, err
 	}
-	// todo: 事件推送
 
 	logs.InfoX(pkg.ModelName, "create single draft %d from user %d", agentID, userID)
 	return &developer_api.DraftBotCreateResponse{Data: &developer_api.DraftBotCreateData{
@@ -94,16 +93,16 @@ func (s *SingleAgentApplicationService) newDefaultSingleAgent(ctx context.Contex
 }
 
 func (s *SingleAgentApplicationService) defaultModelInfo(ctx context.Context) (*bot_common.ModelInfo, error) {
-	modelList, err := modelmgr.DefaultSVC().GetOnlineModelListWithLimit(ctx, 1)
+	model, err := modelmgr.DefaultSVC().GetOnlineDefaultModel(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	if len(modelList) == 0 {
+	if model == nil {
 		return nil, errorx.New(errno.ErrAgentResourceNotFound, errorx.KV("type", "model"), errorx.KV("id", "default"))
 	}
 
-	dm := modelList[0]
+	dm := model
 
 	return &bot_common.ModelInfo{
 		ModelId:          ptr.Of(dm.ID),

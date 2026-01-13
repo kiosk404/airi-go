@@ -212,7 +212,6 @@ func (art *AgentRuntime) push(ctx context.Context, mainChan chan *entity.AgentRe
 					}
 				}
 			}
-
 		case message.MessageTypeToolAsAnswer:
 			var usage *msgEntity.UsageExt
 			fullContent := bytes.NewBuffer([]byte{})
@@ -251,7 +250,6 @@ func (art *AgentRuntime) push(ctx context.Context, mainChan chan *entity.AgentRe
 				sendMsg.Content = streamMsg.Content
 				art.MessageEvent.SendMsgEvent(entity.RunEventMessageDelta, sendMsg, art.SW)
 			}
-
 		case message.MessageTypeAnswer:
 			fullContent := bytes.NewBuffer([]byte{})
 			var usage *msgEntity.UsageExt
@@ -307,7 +305,6 @@ func (art *AgentRuntime) push(ctx context.Context, mainChan chan *entity.AgentRe
 					art.MessageEvent.SendMsgEvent(entity.RunEventMessageDelta, sendReasoningMsg, art.SW)
 				}
 				if len(streamMsg.Content) > 0 {
-
 					if modelAnswerMsg == nil {
 						modelAnswerMsg, err = preCreateAnswer(ctx, art)
 						if err != nil {
@@ -327,7 +324,6 @@ func (art *AgentRuntime) push(ctx context.Context, mainChan chan *entity.AgentRe
 					art.MessageEvent.SendMsgEvent(entity.RunEventMessageDelta, sendAnswerMsg, art.SW)
 				}
 			}
-
 		case message.MessageTypeFlowUp:
 			if isSendFinishAnswer {
 

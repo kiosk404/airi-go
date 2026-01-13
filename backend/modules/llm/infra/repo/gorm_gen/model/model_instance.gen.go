@@ -17,6 +17,7 @@ type ModelInstance struct {
 	Type        int32                  `gorm:"column:type;type:tinyint(4);not null;comment:Model Type 0-LLM 1-TextEmbedding 2-Rerank" json:"type"`                             // Model Type 0-LLM 1-TextEmbedding 2-Rerank
 	Provider    *model.ModelProvider   `gorm:"column:provider;type:json;not null;comment:Provider Information;serializer:json" json:"provider"`                                // Provider Information
 	DisplayInfo *model.DisplayInfo     `gorm:"column:display_info;type:json;not null;comment:Display Information;serializer:json" json:"display_info"`                         // Display Information
+	IsSelected  bool                   `gorm:"column:is_selected;type:tinyint(1);not null;comment:Selected" json:"is_selected"`                                                // Selected
 	Connection  *model.Connection      `gorm:"column:connection;type:json;not null;comment:Connection Information;serializer:json" json:"connection"`                          // Connection Information
 	Capability  *model.ModelAbility    `gorm:"column:capability;type:json;not null;comment:Model Capability;serializer:json" json:"capability"`                                // Model Capability
 	Parameters  []model.ModelParameter `gorm:"column:parameters;type:json;not null;comment:Model Parameters;serializer:json" json:"parameters"`                                // Model Parameters

@@ -15,6 +15,7 @@ type ModelManager interface {
 	GetOnlineModelListWithLimit(ctx context.Context, limit int) ([]*model.Model, error)
 	GetOnlineModelList(ctx context.Context) ([]*model.Model, error)
 	GetAllModelList(ctx context.Context) ([]*model.Model, error)
+	GetOnlineDefaultModel(ctx context.Context) (*model.Model, error)
 }
 
 type ModelManagerApp = model.Model

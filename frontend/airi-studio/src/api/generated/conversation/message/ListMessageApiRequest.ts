@@ -187,7 +187,8 @@ export class ListMessageApiRequest extends thrift.StructLike implements IListMes
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {
         conversation_id: {
             'api.query': "conversation_id",
-            'api.js_conv': "true"
+            'api.js_conv': "true",
+            'go.tag': "json:\"conversation_id,string\""
         },
         limit: {
             'api.body': "limit"

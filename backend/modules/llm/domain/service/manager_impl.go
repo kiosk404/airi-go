@@ -8,9 +8,11 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/entity"
 	"github.com/kiosk404/airi-go/backend/modules/llm/domain/repo"
+	"github.com/kiosk404/airi-go/backend/modules/llm/pkg"
 	"github.com/kiosk404/airi-go/backend/pkg/conf"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/slices"
+	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
 
 type modelManageImpl struct {
@@ -79,6 +81,14 @@ func (m modelManageImpl) CreateLLMModel(ctx context.Context, modelClass entity.M
 	if err != nil {
 		return 0, fmt.Errorf("create model failed, err: %w", err)
 	}
+
+	if defaultInstance, err := m.ModelManageRepo.GetDefaultModel(ctx); err != nil || defaultInstance == nil {
+		// 如果当前没有默认模型，则设置当前模型为默认模型
+		mInstance.IsSelected = true
+		if err = m.ModelManageRepo.UpdateModel(ctx, mInstance); err != nil {
+			logs.ErrorX(pkg.ModelName, "set default model failed, err: %w", err)
+		}
+	}
 	return id, nil
 }
 
@@ -103,6 +113,10 @@ func encryptConn(ctx context.Context, conn *entity.Connection) (*entity.Connecti
 
 func (m modelManageImpl) GetModelByID(ctx context.Context, id int64) (*entity.ModelInstance, error) {
 	return m.ModelManageRepo.GetModel(ctx, id)
+}
+
+func (m modelManageImpl) GetDefaultModel(ctx context.Context) (*entity.ModelInstance, error) {
+	return m.ModelManageRepo.GetDefaultModel(ctx)
 }
 
 func (m modelManageImpl) ListModelByType(ctx context.Context, modelType entity.ModelType, limit int) ([]*entity.ModelInstance, error) {

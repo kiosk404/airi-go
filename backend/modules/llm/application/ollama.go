@@ -6,7 +6,6 @@ import (
 	"github.com/cloudwego/eino-ext/components/model/ollama"
 	"github.com/kiosk404/airi-go/backend/modules/llm/crossdomain/modelmgr/model"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
-	"github.com/ollama/ollama/api"
 )
 
 type ollamaModelBuilder struct {
@@ -21,7 +20,7 @@ func newOllamaModelBuilder(cfg *model.Model) Service {
 
 func (o *ollamaModelBuilder) getDefaultOllamaConfig() *ollama.ChatModelConfig {
 	return &ollama.ChatModelConfig{
-		Options: &api.Options{},
+		Options: &ollama.Options{},
 		BaseURL: "http://127.0.0.1:11434",
 	}
 }
@@ -52,7 +51,7 @@ func (o *ollamaModelBuilder) applyParamsToOllamaConfig(conf *ollama.ChatModelCon
 	}
 
 	if params.EnableThinking != nil {
-		conf.Thinking = &api.ThinkValue{
+		conf.Thinking = &ollama.ThinkValue{
 			Value: ptr.From(params.EnableThinking),
 		}
 	}
@@ -69,11 +68,11 @@ func (o *ollamaModelBuilder) Build(ctx context.Context, params *model.LLMParams)
 
 	switch base.ThinkingType {
 	case model.ThinkingType_Enable:
-		conf.Thinking = &api.ThinkValue{
+		conf.Thinking = &ollama.ThinkValue{
 			Value: ptr.Of(true),
 		}
 	case model.ThinkingType_Disable:
-		conf.Thinking = &api.ThinkValue{
+		conf.Thinking = &ollama.ThinkValue{
 			Value: ptr.Of(false),
 		}
 	}

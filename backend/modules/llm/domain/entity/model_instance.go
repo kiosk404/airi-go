@@ -12,6 +12,7 @@ type ModelInstance struct {
 	Type        ModelType
 	Provider    model.ModelProvider
 	DisplayInfo model.DisplayInfo
+	IsSelected  bool
 	Connection  Connection
 	Capability  model.ModelAbility
 	Parameters  []model.ModelParameter

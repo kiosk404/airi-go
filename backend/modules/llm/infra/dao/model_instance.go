@@ -57,6 +57,17 @@ func (m *ModelMgrDao) GetModel(ctx context.Context, id int64) (do *entity.ModelI
 	return m.modelInstanceDo2Po(po), err
 }
 
+func (m *ModelMgrDao) GetDefaultModel(ctx context.Context) (do *entity.ModelInstance, err error) {
+	mgrDao := m.dbQuery.ModelInstance
+
+	po, err := mgrDao.WithContext(ctx).Where(mgrDao.IsSelected.Is(true)).First()
+	if err != nil {
+		return nil, errorx.WrapByCode(err, errno.ErrModelNotFoundCode, errorx.KV("msg", "GetModel"))
+	}
+
+	return m.modelInstanceDo2Po(po), err
+}
+
 func (m *ModelMgrDao) ListModels(ctx context.Context) (do []*entity.ModelInstance, err error) {
 	mgrDao := m.dbQuery.ModelInstance
 

@@ -31,6 +31,7 @@ func newModelInstance(db *gorm.DB, opts ...gen.DOOption) modelInstance {
 	_modelInstance.Type = field.NewInt32(tableName, "type")
 	_modelInstance.Provider = field.NewField(tableName, "provider")
 	_modelInstance.DisplayInfo = field.NewField(tableName, "display_info")
+	_modelInstance.IsSelected = field.NewBool(tableName, "is_selected")
 	_modelInstance.Connection = field.NewField(tableName, "connection")
 	_modelInstance.Capability = field.NewField(tableName, "capability")
 	_modelInstance.Parameters = field.NewField(tableName, "parameters")
@@ -53,6 +54,7 @@ type modelInstance struct {
 	Type        field.Int32  // Model Type 0-LLM 1-TextEmbedding 2-Rerank
 	Provider    field.Field  // Provider Information
 	DisplayInfo field.Field  // Display Information
+	IsSelected  field.Bool   // Selected
 	Connection  field.Field  // Connection Information
 	Capability  field.Field  // Model Capability
 	Parameters  field.Field  // Model Parameters
@@ -80,6 +82,7 @@ func (m *modelInstance) updateTableName(table string) *modelInstance {
 	m.Type = field.NewInt32(table, "type")
 	m.Provider = field.NewField(table, "provider")
 	m.DisplayInfo = field.NewField(table, "display_info")
+	m.IsSelected = field.NewBool(table, "is_selected")
 	m.Connection = field.NewField(table, "connection")
 	m.Capability = field.NewField(table, "capability")
 	m.Parameters = field.NewField(table, "parameters")
@@ -115,11 +118,12 @@ func (m *modelInstance) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (m *modelInstance) fillFieldMap() {
-	m.fieldMap = make(map[string]field.Expr, 11)
+	m.fieldMap = make(map[string]field.Expr, 12)
 	m.fieldMap["id"] = m.ID
 	m.fieldMap["type"] = m.Type
 	m.fieldMap["provider"] = m.Provider
 	m.fieldMap["display_info"] = m.DisplayInfo
+	m.fieldMap["is_selected"] = m.IsSelected
 	m.fieldMap["connection"] = m.Connection
 	m.fieldMap["capability"] = m.Capability
 	m.fieldMap["parameters"] = m.Parameters

@@ -8,6 +8,7 @@ type Model struct {
 	ID              int64            `json:"id" query:"id"`
 	Provider        *ModelProvider   `json:"provider" query:"provider"`
 	DisplayInfo     *DisplayInfo     `json:"display_info" query:"display_info"`
+	IsSelected      bool             `json:"is_selected" query:"is_selected"`
 	Capability      *ModelAbility    `json:"capability" query:"capability"`
 	Connection      *Connection      `json:"connection" query:"connection"`
 	Type            ModelType        `json:"type" query:"type"`

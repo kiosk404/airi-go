@@ -197,8 +197,8 @@ func generateForLLM(db *gorm.DB) {
 	var path string
 	var tableList []string
 
-	path = "modules/modelmgr/infra/repo/gorm_gen"
-	tableList = []string{"model_entity", "model_meta", "model_instance", "model_request_record"}
+	path = "modules/llm/infra/repo/gorm_gen"
+	tableList = []string{"model_meta", "model_instance", "model_request_record"}
 	generateFunc(db, path, tableList)
 }
 

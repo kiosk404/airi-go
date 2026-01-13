@@ -16,7 +16,7 @@ interface ChatMessage {
     role: 'user' | 'assistant' | 'system';
     content: string;
     createdAt?: number;
-    status?: 'loading' | 'complete' | 'error' | 'incomplete';
+    status?: 'in_progress' | 'failed' | 'completed' | 'cancelled' | 'queued' | 'incomplete';
 }
 
 // 角色配置类型
@@ -88,7 +88,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
             role: isUser ? 'user' : 'assistant',
             content: msg.content || '',
             createdAt: typeof msg.content_time === 'number' ? msg.content_time : Date.now(),
-            status: 'complete',
+            status: 'completed',
         };
     }, []);
 
@@ -149,7 +149,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
             role: 'user',
             content: content,
             createdAt: Date.now(),
-            status: 'complete',
+            status: 'completed',
         };
 
         // 添加 AI 消息占位
@@ -158,7 +158,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
             role: 'assistant',
             content: '',
             createdAt: Date.now(),
-            status: 'loading',
+            status: 'in_progress',
         };
 
         setMessages(prev => [...prev, userMessage, assistantMessage]);
@@ -184,6 +184,11 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                     return;
                 }
 
+                // 忽略 verbose 类型的消息
+                if (data.message?.type === 'verbose') {
+                    return;
+                }
+
                 setMessages(prev => {
                     const newMessages = [...prev];
                     const lastIdx = newMessages.length - 1;
@@ -191,7 +196,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                         newMessages[lastIdx] = {
                             ...newMessages[lastIdx],
                             content: (newMessages[lastIdx].content || '') + (data.message?.content || ''),
-                            status: data.is_finish ? 'complete' : 'loading',
+                            status: data.is_finish ? 'completed' : 'in_progress',
                         };
                     }
                     return newMessages;
@@ -207,7 +212,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                         newMessages[lastIdx] = {
                             ...newMessages[lastIdx],
                             content: (newMessages[lastIdx].content as string) || '抱歉，发生了错误，请重试。',
-                            status: 'error',
+                            status: 'failed',
                         };
                     }
                     return newMessages;
@@ -222,7 +227,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                     if (lastIdx >= 0 && newMessages[lastIdx].role === 'assistant') {
                         newMessages[lastIdx] = {
                             ...newMessages[lastIdx],
-                            status: 'complete',
+                            status: 'completed',
                         };
                     }
                     return newMessages;
@@ -286,10 +291,10 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
         setMessages(prev => {
             const newMessages = [...prev];
             const lastIdx = newMessages.length - 1;
-            if (lastIdx >= 0 && newMessages[lastIdx].status === 'loading') {
+            if (lastIdx >= 0 && newMessages[lastIdx].status === 'in_progress') {
                 newMessages[lastIdx] = {
                     ...newMessages[lastIdx],
-                    status: 'complete',
+                    status: 'completed',
                 };
             }
             return newMessages;
@@ -439,18 +444,20 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                                     )}
                                 </div>
                             ) : (
-                                <AIChatDialogue
-                                    ref={dialogueRef}
-                                    chats={messages as any}
-                                    roleConfig={roleConfig as any}
-                                    onChatsChange={(chats) => chats && setMessages(chats as ChatMessage[])}
-                                    mode="bubble"
-                                    align="leftRight"
-                                    hints={hints}
-                                    dialogueRenderConfig={dialogueRenderConfig}
-                                    onHintClick={handleHintClick}
-                                    style={{ flex: 1, overflow: 'auto' }}
-                                />
+                                    <AIChatDialogue
+                                        ref={dialogueRef}
+                                        chats={messages as any}
+                                        roleConfig={roleConfig as any}
+                                        showReference
+                                        onChatsChange={(chats) => chats && setMessages(chats as ChatMessage[])}
+                                        mode="userBubble"
+                                        align="leftRight"
+                                        hints={hints}
+                                        dialogueRenderConfig={dialogueRenderConfig}
+                                        onHintClick={handleHintClick}
+                                        style={{ flex: 1, overflow: 'auto' }}
+                                    />
+
                             )}
                         </div>
 
