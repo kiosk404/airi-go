@@ -6,7 +6,7 @@
 */
 import * as thrift from "@creditkarma/thrift-server-core";
 import * as ModelProvider from "./ModelProvider";
-import * as Model from "../llm/domain/manage/Model";
+import * as Model from "./Model";
 export interface IProviderModelList {
     provider?: ModelProvider.IModelProvider;
     model_list?: Array<Model.IModel>;

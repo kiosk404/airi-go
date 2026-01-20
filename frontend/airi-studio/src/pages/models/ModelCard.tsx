@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Card, Tag, Button, Popconfirm, Typography, Avatar } from '@douyinfe/semi-ui';
+import { Card, Tag, Button, Popconfirm, Typography, Avatar, Tooltip } from '@douyinfe/semi-ui';
 import type { AvatarProps } from '@douyinfe/semi-ui/lib/es/avatar';
-import { IconDelete, IconEdit } from '@douyinfe/semi-icons';
+import { IconDelete, IconEdit, IconStar } from '@douyinfe/semi-icons';
 import type { ModelListItem } from '@/services/models';
 
 const { Text } = Typography;
 
 interface ModelCardProps {
     model: ModelListItem;
+    isSelected?: boolean;
     onEdit: (model: ModelListItem) => void;
-    onDelete: (id: string) => void; // 使用字符串避免大整数精度丢失
+    onDelete: (id: string) => void;
+    onSelect?: (id: string) => void;
 }
 
 // 模型类型配置
@@ -49,7 +51,7 @@ const getAvatarColor = (name: string): AvatarProps['color'] => {
     return AVATAR_COLORS[index];
 };
 
-const ModelCard: React.FC<ModelCardProps> = ({ model, onEdit, onDelete }) => {
+const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDelete, onSelect }) => {
     const [imgError, setImgError] = useState(false);
 
     const modelType = model.type ?? 0;
@@ -75,7 +77,35 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onEdit, onDelete }) => {
                 padding: '20px 20px 16px',
                 background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
                 borderBottom: '1px solid #e2e8f0',
+                position: 'relative',
             }}>
+                <Tooltip content={ isSelected ? '当前模型' : '默认模型'}>
+                    <div
+                        onClick={() => onSelect?.(model.id)}
+                        style={{
+                            position: 'absolute',
+                            top: 12,
+                            right: 12,
+                            cursor: isSelected ? 'default' : 'pointer',
+                            transition: 'transform 0.2s ease-in-out'
+                        }}
+                        onMouseEnter={(e) => {
+                            if (isSelected) {
+                                e.currentTarget.style.transform = 'scale(1.2)';
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'scale(1)';
+
+                        }}
+                    >
+                        <IconStar size="large" style={{
+                            color: isSelected ? '#ffc107' : '#9ca3af',
+                            fill: isSelected ? '#ffc107' : '#9ca3af',
+                        }}>
+                        </IconStar>
+                    </div>
+                </Tooltip>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
                     {/* 提供商头像 */}
                     {!imgError && model.providerIcon ? (

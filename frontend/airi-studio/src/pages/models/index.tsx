@@ -98,6 +98,16 @@ const ModelsPage: React.FC = () => {
         }
     };
 
+    // 模型选择
+    const handleModelSelect = async (id: string) => {
+        console.log('handleModelSelect', id);
+        try{
+
+        } catch (error) {
+            Toast.error(`设为默认失败: ${error instanceof Error ? error.message : '未知错误'}`);
+        }
+    };
+
     // 弹窗关闭
     const handleDialogClose = () => {
         setDialogVisible(false);
@@ -188,6 +198,7 @@ const ModelsPage: React.FC = () => {
                                     model={model}
                                     onEdit={handleEdit}
                                     onDelete={handleDelete}
+                                    onSelect={handleModelSelect}
                                 />
                             </Col>
                         ))}

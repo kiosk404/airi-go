@@ -13,7 +13,7 @@ struct ListModelsRequest {
 }
 
 struct ListModelsResponse {
-    1: optional list<manage.Model> models
+    1: optional list<manage.AdminModel> models
     127: optional bool has_more
     128: optional string next_page_token
     129: optional i32 total
@@ -28,7 +28,7 @@ struct GetModelRequest {
 }
 
 struct GetModelResponse {
-    1: optional manage.Model model
+    1: optional manage.AdminModel model
 
     255: base.BaseResp BaseResp
 }

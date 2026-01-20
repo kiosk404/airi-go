@@ -15,7 +15,6 @@ export { ModelClass };
 export type { IProviderModelListArgs, IConnectionArgs };
 
 // ============ 后端返回的 Model 类型定义 (来自 model_api.thrift) ============
-// 注意：生成的代码引用了错误的 Model 类型，这里手动定义正确的类型
 
 /** 后端返回的 Model 结构 (modelapi.Model) */
 interface IModelApiModel {

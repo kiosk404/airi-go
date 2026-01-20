@@ -96,11 +96,11 @@ func (p *ListModelsRequest) String() string {
 }
 
 type ListModelsResponse struct {
-	Models        []*manage.Model `thrift:"models,1,optional,list<manage.Model>" json:"models,omitempty"`
-	HasMore       *bool           `thrift:"has_more,127,optional" json:"has_more,omitempty"`
-	NextPageToken *string         `thrift:"next_page_token,128,optional" json:"next_page_token,omitempty"`
-	Total         *int32          `thrift:"total,129,optional" json:"total,omitempty"`
-	BaseResp      *base.BaseResp  `thrift:"BaseResp,255" json:"BaseResp"`
+	Models        []*manage.AdminModel `thrift:"models,1,optional,list<manage.AdminModel>" json:"models,omitempty"`
+	HasMore       *bool                `thrift:"has_more,127,optional" json:"has_more,omitempty"`
+	NextPageToken *string              `thrift:"next_page_token,128,optional" json:"next_page_token,omitempty"`
+	Total         *int32               `thrift:"total,129,optional" json:"total,omitempty"`
+	BaseResp      *base.BaseResp       `thrift:"BaseResp,255" json:"BaseResp"`
 }
 
 func NewListModelsResponse() *ListModelsResponse {
@@ -110,9 +110,9 @@ func NewListModelsResponse() *ListModelsResponse {
 func (p *ListModelsResponse) InitDefault() {
 }
 
-var ListModelsResponse_Models_DEFAULT []*manage.Model
+var ListModelsResponse_Models_DEFAULT []*manage.AdminModel
 
-func (p *ListModelsResponse) GetModels() (v []*manage.Model) {
+func (p *ListModelsResponse) GetModels() (v []*manage.AdminModel) {
 	if !p.IsSetModels() {
 		return ListModelsResponse_Models_DEFAULT
 	}
@@ -154,7 +154,7 @@ func (p *ListModelsResponse) GetBaseResp() (v *base.BaseResp) {
 	}
 	return p.BaseResp
 }
-func (p *ListModelsResponse) SetModels(val []*manage.Model) {
+func (p *ListModelsResponse) SetModels(val []*manage.AdminModel) {
 	p.Models = val
 }
 func (p *ListModelsResponse) SetHasMore(val *bool) {
@@ -249,8 +249,8 @@ func (p *GetModelRequest) String() string {
 }
 
 type GetModelResponse struct {
-	Model    *manage.Model  `thrift:"model,1,optional" json:"model,omitempty"`
-	BaseResp *base.BaseResp `thrift:"BaseResp,255" json:"BaseResp"`
+	Model    *manage.AdminModel `thrift:"model,1,optional" json:"model,omitempty"`
+	BaseResp *base.BaseResp     `thrift:"BaseResp,255" json:"BaseResp"`
 }
 
 func NewGetModelResponse() *GetModelResponse {
@@ -260,9 +260,9 @@ func NewGetModelResponse() *GetModelResponse {
 func (p *GetModelResponse) InitDefault() {
 }
 
-var GetModelResponse_Model_DEFAULT *manage.Model
+var GetModelResponse_Model_DEFAULT *manage.AdminModel
 
-func (p *GetModelResponse) GetModel() (v *manage.Model) {
+func (p *GetModelResponse) GetModel() (v *manage.AdminModel) {
 	if !p.IsSetModel() {
 		return GetModelResponse_Model_DEFAULT
 	}
@@ -277,7 +277,7 @@ func (p *GetModelResponse) GetBaseResp() (v *base.BaseResp) {
 	}
 	return p.BaseResp
 }
-func (p *GetModelResponse) SetModel(val *manage.Model) {
+func (p *GetModelResponse) SetModel(val *manage.AdminModel) {
 	p.Model = val
 }
 func (p *GetModelResponse) SetBaseResp(val *base.BaseResp) {

@@ -8,14 +8,14 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as LLM_DOMAIN_MANAGE_NS from "../domain/manage";
 import * as BASE_NS from "../../base";
 export interface IListModelsResponse {
-    models?: Array<LLM_DOMAIN_MANAGE_NS.IModel>;
+    models?: Array<LLM_DOMAIN_MANAGE_NS.IAdminModel>;
     has_more?: boolean;
     next_page_token?: string;
     total?: number;
     base_resp?: BASE_NS.IBaseResp;
 }
 export interface IListModelsResponseArgs {
-    models?: Array<LLM_DOMAIN_MANAGE_NS.IModelArgs>;
+    models?: Array<LLM_DOMAIN_MANAGE_NS.IAdminModelArgs>;
     has_more?: boolean;
     next_page_token?: string;
     total?: number;
@@ -34,8 +34,8 @@ export const ListModelsResponseCodec: thrift.IStructCodec<IListModelsResponseArg
         if (obj.models != null) {
             output.writeFieldBegin("models", thrift.TType.LIST, 1);
             output.writeListBegin(thrift.TType.STRUCT, obj.models.length);
-            obj.models.forEach((value_1: LLM_DOMAIN_MANAGE_NS.IModelArgs): void => {
-                LLM_DOMAIN_MANAGE_NS.ModelCodec.encode(value_1, output);
+            obj.models.forEach((value_1: LLM_DOMAIN_MANAGE_NS.IAdminModelArgs): void => {
+                LLM_DOMAIN_MANAGE_NS.AdminModelCodec.encode(value_1, output);
             });
             output.writeListEnd();
             output.writeFieldEnd();
@@ -77,11 +77,11 @@ export const ListModelsResponseCodec: thrift.IStructCodec<IListModelsResponseArg
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.LIST) {
-                        const value_2: Array<LLM_DOMAIN_MANAGE_NS.IModel> = new Array<LLM_DOMAIN_MANAGE_NS.IModel>();
+                        const value_2: Array<LLM_DOMAIN_MANAGE_NS.IAdminModel> = new Array<LLM_DOMAIN_MANAGE_NS.IAdminModel>();
                         const metadata_1: thrift.IThriftList = input.readListBegin();
                         const size_1: number = metadata_1.size;
                         for (let i_1: number = 0; i_1 < size_1; i_1++) {
-                            const value_3: LLM_DOMAIN_MANAGE_NS.IModel = LLM_DOMAIN_MANAGE_NS.ModelCodec.decode(input);
+                            const value_3: LLM_DOMAIN_MANAGE_NS.IAdminModel = LLM_DOMAIN_MANAGE_NS.AdminModelCodec.decode(input);
                             value_2.push(value_3);
                         }
                         input.readListEnd();
@@ -144,7 +144,7 @@ export const ListModelsResponseCodec: thrift.IStructCodec<IListModelsResponseArg
     }
 };
 export class ListModelsResponse extends thrift.StructLike implements IListModelsResponse {
-    public models?: Array<LLM_DOMAIN_MANAGE_NS.IModel>;
+    public models?: Array<LLM_DOMAIN_MANAGE_NS.IAdminModel>;
     public has_more?: boolean;
     public next_page_token?: string;
     public total?: number;
@@ -154,9 +154,9 @@ export class ListModelsResponse extends thrift.StructLike implements IListModels
     constructor(args: IListModelsResponseArgs = {}) {
         super();
         if (args.models != null) {
-            const value_8: Array<LLM_DOMAIN_MANAGE_NS.IModel> = new Array<LLM_DOMAIN_MANAGE_NS.IModel>();
-            args.models.forEach((value_13: LLM_DOMAIN_MANAGE_NS.IModelArgs): void => {
-                const value_14: LLM_DOMAIN_MANAGE_NS.IModel = new LLM_DOMAIN_MANAGE_NS.Model(value_13);
+            const value_8: Array<LLM_DOMAIN_MANAGE_NS.IAdminModel> = new Array<LLM_DOMAIN_MANAGE_NS.IAdminModel>();
+            args.models.forEach((value_13: LLM_DOMAIN_MANAGE_NS.IAdminModelArgs): void => {
+                const value_14: LLM_DOMAIN_MANAGE_NS.IAdminModel = new LLM_DOMAIN_MANAGE_NS.AdminModel(value_13);
                 value_8.push(value_14);
             });
             this.models = value_8;

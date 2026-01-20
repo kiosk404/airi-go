@@ -2,7 +2,7 @@ namespace go llm.domain.manage
 
 include "common.thrift"
 
-struct Model {
+struct AdminModel {
     1: optional i64 model_id (api.js_conv='true', go.tag='json:"model_id"')
     2: optional string name
     3: optional string desc

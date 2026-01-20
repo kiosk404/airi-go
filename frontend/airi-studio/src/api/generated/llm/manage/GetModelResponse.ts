@@ -8,11 +8,11 @@ import * as thrift from "@creditkarma/thrift-server-core";
 import * as LLM_DOMAIN_MANAGE_NS from "../domain/manage";
 import * as BASE_NS from "../../base";
 export interface IGetModelResponse {
-    model?: LLM_DOMAIN_MANAGE_NS.IModel;
+    model?: LLM_DOMAIN_MANAGE_NS.IAdminModel;
     base_resp?: BASE_NS.IBaseResp;
 }
 export interface IGetModelResponseArgs {
-    model?: LLM_DOMAIN_MANAGE_NS.IModelArgs;
+    model?: LLM_DOMAIN_MANAGE_NS.IAdminModelArgs;
     base_resp?: BASE_NS.IBaseRespArgs;
 }
 export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, IGetModelResponse> = {
@@ -24,7 +24,7 @@ export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, I
         output.writeStructBegin("GetModelResponse");
         if (obj.model != null) {
             output.writeFieldBegin("model", thrift.TType.STRUCT, 1);
-            LLM_DOMAIN_MANAGE_NS.ModelCodec.encode(obj.model, output);
+            LLM_DOMAIN_MANAGE_NS.AdminModelCodec.encode(obj.model, output);
             output.writeFieldEnd();
         }
         if (obj.BaseResp != null) {
@@ -49,7 +49,7 @@ export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, I
             switch (fieldId) {
                 case 1:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_1: LLM_DOMAIN_MANAGE_NS.IModel = LLM_DOMAIN_MANAGE_NS.ModelCodec.decode(input);
+                        const value_1: LLM_DOMAIN_MANAGE_NS.IAdminModel = LLM_DOMAIN_MANAGE_NS.AdminModelCodec.decode(input);
                         _args.model = value_1;
                     }
                     else {
@@ -79,14 +79,14 @@ export const GetModelResponseCodec: thrift.IStructCodec<IGetModelResponseArgs, I
     }
 };
 export class GetModelResponse extends thrift.StructLike implements IGetModelResponse {
-    public model?: LLM_DOMAIN_MANAGE_NS.IModel;
+    public model?: LLM_DOMAIN_MANAGE_NS.IAdminModel;
     public base_resp?: BASE_NS.IBaseResp;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IGetModelResponseArgs = {}) {
         super();
         if (args.model != null) {
-            const value_3: LLM_DOMAIN_MANAGE_NS.IModel = new LLM_DOMAIN_MANAGE_NS.Model(args.model);
+            const value_3: LLM_DOMAIN_MANAGE_NS.IAdminModel = new LLM_DOMAIN_MANAGE_NS.AdminModel(args.model);
             this.model = value_3;
         }
         if (args.base_resp != null) {

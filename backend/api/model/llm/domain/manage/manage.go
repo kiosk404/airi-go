@@ -43,7 +43,7 @@ type ParamType = string
 
 type DefaultType = string
 
-type Model struct {
+type AdminModel struct {
 	ModelID         *int64                              `thrift:"model_id,1,optional" json:"model_id"`
 	Name            *string                             `thrift:"name,2,optional" json:"name,omitempty"`
 	Desc            *string                             `thrift:"desc,3,optional" json:"desc,omitempty"`
@@ -56,178 +56,178 @@ type Model struct {
 	ParamConfig     *ParamConfig                        `thrift:"param_config,10,optional" json:"param_config,omitempty"`
 }
 
-func NewModel() *Model {
-	return &Model{}
+func NewAdminModel() *AdminModel {
+	return &AdminModel{}
 }
 
-func (p *Model) InitDefault() {
+func (p *AdminModel) InitDefault() {
 }
 
-var Model_ModelID_DEFAULT int64
+var AdminModel_ModelID_DEFAULT int64
 
-func (p *Model) GetModelID() (v int64) {
+func (p *AdminModel) GetModelID() (v int64) {
 	if !p.IsSetModelID() {
-		return Model_ModelID_DEFAULT
+		return AdminModel_ModelID_DEFAULT
 	}
 	return *p.ModelID
 }
 
-var Model_Name_DEFAULT string
+var AdminModel_Name_DEFAULT string
 
-func (p *Model) GetName() (v string) {
+func (p *AdminModel) GetName() (v string) {
 	if !p.IsSetName() {
-		return Model_Name_DEFAULT
+		return AdminModel_Name_DEFAULT
 	}
 	return *p.Name
 }
 
-var Model_Desc_DEFAULT string
+var AdminModel_Desc_DEFAULT string
 
-func (p *Model) GetDesc() (v string) {
+func (p *AdminModel) GetDesc() (v string) {
 	if !p.IsSetDesc() {
-		return Model_Desc_DEFAULT
+		return AdminModel_Desc_DEFAULT
 	}
 	return *p.Desc
 }
 
-var Model_IconURI_DEFAULT string
+var AdminModel_IconURI_DEFAULT string
 
-func (p *Model) GetIconURI() (v string) {
+func (p *AdminModel) GetIconURI() (v string) {
 	if !p.IsSetIconURI() {
-		return Model_IconURI_DEFAULT
+		return AdminModel_IconURI_DEFAULT
 	}
 	return *p.IconURI
 }
 
-var Model_IconURL_DEFAULT string
+var AdminModel_IconURL_DEFAULT string
 
-func (p *Model) GetIconURL() (v string) {
+func (p *AdminModel) GetIconURL() (v string) {
 	if !p.IsSetIconURL() {
-		return Model_IconURL_DEFAULT
+		return AdminModel_IconURL_DEFAULT
 	}
 	return *p.IconURL
 }
 
-var Model_Ability_DEFAULT *Ability
+var AdminModel_Ability_DEFAULT *Ability
 
-func (p *Model) GetAbility() (v *Ability) {
+func (p *AdminModel) GetAbility() (v *Ability) {
 	if !p.IsSetAbility() {
-		return Model_Ability_DEFAULT
+		return AdminModel_Ability_DEFAULT
 	}
 	return p.Ability
 }
 
-var Model_Protocol_DEFAULT Protocol
+var AdminModel_Protocol_DEFAULT Protocol
 
-func (p *Model) GetProtocol() (v Protocol) {
+func (p *AdminModel) GetProtocol() (v Protocol) {
 	if !p.IsSetProtocol() {
-		return Model_Protocol_DEFAULT
+		return AdminModel_Protocol_DEFAULT
 	}
 	return *p.Protocol
 }
 
-var Model_ProtocolConfig_DEFAULT *ProtocolConfig
+var AdminModel_ProtocolConfig_DEFAULT *ProtocolConfig
 
-func (p *Model) GetProtocolConfig() (v *ProtocolConfig) {
+func (p *AdminModel) GetProtocolConfig() (v *ProtocolConfig) {
 	if !p.IsSetProtocolConfig() {
-		return Model_ProtocolConfig_DEFAULT
+		return AdminModel_ProtocolConfig_DEFAULT
 	}
 	return p.ProtocolConfig
 }
 
-var Model_ScenarioConfigs_DEFAULT map[common.Scenario]*ScenarioConfig
+var AdminModel_ScenarioConfigs_DEFAULT map[common.Scenario]*ScenarioConfig
 
-func (p *Model) GetScenarioConfigs() (v map[common.Scenario]*ScenarioConfig) {
+func (p *AdminModel) GetScenarioConfigs() (v map[common.Scenario]*ScenarioConfig) {
 	if !p.IsSetScenarioConfigs() {
-		return Model_ScenarioConfigs_DEFAULT
+		return AdminModel_ScenarioConfigs_DEFAULT
 	}
 	return p.ScenarioConfigs
 }
 
-var Model_ParamConfig_DEFAULT *ParamConfig
+var AdminModel_ParamConfig_DEFAULT *ParamConfig
 
-func (p *Model) GetParamConfig() (v *ParamConfig) {
+func (p *AdminModel) GetParamConfig() (v *ParamConfig) {
 	if !p.IsSetParamConfig() {
-		return Model_ParamConfig_DEFAULT
+		return AdminModel_ParamConfig_DEFAULT
 	}
 	return p.ParamConfig
 }
-func (p *Model) SetModelID(val *int64) {
+func (p *AdminModel) SetModelID(val *int64) {
 	p.ModelID = val
 }
-func (p *Model) SetName(val *string) {
+func (p *AdminModel) SetName(val *string) {
 	p.Name = val
 }
-func (p *Model) SetDesc(val *string) {
+func (p *AdminModel) SetDesc(val *string) {
 	p.Desc = val
 }
-func (p *Model) SetIconURI(val *string) {
+func (p *AdminModel) SetIconURI(val *string) {
 	p.IconURI = val
 }
-func (p *Model) SetIconURL(val *string) {
+func (p *AdminModel) SetIconURL(val *string) {
 	p.IconURL = val
 }
-func (p *Model) SetAbility(val *Ability) {
+func (p *AdminModel) SetAbility(val *Ability) {
 	p.Ability = val
 }
-func (p *Model) SetProtocol(val *Protocol) {
+func (p *AdminModel) SetProtocol(val *Protocol) {
 	p.Protocol = val
 }
-func (p *Model) SetProtocolConfig(val *ProtocolConfig) {
+func (p *AdminModel) SetProtocolConfig(val *ProtocolConfig) {
 	p.ProtocolConfig = val
 }
-func (p *Model) SetScenarioConfigs(val map[common.Scenario]*ScenarioConfig) {
+func (p *AdminModel) SetScenarioConfigs(val map[common.Scenario]*ScenarioConfig) {
 	p.ScenarioConfigs = val
 }
-func (p *Model) SetParamConfig(val *ParamConfig) {
+func (p *AdminModel) SetParamConfig(val *ParamConfig) {
 	p.ParamConfig = val
 }
 
-func (p *Model) IsSetModelID() bool {
+func (p *AdminModel) IsSetModelID() bool {
 	return p.ModelID != nil
 }
 
-func (p *Model) IsSetName() bool {
+func (p *AdminModel) IsSetName() bool {
 	return p.Name != nil
 }
 
-func (p *Model) IsSetDesc() bool {
+func (p *AdminModel) IsSetDesc() bool {
 	return p.Desc != nil
 }
 
-func (p *Model) IsSetIconURI() bool {
+func (p *AdminModel) IsSetIconURI() bool {
 	return p.IconURI != nil
 }
 
-func (p *Model) IsSetIconURL() bool {
+func (p *AdminModel) IsSetIconURL() bool {
 	return p.IconURL != nil
 }
 
-func (p *Model) IsSetAbility() bool {
+func (p *AdminModel) IsSetAbility() bool {
 	return p.Ability != nil
 }
 
-func (p *Model) IsSetProtocol() bool {
+func (p *AdminModel) IsSetProtocol() bool {
 	return p.Protocol != nil
 }
 
-func (p *Model) IsSetProtocolConfig() bool {
+func (p *AdminModel) IsSetProtocolConfig() bool {
 	return p.ProtocolConfig != nil
 }
 
-func (p *Model) IsSetScenarioConfigs() bool {
+func (p *AdminModel) IsSetScenarioConfigs() bool {
 	return p.ScenarioConfigs != nil
 }
 
-func (p *Model) IsSetParamConfig() bool {
+func (p *AdminModel) IsSetParamConfig() bool {
 	return p.ParamConfig != nil
 }
 
-func (p *Model) String() string {
+func (p *AdminModel) String() string {
 	if p == nil {
 		return "<nil>"
 	}
-	return fmt.Sprintf("Model(%+v)", *p)
+	return fmt.Sprintf("AdminModel(%+v)", *p)
 }
 
 type Ability struct {

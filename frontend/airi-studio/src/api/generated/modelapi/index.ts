@@ -23,6 +23,7 @@ export * from './GetModelListResp';
 export * from './HttpConnection';
 export * from './I18nText';
 export * from './KnowledgeConfig';
+export * from './Model';
 export * from './ModelConfigService';
 export * from './ModelProvider';
 export * from './ModelStatus';
