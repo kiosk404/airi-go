@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/kiosk404/airi-go/backend/api/model/modelapi"
+	"github.com/kiosk404/airi-go/backend/modules/component/agent/application/singleagent"
 	modelmgrapp "github.com/kiosk404/airi-go/backend/modules/llm/application"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 )
@@ -65,6 +66,30 @@ func DeleteModel(c *gin.Context) {
 		return
 	}
 	resp := new(modelapi.DeleteModelResp)
+	c.JSON(http.StatusOK, resp)
+}
+
+// SetDefaultModel .
+// @router /api/admin/model/set_default [POST]
+func SetDefaultModel(c *gin.Context) {
+	var err error
+	var req modelapi.SetDefaultModelReq
+	ctx := c.Request.Context()
+	if err = c.ShouldBindJSON(&req); err != nil {
+		invalidParamRequestResponse(c, err.Error())
+		return
+	}
+	if err = modelmgrapp.ModelMgrSVC.SetDefaultModel(ctx, &req); err != nil {
+		invalidParamRequestResponse(c, fmt.Sprintf("set default model failed: %v", err))
+		return
+	}
+
+	if err = singleagent.SingleAgentSVC.UpdateAgentModelInfo(ctx, req.GetID()); err != nil {
+		invalidParamRequestResponse(c, fmt.Sprintf("set default model failed: %v", err))
+		return
+	}
+
+	resp := new(modelapi.SetDefaultModelResp)
 	c.JSON(http.StatusOK, resp)
 }
 

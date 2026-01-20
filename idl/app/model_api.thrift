@@ -60,7 +60,8 @@ struct Model {
     7: list<developer_api.ModelParameter> parameters
     8: ModelStatus status
     9: bool enable_base64_url
-    10: i64 delete_at_ms
+    10: bool is_default
+    11: i64 delete_at_ms
 }
 
 enum ThinkingType {
@@ -143,6 +144,17 @@ struct DeleteModelReq {
 }
 
 struct DeleteModelResp {
+    253: required i64 code
+    254: required string msg
+    255: required base.BaseResp BaseResp(api.none="true")
+}
+
+struct SetDefaultModelReq {
+    1: string id (agw.js_conv="str", api.js_conv="true")
+    255: optional base.Base Base
+}
+
+struct SetDefaultModelResp {
     253: required i64 code
     254: required string msg
     255: required base.BaseResp BaseResp(api.none="true")
@@ -327,4 +339,5 @@ service ModelConfigService {
     CreateModelResp CreateModel(1:CreateModelReq req)(api.post='/api/admin/model/create', api.category="admin")
     UpdateModelResp UpdateModel(1:UpdateModelReq req)(api.post='/api/admin/model/update', api.category="admin")
     DeleteModelResp DeleteModel(1:DeleteModelReq req)(api.post='/api/admin/model/delete', api.category="admin")
+    SetDefaultModelResp SetDefaultModel(1:SetDefaultModelReq req)(api.post='/api/admin/model/set_default', api.category="admin")
 }

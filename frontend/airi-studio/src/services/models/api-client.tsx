@@ -8,7 +8,9 @@ import type {
     IDeleteModelReqArgs,
     IDeleteModelRespArgs,
     IUpdateModelReqArgs,
-    IUpdateModelRespArgs
+    IUpdateModelRespArgs,
+    ISetDefaultModelReqArgs,
+    ISetDefaultModelRespArgs
 } from '@/api/generated/modelapi';
 
 const API_BASE = '/api/admin/model';
@@ -49,4 +51,14 @@ export async function deleteModel(
     req: IDeleteModelReqArgs
 ): Promise<IDeleteModelRespArgs> {
     return httpClient.post<IDeleteModelRespArgs>(`${API_BASE}/delete`, req);
+}
+
+/**
+ * 设置默认模型
+ * GET /api/admin/model/set_default
+ */
+export async function setDefaultModel(
+    req: ISetDefaultModelReqArgs
+): Promise<ISetDefaultModelRespArgs> {
+    return httpClient.post<ISetDefaultModelRespArgs>(`${API_BASE}/set_default`, req);
 }

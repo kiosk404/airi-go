@@ -700,7 +700,8 @@ type Model struct {
 	Parameters      []*developer_api.ModelParameter `thrift:"parameters,7,default,list<developer_api.ModelParameter>" json:"parameters"`
 	Status          ModelStatus                     `thrift:"status,8,default,ModelStatus" json:"status"`
 	EnableBase64URL bool                            `thrift:"enable_base64_url,9" json:"enable_base64_url"`
-	DeleteAtMs      int64                           `thrift:"delete_at_ms,10" json:"delete_at_ms"`
+	IsDefault       bool                            `thrift:"is_default,10" json:"is_default"`
+	DeleteAtMs      int64                           `thrift:"delete_at_ms,11" json:"delete_at_ms"`
 }
 
 func NewModel() *Model {
@@ -766,6 +767,10 @@ func (p *Model) GetEnableBase64URL() (v bool) {
 	return p.EnableBase64URL
 }
 
+func (p *Model) GetIsDefault() (v bool) {
+	return p.IsDefault
+}
+
 func (p *Model) GetDeleteAtMs() (v int64) {
 	return p.DeleteAtMs
 }
@@ -795,6 +800,9 @@ func (p *Model) SetStatus(val ModelStatus) {
 }
 func (p *Model) SetEnableBase64URL(val bool) {
 	p.EnableBase64URL = val
+}
+func (p *Model) SetIsDefault(val bool) {
+	p.IsDefault = val
 }
 func (p *Model) SetDeleteAtMs(val int64) {
 	p.DeleteAtMs = val
@@ -1406,6 +1414,98 @@ func (p *DeleteModelResp) String() string {
 		return "<nil>"
 	}
 	return fmt.Sprintf("DeleteModelResp(%+v)", *p)
+}
+
+type SetDefaultModelReq struct {
+	ID   string     `thrift:"id,1" json:"id"`
+	Base *base.Base `thrift:"Base,255,optional" json:"Base,omitempty"`
+}
+
+func NewSetDefaultModelReq() *SetDefaultModelReq {
+	return &SetDefaultModelReq{}
+}
+
+func (p *SetDefaultModelReq) InitDefault() {
+}
+
+func (p *SetDefaultModelReq) GetID() (v string) {
+	return p.ID
+}
+
+var SetDefaultModelReq_Base_DEFAULT *base.Base
+
+func (p *SetDefaultModelReq) GetBase() (v *base.Base) {
+	if !p.IsSetBase() {
+		return SetDefaultModelReq_Base_DEFAULT
+	}
+	return p.Base
+}
+func (p *SetDefaultModelReq) SetID(val string) {
+	p.ID = val
+}
+func (p *SetDefaultModelReq) SetBase(val *base.Base) {
+	p.Base = val
+}
+
+func (p *SetDefaultModelReq) IsSetBase() bool {
+	return p.Base != nil
+}
+
+func (p *SetDefaultModelReq) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("SetDefaultModelReq(%+v)", *p)
+}
+
+type SetDefaultModelResp struct {
+	Code     int64          `thrift:"code,253,required" json:"code"`
+	Msg      string         `thrift:"msg,254,required" json:"msg"`
+	BaseResp *base.BaseResp `thrift:"BaseResp,255,required" json:"BaseResp"`
+}
+
+func NewSetDefaultModelResp() *SetDefaultModelResp {
+	return &SetDefaultModelResp{}
+}
+
+func (p *SetDefaultModelResp) InitDefault() {
+}
+
+func (p *SetDefaultModelResp) GetCode() (v int64) {
+	return p.Code
+}
+
+func (p *SetDefaultModelResp) GetMsg() (v string) {
+	return p.Msg
+}
+
+var SetDefaultModelResp_BaseResp_DEFAULT *base.BaseResp
+
+func (p *SetDefaultModelResp) GetBaseResp() (v *base.BaseResp) {
+	if !p.IsSetBaseResp() {
+		return SetDefaultModelResp_BaseResp_DEFAULT
+	}
+	return p.BaseResp
+}
+func (p *SetDefaultModelResp) SetCode(val int64) {
+	p.Code = val
+}
+func (p *SetDefaultModelResp) SetMsg(val string) {
+	p.Msg = val
+}
+func (p *SetDefaultModelResp) SetBaseResp(val *base.BaseResp) {
+	p.BaseResp = val
+}
+
+func (p *SetDefaultModelResp) IsSetBaseResp() bool {
+	return p.BaseResp != nil
+}
+
+func (p *SetDefaultModelResp) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("SetDefaultModelResp(%+v)", *p)
 }
 
 type UpdateModelReq struct {
@@ -2618,4 +2718,6 @@ type ModelConfigService interface {
 	UpdateModel(ctx context.Context, req *UpdateModelReq) (r *UpdateModelResp, err error)
 
 	DeleteModel(ctx context.Context, req *DeleteModelReq) (r *DeleteModelResp, err error)
+
+	SetDefaultModel(ctx context.Context, req *SetDefaultModelReq) (r *SetDefaultModelResp, err error)
 }

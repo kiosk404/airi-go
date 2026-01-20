@@ -60,6 +60,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
     const abortControllerRef = useRef<AbortController | null>(null);
     const dialogueRef = useRef<any>(null);
     const chatInputRef = useRef<any>(null);
+    const followUpMessagesRef = useRef<conversationApi.ChatMessage[]>([]);
 
     // 角色配置
     const roleConfig: ChatRoleConfig = {
@@ -141,7 +142,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
 
     // 发送消息核心逻辑
     const sendMessage = useCallback((content: string) => {
-        if (!currentBotId || isStreaming) return;
+        if (!currentBotId || isStreaming || !content.trim()) return;
 
         // 添加用户消息
         const userMessage: ChatMessage = {
@@ -167,6 +168,9 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
         // 滚动到底部
         setTimeout(() => dialogueRef.current?.scrollToBottom(true), 100);
 
+        // 重置 follow_up 消息
+        followUpMessagesRef.current = [];
+
         // 发送请求
         abortControllerRef.current = conversationApi.chat(
             {
@@ -186,6 +190,12 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
 
                 // 忽略 verbose 类型的消息
                 if (data.message?.type === 'verbose') {
+                    return;
+                }
+
+                // 收集 follow_up 消息 (建议问题)
+                if (data.message?.type === 'follow_up' && data.message?.content) {
+                    followUpMessagesRef.current.push(data.message);
                     return;
                 }
 
@@ -232,6 +242,12 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                     }
                     return newMessages;
                 });
+
+                const newHints = followUpMessagesRef.current.
+                    filter(msg => msg.content).
+                    map(msg => msg.content || '');
+
+                setHints(newHints);
                 setIsStreaming(false);
             }
         );
@@ -449,7 +465,6 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ botInfo, conversationId: propConv
                                         chats={messages as any}
                                         roleConfig={roleConfig as any}
                                         showReference
-                                        onChatsChange={(chats) => chats && setMessages(chats as ChatMessage[])}
                                         mode="userBubble"
                                         align="leftRight"
                                         hints={hints}

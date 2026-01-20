@@ -68,6 +68,33 @@ func (m *ModelMgrDao) GetDefaultModel(ctx context.Context) (do *entity.ModelInst
 	return m.modelInstanceDo2Po(po), err
 }
 
+func (m *ModelMgrDao) SetDefaultModel(ctx context.Context, modelId int64) (err error) {
+	// 使用事务保证原子性
+	return m.dbQuery.Transaction(func(tx *query.Query) error {
+		txDao := tx.ModelInstance
+
+		// 1. 将除了该 id 外的其他模型的 is_selected 置为 false
+		_, err := txDao.WithContext(ctx).
+			Where(txDao.ID.Neq(modelId)).
+			Update(txDao.IsSelected, false)
+		if err != nil {
+			return errorx.WrapByCode(err, errno.ErrModelNotFoundCode,
+				errorx.KV("msg", "SetDefaultModel: reset other models"))
+		}
+
+		// 2. 将该模型的 is_selected 置为 true
+		_, err = txDao.WithContext(ctx).
+			Where(txDao.ID.Eq(modelId)).
+			Update(txDao.IsSelected, true)
+		if err != nil {
+			return errorx.WrapByCode(err, errno.ErrModelNotFoundCode,
+				errorx.KV("msg", "SetDefaultModel: set default model"))
+		}
+
+		return nil
+	})
+}
+
 func (m *ModelMgrDao) ListModels(ctx context.Context) (do []*entity.ModelInstance, err error) {
 	mgrDao := m.dbQuery.ModelInstance
 
@@ -176,6 +203,7 @@ func (m *ModelMgrDao) modelInstanceDo2Po(do *model.ModelInstance) *entity.ModelI
 			OutputTokens: do.DisplayInfo.OutputTokens,
 			MaxTokens:    do.DisplayInfo.MaxTokens,
 		},
+		IsSelected: do.IsSelected,
 		Connection: entity.Connection{Connection: do.Connection},
 		Capability: instancemodle.ModelAbility{
 			CotDisplay:         do.Capability.CotDisplay,

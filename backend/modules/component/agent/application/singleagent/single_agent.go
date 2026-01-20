@@ -2,6 +2,7 @@ package singleagent
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/bytedance/sonic"
 	"github.com/kiosk404/airi-go/backend/api/model/app/bot_common"
@@ -13,6 +14,7 @@ import (
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg"
 	"github.com/kiosk404/airi-go/backend/modules/component/agent/pkg/errno"
 	"github.com/kiosk404/airi-go/backend/pkg/errorx"
+	"github.com/kiosk404/airi-go/backend/pkg/lang/conv"
 	"github.com/kiosk404/airi-go/backend/pkg/lang/ptr"
 	"github.com/kiosk404/airi-go/backend/pkg/logs"
 )
@@ -269,6 +271,53 @@ func (s *SingleAgentApplicationService) UpdateAgentDraftDisplayInfo(ctx context.
 		Code: 0,
 		Msg:  "success",
 	}, nil
+}
+
+func (s *SingleAgentApplicationService) UpdateAgentModelInfo(ctx context.Context, modelId string) error {
+	// 转换模型 ID
+	modelID := conv.StrToInt64D(modelId, 0)
+	if modelID == 0 {
+		return fmt.Errorf("invalid model id: %s", modelId)
+	}
+
+	// 构造 ModelInfo 对象
+	modelInfo := &bot_common.ModelInfo{
+		ModelId: ptr.Of(modelID),
+	}
+
+	// 分页获取所有 Agent，避免一次性加载过多数据
+	page := 1
+	pageSize := 100
+
+	for {
+		agents, total, err := s.DomainSVC.ListAgentDraft(ctx, page, pageSize)
+		if err != nil {
+			return fmt.Errorf("failed to list agents: %v", err)
+		}
+
+		// 更新当前页面的 Agent
+		for _, agent := range agents {
+			agent.ModelInfo = modelInfo
+
+			// 保存更新
+			if err := s.DomainSVC.UpdateSingleAgentDraft(ctx, agent); err != nil {
+				logs.ErrorX(pkg.ModelName, "failed to update agent %d model info: %v", agent.AgentID, err)
+				continue // 继续处理其他 Agent
+			}
+
+			logs.InfoX(pkg.ModelName, "successfully updated agent %d model id to %d", agent.AgentID, modelID)
+		}
+
+		// 检查是否已经处理完所有数据
+		if int64(page*pageSize) >= total {
+			break
+		}
+
+		page++
+	}
+
+	logs.InfoX(pkg.ModelName, "finished updating all agents model id to %d", modelID)
+	return nil
 }
 
 func (s *SingleAgentApplicationService) singleAgentDraftDo2Vo(ctx context.Context, do *entity.SingleAgent) (*bot_common.BotInfo, error) {

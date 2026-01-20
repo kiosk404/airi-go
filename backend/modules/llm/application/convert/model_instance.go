@@ -59,6 +59,7 @@ func ToModel(ctx context.Context, oss storage.Storage, model *entity.ModelInstan
 		Connection:      convertModelConnection(conn),
 		Type:            modelapi.ModelType(model.Type.Model()),
 		Parameters:      convertModelParameters(model.Parameters),
+		IsDefault:       model.IsSelected,
 		EnableBase64URL: model.Extra.EnableBase64URL,
 	}
 

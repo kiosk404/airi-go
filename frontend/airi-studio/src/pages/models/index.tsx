@@ -16,6 +16,7 @@ import AddModelDialog from './AddModelDialog';
 import {
     fetchModelList,
     deleteModel,
+    setDefaultModel,
     type ModelListItem,
 } from '@/services/models';
 
@@ -53,7 +54,7 @@ const ModelsPage: React.FC = () => {
     useEffect(() => {
         if (!mountedRef.current) {
             mountedRef.current = true;
-            loadModels();
+            loadModels().then(r => console.log('loadModels ->', r))
         }
     }, [loadModels]);
 
@@ -67,9 +68,9 @@ const ModelsPage: React.FC = () => {
         // 关键词搜索
         if (searchKeyword) {
             const keyword = searchKeyword.toLowerCase();
-            const name = model.name.toLowerCase();
-            const modelId = model.modelId.toLowerCase();
-            const providerName = model.providerName.toLowerCase();
+            const name = (model.display_info?.name || '').toLowerCase();
+            const modelId = (model.connection?.base_conn_info?.model || '').toLowerCase();
+            const providerName = (model.provider?.name?.zh_cn || '').toLowerCase();
             return name.includes(keyword) || modelId.includes(keyword) || providerName.includes(keyword);
         }
         return true;
@@ -102,7 +103,9 @@ const ModelsPage: React.FC = () => {
     const handleModelSelect = async (id: string) => {
         console.log('handleModelSelect', id);
         try{
-
+            await setDefaultModel(id);
+            Toast.success('设为默认成功');
+            await loadModels();
         } catch (error) {
             Toast.error(`设为默认失败: ${error instanceof Error ? error.message : '未知错误'}`);
         }
@@ -116,7 +119,7 @@ const ModelsPage: React.FC = () => {
 
     // 操作成功后刷新
     const handleSuccess = () => {
-        loadModels();
+        loadModels().then(r => console.log('loadModels ->', r))
     };
 
     return (

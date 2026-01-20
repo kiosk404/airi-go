@@ -21,6 +21,7 @@ export interface IModel {
     parameters?: Array<__ROOT_NAMESPACE__.IModelParameter>;
     status?: ModelStatus.ModelStatus;
     enable_base64_url?: boolean;
+    is_default?: boolean;
     delete_at_ms?: thrift.Int64;
 }
 export interface IModelArgs {
@@ -33,6 +34,7 @@ export interface IModelArgs {
     parameters?: Array<__ROOT_NAMESPACE__.IModelParameterArgs>;
     status?: ModelStatus.ModelStatus;
     enable_base64_url?: boolean;
+    is_default?: boolean;
     delete_at_ms?: number | string | thrift.Int64;
 }
 export const ModelCodec: thrift.IStructCodec<IModelArgs, IModel> = {
@@ -47,6 +49,7 @@ export const ModelCodec: thrift.IStructCodec<IModelArgs, IModel> = {
             parameters: args.parameters,
             status: args.status,
             enable_base64_url: args.enable_base64_url,
+            is_default: args.is_default,
             delete_at_ms: (typeof args.delete_at_ms === "number" ? new thrift.Int64(args.delete_at_ms) : typeof args.delete_at_ms === "string" ? thrift.Int64.fromDecimalString(args.delete_at_ms) : args.delete_at_ms)
         };
         output.writeStructBegin("Model");
@@ -99,8 +102,13 @@ export const ModelCodec: thrift.IStructCodec<IModelArgs, IModel> = {
             output.writeBool(obj.enable_base64_url);
             output.writeFieldEnd();
         }
+        if (obj.is_default != null) {
+            output.writeFieldBegin("is_default", thrift.TType.BOOL, 10);
+            output.writeBool(obj.is_default);
+            output.writeFieldEnd();
+        }
         if (obj.delete_at_ms != null) {
-            output.writeFieldBegin("delete_at_ms", thrift.TType.I64, 10);
+            output.writeFieldBegin("delete_at_ms", thrift.TType.I64, 11);
             output.writeI64((typeof obj.delete_at_ms === "number" ? new thrift.Int64(obj.delete_at_ms) : typeof obj.delete_at_ms === "string" ? thrift.Int64.fromDecimalString(obj.delete_at_ms) : obj.delete_at_ms));
             output.writeFieldEnd();
         }
@@ -208,9 +216,18 @@ export const ModelCodec: thrift.IStructCodec<IModelArgs, IModel> = {
                     }
                     break;
                 case 10:
+                    if (fieldType === thrift.TType.BOOL) {
+                        const value_12: boolean = input.readBool();
+                        _args.is_default = value_12;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
+                case 11:
                     if (fieldType === thrift.TType.I64) {
-                        const value_12: thrift.Int64 = input.readI64();
-                        _args.delete_at_ms = value_12;
+                        const value_13: thrift.Int64 = input.readI64();
+                        _args.delete_at_ms = value_13;
                     }
                     else {
                         input.skip(fieldType);
@@ -233,6 +250,7 @@ export const ModelCodec: thrift.IStructCodec<IModelArgs, IModel> = {
             parameters: _args.parameters,
             status: _args.status,
             enable_base64_url: _args.enable_base64_url,
+            is_default: _args.is_default,
             delete_at_ms: _args.delete_at_ms
         };
     }
@@ -247,54 +265,59 @@ export class Model extends thrift.StructLike implements IModel {
     public parameters?: Array<__ROOT_NAMESPACE__.IModelParameter>;
     public status?: ModelStatus.ModelStatus;
     public enable_base64_url?: boolean;
+    public is_default?: boolean;
     public delete_at_ms?: thrift.Int64;
     public readonly _annotations: thrift.IThriftAnnotations = {};
     public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
     constructor(args: IModelArgs = {}) {
         super();
         if (args.id != null) {
-            const value_13: string = args.id;
-            this.id = value_13;
+            const value_14: string = args.id;
+            this.id = value_14;
         }
         if (args.provider != null) {
-            const value_14: ModelProvider.IModelProvider = new ModelProvider.ModelProvider(args.provider);
-            this.provider = value_14;
+            const value_15: ModelProvider.IModelProvider = new ModelProvider.ModelProvider(args.provider);
+            this.provider = value_15;
         }
         if (args.display_info != null) {
-            const value_15: DisplayInfo.IDisplayInfo = new DisplayInfo.DisplayInfo(args.display_info);
-            this.display_info = value_15;
+            const value_16: DisplayInfo.IDisplayInfo = new DisplayInfo.DisplayInfo(args.display_info);
+            this.display_info = value_16;
         }
         if (args.capability != null) {
-            const value_16: __ROOT_NAMESPACE__.IModelAbility = new __ROOT_NAMESPACE__.ModelAbility(args.capability);
-            this.capability = value_16;
+            const value_17: __ROOT_NAMESPACE__.IModelAbility = new __ROOT_NAMESPACE__.ModelAbility(args.capability);
+            this.capability = value_17;
         }
         if (args.connection != null) {
-            const value_17: Connection.IConnection = new Connection.Connection(args.connection);
-            this.connection = value_17;
+            const value_18: Connection.IConnection = new Connection.Connection(args.connection);
+            this.connection = value_18;
         }
         if (args.type != null) {
-            const value_18: ModelType.ModelType = args.type;
-            this.type = value_18;
+            const value_19: ModelType.ModelType = args.type;
+            this.type = value_19;
         }
         if (args.parameters != null) {
-            const value_19: Array<__ROOT_NAMESPACE__.IModelParameter> = new Array<__ROOT_NAMESPACE__.IModelParameter>();
-            args.parameters.forEach((value_23: __ROOT_NAMESPACE__.IModelParameterArgs): void => {
-                const value_24: __ROOT_NAMESPACE__.IModelParameter = new __ROOT_NAMESPACE__.ModelParameter(value_23);
-                value_19.push(value_24);
+            const value_20: Array<__ROOT_NAMESPACE__.IModelParameter> = new Array<__ROOT_NAMESPACE__.IModelParameter>();
+            args.parameters.forEach((value_25: __ROOT_NAMESPACE__.IModelParameterArgs): void => {
+                const value_26: __ROOT_NAMESPACE__.IModelParameter = new __ROOT_NAMESPACE__.ModelParameter(value_25);
+                value_20.push(value_26);
             });
-            this.parameters = value_19;
+            this.parameters = value_20;
         }
         if (args.status != null) {
-            const value_20: ModelStatus.ModelStatus = args.status;
-            this.status = value_20;
+            const value_21: ModelStatus.ModelStatus = args.status;
+            this.status = value_21;
         }
         if (args.enable_base64_url != null) {
-            const value_21: boolean = args.enable_base64_url;
-            this.enable_base64_url = value_21;
+            const value_22: boolean = args.enable_base64_url;
+            this.enable_base64_url = value_22;
+        }
+        if (args.is_default != null) {
+            const value_23: boolean = args.is_default;
+            this.is_default = value_23;
         }
         if (args.delete_at_ms != null) {
-            const value_22: thrift.Int64 = (typeof args.delete_at_ms === "number" ? new thrift.Int64(args.delete_at_ms) : typeof args.delete_at_ms === "string" ? thrift.Int64.fromDecimalString(args.delete_at_ms) : args.delete_at_ms);
-            this.delete_at_ms = value_22;
+            const value_24: thrift.Int64 = (typeof args.delete_at_ms === "number" ? new thrift.Int64(args.delete_at_ms) : typeof args.delete_at_ms === "string" ? thrift.Int64.fromDecimalString(args.delete_at_ms) : args.delete_at_ms);
+            this.delete_at_ms = value_24;
         }
     }
     public static read(input: thrift.TProtocol): Model {

@@ -885,6 +885,10 @@ func _deletemodelMw() []gin.HandlerFunc {
 	return nil
 }
 
+func _setdefaultmodelMw() []gin.HandlerFunc {
+	return nil
+}
+
 func _listmodelMw() []gin.HandlerFunc {
 	return nil
 }

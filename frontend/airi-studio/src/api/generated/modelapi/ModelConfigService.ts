@@ -21,6 +21,8 @@ import * as UpdateModelReq from "./UpdateModelReq";
 import * as UpdateModelResp from "./UpdateModelResp";
 import * as DeleteModelReq from "./DeleteModelReq";
 import * as DeleteModelResp from "./DeleteModelResp";
+import * as SetDefaultModelReq from "./SetDefaultModelReq";
+import * as SetDefaultModelResp from "./SetDefaultModelResp";
 export const serviceName: string = "ModelConfigService";
 export const annotations: thrift.IThriftAnnotations = {};
 export const methodAnnotations: thrift.IMethodAnnotations = {
@@ -79,9 +81,16 @@ export const methodAnnotations: thrift.IMethodAnnotations = {
             'api.category': "admin"
         },
         fieldAnnotations: {}
+    },
+    SetDefaultModel: {
+        annotations: {
+            'api.post': "/api/admin/model/set_default",
+            'api.category': "admin"
+        },
+        fieldAnnotations: {}
     }
 };
-export const methodNames: Array<string> = ["GetBasicConfiguration", "SaveBasicConfiguration", "GetKnowledgeConfig", "UpdateKnowledgeConfig", "GetModelList", "CreateModel", "UpdateModel", "DeleteModel"];
+export const methodNames: Array<string> = ["GetBasicConfiguration", "SaveBasicConfiguration", "GetKnowledgeConfig", "UpdateKnowledgeConfig", "GetModelList", "CreateModel", "UpdateModel", "DeleteModel", "SetDefaultModel"];
 export const methodParameters: {
     [methodName: string]: number;
 } = {
@@ -92,7 +101,8 @@ export const methodParameters: {
     GetModelList: 2,
     CreateModel: 2,
     UpdateModel: 2,
-    DeleteModel: 2
+    DeleteModel: 2,
+    SetDefaultModel: 2
 };
 export interface IGetBasicConfiguration__Args {
     req: GetBasicConfigurationReq.IGetBasicConfigurationReq;
@@ -774,6 +784,91 @@ export class DeleteModel__Args extends thrift.StructLike implements IDeleteModel
         return DeleteModel__ArgsCodec.encode(this, output);
     }
 }
+export interface ISetDefaultModel__Args {
+    req: SetDefaultModelReq.ISetDefaultModelReq;
+}
+export interface ISetDefaultModel__ArgsArgs {
+    req: SetDefaultModelReq.ISetDefaultModelReqArgs;
+}
+export const SetDefaultModel__ArgsCodec: thrift.IStructCodec<ISetDefaultModel__ArgsArgs, ISetDefaultModel__Args> = {
+    encode(args: ISetDefaultModel__ArgsArgs, output: thrift.TProtocol): void {
+        const obj: any = {
+            req: args.req
+        };
+        output.writeStructBegin("SetDefaultModel__Args");
+        if (obj.req != null) {
+            output.writeFieldBegin("req", thrift.TType.STRUCT, 1);
+            SetDefaultModelReq.SetDefaultModelReqCodec.encode(obj.req, output);
+            output.writeFieldEnd();
+        }
+        else {
+            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[req] is unset!");
+        }
+        output.writeFieldStop();
+        output.writeStructEnd();
+        return;
+    },
+    decode(input: thrift.TProtocol): ISetDefaultModel__Args {
+        let _args: any = {};
+        input.readStructBegin();
+        while (true) {
+            const ret: thrift.IThriftField = input.readFieldBegin();
+            const fieldType: thrift.TType = ret.fieldType;
+            const fieldId: number = ret.fieldId;
+            if (fieldType === thrift.TType.STOP) {
+                break;
+            }
+            switch (fieldId) {
+                case 1:
+                    if (fieldType === thrift.TType.STRUCT) {
+                        const value_17: SetDefaultModelReq.ISetDefaultModelReq = SetDefaultModelReq.SetDefaultModelReqCodec.decode(input);
+                        _args.req = value_17;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
+                default: {
+                    input.skip(fieldType);
+                }
+            }
+            input.readFieldEnd();
+        }
+        input.readStructEnd();
+        if (_args.req !== undefined) {
+            return {
+                req: _args.req
+            };
+        }
+        else {
+            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Unable to read SetDefaultModel__Args from input");
+        }
+    }
+};
+export class SetDefaultModel__Args extends thrift.StructLike implements ISetDefaultModel__Args {
+    public req: SetDefaultModelReq.ISetDefaultModelReq;
+    public readonly _annotations: thrift.IThriftAnnotations = {};
+    public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
+    constructor(args: ISetDefaultModel__ArgsArgs) {
+        super();
+        if (args.req != null) {
+            const value_18: SetDefaultModelReq.ISetDefaultModelReq = new SetDefaultModelReq.SetDefaultModelReq(args.req);
+            this.req = value_18;
+        }
+        else {
+            throw new thrift.TProtocolException(thrift.TProtocolExceptionType.UNKNOWN, "Required field[req] is unset!");
+        }
+    }
+    public static read(input: thrift.TProtocol): SetDefaultModel__Args {
+        return new SetDefaultModel__Args(SetDefaultModel__ArgsCodec.decode(input));
+    }
+    public static write(args: ISetDefaultModel__ArgsArgs, output: thrift.TProtocol): void {
+        return SetDefaultModel__ArgsCodec.encode(args, output);
+    }
+    public write(output: thrift.TProtocol): void {
+        return SetDefaultModel__ArgsCodec.encode(this, output);
+    }
+}
 export interface IGetBasicConfiguration__Result {
     success?: GetBasicConfigurationResp.IGetBasicConfigurationResp;
 }
@@ -808,8 +903,8 @@ export const GetBasicConfiguration__ResultCodec: thrift.IStructCodec<IGetBasicCo
             switch (fieldId) {
                 case 0:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_17: GetBasicConfigurationResp.IGetBasicConfigurationResp = GetBasicConfigurationResp.GetBasicConfigurationRespCodec.decode(input);
-                        _args.success = value_17;
+                        const value_19: GetBasicConfigurationResp.IGetBasicConfigurationResp = GetBasicConfigurationResp.GetBasicConfigurationRespCodec.decode(input);
+                        _args.success = value_19;
                     }
                     else {
                         input.skip(fieldType);
@@ -834,8 +929,8 @@ export class GetBasicConfiguration__Result extends thrift.StructLike implements 
     constructor(args: IGetBasicConfiguration__ResultArgs = {}) {
         super();
         if (args.success != null) {
-            const value_18: GetBasicConfigurationResp.IGetBasicConfigurationResp = new GetBasicConfigurationResp.GetBasicConfigurationResp(args.success);
-            this.success = value_18;
+            const value_20: GetBasicConfigurationResp.IGetBasicConfigurationResp = new GetBasicConfigurationResp.GetBasicConfigurationResp(args.success);
+            this.success = value_20;
         }
     }
     public static read(input: thrift.TProtocol): GetBasicConfiguration__Result {
@@ -882,8 +977,8 @@ export const SaveBasicConfiguration__ResultCodec: thrift.IStructCodec<ISaveBasic
             switch (fieldId) {
                 case 0:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_19: SaveBasicConfigurationResp.ISaveBasicConfigurationResp = SaveBasicConfigurationResp.SaveBasicConfigurationRespCodec.decode(input);
-                        _args.success = value_19;
+                        const value_21: SaveBasicConfigurationResp.ISaveBasicConfigurationResp = SaveBasicConfigurationResp.SaveBasicConfigurationRespCodec.decode(input);
+                        _args.success = value_21;
                     }
                     else {
                         input.skip(fieldType);
@@ -908,8 +1003,8 @@ export class SaveBasicConfiguration__Result extends thrift.StructLike implements
     constructor(args: ISaveBasicConfiguration__ResultArgs = {}) {
         super();
         if (args.success != null) {
-            const value_20: SaveBasicConfigurationResp.ISaveBasicConfigurationResp = new SaveBasicConfigurationResp.SaveBasicConfigurationResp(args.success);
-            this.success = value_20;
+            const value_22: SaveBasicConfigurationResp.ISaveBasicConfigurationResp = new SaveBasicConfigurationResp.SaveBasicConfigurationResp(args.success);
+            this.success = value_22;
         }
     }
     public static read(input: thrift.TProtocol): SaveBasicConfiguration__Result {
@@ -956,8 +1051,8 @@ export const GetKnowledgeConfig__ResultCodec: thrift.IStructCodec<IGetKnowledgeC
             switch (fieldId) {
                 case 0:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_21: GetKnowledgeConfigResp.IGetKnowledgeConfigResp = GetKnowledgeConfigResp.GetKnowledgeConfigRespCodec.decode(input);
-                        _args.success = value_21;
+                        const value_23: GetKnowledgeConfigResp.IGetKnowledgeConfigResp = GetKnowledgeConfigResp.GetKnowledgeConfigRespCodec.decode(input);
+                        _args.success = value_23;
                     }
                     else {
                         input.skip(fieldType);
@@ -982,8 +1077,8 @@ export class GetKnowledgeConfig__Result extends thrift.StructLike implements IGe
     constructor(args: IGetKnowledgeConfig__ResultArgs = {}) {
         super();
         if (args.success != null) {
-            const value_22: GetKnowledgeConfigResp.IGetKnowledgeConfigResp = new GetKnowledgeConfigResp.GetKnowledgeConfigResp(args.success);
-            this.success = value_22;
+            const value_24: GetKnowledgeConfigResp.IGetKnowledgeConfigResp = new GetKnowledgeConfigResp.GetKnowledgeConfigResp(args.success);
+            this.success = value_24;
         }
     }
     public static read(input: thrift.TProtocol): GetKnowledgeConfig__Result {
@@ -1030,8 +1125,8 @@ export const UpdateKnowledgeConfig__ResultCodec: thrift.IStructCodec<IUpdateKnow
             switch (fieldId) {
                 case 0:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_23: UpdateKnowledgeConfigResp.IUpdateKnowledgeConfigResp = UpdateKnowledgeConfigResp.UpdateKnowledgeConfigRespCodec.decode(input);
-                        _args.success = value_23;
+                        const value_25: UpdateKnowledgeConfigResp.IUpdateKnowledgeConfigResp = UpdateKnowledgeConfigResp.UpdateKnowledgeConfigRespCodec.decode(input);
+                        _args.success = value_25;
                     }
                     else {
                         input.skip(fieldType);
@@ -1056,8 +1151,8 @@ export class UpdateKnowledgeConfig__Result extends thrift.StructLike implements 
     constructor(args: IUpdateKnowledgeConfig__ResultArgs = {}) {
         super();
         if (args.success != null) {
-            const value_24: UpdateKnowledgeConfigResp.IUpdateKnowledgeConfigResp = new UpdateKnowledgeConfigResp.UpdateKnowledgeConfigResp(args.success);
-            this.success = value_24;
+            const value_26: UpdateKnowledgeConfigResp.IUpdateKnowledgeConfigResp = new UpdateKnowledgeConfigResp.UpdateKnowledgeConfigResp(args.success);
+            this.success = value_26;
         }
     }
     public static read(input: thrift.TProtocol): UpdateKnowledgeConfig__Result {
@@ -1104,8 +1199,8 @@ export const GetModelList__ResultCodec: thrift.IStructCodec<IGetModelList__Resul
             switch (fieldId) {
                 case 0:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_25: GetModelListResp.IGetModelListResp = GetModelListResp.GetModelListRespCodec.decode(input);
-                        _args.success = value_25;
+                        const value_27: GetModelListResp.IGetModelListResp = GetModelListResp.GetModelListRespCodec.decode(input);
+                        _args.success = value_27;
                     }
                     else {
                         input.skip(fieldType);
@@ -1130,8 +1225,8 @@ export class GetModelList__Result extends thrift.StructLike implements IGetModel
     constructor(args: IGetModelList__ResultArgs = {}) {
         super();
         if (args.success != null) {
-            const value_26: GetModelListResp.IGetModelListResp = new GetModelListResp.GetModelListResp(args.success);
-            this.success = value_26;
+            const value_28: GetModelListResp.IGetModelListResp = new GetModelListResp.GetModelListResp(args.success);
+            this.success = value_28;
         }
     }
     public static read(input: thrift.TProtocol): GetModelList__Result {
@@ -1178,8 +1273,8 @@ export const CreateModel__ResultCodec: thrift.IStructCodec<ICreateModel__ResultA
             switch (fieldId) {
                 case 0:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_27: CreateModelResp.ICreateModelResp = CreateModelResp.CreateModelRespCodec.decode(input);
-                        _args.success = value_27;
+                        const value_29: CreateModelResp.ICreateModelResp = CreateModelResp.CreateModelRespCodec.decode(input);
+                        _args.success = value_29;
                     }
                     else {
                         input.skip(fieldType);
@@ -1204,8 +1299,8 @@ export class CreateModel__Result extends thrift.StructLike implements ICreateMod
     constructor(args: ICreateModel__ResultArgs = {}) {
         super();
         if (args.success != null) {
-            const value_28: CreateModelResp.ICreateModelResp = new CreateModelResp.CreateModelResp(args.success);
-            this.success = value_28;
+            const value_30: CreateModelResp.ICreateModelResp = new CreateModelResp.CreateModelResp(args.success);
+            this.success = value_30;
         }
     }
     public static read(input: thrift.TProtocol): CreateModel__Result {
@@ -1252,8 +1347,8 @@ export const UpdateModel__ResultCodec: thrift.IStructCodec<IUpdateModel__ResultA
             switch (fieldId) {
                 case 0:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_29: UpdateModelResp.IUpdateModelResp = UpdateModelResp.UpdateModelRespCodec.decode(input);
-                        _args.success = value_29;
+                        const value_31: UpdateModelResp.IUpdateModelResp = UpdateModelResp.UpdateModelRespCodec.decode(input);
+                        _args.success = value_31;
                     }
                     else {
                         input.skip(fieldType);
@@ -1278,8 +1373,8 @@ export class UpdateModel__Result extends thrift.StructLike implements IUpdateMod
     constructor(args: IUpdateModel__ResultArgs = {}) {
         super();
         if (args.success != null) {
-            const value_30: UpdateModelResp.IUpdateModelResp = new UpdateModelResp.UpdateModelResp(args.success);
-            this.success = value_30;
+            const value_32: UpdateModelResp.IUpdateModelResp = new UpdateModelResp.UpdateModelResp(args.success);
+            this.success = value_32;
         }
     }
     public static read(input: thrift.TProtocol): UpdateModel__Result {
@@ -1326,8 +1421,8 @@ export const DeleteModel__ResultCodec: thrift.IStructCodec<IDeleteModel__ResultA
             switch (fieldId) {
                 case 0:
                     if (fieldType === thrift.TType.STRUCT) {
-                        const value_31: DeleteModelResp.IDeleteModelResp = DeleteModelResp.DeleteModelRespCodec.decode(input);
-                        _args.success = value_31;
+                        const value_33: DeleteModelResp.IDeleteModelResp = DeleteModelResp.DeleteModelRespCodec.decode(input);
+                        _args.success = value_33;
                     }
                     else {
                         input.skip(fieldType);
@@ -1352,8 +1447,8 @@ export class DeleteModel__Result extends thrift.StructLike implements IDeleteMod
     constructor(args: IDeleteModel__ResultArgs = {}) {
         super();
         if (args.success != null) {
-            const value_32: DeleteModelResp.IDeleteModelResp = new DeleteModelResp.DeleteModelResp(args.success);
-            this.success = value_32;
+            const value_34: DeleteModelResp.IDeleteModelResp = new DeleteModelResp.DeleteModelResp(args.success);
+            this.success = value_34;
         }
     }
     public static read(input: thrift.TProtocol): DeleteModel__Result {
@@ -1364,6 +1459,80 @@ export class DeleteModel__Result extends thrift.StructLike implements IDeleteMod
     }
     public write(output: thrift.TProtocol): void {
         return DeleteModel__ResultCodec.encode(this, output);
+    }
+}
+export interface ISetDefaultModel__Result {
+    success?: SetDefaultModelResp.ISetDefaultModelResp;
+}
+export interface ISetDefaultModel__ResultArgs {
+    success?: SetDefaultModelResp.ISetDefaultModelRespArgs;
+}
+export const SetDefaultModel__ResultCodec: thrift.IStructCodec<ISetDefaultModel__ResultArgs, ISetDefaultModel__Result> = {
+    encode(args: ISetDefaultModel__ResultArgs, output: thrift.TProtocol): void {
+        const obj: any = {
+            success: args.success
+        };
+        output.writeStructBegin("SetDefaultModel__Result");
+        if (obj.success != null) {
+            output.writeFieldBegin("success", thrift.TType.STRUCT, 0);
+            SetDefaultModelResp.SetDefaultModelRespCodec.encode(obj.success, output);
+            output.writeFieldEnd();
+        }
+        output.writeFieldStop();
+        output.writeStructEnd();
+        return;
+    },
+    decode(input: thrift.TProtocol): ISetDefaultModel__Result {
+        let _args: any = {};
+        input.readStructBegin();
+        while (true) {
+            const ret: thrift.IThriftField = input.readFieldBegin();
+            const fieldType: thrift.TType = ret.fieldType;
+            const fieldId: number = ret.fieldId;
+            if (fieldType === thrift.TType.STOP) {
+                break;
+            }
+            switch (fieldId) {
+                case 0:
+                    if (fieldType === thrift.TType.STRUCT) {
+                        const value_35: SetDefaultModelResp.ISetDefaultModelResp = SetDefaultModelResp.SetDefaultModelRespCodec.decode(input);
+                        _args.success = value_35;
+                    }
+                    else {
+                        input.skip(fieldType);
+                    }
+                    break;
+                default: {
+                    input.skip(fieldType);
+                }
+            }
+            input.readFieldEnd();
+        }
+        input.readStructEnd();
+        return {
+            success: _args.success
+        };
+    }
+};
+export class SetDefaultModel__Result extends thrift.StructLike implements ISetDefaultModel__Result {
+    public success?: SetDefaultModelResp.ISetDefaultModelResp;
+    public readonly _annotations: thrift.IThriftAnnotations = {};
+    public readonly _fieldAnnotations: thrift.IFieldAnnotations = {};
+    constructor(args: ISetDefaultModel__ResultArgs = {}) {
+        super();
+        if (args.success != null) {
+            const value_36: SetDefaultModelResp.ISetDefaultModelResp = new SetDefaultModelResp.SetDefaultModelResp(args.success);
+            this.success = value_36;
+        }
+    }
+    public static read(input: thrift.TProtocol): SetDefaultModel__Result {
+        return new SetDefaultModel__Result(SetDefaultModel__ResultCodec.decode(input));
+    }
+    public static write(args: ISetDefaultModel__ResultArgs, output: thrift.TProtocol): void {
+        return SetDefaultModel__ResultCodec.encode(args, output);
+    }
+    public write(output: thrift.TProtocol): void {
+        return SetDefaultModel__ResultCodec.encode(this, output);
     }
 }
 export class Client<Context = any> extends thrift.ThriftClient<Context> {
@@ -1682,6 +1851,44 @@ export class Client<Context = any> extends thrift.ThriftClient<Context> {
             }
         });
     }
+    public SetDefaultModel(req: SetDefaultModelReq.ISetDefaultModelReqArgs, context?: Context): Promise<SetDefaultModelResp.ISetDefaultModelResp> {
+        const writer: thrift.TTransport = new this.transport();
+        const output: thrift.TProtocol = new this.protocol(writer);
+        output.writeMessageBegin("SetDefaultModel", thrift.MessageType.CALL, this.increment_request_id());
+        const args: ISetDefaultModel__ArgsArgs = { req };
+        SetDefaultModel__ArgsCodec.encode(args, output);
+        output.writeMessageEnd();
+        return this.connection.send(writer.flush(), context).then((data: Buffer) => {
+            const reader: thrift.TTransport = this.transport.receiver(data);
+            const input: thrift.TProtocol = new this.protocol(reader);
+            try {
+                const { fieldName: fieldName, messageType: messageType }: thrift.IThriftMessage = input.readMessageBegin();
+                if (fieldName === "SetDefaultModel") {
+                    if (messageType === thrift.MessageType.EXCEPTION) {
+                        const err: thrift.TApplicationException = thrift.TApplicationExceptionCodec.decode(input);
+                        input.readMessageEnd();
+                        return Promise.reject(err);
+                    }
+                    else {
+                        const result: ISetDefaultModel__Result = SetDefaultModel__ResultCodec.decode(input);
+                        input.readMessageEnd();
+                        if (result.success != null) {
+                            return Promise.resolve(result.success);
+                        }
+                        else {
+                            return Promise.reject(new thrift.TApplicationException(thrift.TApplicationExceptionType.UNKNOWN, "SetDefaultModel failed: unknown result"));
+                        }
+                    }
+                }
+                else {
+                    return Promise.reject(new thrift.TApplicationException(thrift.TApplicationExceptionType.WRONG_METHOD_NAME, "Received a response to an unknown RPC function: " + fieldName));
+                }
+            }
+            catch (err) {
+                return Promise.reject(err);
+            }
+        });
+    }
 }
 export interface IHandler<Context = any> {
     GetBasicConfiguration(req: GetBasicConfigurationReq.IGetBasicConfigurationReq, context?: Context): GetBasicConfigurationResp.IGetBasicConfigurationRespArgs | Promise<GetBasicConfigurationResp.IGetBasicConfigurationRespArgs>;
@@ -1692,6 +1899,7 @@ export interface IHandler<Context = any> {
     CreateModel(req: CreateModelReq.ICreateModelReq, context?: Context): CreateModelResp.ICreateModelRespArgs | Promise<CreateModelResp.ICreateModelRespArgs>;
     UpdateModel(req: UpdateModelReq.IUpdateModelReq, context?: Context): UpdateModelResp.IUpdateModelRespArgs | Promise<UpdateModelResp.IUpdateModelRespArgs>;
     DeleteModel(req: DeleteModelReq.IDeleteModelReq, context?: Context): DeleteModelResp.IDeleteModelRespArgs | Promise<DeleteModelResp.IDeleteModelRespArgs>;
+    SetDefaultModel(req: SetDefaultModelReq.ISetDefaultModelReq, context?: Context): SetDefaultModelResp.ISetDefaultModelRespArgs | Promise<SetDefaultModelResp.ISetDefaultModelRespArgs>;
 }
 export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IHandler<Context>> {
     protected readonly _handler: IHandler<Context>;
@@ -1744,6 +1952,10 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
                 }
                 case "process_DeleteModel": {
                     resolve(this.process__delete_model(requestId, input, output, context));
+                    break;
+                }
+                case "process_SetDefaultModel": {
+                    resolve(this.process__set_default_model(requestId, input, output, context));
                     break;
                 }
                 default: {
@@ -1947,6 +2159,30 @@ export class Processor<Context = any> extends thrift.ThriftProcessor<Context, IH
         }).catch((err: Error): Buffer => {
             const result: thrift.TApplicationException = new thrift.TApplicationException(thrift.TApplicationExceptionType.UNKNOWN, err.message);
             output.writeMessageBegin("DeleteModel", thrift.MessageType.EXCEPTION, requestId);
+            thrift.TApplicationExceptionCodec.encode(result, output);
+            output.writeMessageEnd();
+            return output.flush();
+        });
+    }
+    public process_SetDefaultModel(requestId: number, input: thrift.TProtocol, output: thrift.TProtocol, context: Context): Promise<Buffer> {
+        return new Promise<SetDefaultModelResp.ISetDefaultModelRespArgs>((resolve, reject): void => {
+            try {
+                const args: ISetDefaultModel__Args = SetDefaultModel__ArgsCodec.decode(input);
+                input.readMessageEnd();
+                resolve(this._handler.SetDefaultModel(args.req, context));
+            }
+            catch (err) {
+                reject(err);
+            }
+        }).then((data: SetDefaultModelResp.ISetDefaultModelRespArgs): Buffer => {
+            const result: ISetDefaultModel__ResultArgs = { success: data };
+            output.writeMessageBegin("SetDefaultModel", thrift.MessageType.REPLY, requestId);
+            SetDefaultModel__ResultCodec.encode(result, output);
+            output.writeMessageEnd();
+            return output.flush();
+        }).catch((err: Error): Buffer => {
+            const result: thrift.TApplicationException = new thrift.TApplicationException(thrift.TApplicationExceptionType.UNKNOWN, err.message);
+            output.writeMessageBegin("SetDefaultModel", thrift.MessageType.EXCEPTION, requestId);
             thrift.TApplicationExceptionCodec.encode(result, output);
             output.writeMessageEnd();
             return output.flush();

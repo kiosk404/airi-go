@@ -42,6 +42,8 @@ export * from './RerankType';
 export * from './SandboxConfig';
 export * from './SaveBasicConfigurationReq';
 export * from './SaveBasicConfigurationResp';
+export * from './SetDefaultModelReq';
+export * from './SetDefaultModelResp';
 export * from './ThinkingType';
 export * from './UpdateKnowledgeConfigReq';
 export * from './UpdateKnowledgeConfigResp';

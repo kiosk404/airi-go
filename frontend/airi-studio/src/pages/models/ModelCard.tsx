@@ -8,7 +8,6 @@ const { Text } = Typography;
 
 interface ModelCardProps {
     model: ModelListItem;
-    isSelected?: boolean;
     onEdit: (model: ModelListItem) => void;
     onDelete: (id: string) => void;
     onSelect?: (id: string) => void;
@@ -51,16 +50,25 @@ const getAvatarColor = (name: string): AvatarProps['color'] => {
     return AVATAR_COLORS[index];
 };
 
-const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDelete, onSelect }) => {
+const ModelCard: React.FC<ModelCardProps> = ({ model, onEdit, onDelete, onSelect }) => {
     const [imgError, setImgError] = useState(false);
 
     const modelType = model.type ?? 0;
     const typeConfig = MODEL_TYPE_CONFIG[modelType] || { label: 'Unknown', color: 'grey' };
 
     // 获取启用的能力列表
-    const enabledCapabilities = CAPABILITY_CONFIG.filter(
-        cap => model.capabilities[cap.key as keyof typeof model.capabilities]
-    );
+    const enabledCapabilities = CAPABILITY_CONFIG.filter(cap => {
+        const capabilityMap: Record<string, boolean | undefined> = {
+            functionCall: model.capability?.function_call,
+            imageUnderstanding: model.capability?.image_understanding,
+            videoUnderstanding: model.capability?.video_understanding,
+            audioUnderstanding: model.capability?.audio_understanding,
+            cotDisplay: model.capability?.cot_display,
+            multiModal: model.capability?.support_multi_modal,
+            prefillResp: model.capability?.prefill_resp,
+        };
+        return capabilityMap[cap.key];
+    });
 
     return (
         <Card
@@ -79,18 +87,18 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDele
                 borderBottom: '1px solid #e2e8f0',
                 position: 'relative',
             }}>
-                <Tooltip content={ isSelected ? '当前模型' : '默认模型'}>
+                <Tooltip content={ model.is_default ? '当前模型' : '默认模型'}>
                     <div
-                        onClick={() => onSelect?.(model.id)}
+                        onClick={() => model.id && onSelect?.(model.id)}
                         style={{
                             position: 'absolute',
                             top: 12,
                             right: 12,
-                            cursor: isSelected ? 'default' : 'pointer',
+                            cursor: model.is_default ? 'default' : 'pointer',
                             transition: 'transform 0.2s ease-in-out'
                         }}
                         onMouseEnter={(e) => {
-                            if (isSelected) {
+                            if (model.is_default) {
                                 e.currentTarget.style.transform = 'scale(1.2)';
                             }
                         }}
@@ -100,18 +108,18 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDele
                         }}
                     >
                         <IconStar size="large" style={{
-                            color: isSelected ? '#ffc107' : '#9ca3af',
-                            fill: isSelected ? '#ffc107' : '#9ca3af',
+                            color: model.is_default ? '#ffc107' : '#9ca3af',
+                            fill: model.is_default ? '#ffc107' : '#9ca3af',
                         }}>
                         </IconStar>
                     </div>
                 </Tooltip>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
                     {/* 提供商头像 */}
-                    {!imgError && model.providerIcon ? (
+                    {!imgError && model.provider?.icon_url ? (
                         <img
-                            src={model.providerIcon}
-                            alt={model.providerName}
+                            src={model.provider.icon_url}
+                            alt={model.provider?.name?.zh_cn || ''}
                             onError={() => setImgError(true)}
                             style={{
                                 width: 40,
@@ -126,7 +134,7 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDele
                     ) : (
                         <Avatar
                             size="default"
-                            color={getAvatarColor(model.providerName)}
+                            color={getAvatarColor(model.provider?.name?.zh_cn || '')}
                             style={{
                                 width: 40,
                                 height: 40,
@@ -135,7 +143,7 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDele
                                 fontWeight: 600,
                             }}
                         >
-                            {getProviderInitial(model.providerName)}
+                            {getProviderInitial(model.provider?.name?.zh_cn || '')}
                         </Avatar>
                     )}
 
@@ -155,16 +163,16 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDele
                                     textOverflow: 'ellipsis',
                                     whiteSpace: 'nowrap',
                                 }}
-                                title={model.name}
+                                title={model.display_info?.name || model.connection?.base_conn_info?.model}
                             >
-                                {model.name}
+                                {model.display_info?.name || model.connection?.base_conn_info?.model || '未知模型'}
                             </Text>
                             <Tag size="small" color={typeConfig.color as any}>
                                 {typeConfig.label}
                             </Tag>
                         </div>
                         <Text type="tertiary" size="small">
-                            {model.providerName}
+                            {model.provider?.name?.zh_cn || '未知提供商'}
                         </Text>
                     </div>
                 </div>
@@ -188,12 +196,12 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDele
                         textOverflow: 'ellipsis',
                         whiteSpace: 'nowrap',
                     }}>
-                        {model.modelId || '-'}
+                        {model.connection?.base_conn_info?.model || model.display_info?.name || '-'}
                     </code>
                 </div>
 
                 {/* 上下文长度 */}
-                {model.maxTokens ? (
+                {model.display_info?.max_tokens && Number(model.display_info.max_tokens) > 0 ? (
                     <div style={{
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -205,7 +213,7 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDele
                     }}>
                         <Text type="tertiary" size="small">上下文</Text>
                         <Text strong size="small" style={{ color: '#3b82f6' }}>
-                            {formatTokens(model.maxTokens)}
+                            {formatTokens(Number(model.display_info.max_tokens))}
                         </Text>
                     </div>
                 ) : null}
@@ -251,7 +259,11 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isSelected, onEdit, onDele
                 <Popconfirm
                     title="确定删除此模型？"
                     content="删除后无法恢复"
-                    onConfirm={() => onDelete(model.id)}
+                    onConfirm={() => {
+                        if (model.id) {
+                            onDelete(model.id);
+                        }
+                    }}
                 >
                     <Button
                         type="danger"

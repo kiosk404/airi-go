@@ -235,6 +235,11 @@ func (s *ModelManagerApplicationService) GetModelList(ctx context.Context, _ *de
 	}, nil
 }
 
+func (s *ModelManagerApplicationService) SetDefaultModel(ctx context.Context, req *modelapi.SetDefaultModelReq) error {
+	modelID := conv.StrToInt64D(req.GetID(), 0)
+	return s.DomainSVC.SetDefaultModel(ctx, modelID)
+}
+
 func modelDo2To(m *entity.ModelInstance, locale i18n.Locale) (*developer_api.Model, error) {
 	model := m
 	desc := ""

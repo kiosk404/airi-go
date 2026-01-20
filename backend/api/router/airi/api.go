@@ -76,6 +76,7 @@ func Register(r *gin.Engine) {
 					_model.POST("/create", append(_createmodelMw(), handle.CreateModel)...)
 					_model.POST("/update", append(_updatemodelMw(), handle.UpdateModel)...)
 					_model.POST("/delete", append(_deletemodelMw(), handle.DeleteModel)...)
+					_model.POST("/set_default", append(_setdefaultmodelMw(), handle.SetDefaultModel)...)
 					_model.GET("/list", append(_listmodelMw(), handle.GetModelList)...)
 				}
 			}

@@ -119,6 +119,10 @@ func (m modelManageImpl) GetDefaultModel(ctx context.Context) (*entity.ModelInst
 	return m.ModelManageRepo.GetDefaultModel(ctx)
 }
 
+func (m modelManageImpl) SetDefaultModel(ctx context.Context, id int64) error {
+	return m.ModelManageRepo.SetDefaultModel(ctx, id)
+}
+
 func (m modelManageImpl) ListModelByType(ctx context.Context, modelType entity.ModelType, limit int) ([]*entity.ModelInstance, error) {
 	return m.ModelManageRepo.ListModelByType(ctx, modelType, limit)
 }
